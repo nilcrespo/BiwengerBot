@@ -1,0 +1,127 @@
+from flask import Flask, render_template, request, jsonify
+import sqlite3
+import pandas as pd
+from datetime import datetime
+
+app = Flask(__name__)
+
+def get_available_dates():
+    conn = sqlite3.connect('data/biwenger_data.db')
+    query = """
+    SELECT DISTINCT DATE(scraped_at) as date 
+    FROM (
+        SELECT scraped_at FROM market
+        UNION SELECT scraped_at FROM team_players
+        UNION SELECT scraped_at FROM teams
+    )
+    ORDER BY date DESC
+    """
+    dates = pd.read_sql(query, conn)['date'].tolist()
+    conn.close()
+    return dates
+
+def get_available_teams():
+    conn = sqlite3.connect('data/biwenger_data.db')
+    query = """
+    SELECT DISTINCT team_id 
+    FROM team_players
+    ORDER BY team_id
+    """
+    teams = pd.read_sql(query, conn)['team_id'].tolist()
+    conn.close()
+    return teams
+
+@app.route('/')
+def dashboard():
+    dates = get_available_dates()
+    teams = get_available_teams()
+    selected_date = request.args.get('date', dates[0] if dates else None)
+    selected_team = request.args.get('team', teams[0] if teams else None)
+    
+    return render_template(
+        'dashboard.html',
+        available_dates=dates,
+        available_teams=teams,
+        selected_date=selected_date,
+        selected_team=selected_team
+    )
+
+@app.route('/api/data')
+def get_data():
+    date = request.args.get('date')
+    team = request.args.get('team')
+    
+    if not date:
+        return jsonify({'error': 'Date parameter required'}), 400
+    
+    conn = sqlite3.connect('data/biwenger_data.db')
+    
+    # Get league standings
+    standings = pd.read_sql(f"""
+        SELECT position, name, points 
+        FROM teams 
+        WHERE DATE(scraped_at) = '{date}'
+        ORDER BY position
+    """, conn)
+    
+    # Modified market query with normalized name matching
+    market = pd.read_sql(f"""
+        SELECT m.position, m.club, m.name, m.price, m.demand, m.this_season_pts,
+               COALESCE(pp.probability, '0%') as probability
+        FROM market m
+        LEFT JOIN (
+            SELECT player_name, team_name, probability
+            FROM player_probabilities
+            WHERE DATE(scraped_at) = '{date}'
+            AND probability != '0%'
+        ) pp ON LOWER(REPLACE(REPLACE(m.name, 'á', 'a'), 'é', 'e')) = 
+                LOWER(REPLACE(REPLACE(pp.player_name, 'á', 'a'), 'é', 'e'))
+             AND LOWER(REPLACE(m.club, ' ', '')) = LOWER(REPLACE(pp.team_name, ' ', ''))
+        WHERE DATE(m.scraped_at) = '{date}'
+        ORDER BY m.price DESC
+        LIMIT 50
+    """, conn)
+    
+    # Get team players summary
+    teams_summary = pd.read_sql(f"""
+        SELECT team_id, COUNT(*) as player_count, 
+               SUM(price) as total_value
+        FROM team_players
+        WHERE DATE(scraped_at) = '{date}'
+        GROUP BY team_id
+        ORDER BY total_value DESC
+    """, conn)
+    
+    # Get team players with probabilities - MODIFIED
+    team_players_query = f"""
+        SELECT tp.position, tp.club, tp.name, tp.price, tp.this_season_pts, 
+               tp.points_per_match, tp.status, 
+               COALESCE(pp.probability, '0%') as probability
+        FROM team_players tp
+        LEFT JOIN (
+            SELECT player_name, team_name, probability
+            FROM player_probabilities
+            WHERE DATE(scraped_at) = '{date}'
+            AND probability != '0%'
+        ) pp ON tp.name = pp.player_name AND tp.club = pp.team_name
+        WHERE DATE(tp.scraped_at) = '{date}'
+    """
+    
+    if team:
+        team_players_query += f" AND tp.team_id = '{team}'"
+    
+    team_players = pd.read_sql(team_players_query + " ORDER BY tp.price DESC", conn)
+    
+    conn.close()
+    
+    return jsonify({
+        'standings': standings.to_dict('records'),
+        'market': market.to_dict('records'),
+        'teams': teams_summary.to_dict('records'),
+        'team_players': team_players.to_dict('records'),
+        'date': date,
+        'team': team
+    })
+
+if __name__ == '__main__':
+    app.run(debug=True)

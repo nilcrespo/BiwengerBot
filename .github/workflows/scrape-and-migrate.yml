@@ -3,67 +3,70 @@ name: Daily scrape + migrate
 on:
   schedule:
     # Runs daily at 05:15 UTC (07:15 Europe/Madrid in summer; 06:15 in winter)
-    - cron: "15 5 * * *"
+    - cron: "15 7 * * *"
   workflow_dispatch: {}  # allow manual run
+
 
 permissions:
   contents: read
 
 concurrency:
-  group: daily-biwenger
+  group: biwengerbot-daily
   cancel-in-progress: false
 
 jobs:
-  run-job:
+  run:
     runs-on: ubuntu-latest
     env:
       BIWENGER_EMAIL: ${{ secrets.BIWENGER_EMAIL }}
       BIWENGER_PASSWORD: ${{ secrets.BIWENGER_PASSWORD }}
-      HEADLESS: "1"  # force headless in CI
+      HEADLESS: "1"   # force headless in CI
     steps:
-      - name: Checkout repo
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install Python deps (cached)
+      - name: Cache pip
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key: pip-${{ runner.os }}-${{ hashFiles('**/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
-            pip-${{ runner.os }}-
-      - run: |
+            ${{ runner.os }}-pip-
+
+      - name: Install deps
+        run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Install Playwright browsers + system deps
+      - name: Install Playwright (Chromium + system deps)
         run: |
           python -m playwright install --with-deps chromium
 
       - name: Run scraper
         run: |
-          python biwenger_job.py
+          python scraper/scraper.py
 
-      - name: Run migration to SQLite
+      - name: Run migration
         run: |
-          python - <<'PY'
-          from biwenger_job import migrate_csv_to_db
-          migrate_csv_to_db()
-          PY
+          python migration.py
 
-      - name: Upload outputs as artifacts
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: biwenger-output
+          name: biwengerbot-output
           path: |
-            market_players.csv
             league_standings.csv
-            team_*.csv
+            market_players.csv
+            market_players_.csv
+            players.csv
+            players_.csv
             player_probabilities.csv
+            scraper/team_*.csv
             data/biwenger_data.db
           if-no-files-found: warn
           retention-days: 30

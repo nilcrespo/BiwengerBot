@@ -526,7 +526,7 @@ def scrape_player_probabilities(team):
     
     return pd.DataFrame(data)
 
-def main():
+def get_starting_player_data():
     teams = [
         'alaves', 'athletic', 'atletico', 'barcelona', 'betis', 
         'celta', 'elche', 'espanyol', 'getafe', 'girona', 
@@ -555,4 +555,4 @@ teams = ['alaves', 'athletic', 'atletico', 'barcelona', 'betis', 'celta', 'elche
 if __name__ == "__main__":
     with sync_playwright() as playwright:
         run(playwright)
-    # main()
+    get_starting_player_data()

@@ -4,8 +4,11 @@ from playwright.sync_api import Playwright, sync_playwright, expect, TimeoutErro
 from typing import List, Dict
 
 # Configuration
-EMAIL = "neilcrespo15@gmail.com"
-PASSWORD = "Biwengernil15"
+import os
+
+EMAIL = os.getenv("BIWENGER_EMAIL")           # set as repo secret
+PASSWORD = os.getenv("BIWENGER_PASSWORD")     # set as repo secret
+HEADLESS = os.getenv("HEADLESS", "1") == "1"
 MAX_RIVALS = 10  # Adjust based on your league size
 
 def login(page):
@@ -386,7 +389,7 @@ def get_all_posts(page, max_scrolls=5, scroll_pause=1.5):
 
 # Usage in your run() function:
 def run(playwright: Playwright) -> None:
-    browser = playwright.chromium.launch(headless=False)
+    browser = playwright.chromium.launch(headless=HEADLESS)
     context = browser.new_context()
     page = context.new_page()
     
@@ -474,7 +477,7 @@ def scrape_player_probabilities(team):
     """Scrape player probabilities for a given team."""
     data = []
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=False)
+        browser = playwright.chromium.launch(headless=HEADLESS)
         context = browser.new_context()
         page = context.new_page()
         

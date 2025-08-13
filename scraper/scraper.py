@@ -435,7 +435,7 @@ def get_all_posts(page, max_scrolls=5, scroll_pause=1.5):
 
 # Usage in your run() function:
 def run(playwright: Playwright) -> None:
-    browser = playwright.chromium.launch(headless=False)
+    browser = playwright.chromium.launch(headless=HEADLESS)
     context = browser.new_context(
         locale="ca-ES",
         extra_http_headers={"Accept-Language": "ca-ES,ca;q=0.9"}

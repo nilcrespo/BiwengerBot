@@ -531,10 +531,7 @@ def scrape_player_probabilities(team):
     data = []
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=HEADLESS)
-        context = browser.new_context(
-            locale="ca-ES",
-            extra_http_headers={"Accept-Language": "ca-ES,ca;q=0.9"}
-        )
+        context = browser.new_context()
         page = context.new_page()
 
         # Navigate to team page

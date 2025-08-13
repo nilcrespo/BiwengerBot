@@ -394,9 +394,12 @@ def get_all_posts(page, max_scrolls=5, scroll_pause=1.5):
 # Usage in your run() function:
 def run(playwright: Playwright) -> None:
     browser = playwright.chromium.launch(headless=HEADLESS)
-    context = browser.new_context()
+    context = browser.new_context(
+        locale="ca-ES",
+        extra_http_headers={"Accept-Language": "ca-ES,ca;q=0.9"}
+    )
     page = context.new_page()
-    
+
     # Login
     login(page)
     
@@ -482,9 +485,12 @@ def scrape_player_probabilities(team):
     data = []
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=HEADLESS)
-        context = browser.new_context()
+        context = browser.new_context(
+            locale="ca-ES",
+            extra_http_headers={"Accept-Language": "ca-ES,ca;q=0.9"}
+        )
         page = context.new_page()
-        
+
         # Navigate to team page
         team_url = f"https://www.futbolfantasy.com/laliga/equipos/{team}"
         page.goto(team_url, timeout=30000)
@@ -554,7 +560,6 @@ def get_starting_player_data():
     print(all_data)
     all_data.to_csv("player_probabilities.csv", index=False)
 
-teams = ['alaves', 'athletic', 'atletico', 'barcelona', 'betis', 'celta', 'elche', 'espanyol', 'getafe', 'girona', 'levante', 'mallorca', 'osasuna', 'rayo-vallecano', 'real-madrid', 'real-oviedo', 'real-sociedad', 'sevilla', 'valencia', 'villarreal'] 
         
 if __name__ == "__main__":
     with sync_playwright() as playwright:

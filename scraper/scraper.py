@@ -134,20 +134,66 @@ def get_rival_teams(page) -> List[Dict]:
     teams = []
     
     team_elements = page.locator("user-card").all()
+    # Switch to table view
+    try:
+        page.get_by_role("button", name="Taula").click(timeout=3000)
+    except:
+        try:
+            page.locator('i[role="button"][title="Table"]').click(timeout=3000)
+        except Exception as e:
+            print(f"Could not switch to table view: {e}")
+            return pd.DataFrame()
+    # Wait for the table to be visible and stable
+    table = page.locator(".table-responsive.section-xs.light.ng-star-inserted")
+    table.wait_for(timeout=10000)  # Wait up to 10 seconds
+
+    # Get the HTML content
+    table_html = table.inner_html(timeout=10000)
+
+    # Parse with pandas
+    import pandas as pd
+    try:
+        df = pd.read_html(table_html)[0]
+    except Exception as e:
+        print(f"Failed to parse table: {e}")
+        return pd.DataFrame()
     
-    for team in team_elements:
-        name = safe_inner_text(team.locator("h3 > a"), "Unknown Team")
-        position = safe_inner_text(team.locator("user-position"), "0")
-        points = safe_inner_text(team.locator("div.right ng-star-insterted"), "0")
-        teams.append({
-            "position": position,
-            "name": name,
-            "points": points.replace(" pl.", "")
-        })
+    df = df.rename(columns={
+        'Unnamed: 0': 'position',
+        'Unnamed: 2': 'name',
+        'Punts': 'points',
+        'Jugadors': 'players'
+    })
+    # Extract just the number from position (remove º∞)
+    df['position'] = df['position'].str.extract(r'(\d+)').astype(int)
+
+    # Split 'Equip' column into 'team_value' and 'team_growth'
+    df[['team_value', 'eur', 'team_growth', 'eur2']] = df['Equip'].str.split(expand=True)
+
+    # Drop unnecessary columns
+    df = df.drop(columns=['Unnamed: 1', 'Unnamed: 3', 'Equip', 'eur', 'eur2'])
+
+    # Convert monetary columns to numeric (remove € and . as thousand separator)
+    df['team_value'] = df['team_value'].str.replace('€', '').str.replace('.', '').str.replace(',', '.').astype(float)
+    df['team_growth'] = df['team_growth'].str.replace('€', '').str.replace('.', '').str.replace(',', '.').astype(float)
+
+    # Reorder columns if needed
+    df = df[['position', 'name', 'points', 'team_value', 'team_growth', 'players']]
+    # print(len(team_elements), "teams found in league")
+    
+    # for team in team_elements:
+    #     name = safe_inner_text(team.locator("h3 > a"), "Unknown Team")
+    #     position = safe_inner_text(team.locator("user-position"), "0")
+    #     points = safe_inner_text(team.locator("div.right ng-star-insterted"), "0")
+    #     teams.append({
+    #         "position": position,
+    #         "name": name,
+    #         "points": points.replace(" pl.", "")
+    #     })
     
     # Save league standings
-    pd.DataFrame(teams).to_csv("league_standings.csv", index=False)
-    return teams
+    df.to_csv("league_standings.csv", index=False)
+    return df.to_dict('records')
 
 def extract_all_players(page) -> pd.DataFrame:
     # Navigate

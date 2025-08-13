@@ -537,7 +537,10 @@ def scrape_player_probabilities(team):
         # Navigate to team page
         team_url = f"https://www.futbolfantasy.com/laliga/equipos/{team}"
         page.goto(team_url, timeout=30000)
-        page.get_by_role("button", name="ACEPTO").click()
+        try:
+            page.get_by_role("button", name="ACEPTO").click()
+        except:
+            pass
         page.get_by_role("link", name=" Lista").click()
         
         # Get player list

@@ -1,0 +1,43 @@
+{
+  "team": "General \"Hansi” Topete",
+  "starting_money": 0,
+  "current_balance": 58580290.0,
+  "transactions": [
+    {
+      "type": "Salary",
+      "movement": "Wages",
+      "amount": 27310.0,
+      "signed_amount": -27310.0
+    },
+    {
+      "type": "Salary",
+      "movement": "Wages",
+      "amount": 24800.0,
+      "signed_amount": -24800.0
+    },
+    {
+      "type": "Purchase",
+      "movement": "Forés",
+      "amount": 317140.0,
+      "signed_amount": -317140.0
+    },
+    {
+      "type": "Salary",
+      "movement": "Wages",
+      "amount": 24170.0,
+      "signed_amount": -24170.0
+    },
+    {
+      "type": "Purchase",
+      "movement": "Pol Lozano",
+      "amount": 1026290.0,
+      "signed_amount": -1026290.0
+    },
+    {
+      "type": "Admin adjustment",
+      "movement": "Credit/Penalty",
+      "amount": 60000000.0,
+      "signed_amount": 60000000.0
+    }
+  ]
+}

@@ -18,10 +18,6 @@ def login(page):
         page.get_by_role("button", name="Agree").click(timeout=5000)
     except:
         pass
-    # print all links names, since "comensa a jugar not found"
-    links = page.locator("a").all()
-    for link in links:
-        print(link.inner_text())
     page.get_by_role("link", name="Comença a jugar!").click()
     page.get_by_role("button", name="Ja tinc un compte").click()
     page.get_by_role("textbox", name="Email").fill(EMAIL)
@@ -58,7 +54,7 @@ def extract_team_players(page, team_name: str) -> pd.DataFrame:
     print(f"\nExtracting players for {team_name}...")
     
     # Navigate to team page and click table view
-    page.get_by_role("button", name=team_name).click()
+    page.get_by_role("button", name=team_name).first.click()
     try:
         page.get_by_role("button", name="Taula").click(timeout=500)
     except:
@@ -123,7 +119,7 @@ def extract_team_players(page, team_name: str) -> pd.DataFrame:
             continue
     
     df = pd.DataFrame(all_rows)
-    filename = f"team_{team_name.replace(' ', '_').replace('/', '_')}.csv"
+    filename = f"csvs/teams/team_{team_name.replace(' ', '_').replace('/', '_')}.csv"
     df.to_csv(filename, index=False)
     print(f"✅ Saved {len(df)} players to {filename}")
     return df
@@ -192,7 +188,7 @@ def get_rival_teams(page) -> List[Dict]:
     #     })
     
     # Save league standings
-    df.to_csv("league_standings.csv", index=False)
+    df.to_csv("csvs/other/league_standings.csv", index=False)
     return df.to_dict('records')
 
 def extract_all_players(page) -> pd.DataFrame:
@@ -400,8 +396,8 @@ def extract_market_players(page) -> pd.DataFrame:
     for col in numeric_cols:
         df[col] = df[col].str.replace(r"[^\d\.]", "", regex=True)
         df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
-    
-    filename = "market_players.csv"
+
+    filename = "csvs/market/market_players.csv"
     df.to_csv(filename, index=False)
     print(f"✅ Saved {len(df)} market players to {filename}")
     return df
@@ -439,7 +435,7 @@ def get_all_posts(page, max_scrolls=5, scroll_pause=1.5):
 
 # Usage in your run() function:
 def run(playwright: Playwright) -> None:
-    browser = playwright.chromium.launch(headless=HEADLESS)
+    browser = playwright.chromium.launch(headless=False)
     context = browser.new_context(
         locale="ca-ES",
         extra_http_headers={"Accept-Language": "ca-ES,ca;q=0.9"}
@@ -604,7 +600,7 @@ def get_starting_player_data():
     
     print("\n=== All teams scraped successfully ===")
     print(all_data)
-    all_data.to_csv("player_probabilities.csv", index=False)
+    all_data.to_csv("csvs/other/player_probabilities.csv", index=False)
 
         
 if __name__ == "__main__":

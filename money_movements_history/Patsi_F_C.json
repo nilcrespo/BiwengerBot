@@ -1,0 +1,49 @@
+{
+  "team": "Patsi F.C",
+  "starting_money": 0,
+  "current_balance": 49279650.0,
+  "transactions": [
+    {
+      "type": "Salary",
+      "movement": "Wages",
+      "amount": 36670.0,
+      "signed_amount": -36670.0
+    },
+    {
+      "type": "Salary",
+      "movement": "Wages",
+      "amount": 34320.0,
+      "signed_amount": -34320.0
+    },
+    {
+      "type": "Sale",
+      "movement": "Nianzou",
+      "amount": 154600.0,
+      "signed_amount": 154600.0
+    },
+    {
+      "type": "Salary",
+      "movement": "Wages",
+      "amount": 33960.0,
+      "signed_amount": -33960.0
+    },
+    {
+      "type": "Purchase",
+      "movement": "Firpo",
+      "amount": 4020000.0,
+      "signed_amount": -4020000.0
+    },
+    {
+      "type": "Purchase",
+      "movement": "Moleiro",
+      "amount": 6750000.0,
+      "signed_amount": -6750000.0
+    },
+    {
+      "type": "Admin adjustment",
+      "movement": "Credit/Penalty",
+      "amount": 60000000.0,
+      "signed_amount": 60000000.0
+    }
+  ]
+}

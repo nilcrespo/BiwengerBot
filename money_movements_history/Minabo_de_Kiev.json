@@ -1,0 +1,37 @@
+{
+  "team": "Minabo de Kiev",
+  "starting_money": 0,
+  "current_balance": 62242670.0,
+  "transactions": [
+    {
+      "type": "Salary",
+      "movement": "Wages",
+      "amount": 20850.0,
+      "signed_amount": -20850.0
+    },
+    {
+      "type": "Admin adjustment",
+      "movement": "Credit/Penalty",
+      "amount": 2310000.0,
+      "signed_amount": 2310000.0
+    },
+    {
+      "type": "Salary",
+      "movement": "Wages",
+      "amount": 23200.0,
+      "signed_amount": -23200.0
+    },
+    {
+      "type": "Salary",
+      "movement": "Wages",
+      "amount": 23280.0,
+      "signed_amount": -23280.0
+    },
+    {
+      "type": "Admin adjustment",
+      "movement": "Credit/Penalty",
+      "amount": 60000000.0,
+      "signed_amount": 60000000.0
+    }
+  ]
+}

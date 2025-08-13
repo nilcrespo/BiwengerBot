@@ -1,0 +1,115 @@
+{
+  "team": "CD Numancia",
+  "starting_money": 0,
+  "current_balance": 47212957.0,
+  "transactions": [
+    {
+      "type": "Salary",
+      "movement": "Wages",
+      "amount": 37580.0,
+      "signed_amount": -37580.0
+    },
+    {
+      "type": "Sale",
+      "movement": "Mosquera",
+      "amount": 1901100.0,
+      "signed_amount": 1901100.0
+    },
+    {
+      "type": "Sale",
+      "movement": "Larin",
+      "amount": 603700.0,
+      "signed_amount": 603700.0
+    },
+    {
+      "type": "Salary",
+      "movement": "Wages",
+      "amount": 37550.0,
+      "signed_amount": -37550.0
+    },
+    {
+      "type": "Purchase",
+      "movement": "Valjent",
+      "amount": 3300009.0,
+      "signed_amount": -3300009.0
+    },
+    {
+      "type": "Purchase",
+      "movement": "Courtois",
+      "amount": 6850009.0,
+      "signed_amount": -6850009.0
+    },
+    {
+      "type": "Purchase",
+      "movement": "Beñat Prados",
+      "amount": 1400009.0,
+      "signed_amount": -1400009.0
+    },
+    {
+      "type": "Purchase",
+      "movement": "Germán Valera",
+      "amount": 460099.0,
+      "signed_amount": -460099.0
+    },
+    {
+      "type": "Purchase",
+      "movement": "Oblak",
+      "amount": 5100009.0,
+      "signed_amount": -5100009.0
+    },
+    {
+      "type": "Purchase",
+      "movement": "Toni Martínez",
+      "amount": 470009.0,
+      "signed_amount": -470009.0
+    },
+    {
+      "type": "Sale",
+      "movement": "David López",
+      "amount": 145100.0,
+      "signed_amount": 145100.0
+    },
+    {
+      "type": "Sale",
+      "movement": "Lunin",
+      "amount": 446200.0,
+      "signed_amount": 446200.0
+    },
+    {
+      "type": "Sale",
+      "movement": "Mariezkurrena",
+      "amount": 157100.0,
+      "signed_amount": 157100.0
+    },
+    {
+      "type": "Sale",
+      "movement": "Jordán",
+      "amount": 853000.0,
+      "signed_amount": 853000.0
+    },
+    {
+      "type": "Sale",
+      "movement": "Ter Stegen",
+      "amount": 1195700.0,
+      "signed_amount": 1195700.0
+    },
+    {
+      "type": "Salary",
+      "movement": "Wages",
+      "amount": 23660.0,
+      "signed_amount": -23660.0
+    },
+    {
+      "type": "Purchase",
+      "movement": "Etta Eyong",
+      "amount": 410009.0,
+      "signed_amount": -410009.0
+    },
+    {
+      "type": "Admin adjustment",
+      "movement": "Credit/Penalty",
+      "amount": 60000000.0,
+      "signed_amount": 60000000.0
+    }
+  ]
+}

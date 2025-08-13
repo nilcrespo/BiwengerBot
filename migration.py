@@ -4,7 +4,7 @@ import glob
 from datetime import datetime, timedelta
 import os
 
-def migrate_csv_to_db():
+def migrate_csv_to_db(days_behind=0):
     # Ensure data directory exists
     os.makedirs('data', exist_ok=True)
     
@@ -55,9 +55,9 @@ def migrate_csv_to_db():
             
             # Ensure only free agents are included
             df = df[df['owner'] == 'Free agent']
-            
-            df['scraped_at'] = ((datetime.now()-timedelta(days=1))).strftime('%Y-%m-%d %H:%M:%S')
-            
+
+            df['scraped_at'] = ((datetime.now()-timedelta(days=days_behind))).strftime('%Y-%m-%d %H:%M:%S')
+
             # Select only the columns we need
             df = df[['position', 'club', 'name', 'price', 'owner', 
                     'last_sale', 'demand', 'this_season_pts', 
@@ -81,9 +81,9 @@ def migrate_csv_to_db():
                 df = df.rename(columns={'pl.': 'position'})
             if 'points' not in df.columns:
                 df['points'] = 0
-                
-            df['scraped_at'] = (datetime.now()-timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')
-            
+
+            df['scraped_at'] = (datetime.now()-timedelta(days=days_behind)).strftime('%Y-%m-%d %H:%M:%S')
+
             df.to_sql('teams', conn, if_exists='append', index=False)
             print(f"→ Migrated {len(df)} records to teams table")
             

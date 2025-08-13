@@ -1,0 +1,109 @@
+{
+  "team": "RaiFC",
+  "starting_money": 0,
+  "current_balance": 29550090.0,
+  "transactions": [
+    {
+      "type": "Salary",
+      "movement": "Wages",
+      "amount": 48050.0,
+      "signed_amount": -48050.0
+    },
+    {
+      "type": "Purchase",
+      "movement": "Oyarzabal",
+      "amount": 9067930.0,
+      "signed_amount": -9067930.0
+    },
+    {
+      "type": "Purchase",
+      "movement": "Simeone",
+      "amount": 3480500.0,
+      "signed_amount": -3480500.0
+    },
+    {
+      "type": "Admin adjustment",
+      "movement": "Credit/Penalty",
+      "amount": 2060000.0,
+      "signed_amount": 2060000.0
+    },
+    {
+      "type": "Salary",
+      "movement": "Wages",
+      "amount": 38500.0,
+      "signed_amount": -38500.0
+    },
+    {
+      "type": "Purchase",
+      "movement": "Mojica",
+      "amount": 3197510.0,
+      "signed_amount": -3197510.0
+    },
+    {
+      "type": "Purchase",
+      "movement": "Parejo",
+      "amount": 5464640.0,
+      "signed_amount": -5464640.0
+    },
+    {
+      "type": "Sale",
+      "movement": "Adrián",
+      "amount": 565600.0,
+      "signed_amount": 565600.0
+    },
+    {
+      "type": "Sale",
+      "movement": "Matías Moreno",
+      "amount": 575000.0,
+      "signed_amount": 575000.0
+    },
+    {
+      "type": "Sale",
+      "movement": "Cömert",
+      "amount": 144100.0,
+      "signed_amount": 144100.0
+    },
+    {
+      "type": "Sale",
+      "movement": "Ristic",
+      "amount": 156600.0,
+      "signed_amount": 156600.0
+    },
+    {
+      "type": "Sale",
+      "movement": "Lemar",
+      "amount": 151900.0,
+      "signed_amount": 151900.0
+    },
+    {
+      "type": "Salary",
+      "movement": "Wages",
+      "amount": 32960.0,
+      "signed_amount": -32960.0
+    },
+    {
+      "type": "Purchase",
+      "movement": "Batalla",
+      "amount": 5480000.0,
+      "signed_amount": -5480000.0
+    },
+    {
+      "type": "Purchase",
+      "movement": "Yuri",
+      "amount": 2743020.0,
+      "signed_amount": -2743020.0
+    },
+    {
+      "type": "Purchase",
+      "movement": "Diego López",
+      "amount": 4550000.0,
+      "signed_amount": -4550000.0
+    },
+    {
+      "type": "Admin adjustment",
+      "movement": "Credit/Penalty",
+      "amount": 60000000.0,
+      "signed_amount": 60000000.0
+    }
+  ]
+}

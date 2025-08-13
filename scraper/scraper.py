@@ -18,6 +18,10 @@ def login(page):
         page.get_by_role("button", name="Agree").click(timeout=5000)
     except:
         pass
+    # print all links names, since "comensa a jugar not found"
+    links = page.locator("a").all()
+    for link in links:
+        print(link.inner_text())
     page.get_by_role("link", name="Comença a jugar!").click()
     page.get_by_role("button", name="Ja tinc un compte").click()
     page.get_by_role("textbox", name="Email").fill(EMAIL)

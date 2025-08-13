@@ -104,8 +104,8 @@ def extract_team_players(page, team_name: str) -> pd.DataFrame:
             all_rows.append({
                 "team": team_name,
                 "position": position,
-                "club": club,
-                "name": name,
+                "club": normalize_player_name(club),
+                "name": normalize_player_name(name),
                 "this_season_pts": this_season_pts,
                 "last_season_pts": last_season_pts,
                 "price": price,
@@ -141,7 +141,7 @@ def get_rival_teams(page) -> List[Dict]:
         points = safe_inner_text(team.locator("div.right ng-star-insterted"), "0")
         teams.append({
             "position": position,
-            "name": normalize_player_name(name),
+            "name": name,
             "points": points.replace(" pl.", "")
         })
     

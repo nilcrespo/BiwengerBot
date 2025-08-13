@@ -4,4 +4,4 @@ sqlalchemy==2.0.19
 plotly==5.15.0
 playwright==1.36.0
 schedule==1.2.0
-sqlite3-binary
+gunicorn

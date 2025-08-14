@@ -52,21 +52,21 @@ jobs:
         run: |
           python migration.py
 
-          - name: Upload artifacts
-            uses: actions/upload-artifact@v4
-            with:
-              name: biwengerbot-output
-              path: |
-                league_standings.csv
-                market_players.csv
-                market_players_.csv
-                players.csv
-                players_.csv
-                player_probabilities.csv
-                scraper/team_*.csv
-                data/biwenger_data.db
-              if-no-files-found: warn
-              retention-days: 30
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: biwengerbot-output
+          path: |
+            league_standings.csv
+            market_players.csv
+            market_players_.csv
+            players.csv
+            players_.csv
+            player_probabilities.csv
+            scraper/team_*.csv
+            data/biwenger_data.db
+          if-no-files-found: warn
+          retention-days: 30
       - name: Update repository
         run: |
           git config user.name "github-actions[bot]"

@@ -47,7 +47,7 @@ def migrate_csv_to_db(days_behind=0):
     conn.commit()
     
     # Process market CSV
-    market_files = glob.glob('market_players.csv')
+    market_files = glob.glob('csvs/market/market_players.csv')
     for file in market_files:
         try:
             df = pd.read_csv(file)
@@ -70,7 +70,7 @@ def migrate_csv_to_db(days_behind=0):
             print(f"Error processing {file}: {str(e)}")
     
     # Process league standings
-    league_files = glob.glob('league_standings.csv')
+    league_files = glob.glob('csvs/others/league_standings.csv')
     for file in league_files:
         try:
             df = pd.read_csv(file)
@@ -91,7 +91,7 @@ def migrate_csv_to_db(days_behind=0):
             print(f"Error processing {file}: {str(e)}")
     
     # Process team players
-    team_files = glob.glob('team_*.csv')
+    team_files = glob.glob('csvs/teams/team_*.csv')
     for file in team_files:
         df = pd.read_csv(file)
         team_name = df['team'].iloc[0]
@@ -109,7 +109,7 @@ def migrate_csv_to_db(days_behind=0):
         print(f"  → Saved {len(players_df)} players for '{team_name}'")
     
     # NEW: Process player probabilities
-    prob_files = glob.glob('player_probabilities.csv')
+    prob_files = glob.glob('csvs/others/player_probabilities.csv')
     for file in prob_files:
         try:
             df = pd.read_csv(file)

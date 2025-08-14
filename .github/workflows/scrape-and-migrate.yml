@@ -2,7 +2,7 @@ name: Daily scrape & migrate
 
 on:
   schedule:
-    - cron: "15 7 * * *"   # 07:15 UTC daily
+    - cron: "15 6 * * *"   # 06:15 UTC daily
   workflow_dispatch: {}
 
 permissions:

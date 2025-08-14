@@ -595,7 +595,7 @@ def get_starting_player_data():
         all_data = pd.concat([all_data, team_df], ignore_index=True)
         
         # Save progress after each team
-        all_data.to_csv("player_probabilities.csv", index=False)
+        all_data.to_csv("csvs/others/player_probabilities.csv", index=False)
         print(f"Saved data for {team.title()}")
     
     print("\n=== All teams scraped successfully ===")

@@ -188,7 +188,7 @@ def get_rival_teams(page) -> List[Dict]:
     #     })
     
     # Save league standings
-    df.to_csv("csvs/other/league_standings.csv", index=False)
+    df.to_csv("csvs/others/league_standings.csv", index=False)
     return df.to_dict('records')
 
 def extract_all_players(page) -> pd.DataFrame:
@@ -600,7 +600,7 @@ def get_starting_player_data():
     
     print("\n=== All teams scraped successfully ===")
     print(all_data)
-    all_data.to_csv("csvs/other/player_probabilities.csv", index=False)
+    all_data.to_csv("csvs/others/player_probabilities.csv", index=False)
 
         
 if __name__ == "__main__":

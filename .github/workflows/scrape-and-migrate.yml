@@ -57,13 +57,11 @@ jobs:
         with:
           name: biwengerbot-output
           path: |
-            league_standings.csv
-            market_players.csv
-            market_players_.csv
-            players.csv
-            players_.csv
-            player_probabilities.csv
-            scraper/team_*.csv
+            csvs/others/league_standings.csv
+            csvs/market/market_players.csv
+            csvs/players/players.csv
+            csvs/others/player_probabilities.csv
+            csvs/teams/team_*.csv
             data/biwenger_data.db
           if-no-files-found: warn
           retention-days: 30
@@ -82,8 +80,8 @@ jobs:
           git stash pop || true
           
           # Add and commit files
-          git add league_standings.csv market_players.csv players.csv player_probabilities.csv || true
-          git add scraper/team_*.csv 2>/dev/null || true
+          git add csvs/others/league_standings.csv csvs/market/market_players.csv csvs/players/players.csv csvs/others/player_probabilities.csv || true
+          git add csvs/teams/team_*.csv 2>/dev/null || true
           git add data/biwenger_data.db || true
           git commit -m "data: update CSV/DB from run ${GITHUB_RUN_NUMBER}" || echo "No changes"
           git push

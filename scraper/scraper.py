@@ -119,6 +119,8 @@ def extract_team_players(page, team_name: str) -> pd.DataFrame:
             continue
     
     df = pd.DataFrame(all_rows)
+    if team_name == 'General_"Hansi”_Topete':
+        team_name = 'General_Hansi_Topete'
     filename = f"csvs/teams/team_{team_name.replace(' ', '_').replace('/', '_')}.csv"
     df.to_csv(filename, index=False)
     print(f"✅ Saved {len(df)} players to {filename}")

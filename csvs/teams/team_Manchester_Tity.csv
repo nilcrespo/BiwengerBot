@@ -1,22 +1,21 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Manchester Tity,Goalkeeper,Mallorca,Leo Roman,0,56,4170000,40000,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Defender,Athletic,Vivian,0,201,6410000,20000,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Defender,Elche,Affengruber,0,0,2880000,20000,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Defender,Valencia,Copete,0,88,2590000,20000,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Defender,Girona,Hugo Rincon,0,0,2460000,10000,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Defender,Atletico,Galan,0,89,700000,10000,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Midfielder,Real Madrid,Valverde,0,261,14930000,80000,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Midfielder/Forward,Barcelona,Dani Olmo,0,169,9060000,220000,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Midfielder,Getafe,Arambarri,0,204,5780000,10000,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Midfielder,Villarreal,Comesana,0,183,4450000,70000,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Midfielder,Real Oviedo,Colombatto,0,0,2260000,40000,Injured. Muscle discomfort. Estimated return: End of August.,0,0.0,0,0.0,0,0.0
-Manchester Tity,Midfielder,Barcelona,Marc Casado,0,117,1940000,30000,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Midfielder,Alaves,Pablo Ibanez,0,86,1260000,0,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Goalkeeper,Mallorca,Leo Roman,0,56,4200000,30000,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Defender,Athletic,Vivian,0,201,6360000,50000,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Defender,Elche,Affengruber,0,0,2860000,20000,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Defender,Valencia,Copete,0,88,2600000,10000,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Defender,Girona,Hugo Rincon,0,0,2400000,60000,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Defender,Atletico,Galan,0,89,690000,10000,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Midfielder,Real Madrid,Valverde,0,261,14840000,90000,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Midfielder/Forward,Barcelona,Dani Olmo,0,169,8880000,180000,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Midfielder,Getafe,Arambarri,0,204,5790000,10000,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Midfielder,Villarreal,Comesana,0,183,4380000,70000,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Midfielder,Barcelona,Marc Casado,0,117,1920000,20000,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Midfielder,Alaves,Pablo Ibanez,0,86,1250000,10000,Fit,0,0.0,0,0.0,0,0.0
 Manchester Tity,Midfielder,Real Sociedad,Zakharyan,0,18,180000,0,Fit,0,0.0,0,0.0,0,0.0
 Manchester Tity,Midfielder,Athletic,Vencedor,0,0,150000,0,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Forward,Athletic,Inaki Williams,0,200,8650000,0,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Forward/Midfielder,Athletic,Berenguer,0,196,5290000,40000,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Forward/Midfielder,Rayo Vallecano,De Frutos,0,165,3570000,30000,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Forward/Midfielder,Sevilla,Alfon Gonzalez,0,130,3100000,50000,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Forward/Midfielder,Valencia,Fran Perez,0,65,330000,20000,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Forward,Rayo Vallecano,Nteka,0,79,150000,0,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Forward,Athletic,Inaki Williams,0,200,8610000,40000,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Forward/Midfielder,Athletic,Berenguer,0,196,5320000,30000,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Forward/Midfielder,Rayo Vallecano,De Frutos,0,165,3600000,30000,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Forward/Midfielder,Sevilla,Alfon Gonzalez,0,130,3000000,100000,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Forward/Midfielder,Valencia,Fran Perez,0,65,350000,20000,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Forward,Rayo Vallecano,Nteka,0,79,160000,10000,Fit,0,0.0,0,0.0,0,0.0

@@ -1,22 +1,21 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Patsi F.C,Goalkeeper,Barcelona,Joan Garcia,0,233,7880000,10000,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Goalkeeper,Athletic,Unai Simon,0,102,5720000,20000,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Goalkeeper,Betis,Alvaro Valles,0,0,4980000,20000,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Defender,Villarreal,Sergi Cardona,0,169,4390000,20000,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Defender,Rayo Vallecano,Chavarria,0,144,2510000,30000,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Defender,Alaves,Jonny Castro,0,0,1900000,10000,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Defender,Mallorca,Maffeo,0,132,1700000,10000,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Defender,Valencia,Foulquier,0,103,1530000,30000,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Midfielder/Forward,Villarreal,Moleiro,0,174,7500000,150000,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Midfielder,Valencia,Pepelu,0,122,4080000,20000,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Midfielder,Real Oviedo,Luka Ilic,0,0,3260000,10000,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Midfielder,Rayo Vallecano,Pedro Diaz,0,115,3190000,20000,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Midfielder,Elche,Febas,0,0,3160000,0,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Midfielder,Getafe,Neyou,0,126,1840000,10000,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Forward,Atletico,Julian Alvarez,0,235,16620000,30000,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Forward/Midfielder,Espanyol,Puado,0,194,6400000,40000,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Forward/Midfielder,Valencia,Diego Lopez,0,173,4550000,20000,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Forward,Getafe,Mayoral,0,98,4400000,20000,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Forward/Midfielder,Levante,Carlos Alvarez,0,0,2730000,30000,Doubt. Pubalgia.,0,0.0,0,0.0,0,0.0
-Patsi F.C,Forward/Midfielder,Betis,Chimy Avila,0,62,500000,10000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Goalkeeper,Barcelona,Joan Garcia,0,233,7870000,10000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Goalkeeper,Athletic,Unai Simon,0,102,5740000,20000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Defender,Villarreal,Sergi Cardona,0,169,4400000,10000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Defender,Rayo Vallecano,Chavarria,0,144,2490000,20000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Defender,Alaves,Jonny Castro,0,0,1910000,10000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Defender,Mallorca,Maffeo,0,132,1700000,0,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Defender,Valencia,Foulquier,0,103,1560000,30000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Midfielder/Forward,Villarreal,Moleiro,0,174,7300000,200000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Midfielder,Valencia,Pepelu,0,122,4090000,10000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Midfielder,Real Oviedo,Luka Ilic,0,0,3270000,10000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Midfielder,Rayo Vallecano,Pedro Diaz,0,115,3170000,20000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Midfielder,Elche,Febas,0,0,3150000,10000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Midfielder,Getafe,Neyou,0,126,1840000,0,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Forward,Atletico,Julian Alvarez,0,235,16540000,80000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Forward/Midfielder,Espanyol,Puado,0,194,6430000,30000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Forward/Midfielder,Valencia,Diego Lopez,0,173,4570000,20000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Forward,Getafe,Mayoral,0,98,4420000,20000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Forward/Midfielder,Levante,Carlos Alvarez,0,0,2700000,30000,Doubt. Pubalgia.,0,0.0,0,0.0,0,0.0
+Patsi F.C,Forward/Midfielder,Betis,Chimy Avila,0,62,510000,10000,Fit,0,0.0,0,0.0,0,0.0
 Patsi F.C,Forward/Midfielder,Atletico,Carlos Martin,0,88,410000,0,Fit,0,0.0,0,0.0,0,0.0

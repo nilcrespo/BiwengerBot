@@ -1,4 +1,5 @@
 import re
+from matplotlib import table
 import pandas as pd
 from playwright.sync_api import Playwright, sync_playwright, expect, TimeoutError
 from typing import List, Dict
@@ -13,11 +14,14 @@ MAX_RIVALS = 10  # Adjust based on your league size
 
 def login(page):
     """Handle login process"""
-    page.goto("https://biwenger.as.com/")
+    page.goto("https://biwenger.as.com/", wait_until="domcontentloaded",)
     try:
         page.get_by_role("button", name="Agree").click(timeout=5000)
     except:
-        pass
+        try:
+            page.click("button#didomi-notice-agree-button", timeout=500)
+        except:
+            pass
     page.get_by_role("link", name="Comença a jugar!").click()
     page.get_by_role("button", name="Ja tinc un compte").click()
     page.get_by_role("textbox", name="Email").fill(EMAIL)
@@ -54,24 +58,25 @@ def extract_team_players(page, team_name: str) -> pd.DataFrame:
     print(f"\nExtracting players for {team_name}...")
     
     # Navigate to team page and click table view
-    page.get_by_role("button", name=team_name).first.click()
+    page.get_by_role("button", name=team_name).last.click()
+    # page.locator(f"a[role='button'][href*={team_name.split()[0].lower()}]").click()  
     try:
         page.get_by_role("button", name="Taula").click(timeout=500)
     except:
         pass
-    page.wait_for_selector("table tbody tr", timeout=1000)
+    page.wait_for_selector("table.table.no-swipe", timeout=1000)
     
     all_rows = []
-    rows = page.locator("table tbody tr").all()
-    
+    rows = page.locator("table.table.no-swipe tbody tr").all()
     for row in rows:
         try:
             # Extract player data
             pos_locator = row.locator("player-position")
             pos_count = pos_locator.count()
+            
             titles = [pos_locator.nth(j).get_attribute("title").strip() for j in range(pos_count)]
             position = "/".join(titles)
-
+            
             club = safe_get_attribute(row.locator("a.team"), "title", "Unknown Club")
             name = safe_inner_text(row.locator("th a"), "Unknown Player")
 
@@ -119,12 +124,43 @@ def extract_team_players(page, team_name: str) -> pd.DataFrame:
             continue
     
     df = pd.DataFrame(all_rows)
-    if team_name == 'General_"Hansi”_Topete':
-        team_name = 'General_Hansi_Topete'
+    if team_name == 'General "Hansi” Topete':
+        team_name = 'General Hansi Topete'
     filename = f"csvs/teams/team_{team_name.replace(' ', '_').replace('/', '_')}.csv"
     df.to_csv(filename, index=False)
     print(f"✅ Saved {len(df)} players to {filename}")
     return df
+
+def wait_for_table_ready(page, timeout_ms=20000, poll_ms=200):
+    table = page.locator(".table-responsive.section-xs.light.ng-star-inserted table").first
+    table.wait_for(state="visible", timeout=timeout_ms)
+
+    # 1) wait for at least one row
+    tbody_rows = page.locator(".table-responsive.section-xs.light.ng-star-inserted table tbody tr")
+    page.wait_for_timeout(200)  # small grace
+    total = 0
+    elapsed = 0
+    while elapsed < timeout_ms:
+        total = tbody_rows.count()
+        if total > 0:
+            break
+        page.wait_for_timeout(poll_ms)
+        elapsed += poll_ms
+    if total == 0:
+        raise TimeoutError("Table has no rows after waiting.")
+
+    # 2) wait for skeletons to disappear (if they exist at all)
+    skeletons = page.locator(".table-responsive.section-xs.light.ng-star-inserted table >> text=/█+/")
+    elapsed = 0
+    while elapsed < timeout_ms:
+        if skeletons.count() == 0:
+            break
+        page.wait_for_timeout(poll_ms)
+        elapsed += poll_ms
+
+    return table  # a Locator pointing to <table>
+
+
 
 def get_rival_teams(page) -> List[Dict]:
     """Get list of all rival teams in the league"""
@@ -142,16 +178,14 @@ def get_rival_teams(page) -> List[Dict]:
             print(f"Could not switch to table view: {e}")
             return pd.DataFrame()
     # Wait for the table to be visible and stable
-    table = page.locator(".table-responsive.section-xs.light.ng-star-inserted")
-    table.wait_for(timeout=10000)  # Wait up to 10 seconds
-
-    # Get the HTML content
-    table_html = table.inner_html(timeout=10000)
-
+    table = wait_for_table_ready(page)
+    html = table.evaluate("el => el.outerHTML")
+    # if table is the locator for the <table> element:
+    # build minimal valid table HTML and pass via StringIO
     # Parse with pandas
-    import pandas as pd
     try:
-        df = pd.read_html(table_html)[0]
+        from io import StringIO
+        df = pd.read_html(StringIO(f"<table>{html}</table>"))[0]
     except Exception as e:
         print(f"Failed to parse table: {e}")
         return pd.DataFrame()
@@ -163,6 +197,7 @@ def get_rival_teams(page) -> List[Dict]:
         'Jugadors': 'players'
     })
     # Extract just the number from position (remove º∞)
+    print(df)
     df['position'] = df['position'].str.extract(r'(\d+)').astype(int)
 
     # Split 'Equip' column into 'team_value' and 'team_growth'
@@ -406,30 +441,58 @@ def extract_market_players(page) -> pd.DataFrame:
 
 import time
 import json
-def get_all_posts(page, max_scrolls=5, scroll_pause=1.5):
+import json, time
+from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
+
+def get_all_posts(page, max_scrolls=5, initial_wait=3, load_timeout_ms=6000):
     seen = set()
     all_posts = []
-    last_count = 0
+
+    print(f"⏳ Waiting {initial_wait}s for first posts to render...")
+    time.sleep(initial_wait)
+
+    # Cookie banner (best-effort)
+    try:
+        page.get_by_role("button", name="Agree").click(timeout=3000)
+    except:
+        try:
+            page.click("button#didomi-notice-agree-button", timeout=1000)
+        except:
+            pass
+
+    post_locator = page.locator("league-board-post")
+
+    # Ensure at least one post exists (don’t fail if none yet)
+    try:
+        page.wait_for_selector("league-board-post", timeout=5000)
+    except PlaywrightTimeoutError:
+        print("⚠️ No posts found at start.")
+        return []
+
+    last_count = post_locator.count()
+    print(f"Start: {last_count} posts")
+
     for i in range(max_scrolls):
-        posts = page.locator("league-board-post").all()
-        print(f"Scroll {i+1}: Found {len(posts)} posts")
-        for title in posts:
-            post_data = title.inner_text().split('\n')
-            # Use a hash of the post data as identifier
+        # Collect what we currently have
+        count_now = post_locator.count()
+        print(f"Scroll {i+1} (before scroll): {count_now} posts")
+
+        for idx in range(count_now):
+            title = post_locator.nth(idx)
+            post_data = title.inner_text().split("\n")
             post_id = json.dumps(post_data, ensure_ascii=False)
             if post_id not in seen:
                 seen.add(post_id)
                 all_posts.append(post_data)
-                print(post_data)
-                print('---')
-        page.evaluate("window.scrollBy(0, window.innerHeight*3)")
-        time.sleep(scroll_pause)  # Wait for new posts to load and for visibility
 
-        if len(posts) == last_count:
-            print("No more new posts loaded.")
-            break
-        last_count = len(posts)
-    # Optionally save all_posts to a file
+            # Scroll down to trigger loading more
+            last_post = page.locator("league-board-post").last
+            last_post.scroll_into_view_if_needed()
+
+            # Update last_count for the next loop
+            last_count = post_locator.count()
+            print(f"Scroll {i+1} (after load): {last_count} posts")
+
     with open("unique_posts.json", "w", encoding="utf-8") as f:
         json.dump(all_posts, f, ensure_ascii=False, indent=2)
     print(f"✅ Saved {len(all_posts)} unique posts to unique_posts.json")
@@ -447,7 +510,7 @@ def run(playwright: Playwright) -> None:
     # Login
     login(page)
     
-    # # Get all post titles
+    # Get all post titles
     # get_all_posts(page, max_scrolls=20)
  
     # Get all rival teams
@@ -608,4 +671,4 @@ def get_starting_player_data():
 if __name__ == "__main__":
     with sync_playwright() as playwright:
         run(playwright)
-    get_starting_player_data()
+    # get_starting_player_data()

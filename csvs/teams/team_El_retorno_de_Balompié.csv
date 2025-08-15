@@ -1,23 +1,20 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-El retorno de Balompié,Goalkeeper,Getafe,David Soria,0,183,4880000,20000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Goalkeeper,Real Sociedad,Remiro,0,158,4880000,40000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Defender,Valencia,Gayà,0,102,3620000,20000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Defender,Osasuna,Boyomo,0,177,3470000,10000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Defender,Rayo Vallecano,Luiz Felipe,0,0,3290000,10000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Defender,Girona,David López,0,121,2000000,40000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Defender,Alavés,Yusi Enríquez,0,0,540000,10000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Midfielder,Betis,Lo Celso,0,163,7950000,40000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Midfielder/Defender,Atlético,Marcos Llorente,0,176,5800000,20000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Midfielder/Forward,Atlético,Giuliano Simeone,0,156,5670000,10000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Midfielder,Valencia,Javi Guerra,0,156,4410000,20000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Midfielder,Real Oviedo,Alberto Reina,0,0,3120000,20000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Midfielder,Alavés,Guridi,0,125,1730000,30000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Midfielder/Forward,Athletic,Robert Navarro,0,97,1730000,20000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Midfielder,Sevilla,Sow,0,115,1690000,50000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Forward,Barcelona,Lewandowski,0,266,15840000,50000,Injured. Muscle discomfort in the biceps femoris of the left thigh. Estimated return: End of August.,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Forward,Athletic,Nico Williams,0,146,11830000,130000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Forward,Real Madrid,Mastantuono,0,0,6970000,30000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Forward,Athletic,Sannadi,0,65,3060000,20000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Forward,Girona,Stuani,0,171,2520000,40000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Forward,Real Oviedo,Viñas,0,0,1190000,30000,Fit,0,0.0,0,0.0,0,0.0
-El retorno de Balompié,Coach,Levante,Julián Calero,0,0,260000,0,Fit,0,0.0,0,0.0,0,0.0
+El retorno de Balompié,Goalkeeper,Real Sociedad,Remiro,0,158,5060000,20000,Fit,0,0.0,0,0.0,0,0.0
+El retorno de Balompié,Goalkeeper,Getafe,David Soria,0,183,5020000,30000,Fit,0,0.0,0,0.0,0,0.0
+El retorno de Balompié,Defender,Valencia,Gaya,0,102,3730000,30000,Fit,0,0.0,0,0.0,0,0.0
+El retorno de Balompié,Defender,Osasuna,Boyomo,0,177,3530000,10000,Fit,0,0.0,0,0.0,0,0.0
+El retorno de Balompié,Defender,Rayo Vallecano,Luiz Felipe,0,0,3200000,20000,Fit,0,0.0,0,0.0,0,0.0
+El retorno de Balompié,Defender,Alaves,Yusi Enriquez,0,0,590000,10000,Fit,0,0.0,0,0.0,0,0.0
+El retorno de Balompié,Midfielder,Betis,Lo Celso,0,163,8570000,130000,Fit,0,0.0,0,0.0,0,0.0
+El retorno de Balompié,Midfielder/Defender,Atletico,Marcos Llorente,0,176,5920000,20000,Fit,0,0.0,0,0.0,0,0.0
+El retorno de Balompié,Midfielder/Forward,Atletico,Giuliano Simeone,0,156,5780000,20000,Fit,0,0.0,0,0.0,0,0.0
+El retorno de Balompié,Midfielder,Valencia,Javi Guerra,0,156,4770000,60000,Fit,0,0.0,0,0.0,0,0.0
+El retorno de Balompié,Midfielder,Alaves,Guridi,0,125,1890000,40000,Fit,0,0.0,0,0.0,0,0.0
+El retorno de Balompié,Midfielder,Sevilla,Sow,0,115,1890000,40000,Fit,0,0.0,0,0.0,0,0.0
+El retorno de Balompié,Midfielder/Forward,Athletic,Robert Navarro,0,97,1780000,0,Fit,0,0.0,0,0.0,0,0.0
+El retorno de Balompié,Forward,Barcelona,Lewandowski,0,266,13840000,220000,Injured. Muscle discomfort in the biceps femoris of the left thigh. Estimated return: End of August.,0,0.0,0,0.0,0,0.0
+El retorno de Balompié,Forward,Athletic,Nico Williams,0,146,11200000,40000,Fit,0,0.0,0,0.0,0,0.0
+El retorno de Balompié,Forward/Midfielder,Rayo Vallecano,Alvaro Garcia,0,197,4730000,20000,Fit,0,0.0,0,0.0,0,0.0
+El retorno de Balompié,Forward,Girona,Stuani,0,171,2970000,100000,Not in match squad. Personal matters.,0,0.0,0,0.0,0,0.0
+El retorno de Balompié,Forward,Real Oviedo,Vinas,0,0,1070000,60000,Fit,0,0.0,0,0.0,0,0.0
+El retorno de Balompié,Coach,Levante,Julian Calero,0,0,270000,10000,Fit,0,0.0,0,0.0,0,0.0

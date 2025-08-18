@@ -1,26 +1,25 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-"General ""Hansi” Topete",Goalkeeper,Real Oviedo,Escandell,0,0,3440000,10000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Defender,Real Madrid,Militão,0,62,5320000,90000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Defender,Barcelona,Ronald Araujo,0,46,3780000,140000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Defender,Betis,Natan,0,107,3090000,10000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Defender,Espanyol,Carlos Romero,0,149,2930000,20000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Defender/Midfielder,Real Madrid,Fran Garcia,0,140,1880000,30000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Defender/Midfielder,Levante,Manu Sanchez,0,112,1690000,20000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Defender,Barcelona,Christensen,0,22,1510000,60000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Defender,Real Oviedo,Luengo,0,0,1290000,10000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Midfielder,Atletico,Johnny,0,151,6340000,30000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Midfielder,Athletic,Jauregizar,0,162,4830000,20000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Midfielder/Defender,Real Sociedad,Sergio Gomez,0,186,4650000,50000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Midfielder,Levante,Oriol Rey,0,0,1880000,20000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Midfielder,Espanyol,Pol Lozano,0,106,1580000,20000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Midfielder,Atletico,Gallagher,0,132,1520000,30000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Midfielder,Rayo Vallecano,Oscar Valentin,0,118,1180000,10000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Midfielder/Defender,Sevilla,Juanlu,0,133,790000,50000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Midfielder,Osasuna,Moi Gomez,0,61,520000,30000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Forward/Midfielder,Villarreal,Yeremy Pino,0,164,4080000,0,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Forward,Real Madrid,Rodrygo,0,176,3100000,80000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Forward,Athletic,Sannadi,0,65,2850000,30000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Forward,Levante,Morales,0,0,2760000,60000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Forward,Real Madrid,Brahim,0,121,2310000,210000,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Forward,Real Oviedo,Fores,0,0,240000,10000,Not in match squad. Fear clause.,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",Forward,Sevilla,Rafa Mir,0,62,190000,0,Fit,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",Goalkeeper,Real Oviedo,Escandell,9,0,3590000,50000,Fit,1,9.0,0,0.0,9,9.0
+"General ""Hansi” Topete",Defender,Espanyol,Carlos Romero,6,0,2880000,0,Fit,1,6.0,6,6.0,0,0.0
+"General ""Hansi” Topete",Defender,Barcelona,Ronald Araujo,5,0,4170000,140000,Fit,1,5.0,0,0.0,5,5.0
+"General ""Hansi” Topete",Defender,Real Oviedo,Luengo,5,0,1320000,20000,Fit,1,5.0,0,0.0,5,5.0
+"General ""Hansi” Topete",Defender/Midfielder,Levante,Manu Sanchez,3,0,1680000,10000,Fit,1,3.0,0,0.0,3,3.0
+"General ""Hansi” Topete",Defender,Real Madrid,Militão,0,62,5620000,90000,Fit,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",Defender,Betis,Natan,0,107,3060000,20000,Fit,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",Defender/Midfielder,Real Madrid,Fran Garcia,0,140,1840000,10000,Fit,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",Defender,Barcelona,Christensen,0,22,1440000,100000,Fit,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",Midfielder,Atletico,Johnny,6,0,6410000,30000,Fit,1,6.0,0,0.0,6,6.0
+"General ""Hansi” Topete",Midfielder,Rayo Vallecano,Pathe Ciss,6,0,2620000,80000,Fit,1,6.0,0,0.0,6,6.0
+"General ""Hansi” Topete",Midfielder,Espanyol,Pol Lozano,4,0,1580000,0,Fit,1,4.0,4,4.0,0,0.0
+"General ""Hansi” Topete",Midfielder,Levante,Oriol Rey,3,0,1840000,30000,Fit,1,3.0,0,0.0,3,3.0
+"General ""Hansi” Topete",Midfielder,Athletic,Jauregizar,2,0,4870000,0,Fit,1,2.0,2,2.0,0,0.0
+"General ""Hansi” Topete",Midfielder/Defender,Real Sociedad,Sergio Gomez,2,0,4430000,140000,Fit,1,2.0,0,0.0,2,2.0
+"General ""Hansi” Topete",Midfielder,Atletico,Gallagher,2,0,1600000,30000,Fit,1,2.0,0,0.0,2,2.0
+"General ""Hansi” Topete",Midfielder/Defender,Sevilla,Juanlu,2,0,880000,30000,Fit,1,2.0,0,0.0,2,2.0
+"General ""Hansi” Topete",Forward/Midfielder,Villarreal,Yeremy Pino,6,0,4260000,80000,Fit,1,6.0,6,6.0,0,0.0
+"General ""Hansi” Topete",Forward,Athletic,Sannadi,5,0,2860000,50000,Fit,1,5.0,5,5.0,0,0.0
+"General ""Hansi” Topete",Forward,Levante,Morales,3,0,2600000,80000,Fit,1,3.0,0,0.0,3,3.0
+"General ""Hansi” Topete",Forward,Real Madrid,Rodrygo,0,176,3240000,40000,Fit,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",Forward,Real Madrid,Brahim,0,121,2940000,200000,Fit,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",Forward,Sevilla,Rafa Mir,0,62,260000,60000,Fit,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",Forward,Real Oviedo,Fores,0,0,240000,0,Fit,0,0.0,0,0.0,0,0.0

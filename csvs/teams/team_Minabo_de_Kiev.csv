@@ -1,25 +1,23 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Minabo de Kiev,Goalkeeper,Valencia,Dimitrievski,0,13,420000,10000,Fit,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Goalkeeper,Valencia,Dimitrievski,0,13,420000,0,Fit,0,0.0,0,0.0,0,0.0
 Minabo de Kiev,Goalkeeper,Mallorca,Bergström,0,0,150000,0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Goalkeeper,Girona,Gazzaniga,-7,0,3470000,80000,Suspended. Direct red.,1,-7.0,-7,-7.0,0,0.0
-Minabo de Kiev,Defender,Alaves,Tenaglia,15,0,3880000,60000,Fit,1,15.0,15,15.0,0,0.0
-Minabo de Kiev,Defender,Real Madrid,Dean Huijsen,9,0,10210000,60000,Fit,1,9.0,9,9.0,0,0.0
-Minabo de Kiev,Defender/Midfielder,Barcelona,Eric Garcia,6,0,3260000,70000,Fit,1,6.0,0,0.0,6,6.0
-Minabo de Kiev,Defender,Real Sociedad,Aramburu,6,0,3170000,40000,Fit,1,6.0,0,0.0,6,6.0
-Minabo de Kiev,Defender,Espanyol,Calero,5,0,680000,80000,Fit,1,5.0,5,5.0,0,0.0
-Minabo de Kiev,Defender,Girona,Blind,2,0,2750000,30000,Fit,1,2.0,2,2.0,0,0.0
-Minabo de Kiev,Defender,Real Oviedo,David Costas,0,0,360000,0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Midfielder,Alaves,Antonio Blanco,7,0,2550000,80000,Fit,1,7.0,7,7.0,0,0.0
-Minabo de Kiev,Midfielder,Barcelona,Gavi,6,0,4680000,50000,Fit,1,6.0,0,0.0,6,6.0
-Minabo de Kiev,Midfielder,Girona,Yangel Herrera,5,0,4430000,30000,Fit,1,5.0,5,5.0,0,0.0
-Minabo de Kiev,Midfielder,Osasuna,Moncayola,4,0,2380000,0,Fit,1,4.0,0,0.0,4,4.0
-Minabo de Kiev,Midfielder,Mallorca,Antonio Sanchez,4,0,540000,80000,Fit,1,4.0,4,4.0,0,0.0
-Minabo de Kiev,Midfielder,Real Oviedo,Sibo,3,0,1790000,20000,Fit,1,3.0,0,0.0,3,3.0
-Minabo de Kiev,Midfielder/Forward,Osasuna,Ruben Garcia,1,0,3840000,60000,Fit,1,1.0,0,0.0,1,1.0
-Minabo de Kiev,Midfielder/Forward,Getafe,Javi Munoz,0,136,1390000,50000,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Midfielder,Barcelona,Fermin,-1,0,4120000,0,Fit,1,-1.0,0,0.0,-1,-1.0
-Minabo de Kiev,Forward,Celta,Iago Aspas,6,0,7380000,50000,Fit,1,6.0,6,6.0,0,0.0
-Minabo de Kiev,Forward,Espanyol,Kike Garcia,4,0,3490000,40000,Fit,1,4.0,4,4.0,0,0.0
-Minabo de Kiev,Forward,Levante,Brugue,1,0,1780000,30000,Fit,1,1.0,0,0.0,1,1.0
-Minabo de Kiev,Forward,Mallorca,Abdon Prats,0,61,150000,0,Fit,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Goalkeeper,Girona,Gazzaniga,-7,0,3390000,80000,Suspended. Direct red.,1,-7.0,-7,-7.0,0,0.0
+Minabo de Kiev,Defender,Alaves,Tenaglia,15,0,3950000,70000,Fit,1,15.0,15,15.0,0,0.0
+Minabo de Kiev,Defender,Real Madrid,Dean Huijsen,9,0,10280000,70000,Fit,1,9.0,9,9.0,0,0.0
+Minabo de Kiev,Defender/Midfielder,Barcelona,Eric Garcia,6,0,3340000,80000,Fit,1,6.0,0,0.0,6,6.0
+Minabo de Kiev,Defender,Real Sociedad,Aramburu,6,0,3220000,50000,Fit,1,6.0,0,0.0,6,6.0
+Minabo de Kiev,Defender,Espanyol,Calero,5,0,770000,90000,Fit,1,5.0,5,5.0,0,0.0
+Minabo de Kiev,Defender,Girona,Blind,2,0,2720000,30000,Fit,1,2.0,2,2.0,0,0.0
+Minabo de Kiev,Midfielder,Alaves,Antonio Blanco,7,0,2650000,100000,Fit,1,7.0,7,7.0,0,0.0
+Minabo de Kiev,Midfielder,Barcelona,Gavi,6,0,4740000,60000,Fit,1,6.0,0,0.0,6,6.0
+Minabo de Kiev,Midfielder,Girona,Yangel Herrera,5,0,4420000,10000,Fit,1,5.0,5,5.0,0,0.0
+Minabo de Kiev,Midfielder,Osasuna,Moncayola,4,0,2400000,20000,Fit,1,4.0,0,0.0,4,4.0
+Minabo de Kiev,Midfielder,Mallorca,Antonio Sanchez,4,0,640000,100000,Fit,1,4.0,4,4.0,0,0.0
+Minabo de Kiev,Midfielder,Real Oviedo,Sibo,3,0,1780000,10000,Fit,1,3.0,0,0.0,3,3.0
+Minabo de Kiev,Midfielder/Forward,Osasuna,Ruben Garcia,1,0,3800000,40000,Fit,1,1.0,0,0.0,1,1.0
+Minabo de Kiev,Midfielder/Forward,Getafe,Javi Munoz,0,136,1350000,40000,Fit,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Midfielder,Barcelona,Fermin,-1,0,4100000,20000,Fit,1,-1.0,0,0.0,-1,-1.0
+Minabo de Kiev,Forward,Celta,Iago Aspas,6,0,7450000,70000,Fit,1,6.0,6,6.0,0,0.0
+Minabo de Kiev,Forward,Espanyol,Kike Garcia,4,0,3460000,30000,Fit,1,4.0,4,4.0,0,0.0
+Minabo de Kiev,Forward,Levante,Brugue,1,0,1750000,30000,Fit,1,1.0,0,0.0,1,1.0
 Minabo de Kiev,Forward/Midfielder,Valencia,Sergi Canos,0,43,150000,0,Fit,0,0.0,0,0.0,0,0.0

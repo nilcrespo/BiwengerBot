@@ -1,23 +1,24 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-CD Numancia,Goalkeeper,Valencia,Agirrezabala,3,0,4820000,40000,Fit,1,3.0,3,3.0,0,0.0
-CD Numancia,Goalkeeper,Alaves,Sivera,2,0,4350000,40000,Fit,1,2.0,2,2.0,0,0.0
+CD Numancia,Goalkeeper,Valencia,Agirrezabala,3,0,4790000,30000,Fit,1,3.0,3,3.0,0,0.0
+CD Numancia,Goalkeeper,Alaves,Sivera,2,0,4310000,40000,Fit,1,2.0,2,2.0,0,0.0
 CD Numancia,Goalkeeper,Levante,Pastor,0,0,150000,0,Injured. Operation of fracture in the index finger. Estimated return: Early September.,0,0.0,0,0.0,0,0.0
-CD Numancia,Defender/Midfielder,Rayo Vallecano,Ratiu,5,0,4370000,40000,Fit,1,5.0,0,0.0,5,5.0
-CD Numancia,Defender,Rayo Vallecano,Lejeune,4,0,5110000,40000,Fit,1,4.0,0,0.0,4,4.0
-CD Numancia,Defender,Mallorca,Raillo,4,0,4930000,30000,Fit,1,4.0,4,4.0,0,0.0
-CD Numancia,Defender,Celta,Marcos Alonso,4,0,4500000,20000,Fit,1,4.0,4,4.0,0,0.0
-CD Numancia,Defender/Midfielder,Real Madrid,Trent,2,0,7420000,190000,Fit,1,2.0,2,2.0,0,0.0
-CD Numancia,Defender,Alaves,Facundo Garces,2,0,1830000,30000,Fit,1,2.0,2,2.0,0,0.0
-CD Numancia,Defender,Levante,Cabello,1,0,230000,10000,Fit,1,1.0,0,0.0,1,1.0
-CD Numancia,Midfielder/Forward,Athletic,Robert Navarro,10,0,2200000,170000,Fit,1,10.0,10,10.0,0,0.0
-CD Numancia,Midfielder,Athletic,De Galarreta,4,0,3580000,10000,Fit,1,4.0,4,4.0,0,0.0
-CD Numancia,Midfielder,Betis,Sergi Altimira,4,0,2660000,50000,Fit,1,4.0,0,0.0,4,4.0
-CD Numancia,Midfielder/Forward,Atletico,Baena,3,0,12450000,400000,Injured. Low grade muscle injury. Estimated return: Mid-September.,1,3.0,0,0.0,3,3.0
-CD Numancia,Midfielder,Celta,Ilaix Moriba,2,0,3760000,60000,Fit,1,2.0,2,2.0,0,0.0
+CD Numancia,Defender/Midfielder,Rayo Vallecano,Ratiu,5,0,4420000,50000,Fit,1,5.0,0,0.0,5,5.0
+CD Numancia,Defender,Rayo Vallecano,Lejeune,4,0,5070000,40000,Fit,1,4.0,0,0.0,4,4.0
+CD Numancia,Defender,Mallorca,Raillo,4,0,4910000,20000,Fit,1,4.0,4,4.0,0,0.0
+CD Numancia,Defender,Celta,Marcos Alonso,4,0,4470000,30000,Fit,1,4.0,4,4.0,0,0.0
+CD Numancia,Defender/Midfielder,Real Madrid,Trent,2,0,7220000,200000,Fit,1,2.0,2,2.0,0,0.0
+CD Numancia,Defender,Alaves,Facundo Garces,2,0,1810000,20000,Fit,1,2.0,2,2.0,0,0.0
+CD Numancia,Defender,Levante,Cabello,1,0,250000,20000,Fit,1,1.0,0,0.0,1,1.0
+CD Numancia,Midfielder/Forward,Athletic,Robert Navarro,10,0,2390000,190000,Fit,1,10.0,10,10.0,0,0.0
+CD Numancia,Midfielder,Athletic,De Galarreta,4,0,3570000,10000,Fit,1,4.0,4,4.0,0,0.0
+CD Numancia,Midfielder,Betis,Sergi Altimira,4,0,2740000,80000,Fit,1,4.0,0,0.0,4,4.0
+CD Numancia,Midfielder/Forward,Atletico,Baena,3,0,11900000,550000,Injured. Low grade muscle injury. Estimated return: Mid-September.,1,3.0,0,0.0,3,3.0
+CD Numancia,Midfielder,Celta,Ilaix Moriba,2,0,3720000,40000,Fit,1,2.0,2,2.0,0,0.0
 CD Numancia,Midfielder/Defender,Osasuna,Iker Benito,0,4,150000,0,Injured. Ligamentous injury in the left ankle without associated bone injury. Estimated return: early September.,0,0.0,0,0.0,0,0.0
-CD Numancia,Forward/Midfielder,Rayo Vallecano,Isi Palazon,11,0,5160000,100000,Fit,1,11.0,0,0.0,11,11.0
-CD Numancia,Forward/Midfielder,Elche,German Valera,10,0,1490000,110000,Fit,1,10.0,10,10.0,0,0.0
-CD Numancia,Forward,Villarreal,Etta Eyong,7,0,4750000,100000,Fit,1,7.0,7,7.0,0,0.0
-CD Numancia,Forward,Mallorca,Mateo Joseph,4,0,1660000,110000,Fit,1,4.0,4,4.0,0,0.0
-CD Numancia,Forward,Celta,Borja Iglesias,2,0,3430000,10000,Fit,1,2.0,2,2.0,0,0.0
-CD Numancia,Coach,Villarreal,Marcelino,3,0,2410000,10000,Fit,1,3.0,3,3.0,0,0.0
+CD Numancia,Forward/Midfielder,Rayo Vallecano,Isi Palazon,11,0,5280000,120000,Fit,1,11.0,0,0.0,11,11.0
+CD Numancia,Forward/Midfielder,Elche,German Valera,10,0,1620000,130000,Fit,1,10.0,10,10.0,0,0.0
+CD Numancia,Forward/Midfielder,Getafe,Adrian Liso,9,0,1080000,250000,Fit,1,9.0,0,0.0,9,9.0
+CD Numancia,Forward,Villarreal,Etta Eyong,7,0,4880000,130000,Fit,1,7.0,7,7.0,0,0.0
+CD Numancia,Forward,Mallorca,Mateo Joseph,4,0,1780000,120000,Fit,1,4.0,4,4.0,0,0.0
+CD Numancia,Forward,Celta,Borja Iglesias,2,0,3420000,10000,Fit,1,2.0,2,2.0,0,0.0
+CD Numancia,Coach,Villarreal,Marcelino,3,0,2400000,10000,Fit,1,3.0,3,3.0,0,0.0

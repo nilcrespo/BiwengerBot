@@ -1,21 +1,20 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-RaiFC,Goalkeeper,Levante,Pablo Campos,4,0,3200000,20000,Fit,1,4.0,0,0.0,4,4.0
-RaiFC,Goalkeeper,Rayo Vallecano,Batalla,3,0,4630000,30000,Fit,1,3.0,0,0.0,3,3.0
-RaiFC,Defender,Getafe,Djene,7,0,2820000,80000,Fit,1,7.0,0,0.0,7,7.0
-RaiFC,Defender/Midfielder,Real Madrid,Alvaro Carreras,5,0,6410000,40000,Fit,1,5.0,5,5.0,0,0.0
-RaiFC,Defender,Rayo Vallecano,Pacha Espino,5,0,1010000,50000,Fit,1,5.0,0,0.0,5,5.0
-RaiFC,Defender/Midfielder,Celta,Mingueza,4,0,5670000,60000,Fit,1,4.0,4,4.0,0,0.0
-RaiFC,Defender,Athletic,Yuri,2,0,2820000,40000,Fit,1,2.0,2,2.0,0,0.0
-RaiFC,Defender,Atletico,Le Normand,1,0,4080000,60000,Fit,1,1.0,0,0.0,1,1.0
-RaiFC,Midfielder,Villarreal,Pape Gueye,16,0,6260000,110000,Fit,1,16.0,16,16.0,0,0.0
-RaiFC,Midfielder/Forward,Betis,Roro Riquelme,8,0,5860000,20000,Fit,2,4.0,2,2.0,6,6.0
-RaiFC,Midfielder/Forward,Betis,Fornals,8,0,4890000,40000,Fit,2,4.0,5,5.0,3,3.0
-RaiFC,Midfielder,Rayo Vallecano,Unai Lopez,6,0,1870000,70000,Fit,1,6.0,0,0.0,6,6.0
-RaiFC,Midfielder,Osasuna,Aimar Oroz,1,0,5860000,100000,Fit,1,1.0,0,0.0,1,1.0
-RaiFC,Forward,Barcelona,Ferran Torres,10,0,5570000,100000,Fit,1,10.0,0,0.0,10,10.0
-RaiFC,Forward,Levante,Ivan Romero,6,0,1020000,120000,Fit,1,6.0,0,0.0,6,6.0
-RaiFC,Forward,Real Sociedad,Oyarzabal,5,0,7280000,30000,Fit,1,5.0,0,0.0,5,5.0
-RaiFC,Forward,Espanyol,Roberto Fernandez,3,0,4160000,50000,Fit,1,3.0,3,3.0,0,0.0
-RaiFC,Forward,Betis,Cucho,2,0,6940000,200000,Fit,2,1.0,1,1.0,1,1.0
-RaiFC,Forward/Midfielder,Atletico,Griezmann,-1,0,6120000,80000,Fit,1,-1.0,0,0.0,-1,-1.0
-RaiFC,Coach,Atletico,Simeone,0,76,2990000,20000,Fit,1,0.0,0,0.0,0,0.0
+RaiFC,Goalkeeper,Levante,Pablo Campos,13,0,3210000,10000,Fit,2,6.5,9,9.0,4,4.0
+RaiFC,Goalkeeper,Rayo Vallecano,Batalla,3,0,4610000,20000,Fit,1,3.0,0,0.0,3,3.0
+RaiFC,Defender,Getafe,Djene,7,0,2890000,70000,Fit,1,7.0,0,0.0,7,7.0
+RaiFC,Defender/Midfielder,Real Madrid,Alvaro Carreras,5,0,6460000,50000,Fit,1,5.0,5,5.0,0,0.0
+RaiFC,Defender,Rayo Vallecano,Pacha Espino,5,0,1050000,40000,Fit,1,5.0,0,0.0,5,5.0
+RaiFC,Defender/Midfielder,Celta,Mingueza,4,0,5550000,120000,Fit,1,4.0,4,4.0,0,0.0
+RaiFC,Defender,Atletico,Le Normand,4,0,4030000,50000,Fit,2,2.0,3,3.0,1,1.0
+RaiFC,Midfielder,Villarreal,Pape Gueye,16,0,6370000,110000,Fit,1,16.0,16,16.0,0,0.0
+RaiFC,Midfielder/Forward,Betis,Roro Riquelme,8,0,5870000,10000,Fit,2,4.0,2,2.0,6,6.0
+RaiFC,Midfielder/Forward,Betis,Fornals,8,0,4870000,20000,Fit,2,4.0,5,5.0,3,3.0
+RaiFC,Midfielder,Rayo Vallecano,Unai Lopez,6,0,1920000,50000,Fit,1,6.0,0,0.0,6,6.0
+RaiFC,Midfielder,Osasuna,Aimar Oroz,1,0,5790000,70000,Fit,1,1.0,0,0.0,1,1.0
+RaiFC,Forward,Barcelona,Ferran Torres,20,0,5750000,180000,Fit,2,10.0,0,0.0,20,10.0
+RaiFC,Forward,Levante,Ivan Romero,20,0,1270000,250000,Fit,2,10.0,14,14.0,6,6.0
+RaiFC,Forward,Real Sociedad,Oyarzabal,5,0,7250000,30000,Fit,1,5.0,0,0.0,5,5.0
+RaiFC,Forward,Espanyol,Roberto Fernandez,3,0,4120000,40000,Fit,1,3.0,3,3.0,0,0.0
+RaiFC,Forward,Betis,Cucho,2,0,6570000,370000,Fit,2,1.0,1,1.0,1,1.0
+RaiFC,Forward/Midfielder,Atletico,Griezmann,0,194,6010000,110000,Fit,2,0.0,1,1.0,-1,-1.0
+RaiFC,Coach,Atletico,Simeone,1,0,2990000,0,Fit,2,0.5,1,1.0,0,0.0

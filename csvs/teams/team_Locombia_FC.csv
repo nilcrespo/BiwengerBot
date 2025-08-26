@@ -1,20 +1,20 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Locombia FC,Goalkeeper,Betis,Pau Lopez,9,0,2140000,150000,Fit,2,4.5,7,7.0,2,2.0
-Locombia FC,Defender,Elche,Alvaro Nunez,10,0,1930000,40000,Fit,2,5.0,7,7.0,3,3.0
-Locombia FC,Defender,Betis,Bellerin,9,0,1650000,110000,Fit,2,4.5,4,4.0,5,5.0
-Locombia FC,Defender,Espanyol,El Hilali,6,0,3170000,30000,Fit,1,6.0,6,6.0,0,0.0
-Locombia FC,Defender,Levante,Elgezabal,5,0,2050000,20000,Fit,2,2.5,1,1.0,4,4.0
-Locombia FC,Defender,Sevilla,Marcão,4,0,370000,30000,Fit,1,4.0,0,0.0,4,4.0
-Locombia FC,Defender,Athletic,Gorosabel,3,0,570000,10000,Fit,1,3.0,3,3.0,0,0.0
-Locombia FC,Defender,Villarreal,Pedraza,2,0,750000,10000,Fit,1,2.0,2,2.0,0,0.0
-Locombia FC,Defender,Barcelona,Gerard Martin,0,101,820000,10000,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Defender,Sevilla,Pedrosa,0,121,580000,10000,Fit,0,0.0,0,0.0,0,0.0
+Locombia FC,Goalkeeper,Betis,Pau Lopez,9,0,2370000,90000,Doubtful. Knee contusion.,2,4.5,7,7.0,2,2.0
+Locombia FC,Defender,Elche,Alvaro Nunez,10,0,2000000,30000,Fit,2,5.0,7,7.0,3,3.0
+Locombia FC,Defender,Betis,Bellerin,9,0,1820000,80000,Fit,2,4.5,4,4.0,5,5.0
+Locombia FC,Defender,Espanyol,El Hilali,8,0,3190000,10000,Fit,2,4.0,6,6.0,2,2.0
+Locombia FC,Defender,Levante,Elgezabal,5,0,1980000,30000,Fit,2,2.5,1,1.0,4,4.0
+Locombia FC,Defender,Athletic,Gorosabel,3,0,580000,0,Fit,1,3.0,3,3.0,0,0.0
+Locombia FC,Defender,Sevilla,Pedrosa,3,0,560000,10000,Fit,1,3.0,3,3.0,0,0.0
+Locombia FC,Defender,Villarreal,Pedraza,2,0,710000,30000,Fit,1,2.0,2,2.0,0,0.0
+Locombia FC,Defender,Barcelona,Gerard Martin,0,101,790000,20000,Fit,0,0.0,0,0.0,0,0.0
 Locombia FC,Defender,Athletic,Boiro,0,53,170000,0,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Midfielder,Getafe,Luis Milla,5,0,5690000,0,Fit,1,5.0,0,0.0,5,5.0
-Locombia FC,Midfielder,Villarreal,Denis Suarez,0,62,350000,20000,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Forward,Real Madrid,Mbappe,14,0,22940000,30000,Fit,1,14.0,14,14.0,0,0.0
-Locombia FC,Forward/Midfielder,Girona,Tsygankov,8,0,4960000,70000,Fit,1,8.0,8,8.0,0,0.0
-Locombia FC,Forward/Midfielder,Real Oviedo,Chaira,6,0,2710000,30000,Fit,1,6.0,0,0.0,6,6.0
-Locombia FC,Forward,Sevilla,Akor Adams,5,0,3260000,40000,Fit,1,5.0,0,0.0,5,5.0
-Locombia FC,Forward/Midfielder,Levante,Losada,2,0,280000,30000,Fit,1,2.0,2,2.0,0,0.0
-Locombia FC,Forward/Midfielder,Espanyol,Antoniu Roca,0,84,250000,0,Fit,0,0.0,0,0.0,0,0.0
+Locombia FC,Midfielder,Getafe,Luis Milla,15,0,5720000,30000,Fit,2,7.5,0,0.0,15,7.5
+Locombia FC,Midfielder,Athletic,Vesga,5,0,330000,10000,Fit,2,2.5,5,2.5,0,0.0
+Locombia FC,Midfielder,Villarreal,Denis Suarez,0,62,360000,0,Fit,0,0.0,0,0.0,0,0.0
+Locombia FC,Forward,Real Madrid,Mbappe,32,0,22980000,40000,Fit,2,16.0,14,14.0,18,18.0
+Locombia FC,Forward/Midfielder,Girona,Tsygankov,10,0,4950000,30000,Fit,2,5.0,8,8.0,2,2.0
+Locombia FC,Forward/Midfielder,Real Oviedo,Chaira,8,0,2710000,10000,Fit,2,4.0,2,2.0,6,6.0
+Locombia FC,Forward,Sevilla,Akor Adams,4,0,3270000,10000,Fit,2,2.0,-1,-1.0,5,5.0
+Locombia FC,Forward/Midfielder,Levante,Losada,2,0,310000,10000,Fit,1,2.0,2,2.0,0,0.0
+Locombia FC,Forward/Midfielder,Espanyol,Antoniu Roca,2,0,250000,0,Fit,1,2.0,0,0.0,2,2.0

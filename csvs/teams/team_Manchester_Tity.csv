@@ -1,23 +1,21 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Manchester Tity,Goalkeeper,Mallorca,Leo Roman,7,0,4370000,20000,Fit,2,3.5,7,3.5,0,0.0
-Manchester Tity,Defender,Espanyol,Cabrera,7,0,3200000,40000,Fit,1,7.0,7,7.0,0,0.0
-Manchester Tity,Defender,Athletic,Vivian,5,0,6070000,30000,Fit,1,5.0,5,5.0,0,0.0
-Manchester Tity,Defender,Getafe,Davinchi,4,0,1220000,60000,Fit,1,4.0,0,0.0,4,4.0
-Manchester Tity,Defender,Girona,Vitor Reis,3,0,2150000,10000,Fit,1,3.0,3,3.0,0,0.0
-Manchester Tity,Defender,Girona,Hugo Rincon,3,0,1930000,20000,Fit,1,3.0,3,3.0,0,0.0
+Manchester Tity,Goalkeeper,Mallorca,Leo Roman,7,0,4350000,20000,Fit,2,3.5,7,3.5,0,0.0
+Manchester Tity,Defender,Espanyol,Cabrera,11,0,3260000,30000,Fit,2,5.5,7,7.0,4,4.0
+Manchester Tity,Defender,Athletic,Vivian,9,0,6020000,30000,Fit,2,4.5,9,4.5,0,0.0
+Manchester Tity,Defender,Getafe,Davinchi,8,0,1310000,50000,Fit,2,4.0,0,0.0,8,4.0
+Manchester Tity,Defender,Girona,Vitor Reis,6,0,2090000,40000,Fit,2,3.0,3,3.0,3,3.0
 Manchester Tity,Defender,Athletic,Egiluz,0,0,150000,0,Injured. Ruptured anterior cruciate ligament. Estimated return: End of June.,0,0.0,0,0.0,0,0.0
-Manchester Tity,Midfielder,Alaves,Pablo Ibanez,8,0,1250000,30000,Fit,2,4.0,3,3.0,5,5.0
-Manchester Tity,Midfielder/Forward,Barcelona,Dani Olmo,5,0,8220000,80000,Fit,2,2.5,0,0.0,5,2.5
-Manchester Tity,Midfielder,Getafe,Arambarri,5,0,5980000,20000,Fit,1,5.0,0,0.0,5,5.0
-Manchester Tity,Midfielder,Villarreal,Comesana,5,0,4470000,30000,Fit,1,5.0,5,5.0,0,0.0
-Manchester Tity,Midfielder,Real Madrid,Valverde,4,0,14030000,100000,Fit,1,4.0,4,4.0,0,0.0
-Manchester Tity,Midfielder,Barcelona,Marc Casado,1,0,1580000,10000,Fit,1,1.0,0,0.0,1,1.0
+Manchester Tity,Midfielder,Villarreal,Comesana,11,0,4560000,50000,Fit,2,5.5,11,5.5,0,0.0
+Manchester Tity,Midfielder,Real Madrid,Valverde,10,0,13860000,70000,Fit,2,5.0,4,4.0,6,6.0
+Manchester Tity,Midfielder,Alaves,Pablo Ibanez,8,0,1290000,20000,Fit,2,4.0,3,3.0,5,5.0
+Manchester Tity,Midfielder,Getafe,Arambarri,7,0,6000000,0,Fit,2,3.5,0,0.0,7,3.5
+Manchester Tity,Midfielder/Forward,Barcelona,Dani Olmo,5,0,7950000,150000,Fit,2,2.5,0,0.0,5,2.5
+Manchester Tity,Midfielder,Barcelona,Marc Casado,1,0,1550000,20000,Fit,1,1.0,0,0.0,1,1.0
 Manchester Tity,Midfielder,Athletic,Vencedor,0,0,150000,0,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Forward/Midfielder,Rayo Vallecano,De Frutos,15,0,4860000,120000,Fit,1,15.0,0,0.0,15,15.0
-Manchester Tity,Forward,Alaves,Toni Martinez,10,0,2230000,40000,Fit,2,5.0,10,10.0,0,0.0
-Manchester Tity,Forward/Midfielder,Athletic,Berenguer,6,0,5610000,20000,Fit,1,6.0,6,6.0,0,0.0
-Manchester Tity,Forward/Midfielder,Girona,Portu,5,0,1240000,30000,Fit,1,5.0,5,5.0,0,0.0
-Manchester Tity,Forward,Rayo Vallecano,Nteka,3,0,210000,10000,Fit,1,3.0,0,0.0,3,3.0
-Manchester Tity,Forward,Athletic,Inaki Williams,2,0,7970000,30000,Fit,1,2.0,2,2.0,0,0.0
-Manchester Tity,Forward/Midfielder,Rayo Vallecano,Fran Perez,0,65,480000,0,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Coach,Rayo Vallecano,Inigo Perez,3,0,1090000,20000,Fit,1,3.0,0,0.0,3,3.0
+Manchester Tity,Forward/Midfielder,Rayo Vallecano,De Frutos,17,0,5030000,70000,Fit,2,8.5,0,0.0,17,8.5
+Manchester Tity,Forward,Alaves,Toni Martinez,10,0,2270000,10000,Fit,2,5.0,10,10.0,0,0.0
+Manchester Tity,Forward/Midfielder,Athletic,Berenguer,9,0,5610000,10000,Fit,2,4.5,9,4.5,0,0.0
+Manchester Tity,Forward,Rayo Vallecano,Nteka,6,0,230000,10000,Fit,2,3.0,0,0.0,6,3.0
+Manchester Tity,Forward,Athletic,Inaki Williams,4,0,7840000,100000,Fit,2,2.0,4,2.0,0,0.0
+Manchester Tity,Forward/Midfielder,Rayo Vallecano,Fran Perez,3,0,480000,0,Fit,1,3.0,0,0.0,3,3.0
+Manchester Tity,Coach,Rayo Vallecano,Inigo Perez,3,0,1090000,0,Fit,2,1.5,0,0.0,3,1.5

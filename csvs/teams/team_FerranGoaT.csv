@@ -1,19 +1,20 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-FerranGoaT,Goalkeeper,Villarreal,Luiz Junior,10,0,4390000,30000,Fit,2,5.0,10,5.0,0,0.0
-FerranGoaT,Defender,Villarreal,Santiago Mourino,15,0,4160000,100000,Fit,2,7.5,15,7.5,0,0.0
-FerranGoaT,Defender,Atletico,Hancko,11,0,4210000,60000,Fit,2,5.5,6,6.0,5,5.0
-FerranGoaT,Defender,Villarreal,Foyth,10,0,4780000,0,Fit,2,5.0,10,5.0,0,0.0
-FerranGoaT,Defender,Valencia,Tarrega,9,0,3750000,10000,Fit,2,4.5,6,6.0,3,3.0
-FerranGoaT,Midfielder/Forward,Real Sociedad,Kubo,18,0,10620000,90000,Fit,2,9.0,6,6.0,12,12.0
-FerranGoaT,Midfielder,Espanyol,Exposito,16,0,4180000,70000,Fit,2,8.0,12,12.0,4,4.0
-FerranGoaT,Midfielder/Defender,Real Madrid,Tchouameni,12,0,6640000,60000,Fit,2,6.0,5,5.0,7,7.0
-FerranGoaT,Midfielder,Betis,Marc Roca,0,74,410000,20000,Doubtful. Ankle injury.,0,0.0,0,0.0,0,0.0
-FerranGoaT,Forward,Osasuna,Budimir,14,0,10540000,60000,Fit,2,7.0,12,12.0,2,2.0
-FerranGoaT,Forward,Real Sociedad,Oskarsson,12,0,3070000,80000,Fit,2,6.0,10,10.0,2,2.0
-FerranGoaT,Forward,Valencia,Raba,9,0,7310000,90000,Fit,2,4.5,7,7.0,2,2.0
-FerranGoaT,Forward,Valencia,Danjuma,5,0,3340000,50000,Fit,2,2.5,3,3.0,2,2.0
-FerranGoaT,Forward/Midfielder,Real Sociedad,Guedes,4,0,4370000,160000,Fit,2,2.0,3,3.0,1,1.0
-FerranGoaT,Forward/Midfielder,Mallorca,Asano,4,0,1310000,30000,Fit,2,2.0,4,2.0,0,0.0
-FerranGoaT,Forward,Real Madrid,Endrick,0,55,550000,0,Injured. Injury to the hamstring joint of the right leg. Estimated return: Mid-September.,0,0.0,0,0.0,0,0.0
-FerranGoaT,Coach,Osasuna,Alessio Lisci,3,0,830000,10000,Fit,2,1.5,3,3.0,0,0.0
-FerranGoaT,Coach,Valencia,Corberan,1,0,1120000,20000,Fit,2,0.5,1,1.0,0,0.0
+FerranGoaT,Porter,Villarreal,Luiz Junior,10,0,4.410.000,20.000,En forma,2,"5,0",10,"5,0",0,"0,0"
+FerranGoaT,Defensa,Villarreal,Santiago Mourino,15,0,4.270.000,0,Unknown,2,"7,5",15,"7,5",0,"0,0"
+FerranGoaT,Defensa,Atletico,Hancko,11,0,4.260.000,50.000,En forma,2,"5,5",6,"6,0",5,"5,0"
+FerranGoaT,Defensa,Villarreal,Foyth,10,0,4.790.000,10.000,En forma,2,"5,0",10,"5,0",0,"0,0"
+FerranGoaT,Defensa,Valencia,Tarrega,9,0,3.710.000,40.000,En forma,2,"4,5",6,"6,0",3,"3,0"
+FerranGoaT,Migcampista/Davanter,Real Sociedad,Kubo,18,0,10.710.000,90.000,En forma,2,"9,0",6,"6,0",12,"12,0"
+FerranGoaT,Migcampista,Espanyol,Exposito,16,0,4.230.000,50.000,En forma,2,"8,0",12,"12,0",4,"4,0"
+FerranGoaT,Migcampista/Defensa,Real Madrid,Tchouameni,12,0,6.710.000,70.000,En forma,2,"6,0",5,"5,0",7,"7,0"
+FerranGoaT,Migcampista,Betis,Marc Roca,0,74,430.000,20.000,Lesionat. Recuperació de lesió al turmell. Tornada estimada: Principis de Setembre.,0,"0,0",0,"0,0",0,"0,0"
+FerranGoaT,Davanter,Osasuna,Budimir,14,0,10.610.000,70.000,En forma,2,"7,0",12,"12,0",2,"2,0"
+FerranGoaT,Davanter,Real Sociedad,Oskarsson,12,0,3.120.000,50.000,En forma,2,"6,0",10,"10,0",2,"2,0"
+FerranGoaT,Davanter,Valencia,Raba,9,0,7.180.000,130.000,En forma,2,"4,5",7,"7,0",2,"2,0"
+FerranGoaT,Davanter,Valencia,Danjuma,5,0,3.290.000,50.000,En forma,2,"2,5",3,"3,0",2,"2,0"
+FerranGoaT,Davanter/Migcampista,Real Sociedad,Guedes,4,0,4.250.000,120.000,En forma,2,"2,0",3,"3,0",1,"1,0"
+FerranGoaT,Davanter,Athletic,Guruzeta,4,0,2.120.000,50.000,En forma,2,"2,0",4,"2,0",0,"0,0"
+FerranGoaT,Davanter/Migcampista,Mallorca,Asano,4,0,1.300.000,10.000,En forma,2,"2,0",4,"2,0",0,"0,0"
+FerranGoaT,Davanter,Real Madrid,Endrick,0,55,550.000,0,Lesionat. Lesió del tendó conjunt dels isquiotibials de la cama dreta. Retorn estimat: mitjans de setembre.,0,"0,0",0,"0,0",0,"0,0"
+FerranGoaT,Entrenador,Osasuna,Alessio Lisci,3,0,840.000,10.000,En forma,2,"1,5",3,"3,0",0,"0,0"
+FerranGoaT,Entrenador,Valencia,Corberan,1,0,1.110.000,10.000,En forma,2,"0,5",1,"1,0",0,"0,0"

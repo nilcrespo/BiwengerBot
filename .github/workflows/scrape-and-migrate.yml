@@ -72,20 +72,24 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
+
           # Stash any changes before rebasing
           git stash
-          
+
           # Pull with rebase
           git pull --rebase
-          
+
           # Apply stashed changes if any
           git stash pop || true
-          
+
           # Add and commit files
-          git add csvs/others/league_standings.csv csvs/market/market_players.csv csvs/players/players.csv csvs/others/player_probabilities.csv || true
+          git add csvs/others/league_standings.csv || true
+          git add csvs/market/market_players.csv || true
+          [ -f csvs/players/players.csv ] && git add csvs/players/players.csv || true
+          git add csvs/others/player_probabilities.csv || true
           git add csvs/teams/team_*.csv 2>/dev/null || true
           git add data/biwenger_data.db || true
+
           git commit -m "data: update CSV/DB from run ${GITHUB_RUN_NUMBER}" || echo "No changes"
           git push
 

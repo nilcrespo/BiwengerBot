@@ -1,24 +1,23 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Minabo de Kiev,Goalkeeper,Valencia,Dimitrievski,0,13,480000,10000,Fit,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Goalkeeper,Girona,Krapyvtsov,6,0,880000,30000,Fit,2,3.0,5,5.0,1,1.0
+Minabo de Kiev,Goalkeeper,Valencia,Dimitrievski,0,13,400000,10000,Fit,0,0.0,0,0.0,0,0.0
 Minabo de Kiev,Goalkeeper,Mallorca,Bergström,0,0,150000,0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Defender,Real Madrid,Dean Huijsen,0,0,9970000,10000,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Defender,Alaves,Tenaglia,0,188,3560000,20000,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Defender,Girona,Blind,0,150,3090000,20000,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Defender,Real Sociedad,Aramburu,0,141,2940000,30000,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Defender/Midfielder,Barcelona,Eric Garcia,0,160,2710000,60000,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Defender,Espanyol,Calero,0,69,490000,10000,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Defender,Real Oviedo,David Costas,0,0,360000,0,Suspended. Direct red.,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Midfielder,Girona,Yangel Herrera,0,148,4580000,20000,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Midfielder,Barcelona,Gavi,0,110,4340000,50000,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Midfielder/Forward,Osasuna,Ruben Garcia,0,195,4010000,20000,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Midfielder,Barcelona,Fermin,0,149,3700000,170000,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Midfielder,Osasuna,Moncayola,0,127,2400000,10000,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Midfielder,Alaves,Antonio Blanco,0,123,2150000,30000,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Midfielder,Real Oviedo,Sibo,0,0,1880000,20000,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Midfielder/Forward,Getafe,Javi Munoz,0,136,1740000,20000,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Midfielder,Mallorca,Antonio Sanchez,0,101,240000,0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Forward,Celta,Iago Aspas,0,198,7070000,30000,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Forward,Espanyol,Kike Garcia,0,198,3850000,30000,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Forward,Levante,Brugue,0,0,2030000,10000,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Forward,Mallorca,Abdon Prats,0,61,150000,0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Forward/Midfielder,Valencia,Sergi Canos,0,43,150000,0,Doubt. Hernia operation.,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Goalkeeper,Girona,Gazzaniga,-7,0,3160000,30000,Fit,1,-7.0,-7,-7.0,0,0.0
+Minabo de Kiev,Defender,Alaves,Tenaglia,18,0,4100000,20000,Fit,2,9.0,15,15.0,3,3.0
+Minabo de Kiev,Defender,Real Madrid,Dean Huijsen,14,0,10550000,30000,Fit,2,7.0,9,9.0,5,5.0
+Minabo de Kiev,Defender,Real Sociedad,Aramburu,10,0,3330000,10000,Fit,2,5.0,4,4.0,6,6.0
+Minabo de Kiev,Defender/Midfielder,Barcelona,Eric Garcia,9,0,3550000,20000,Fit,2,4.5,0,0.0,9,4.5
+Minabo de Kiev,Defender,Espanyol,Calero,8,0,990000,20000,Fit,2,4.0,5,5.0,3,3.0
+Minabo de Kiev,Defender,Girona,Blind,0,150,2310000,70000,Fit,2,0.0,2,2.0,-2,-2.0
+Minabo de Kiev,Midfielder,Barcelona,Gavi,14,0,5280000,80000,Fit,2,7.0,0,0.0,14,7.0
+Minabo de Kiev,Midfielder,Alaves,Antonio Blanco,10,0,2860000,10000,Fit,2,5.0,7,7.0,3,3.0
+Minabo de Kiev,Midfielder,Osasuna,Moncayola,10,0,2670000,70000,Fit,2,5.0,6,6.0,4,4.0
+Minabo de Kiev,Midfielder,Mallorca,Antonio Sanchez,5,0,810000,10000,Fit,2,2.5,5,2.5,0,0.0
+Minabo de Kiev,Midfielder,Girona,Yangel Herrera,4,0,3770000,180000,Injured. Muscle injury. Estimated return: Mid-October.,2,2.0,5,5.0,-1,-1.0
+Minabo de Kiev,Midfielder,Real Oviedo,Sibo,4,0,1660000,20000,Fit,2,2.0,1,1.0,3,3.0
+Minabo de Kiev,Midfielder/Forward,Osasuna,Ruben Garcia,3,0,3390000,70000,Fit,2,1.5,2,2.0,1,1.0
+Minabo de Kiev,Midfielder/Forward,Getafe,Javi Munoz,0,136,1170000,40000,Fit,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Midfielder,Barcelona,Fermin,-1,0,3340000,110000,Fit,1,-1.0,0,0.0,-1,-1.0
+Minabo de Kiev,Forward,Celta,Iago Aspas,13,0,7580000,0,Fit,3,4.3,9,4.5,4,4.0
+Minabo de Kiev,Forward,Espanyol,Kike Garcia,6,0,3090000,70000,Fit,2,3.0,4,4.0,2,2.0
+Minabo de Kiev,Forward/Midfielder,Valencia,Sergi Canos,0,43,150000,0,Fit,0,0.0,0,0.0,0,0.0

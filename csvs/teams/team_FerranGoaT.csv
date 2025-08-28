@@ -1,26 +1,19 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-FerranGoaT,Goalkeeper,Villarreal,Luiz Junior,0,85,3950000,40000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Defender,Villarreal,Foyth,0,105,4920000,30000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Defender,Valencia,Tarrega,0,154,3530000,30000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Defender,Villarreal,Santiago Mourino,0,100,3470000,40000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Defender,Valencia,Diakhaby,0,63,2070000,50000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Defender,Getafe,Abqar,0,111,1750000,70000,Injured. To be determined. Estimated return: Imminent return.,0,0.0,0,0.0,0,0.0
-FerranGoaT,Defender,Alaves,Moussa Diarra,0,67,150000,0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Midfielder/Forward,Real Sociedad,Kubo,0,209,9530000,40000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Midfielder/Defender,Real Madrid,Tchouameni,0,130,6230000,50000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Midfielder,Espanyol,Exposito,0,86,3510000,20000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Midfielder,Real Sociedad,Luka Sucic,0,120,2620000,30000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Midfielder/Forward,Villarreal,Buchanan,0,53,2450000,20000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Midfielder,Real Sociedad,Turrientes,0,62,820000,40000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Forward,Osasuna,Budimir,0,268,11310000,90000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Forward,Valencia,Raba,0,175,6960000,30000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Forward/Midfielder,Real Sociedad,Guedes,0,0,5360000,50000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Forward/Midfielder,Valencia,Rioja,0,174,4500000,30000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Forward/Midfielder,Real Oviedo,Hassan,0,0,3050000,40000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Forward,Valencia,Danjuma,0,107,2570000,290000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Forward/Midfielder,Mallorca,Asano,0,83,1400000,40000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Forward,Rayo Vallecano,Camello,0,93,1370000,10000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Forward,Betis,Bakambu,0,79,640000,10000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Forward,Real Madrid,Endrick,0,55,570000,0,Injured. Hamstring joint injury of the right leg. Estimated return: early September.,0,0.0,0,0.0,0,0.0
-FerranGoaT,Coach,Valencia,Corberan,0,34,1160000,20000,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Coach,Osasuna,Alessio Lisci,0,0,810000,10000,Fit,0,0.0,0,0.0,0,0.0
+FerranGoaT,Porter,Villarreal,Luiz Junior,10,0,4.430.000,20.000,En forma,2,"5,0",10,"5,0",0,"0,0"
+FerranGoaT,Defensa,Villarreal,Santiago Mourino,15,0,4.370.000,100.000,En forma,2,"7,5",15,"7,5",0,"0,0"
+FerranGoaT,Defensa,Atletico,Hancko,11,0,4.310.000,50.000,En forma,2,"5,5",6,"6,0",5,"5,0"
+FerranGoaT,Defensa,Villarreal,Foyth,10,0,4.810.000,20.000,En forma,2,"5,0",10,"5,0",0,"0,0"
+FerranGoaT,Defensa,Valencia,Tarrega,9,0,3.670.000,40.000,En forma,2,"4,5",6,"6,0",3,"3,0"
+FerranGoaT,Migcampista/Davanter,Real Sociedad,Kubo,18,0,10.780.000,70.000,En forma,2,"9,0",6,"6,0",12,"12,0"
+FerranGoaT,Migcampista,Espanyol,Exposito,16,0,4.290.000,60.000,En forma,2,"8,0",12,"12,0",4,"4,0"
+FerranGoaT,Migcampista/Defensa,Real Madrid,Tchouameni,12,0,6.770.000,60.000,En forma,2,"6,0",5,"5,0",7,"7,0"
+FerranGoaT,Migcampista,Betis,Marc Roca,0,74,440.000,10.000,Lesionat. Recuperació de lesió al turmell. Tornada estimada: Principis de Setembre.,0,"0,0",0,"0,0",0,"0,0"
+FerranGoaT,Davanter,Osasuna,Budimir,14,0,10.680.000,70.000,En forma,2,"7,0",12,"12,0",2,"2,0"
+FerranGoaT,Davanter,Real Sociedad,Oskarsson,12,0,3.170.000,50.000,En forma,2,"6,0",10,"10,0",2,"2,0"
+FerranGoaT,Davanter,Valencia,Raba,9,0,7.050.000,130.000,En forma,2,"4,5",7,"7,0",2,"2,0"
+FerranGoaT,Davanter,Valencia,Danjuma,5,0,3.250.000,40.000,En forma,2,"2,5",3,"3,0",2,"2,0"
+FerranGoaT,Davanter/Migcampista,Real Sociedad,Guedes,4,0,4.150.000,100.000,En forma,2,"2,0",3,"3,0",1,"1,0"
+FerranGoaT,Davanter,Athletic,Guruzeta,4,0,2.080.000,40.000,En forma,2,"2,0",4,"2,0",0,"0,0"
+FerranGoaT,Davanter,Real Madrid,Endrick,0,55,540.000,10.000,Lesionat. Lesió del tendó conjunt dels isquiotibials de la cama dreta. Retorn estimat: mitjans de setembre.,0,"0,0",0,"0,0",0,"0,0"
+FerranGoaT,Entrenador,Osasuna,Alessio Lisci,3,0,850.000,10.000,En forma,2,"1,5",3,"3,0",0,"0,0"
+FerranGoaT,Entrenador,Valencia,Corberan,1,0,1.090.000,20.000,En forma,2,"0,5",1,"1,0",0,"0,0"

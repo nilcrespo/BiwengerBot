@@ -1,20 +1,22 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Locombia FC,Goalkeeper,Celta,Ionut Radu,0,0,3240000,10000,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Goalkeeper,Celta,Ivan Villar,0,12,180000,0,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Defender,Osasuna,Catena,0,155,3070000,0,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Defender,Espanyol,El Hilali,0,151,2870000,20000,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Defender,Levante,Elgezabal,0,0,2200000,10000,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Defender,Elche,Alvaro Nunez,0,0,1680000,10000,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Defender,Rayo Vallecano,Balliu,0,79,1390000,20000,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Defender,Barcelona,Gerard Martin,0,101,950000,10000,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Defender,Sevilla,Pedrosa,0,121,690000,10000,Doubt. Right thigh adductor overload.,0,0.0,0,0.0,0,0.0
+Locombia FC,Goalkeeper,Betis,Pau Lopez,9,0,2280000,80000,Injured. Knee contusion. Estimated return: End of August.,2,4.5,7,7.0,2,2.0
+Locombia FC,Defender,Betis,Bellerin,11,0,1960000,60000,Fit,3,3.7,4,4.0,7,3.5
+Locombia FC,Defender,Elche,Alvaro Nunez,10,0,2070000,30000,Fit,2,5.0,7,7.0,3,3.0
+Locombia FC,Defender,Espanyol,El Hilali,8,0,3200000,0,Fit,2,4.0,6,6.0,2,2.0
+Locombia FC,Defender,Celta,Javi Rodriguez,7,0,1790000,30000,Fit,3,2.3,5,2.5,2,2.0
+Locombia FC,Defender,Levante,Elgezabal,5,0,1920000,30000,Fit,2,2.5,1,1.0,4,4.0
+Locombia FC,Defender,Sevilla,Pedrosa,3,0,550000,0,Fit,1,3.0,3,3.0,0,0.0
+Locombia FC,Defender,Villarreal,Pedraza,2,0,670000,20000,Fit,1,2.0,2,2.0,0,0.0
+Locombia FC,Defender,Barcelona,Gerard Martin,0,101,770000,10000,Fit,0,0.0,0,0.0,0,0.0
 Locombia FC,Defender,Athletic,Boiro,0,53,170000,0,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Midfielder,Getafe,Luis Milla,0,177,5550000,40000,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Midfielder,Alaves,Guevara,0,101,670000,30000,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Forward,Real Madrid,Mbappe,0,316,23650000,60000,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Forward,Real Madrid,Gonzalo Garcia,0,7,5080000,10000,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Forward/Midfielder,Alaves,Carlos Vicente,0,200,5020000,30000,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Forward/Midfielder,Girona,Tsygankov,0,131,4190000,60000,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Forward,Sevilla,Akor Adams,0,8,3150000,20000,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Forward/Midfielder,Real Oviedo,Chaira,0,0,2360000,10000,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Forward/Midfielder,Espanyol,Antoniu Roca,0,84,240000,30000,Fit,0,0.0,0,0.0,0,0.0
+Locombia FC,Midfielder,Getafe,Luis Milla,15,0,5830000,60000,Fit,2,7.5,0,0.0,15,7.5
+Locombia FC,Midfielder,Athletic,Vesga,5,0,360000,10000,Fit,2,2.5,5,2.5,0,0.0
+Locombia FC,Midfielder/Forward,Celta,Swedberg,2,0,1490000,20000,Fit,3,0.7,0,0.0,2,2.0
+Locombia FC,Midfielder,Villarreal,Denis Suarez,0,62,370000,10000,Fit,0,0.0,0,0.0,0,0.0
+Locombia FC,Forward,Real Madrid,Mbappe,32,0,23070000,50000,Fit,2,16.0,14,14.0,18,18.0
+Locombia FC,Forward/Midfielder,Girona,Tsygankov,10,0,4780000,100000,Fit,2,5.0,8,8.0,2,2.0
+Locombia FC,Forward/Midfielder,Real Oviedo,Chaira,8,0,2640000,40000,Fit,2,4.0,2,2.0,6,6.0
+Locombia FC,Forward/Midfielder,Levante,Losada,2,0,330000,10000,Fit,1,2.0,2,2.0,0,0.0
+Locombia FC,Forward/Midfielder,Espanyol,Antoniu Roca,2,0,250000,0,Fit,1,2.0,0,0.0,2,2.0
+Locombia FC,Forward,Villarreal,Ayoze,0,241,9630000,0,Fit,0,0.0,0,0.0,0,0.0
+Locombia FC,Forward,Girona,Abel Ruiz,0,76,280000,0,Injured. Quadriceps injury. Estimated return: Mid-September.,0,0.0,0,0.0,0,0.0

@@ -102,7 +102,7 @@ def migrate_csv_to_db(days_behind=0):
         # Build and clean your players_df ...
         players_df = df.drop(columns=['team'])
         players_df['team_id'] = team_id
-        players_df['scraped_at'] = ((datetime.now()-timedelta(days=1))).strftime('%Y-%m-%d %H:%M:%S')
+        players_df['scraped_at'] = ((datetime.now()-timedelta(days=days_behind))).strftime('%Y-%m-%d %H:%M:%S')
 
         # Append into team_players
         players_df.to_sql('team_players', conn, if_exists='append', index=False)
@@ -115,8 +115,8 @@ def migrate_csv_to_db(days_behind=0):
             df = pd.read_csv(file)
             print(f"\nProcessing {file} with columns: {list(df.columns)}")
             
-            df['scraped_at'] = (datetime.now()-timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')
-            df['match_date'] = (datetime.now()-timedelta(days=1)).strftime('%Y-%m-%d')  # Current date as match date
+            df['scraped_at'] = (datetime.now()-timedelta(days=days_behind)).strftime('%Y-%m-%d %H:%M:%S')
+            df['match_date'] = (datetime.now()-timedelta(days=days_behind)).strftime('%Y-%m-%d')  # Current date as match date
             
             # Select only the columns we need
             df = df[['Player', 'Team', 'Probability', 'match_date', 'scraped_at']]

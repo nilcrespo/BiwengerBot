@@ -1,189 +1,182 @@
 position,club,name,price,owner,last_sale,demand,this_season_pts,last_season_pts,scraped_at
-Defender/Midfielder,Barcelona,Eric García,2650000,Minabo de Kiev,"2,650,000",0.0,0,160,2025-08-13 10:03:15
-Forward,Espanyol,Kike García,3880000,Minabo de Kiev,"3,880,000",0.0,0,198,2025-08-13 10:03:15
-Defender,Real Oviedo,David Costas,360000,Minabo de Kiev,"360,000",0.0,0,0,2025-08-13 10:03:16
-Forward,Celta,Iago Aspas,7040000,Minabo de Kiev,"7,040,000",0.0,0,198,2025-08-13 10:03:16
-Midfielder/Forward,Osasuna,Rubén García,3990000,Minabo de Kiev,"3,990,000",0.0,0,195,2025-08-13 10:03:17
-Midfielder,Alavés,Antonio Blanco,2120000,Minabo de Kiev,"2,120,000",0.0,0,123,2025-08-13 10:03:17
-Midfielder,Mallorca,Antonio Sánchez,240000,Minabo de Kiev,"240,000",0.0,0,101,2025-08-13 10:03:17
-Midfielder,Osasuna,Moncayola,2390000,Minabo de Kiev,"2,390,000",0.0,0,127,2025-08-13 10:03:17
-Defender,Espanyol,Calero,500000,Minabo de Kiev,"500,000",0.0,0,69,2025-08-13 10:03:18
-Goalkeeper,Valencia,Dimitrievski,490000,Minabo de Kiev,"490,000",0.0,0,13,2025-08-13 10:03:18
-Forward,Levante,Brugué,2040000,Minabo de Kiev,"2,040,000",0.0,0,0,2025-08-13 10:03:19
-Midfielder/Forward,Getafe,Javi Muñoz,1760000,Minabo de Kiev,"1,760,000",0.0,0,136,2025-08-13 10:03:19
-Midfielder,Girona,Yangel Herrera,4560000,Minabo de Kiev,"4,560,000",0.0,0,148,2025-08-13 10:03:20
-Forward,Mallorca,Abdón Prats,150000,Minabo de Kiev,"150,000",0.0,0,61,2025-08-13 10:03:20
-Midfielder,Barcelona,Gavi,4290000,Minabo de Kiev,"4,290,000",0.0,0,110,2025-08-13 10:03:20
-Defender,Alavés,Tenaglia,3540000,Minabo de Kiev,"3,540,000",0.0,0,188,2025-08-13 10:03:20
-Midfielder,Barcelona,Fermín,3530000,Minabo de Kiev,"3,530,000",0.0,0,149,2025-08-13 10:03:20
-Forward/Midfielder,Valencia,Sergi Canós,150000,Minabo de Kiev,"150,000",0.0,0,43,2025-08-13 10:03:21
-Defender,Real Sociedad,Aramburu,2910000,Minabo de Kiev,"2,910,000",0.0,0,141,2025-08-13 10:03:21
-Goalkeeper,Mallorca,Bergström,150000,Minabo de Kiev,"150,000",0.0,0,0,2025-08-13 10:03:22
-Midfielder,Real Oviedo,Sibo,1860000,Minabo de Kiev,"1,860,000",0.0,0,0,2025-08-13 10:03:23
-Defender,Real Madrid,Dean Huijsen,9980000,Minabo de Kiev,"9,980,000",0.0,0,0,2025-08-13 10:03:25
-Forward,Athletic,Iñaki Williams,8650000,Manchester Tity,"8,650,000",0.0,0,200,2025-08-13 10:03:25
-Midfielder,Real Madrid,Valverde,15010000,Manchester Tity,"15,010,000",0.0,0,261,2025-08-13 10:03:25
-Midfielder,Villarreal,Comesaña,4520000,Manchester Tity,"4,520,000",0.0,0,183,2025-08-13 10:03:25
-Midfielder,Getafe,Arambarri,5770000,Manchester Tity,"5,770,000",0.0,0,204,2025-08-13 10:03:25
-Defender,Athletic,Vivian,6430000,Manchester Tity,"6,430,000",0.0,0,201,2025-08-13 10:03:26
-Goalkeeper,Mallorca,Leo Román,4130000,Manchester Tity,"4,130,000",0.0,0,56,2025-08-13 10:03:26
-Midfielder,Alavés,Pablo Ibáñez,1260000,Manchester Tity,"1,260,000",0.0,0,86,2025-08-13 10:03:26
-Defender,Atlético,Galán,710000,Manchester Tity,"710,000",0.0,0,89,2025-08-13 10:03:26
-Forward/Midfielder,Rayo Vallecano,De Frutos,3540000,Manchester Tity,"3,540,000",0.0,0,165,2025-08-13 10:03:26
-Midfielder,Athletic,Vencedor,150000,Manchester Tity,"150,000",0.0,0,0,2025-08-13 10:03:28
-Forward/Midfielder,Sevilla,Alfon González,3150000,Manchester Tity,"3,150,000",0.0,0,130,2025-08-13 10:03:28
-Forward,Rayo Vallecano,Nteka,150000,Manchester Tity,"150,000",0.0,0,79,2025-08-13 10:03:28
-Defender,Valencia,Copete,2570000,Manchester Tity,"2,570,000",0.0,0,88,2025-08-13 10:03:28
-Forward/Midfielder,Valencia,Fran Pérez,310000,Manchester Tity,"310,000",0.0,0,65,2025-08-13 10:03:28
-Midfielder,Real Sociedad,Zakharyan,180000,Manchester Tity,"180,000",0.0,0,18,2025-08-13 10:03:28
-Midfielder,Barcelona,Marc Casadó,1970000,Manchester Tity,"1,970,000",0.0,0,117,2025-08-13 10:03:29
-Midfielder/Forward,Barcelona,Dani Olmo,9280000,Manchester Tity,"9,280,000",0.0,0,169,2025-08-13 10:03:29
-Midfielder,Real Oviedo,Colombatto,2300000,Manchester Tity,"2,300,000",0.0,0,0,2025-08-13 10:03:30
-Defender,Elche,Affengruber,2900000,Manchester Tity,"2,900,000",0.0,0,0,2025-08-13 10:03:31
-Defender,Girona,Hugo Rincón,2470000,Manchester Tity,"2,470,000",0.0,0,0,2025-08-13 10:03:32
-Goalkeeper,Getafe,David Soria,4990000,El retorno de Balompié,"24,950,000",0.0,0,183,2025-08-13 10:03:32
-Forward/Midfielder,Rayo Vallecano,Álvaro García,4710000,El retorno de Balompié,"23,550,000",0.0,0,197,2025-08-13 10:03:32
-Defender,Valencia,Gayà,3700000,El retorno de Balompié,"18,500,000",0.0,0,102,2025-08-13 10:03:33
-Midfielder/Defender,Atlético,Marcos Llorente,5900000,El retorno de Balompié,"29,500,000",0.0,0,176,2025-08-13 10:03:33
-Goalkeeper,Real Sociedad,Remiro,5040000,El retorno de Balompié,"25,200,000",0.0,0,158,2025-08-13 10:03:33
-Forward,Girona,Stuani,2870000,El retorno de Balompié,"14,350,000",0.0,0,171,2025-08-13 10:03:33
-Midfielder,Alavés,Guridi,1850000,El retorno de Balompié,"9,250,000",0.0,0,125,2025-08-13 10:03:33
-Midfielder,Betis,Lo Celso,8440000,El retorno de Balompié,"42,200,000",0.0,0,163,2025-08-13 10:03:33
-Forward,Athletic,Nico Williams,11240000,El retorno de Balompié,"56,200,000",0.0,0,146,2025-08-13 10:03:33
-Midfielder/Forward,Athletic,Robert Navarro,1780000,El retorno de Balompié,"8,900,000",0.0,0,97,2025-08-13 10:03:34
-Defender,Rayo Vallecano,Luiz Felipe,3220000,El retorno de Balompié,"16,100,000",0.0,0,0,2025-08-13 10:03:35
-Forward,Barcelona,Lewandowski,14060000,El retorno de Balompié,"70,300,000",0.0,0,266,2025-08-13 10:03:35
-Midfielder,Valencia,Javi Guerra,4710000,El retorno de Balompié,"23,550,000",0.0,0,156,2025-08-13 10:03:35
-Midfielder/Forward,Atlético,Giuliano Simeone,5760000,El retorno de Balompié,"28,800,000",0.0,0,156,2025-08-13 10:03:35
-Midfielder,Sevilla,Sow,1850000,El retorno de Balompié,"9,250,000",0.0,0,115,2025-08-13 10:03:35
-Defender,Osasuna,Boyomo,3520000,El retorno de Balompié,"17,600,000",0.0,0,177,2025-08-13 10:03:35
-Forward,Athletic,Sannadi,2930000,El retorno de Balompié,"14,650,000",0.0,0,65,2025-08-13 10:03:36
-Forward,Real Oviedo,Viñas,1130000,El retorno de Balompié,"5,650,000",0.0,0,0,2025-08-13 10:03:37
-Defender,Alavés,Yusi Enríquez,580000,El retorno de Balompié,"2,900,000",0.0,0,0,2025-08-13 10:03:38
-Coach,Levante,Julián Calero,260000,El retorno de Balompié,"1,300,000",0.0,0,0,2025-08-13 10:03:39
-Forward/Midfielder,Athletic,Berenguer,5250000,RaiFC,"5,250,000",0.0,0,196,2025-08-13 10:03:39
-Midfielder,Villarreal,Parejo,4610000,RaiFC,"4,610,000",0.0,0,183,2025-08-13 10:03:39
-Defender,Athletic,Yuri,2760000,RaiFC,"2,760,000",0.0,0,115,2025-08-13 10:03:39
-Forward/Midfielder,Atlético,Griezmann,7020000,RaiFC,"7,020,000",0.0,0,194,2025-08-13 10:03:39
-Midfielder,Rayo Vallecano,Unai López,1270000,RaiFC,"1,270,000",0.0,0,124,2025-08-13 10:03:40
-Midfielder/Forward,Betis,Fornals,4760000,RaiFC,"4,760,000",0.0,0,122,2025-08-13 10:03:40
-Forward,Real Sociedad,Oyarzabal,7410000,RaiFC,"7,410,000",0.0,0,153,2025-08-13 10:03:40
-Midfielder/Forward,Betis,Roro Riquelme,5480000,RaiFC,"5,480,000",0.0,0,60,2025-08-13 10:03:40
-Defender,Getafe,Djené,2270000,RaiFC,"2,270,000",0.0,0,113,2025-08-13 10:03:40
-Forward,Betis,Cucho,7610000,RaiFC,"7,610,000",0.0,0,103,2025-08-13 10:03:40
-Forward,Barcelona,Ferran Torres,4050000,RaiFC,"4,050,000",0.0,0,156,2025-08-13 10:03:40
-Coach,Atlético,Simeone,3110000,RaiFC,"3,110,000",0.0,0,76,2025-08-13 10:03:40
-Defender/Midfielder,Celta,Mingueza,5740000,RaiFC,"5,740,000",0.0,0,181,2025-08-13 10:03:41
-Midfielder,Osasuna,Aimar Oroz,5950000,RaiFC,"5,950,000",0.0,0,207,2025-08-13 10:03:41
-Forward/Midfielder,Valencia,Diego López,4530000,RaiFC,"4,530,000",0.0,0,173,2025-08-13 10:03:41
-Midfielder,Villarreal,Pape Gueye,5140000,RaiFC,"5,140,000",0.0,0,164,2025-08-13 10:03:41
-Goalkeeper,Rayo Vallecano,Batalla,4640000,RaiFC,"4,640,000",0.0,0,173,2025-08-13 10:03:41
-Forward,Espanyol,Roberto Fernández,4330000,RaiFC,"4,330,000",0.0,0,105,2025-08-13 10:03:41
-Forward/Midfielder,Betis,Pablo García,1680000,RaiFC,"1,680,000",0.0,0,6,2025-08-13 10:03:41
-Goalkeeper,Levante,Pablo Campos,3240000,RaiFC,"3,240,000",0.0,0,0,2025-08-13 10:03:43
-Defender,Girona,Miguel Gutiérrez,1750000,Free agent,"1,750,000",0.0,0,147,2025-08-13 10:03:43
-Forward,Getafe,Juanmi,360000,Free agent,"360,000",0.0,0,63,2025-08-13 10:03:43
-Midfielder,Osasuna,Moi Gómez,460000,Free agent,"460,000",0.0,0,61,2025-08-13 10:03:43
-Forward/Midfielder,Rayo Vallecano,Isi Palazón,4410000,Free agent,"4,410,000",0.0,0,164,2025-08-13 10:03:43
-Defender,Mallorca,Maffeo,1690000,Free agent,"1,690,000",0.0,0,132,2025-08-13 10:03:43
-Midfielder,Alavés,Guevara,640000,Free agent,"640,000",0.0,0,101,2025-08-13 10:03:43
-Defender,Rayo Vallecano,Balliu,1370000,Free agent,"1,370,000",0.0,0,79,2025-08-13 10:03:43
-Midfielder/Defender,Elche,John Donald,200000,Free agent,"200,000",0.0,0,0,2025-08-13 10:03:45
-Midfielder/Defender,Osasuna,Iker Benito,150000,Free agent,"150,000",0.0,0,4,2025-08-13 10:03:45
-Forward,Real Sociedad,Jon Karrikaburu,150000,Free agent,"150,000",0.0,0,0,2025-08-13 10:03:46
-Defender,Girona,Blind,3070000,Free agent,"3,070,000",0.0,0,150,2025-08-13 10:03:46
-Defender,Villarreal,Adrià Altimira,170000,Free agent,"170,000",0.0,0,65,2025-08-13 10:03:46
-Goalkeeper,Betis,Adrián,310000,Free agent,"310,000",0.0,0,69,2025-08-13 10:03:46
-Midfielder,Atlético,Gallagher,1450000,Free agent,"1,450,000",0.0,0,132,2025-08-13 10:03:46
-Midfielder,Athletic,Peio Canales,150000,Free agent,"150,000",0.0,0,26,2025-08-13 10:03:46
-Defender,Real Madrid,Raúl Asencio,1810000,Free agent,"1,810,000",0.0,0,104,2025-08-13 10:03:47
-Defender,Mallorca,David López,150000,Free agent,"150,000",0.0,0,7,2025-08-13 10:03:47
-Defender,Espanyol,Salinas,240000,Free agent,"240,000",0.0,0,0,2025-08-13 10:03:48
-Coach,Elche,Eder Sarabia,340000,Free agent,"340,000",0.0,0,0,2025-08-13 10:03:49
-Coach,Real Oviedo,Paunovic,390000,Free agent,"390,000",0.0,0,0,2025-08-13 10:03:50
-Goalkeeper,Celta,Iván Villar,180000,Locombia FC,"180,000",0.0,0,12,2025-08-13 10:03:50
-Defender,Levante,Elgezabal,2190000,Locombia FC,"2,170,000",0.0,0,0,2025-08-13 10:03:51
-Defender,Sevilla,Pedrosa,700000,Locombia FC,"710,000",0.0,0,121,2025-08-13 10:03:51
-Defender,Osasuna,Catena,3070000,Locombia FC,"3,060,000",0.0,0,155,2025-08-13 10:03:52
-Midfielder,Getafe,Luis Milla,5510000,Locombia FC,"5,460,000",0.0,0,177,2025-08-13 10:03:52
-Forward,Real Madrid,Mbappé,23710000,Locombia FC,"23,780,000",0.0,0,316,2025-08-13 10:03:52
-Defender,Espanyol,El Hilali,2890000,Locombia FC,"2,900,000",0.0,0,151,2025-08-13 10:03:52
-Forward/Midfielder,Girona,Tsygankov,4130000,Locombia FC,"4,090,000",0.0,0,131,2025-08-13 10:03:52
-Forward/Midfielder,Real Oviedo,Chaira,2370000,Locombia FC,"2,390,000",0.0,0,0,2025-08-13 10:03:53
-Forward,Real Madrid,Gonzalo García,5070000,Locombia FC,"5,000,000",0.0,0,7,2025-08-13 10:03:53
-Forward/Midfielder,Alavés,Carlos Vicente,4990000,Locombia FC,"4,950,000",0.0,0,200,2025-08-13 10:03:53
-Defender,Athletic,Boiro,170000,Locombia FC,"170,000",0.0,0,53,2025-08-13 10:03:53
-Forward/Midfielder,Espanyol,Antoniu Roca,210000,Locombia FC,"190,000",0.0,0,84,2025-08-13 10:03:54
-Defender,Barcelona,Gerard Martín,940000,Locombia FC,"930,000",0.0,0,101,2025-08-13 10:03:54
-Forward,Sevilla,Akor Adams,3130000,Locombia FC,"3,080,000",0.0,0,8,2025-08-13 10:03:54
-Goalkeeper,Celta,Ionut Radu,3250000,Locombia FC,"3,270,000",0.0,0,0,2025-08-13 10:03:55
-Defender,Elche,Álvaro Núñez,1670000,Locombia FC,"1,660,000",0.0,0,0,2025-08-13 10:03:56
-Goalkeeper,Real Oviedo,Escandell,3410000,"General ""Hansi” Topete","3,400,000",0.0,0,0,2025-08-13 10:03:57
-Defender/Midfielder,Levante,Manu Sánchez,1650000,"General ""Hansi” Topete","1,640,000",0.0,0,112,2025-08-13 10:03:57
-Forward,Levante,Morales,2840000,"General ""Hansi” Topete","2,840,000",0.0,0,0,2025-08-13 10:03:58
-Defender/Midfielder,Real Madrid,Fran García,1940000,"General ""Hansi” Topete","1,970,000",0.0,0,140,2025-08-13 10:03:59
-Midfielder,Rayo Vallecano,Óscar Valentín,1160000,"General ""Hansi” Topete","1,140,000",0.0,0,118,2025-08-13 10:03:59
-Defender,Real Sociedad,Jon Pacheco,170000,"General ""Hansi” Topete","170,000",0.0,0,37,2025-08-13 10:03:59
-Midfielder,Espanyol,Pol Lozano,1540000,"General ""Hansi” Topete","1,510,000",0.0,0,106,2025-08-13 10:03:59
-Defender,Real Madrid,Militão,5140000,"General ""Hansi” Topete","5,060,000",0.0,0,62,2025-08-13 10:03:59
-Forward,Real Madrid,Rodrygo,2920000,"General ""Hansi” Topete","2,860,000",0.0,0,176,2025-08-13 10:03:59
-Forward,Sevilla,Rafa Mir,190000,"General ""Hansi” Topete","190,000",0.0,0,62,2025-08-13 10:03:59
-Midfielder/Defender,Real Sociedad,Sergio Gómez,4760000,"General ""Hansi” Topete","4,830,000",0.0,0,186,2025-08-13 10:04:00
-Defender,Betis,Natan,3070000,"General ""Hansi” Topete","3,060,000",0.0,0,107,2025-08-13 10:04:00
-Defender,Barcelona,Ronald Araújo,3480000,"General ""Hansi” Topete","3,300,000",0.0,0,46,2025-08-13 10:04:00
-Forward/Midfielder,Villarreal,Yéremy Pino,4090000,"General ""Hansi” Topete","4,110,000",0.0,0,164,2025-08-13 10:04:00
-Midfielder/Defender,Sevilla,Juanlu,710000,"General ""Hansi” Topete","700,000",0.0,0,133,2025-08-13 10:04:00
-Defender,Espanyol,Carlos Romero,2980000,"General ""Hansi” Topete","3,000,000",0.0,0,149,2025-08-13 10:04:00
-Midfielder/Forward,Celta,Swedberg,1790000,"General ""Hansi” Topete","1,810,000",0.0,0,123,2025-08-13 10:04:00
-Midfielder,Athletic,Jauregizar,4790000,"General ""Hansi” Topete","4,760,000",0.0,0,162,2025-08-13 10:04:00
-Midfielder,Atlético,Johnny,6290000,"General ""Hansi” Topete","6,240,000",0.0,0,151,2025-08-13 10:04:00
-Defender,Betis,Angel Ortiz,190000,"General ""Hansi” Topete","190,000",0.0,0,26,2025-08-13 10:04:01
-Defender,Real Oviedo,Luengo,1260000,"General ""Hansi” Topete","1,240,000",0.0,0,0,2025-08-13 10:04:02
-Forward,Real Oviedo,Forés,260000,"General ""Hansi” Topete","270,000",0.0,0,0,2025-08-13 10:04:03
-Midfielder,Levante,Oriol Rey,1840000,"General ""Hansi” Topete","1,810,000",0.0,0,0,2025-08-13 10:04:04
-Goalkeeper,Atlético,Oblak,5660000,CD Numancia,"7,681,000",0.0,0,161,2025-08-13 10:04:04
-Forward,Celta,Borja Iglesias,3220000,CD Numancia,"8,914,280",0.0,0,186,2025-08-13 10:04:04
-Midfielder,Athletic,De Galarreta,3530000,CD Numancia,"5,392,630",0.0,0,120,2025-08-13 10:04:04
-Defender,Mallorca,Raíllo,5190000,CD Numancia,"7,262,480",0.0,0,196,2025-08-13 10:04:04
-Defender,Rayo Vallecano,Lejeune,5320000,CD Numancia,"5,828,090",0.0,0,212,2025-08-13 10:04:05
-Forward,Celta,Jutglà,5730000,CD Numancia,"10,132,250",0.0,0,0,2025-08-13 10:04:06
-Goalkeeper,Alavés,Sivera,4360000,CD Numancia,"5,328,540",0.0,0,160,2025-08-13 10:04:06
-Midfielder,Mallorca,Morlanes,1350000,CD Numancia,"4,584,380",0.0,0,94,2025-08-13 10:04:06
-Goalkeeper,Valencia,Agirrezabala,4760000,CD Numancia,"6,789,590",0.0,0,58,2025-08-13 10:04:06
-Coach,Villarreal,Marcelino,2340000,CD Numancia,"2,687,270",0.0,0,70,2025-08-13 10:04:06
-Midfielder/Forward,Atlético,Baena,13690000,CD Numancia,"13,778,230",0.0,0,246,2025-08-13 10:04:06
-Forward/Midfielder,Elche,Germán Valera,1180000,CD Numancia,"2,455,630",0.0,0,18,2025-08-13 10:04:06
-Midfielder,Celta,Ilaix Moriba,3820000,CD Numancia,"6,545,010",0.0,0,144,2025-08-13 10:04:07
-Defender,Sevilla,Carmona,2270000,CD Numancia,"3,699,290",0.0,0,130,2025-08-13 10:04:07
-Defender,Celta,Marcos Alonso,4410000,CD Numancia,"5,837,500",0.0,0,162,2025-08-13 10:04:07
-Midfielder,Real Sociedad,Pablo Marín,1950000,CD Numancia,"4,389,590",0.0,0,80,2025-08-13 10:04:07
-Defender,Celta,Starfelt,2780000,CD Numancia,"4,785,770",0.0,0,131,2025-08-13 10:04:07
-Forward,Villarreal,Etta Eyong,3820000,CD Numancia,"5,814,680",0.0,0,16,2025-08-13 10:04:07
-Defender,Alavés,Facundo Garcés,1880000,CD Numancia,"3,298,010",0.0,0,37,2025-08-13 10:04:07
-Defender,Real Oviedo,Alhassane,1570000,CD Numancia,"1,899,630",0.0,0,0,2025-08-13 10:04:08
-Defender,Levante,Cabello,160000,CD Numancia,"892,260",0.0,0,0,2025-08-13 10:04:10
-Defender,Levante,De la Fuente,1960000,CD Numancia,"5,423,560",0.0,0,0,2025-08-13 10:04:11
-Forward,Mallorca,Mateo Joseph,630000,CD Numancia,"2,117,990",0.0,0,0,2025-08-13 10:04:12
-Defender,Valencia,Diakhaby,2120000,FerranGoaT,"2,140,000",0.0,0,63,2025-08-13 10:04:12
-Forward,Betis,Bakambu,650000,FerranGoaT,"650,000",0.0,0,79,2025-08-13 10:04:12
-Defender,Getafe,Abqar,1820000,FerranGoaT,"2,010,000",0.0,0,111,2025-08-13 10:04:12
-Forward,Getafe,Mayoral,4380000,Patsi F.C,"4,310,000",0.0,0,98,2025-08-13 10:04:12
-Defender,Alavés,Jonny Castro,1890000,Patsi F.C,"1,870,000",0.0,0,0,2025-08-13 10:04:13
-Defender,Valencia,Foulquier,1500000,Patsi F.C,"1,450,000",0.0,0,103,2025-08-13 10:04:13
-Forward/Midfielder,Betis,Chimy Ávila,490000,Patsi F.C,"470,000",0.0,0,62,2025-08-13 10:04:14
-Midfielder,Valencia,Pepelu,4060000,Patsi F.C,"4,020,000",0.0,0,122,2025-08-13 10:04:14
-Goalkeeper,Barcelona,Joan García,7890000,Patsi F.C,"7,990,000",0.0,0,233,2025-08-13 10:04:14
-Defender,Atlético,Le Normand,4340000,Patsi F.C,"4,290,000",0.0,0,112,2025-08-13 10:04:14
-Forward/Midfielder,Espanyol,Puado,6360000,Patsi F.C,"6,270,000",0.0,0,194,2025-08-13 10:04:14
-Goalkeeper,Athletic,Unai Simón,5700000,Patsi F.C,"5,660,000",0.0,0,102,2025-08-13 10:04:14
-Midfielder,Elche,Febas,3160000,Patsi F.C,"3,140,000",0.0,0,0,2025-08-13 10:04:15
-Forward/Midfielder,Atlético,Carlos Martín,410000,Patsi F.C,"410,000",0.0,0,88,2025-08-13 10:04:15
-Defender,Rayo Vallecano,Chavarría,2540000,Patsi F.C,"2,630,000",0.0,0,144,2025-08-13 10:04:16
-Forward/Midfielder,Levante,Carlos Álvarez,2760000,Patsi F.C,"2,810,000",0.0,0,0,2025-08-13 10:04:17
-Goalkeeper,Betis,Álvaro Valles,5000000,Patsi F.C,"4,970,000",0.0,0,0,2025-08-13 10:04:18
-Defender,Villarreal,Sergi Cardona,4370000,Patsi F.C,"4,310,000",0.0,0,169,2025-08-13 10:04:18
-Midfielder/Forward,Villarreal,Moleiro,7650000,Patsi F.C,"7,700,000",0.0,0,174,2025-08-13 10:04:18
-Midfielder,Getafe,Neyou,1830000,Patsi F.C,"1,790,000",0.0,0,126,2025-08-13 10:04:18
-Midfielder,Rayo Vallecano,Pedro Díaz,3210000,Patsi F.C,"3,280,000",0.0,0,115,2025-08-13 10:04:18
-Forward,Atlético,Julián Alvarez,16650000,Patsi F.C,"16,630,000",0.0,0,235,2025-08-13 10:04:18
-Midfielder,Real Oviedo,Luka Ilic,3250000,Patsi F.C,"3,210,000",0.0,0,0,2025-08-13 10:04:19
+Defender,Villarreal,Foyth,4810000,FerranGoaT,"4,850,000",64.0,10,0,2025-08-28 20:26:54
+Goalkeeper,Betis,Pau López,2280000,Locombia FC,"2,280,000",72.0,9,0,2025-08-28 20:26:55
+Midfielder,Villarreal,Denis Suárez,370000,Locombia FC,"370,000",0.0,0,62,2025-08-28 20:26:55
+Forward,Villarreal,Ayoze,9630000,Locombia FC,"9,630,000",0.0,0,241,2025-08-28 20:26:55
+Defender,Villarreal,Pedraza,670000,Locombia FC,"670,000",2.0,2,0,2025-08-28 20:26:57
+Defender,Betis,Bellerín,1960000,Locombia FC,"1,960,000",245.0,11,0,2025-08-28 20:26:58
+Midfielder,Athletic,Vesga,360000,Locombia FC,"360,000",23.0,5,0,2025-08-28 20:26:59
+Forward/Midfielder,Levante,Losada,330000,Locombia FC,"330,000",2.0,2,0,2025-08-28 20:27:00
+Defender,Levante,Elgezabal,1920000,Locombia FC,"1,920,000",14.0,5,0,2025-08-28 20:27:01
+Defender,Sevilla,Pedrosa,550000,Locombia FC,"550,000",3.0,3,0,2025-08-28 20:27:02
+Midfielder,Getafe,Luis Milla,5830000,Locombia FC,"5,830,000",105.0,15,0,2025-08-28 20:27:03
+Forward,Real Madrid,Mbappé,23070000,Locombia FC,"23,070,000",1814.0,32,0,2025-08-28 20:27:04
+Midfielder/Forward,Celta,Swedberg,1490000,Locombia FC,"1,490,000",20.0,2,0,2025-08-28 20:27:05
+Defender,Espanyol,El Hilali,3200000,Locombia FC,"3,200,000",26.0,8,0,2025-08-28 20:27:06
+Forward/Midfielder,Girona,Tsygankov,4780000,Locombia FC,"4,780,000",28.0,10,0,2025-08-28 20:27:08
+Forward/Midfielder,Real Oviedo,Chaira,2640000,Locombia FC,"2,640,000",26.0,8,0,2025-08-28 20:27:09
+Defender,Athletic,Boiro,170000,Locombia FC,"170,000",0.0,0,53,2025-08-28 20:27:09
+Forward/Midfielder,Espanyol,Antoniu Roca,250000,Locombia FC,"250,000",2.0,2,0,2025-08-28 20:27:10
+Forward,Girona,Abel Ruiz,280000,Locombia FC,"280,000",0.0,0,76,2025-08-28 20:27:10
+Defender,Celta,Javi Rodríguez,1790000,Locombia FC,"1,790,000",322.0,7,0,2025-08-28 20:27:11
+Defender,Barcelona,Gerard Martín,770000,Locombia FC,"770,000",0.0,0,101,2025-08-28 20:27:11
+Defender,Elche,Álvaro Núñez,2070000,Locombia FC,"2,070,000",37.0,10,0,2025-08-28 20:27:12
+Defender/Midfielder,Levante,Toljan,2020000,CD Numancia,"2,668,970",39.0,12,0,2025-08-28 20:27:13
+Forward/Midfielder,Real Sociedad,Guedes,4150000,FerranGoaT,"4,370,000",31.0,4,0,2025-08-28 20:27:14
+Midfielder,Rayo Vallecano,Unai López,2110000,RaiFC,"2,110,000",46.0,10,0,2025-08-28 20:27:16
+Midfielder/Forward,Betis,Fornals,4860000,RaiFC,"4,860,000",653.0,14,0,2025-08-28 20:27:17
+Forward,Real Sociedad,Oyarzabal,7160000,RaiFC,"7,160,000",55.0,10,0,2025-08-28 20:27:18
+Midfielder/Forward,Betis,Roro Riquelme,5640000,RaiFC,"5,640,000",326.0,11,0,2025-08-28 20:27:19
+Defender,Getafe,Djené,3080000,RaiFC,"3,080,000",47.0,11,0,2025-08-28 20:27:20
+Forward,Barcelona,Ferran Torres,6420000,RaiFC,"6,420,000",1010.0,20,0,2025-08-28 20:27:21
+Defender,Atlético,Le Normand,3780000,RaiFC,"3,780,000",31.0,4,0,2025-08-28 20:27:22
+Forward,Levante,Iván Romero,2280000,RaiFC,"2,280,000",146.0,20,0,2025-08-28 20:27:23
+Coach,Atlético,Simeone,2860000,RaiFC,"2,860,000",10.0,1,0,2025-08-28 20:27:24
+Midfielder,Osasuna,Aimar Oroz,5740000,RaiFC,"5,740,000",71.0,8,0,2025-08-28 20:27:25
+Midfielder,Villarreal,Pape Gueye,6990000,RaiFC,"6,990,000",1016.0,26,0,2025-08-28 20:27:26
+Defender/Midfielder,Real Madrid,Álvaro Carreras,6370000,RaiFC,"6,370,000",35.0,8,0,2025-08-28 20:27:28
+Goalkeeper,Rayo Vallecano,Batalla,4540000,RaiFC,"4,540,000",63.0,9,0,2025-08-28 20:27:29
+Forward,Espanyol,Roberto Fernández,4030000,RaiFC,"4,030,000",53.0,8,0,2025-08-28 20:27:30
+Goalkeeper,Levante,Pablo Campos,3330000,RaiFC,"3,330,000",94.0,13,0,2025-08-28 20:27:31
+Midfielder,Real Madrid,Valverde,13730000,Manchester Tity,"13,730,000",64.0,10,0,2025-08-28 20:27:32
+Midfielder,Villarreal,Comesaña,4650000,Manchester Tity,"4,650,000",65.0,11,0,2025-08-28 20:27:33
+Midfielder,Getafe,Arambarri,5870000,Manchester Tity,"5,870,000",25.0,7,0,2025-08-28 20:27:34
+Defender,Espanyol,Cabrera,3310000,Manchester Tity,"3,310,000",47.0,11,0,2025-08-28 20:27:35
+Defender,Athletic,Vivian,5920000,Manchester Tity,"5,920,000",45.0,9,0,2025-08-28 20:27:36
+Goalkeeper,Mallorca,Leo Román,4280000,Manchester Tity,"4,280,000",43.0,7,0,2025-08-28 20:27:38
+Midfielder,Alavés,Pablo Ibáñez,1330000,Manchester Tity,"1,330,000",53.0,8,0,2025-08-28 20:27:39
+Forward/Midfielder,Rayo Vallecano,De Frutos,5130000,Manchester Tity,"5,130,000",215.0,17,0,2025-08-28 20:27:40
+Midfielder,Athletic,Vencedor,150000,Manchester Tity,"150,000",0.0,0,0,2025-08-28 20:27:41
+Midfielder,Real Madrid,Arda Güler,11920000,Manchester Tity,"11,920,000",76.0,13,0,2025-08-28 20:27:42
+Midfielder,Barcelona,Marc Casadó,1510000,Manchester Tity,"1,510,000",1.0,1,0,2025-08-28 20:27:43
+Midfielder/Forward,Barcelona,Dani Olmo,7800000,Manchester Tity,"7,800,000",32.0,5,0,2025-08-28 20:27:44
+Forward,Alavés,Toni Martínez,2290000,Manchester Tity,"2,290,000",10.0,10,0,2025-08-28 20:27:45
+Defender,Getafe,Davinchi,1440000,Manchester Tity,"1,440,000",44.0,8,0,2025-08-28 20:27:46
+Defender,Athletic,Egiluz,150000,Manchester Tity,"150,000",0.0,0,0,2025-08-28 20:27:48
+Forward,Espanyol,Dolan,1300000,Manchester Tity,"1,300,000",43.0,7,0,2025-08-28 20:27:49
+Defender,Girona,Vitor Reis,2030000,Manchester Tity,"2,030,000",33.0,6,0,2025-08-28 20:27:50
+Midfielder,Real Madrid,Ceballos,1720000,Free agent,"1,720,000",2.0,2,0,2025-08-28 20:27:51
+Goalkeeper,Levante,Ryan,1590000,Free agent,"1,590,000",0.0,0,0,2025-08-28 20:27:52
+Midfielder,Rayo Vallecano,Gumbau,390000,Free agent,"390,000",22.0,0,72,2025-08-28 20:27:52
+Defender,Getafe,Diego Rico,3120000,Free agent,"3,120,000",36.0,9,0,2025-08-28 20:27:53
+Defender,Real Sociedad,Odriozola,150000,Free agent,"150,000",0.0,0,5,2025-08-28 20:27:53
+Midfielder,Valencia,Pepelu,4100000,Free agent,"4,100,000",15.0,4,0,2025-08-28 20:27:54
+Midfielder,Barcelona,Oriol Romeu,720000,Free agent,"720,000",0.0,0,77,2025-08-28 20:27:55
+Defender,Athletic,Gorosabel,540000,Free agent,"540,000",3.0,3,0,2025-08-28 20:27:56
+Forward,Real Madrid,Vinícius Jr,15170000,Free agent,"15,170,000",144.0,18,0,2025-08-28 20:27:57
+Defender/Midfielder,Levante,Víctor García,610000,Free agent,"610,000",12.0,3,0,2025-08-28 20:27:58
+Defender,Espanyol,Rubén Sánchez,150000,Free agent,"150,000",0.0,0,0,2025-08-28 20:27:59
+Midfielder,Mallorca,Samú Costa,1640000,Free agent,"1,640,000",0.0,0,128,2025-08-28 20:27:59
+Forward/Midfielder,Villarreal,Pau Cabanes,150000,Free agent,"150,000",0.0,0,47,2025-08-28 20:27:59
+Defender,Celta,Starfelt,1730000,Free agent,"1,730,000",0.0,0,131,2025-08-28 20:27:59
+Defender,Celta,Yoel Lago,490000,Free agent,"490,000",62.0,8,0,2025-08-28 20:28:00
+Forward,Sevilla,Iheanacho,170000,Free agent,"170,000",0.0,0,12,2025-08-28 20:28:00
+Midfielder,Atlético,Gallagher,1550000,Free agent,"1,550,000",22.0,4,0,2025-08-28 20:28:02
+Forward,Real Oviedo,Forés,210000,Free agent,"210,000",0.0,0,0,2025-08-28 20:28:03
+Defender,Elche,Diaby,150000,Free agent,"150,000",0.0,0,0,2025-08-28 20:28:04
+Midfielder,Elche,Mendoza,1290000,Free agent,"1,290,000",23.0,5,0,2025-08-28 20:28:05
+Forward,Real Madrid,Brahim,2950000,"General ""Hansi” Topete","3,000,000",41.0,5,0,2025-08-28 20:28:06
+Goalkeeper,Real Oviedo,Escandell,4030000,"General ""Hansi” Topete","3,970,000",99.0,18,0,2025-08-28 20:28:07
+Defender/Midfielder,Levante,Manu Sánchez,1770000,"General ""Hansi” Topete","1,720,000",73.0,10,0,2025-08-28 20:28:08
+Forward,Levante,Morales,2880000,"General ""Hansi” Topete","2,770,000",93.0,12,0,2025-08-28 20:28:09
+Forward/Midfielder,Espanyol,Pere Milla,2210000,"General ""Hansi” Topete","1,920,000",1111.0,22,0,2025-08-28 20:28:10
+Midfielder,Real Sociedad,Brais Méndez,5500000,"General ""Hansi” Topete","5,580,000",44.0,8,0,2025-08-28 20:28:11
+Midfielder,Espanyol,Pol Lozano,1720000,"General ""Hansi” Topete","1,730,000",24.0,6,0,2025-08-28 20:28:13
+Forward,Real Madrid,Rodrygo,3110000,"General ""Hansi” Topete","2,950,000",5.0,5,0,2025-08-28 20:28:14
+Forward,Elche,Rafa Mir,1960000,"General ""Hansi” Topete","1,810,000",82.0,10,0,2025-08-28 20:28:15
+Midfielder/Defender,Real Sociedad,Sergio Gómez,3720000,"General ""Hansi” Topete","3,770,000",32.0,5,0,2025-08-28 20:28:16
+Defender,Betis,Natan,2850000,"General ""Hansi” Topete","2,830,000",551.0,11,0,2025-08-28 20:28:17
+Defender,Barcelona,Ronald Araújo,4900000,"General ""Hansi” Topete","4,880,000",45.0,9,0,2025-08-28 20:28:18
+Midfielder,Rayo Vallecano,Pathé Ciss,3300000,"General ""Hansi” Topete","3,240,000",66.0,12,0,2025-08-28 20:28:19
+Midfielder/Defender,Sevilla,Juanlu,1020000,"General ""Hansi” Topete","970,000",61.0,7,0,2025-08-28 20:28:20
+Defender,Espanyol,Carlos Romero,2970000,"General ""Hansi” Topete","3,010,000",26.0,8,0,2025-08-28 20:28:21
+Defender,Barcelona,Christensen,1230000,"General ""Hansi” Topete","1,210,000",6.0,6,0,2025-08-28 20:28:23
+Defender,Girona,Witsel,1100000,"General ""Hansi” Topete","1,150,000",0.0,0,49,2025-08-28 20:28:23
+Midfielder,Athletic,Jauregizar,4310000,"General ""Hansi” Topete","4,380,000",23.0,5,0,2025-08-28 20:28:24
+Midfielder,Atlético,Johnny,6620000,"General ""Hansi” Topete","6,640,000",46.0,10,0,2025-08-28 20:28:25
+Forward,Athletic,Sannadi,3240000,"General ""Hansi” Topete","3,260,000",35.0,8,0,2025-08-28 20:28:26
+Defender,Real Oviedo,Luengo,1390000,"General ""Hansi” Topete","1,410,000",35.0,8,0,2025-08-28 20:28:27
+Midfielder,Levante,Oriol Rey,1840000,"General ""Hansi” Topete","1,810,000",63.0,9,0,2025-08-28 20:28:28
+Defender,Atlético,Ruggeri,2960000,"General ""Hansi” Topete","3,010,000",32.0,5,0,2025-08-28 20:28:29
+Forward,Celta,Borja Iglesias,3120000,CD Numancia,"8,914,280",322.0,7,0,2025-08-28 20:28:30
+Midfielder,Athletic,De Galarreta,3510000,CD Numancia,"5,392,630",64.0,10,0,2025-08-28 20:28:31
+Defender,Mallorca,Raíllo,4560000,CD Numancia,"7,262,480",34.0,7,0,2025-08-28 20:28:33
+Defender,Rayo Vallecano,Lejeune,4930000,CD Numancia,"5,828,090",64.0,10,0,2025-08-28 20:28:34
+Defender,Celta,Carlos Dominguez,220000,CD Numancia,"1,595,090",3.0,3,0,2025-08-28 20:28:35
+Forward/Midfielder,Rayo Vallecano,Isi Palazón,5590000,CD Numancia,"5,635,690",111.0,12,0,2025-08-28 20:28:36
+Goalkeeper,Alavés,Sivera,4230000,CD Numancia,"5,328,540",62.0,8,0,2025-08-28 20:28:37
+Coach,Villarreal,Marcelino,2460000,CD Numancia,"2,687,270",33.0,6,0,2025-08-28 20:28:38
+Midfielder/Forward,Atlético,Baena,10380000,CD Numancia,"13,778,230",3.0,3,0,2025-08-28 20:28:39
+Forward/Midfielder,Elche,Germán Valera,2740000,CD Numancia,"4,735,940",710.0,17,0,2025-08-28 20:28:40
+Midfielder,Celta,Ilaix Moriba,3700000,CD Numancia,"6,545,010",562.0,13,0,2025-08-28 20:28:41
+Midfielder/Defender,Osasuna,Iker Benito,150000,CD Numancia,"210,170",0.0,0,4,2025-08-28 20:28:42
+Defender/Midfielder,Rayo Vallecano,Ratiu,4380000,CD Numancia,"5,924,260",15.0,6,0,2025-08-28 20:28:43
+Defender,Celta,Marcos Alonso,4150000,CD Numancia,"5,837,500",434.0,11,0,2025-08-28 20:28:44
+Midfielder,Betis,Sergi Altimira,3340000,CD Numancia,"6,991,270",574.0,16,0,2025-08-28 20:28:45
+Forward,Villarreal,Etta Eyong,5280000,CD Numancia,"5,814,680",47.0,11,0,2025-08-28 20:28:46
+Defender,Alavés,Facundo Garcés,1830000,CD Numancia,"3,298,010",52.0,7,0,2025-08-28 20:28:47
+Defender,Levante,Cabello,310000,CD Numancia,"892,260",21.0,3,0,2025-08-28 20:28:48
+Forward/Midfielder,Getafe,Adrián Liso,2310000,CD Numancia,"4,107,430",179.0,26,0,2025-08-28 20:28:49
+Forward,Mallorca,Mateo Joseph,1970000,CD Numancia,"2,117,990",44.0,8,0,2025-08-28 20:28:50
+Forward,Athletic,Guruzeta,2080000,FerranGoaT,"2,120,000",22.0,4,0,2025-08-28 20:28:51
+Forward,Valencia,Danjuma,3250000,FerranGoaT,"3,290,000",23.0,5,0,2025-08-28 20:28:53
+Forward,Valencia,Raba,7050000,FerranGoaT,"7,180,000",27.0,9,0,2025-08-28 20:28:54
+Defender/Midfielder,Barcelona,Eric García,3550000,Minabo de Kiev,"3,530,000",36.0,9,0,2025-08-28 20:28:55
+Forward,Espanyol,Kike García,3090000,Minabo de Kiev,"3,160,000",24.0,6,0,2025-08-28 20:28:56
+Forward,Celta,Iago Aspas,7580000,Minabo de Kiev,"7,580,000",346.0,13,0,2025-08-28 20:28:57
+Midfielder/Forward,Osasuna,Rubén García,3390000,Minabo de Kiev,"3,460,000",21.0,3,0,2025-08-28 20:28:58
+Midfielder,Alavés,Antonio Blanco,2860000,Minabo de Kiev,"2,850,000",37.0,10,0,2025-08-28 20:28:59
+Midfielder,Mallorca,Antonio Sánchez,810000,Minabo de Kiev,"800,000",14.0,5,0,2025-08-28 20:29:00
+Midfielder,Osasuna,Moncayola,2670000,Minabo de Kiev,"2,600,000",64.0,10,0,2025-08-28 20:29:01
+Defender,Espanyol,Calero,990000,Minabo de Kiev,"970,000",35.0,8,0,2025-08-28 20:29:02
+Goalkeeper,Valencia,Dimitrievski,400000,Minabo de Kiev,"410,000",0.0,0,13,2025-08-28 20:29:03
+Midfielder/Forward,Getafe,Javi Muñoz,1170000,Minabo de Kiev,"1,210,000",0.0,0,136,2025-08-28 20:29:03
+Midfielder,Girona,Yangel Herrera,3770000,Minabo de Kiev,"3,950,000",15.0,4,0,2025-08-28 20:29:04
+Goalkeeper,Girona,Gazzaniga,3160000,Minabo de Kiev,"3,190,000",7.0,7,0,2025-08-28 20:29:05
+Midfielder,Barcelona,Gavi,5280000,Minabo de Kiev,"5,200,000",86.0,14,0,2025-08-28 20:29:06
+Defender,Alavés,Tenaglia,4100000,Minabo de Kiev,"4,080,000",315.0,18,0,2025-08-28 20:29:07
+Defender,Girona,Blind,2310000,Minabo de Kiev,"2,380,000",22.0,0,150,2025-08-28 20:29:07
+Midfielder,Barcelona,Fermín,3340000,Minabo de Kiev,"3,450,000",1.0,1,0,2025-08-28 20:29:08
+Forward/Midfielder,Valencia,Sergi Canós,150000,Minabo de Kiev,"150,000",0.0,0,43,2025-08-28 20:29:08
+Defender,Real Sociedad,Aramburu,3330000,Minabo de Kiev,"3,320,000",46.0,10,0,2025-08-28 20:29:09
+Goalkeeper,Mallorca,Bergström,150000,Minabo de Kiev,"150,000",0.0,0,0,2025-08-28 20:29:11
+Midfielder,Real Oviedo,Sibo,1660000,Minabo de Kiev,"1,680,000",13.0,4,0,2025-08-28 20:29:12
+Goalkeeper,Girona,Krapyvtsov,880000,Minabo de Kiev,"910,000",15.0,6,0,2025-08-28 20:29:13
+Defender,Real Madrid,Dean Huijsen,10550000,Minabo de Kiev,"10,520,000",59.0,14,0,2025-08-28 20:29:14
+Defender,Alavés,Jonny Castro,2710000,Patsi F.C,"2,640,000",66.0,12,0,2025-08-28 20:29:15
+Midfielder,Mallorca,Darder,4310000,Patsi F.C,"4,330,000",60.0,6,0,2025-08-28 20:29:16
+Defender,Valencia,Foulquier,1590000,Patsi F.C,"1,610,000",23.0,5,0,2025-08-28 20:29:17
+Midfielder,Mallorca,Mascarell,600000,Patsi F.C,"590,000",33.0,6,0,2025-08-28 20:29:18
+Defender,Real Madrid,Rüdiger,3190000,Patsi F.C,"3,140,000",6.0,6,0,2025-08-28 20:29:19
+Midfielder/Forward,Real Sociedad,Barrenetxea,2860000,Patsi F.C,"2,690,000",123.0,15,0,2025-08-28 20:29:20
+Goalkeeper,Barcelona,Joan García,8410000,Patsi F.C,"8,400,000",69.0,15,0,2025-08-28 20:29:21
+Forward/Midfielder,Espanyol,Puado,6420000,Patsi F.C,"6,360,000",94.0,13,0,2025-08-28 20:29:23
+Goalkeeper,Athletic,Unai Simón,5770000,Patsi F.C,"5,820,000",35.0,8,0,2025-08-28 20:29:24
+Forward/Midfielder,Atlético,Carlos Martín,330000,Patsi F.C,"330,000",0.0,0,88,2025-08-28 20:29:24
+Forward/Midfielder,Valencia,Diego López,5350000,Patsi F.C,"5,330,000",39.0,12,0,2025-08-28 20:29:25
+Defender,Rayo Vallecano,Chavarría,2980000,Patsi F.C,"3,020,000",26.0,8,0,2025-08-28 20:29:26
+Forward/Midfielder,Levante,Carlos Álvarez,2600000,Patsi F.C,"2,660,000",21.0,3,0,2025-08-28 20:29:27
+Midfielder,Real Sociedad,Pablo Marín,2490000,Patsi F.C,"2,480,000",25.0,7,0,2025-08-28 20:29:28
+Defender,Villarreal,Sergi Cardona,5150000,Patsi F.C,"5,090,000",87.0,15,0,2025-08-28 20:29:29
+Midfielder,Sevilla,Agoumé,3630000,Patsi F.C,"3,600,000",411.0,15,0,2025-08-28 20:29:30
+Forward/Midfielder,Sevilla,Ejuke,1910000,Patsi F.C,"1,860,000",35.0,8,0,2025-08-28 20:29:31
+Midfielder,Rayo Vallecano,Pedro Díaz,3190000,Patsi F.C,"3,240,000",24.0,6,0,2025-08-28 20:29:33
+Forward,Atlético,Julián Alvarez,15590000,Patsi F.C,"15,700,000",210.0,12,0,2025-08-28 20:29:34
+Goalkeeper,Getafe,David Soria,5220000,Real Club de Balompié Rafanells,"26,350,000",27.0,9,0,2025-08-28 20:29:35
+Forward/Midfielder,Rayo Vallecano,Álvaro García,5600000,Real Club de Balompié Rafanells,"27,600,000",59.0,14,0,2025-08-28 20:29:36
+Midfielder/Defender,Atlético,Marcos Llorente,5310000,Real Club de Balompié Rafanells,"26,900,000",50.0,5,0,2025-08-28 20:29:37
+Forward,Girona,Stuani,2240000,Real Club de Balompié Rafanells,"11,800,000",0.0,0,171,2025-08-28 20:29:37
+Defender,Barcelona,Balde,6720000,Real Club de Balompié Rafanells,"33,500,000",56.0,11,0,2025-08-28 20:29:38
+Midfielder,Alavés,Guridi,1800000,Real Club de Balompié Rafanells,"9,150,000",23.0,5,0,2025-08-28 20:29:39
+Midfielder,Betis,Lo Celso,10380000,Real Club de Balompié Rafanells,"50,350,000",3137.0,23,0,2025-08-28 20:29:40
+Forward,Athletic,Nico Williams,12690000,Real Club de Balompié Rafanells,"62,150,000",716.0,23,0,2025-08-28 20:29:41
+Defender,Real Oviedo,Calvo,1810000,Real Club de Balompié Rafanells,"9,150,000",52.0,7,0,2025-08-28 20:29:43
+Forward,Mallorca,Muriqi,5480000,Real Club de Balompié Rafanells,"27,400,000",6.0,6,0,2025-08-28 20:29:44
+Defender,Rayo Vallecano,Luiz Felipe,2720000,Real Club de Balompié Rafanells,"13,800,000",53.0,8,0,2025-08-28 20:29:45
+Forward,Barcelona,Lewandowski,13260000,Real Club de Balompié Rafanells,"67,450,000",2.0,2,0,2025-08-28 20:29:46
+Midfielder,Valencia,Javi Guerra,5360000,Real Club de Balompié Rafanells,"27,250,000",26.0,8,0,2025-08-28 20:29:47
+Defender,Alavés,Victor Parada,310000,Real Club de Balompié Rafanells,"1,450,000",12.0,3,0,2025-08-28 20:29:48
+Defender,Osasuna,Boyomo,3980000,Real Club de Balompié Rafanells,"19,150,000",97.0,16,0,2025-08-28 20:29:49
+Goalkeeper,Getafe,Letacek,150000,Real Club de Balompié Rafanells,"750,000",0.0,0,0,2025-08-28 20:29:50
+Forward,Real Oviedo,Viñas,900000,Real Club de Balompié Rafanells,"4,600,000",33.0,6,0,2025-08-28 20:29:51
+Coach,Levante,Julián Calero,290000,Real Club de Balompié Rafanells,"1,450,000",0.0,0,0,2025-08-28 20:29:52

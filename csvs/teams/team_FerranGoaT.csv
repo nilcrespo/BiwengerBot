@@ -1,6 +1,6 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
 FerranGoaT,Porter,Villarreal,Luiz Junior,10,0,4.430.000,20.000,En forma,2,"5,0",10,"5,0",0,"0,0"
-FerranGoaT,Defensa,Villarreal,Santiago Mourino,15,0,4.370.000,100.000,En forma,2,"7,5",15,"7,5",0,"0,0"
+FerranGoaT,Defensa,Villarreal,Santiago Mourino,15,0,4.370.000,0,Unknown,2,"7,5",15,"7,5",0,"0,0"
 FerranGoaT,Defensa,Atletico,Hancko,11,0,4.310.000,50.000,En forma,2,"5,5",6,"6,0",5,"5,0"
 FerranGoaT,Defensa,Villarreal,Foyth,10,0,4.810.000,20.000,En forma,2,"5,0",10,"5,0",0,"0,0"
 FerranGoaT,Defensa,Valencia,Tarrega,9,0,3.670.000,40.000,En forma,2,"4,5",6,"6,0",3,"3,0"

@@ -1,5 +1,5 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Locombia FC,Goalkeeper,Betis,Pau Lopez,9,0,2280000,80000,Injured. Knee contusion. Estimated return: End of August.,2,4.5,7,7.0,2,2.0
+Locombia FC,Goalkeeper,Betis,Pau Lopez,9,0,2280000,80000,Doubtful. Knee contusion.,2,4.5,7,7.0,2,2.0
 Locombia FC,Defender,Betis,Bellerin,11,0,1960000,60000,Fit,3,3.7,4,4.0,7,3.5
 Locombia FC,Defender,Elche,Alvaro Nunez,10,0,2070000,30000,Fit,2,5.0,7,7.0,3,3.0
 Locombia FC,Defender,Espanyol,El Hilali,8,0,3200000,0,Fit,2,4.0,6,6.0,2,2.0
@@ -14,9 +14,9 @@ Locombia FC,Midfielder,Athletic,Vesga,5,0,360000,10000,Fit,2,2.5,5,2.5,0,0.0
 Locombia FC,Midfielder/Forward,Celta,Swedberg,2,0,1490000,20000,Fit,3,0.7,0,0.0,2,2.0
 Locombia FC,Midfielder,Villarreal,Denis Suarez,0,62,370000,10000,Fit,0,0.0,0,0.0,0,0.0
 Locombia FC,Forward,Real Madrid,Mbappe,32,0,23070000,50000,Fit,2,16.0,14,14.0,18,18.0
-Locombia FC,Forward/Midfielder,Girona,Tsygankov,10,0,4780000,100000,Fit,2,5.0,8,8.0,2,2.0
+Locombia FC,Forward/Midfielder,Girona,Tsygankov,10,0,4780000,100000,Doubtful. I work on the sidelines.,2,5.0,8,8.0,2,2.0
 Locombia FC,Forward/Midfielder,Real Oviedo,Chaira,8,0,2640000,40000,Fit,2,4.0,2,2.0,6,6.0
-Locombia FC,Forward/Midfielder,Levante,Losada,2,0,330000,10000,Fit,1,2.0,2,2.0,0,0.0
+Locombia FC,Forward/Midfielder,Levante,Losada,2,0,330000,10000,Doubtful. Stroke.,1,2.0,2,2.0,0,0.0
 Locombia FC,Forward/Midfielder,Espanyol,Antoniu Roca,2,0,250000,0,Fit,1,2.0,0,0.0,2,2.0
 Locombia FC,Forward,Villarreal,Ayoze,0,241,9630000,0,Fit,0,0.0,0,0.0,0,0.0
 Locombia FC,Forward,Girona,Abel Ruiz,0,76,280000,0,Injured. Quadriceps injury. Estimated return: Mid-September.,0,0.0,0,0.0,0,0.0

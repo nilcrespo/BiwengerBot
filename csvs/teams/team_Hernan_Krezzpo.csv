@@ -1,19 +1,20 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Hernan Krezzpo,Goalkeeper,Elche,Dituro,13,0,3480000,20000,Fit,2,6.5,6,6.0,7,7.0
-Hernan Krezzpo,Goalkeeper,Espanyol,Dmitrovic,8,0,4110000,10000,Fit,2,4.0,3,3.0,5,5.0
-Hernan Krezzpo,Defender,Betis,Bartra,23,0,3930000,60000,Fit,3,7.7,6,6.0,17,8.5
-Hernan Krezzpo,Defender,Mallorca,Mateu Morey,14,0,1340000,70000,Fit,2,7.0,14,7.0,0,0.0
-Hernan Krezzpo,Defender,Osasuna,Rosier,13,0,3210000,80000,Fit,2,6.5,9,9.0,4,4.0
-Hernan Krezzpo,Defender,Sevilla,Kike Salas,10,0,3060000,20000,Fit,2,5.0,5,5.0,5,5.0
-Hernan Krezzpo,Defender,Elche,Bigas,10,0,1730000,40000,Fit,2,5.0,4,4.0,6,6.0
-Hernan Krezzpo,Defender,Real Sociedad,Aihen,8,0,1290000,10000,Fit,2,4.0,3,3.0,5,5.0
-Hernan Krezzpo,Defender,Osasuna,Juan Cruz,5,0,600000,30000,Fit,2,2.5,4,4.0,1,1.0
-Hernan Krezzpo,Defender,Barcelona,Kounde,4,0,6970000,110000,Fit,2,2.0,0,0.0,4,2.0
-Hernan Krezzpo,Defender,Getafe,Bekhoucha,4,0,960000,20000,Fit,2,2.0,0,0.0,4,2.0
-Hernan Krezzpo,Defender,Barcelona,Hector Fort,0,53,300000,10000,Fit,0,0.0,0,0.0,0,0.0
-Hernan Krezzpo,Midfielder,Barcelona,Pedri,23,0,16710000,60000,Fit,2,11.5,0,0.0,23,11.5
-Hernan Krezzpo,Midfielder,Atletico,Barrios,8,0,4330000,20000,Fit,2,4.0,5,5.0,3,3.0
-Hernan Krezzpo,Midfielder,Barcelona,De Jong,6,0,8320000,60000,Fit,1,6.0,0,0.0,6,6.0
-Hernan Krezzpo,Forward/Midfielder,Mallorca,Asano,4,0,1290000,10000,Fit,2,2.0,4,2.0,0,0.0
-Hernan Krezzpo,Forward,Rayo Vallecano,Etienne Eto'O,0,3,240000,10000,Fit,0,0.0,0,0.0,0,0.0
-Hernan Krezzpo,Coach,Girona,Michel,0,41,890000,20000,Fit,2,0.0,0,0.0,0,0.0
+Hernan Krezzpo,Goalkeeper,Elche,Dituro,13,0,3490000,10000,Fit,2,6.5,6,6.0,7,7.0
+Hernan Krezzpo,Goalkeeper,Espanyol,Dmitrovic,8,0,4090000,20000,Fit,2,4.0,3,3.0,5,5.0
+Hernan Krezzpo,Defender,Betis,Bartra,23,0,4020000,90000,Fit,3,7.7,6,6.0,17,8.5
+Hernan Krezzpo,Defender,Mallorca,Mateu Morey,14,0,1410000,70000,Fit,2,7.0,14,7.0,0,0.0
+Hernan Krezzpo,Defender,Osasuna,Rosier,13,0,3270000,60000,Fit,2,6.5,9,9.0,4,4.0
+Hernan Krezzpo,Defender,Sevilla,Kike Salas,10,0,3090000,30000,Fit,2,5.0,5,5.0,5,5.0
+Hernan Krezzpo,Defender,Elche,Bigas,10,0,1780000,50000,Fit,2,5.0,4,4.0,6,6.0
+Hernan Krezzpo,Defender,Real Sociedad,Aihen,8,0,1310000,20000,Fit,2,4.0,3,3.0,5,5.0
+Hernan Krezzpo,Defender,Osasuna,Juan Cruz,5,0,640000,40000,Fit,2,2.5,4,4.0,1,1.0
+Hernan Krezzpo,Defender,Barcelona,Kounde,4,0,6900000,70000,Fit,2,2.0,0,0.0,4,2.0
+Hernan Krezzpo,Defender,Getafe,Bekhoucha,4,0,930000,30000,Fit,2,2.0,0,0.0,4,2.0
+Hernan Krezzpo,Defender,Barcelona,Hector Fort,0,53,320000,20000,Fit,0,0.0,0,0.0,0,0.0
+Hernan Krezzpo,Midfielder,Barcelona,Pedri,23,0,16770000,60000,Fit,2,11.5,0,0.0,23,11.5
+Hernan Krezzpo,Midfielder,Atletico,Barrios,8,0,4360000,30000,Fit,2,4.0,5,5.0,3,3.0
+Hernan Krezzpo,Midfielder,Barcelona,De Jong,6,0,8290000,30000,Fit,1,6.0,0,0.0,6,6.0
+Hernan Krezzpo,Midfielder,Barcelona,Oriol Romeu,0,77,720000,0,Fit,0,0.0,0,0.0,0,0.0
+Hernan Krezzpo,Forward/Midfielder,Mallorca,Asano,4,0,1290000,0,Fit,2,2.0,4,2.0,0,0.0
+Hernan Krezzpo,Forward,Rayo Vallecano,Etienne Eto'O,0,3,240000,0,Fit,0,0.0,0,0.0,0,0.0
+Hernan Krezzpo,Coach,Girona,Michel,0,41,880000,10000,Fit,2,0.0,0,0.0,0,0.0

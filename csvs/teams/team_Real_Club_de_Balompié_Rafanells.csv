@@ -1,19 +1,19 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Real Club de Balompié Rafanells,Goalkeeper,Getafe,David Soria,9,0,5190000,30000,Fit,2,4.5,0,0.0,9,4.5
+Real Club de Balompié Rafanells,Goalkeeper,Getafe,David Soria,10,0,5080000,60000,Fit,3,3.3,0,0.0,10,3.3
 Real Club de Balompié Rafanells,Goalkeeper,Getafe,Letacek,0,0,150000,0,Fit,0,0.0,0,0.0,0,0.0
-Real Club de Balompié Rafanells,Defender,Osasuna,Boyomo,16,0,4060000,80000,Fit,2,8.0,9,9.0,7,7.0
-Real Club de Balompié Rafanells,Defender,Barcelona,Balde,11,0,6730000,10000,Fit,2,5.5,0,0.0,11,5.5
-Real Club de Balompié Rafanells,Defender,Rayo Vallecano,Luiz Felipe,8,0,2710000,10000,Fit,2,4.0,0,0.0,8,4.0
-Real Club de Balompié Rafanells,Defender,Real Oviedo,Calvo,7,0,1800000,10000,Fit,2,3.5,5,5.0,2,2.0
-Real Club de Balompié Rafanells,Defender,Alaves,Victor Parada,3,0,330000,20000,Fit,2,1.5,2,2.0,1,1.0
-Real Club de Balompié Rafanells,Midfielder,Betis,Lo Celso,23,0,10500000,120000,Fit,3,7.7,13,13.0,10,5.0
-Real Club de Balompié Rafanells,Midfielder,Valencia,Javi Guerra,8,0,5330000,30000,Fit,2,4.0,6,6.0,2,2.0
-Real Club de Balompié Rafanells,Midfielder/Defender,Atletico,Marcos Llorente,5,0,5300000,10000,Fit,2,2.5,5,5.0,0,0.0
-Real Club de Balompié Rafanells,Midfielder,Alaves,Guridi,5,0,1790000,10000,Fit,2,2.5,3,3.0,2,2.0
-Real Club de Balompié Rafanells,Forward,Athletic,Nico Williams,23,0,12810000,120000,Fit,2,11.5,23,11.5,0,0.0
-Real Club de Balompié Rafanells,Forward/Midfielder,Rayo Vallecano,Alvaro Garcia,14,0,5650000,50000,Fit,2,7.0,0,0.0,14,7.0
-Real Club de Balompié Rafanells,Forward,Real Oviedo,Vinas,6,0,900000,0,Fit,2,3.0,3,3.0,3,3.0
-Real Club de Balompié Rafanells,Forward,Barcelona,Lewandowski,2,0,13210000,50000,Fit,1,2.0,0,0.0,2,2.0
-Real Club de Balompié Rafanells,Forward,Girona,Stuani,0,171,2230000,10000,Fit,0,0.0,0,0.0,0,0.0
-Real Club de Balompié Rafanells,Forward,Mallorca,Muriqi,-6,0,5490000,10000,Fit,1,-6.0,-6,-6.0,0,0.0
-Real Club de Balompié Rafanells,Coach,Levante,Julian Calero,0,0,290000,0,Fit,2,0.0,0,0.0,0,0.0
+Real Club de Balompié Rafanells,Defender,Osasuna,Boyomo,16,0,4210000,60000,Fit,2,8.0,9,9.0,7,7.0
+Real Club de Balompié Rafanells,Defender,Real Oviedo,Calvo,13,0,1780000,0,Fit,3,4.3,11,5.5,2,2.0
+Real Club de Balompié Rafanells,Defender,Barcelona,Balde,11,0,6750000,10000,Fit,2,5.5,0,0.0,11,5.5
+Real Club de Balompié Rafanells,Defender,Rayo Vallecano,Luiz Felipe,8,0,2680000,10000,Fit,2,4.0,0,0.0,8,4.0
+Real Club de Balompié Rafanells,Defender,Alaves,Victor Parada,6,0,340000,0,Fit,3,2.0,5,2.5,1,1.0
+Real Club de Balompié Rafanells,Midfielder,Betis,Lo Celso,23,0,10750000,110000,Fit,3,7.7,13,13.0,10,5.0
+Real Club de Balompié Rafanells,Midfielder,Valencia,Javi Guerra,11,0,5200000,70000,Fit,3,3.7,9,4.5,2,2.0
+Real Club de Balompié Rafanells,Midfielder/Defender,Atletico,Marcos Llorente,7,0,5190000,70000,Fit,3,2.3,5,5.0,2,1.0
+Real Club de Balompié Rafanells,Midfielder,Alaves,Guridi,7,0,1750000,20000,Fit,3,2.3,5,2.5,2,2.0
+Real Club de Balompié Rafanells,Forward,Athletic,Nico Williams,23,0,13060000,120000,Fit,2,11.5,23,11.5,0,0.0
+Real Club de Balompié Rafanells,Forward/Midfielder,Rayo Vallecano,Alvaro Garcia,14,0,5740000,40000,Fit,2,7.0,0,0.0,14,7.0
+Real Club de Balompié Rafanells,Forward,Real Oviedo,Vinas,13,0,900000,10000,Fit,3,4.3,10,5.0,3,3.0
+Real Club de Balompié Rafanells,Forward,Mallorca,Muriqi,4,0,5570000,70000,Fit,2,2.0,-6,-6.0,10,10.0
+Real Club de Balompié Rafanells,Forward,Barcelona,Lewandowski,2,0,13120000,40000,Fit,1,2.0,0,0.0,2,2.0
+Real Club de Balompié Rafanells,Forward,Girona,Stuani,2,0,2170000,30000,Fit,1,2.0,2,2.0,0,0.0
+Real Club de Balompié Rafanells,Coach,Levante,Julian Calero,0,0,280000,0,Fit,3,0.0,0,0.0,0,0.0

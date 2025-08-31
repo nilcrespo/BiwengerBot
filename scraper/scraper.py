@@ -743,6 +743,6 @@ def get_starting_player_data():
 
         
 if __name__ == "__main__":
-    # with sync_playwright() as playwright:
-    #     run(playwright)
+    with sync_playwright() as playwright:
+        run(playwright)
     get_starting_player_data()

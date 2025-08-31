@@ -418,7 +418,7 @@ def extract_market_players(page) -> pd.DataFrame:
                 "demand": demand,
                 "this_season_pts": this_season_pts,
                 "last_season_pts": last_season_pts,
-                "scraped_at": pd.Timestamp.now().strftime("%Y-%m-%d %H:%M:%S")
+                "scraped_at": pd.Timestamp.now().strftime("%Y-%m-%d")
             })
             print(all_rows[-1])  # Print the last row added for debugging
             
@@ -643,6 +643,80 @@ def scrape_player_probabilities(team):
     
     return pd.DataFrame(data)
 
+import re
+import asyncio
+import pandas as pd
+from playwright.async_api import async_playwright
+
+HEADLESS = True
+
+async def scrape_player_probabilities_async(team: str, concurrency: int = 6) -> pd.DataFrame:
+    """Scrape player probabilities for a given team (async concurrent version)."""
+    def normalize_player_name(name: str) -> str:
+        return name  # keep your existing implementation
+
+    async with async_playwright() as pw:
+        browser = await pw.chromium.launch(headless=HEADLESS, args=["--disable-dev-shm-usage"])
+        context = await browser.new_context()
+
+        async def route_handler(route, request):
+            if request.resource_type in {"image", "media", "font", "stylesheet"} or any(
+                s in request.url for s in ["googletagmanager", "google-analytics", "doubleclick", "facebook"]
+            ):
+                await route.abort()
+            else:
+                await route.continue_()
+
+        await context.route("**/*", route_handler)
+
+        page = await context.new_page()
+        team_url = f"https://www.futbolfantasy.com/laliga/equipos/{team}"
+        await page.goto(team_url, timeout=30000, wait_until="domcontentloaded")
+
+        try:
+            await page.get_by_role("button", name=re.compile("ACEPTO|ACEPTAR|Aceptar", re.I)).click(timeout=2000)
+        except Exception:
+            pass
+
+        try:
+            await page.get_by_role("link", name=re.compile("Lista", re.I)).click(timeout=5000)
+        except Exception:
+            pass
+
+        hrefs = await page.locator("div[class*='jugadores-titulares-'].mod.lesionados.mb-0 a.jugador.my-auto") \
+                          .evaluate_all("els => els.map(e => e.href)")
+
+        sem = asyncio.Semaphore(concurrency)
+        results = []
+
+        async def fetch(href: str):
+            name = href.rstrip("/").split("/")[-1].replace("-", " ").title()
+            async with sem:
+                p = await context.new_page()
+                try:
+                    await p.goto(href, timeout=20000, wait_until="domcontentloaded")
+                    await p.wait_for_selector('span.mx-auto[class*="prob-"]', state="attached", timeout=5000)
+                    percentage = await p.locator('span.mx-auto[class*="prob-"]').first.text_content()
+                    results.append({
+                        "Team": team.title(),
+                        "Player": normalize_player_name(name),
+                        "Probability": (percentage or "").strip()
+                    })
+                    print(f"✅ {team} - {name}: {percentage}")
+                except Exception as e:
+                    print(f"❌ {team} - {name}: {e}")
+                finally:
+                    await p.close()
+
+        await asyncio.gather(*(fetch(h) for h in hrefs))
+        await browser.close()
+
+    return pd.DataFrame(results)
+
+# If you want a simple sync wrapper:
+def scrape_player_probabilities_fast(team: str, concurrency: int = 6) -> pd.DataFrame:
+    return asyncio.run(scrape_player_probabilities_async(team, concurrency=concurrency))
+
 def get_starting_player_data():
     teams = [
         'alaves', 'athletic', 'atletico', 'barcelona', 'betis', 
@@ -656,7 +730,7 @@ def get_starting_player_data():
     
     for team in teams:
         print(f"\n=== Scraping {team.title()} ===")
-        team_df = scrape_player_probabilities(team)
+        team_df = scrape_player_probabilities_fast(team)
         all_data = pd.concat([all_data, team_df], ignore_index=True)
         
         # Save progress after each team
@@ -669,6 +743,6 @@ def get_starting_player_data():
 
         
 if __name__ == "__main__":
-    with sync_playwright() as playwright:
-        run(playwright)
+    # with sync_playwright() as playwright:
+    #     run(playwright)
     get_starting_player_data()

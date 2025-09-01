@@ -1,17 +1,16 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Manchester tity,Goalkeeper,Mallorca,Leo Roman,10,0,4230000.0,0.0,Fit,3,3.3,7,3.5,3,3.0
-Manchester tity,Defender,Espanyol,Cabrera,11,0,3350000.0,0.0,Fit,2,5.5,7,7.0,4,4.0
-Manchester tity,Defender,Girona,Vitor Reis,10,0,1960000.0,0.0,Fit,3,3.3,7,3.5,3,3.0
-Manchester tity,Defender,Getafe,Davinchi,10,0,1590000.0,0.0,Fit,3,3.3,0,0.0,10,3.3
-Manchester tity,Defender,Athletic,Vivian,9,0,5790000.0,0.0,Fit,2,4.5,9,4.5,0,0.0
-Manchester tity,Defender,Athletic,Egiluz,0,0,150000.0,0.0,Injured. Ruptured anterior cruciate ligament. Estimated return: End of June.,0,0.0,0,0.0,0,0.0
-Manchester tity,Midfielder,Real Madrid,Arda Guler,26,0,12090000.0,0.0,Fit,3,8.7,19,9.5,7,7.0
-Manchester tity,Midfielder,Real Madrid,Valverde,15,0,13740000.0,0.0,Fit,3,5.0,9,4.5,6,6.0
-Manchester tity,Midfielder,Alaves,Pablo Ibanez,13,0,1400000.0,0.0,Fit,3,4.3,8,4.0,5,5.0
-Manchester tity,Midfielder,Villarreal,Comesana,11,0,4770000.0,0.0,Fit,2,5.5,11,5.5,0,0.0
-Manchester tity,Midfielder/Forward,Barcelona,Dani Olmo,5,0,7700000.0,0.0,Fit,2,2.5,0,0.0,5,2.5
-Manchester tity,Midfielder,Barcelona,Marc Casado,1,0,1470000.0,0.0,Fit,1,1.0,0,0.0,1,1.0
-Manchester tity,Midfielder,Athletic,Vencedor,0,0,150000.0,0.0,Fit,0,0.0,0,0.0,0,0.0
-Manchester tity,Forward/Midfielder,Rayo Vallecano,De Frutos,17,0,5260000.0,0.0,Fit,2,8.5,0,0.0,17,8.5
-Manchester tity,Forward,Alaves,Toni Martinez,13,0,2300000.0,0.0,Fit,3,4.3,13,6.5,0,0.0
-Manchester tity,Forward,Espanyol,Dolan,7,0,1430000.0,0.0,Fit,2,3.5,3,3.0,4,4.0
+Manchester Tity,Goalkeeper,Mallorca,Leo Roman,10,0,4200000,30000,Fit,3,3.3,7,3.5,3,3.0
+Manchester Tity,Defender,Espanyol,Cabrera,18,0,3380000,30000,Fit,3,6.0,14,7.0,4,4.0
+Manchester Tity,Defender,Athletic,Vivian,13,0,5740000,50000,Fit,3,4.3,9,4.5,4,4.0
+Manchester Tity,Defender,Girona,Vitor Reis,10,0,1920000,40000,Fit,3,3.3,7,3.5,3,3.0
+Manchester Tity,Defender,Getafe,Davinchi,10,0,1610000,20000,Fit,3,3.3,0,0.0,10,3.3
+Manchester Tity,Defender,Athletic,Egiluz,0,0,150000,0,Injured. Ruptured anterior cruciate ligament. Estimated return: End of June.,0,0.0,0,0.0,0,0.0
+Manchester Tity,Midfielder,Real Madrid,Arda Guler,26,0,12230000,140000,Fit,3,8.7,19,9.5,7,7.0
+Manchester Tity,Midfielder,Villarreal,Comesana,17,0,4820000,50000,Fit,3,5.7,11,5.5,6,6.0
+Manchester Tity,Midfielder,Real Madrid,Valverde,15,0,13740000,0,Fit,3,5.0,9,4.5,6,6.0
+Manchester Tity,Midfielder,Alaves,Pablo Ibanez,13,0,1440000,40000,Fit,3,4.3,8,4.0,5,5.0
+Manchester Tity,Midfielder,Barcelona,Marc Casado,1,0,1450000,20000,Fit,1,1.0,0,0.0,1,1.0
+Manchester Tity,Midfielder,Athletic,Vencedor,0,0,150000,0,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Forward/Midfielder,Rayo Vallecano,De Frutos,20,0,5290000,30000,Fit,3,6.7,3,3.0,17,8.5
+Manchester Tity,Forward,Alaves,Toni Martinez,13,0,2250000,50000,Fit,3,4.3,13,6.5,0,0.0
+Manchester Tity,Forward,Espanyol,Dolan,9,0,1450000,20000,Fit,3,3.0,5,2.5,4,4.0

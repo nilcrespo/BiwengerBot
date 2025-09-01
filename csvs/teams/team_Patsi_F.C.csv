@@ -1,21 +1,23 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Patsi F.C,Goalkeeper,Barcelona,Joan Garcia,15,0,8420000,10000,Fit,2,7.5,0,0.0,15,7.5
-Patsi F.C,Goalkeeper,Athletic,Unai Simon,8,0,5740000,30000,Fit,2,4.0,8,4.0,0,0.0
-Patsi F.C,Defender,Villarreal,Sergi Cardona,15,0,5220000,70000,Fit,2,7.5,15,7.5,0,0.0
-Patsi F.C,Defender,Alaves,Jonny Castro,12,0,2780000,70000,Fit,2,6.0,6,6.0,6,6.0
-Patsi F.C,Defender,Getafe,Diego Rico,9,0,3130000,10000,Fit,2,4.5,0,0.0,9,4.5
-Patsi F.C,Defender,Rayo Vallecano,Chavarria,8,0,2950000,30000,Fit,2,4.0,0,0.0,8,4.0
-Patsi F.C,Defender,Real Madrid,Rudiger,6,0,3240000,50000,Fit,1,6.0,0,0.0,6,6.0
-Patsi F.C,Defender,Valencia,Foulquier,5,0,1580000,10000,Fit,2,2.5,3,3.0,2,2.0
-Patsi F.C,Midfielder,Sevilla,Agoume,15,0,3670000,40000,Fit,2,7.5,4,4.0,11,11.0
-Patsi F.C,Midfielder/Forward,Real Sociedad,Barrenetxea,15,0,3040000,180000,Fit,2,7.5,12,12.0,3,3.0
-Patsi F.C,Midfielder,Real Sociedad,Pablo Marin,7,0,2510000,20000,Fit,2,3.5,2,2.0,5,5.0
-Patsi F.C,Midfielder,Mallorca,Darder,6,0,4290000,20000,Fit,2,3.0,6,3.0,0,0.0
-Patsi F.C,Midfielder,Rayo Vallecano,Pedro Diaz,6,0,3160000,30000,Fit,2,3.0,0,0.0,6,3.0
-Patsi F.C,Midfielder,Mallorca,Mascarell,6,0,620000,20000,Fit,2,3.0,6,3.0,0,0.0
-Patsi F.C,Forward/Midfielder,Espanyol,Puado,13,0,6480000,60000,Fit,2,6.5,4,4.0,9,9.0
-Patsi F.C,Forward,Atletico,Julian Alvarez,12,0,15510000,80000,Fit,2,6.0,2,2.0,10,10.0
-Patsi F.C,Forward/Midfielder,Valencia,Diego Lopez,12,0,5390000,40000,Fit,2,6.0,9,9.0,3,3.0
-Patsi F.C,Forward/Midfielder,Sevilla,Ejuke,8,0,1980000,70000,Fit,2,4.0,3,3.0,5,5.0
-Patsi F.C,Forward/Midfielder,Levante,Carlos Alvarez,3,0,2570000,30000,Fit,2,1.5,2,2.0,1,1.0
+Patsi F.C,Goalkeeper,Barcelona,Joan Garcia,26,0,8530000,60000,Fit,3,8.7,0,0.0,26,8.7
+Patsi F.C,Goalkeeper,Athletic,Unai Simon,10,0,5630000,50000,Fit,3,3.3,8,4.0,2,2.0
+Patsi F.C,Defender,Villarreal,Sergi Cardona,19,0,5410000,60000,Fit,3,6.3,15,7.5,4,4.0
+Patsi F.C,Defender,Alaves,Jonny Castro,14,0,2900000,20000,Fit,3,4.7,8,4.0,6,6.0
+Patsi F.C,Defender,Rayo Vallecano,Chavarria,14,0,2880000,0,Fit,3,4.7,6,6.0,8,4.0
+Patsi F.C,Defender,Osasuna,Catena,12,0,3210000,0,Fit,3,4.0,5,5.0,7,3.5
+Patsi F.C,Defender,Real Madrid,Militão,11,0,5120000,10000,Fit,2,5.5,11,5.5,0,0.0
+Patsi F.C,Defender,Getafe,Diego Rico,10,0,2990000,80000,Fit,3,3.3,0,0.0,10,3.3
+Patsi F.C,Defender,Valencia,Foulquier,8,0,1540000,10000,Fit,3,2.7,6,3.0,2,2.0
+Patsi F.C,Defender,Real Madrid,Rudiger,6,0,3250000,50000,Fit,1,6.0,0,0.0,6,6.0
+Patsi F.C,Defender,Villarreal,Renato Veiga,4,0,3330000,0,Fit,2,2.0,3,3.0,1,1.0
+Patsi F.C,Midfielder,Sevilla,Agoume,21,0,3800000,60000,Fit,3,7.0,4,4.0,17,8.5
+Patsi F.C,Midfielder/Forward,Real Sociedad,Barrenetxea,19,0,3220000,40000,Fit,3,6.3,12,12.0,7,3.5
+Patsi F.C,Midfielder,Mallorca,Darder,12,0,4260000,10000,Fit,3,4.0,6,3.0,6,6.0
+Patsi F.C,Midfielder,Rayo Vallecano,Pedro Diaz,10,0,3050000,30000,Fit,3,3.3,4,4.0,6,3.0
+Patsi F.C,Midfielder,Real Sociedad,Pablo Marin,9,0,2480000,40000,Fit,3,3.0,2,2.0,7,3.5
+Patsi F.C,Midfielder,Mallorca,Mascarell,6,0,610000,20000,Fit,2,3.0,6,3.0,0,0.0
+Patsi F.C,Forward/Midfielder,Espanyol,Puado,17,0,6600000,30000,Fit,3,5.7,8,4.0,9,9.0
+Patsi F.C,Forward/Midfielder,Valencia,Diego Lopez,15,0,5360000,50000,Fit,3,5.0,12,6.0,3,3.0
+Patsi F.C,Forward,Atletico,Julian Alvarez,11,0,14920000,340000,Fit,3,3.7,2,2.0,9,4.5
+Patsi F.C,Forward/Midfielder,Levante,Carlos Alvarez,6,0,2460000,30000,Fit,3,2.0,2,2.0,4,2.0
 Patsi F.C,Forward/Midfielder,Atletico,Carlos Martin,0,88,330000,0,Fit,0,0.0,0,0.0,0,0.0

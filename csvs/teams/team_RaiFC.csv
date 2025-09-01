@@ -1,16 +1,17 @@
 team,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Raifc,Goalkeeper,Rayo Vallecano,Batalla,9,0,4540000.0,0.0,Fit,2,4.5,0,0.0,9,4.5
-Raifc,Defender/Midfielder,Real Madrid,Alvaro Carreras,17,0,6310000.0,0.0,Fit,3,5.7,14,7.0,3,3.0
-Raifc,Defender,Getafe,Djene,13,0,3120000.0,0.0,Fit,3,4.3,0,0.0,13,4.3
-Raifc,Defender,Atletico,Le Normand,9,0,3670000.0,0.0,Fit,3,3.0,3,3.0,6,3.0
-Raifc,Midfielder,Villarreal,Pape Gueye,26,0,7480000.0,0.0,Fit,2,13.0,26,13.0,0,0.0
-Raifc,Midfielder/Forward,Betis,Fornals,14,0,4990000.0,0.0,Fit,3,4.7,5,5.0,9,4.5
-Raifc,Midfielder/Forward,Betis,Roro Riquelme,11,0,5450000.0,0.0,Fit,3,3.7,2,2.0,9,4.5
-Raifc,Midfielder,Rayo Vallecano,Unai Lopez,10,0,2230000.0,0.0,Fit,2,5.0,0,0.0,10,5.0
-Raifc,Midfielder,Osasuna,Aimar Oroz,8,0,5770000.0,0.0,Fit,2,4.0,7,7.0,1,1.0
-Raifc,Forward,Real Madrid,Vinicius Jr,30,0,15420000.0,0.0,Fit,3,10.0,16,8.0,14,14.0
-Raifc,Forward,Levante,Ivan Romero,24,0,2890000.0,0.0,Fit,3,8.0,14,14.0,10,5.0
-Raifc,Forward,Barcelona,Ferran Torres,20,0,6860000.0,0.0,Fit,2,10.0,0,0.0,20,10.0
-Raifc,Forward,Real Sociedad,Oyarzabal,13,0,7190000.0,0.0,Fit,3,4.3,5,5.0,8,4.0
-Raifc,Forward,Espanyol,Roberto Fernandez,8,0,3980000.0,0.0,Fit,2,4.0,3,3.0,5,5.0
-Raifc,Coach,Atletico,Simeone,2,0,2810000.0,0.0,Fit,3,0.7,1,1.0,1,0.5
+RaiFC,Goalkeeper,Rayo Vallecano,Batalla,14,0,4540000,0,Fit,3,4.7,5,5.0,9,4.5
+RaiFC,Defender/Midfielder,Real Madrid,Alvaro Carreras,17,0,6370000,60000,Fit,3,5.7,14,7.0,3,3.0
+RaiFC,Defender/Midfielder,Real Madrid,Carvajal,14,0,4570000,30000,Fit,3,4.7,6,3.0,8,8.0
+RaiFC,Defender,Getafe,Djene,13,0,3130000,10000,Fit,3,4.3,0,0.0,13,4.3
+RaiFC,Defender,Atletico,Le Normand,9,0,3630000,40000,Fit,3,3.0,3,3.0,6,3.0
+RaiFC,Midfielder,Villarreal,Pape Gueye,29,0,7590000,110000,Fit,3,9.7,26,13.0,3,3.0
+RaiFC,Midfielder/Forward,Betis,Fornals,18,0,5020000,30000,Fit,4,4.5,9,4.5,9,4.5
+RaiFC,Midfielder,Rayo Vallecano,Unai Lopez,13,0,2250000,20000,Fit,3,4.3,3,3.0,10,5.0
+RaiFC,Midfielder,Osasuna,Aimar Oroz,12,0,5770000,0,Fit,3,4.0,7,7.0,5,2.5
+RaiFC,Midfielder/Forward,Betis,Roro Riquelme,12,0,5340000,110000,Fit,4,3.0,3,1.5,9,4.5
+RaiFC,Forward,Real Madrid,Vinicius Jr,30,0,15570000,150000,Fit,3,10.0,16,8.0,14,14.0
+RaiFC,Forward,Levante,Ivan Romero,24,0,3030000,140000,Fit,3,8.0,14,14.0,10,5.0
+RaiFC,Forward,Barcelona,Ferran Torres,21,0,6960000,100000,Fit,3,7.0,0,0.0,21,7.0
+RaiFC,Forward,Real Sociedad,Oyarzabal,13,0,7130000,60000,Fit,3,4.3,5,5.0,8,4.0
+RaiFC,Forward,Espanyol,Roberto Fernandez,10,0,3900000,80000,Fit,3,3.3,5,2.5,5,5.0
+RaiFC,Coach,Atletico,Simeone,2,0,2760000,50000,Fit,3,0.7,1,1.0,1,0.5

@@ -6,6 +6,9 @@ from typing import List, Dict
 
 # Configuration
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 EMAIL = os.getenv("BIWENGER_EMAIL")           # set as repo secret
 PASSWORD = os.getenv("BIWENGER_PASSWORD")     # set as repo secret
@@ -49,9 +52,114 @@ def safe_inner_text(locator, default="", timeout=1000):
     try:
         locator.first.wait_for(state="visible", timeout=timeout)
         txt = locator.first.inner_text(timeout=timeout)
-        return txt.strip()
+        # replace " for ' and remove accents
+        txt = txt.strip()
+        txt = txt.replace('"', '').replace('”', '')
+        return normalize_player_name(txt)
     except TimeoutError:
         return default
+
+
+def parse_money(s: str) -> float:
+    if not s:
+        return 0.0
+    # keep digits, separators, sign; normalize to plain integer (these are usually whole €)
+    t = re.sub(r"[^\d,.\-]", "", s)
+    # remove thousands separators (commas or dots). if you actually have decimals, adapt this.
+    t = t.replace(",", "").replace(".", "")
+    return float(t or 0)
+
+def extract_value_and_delta(cell):
+    """
+    cell: Locator pointing to the <td> that contains the value + <increment>.
+    Returns (value_eur, delta_eur) where delta is negative if 'decrement' icon.
+    """
+    # 1) Base value: clone cell, remove <increment>, read remaining text
+    base_text = cell.evaluate("""
+        (td) => {
+          const clone = td.cloneNode(true);
+          clone.querySelectorAll('increment').forEach(n => n.remove());
+          return clone.textContent.trim();
+        }
+    """)
+    value_eur = parse_money(base_text)
+
+    # 2) Delta from <increment>
+    inc_label = cell.evaluate(
+        "(td) => td.querySelector('increment')?.getAttribute('aria-label') || null"
+    )
+    cls = cell.evaluate(
+        "(td) => td.querySelector('increment')?.className || ''"
+    )
+    delta = parse_money(inc_label) if inc_label else 0.0
+    if "decrement" in cls:  # matches 'icon-decrement' or 'decrement'
+        delta = -delta
+    return value_eur, delta
+
+def get_league_standings(page):
+    print("\nExtracting league standings...")
+
+    # Navigate to league standings
+    page.goto("https://biwenger.as.com/league")
+    links = []
+    # Switch to table view
+    try:
+        page.get_by_role("button", name="Taula").click(timeout=3000)
+    except:
+        try:
+            page.locator('i[role="button"][title="Table"]').click(timeout=3000)
+        except Exception as e:
+            print(f"Could not switch to table view: {e}")
+            return pd.DataFrame()
+    
+    # Wait for table to load
+    page.wait_for_selector("table tbody tr", timeout=10000)
+    
+    all_rows = []
+    rows = page.locator("table tbody tr").all()
+    
+    for row in rows:
+        try:
+            # Extract position
+            pos_locator = row.locator("user-position")
+            raw_pos = pos_locator.inner_text()
+            # only get numeral part of raw_pos
+            position = re.search(r"\d+", raw_pos).group() if re.search(r"\d+", raw_pos) else "0"
+
+            # Name
+            name_cell = row.locator("td").nth(2).locator("a")
+            name = safe_inner_text(name_cell, "Unknown Player")
+            links.append(name_cell.get_attribute("href"))
+
+            # Points data
+            pts_cell = row.locator("td").nth(4).first
+            points = pts_cell.inner_text().split()[0]
+
+            # Team value and increment
+            price_cell = row.locator("td").nth(5)  # Price column
+            team_value, value_change = extract_value_and_delta(price_cell)
+            
+            # Num of players
+            num_players_cell = row.locator("td").nth(6)
+            num_players = safe_inner_text(num_players_cell, "0")
+
+            all_rows.append({
+                "position": position,
+                "name": name,
+                "points": points,
+                "team_value": team_value,
+                "value_change": value_change,
+                "num_players": num_players,
+                "scraped_at": pd.Timestamp.now().strftime("%Y-%m-%d")
+            })
+            
+        except Exception as e:
+            print(f"⚠️ Error processing market row: {e}")
+            continue
+    
+    df = pd.DataFrame(all_rows)
+    df.to_csv("csvs/others/league_standings.csv", index=False)
+    return df.to_dict('records'), links
 
 def extract_team_players(page, team_name: str) -> pd.DataFrame:
     """Extract player data for a specific team"""
@@ -159,7 +267,6 @@ def wait_for_table_ready(page, timeout_ms=20000, poll_ms=200):
         elapsed += poll_ms
 
     return table  # a Locator pointing to <table>
-
 
 
 def get_rival_teams(page) -> List[Dict]:
@@ -404,6 +511,9 @@ def extract_market_players(page) -> pd.DataFrame:
             
             owner_cell = row.locator("td").nth(7)  # Owner column
             owner = safe_inner_text(owner_cell, "Free Agent")
+            if owner.lower() != "free agent":
+                print(f"Skipping player {name} owned by {owner}")
+                continue
             
             sale_price_cell = row.locator("td").nth(8)  # Last sale price
             sale_price = safe_inner_text(sale_price_cell, "0").replace("€", "").strip()
@@ -420,7 +530,6 @@ def extract_market_players(page) -> pd.DataFrame:
                 "last_season_pts": last_season_pts,
                 "scraped_at": pd.Timestamp.now().strftime("%Y-%m-%d")
             })
-            print(all_rows[-1])  # Print the last row added for debugging
             
         except Exception as e:
             print(f"⚠️ Error processing market row: {e}")
@@ -514,7 +623,8 @@ def run(playwright: Playwright) -> None:
     # get_all_posts(page, max_scrolls=20)
  
     # Get all rival teams
-    rival_teams = get_rival_teams(page)
+    # rival_teams = get_rival_teams(page)
+    rival_teams, links = get_league_standings(page)
     print(f"\nFound {len(rival_teams)} rival teams:")
     for team in rival_teams:
         print(f"{team['position']} - {team['name']} ({team['points']} pts)")
@@ -745,4 +855,4 @@ def get_starting_player_data():
 if __name__ == "__main__":
     with sync_playwright() as playwright:
         run(playwright)
-    get_starting_player_data()
+    # get_starting_player_data()

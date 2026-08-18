@@ -113,28 +113,19 @@ function renderMarket(data) {
   `);
 }
 
-function renderTeamValuations(data) {
-  const tbody = document.querySelector('#teamsTable tbody');
-  renderTable(tbody, data, 8, (t) => {
-    const pos = t.positions || {};
-    return `
-    <tr class="${t.is_me ? 'row-me' : ''}">
-      <td class="cell-primary">${escapeHtml(t.team)}${t.is_me ? ' <span class="pill pill-me">You</span>' : ''}</td>
-      <td class="num cell-muted">${escapeHtml(t.players)}</td>
-      <td class="num cell-muted">${escapeHtml(pos.GK ?? '—')}</td>
-      <td class="num cell-muted">${escapeHtml(pos.DEF ?? '—')}</td>
-      <td class="num cell-muted">${escapeHtml(pos.MID ?? '—')}</td>
-      <td class="num cell-muted">${escapeHtml(pos.FWD ?? '—')}</td>
-      <td class="num">${formatMoney(t.total_value)}</td>
-      <td class="num">${formatBalance(t.balance)}</td>
-    </tr>
-  `;
-  });
-}
-
-function renderTeamPlayers(data) {
-  const tbody = document.querySelector('#teamPlayersTable tbody');
-  renderTable(tbody, data, 7, (p) => `
+// Team valuations doubles as the roster browser: click a team row to
+// expand its squad inline instead of a separate dropdown-driven section.
+function renderRosterRows(players) {
+  if (!players || players.length === 0) {
+    return `<tr><td colspan="7" class="roster-empty">No roster data</td></tr>`;
+  }
+  const head = `
+    <tr class="roster-head">
+      <th>Pos</th><th>Club</th><th>Name</th>
+      <th class="num">Price</th><th class="num">Points</th>
+      <th class="num">Pts/match</th><th>Status</th>
+    </tr>`;
+  const rows = players.map((p) => `
     <tr>
       <td><span class="pos-badge">${escapeHtml(p.position)}</span></td>
       <td class="cell-muted">${escapeHtml(p.club)}</td>
@@ -144,20 +135,65 @@ function renderTeamPlayers(data) {
       <td class="num cell-muted">${formatNumber(p.points_per_match)}</td>
       <td>${statusPill(p.status)}</td>
     </tr>
-  `);
+  `).join('');
+  return head + rows;
+}
+
+function renderTeamValuations(teams, rostersByTeamId) {
+  const tbody = document.querySelector('#teamsTable tbody');
+  if (!teams || teams.length === 0) {
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="8">No data available</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = teams.map((t) => {
+    const pos = t.positions || {};
+    const roster = rostersByTeamId[t.team_id] || [];
+    return `
+    <tr class="team-row ${t.is_me ? 'row-me' : ''}" data-team-id="${escapeHtml(t.team_id)}">
+      <td class="cell-primary"><span class="expand-chevron">▸</span> ${escapeHtml(t.team)}${t.is_me ? ' <span class="pill pill-me">You</span>' : ''}</td>
+      <td class="num cell-muted">${escapeHtml(t.players)}</td>
+      <td class="num cell-muted">${escapeHtml(pos.GK ?? '—')}</td>
+      <td class="num cell-muted">${escapeHtml(pos.DEF ?? '—')}</td>
+      <td class="num cell-muted">${escapeHtml(pos.MID ?? '—')}</td>
+      <td class="num cell-muted">${escapeHtml(pos.FWD ?? '—')}</td>
+      <td class="num">${formatMoney(t.total_value)}</td>
+      <td class="num">${formatBalance(t.balance)}</td>
+    </tr>
+    <tr class="roster-detail" hidden>
+      <td colspan="8">
+        <table class="roster-table">${renderRosterRows(roster)}</table>
+      </td>
+    </tr>
+  `;
+  }).join('');
+
+  tbody.querySelectorAll('tr.team-row').forEach((row) => {
+    row.addEventListener('click', () => {
+      const detail = row.nextElementSibling;
+      const collapsing = !detail.hidden;
+      detail.hidden = collapsing;
+      row.classList.toggle('expanded', !collapsing);
+    });
+  });
+}
+
+function groupRostersByTeam(teamPlayers) {
+  const grouped = {};
+  for (const p of teamPlayers || []) {
+    (grouped[p.team_id] = grouped[p.team_id] || []).push(p);
+  }
+  return grouped;
 }
 
 // ---------- App state & data loading ----------
+// Always shows the most recent scrape — no date navigation. A picker over
+// static daily snapshots wasn't actually useful without trend context;
+// that's better served by real trend charts later than by flipping
+// between raw snapshots.
 
 const state = {
-  dates: window.__availableDates || [],
-  teams: window.__availableTeams || [],
-  date: window.__selectedDate || null,
-  team: window.__selectedTeam || null,
+  date: window.__selectedDate || (window.__availableDates || [])[0] || null,
 };
-
-if (!state.date && state.dates.length) state.date = state.dates[0];
-if (!state.team && state.teams.length) state.team = state.teams[0].team_id;
 
 function setLoading(isLoading) {
   document.body.classList.toggle('is-loading', isLoading);
@@ -175,19 +211,17 @@ function showError(message) {
 }
 
 function loadData() {
-  if (!state.date) return;
+  if (!state.date) {
+    showError('No scraped data yet — run the scraper and migration first.');
+    return;
+  }
 
   document.getElementById('currentDate').textContent = state.date;
-  const teamMeta = state.teams.find((t) => t.team_id === state.team);
-  document.getElementById('currentTeam').textContent = teamMeta ? teamMeta.team_name : 'All teams';
-
-  let url = `/api/data?date=${encodeURIComponent(state.date)}`;
-  if (state.team) url += `&team=${encodeURIComponent(state.team)}`;
 
   setLoading(true);
   showError(null);
 
-  fetch(url)
+  fetch(`/api/data?date=${encodeURIComponent(state.date)}`)
     .then((response) => {
       if (!response.ok) throw new Error(`Server returned ${response.status}`);
       return response.json();
@@ -196,8 +230,7 @@ function loadData() {
       if (data.error) throw new Error(data.error);
       renderStandings(data.standings);
       renderMarket(data.market);
-      renderTeamValuations(data.teams);
-      renderTeamPlayers(data.team_players);
+      renderTeamValuations(data.teams, groupRostersByTeam(data.team_players));
     })
     .catch((err) => {
       showError(`Couldn't load data: ${err.message}`);
@@ -205,48 +238,4 @@ function loadData() {
     .finally(() => setLoading(false));
 }
 
-function navigateDate(offset) {
-  if (!state.dates.length) return;
-  const idx = state.dates.indexOf(state.date);
-  let newIdx = (idx === -1 ? 0 : idx) + offset;
-  newIdx = Math.max(0, Math.min(state.dates.length - 1, newIdx));
-  state.date = state.dates[newIdx];
-  if (window.__datePicker) window.__datePicker.setDate(state.date);
-  loadData();
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  const teamSelect = document.getElementById('teamSelect');
-  state.teams.forEach((team) => {
-    const option = document.createElement('option');
-    option.value = team.team_id;
-    option.textContent = team.team_name;
-    if (team.team_id === state.team) option.selected = true;
-    teamSelect.appendChild(option);
-  });
-  teamSelect.addEventListener('change', function () {
-    state.team = this.value;
-    loadData();
-  });
-
-  window.__datePicker = flatpickr('#datePicker', {
-    dateFormat: 'Y-m-d',
-    defaultDate: state.date,
-    enable: state.dates.length ? state.dates : undefined,
-    onChange: (_dates, dateStr) => {
-      if (dateStr) {
-        state.date = dateStr;
-        loadData();
-      }
-    },
-  });
-
-  document.querySelector('.prev-date').addEventListener('click', () => navigateDate(-1));
-  document.querySelector('.next-date').addEventListener('click', () => navigateDate(1));
-
-  if (state.date) {
-    loadData();
-  } else {
-    showError('No scraped data yet — run the scraper and migration first.');
-  }
-});
+document.addEventListener('DOMContentLoaded', loadData);

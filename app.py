@@ -21,39 +21,20 @@ def get_available_dates():
     conn.close()
     return dates
 
-def get_available_teams():
-    """Returns [{'team_id': ..., 'team_name': ...}, ...] — team_id is the
-    stable filter key, team_name is the human-readable label for display."""
-    conn = sqlite3.connect('data/biwenger_data.db')
-    query = """
-    SELECT team_id, MAX(team) AS team_name
-    FROM team_players
-    GROUP BY team_id
-    ORDER BY team_name
-    """
-    teams = pd.read_sql(query, conn).to_dict('records')
-    conn.close()
-    return teams
-
 @app.route('/')
 def dashboard():
     dates = get_available_dates()
-    teams = get_available_teams()
     selected_date = request.args.get('date', dates[0] if dates else None)
-    selected_team = request.args.get('team', teams[0]['team_id'] if teams else None)
-    
+
     return render_template(
         'dashboard.html',
         available_dates=dates,
-        available_teams=teams,
         selected_date=selected_date,
-        selected_team=selected_team
     )
 
 @app.route('/api/data')
 def get_data():
     date = request.args.get('date')
-    team = request.args.get('team')
     if not date:
         return jsonify({'error': 'Date parameter required'}), 400
 
@@ -133,13 +114,14 @@ def get_data():
 
     teams_summary = teams_summary.copy()
     teams_summary.loc[:, 'positions'] = teams_summary['team_id'].map(pos_counts)
-    teams_summary = teams_summary.drop(columns=['team_id']).rename(
+    teams_summary = teams_summary.rename(
         columns={'team_name': 'team', 'player_count': 'players'}
     )
 
-    # --- Team players (unchanged) ---
+    # --- Team players for every team (the dashboard expands rosters inline
+    # under each team's row rather than filtering to one team at a time) ---
     base_team_players_sql = """
-        SELECT tp.position, tp.club, tp.name, tp.price, tp.this_season_pts,
+        SELECT tp.team_id, tp.position, tp.club, tp.name, tp.price, tp.this_season_pts,
                tp.points_per_match, tp.status,
                COALESCE(pp.probability, '0%') AS probability
         FROM team_players tp
@@ -157,10 +139,7 @@ def get_data():
         WHERE tp.scraped_at LIKE ?
     """
     params = [f"{date}%", f"{date}%"]
-    if team:
-        base_team_players_sql += " AND tp.team_id = ?"
-        params.append(team)
-    base_team_players_sql += " ORDER BY tp.price DESC"
+    base_team_players_sql += " ORDER BY tp.team_id, tp.price DESC"
 
     team_players = pd.read_sql(base_team_players_sql, conn, params=params)
 
@@ -171,8 +150,7 @@ def get_data():
         'market': market.to_dict('records'),
         'teams': teams_summary.to_dict('records'),
         'team_players': team_players.to_dict('records'),
-        'date': date,
-        'team': team
+        'date': date
     })
 
 if __name__ == '__main__':

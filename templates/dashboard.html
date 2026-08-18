@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biwenger Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -15,32 +14,13 @@
                 <span class="brand-title">Biwenger Dashboard</span>
                 <span class="brand-sub">League analytics</span>
             </div>
-
-            <div class="filters">
-                <div class="field">
-                    <label for="datePicker">Date</label>
-                    <input type="text" id="datePicker" class="control" placeholder="Select date" readonly>
-                </div>
-
-                <div class="btn-group">
-                    <button class="btn prev-date" aria-label="Previous date">&larr;</button>
-                    <button class="btn next-date" aria-label="Next date">&rarr;</button>
-                </div>
-
-                <div class="field">
-                    <label for="teamSelect">Team</label>
-                    <select id="teamSelect" class="control">
-                        <option value="">All teams</option>
-                    </select>
-                </div>
-            </div>
         </div>
     </header>
 
     <main class="page">
         <div id="errorBanner" class="error-banner" style="display:none;"></div>
 
-        <section class="grid">
+        <section class="grid single">
             <div class="card">
                 <div class="card-header">
                     <span class="card-title"><span class="icon">🏆</span> League standings</span>
@@ -59,12 +39,15 @@
                     </table>
                 </div>
             </div>
+        </section>
 
+        <section class="grid single">
             <div class="card">
                 <div class="card-header">
                     <span class="card-title"><span class="icon">💰</span> Team valuations</span>
+                    <span class="card-meta">Click a team to see its roster</span>
                 </div>
-                <div class="card-body scroll">
+                <div class="card-body">
                     <table id="teamsTable">
                         <thead>
                             <tr>
@@ -109,40 +92,12 @@
             </div>
         </section>
 
-        <section class="grid single">
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-title"><span class="icon">👥</span> Team roster —
-                        <span id="currentTeam"></span>
-                    </span>
-                </div>
-                <div class="card-body">
-                    <table id="teamPlayersTable">
-                        <thead>
-                            <tr>
-                                <th>Pos</th>
-                                <th>Club</th>
-                                <th>Name</th>
-                                <th class="num">Price</th>
-                                <th class="num">Points</th>
-                                <th class="num">Pts/match</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
     </main>
 
     <script>
         window.__availableDates = {{ available_dates|tojson|safe }};
-        window.__availableTeams = {{ available_teams|tojson|safe }};
         window.__selectedDate = {{ selected_date|tojson|safe }};
-        window.__selectedTeam = {{ selected_team|tojson|safe }};
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 </body>
 </html>

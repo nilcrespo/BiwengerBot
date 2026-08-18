@@ -369,33 +369,53 @@ tr.row-me:hover td {
   font-size: 13px;
 }
 
-/* Flatpickr dark-theme override */
-.flatpickr-calendar {
-  background: var(--surface-raised) !important;
-  border: 1px solid var(--border) !important;
-  box-shadow: var(--shadow) !important;
-  color: var(--text) !important;
+/* ---------- Team roster accordion ---------- */
+tr.team-row {
+  cursor: pointer;
 }
-.flatpickr-day {
-  color: var(--text) !important;
+
+.expand-chevron {
+  display: inline-block;
+  color: var(--text-faint);
+  transition: transform 0.15s;
+  width: 0.8em;
 }
-.flatpickr-day.flatpickr-disabled {
-  color: var(--text-faint) !important;
+
+tr.team-row.expanded .expand-chevron {
+  transform: rotate(90deg);
 }
-.flatpickr-day.selected {
-  background: var(--accent-dim) !important;
-  border-color: var(--accent-dim) !important;
+
+tr.roster-detail td {
+  padding: 0;
+  background: var(--bg);
 }
-.flatpickr-day:hover {
-  background: var(--surface) !important;
+
+tr.roster-detail:hover td {
+  background: var(--bg);
 }
-.flatpickr-months, .flatpickr-weekdays {
-  background: var(--surface-raised) !important;
+
+.roster-table {
+  width: 100%;
 }
-.flatpickr-month, .flatpickr-weekday {
-  color: var(--text) !important;
-  fill: var(--text) !important;
+
+.roster-table thead,
+.roster-table .roster-head {
+  display: table-header-group;
 }
-.flatpickr-current-month input.cur-year {
-  color: var(--text) !important;
+
+.roster-table .roster-head th {
+  position: static;
+  background: transparent;
+  padding-top: var(--space-2);
+}
+
+.roster-table tbody td,
+.roster-table td {
+  padding-left: calc(var(--space-4) + 1.5em);
+}
+
+.roster-empty {
+  padding: var(--space-4);
+  color: var(--text-faint);
+  text-align: center;
 }

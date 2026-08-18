@@ -1,25 +1,23 @@
 /* ---------- Design tokens ---------- */
 :root {
-  --bg: #0a0a0b;
-  --surface: #131315;
-  --surface-raised: #1b1b1e;
-  --border: #2a2a2e;
-  --border-subtle: #1c1c1f;
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface-raised: #1c2129;
+  --border: #30363d;
+  --border-subtle: #21262d;
 
-  --text: #f0ede6;
-  --text-muted: #9c988f;
-  --text-faint: #656158;
+  --text: #e6edf3;
+  --text-muted: #8b949e;
+  --text-faint: #6e7681;
 
-  /* Amber is the brand/UI accent — used for interactive/emphasis states.
-     Gain/loss get their own dedicated colors so amber never gets
-     confused with "money went up." */
-  --accent: #e3a13a;
-  --accent-dim: #c98a2e;
-  --gain: #3ecf72;
-  --loss: #f2534a;
+  --accent: #3fb950;
+  --accent-dim: #2ea043;
+  --danger: #f85149;
+  --warning: #d29922;
 
-  --radius: 3px;
-  --radius-sm: 2px;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 
   --space-1: 4px;
   --space-2: 8px;
@@ -27,9 +25,6 @@
   --space-4: 16px;
   --space-5: 24px;
   --space-6: 32px;
-
-  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 * {
@@ -44,20 +39,14 @@ html, body {
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-display);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  background-image:
-    linear-gradient(var(--border-subtle) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
-  background-size: 48px 48px;
-  background-attachment: fixed;
-  background-position: -1px -1px;
 }
 
 ::selection {
-  background: rgba(227, 161, 58, 0.3);
+  background: rgba(63, 185, 80, 0.35);
 }
 
 /* ---------- Layout ---------- */
@@ -72,7 +61,7 @@ body {
   top: 0;
   z-index: 20;
   background: var(--bg);
-  border-bottom: 1px solid var(--accent);
+  border-bottom: 1px solid var(--border-subtle);
   padding: var(--space-4) var(--space-5);
   margin-bottom: var(--space-5);
 }
@@ -88,45 +77,25 @@ body {
 
 .brand {
   display: flex;
-  align-items: center;
-  gap: var(--space-3);
+  align-items: baseline;
+  gap: var(--space-2);
   margin-right: auto;
 }
 
 .brand-mark {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  border: 1.5px solid var(--accent);
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 14px;
-  flex-shrink: 0;
-}
-
-.brand-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
+  font-size: 20px;
 }
 
 .brand-title {
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-size: 17px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
   color: var(--text);
-  font-family: var(--font-mono);
 }
 
 .brand-sub {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-faint);
-  font-family: var(--font-mono);
-  letter-spacing: 0.02em;
 }
 
 /* ---------- Filter controls ---------- */
@@ -158,7 +127,7 @@ body {
   border-radius: var(--radius-sm);
   padding: 7px 10px;
   font-size: 13px;
-  font-family: var(--font-mono);
+  font-family: inherit;
   min-width: 160px;
 }
 
@@ -215,8 +184,9 @@ body {
 
 .card {
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius);
+  box-shadow: var(--shadow);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -227,34 +197,26 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
-  padding: var(--space-3) var(--space-4);
-  border-bottom: 1px solid var(--border);
-  background: var(--surface-raised);
+  padding: var(--space-4) var(--space-4);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .card-title {
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 650;
+  color: var(--text);
   display: flex;
   align-items: center;
   gap: var(--space-2);
 }
 
-.card-title::before {
-  content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  background: var(--accent);
+.card-title .icon {
+  opacity: 0.8;
 }
 
 .card-meta {
   font-size: 12px;
   color: var(--text-faint);
-  font-family: var(--font-mono);
 }
 
 .card-body {
@@ -270,6 +232,7 @@ body {
 table {
   width: 100%;
   border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
 }
 
 thead th {
@@ -277,20 +240,18 @@ thead th {
   top: 0;
   background: var(--surface);
   text-align: left;
-  font-size: 10px;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
   color: var(--text-faint);
-  font-weight: 700;
+  font-weight: 600;
   padding: var(--space-3) var(--space-4);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-subtle);
   white-space: nowrap;
 }
 
 th.num, td.num {
   text-align: right;
-  font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
 }
 
 tbody td {
@@ -313,7 +274,7 @@ tbody tr:hover td {
 }
 
 .cell-primary {
-  font-weight: 600;
+  font-weight: 550;
 }
 
 .cell-muted {
@@ -321,18 +282,17 @@ tbody tr:hover td {
 }
 
 .money-pos {
-  color: var(--gain);
+  color: var(--accent);
 }
 
 .money-neg {
-  color: var(--loss);
+  color: var(--danger);
 }
 
 .empty-row td {
   color: var(--text-faint);
   text-align: center;
   padding: var(--space-5);
-  font-family: var(--font-mono);
 }
 
 /* ---------- Badges & pills ---------- */
@@ -340,36 +300,33 @@ tbody tr:hover td {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 1px 7px;
-  border-radius: var(--radius-sm);
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
   line-height: 1.6;
   white-space: nowrap;
-  font-family: var(--font-mono);
 }
 
-.pill-fit { background: rgba(62, 207, 114, 0.12); color: var(--gain); }
-.pill-injured { background: rgba(242, 83, 74, 0.12); color: var(--loss); }
-.pill-doubt { background: rgba(227, 161, 58, 0.15); color: var(--accent); }
-.pill-neutral { background: rgba(156, 152, 143, 0.12); color: var(--text-muted); }
+.pill-fit { background: rgba(63, 185, 80, 0.15); color: var(--accent); }
+.pill-injured { background: rgba(248, 81, 73, 0.15); color: var(--danger); }
+.pill-doubt { background: rgba(210, 153, 34, 0.15); color: var(--warning); }
+.pill-neutral { background: rgba(139, 148, 158, 0.15); color: var(--text-muted); }
 
-.prob-high { background: rgba(62, 207, 114, 0.12); color: var(--gain); }
-.prob-mid { background: rgba(227, 161, 58, 0.15); color: var(--accent); }
-.prob-low { background: rgba(156, 152, 143, 0.12); color: var(--text-muted); }
+.prob-high { background: rgba(63, 185, 80, 0.15); color: var(--accent); }
+.prob-mid { background: rgba(210, 153, 34, 0.15); color: var(--warning); }
+.prob-low { background: rgba(139, 148, 158, 0.15); color: var(--text-muted); }
 
 .pill-me {
-  background: var(--accent);
-  color: var(--bg);
+  background: rgba(63, 185, 80, 0.2);
+  color: var(--accent);
 }
 
 tr.row-me td {
-  background: rgba(227, 161, 58, 0.06);
+  background: rgba(63, 185, 80, 0.05);
 }
 tr.row-me:hover td {
-  background: rgba(227, 161, 58, 0.12);
+  background: rgba(63, 185, 80, 0.1);
 }
 
 .rank {
@@ -378,26 +335,20 @@ tr.row-me:hover td {
   justify-content: center;
   width: 20px;
   height: 20px;
-  border-radius: var(--radius-sm);
+  border-radius: 5px;
   font-size: 11px;
   font-weight: 700;
-  font-family: var(--font-mono);
   background: var(--surface-raised);
   color: var(--text-muted);
-  border: 1px solid var(--border);
 }
 
-.rank-1 {
-  background: var(--accent);
-  color: var(--bg);
-  border-color: var(--accent);
-}
+.rank-1 { background: rgba(210, 153, 34, 0.2); color: #e3b341; }
+.rank-2 { background: rgba(139, 148, 158, 0.2); color: #c9d1d9; }
+.rank-3 { background: rgba(210, 153, 34, 0.12); color: #b08a4e; }
 
 .pos-badge {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--text-faint);
-  font-family: var(--font-mono);
-  text-transform: uppercase;
 }
 
 /* ---------- Misc states ---------- */
@@ -409,14 +360,13 @@ tr.row-me:hover td {
 }
 
 .error-banner {
-  background: rgba(242, 83, 74, 0.08);
-  border: 1px solid rgba(242, 83, 74, 0.35);
-  color: #ff9891;
+  background: rgba(248, 81, 73, 0.1);
+  border: 1px solid rgba(248, 81, 73, 0.35);
+  color: #ffb4ae;
   border-radius: var(--radius-sm);
   padding: var(--space-3) var(--space-4);
   margin-bottom: var(--space-5);
   font-size: 13px;
-  font-family: var(--font-mono);
 }
 
 /* ---------- Team roster accordion ---------- */
@@ -426,8 +376,7 @@ tr.team-row {
 
 .expand-chevron {
   display: inline-block;
-  color: var(--accent);
-  font-family: var(--font-mono);
+  color: var(--text-faint);
   transition: transform 0.15s;
   width: 0.8em;
 }
@@ -469,5 +418,4 @@ tr.roster-detail:hover td {
   padding: var(--space-4);
   color: var(--text-faint);
   text-align: center;
-  font-family: var(--font-mono);
 }

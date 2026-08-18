@@ -1,8 +1,26 @@
 import pandas as pd
 import sqlite3
 import glob
+import re
 from datetime import datetime, timedelta
 import os
+
+def normalize_team_key(name):
+    """Stable identifier for a team; mirrors scraper.normalize_team_key.
+
+    Fallback only — CSVs written by the current scraper already carry a
+    team_id column. This exists so older-format CSVs without that column
+    still key consistently instead of fragmenting by accent/casing.
+    """
+    text = str(name).lower().strip()
+    replacements = {'ñ': 'n', 'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o',
+                    'ú': 'u', 'ü': 'u', 'à': 'a', 'è': 'e', 'ò': 'o'}
+    for old, new in replacements.items():
+        text = text.replace(old, new)
+    text = text.title()
+    text = re.sub(r"[^\w\s]", "", text)
+    text = re.sub(r"\s+", "_", text.strip())
+    return text
 
 def migrate_csv_to_db(days_behind=0):
     # Ensure data directory exists
@@ -33,7 +51,30 @@ def migrate_csv_to_db(days_behind=0):
         points INTEGER,
         scraped_at TIMESTAMP
     )''')
-    
+
+    # team_players must exist even before the first team CSV is migrated —
+    # app.py queries it unconditionally to populate the team filter dropdown.
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS team_players (
+        team TEXT,
+        team_id TEXT,
+        position TEXT,
+        club TEXT,
+        name TEXT,
+        this_season_pts REAL,
+        last_season_pts REAL,
+        price REAL,
+        change REAL,
+        status TEXT,
+        played INTEGER,
+        points_per_match REAL,
+        home_pts REAL,
+        home_average REAL,
+        away_pts REAL,
+        away_average REAL,
+        scraped_at TIMESTAMP
+    )''')
+
     # NEW: Initialize probabilities table
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS player_probabilities (
@@ -95,9 +136,8 @@ def migrate_csv_to_db(days_behind=0):
     for file in team_files:
         df = pd.read_csv(file)
         team_name = df['team'].iloc[0]
-        print(f"\nProcessing {file} for team_players of {team_name!r}")
-
-        team_id = team_name
+        team_id = df['team_id'].iloc[0] if 'team_id' in df.columns else normalize_team_key(team_name)
+        print(f"\nProcessing {file} for team_players of {team_name!r} (team_id={team_id!r})")
 
         # Build and clean your players_df ...
         players_df = df.drop(columns=['team'])
@@ -106,7 +146,7 @@ def migrate_csv_to_db(days_behind=0):
 
         # Append into team_players
         players_df.to_sql('team_players', conn, if_exists='append', index=False)
-        print(f"  → Saved {len(players_df)} players for '{team_name}'")
+        print(f"  → Saved {len(players_df)} players for '{team_name}' (team_id={team_id})")
     
     # NEW: Process player probabilities
     prob_files = glob.glob('csvs/others/player_probabilities.csv')

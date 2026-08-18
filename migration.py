@@ -146,8 +146,9 @@ def migrate_csv_to_db(days_behind=0):
         team_id = df['team_id'].iloc[0] if 'team_id' in df.columns else normalize_team_key(team_name)
         print(f"\nProcessing {file} for team_players of {team_name!r} (team_id={team_id!r})")
 
-        # Build and clean your players_df ...
-        players_df = df.drop(columns=['team'])
+        # Build and clean your players_df ... (keep 'team' — it's the
+        # human-readable display name; app.py needs it alongside team_id)
+        players_df = df.copy()
         players_df['team_id'] = team_id
         players_df['scraped_at'] = ((datetime.now()-timedelta(days=days_behind))).strftime('%Y-%m-%d %H:%M:%S')
 

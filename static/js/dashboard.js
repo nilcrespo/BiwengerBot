@@ -70,6 +70,34 @@ function probabilityPill(probability) {
   return `<span class="pill ${cls}">${escapeHtml(probability)}</span>`;
 }
 
+// Unlike probabilityPill (an inline annotation next to a name, where 0%
+// is noise worth hiding), this is a dedicated table column — 0% is a real
+// value there, not an absence of data, so it must render.
+function startPctCell(probability) {
+  if (probability === undefined || probability === null || probability === '') return '—';
+  const pct = parseInt(probability, 10);
+  if (Number.isNaN(pct)) return '—';
+  let cls = 'prob-low';
+  if (pct > 66) cls = 'prob-high';
+  else if (pct > 33) cls = 'prob-mid';
+  return `<span class="pill ${cls}">${escapeHtml(probability)}</span>`;
+}
+
+function scoreBadge(score) {
+  if (score === undefined || score === null || score === '') return '—';
+  const n = parseFloat(score);
+  if (Number.isNaN(n)) return '—';
+  let cls = 'prob-low';
+  if (n >= 60) cls = 'prob-high';
+  else if (n >= 35) cls = 'prob-mid';
+  return `<span class="pill ${cls}">${n.toFixed(1)}</span>`;
+}
+
+function needBadge(need) {
+  if (!need) return '';
+  return `<span class="pill pill-me">${escapeHtml(need)}</span>`;
+}
+
 function rankBadge(pos) {
   const n = parseInt(pos, 10);
   const cls = n === 1 ? 'rank-1' : n === 2 ? 'rank-2' : n === 3 ? 'rank-3' : '';
@@ -162,6 +190,43 @@ function renderSales(data) {
       </tr>
     `);
   }
+}
+
+function renderBuyRecommendations(data) {
+  const tbody = document.querySelector('#buyTable tbody');
+  renderTable(tbody, data, 8, (p) => {
+    const bidTitle = p.bucket_avg_bids
+      ? `Estimate: ${p.bucket_sample} historical signings in the ${p.bid_bucket} range drew ${parseFloat(p.bucket_avg_bids).toFixed(1)} bids on average`
+      : 'Estimate: no historical signings in this price range yet, flat 5% cushion applied';
+    return `
+    <tr>
+      <td><span class="pos-badge">${escapeHtml(p.position)}</span></td>
+      <td class="cell-muted">${escapeHtml(p.club)}</td>
+      <td class="cell-primary">${escapeHtml(p.name)}</td>
+      <td class="num">${formatMoney(p.price)}</td>
+      <td class="num">${startPctCell(p.probability)}</td>
+      <td class="num">${scoreBadge(p.score)}</td>
+      <td>${needBadge(p.squad_need)}</td>
+      <td class="num" title="${escapeHtml(bidTitle)}">${formatMoney(p.suggested_bid)}</td>
+    </tr>
+  `;
+  });
+}
+
+function renderSellRecommendations(data) {
+  const tbody = document.querySelector('#sellTable tbody');
+  renderTable(tbody, data, 8, (p) => `
+    <tr>
+      <td><span class="pos-badge">${escapeHtml(p.position)}</span></td>
+      <td class="cell-muted">${escapeHtml(p.club)}</td>
+      <td class="cell-primary">${escapeHtml(p.player)}</td>
+      <td class="num">${formatMoney(p.current_price)}</td>
+      <td class="num">${p.profit === null || p.profit === undefined ? '<span class="cell-muted">—</span>' : formatDelta(p.profit)}</td>
+      <td class="num">${startPctCell(p.probability)}</td>
+      <td>${statusPill(p.status)}</td>
+      <td class="num">${scoreBadge(p.score)}</td>
+    </tr>
+  `);
 }
 
 // Team valuations doubles as the roster browser: click a team row to
@@ -287,6 +352,8 @@ function loadData() {
       renderTeamValuations(data.teams, groupRostersByTeam(data.team_players));
       renderHoldings(data.my_holdings);
       renderSales(data.my_sales);
+      renderBuyRecommendations(data.buy_recommendations);
+      renderSellRecommendations(data.sell_recommendations);
     })
     .catch((err) => {
       showError(`Couldn't load data: ${err.message}`);

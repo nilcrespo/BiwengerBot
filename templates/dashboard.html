@@ -20,6 +20,7 @@
             <button class="tab" role="tab" data-tab="teams" aria-selected="false">Team valuations</button>
             <button class="tab" role="tab" data-tab="market" aria-selected="false">Market</button>
             <button class="tab" role="tab" data-tab="trades" aria-selected="false">My trades</button>
+            <button class="tab" role="tab" data-tab="recommendations" aria-selected="false">Recommendations</button>
         </nav>
     </header>
 
@@ -135,6 +136,56 @@
                                 <th class="num">Bought for</th>
                                 <th class="num">Sold for</th>
                                 <th class="num">Profit</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="tab-panel" data-tab-panel="recommendations" hidden>
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title"><span class="icon">🎯</span> Buy recommender</span>
+                    <span class="card-meta">Ranked by starting-XI odds, points per euro, and recent form</span>
+                </div>
+                <div class="card-body scroll">
+                    <table id="buyTable">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Club</th>
+                                <th>Name</th>
+                                <th class="num">Price</th>
+                                <th class="num">Start %</th>
+                                <th class="num">Score</th>
+                                <th>Squad need</th>
+                                <th class="num">Suggested bid</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title"><span class="icon">📤</span> Sell recommender</span>
+                    <span class="card-meta">Your roster, ranked by bench risk and banked profit</span>
+                </div>
+                <div class="card-body scroll">
+                    <table id="sellTable">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Club</th>
+                                <th>Name</th>
+                                <th class="num">Current price</th>
+                                <th class="num">Profit</th>
+                                <th class="num">Start %</th>
+                                <th>Status</th>
+                                <th class="num">Score</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

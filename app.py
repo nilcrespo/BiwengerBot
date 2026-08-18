@@ -75,6 +75,59 @@ def _attach_probabilities(df, prob_df, name_col='name', club_col='club'):
     )
     return df
 
+def _accent_fold_sql(col):
+    return (
+        f"LOWER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE({col},'á','a'),'é','e'),'í','i'),'ó','o'),'ñ','n'))"
+    )
+
+# ---------- Buy/sell recommenders ----------
+# Heuristic scoring over data we actually have — starting-XI probability,
+# season/recent points, and (for buy) historical bid-count patterns by
+# price bracket. Not a market-value model, just a way to surface and rank
+# candidates worth a closer look; every input is shown alongside the score
+# so the number is checkable, not a black box.
+
+# Mirrors money_left.py's BID_BUCKETS — duplicated rather than imported
+# (importing across the scraper/app boundary isn't worth it for six
+# tuples; migration.py already does its own importlib dance for the
+# heavier functions in that module).
+BID_BUCKETS = [
+    (0, 500_000, "<500k"),
+    (500_000, 1_000_000, "500k-1M"),
+    (1_000_000, 3_000_000, "1M-3M"),
+    (3_000_000, 5_000_000, "3M-5M"),
+    (5_000_000, 10_000_000, "5M-10M"),
+    (10_000_000, float("inf"), "10M+"),
+]
+
+def _bucket_label(price):
+    for lo, hi, label in BID_BUCKETS:
+        if lo <= price < hi:
+            return label
+    return BID_BUCKETS[-1][2]
+
+def _parse_pct(s):
+    try:
+        return float(str(s).rstrip('%'))
+    except (ValueError, TypeError):
+        return 0.0
+
+def _normalize(series):
+    """Min-max scale to 0-100. A constant or empty series has no signal to
+    rank on, so it's given a neutral 50 rather than collapsing to 0 (which
+    would look like the worst possible score, not "no data")."""
+    s = series.astype(float)
+    lo, hi = s.min(), s.max()
+    if pd.isna(lo) or pd.isna(hi) or hi == lo:
+        return pd.Series([50.0] * len(s), index=s.index)
+    return (s - lo) / (hi - lo) * 100
+
+def _json_safe(df):
+    """NaN isn't valid JSON; swap it (and pandas NaT) for null before
+    to_dict so the frontend gets a clean absent value instead of a NaN
+    token some JSON parsers choke on."""
+    return df.astype(object).where(pd.notna(df), None).to_dict('records')
+
 def get_available_dates():
     conn = sqlite3.connect('data/biwenger_data.db')
     query = """
@@ -207,14 +260,97 @@ def get_data():
     market = _attach_probabilities(market, prob_df)
     team_players = _attach_probabilities(team_players, prob_df)
 
+    # --- Buy recommender: rank market listings by starting-XI probability,
+    # a points-per-euro value score, and recent form, with a squad-need
+    # flag (position counts below the league median for my team) and a
+    # suggested-bid range derived from historical bid counts in the same
+    # price bracket. ---
+    my_team_row = teams_summary[teams_summary['is_me'] == 1]
+    my_team_id = my_team_row['team_id'].iloc[0] if len(my_team_row) else None
+    my_counts = pos_counts.get(my_team_id, {'GK': 0, 'DEF': 0, 'MID': 0, 'FWD': 0})
+    position_medians = {}
+    if pos_counts:
+        for label in ('GK', 'DEF', 'MID', 'FWD'):
+            vals = sorted(c[label] for c in pos_counts.values())
+            n = len(vals)
+            position_medians[label] = vals[n // 2] if n % 2 else (vals[n // 2 - 1] + vals[n // 2]) / 2
+
+    def _needed_positions(position_str):
+        needed = [
+            POSITION_LABELS[token.strip()]
+            for token in str(position_str).split('/')
+            if POSITION_LABELS.get(token.strip())
+            and my_counts.get(POSITION_LABELS[token.strip()], 0) < position_medians.get(POSITION_LABELS[token.strip()], 0)
+        ]
+        return ', '.join(needed) or None
+
+    bid_buckets = pd.read_sql(
+        "SELECT bucket, avg_bids, count FROM bid_history_buckets WHERE scraped_at LIKE ?",
+        conn, params=(f"{date}%",)
+    )
+    bucket_avg_bids = dict(zip(bid_buckets['bucket'], bid_buckets['avg_bids']))
+    bucket_sample_size = dict(zip(bid_buckets['bucket'], bid_buckets['count']))
+
+    def _suggested_bid(price):
+        avg_bids = bucket_avg_bids.get(_bucket_label(price))
+        # No historical signings in this bracket yet -> fall back to a
+        # flat 5% cushion above asking price rather than no suggestion.
+        markup = 1 + min(avg_bids, 10) * 0.02 if avg_bids else 1.05
+        return round(price * markup / 10_000) * 10_000
+
+    buy = market.copy()
+    buy.loc[:, 'start_pct'] = buy['probability'].apply(_parse_pct)
+    buy.loc[:, 'blended_pts'] = buy['this_season_pts'].fillna(0) + buy['last_season_pts'].fillna(0) * 0.5
+    buy.loc[:, 'value_score'] = buy.apply(
+        lambda r: (r['blended_pts'] / (r['price'] / 1_000_000)) if r['price'] else 0, axis=1
+    )
+    buy.loc[:, 'recent_score'] = buy['recent_pts'].fillna(0)
+    buy.loc[:, 'score'] = (
+        0.45 * _normalize(buy['start_pct']) +
+        0.35 * _normalize(buy['value_score']) +
+        0.20 * _normalize(buy['recent_score'])
+    ).round(1)
+    buy.loc[:, 'squad_need'] = buy['position'].apply(_needed_positions)
+    buy.loc[:, 'bid_bucket'] = buy['price'].apply(_bucket_label)
+    buy.loc[:, 'bucket_avg_bids'] = buy['bid_bucket'].map(bucket_avg_bids)
+    buy.loc[:, 'bucket_sample'] = buy['bid_bucket'].map(bucket_sample_size)
+    buy.loc[:, 'suggested_bid'] = buy['price'].apply(_suggested_bid)
+    buy_recommendations = buy.sort_values('score', ascending=False).head(12)
+
+    # --- Sell recommender: my full roster, ranked by a mix of bench risk
+    # (low starting-XI probability) and profit already banked (where a
+    # purchase price is known — original-squad players have none, so they
+    # rank purely on bench risk instead of being excluded). ---
+    sell_pool = pd.read_sql(
+        f"""
+        SELECT tp.name AS player, tp.club, tp.position, tp.price AS current_price,
+               tp.this_season_pts, tp.last_season_pts, tp.status, op.buy_price
+        FROM team_players tp
+        JOIN team_balance tb ON tb.team_id = tp.team_id AND tb.is_me = 1 AND tb.scraped_at LIKE ?
+        LEFT JOIN open_positions op ON op.team_id = tp.team_id AND op.scraped_at LIKE ?
+          AND {_accent_fold_sql('op.player')} = {_accent_fold_sql('tp.name')}
+        WHERE tp.scraped_at LIKE ?
+        """,
+        conn, params=(f"{date}%", f"{date}%", f"{date}%")
+    )
+    sell_pool = _attach_probabilities(sell_pool, prob_df, name_col='player', club_col='club')
+    sell_pool.loc[:, 'start_pct'] = sell_pool['probability'].apply(_parse_pct)
+    sell_pool.loc[:, 'bench_score'] = 100 - sell_pool['start_pct']
+    sell_pool.loc[:, 'profit'] = sell_pool['current_price'] - sell_pool['buy_price']
+    sell_pool.loc[:, 'profit_pct'] = (sell_pool['profit'] / sell_pool['buy_price']).where(sell_pool['buy_price'] > 0)
+    sell_pool.loc[:, 'injured'] = sell_pool['status'].fillna('').str.startswith(('Injured', 'Doubtful'))
+    sell_pool.loc[:, 'score'] = (
+        0.5 * _normalize(sell_pool['bench_score']) +
+        0.4 * _normalize(sell_pool['profit_pct'].fillna(0).clip(lower=0)) +
+        0.1 * sell_pool['injured'].map({True: 100.0, False: 0.0})
+    ).round(1)
+    sell_recommendations = sell_pool.sort_values('score', ascending=False)
+
     # --- My trades: current holdings (unrealized profit) and completed
     # sales (realized profit), for the "My Trades" tab. Only meaningful
     # for the logged-in user's own team (is_me) — that's the only account
     # whose purchase history the forum ledger can be trusted to be complete
     # for from the moment we started scraping.
-    accent_fold = lambda col: (
-        f"LOWER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE({col},'á','a'),'é','e'),'í','i'),'ó','o'),'ñ','n'))"
-    )
     my_holdings = pd.read_sql(
         f"""
         SELECT op.player, op.buy_price, op.count, tp.price AS current_price,
@@ -222,7 +358,7 @@ def get_data():
         FROM open_positions op
         JOIN team_balance tb ON tb.team_id = op.team_id AND tb.is_me = 1 AND tb.scraped_at LIKE ?
         JOIN team_players tp ON tp.team_id = op.team_id AND tp.scraped_at LIKE ?
-          AND {accent_fold('tp.name')} = {accent_fold('op.player')}
+          AND {_accent_fold_sql('tp.name')} = {_accent_fold_sql('op.player')}
         WHERE op.scraped_at LIKE ?
         ORDER BY profit DESC
         """,
@@ -249,6 +385,8 @@ def get_data():
         'team_players': team_players.to_dict('records'),
         'my_holdings': my_holdings.to_dict('records'),
         'my_sales': my_sales.to_dict('records'),
+        'buy_recommendations': _json_safe(buy_recommendations),
+        'sell_recommendations': _json_safe(sell_recommendations),
         'date': date
     })
 

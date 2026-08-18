@@ -622,7 +622,7 @@ def extract_market_players(page) -> pd.DataFrame:
 
             all_rows.append({
                 "position": position,
-                "club": club,
+                "club": normalize_player_name(club),
                 "name": name,
                 "price": price,
                 "change": change,
@@ -1084,12 +1084,22 @@ def get_starting_player_data():
     scrape — a slow or blocked futbolfantasy.com shouldn't be able to hold
     up the core pipeline. Out of scope here; not built.
     """
+    # This list was missing 3 clubs that Biwenger itself actually has
+    # players for this season (found by cross-checking DISTINCT club
+    # against this list): Racing, Deportivo, Málaga. Verified each slug
+    # resolves (200, not 404) on futbolfantasy.com before adding. Not
+    # removing anything from the original 20 since there's no reliable way
+    # to confirm which (if any) are stale without real-world knowledge of
+    # this specific season's promotions/relegations — a wrong slug here
+    # just gets skipped gracefully (see the "no widget" branch above), so
+    # slight over-inclusion is the safe direction to err in.
     teams = [
         'alaves', 'athletic', 'atletico', 'barcelona', 'betis',
         'celta', 'elche', 'espanyol', 'getafe', 'girona',
         'levante', 'mallorca', 'osasuna', 'rayo-vallecano',
         'real-madrid', 'real-oviedo', 'real-sociedad',
-        'sevilla', 'valencia', 'villarreal'
+        'sevilla', 'valencia', 'villarreal',
+        'racing', 'deportivo', 'malaga',
     ]
 
     all_rows = []

@@ -338,6 +338,13 @@ tbody tr:hover td {
   padding: var(--space-5);
 }
 
+.total-row td {
+  border-top: 2px solid var(--border);
+  border-bottom: none;
+  font-weight: 650;
+  background: var(--surface-raised);
+}
+
 /* ---------- Badges & pills ---------- */
 .pill {
   display: inline-flex;

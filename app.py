@@ -117,6 +117,10 @@ def get_data():
 
     teams_summary = teams_summary.copy()
     teams_summary.loc[:, 'positions'] = teams_summary['team_id'].map(pos_counts)
+    # Biwenger's own max-bid formula, confirmed against the live bid modal:
+    # balance + 25% of total squad value (checked to the euro:
+    # €368,300 + 0.25 x €68,050,000 = €17,380,800, matched exactly).
+    teams_summary.loc[:, 'max_bid'] = teams_summary['balance'] + 0.25 * teams_summary['total_value']
     teams_summary = teams_summary.rename(
         columns={'team_name': 'team', 'player_count': 'players'}
     )

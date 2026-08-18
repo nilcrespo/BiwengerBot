@@ -114,6 +114,10 @@ function renderMarket(data) {
   `);
 }
 
+function sumBy(data, key) {
+  return (data || []).reduce((total, row) => total + (parseFloat(row[key]) || 0), 0);
+}
+
 function renderHoldings(data) {
   const tbody = document.querySelector('#holdingsTable tbody');
   renderTable(tbody, data, 6, (p) => `
@@ -126,6 +130,16 @@ function renderHoldings(data) {
       <td class="num">${formatDelta(p.profit)}</td>
     </tr>
   `);
+  if (data && data.length) {
+    tbody.insertAdjacentHTML('beforeend', `
+      <tr class="total-row">
+        <td colspan="3" class="cell-primary">Total</td>
+        <td class="num cell-primary">${formatMoney(sumBy(data, 'buy_price'))}</td>
+        <td class="num cell-primary">${formatMoney(sumBy(data, 'current_price'))}</td>
+        <td class="num">${formatDelta(sumBy(data, 'profit'))}</td>
+      </tr>
+    `);
+  }
 }
 
 function renderSales(data) {
@@ -138,6 +152,16 @@ function renderSales(data) {
       <td class="num">${formatDelta(p.profit)}</td>
     </tr>
   `);
+  if (data && data.length) {
+    tbody.insertAdjacentHTML('beforeend', `
+      <tr class="total-row">
+        <td class="cell-primary">Total</td>
+        <td class="num cell-primary">${formatMoney(sumBy(data, 'buy_price'))}</td>
+        <td class="num cell-primary">${formatMoney(sumBy(data, 'sell_price'))}</td>
+        <td class="num">${formatDelta(sumBy(data, 'profit'))}</td>
+      </tr>
+    `);
+  }
 }
 
 // Team valuations doubles as the roster browser: click a team row to
@@ -170,7 +194,7 @@ function renderRosterRows(players) {
 function renderTeamValuations(teams, rostersByTeamId) {
   const tbody = document.querySelector('#teamsTable tbody');
   if (!teams || teams.length === 0) {
-    tbody.innerHTML = `<tr class="empty-row"><td colspan="9">No data available</td></tr>`;
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="10">No data available</td></tr>`;
     return;
   }
   tbody.innerHTML = teams.map((t) => {
@@ -187,9 +211,10 @@ function renderTeamValuations(teams, rostersByTeamId) {
       <td class="num">${formatMoney(t.total_value)}</td>
       <td class="num">${formatDelta(t.value_change, { hideZero: true })}</td>
       <td class="num">${formatBalance(t.balance)}</td>
+      <td class="num cell-muted">${formatMoney(t.max_bid)}</td>
     </tr>
     <tr class="roster-detail" hidden>
-      <td colspan="9">
+      <td colspan="10">
         <table class="roster-table">${renderRosterRows(roster)}</table>
       </td>
     </tr>

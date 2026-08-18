@@ -49,6 +49,9 @@ def migrate_csv_to_db(days_behind=0):
         position INTEGER,
         name TEXT,
         points INTEGER,
+        team_value REAL,
+        value_change REAL,
+        num_players INTEGER,
         scraped_at TIMESTAMP
     )''')
 
@@ -94,8 +97,12 @@ def migrate_csv_to_db(days_behind=0):
             df = pd.read_csv(file)
             print(f"\nProcessing {file} with columns: {list(df.columns)}")
             
-            # Ensure only free agents are included
-            df = df[df['owner'] == 'Free agent']
+            # Ensure only free agents are included. extract_market_players()
+            # already filters to free agents, but its owner text goes
+            # through the scraper's name-normalizer (title-cases
+            # everything), so match case-insensitively rather than the
+            # exact literal "Free agent".
+            df = df[df['owner'].str.lower() == 'free agent']
 
             df['scraped_at'] = ((datetime.now()-timedelta(days=days_behind))).strftime('%Y-%m-%d %H:%M:%S')
 

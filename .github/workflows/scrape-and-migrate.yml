@@ -1,1 +1,97 @@
+name: Daily scrape & migrate
 
+on:
+  schedule:
+    - cron: "15 6 * * *"   # 06:15 UTC daily
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+concurrency:
+  group: biwengerbot-daily
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-22.04
+    env:
+      BIWENGER_EMAIL: ${{ secrets.BIWENGER_EMAIL }}
+      BIWENGER_PASSWORD: ${{ secrets.BIWENGER_PASSWORD }}
+      HEADLESS: "1"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Keep this simple to avoid cached, mismatched wheels
+      - name: Install Python deps (pin numpy/pandas + playwright)
+        env:
+          PIP_NO_CACHE_DIR: "1"     # avoid stale wheels
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          # Compatible combo
+          pip install "numpy==1.26.4"
+          pip install "lxml==5.2.2"
+          pip install "beautifulsoup4==4.12.3"
+          pip install "pandas==2.2.2"
+          pip install "playwright==1.52.0"
+          pip install "matplotlib"
+          # Install the rest without re-resolving numpy/pandas/playwright
+          pip install -r requirements.txt --no-deps || true
+
+      # Install Chromium and its Linux dependencies
+      - name: Install Playwright browsers + OS deps
+        run: |
+          python -m playwright install --with-deps chromium
+
+      - name: Run scraper
+        run: |
+          python scraper/scraper.py
+
+      - name: Run migration
+        run: |
+          python migration.py
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: biwengerbot-output
+          path: |
+            csvs/others/league_standings.csv
+            csvs/market/market_players.csv
+            csvs/others/players.csv
+            csvs/others/player_probabilities.csv
+            csvs/teams/team_*.csv
+            data/biwenger_data.db
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Update repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Stash any changes before rebasing
+          git stash
+
+          # Pull with rebase
+          git pull --rebase
+
+          # Apply stashed changes if any
+          git stash pop || true
+
+          # Add and commit files
+          git add csvs/others/league_standings.csv || true
+          git add csvs/market/market_players.csv || true
+          git add csvs/others/players.csv || true
+          git add csvs/others/player_probabilities.csv || true
+          git add csvs/teams/team_*.csv 2>/dev/null || true
+          git add data/biwenger_data.db || true
+
+          git commit -m "data: update CSV/DB from run ${GITHUB_RUN_NUMBER}" || echo "No changes"
+          git push

@@ -15,6 +15,20 @@ PASSWORD = os.getenv("BIWENGER_PASSWORD")     # set as repo secret
 HEADLESS = os.getenv("HEADLESS", "1") == "1"
 MAX_RIVALS = 10  # Adjust based on your league size
 
+# Biwenger's own /api/v2/auth/login rejects requests whose User-Agent
+# reports "HeadlessChrome" (Playwright's default headless mode) with a
+# 403 "Not allowed" before credentials are even checked. A normal desktop
+# Chrome UA string gets through fine — confirmed against the live API.
+DESKTOP_CHROME_UA = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+)
+
+# The card/table view toggle button used to always say "Taula" (Catalan).
+# The app now renders some views in English ("Table") regardless of the
+# ca-ES locale/Accept-Language we set, so match either.
+TABLE_VIEW_LABEL = re.compile(r"Taula|Table", re.I)
+
 def login(page):
     """Handle login process"""
     page.goto("https://biwenger.as.com/", wait_until="domcontentloaded",)
@@ -26,7 +40,10 @@ def login(page):
         except:
             pass
     page.get_by_role("link", name="Comença a jugar!").click()
-    page.get_by_role("button", name="Ja tinc un compte").click()
+    # Biwenger dropped the old "Ja tinc un compte" intermediate screen — the
+    # /login page now goes straight to CREAR COMPTE / INICIAR SESSIÓ, and
+    # clicking INICIAR SESSIÓ reveals the email/password form in place.
+    page.get_by_role("button", name="Iniciar sessió").click()
     page.get_by_role("textbox", name="Email").fill(EMAIL)
     page.get_by_role("textbox", name="Contrasenya").fill(PASSWORD)
     page.get_by_role("button", name="Iniciar sessió").click()
@@ -104,7 +121,7 @@ def get_league_standings(page):
     links = []
     # Switch to table view
     try:
-        page.get_by_role("button", name="Taula").click(timeout=3000)
+        page.get_by_role("button", name=TABLE_VIEW_LABEL).click(timeout=3000)
     except:
         try:
             page.locator('i[role="button"][title="Table"]').click(timeout=3000)
@@ -126,9 +143,17 @@ def get_league_standings(page):
             # only get numeral part of raw_pos
             position = re.search(r"\d+", raw_pos).group() if re.search(r"\d+", raw_pos) else "0"
 
-            # Name
+            # Name — keep the raw display text (accents, casing) untouched here.
+            # extract_team_players() needs to click a button whose accessible
+            # name matches this exactly; normalizing it (as safe_inner_text
+            # does) caused the same team to be scraped under two different
+            # keys depending on whether the click matched.
             name_cell = row.locator("td").nth(2).locator("a")
-            name = safe_inner_text(name_cell, "Unknown Player")
+            try:
+                name_cell.first.wait_for(state="visible", timeout=1000)
+                name = name_cell.first.inner_text(timeout=1000).strip()
+            except TimeoutError:
+                name = "Unknown Player"
             links.append(name_cell.get_attribute("href"))
 
             # Points data
@@ -169,10 +194,10 @@ def extract_team_players(page, team_name: str) -> pd.DataFrame:
     page.get_by_role("button", name=team_name).last.click()
     # page.locator(f"a[role='button'][href*={team_name.split()[0].lower()}]").click()  
     try:
-        page.get_by_role("button", name="Taula").click(timeout=500)
+        page.get_by_role("button", name=TABLE_VIEW_LABEL).click(timeout=500)
     except:
         pass
-    page.wait_for_selector("table.table.no-swipe", timeout=1000)
+    page.wait_for_selector("table.table.no-swipe", timeout=8000)
     
     all_rows = []
     rows = page.locator("table.table.no-swipe tbody tr").all()
@@ -212,6 +237,7 @@ def extract_team_players(page, team_name: str) -> pd.DataFrame:
 
             all_rows.append({
                 "team": team_name,
+                "team_id": normalize_team_key(team_name),
                 "position": position,
                 "club": normalize_player_name(club),
                 "name": normalize_player_name(name),
@@ -232,9 +258,8 @@ def extract_team_players(page, team_name: str) -> pd.DataFrame:
             continue
     
     df = pd.DataFrame(all_rows)
-    if team_name == 'General "Hansi” Topete':
-        team_name = 'General Hansi Topete'
-    filename = f"csvs/teams/team_{team_name.replace(' ', '_').replace('/', '_')}.csv"
+    team_key = normalize_team_key(team_name)
+    filename = f"csvs/teams/team_{team_key}.csv"
     df.to_csv(filename, index=False)
     print(f"✅ Saved {len(df)} players to {filename}")
     return df
@@ -277,7 +302,7 @@ def get_rival_teams(page) -> List[Dict]:
     team_elements = page.locator("user-card").all()
     # Switch to table view
     try:
-        page.get_by_role("button", name="Taula").click(timeout=3000)
+        page.get_by_role("button", name=TABLE_VIEW_LABEL).click(timeout=3000)
     except:
         try:
             page.locator('i[role="button"][title="Table"]').click(timeout=3000)
@@ -339,7 +364,7 @@ def extract_all_players(page) -> pd.DataFrame:
     # Navigate
     page.goto("https://biwenger.as.com/players")
     try:
-        page.get_by_role("button", name="Taula").click()
+        page.get_by_role("button", name=TABLE_VIEW_LABEL).click()
     except:
         page.locator('i[role="button"][title="Table"]').click()
 
@@ -465,7 +490,7 @@ def extract_market_players(page) -> pd.DataFrame:
     
     # Switch to table view
     try:
-        page.get_by_role("button", name="Taula").click(timeout=3000)
+        page.get_by_role("button", name=TABLE_VIEW_LABEL).click(timeout=3000)
     except:
         try:
             page.locator('i[role="button"][title="Table"]').click(timeout=3000)
@@ -553,9 +578,30 @@ import json
 import json, time
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 
-def get_all_posts(page, max_scrolls=5, initial_wait=3, load_timeout_ms=6000):
+def get_all_posts(page, max_scrolls=300, initial_wait=3, load_timeout_ms=6000,
+                   stale_limit=3, checkpoint_every=5, stop_when_contains="Inici de joc"):
+    """Scroll the league forum feed and collect every post.
+
+    Three things that used to make this run forever:
+    - it re-read every post on the page on every scroll (including ones
+      already collected), so each pass got slower as the feed grew —
+      quadratic in the number of posts.
+    - the only stopping condition besides a fixed iteration count was "no
+      new posts in a while" — but this league's board goes back years, so
+      that condition basically never fires within a sane number of scrolls.
+    - there was no way to bound the scrape to just the current season.
+
+    Now it only extracts text for posts not already seen, checkpoints to
+    disk periodically so an interruption doesn't lose everything, and
+    stops as soon as it hits a post containing `stop_when_contains` — by
+    default "Inici de joc" ("start of game"), Biwenger's own marker for
+    the admin post that credits every team's starting budget at the top
+    of a new season. That post is kept (need it for the money ledger);
+    nothing older than it is fetched.
+    """
     seen = set()
     all_posts = []
+    processed_count = 0  # DOM index of the last post we've already read
 
     print(f"⏳ Waiting {initial_wait}s for first posts to render...")
     time.sleep(initial_wait)
@@ -578,29 +624,54 @@ def get_all_posts(page, max_scrolls=5, initial_wait=3, load_timeout_ms=6000):
         print("⚠️ No posts found at start.")
         return []
 
-    last_count = post_locator.count()
-    print(f"Start: {last_count} posts")
+    print(f"Start: {post_locator.count()} posts")
 
+    stale_scrolls = 0
     for i in range(max_scrolls):
-        # Collect what we currently have
         count_now = post_locator.count()
-        print(f"Scroll {i+1} (before scroll): {count_now} posts")
 
-        for idx in range(count_now):
+        new_this_round = 0
+        hit_stop_marker = False
+        for idx in range(processed_count, count_now):
             title = post_locator.nth(idx)
             post_data = title.inner_text().split("\n")
             post_id = json.dumps(post_data, ensure_ascii=False)
             if post_id not in seen:
                 seen.add(post_id)
                 all_posts.append(post_data)
+                new_this_round += 1
+                if stop_when_contains and any(stop_when_contains in str(x) for x in post_data):
+                    hit_stop_marker = True
+                    break
+        processed_count = count_now
 
-            # Scroll down to trigger loading more
-            last_post = page.locator("league-board-post").last
-            last_post.scroll_into_view_if_needed()
+        print(f"Scroll {i+1}: {count_now} posts on page, "
+              f"{new_this_round} new, {len(all_posts)} total")
 
-            # Update last_count for the next loop
-            last_count = post_locator.count()
-            print(f"Scroll {i+1} (after load): {last_count} posts")
+        if hit_stop_marker:
+            with open("unique_posts.json", "w", encoding="utf-8") as f:
+                json.dump(all_posts, f, ensure_ascii=False, indent=2)
+            print(f"Found '{stop_when_contains}' marker — that's the season "
+                  f"start, stopping here ({len(all_posts)} posts).")
+            break
+
+        if (i + 1) % checkpoint_every == 0:
+            with open("unique_posts.json", "w", encoding="utf-8") as f:
+                json.dump(all_posts, f, ensure_ascii=False, indent=2)
+            print(f"  ↳ checkpoint saved ({len(all_posts)} posts)")
+
+        if new_this_round == 0:
+            stale_scrolls += 1
+            if stale_scrolls >= stale_limit:
+                print(f"No new posts for {stale_limit} scrolls in a row — "
+                      f"reached the end of the feed, stopping early.")
+                break
+        else:
+            stale_scrolls = 0
+
+        # Scroll down to trigger loading more
+        page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+        page.wait_for_timeout(1200)  # give posts time to load
 
     with open("unique_posts.json", "w", encoding="utf-8") as f:
         json.dump(all_posts, f, ensure_ascii=False, indent=2)
@@ -612,41 +683,40 @@ def run(playwright: Playwright) -> None:
     browser = playwright.chromium.launch(headless=HEADLESS)
     context = browser.new_context(
         locale="ca-ES",
-        extra_http_headers={"Accept-Language": "ca-ES,ca;q=0.9"}
+        extra_http_headers={"Accept-Language": "ca-ES,ca;q=0.9"},
+        user_agent=DESKTOP_CHROME_UA,
     )
     page = context.new_page()
 
     # Login
     login(page)
-    
-    # Get all post titles
-    # get_all_posts(page, max_scrolls=20)
- 
-    # Get all rival teams
-    # rival_teams = get_rival_teams(page)
+
+    # Get all post titles (feeds the money ledger). max_scrolls is just a
+    # safety cap now — it stops early once it stops finding new posts.
+    get_all_posts(page)
+
+    # Get league standings + rival team list
     rival_teams, links = get_league_standings(page)
     print(f"\nFound {len(rival_teams)} rival teams:")
     for team in rival_teams:
         print(f"{team['position']} - {team['name']} ({team['points']} pts)")
-    
+
     # Extract players for each rival team
     for team in rival_teams:
         print(f"\nProcessing team: {team['name']} at position {team['position']}")
         extract_team_players(page, team["name"])
         # Go back to league view
-        page.goto('https://biwenger.as.com/league')  
-    
-    # # Extract all players
-    # print("\nExtracting all players...")
-    # all_players_df = extract_all_players(page)
-    # print(f"Extracted {len(all_players_df)} players → players.csv")
-    
-    #extract market players
+        page.goto('https://biwenger.as.com/league')
+
+    # Extract market players
     market_players_df = extract_market_players(page)
     print(f"Extracted {len(market_players_df)} market players → market_players.csv")
 
-    # extract player probabilities
-    
+    # NOTE: extract_all_players() (full player database, not just market/rosters)
+    # is intentionally left disabled here — nothing downstream consumes it yet
+    # (migration.py has no players-table loader). Wiring that up is Day 1 work
+    # (the deals engine), not part of getting the pipeline running again.
+
     context.close()
     browser.close()
 
@@ -697,6 +767,19 @@ def normalize_player_name(name):
     for old, new in replacements.items():
         name = name.replace(old, new)
     return name.title()  # Capitalize first letters
+
+def normalize_team_key(name):
+    """Stable, accent/case-insensitive team identifier.
+
+    Used as the CSV filename suffix and DB team_id so the same team never
+    fragments into multiple records just because Biwenger rendered its name
+    with different accents/casing on different scrapes.
+    """
+    key = normalize_player_name(name)
+    key = re.sub(r"[^\w\s]", "", key)  # drop quotes/punctuation
+    key = re.sub(r"\s+", "_", key.strip())
+    return key
+
 def scrape_player_probabilities(team):
     """Scrape player probabilities for a given team."""
     data = []

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import sqlite3
 import pandas as pd
+import os
 from datetime import datetime
 
 app = Flask(__name__)
@@ -144,4 +145,6 @@ def get_data():
     })
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # 5000 is macOS AirPlay Receiver's default port — use 5001 instead so
+    # this doesn't collide with it out of the box.
+    app.run(debug=True, port=int(os.getenv('PORT', 5001)))

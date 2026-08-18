@@ -1,0 +1,22 @@
+team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
+"General ""Hansi” Topete",General_Hansi_Topete,Goalkeeper,Sevilla,Odysseas,4,0,3980000,-20000.0,Fit,1,4.0,4,4.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Defender,Espanyol,Hinojo,7,0,430000,170000.0,Fit,1,7.0,7,7.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Defender,Villarreal,Renato Veiga,6,0,3860000,40000.0,Fit,1,6.0,0,0.0,6,6.0
+"General ""Hansi” Topete",General_Hansi_Topete,Defender,Villarreal,Santiago Mourino,3,0,3310000,10000.0,Fit,1,3.0,0,0.0,3,3.0
+"General ""Hansi” Topete",General_Hansi_Topete,Defender,Levante,Mandi,3,0,2250000,0.0,Fit,1,3.0,0,0.0,3,3.0
+"General ""Hansi” Topete",General_Hansi_Topete,Defender/Midfielder,Elche,Sangare,2,0,1770000,0.0,Fit,1,2.0,0,0.0,2,2.0
+"General ""Hansi” Topete",General_Hansi_Topete,Defender,Osasuna,Boyomo,0,128,3420000,-40000.0,Fit,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Defender,Athletic,Paredes,0,76,830000,10000.0,Fit,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Defender,Unknown Club,Torrents,0,8,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Midfielder,Sevilla,Manu Bueno,6,0,270000,70000.0,Fit,1,6.0,6,6.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Midfielder,Getafe,Mario Martin,5,0,2140000,40000.0,Fit,1,5.0,0,0.0,5,5.0
+"General ""Hansi” Topete",General_Hansi_Topete,Midfielder,Deportivo,Mario Soriano,4,0,5110000,20000.0,Fit,1,4.0,4,4.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Midfielder,Espanyol,Alex Calatrava,4,0,4370000,0.0,Fit,1,4.0,4,4.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Midfielder/Forward,Betis,Roro Riquelme,0,74,2030000,70000.0,Fit,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Forward,Racing,Andres Martin,10,0,5530000,90000.0,Fit,1,10.0,10,10.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Forward/Defender/Midfielder,Alaves,Angel Perez,4,0,3320000,-50000.0,Fit,1,4.0,4,4.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Forward,Real Madrid,Mbappe,0,265,25320000,-70000.0,Fit,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Forward/Midfielder,Real Madrid,Brahim,0,91,2160000,130000.0,Fit,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Forward,Real Madrid,Endrick,0,-1,1980000,-30000.0,Fit,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Forward/Midfielder,Levante,Thiago Fernandez,0,65,1610000,0.0,Fit,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Forward,Levante,Etta Eyong,-1,0,3840000,-280000.0,Fit,1,-1.0,0,0.0,-1,-1.0

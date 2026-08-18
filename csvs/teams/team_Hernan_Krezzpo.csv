@@ -1,15 +1,15 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Hernan Krezzpo,Hernan_Krezzpo,Goalkeeper,Athletic,Unai Simon,0,155,5160000,0,Fit,0,0.0,0,0.0,0,0.0
-Hernan Krezzpo,Hernan_Krezzpo,Goalkeeper,Malaga,Carlos Lopez,0,0,150000,0,Fit,0,0.0,0,0.0,0,0.0
-Hernan Krezzpo,Hernan_Krezzpo,Defender,Levante,De La Fuente,4,0,3250000,0,Fit,1,4.0,0,0.0,4,4.0
-Hernan Krezzpo,Hernan_Krezzpo,Defender/Midfielder,Getafe,Djene,2,0,2210000,10000,Fit,1,2.0,0,0.0,2,2.0
-Hernan Krezzpo,Hernan_Krezzpo,Defender/Midfielder,Barcelona,Eric Garcia,0,205,7750000,10000,Fit,0,0.0,0,0.0,0,0.0
-Hernan Krezzpo,Hernan_Krezzpo,Defender/Midfielder,Osasuna,Bretones,0,92,1750000,0,Fit,0,0.0,0,0.0,0,0.0
-Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Sevilla,Agoume,5,0,2510000,40000,Fit,1,5.0,5,5.0,0,0.0
-Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Elche,Gonzalo Villar,5,0,2370000,40000,Fit,1,5.0,0,0.0,5,5.0
-Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Barcelona,Pedri,0,211,15760000,100000,Fit,0,0.0,0,0.0,0,0.0
-Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Betis,Isco,0,34,10590000,140000,Fit,0,0.0,0,0.0,0,0.0
-Hernan Krezzpo,Hernan_Krezzpo,Midfielder/Forward,Real Sociedad,Barrenetxea,0,140,4670000,30000,Fit,0,0.0,0,0.0,0,0.0
-Hernan Krezzpo,Hernan_Krezzpo,Forward,Deportivo,Luismi Cruz,2,0,1850000,10000,Fit,1,2.0,2,2.0,0,0.0
-Hernan Krezzpo,Hernan_Krezzpo,Forward/Midfielder,Atletico,Lookman,0,45,9320000,30000,Fit,0,0.0,0,0.0,0,0.0
-Hernan Krezzpo,Hernan_Krezzpo,Coach,Sevilla,Luis Garcia,3,0,710000,10000,Fit,1,3.0,3,3.0,0,0.0
+Hernan Krezzpo,Hernan_Krezzpo,Goalkeeper,Athletic,Unai Simon,0,155,5160000,0.0,Fit,0,0.0,0,0.0,0,0.0
+Hernan Krezzpo,Hernan_Krezzpo,Goalkeeper,Malaga,Carlos Lopez,0,0,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
+Hernan Krezzpo,Hernan_Krezzpo,Defender,Levante,De La Fuente,4,0,3250000,0.0,Fit,1,4.0,0,0.0,4,4.0
+Hernan Krezzpo,Hernan_Krezzpo,Defender/Midfielder,Getafe,Djene,2,0,2210000,-10000.0,Fit,1,2.0,0,0.0,2,2.0
+Hernan Krezzpo,Hernan_Krezzpo,Defender/Midfielder,Barcelona,Eric Garcia,0,205,7750000,10000.0,Fit,0,0.0,0,0.0,0,0.0
+Hernan Krezzpo,Hernan_Krezzpo,Defender/Midfielder,Osasuna,Bretones,0,92,1750000,0.0,Fit,0,0.0,0,0.0,0,0.0
+Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Sevilla,Agoume,5,0,2510000,40000.0,Fit,1,5.0,5,5.0,0,0.0
+Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Elche,Gonzalo Villar,5,0,2370000,40000.0,Fit,1,5.0,0,0.0,5,5.0
+Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Barcelona,Pedri,0,211,15760000,-100000.0,Fit,0,0.0,0,0.0,0,0.0
+Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Betis,Isco,0,34,10590000,-140000.0,Fit,0,0.0,0,0.0,0,0.0
+Hernan Krezzpo,Hernan_Krezzpo,Midfielder/Forward,Real Sociedad,Barrenetxea,0,140,4670000,30000.0,Fit,0,0.0,0,0.0,0,0.0
+Hernan Krezzpo,Hernan_Krezzpo,Forward,Deportivo,Luismi Cruz,2,0,1850000,-10000.0,Fit,1,2.0,2,2.0,0,0.0
+Hernan Krezzpo,Hernan_Krezzpo,Forward/Midfielder,Atletico,Lookman,0,45,9320000,30000.0,Fit,0,0.0,0,0.0,0,0.0
+Hernan Krezzpo,Hernan_Krezzpo,Coach,Sevilla,Luis Garcia,3,0,710000,10000.0,Fit,1,3.0,3,3.0,0,0.0

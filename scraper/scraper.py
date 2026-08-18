@@ -204,12 +204,24 @@ def extract_team_players(page, team_name: str) -> pd.DataFrame:
     
     # Navigate to team page and click table view
     page.get_by_role("button", name=team_name).last.click()
-    # page.locator(f"a[role='button'][href*={team_name.split()[0].lower()}]").click()  
-    try:
-        page.get_by_role("button", name=TABLE_VIEW_LABEL).click(timeout=500)
-    except:
-        pass
-    page.wait_for_selector("table.table.no-swipe", timeout=8000)
+    page.wait_for_timeout(500)  # let the team view settle before probing it
+
+    # The toggle click can land before the view is fully ready and silently
+    # no-op (no exception — the click succeeds, it just doesn't switch the
+    # view in time), so retry once with a longer wait rather than trusting
+    # a single attempt.
+    for attempt, click_timeout in enumerate((3000, 5000)):
+        try:
+            page.get_by_role("button", name=TABLE_VIEW_LABEL).click(timeout=click_timeout)
+        except Exception:
+            pass
+        try:
+            page.wait_for_selector("table.table.no-swipe", timeout=5000)
+            break
+        except Exception:
+            if attempt == 1:
+                raise
+            page.wait_for_timeout(500)
     
     all_rows = []
     rows = page.locator("table.table.no-swipe tbody tr").all()

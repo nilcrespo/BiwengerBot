@@ -36,6 +36,7 @@ def migrate_csv_to_db(days_behind=0):
         club TEXT,
         name TEXT,
         price REAL,
+        change REAL,
         owner TEXT,
         last_sale TEXT,
         demand INTEGER,
@@ -52,6 +53,7 @@ def migrate_csv_to_db(days_behind=0):
         team_value REAL,
         value_change REAL,
         num_players INTEGER,
+        is_me INTEGER,
         scraped_at TIMESTAMP
     )''')
 
@@ -107,8 +109,10 @@ def migrate_csv_to_db(days_behind=0):
             df['scraped_at'] = ((datetime.now()-timedelta(days=days_behind))).strftime('%Y-%m-%d %H:%M:%S')
 
             # Select only the columns we need
-            df = df[['position', 'club', 'name', 'price', 'owner', 
-                    'last_sale', 'demand', 'this_season_pts', 
+            if 'change' not in df.columns:
+                df['change'] = 0  # older CSVs won't have this column
+            df = df[['position', 'club', 'name', 'price', 'change', 'owner',
+                    'last_sale', 'demand', 'this_season_pts',
                     'last_season_pts', 'scraped_at']]
             
             df.to_sql('market', conn, if_exists='append', index=False)
@@ -179,6 +183,78 @@ def migrate_csv_to_db(days_behind=0):
             
         except Exception as e:
             print(f"Error processing {file}: {str(e)}")
+
+    # Team balances — computed from the forum-post ledger (season-start
+    # budget credit, salaries, market purchases/sales, admin adjustments).
+    # Cross-checked against the logged-in user's own live-scraped balance
+    # when available, since that's the only team we have ground truth for.
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS team_balance (
+        team_id TEXT,
+        team_name TEXT,
+        ledger_balance REAL,
+        actual_balance REAL,
+        is_me INTEGER,
+        scraped_at TIMESTAMP
+    )''')
+    conn.commit()
+
+    posts_path = 'unique_posts.json'
+    if os.path.exists(posts_path):
+        try:
+            import json
+            import importlib.util
+            spec = importlib.util.spec_from_file_location(
+                "money_left", "money_movements_history/money_left.py"
+            )
+            money_left = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(money_left)
+
+            with open(posts_path, encoding='utf-8') as f:
+                posts = json.load(f)
+            balances, _ledger = money_left.compute_balances(posts)
+
+            # Which team_id is mine, and what does Biwenger say my balance
+            # actually is (ground truth for validation)?
+            my_team_id = None
+            if os.path.exists('csvs/others/league_standings.csv'):
+                standings_df = pd.read_csv('csvs/others/league_standings.csv')
+                if 'is_me' in standings_df.columns:
+                    me_rows = standings_df[standings_df['is_me'] == True]
+                    if len(me_rows):
+                        my_team_id = normalize_team_key(me_rows.iloc[0]['name'])
+
+            actual_balance = None
+            if os.path.exists('csvs/others/my_balance.csv'):
+                my_bal_df = pd.read_csv('csvs/others/my_balance.csv')
+                if len(my_bal_df):
+                    actual_balance = float(my_bal_df.iloc[0]['balance'])
+
+            now = (datetime.now() - timedelta(days=days_behind)).strftime('%Y-%m-%d %H:%M:%S')
+            rows = []
+            for team_name, bal in balances.items():
+                team_id = normalize_team_key(team_name)
+                is_me = (team_id == my_team_id)
+                rows.append({
+                    'team_id': team_id,
+                    'team_name': team_name,
+                    'ledger_balance': bal,
+                    'actual_balance': actual_balance if is_me else None,
+                    'is_me': is_me,
+                    'scraped_at': now,
+                })
+            pd.DataFrame(rows).to_sql('team_balance', conn, if_exists='append', index=False)
+            print(f"→ Migrated {len(rows)} team balances")
+
+            if my_team_id and actual_balance is not None:
+                mine = next((r for r in rows if r['team_id'] == my_team_id), None)
+                if mine:
+                    diff = mine['ledger_balance'] - actual_balance
+                    status = "MATCH" if abs(diff) < 1 else f"MISMATCH (diff €{diff:,.0f})"
+                    print(f"  ↳ balance validation for {mine['team_name']}: "
+                          f"ledger=€{mine['ledger_balance']:,.0f} actual=€{actual_balance:,.0f} [{status}]")
+        except Exception as e:
+            print(f"Error computing team balances: {str(e)}")
 
     conn.close()
     print("\nMigration complete!")

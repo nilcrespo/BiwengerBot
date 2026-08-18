@@ -241,4 +241,31 @@ function loadData() {
     .finally(() => setLoading(false));
 }
 
-document.addEventListener('DOMContentLoaded', loadData);
+// ---------- Tabs ----------
+
+function activateTab(name) {
+  document.querySelectorAll('.tab').forEach((btn) => {
+    const isActive = btn.dataset.tab === name;
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-selected', String(isActive));
+  });
+  document.querySelectorAll('.tab-panel').forEach((panel) => {
+    panel.hidden = panel.dataset.tabPanel !== name;
+  });
+  if (history.replaceState) history.replaceState(null, '', `#${name}`);
+}
+
+function initTabs() {
+  const tabNames = Array.from(document.querySelectorAll('.tab')).map((b) => b.dataset.tab);
+  const fromHash = window.location.hash.replace('#', '');
+  activateTab(tabNames.includes(fromHash) ? fromHash : tabNames[0]);
+
+  document.querySelectorAll('.tab').forEach((btn) => {
+    btn.addEventListener('click', () => activateTab(btn.dataset.tab));
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initTabs();
+  loadData();
+});

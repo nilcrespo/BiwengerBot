@@ -15,12 +15,17 @@
                 <span class="brand-sub">League analytics</span>
             </div>
         </div>
+        <nav class="tabs" role="tablist">
+            <button class="tab active" role="tab" data-tab="standings" aria-selected="true">Standings</button>
+            <button class="tab" role="tab" data-tab="teams" aria-selected="false">Team valuations</button>
+            <button class="tab" role="tab" data-tab="market" aria-selected="false">Market</button>
+        </nav>
     </header>
 
     <main class="page">
         <div id="errorBanner" class="error-banner" style="display:none;"></div>
 
-        <section class="grid single">
+        <section class="tab-panel" data-tab-panel="standings">
             <div class="card">
                 <div class="card-header">
                     <span class="card-title"><span class="icon">🏆</span> League standings</span>
@@ -41,7 +46,7 @@
             </div>
         </section>
 
-        <section class="grid single">
+        <section class="tab-panel" data-tab-panel="teams" hidden>
             <div class="card">
                 <div class="card-header">
                     <span class="card-title"><span class="icon">💰</span> Team valuations</span>
@@ -68,7 +73,7 @@
             </div>
         </section>
 
-        <section class="grid single">
+        <section class="tab-panel" data-tab-panel="market" hidden>
             <div class="card">
                 <div class="card-header">
                     <span class="card-title"><span class="icon">🛒</span> Market — top listings</span>

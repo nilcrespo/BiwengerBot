@@ -312,18 +312,30 @@ function renderBuyRecommendations(data) {
 
 function renderSellRecommendations(data) {
   const tbody = document.querySelector('#sellTable tbody');
-  renderTable(tbody, data, 8, (p) => `
+  renderTable(tbody, data, 9, (p) => `
     <tr>
       <td><span class="pos-badge">${escapeHtml(p.position)}</span></td>
       <td class="cell-muted">${escapeHtml(p.club)}</td>
       <td class="cell-primary">${escapeHtml(p.player)}</td>
       <td class="num">${formatMoney(p.current_price)}</td>
       <td class="num">${p.profit === null || p.profit === undefined ? '<span class="cell-muted">—</span>' : formatDelta(p.profit)}</td>
+      <td class="num">${p.offer_price ? `<span class="pill prob-high">${formatMoney(p.offer_price)}</span>` : '<span class="cell-muted">—</span>'}</td>
       <td class="num">${startPctCell(p.probability)}</td>
       <td>${statusPill(p.status)}</td>
       <td class="num">${scoreBadge(p.score)}</td>
     </tr>
   `);
+
+  // The offers feature is easy to mistake for broken/missing when it's
+  // just quiet — say outright whether any live offers exist right now
+  // instead of leaving the whole Offer column blank with no explanation.
+  const offerCount = (data || []).filter((p) => p.offer_price).length;
+  const meta = document.getElementById('sellMeta');
+  if (meta) {
+    meta.textContent = offerCount > 0
+      ? `Your roster, ranked by bench risk and banked profit — ${offerCount} live offer${offerCount === 1 ? '' : 's'} right now`
+      : 'Your roster, ranked by bench risk and banked profit — no pending offers on your players right now';
+  }
 }
 
 // Team valuations doubles as the roster browser: click a team row to

@@ -14,6 +14,7 @@ OUT_DIR = Path("ledgers")  # folder to write per-team JSONs (created if missing)
 # Helpers
 # -----------------------
 money_pattern_inline = re.compile(r"([\d\.]+(?:,\d{3})*|\d+)\s*€")
+bids_pattern_inline = re.compile(r"^(\d+)\s*licitacions")
 ROLE_TOKENS = {"PT","DF","MC","DV","E","/"}
 
 def parse_amount(amount_str: str) -> float:
@@ -204,6 +205,143 @@ def compute_trades(ledger: dict) -> dict:
                 }
         results[team] = {"realized": realized, "open": open_summary}
     return results
+
+
+def compute_bid_history(posts: list) -> list[dict]:
+    """Extract per-transaction market bid activity (price paid vs. number of
+    competing bids) from the same "Fitxat per" market-signing entries used
+    by compute_balances()'s block 3, to later power a "how much should I
+    bid" recommendation.
+
+    Token layout confirmed against real posts before writing this (see the
+    the class of bug documented in git history where offsets assumed for
+    one post shape silently broke on the other): every "Fitxat per" entry
+    is followed by [team, "Per N €", ...], and the item right after the
+    price is either a "N licitacions" string or — when a signing drew no
+    competing bids — that string is omitted entirely and the sequence
+    jumps straight to the next stat/points number. There is no literal
+    "0 licitacions" anywhere in the scraped data, confirming the omission
+    is how zero-bid signings are represented rather than an inconsistent
+    format. Since a missing token is ambiguous between "zero bids" and
+    "some other omitted count", transactions without an explicit
+    "N licitacions" string are skipped rather than guessed at — hence
+    "one row per transaction that has a parseable bid count".
+
+    The player name sits immediately before "Fitxat per" (post[idx-1]);
+    walking further back collects the position token(s) that precede it.
+    Positions are joined with "/" regardless of whether the raw scrape
+    happened to include a literal "/" token between them (it does for
+    two-position players but not for the rarer three-position ones, e.g.
+    a real "DV","DF","MC" triple with no separator token in between) —
+    normalizing here keeps the output format consistent either way.
+
+    Returns a list of {"player": str, "price": float, "bids": int,
+    "position": str|None} dicts, one per parseable transaction.
+    """
+    transactions = []
+    for post in posts:
+        if not any(isinstance(x, str) and "Fitxat per" in x for x in post):
+            continue
+        for idx, item in enumerate(post):
+            if not (isinstance(item, str) and "Fitxat per" in item):
+                continue
+
+            amount_str = post[idx + 2] if idx + 2 < len(post) and isinstance(post[idx + 2], str) else None
+            if not amount_str:
+                continue
+            m = money_pattern_inline.search(amount_str)
+            if not m:
+                continue
+            price = parse_amount(m.group(1))
+
+            bids = None
+            if idx + 3 < len(post) and isinstance(post[idx + 3], str):
+                bm = bids_pattern_inline.match(post[idx + 3].strip())
+                if bm:
+                    bids = int(bm.group(1))
+            if bids is None:
+                # No "N licitacions" token present — ambiguous, skip rather
+                # than assume zero (see docstring).
+                continue
+
+            player = post[idx - 1].strip() if idx - 1 >= 0 and isinstance(post[idx - 1], str) else None
+            if not player:
+                continue
+
+            position = None
+            role_tokens = []
+            j = idx - 2
+            while j >= 0 and isinstance(post[j], str) and post[j].strip() in ROLE_TOKENS:
+                tok = post[j].strip()
+                if tok != "/":
+                    role_tokens.append(tok)
+                j -= 1
+            if role_tokens:
+                position = "/".join(reversed(role_tokens))
+
+            transactions.append({
+                "player": player,
+                "price": price,
+                "bids": bids,
+                "position": position,
+            })
+
+    return transactions
+
+
+# Price-range buckets for the bid-count aggregation below. Picked to give a
+# reasonable spread against real league data (roughly six figures to eight
+# figures of euros) rather than dumping most transactions into one bucket.
+BID_BUCKETS = [
+    (0, 500_000, "<500k"),
+    (500_000, 1_000_000, "500k-1M"),
+    (1_000_000, 3_000_000, "1M-3M"),
+    (3_000_000, 5_000_000, "3M-5M"),
+    (5_000_000, 10_000_000, "5M-10M"),
+    (10_000_000, float("inf"), "10M+"),
+]
+
+
+def _bucket_label(price: float) -> str:
+    for lo, hi, label in BID_BUCKETS:
+        if lo <= price < hi:
+            return label
+    return BID_BUCKETS[-1][2]
+
+
+def compute_bid_buckets(transactions: list[dict]) -> list[dict]:
+    """Aggregate compute_bid_history() rows into price-range buckets with
+    count/avg/median bid stats — a coarse first look at "how many bids does
+    a player in this price range typically draw", ahead of a later
+    recommender that presumably works from the raw per-transaction table
+    for anything more precise.
+
+    Returns a list of {"bucket": str, "count": int, "avg_bids": float,
+    "median_bids": float, "min_price": float, "max_price": float} dicts,
+    ordered as in BID_BUCKETS, omitting empty buckets.
+    """
+    by_bucket = defaultdict(list)
+    for t in transactions:
+        by_bucket[_bucket_label(t["price"])].append(t)
+
+    rows = []
+    for lo, hi, label in BID_BUCKETS:
+        txs = by_bucket.get(label)
+        if not txs:
+            continue
+        bids = sorted(t["bids"] for t in txs)
+        n = len(bids)
+        median = bids[n // 2] if n % 2 else (bids[n // 2 - 1] + bids[n // 2]) / 2
+        prices = [t["price"] for t in txs]
+        rows.append({
+            "bucket": label,
+            "count": n,
+            "avg_bids": sum(bids) / n,
+            "median_bids": median,
+            "min_price": min(prices),
+            "max_price": max(prices),
+        })
+    return rows
 
 
 if __name__ == "__main__":

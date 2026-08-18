@@ -37,9 +37,10 @@ def migrate_csv_to_db(days_behind=0):
         name TEXT,
         price REAL,
         change REAL,
+        status TEXT,
         owner TEXT,
         last_sale TEXT,
-        demand INTEGER,
+        recent_pts REAL,
         this_season_pts REAL,
         last_season_pts REAL,
         scraped_at TIMESTAMP
@@ -108,11 +109,17 @@ def migrate_csv_to_db(days_behind=0):
 
             df['scraped_at'] = ((datetime.now()-timedelta(days=days_behind))).strftime('%Y-%m-%d %H:%M:%S')
 
-            # Select only the columns we need
+            # Select only the columns we need. Older CSVs (pre-rename) won't
+            # have 'change'/'status'/'recent_pts', or will still have the
+            # old 'demand' name — handle either shape gracefully.
             if 'change' not in df.columns:
-                df['change'] = 0  # older CSVs won't have this column
-            df = df[['position', 'club', 'name', 'price', 'change', 'owner',
-                    'last_sale', 'demand', 'this_season_pts',
+                df['change'] = 0
+            if 'status' not in df.columns:
+                df['status'] = 'Fit'
+            if 'recent_pts' not in df.columns:
+                df['recent_pts'] = df['demand'] if 'demand' in df.columns else 0
+            df = df[['position', 'club', 'name', 'price', 'change', 'status', 'owner',
+                    'last_sale', 'recent_pts', 'this_season_pts',
                     'last_season_pts', 'scraped_at']]
             
             df.to_sql('market', conn, if_exists='append', index=False)

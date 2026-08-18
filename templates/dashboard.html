@@ -37,9 +37,9 @@
                     <table id="standingsTable">
                         <thead>
                             <tr>
-                                <th>Pos</th>
-                                <th>Team</th>
-                                <th class="num">Points</th>
+                                <th data-sort="pos">Pos</th>
+                                <th data-sort="team">Team</th>
+                                <th class="num" data-sort="points">Points</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -58,16 +58,16 @@
                     <table id="teamsTable">
                         <thead>
                             <tr>
-                                <th>Team</th>
-                                <th class="num">Players</th>
-                                <th class="num">GK</th>
-                                <th class="num">DEF</th>
-                                <th class="num">MID</th>
-                                <th class="num">FWD</th>
-                                <th class="num">Total value</th>
-                                <th class="num">Value Δ</th>
-                                <th class="num">Balance</th>
-                                <th class="num">Max bid</th>
+                                <th data-sort="team">Team</th>
+                                <th class="num" data-sort="players">Players</th>
+                                <th class="num" data-sort="positions.GK">GK</th>
+                                <th class="num" data-sort="positions.DEF">DEF</th>
+                                <th class="num" data-sort="positions.MID">MID</th>
+                                <th class="num" data-sort="positions.FWD">FWD</th>
+                                <th class="num" data-sort="total_value">Total value</th>
+                                <th class="num" data-sort="value_change">Value Δ</th>
+                                <th class="num" data-sort="balance">Balance</th>
+                                <th class="num" data-sort="max_bid">Max bid</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -85,15 +85,15 @@
                     <table id="marketTable">
                         <thead>
                             <tr>
-                                <th>Pos</th>
-                                <th>Club</th>
-                                <th>Name</th>
-                                <th class="num">Price</th>
-                                <th class="num">Change</th>
-                                <th>Status</th>
-                                <th class="num">Points</th>
-                                <th class="num">Form</th>
-                                <th class="num">Last szn</th>
+                                <th data-sort="position">Pos</th>
+                                <th data-sort="club">Club</th>
+                                <th data-sort="name">Name</th>
+                                <th class="num" data-sort="price">Price</th>
+                                <th class="num" data-sort="change">Change</th>
+                                <th data-sort="status">Status</th>
+                                <th class="num" data-sort="this_season_pts">Points</th>
+                                <th class="num" data-sort="recent_pts">Form</th>
+                                <th class="num" data-sort="last_season_pts">Last szn</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -111,12 +111,12 @@
                     <table id="holdingsTable">
                         <thead>
                             <tr>
-                                <th>Pos</th>
-                                <th>Club</th>
-                                <th>Name</th>
-                                <th class="num">Bought for</th>
-                                <th class="num">Current price</th>
-                                <th class="num">Profit</th>
+                                <th data-sort="position">Pos</th>
+                                <th data-sort="club">Club</th>
+                                <th data-sort="player">Name</th>
+                                <th class="num" data-sort="buy_price">Bought for</th>
+                                <th class="num" data-sort="current_price">Current price</th>
+                                <th class="num" data-sort="profit">Profit</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -132,10 +132,10 @@
                     <table id="salesTable">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th class="num">Bought for</th>
-                                <th class="num">Sold for</th>
-                                <th class="num">Profit</th>
+                                <th data-sort="player">Name</th>
+                                <th class="num" data-sort="buy_price">Bought for</th>
+                                <th class="num" data-sort="sell_price">Sold for</th>
+                                <th class="num" data-sort="profit">Profit</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -154,14 +154,14 @@
                     <table id="buyTable">
                         <thead>
                             <tr>
-                                <th>Pos</th>
-                                <th>Club</th>
-                                <th>Name</th>
-                                <th class="num">Price</th>
-                                <th class="num">Start %</th>
-                                <th class="num">Score</th>
-                                <th>Squad need</th>
-                                <th class="num">Suggested bid</th>
+                                <th data-sort="position">Pos</th>
+                                <th data-sort="club">Club</th>
+                                <th data-sort="name">Name</th>
+                                <th class="num" data-sort="price">Price</th>
+                                <th class="num" data-sort="start_pct">Start %</th>
+                                <th class="num" data-sort="score">Score</th>
+                                <th data-sort="squad_need">Squad need</th>
+                                <th class="num" data-sort="suggested_bid">Suggested bid</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -178,14 +178,14 @@
                     <table id="sellTable">
                         <thead>
                             <tr>
-                                <th>Pos</th>
-                                <th>Club</th>
-                                <th>Name</th>
-                                <th class="num">Current price</th>
-                                <th class="num">Profit</th>
-                                <th class="num">Start %</th>
-                                <th>Status</th>
-                                <th class="num">Score</th>
+                                <th data-sort="position">Pos</th>
+                                <th data-sort="club">Club</th>
+                                <th data-sort="player">Name</th>
+                                <th class="num" data-sort="current_price">Current price</th>
+                                <th class="num" data-sort="profit">Profit</th>
+                                <th class="num" data-sort="start_pct">Start %</th>
+                                <th data-sort="status">Status</th>
+                                <th class="num" data-sort="score">Score</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

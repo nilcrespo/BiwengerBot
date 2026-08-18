@@ -104,6 +104,103 @@ function rankBadge(pos) {
   return `<span class="rank ${cls}">${escapeHtml(pos)}</span>`;
 }
 
+// ---------- Sorting ----------
+// Every table is sortable by clicking any column header — data is kept
+// in memory (tableState) so re-sorting never needs a refetch, and each
+// header's data-sort attribute names the exact field to sort by
+// (supports "a.b" for nested fields, e.g. teams' positions.GK).
+
+function getByPath(obj, path) {
+  return path.split('.').reduce((o, k) => (o === null || o === undefined ? undefined : o[k]), obj);
+}
+
+// Values arrive as raw JSON (numbers, null) or already-formatted strings
+// ("83%", "Fit") depending on the field — strip the noise so both sort
+// numerically when they're numeric at heart.
+function parseSortValue(v) {
+  if (v === null || v === undefined || v === '') return null;
+  if (typeof v === 'number') return v;
+  if (typeof v === 'boolean') return v ? 1 : 0;
+  const stripped = String(v).replace(/[€,%]/g, '').trim();
+  if (stripped !== '' && !Number.isNaN(Number(stripped))) return Number(stripped);
+  return String(v).toLowerCase();
+}
+
+function sortData(data, key, dir) {
+  const mult = dir === 'asc' ? 1 : -1;
+  return [...data].sort((a, b) => {
+    const av = parseSortValue(getByPath(a, key));
+    const bv = parseSortValue(getByPath(b, key));
+    if (av === null && bv === null) return 0;
+    if (av === null) return 1;   // nulls always sort last, regardless of direction
+    if (bv === null) return -1;
+    if (av < bv) return -1 * mult;
+    if (av > bv) return 1 * mult;
+    return 0;
+  });
+}
+
+const tableState = {};
+
+function updateSortIndicators(tableId) {
+  const st = tableState[tableId];
+  document.querySelectorAll(`#${tableId} thead th[data-sort]`).forEach((th) => {
+    th.classList.remove('sort-asc', 'sort-desc');
+    if (th.dataset.sort === st.sortKey) th.classList.add(st.sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
+  });
+}
+
+function applySort(tableId) {
+  const st = tableState[tableId];
+  const sorted = st.sortKey ? sortData(st.data, st.sortKey, st.sortDir) : st.data;
+  st.renderFn(sorted);
+  updateSortIndicators(tableId);
+}
+
+// renderFn takes the (already sorted) data array and draws the tbody.
+function registerSortable(tableId, renderFn, defaultKey, defaultDir = 'desc') {
+  tableState[tableId] = { data: [], sortKey: defaultKey, sortDir: defaultDir, renderFn };
+  document.querySelectorAll(`#${tableId} thead th[data-sort]`).forEach((th) => {
+    th.addEventListener('click', () => {
+      const st = tableState[tableId];
+      const key = th.dataset.sort;
+      st.sortDir = st.sortKey === key && st.sortDir === 'asc' ? 'desc' : (st.sortKey === key ? 'asc' : 'desc');
+      st.sortKey = key;
+      applySort(tableId);
+    });
+  });
+}
+
+function setTableData(tableId, data) {
+  tableState[tableId].data = data || [];
+  applySort(tableId);
+}
+
+// Roster tables are a special case: one instance per team, created fresh
+// each time an accordion row expands, so sort state is tracked per team
+// id instead of per (static) table id, and re-sorting re-renders just
+// that team's rows via delegated clicks rather than a registered table.
+const rosterSortState = {};
+
+function rosterTableHtml(teamId, players) {
+  const st = rosterSortState[teamId] || { key: 'price', dir: 'desc' };
+  const sorted = st.key ? sortData(players, st.key, st.dir) : players;
+  return `<table class="roster-table" data-team-id="${escapeHtml(teamId)}">${renderRosterRows(sorted, st)}</table>`;
+}
+
+document.addEventListener('click', (e) => {
+  const th = e.target.closest('.roster-table th[data-sort]');
+  if (!th) return;
+  const table = th.closest('table.roster-table');
+  const teamId = table.dataset.teamId;
+  const key = th.dataset.sort;
+  const prev = rosterSortState[teamId] || { key: 'price', dir: 'desc' };
+  const dir = prev.key === key && prev.dir === 'asc' ? 'desc' : (prev.key === key ? 'asc' : 'desc');
+  rosterSortState[teamId] = { key, dir };
+  const players = (state.rostersByTeamId || {})[teamId] || [];
+  table.outerHTML = rosterTableHtml(teamId, players);
+});
+
 // ---------- Table rendering ----------
 
 function renderTable(tbodyEl, data, colCount, rowFn) {
@@ -231,16 +328,22 @@ function renderSellRecommendations(data) {
 
 // Team valuations doubles as the roster browser: click a team row to
 // expand its squad inline instead of a separate dropdown-driven section.
-function renderRosterRows(players) {
-  if (!players || players.length === 0) {
-    return `<tr><td colspan="8" class="roster-empty">No roster data</td></tr>`;
-  }
+function renderRosterRows(players, sortState) {
+  const sortCls = (key) => (sortState && sortState.key === key ? `sort-${sortState.dir}` : '');
   const head = `
     <tr class="roster-head">
-      <th>Pos</th><th>Club</th><th>Name</th>
-      <th class="num">Price</th><th class="num">Change</th><th class="num">Points</th>
-      <th class="num">Pts/match</th><th>Status</th>
+      <th data-sort="position" class="${sortCls('position')}">Pos</th>
+      <th data-sort="club" class="${sortCls('club')}">Club</th>
+      <th data-sort="name" class="${sortCls('name')}">Name</th>
+      <th class="num ${sortCls('price')}" data-sort="price">Price</th>
+      <th class="num ${sortCls('change')}" data-sort="change">Change</th>
+      <th class="num ${sortCls('this_season_pts')}" data-sort="this_season_pts">Points</th>
+      <th class="num ${sortCls('points_per_match')}" data-sort="points_per_match">Pts/match</th>
+      <th data-sort="status" class="${sortCls('status')}">Status</th>
     </tr>`;
+  if (!players || players.length === 0) {
+    return head + `<tr><td colspan="8" class="roster-empty">No roster data</td></tr>`;
+  }
   const rows = players.map((p) => `
     <tr>
       <td><span class="pos-badge">${escapeHtml(p.position)}</span></td>
@@ -280,7 +383,7 @@ function renderTeamValuations(teams, rostersByTeamId) {
     </tr>
     <tr class="roster-detail" hidden>
       <td colspan="10">
-        <table class="roster-table">${renderRosterRows(roster)}</table>
+        ${rosterTableHtml(t.team_id, roster)}
       </td>
     </tr>
   `;
@@ -304,6 +407,14 @@ function groupRostersByTeam(teamPlayers) {
   return grouped;
 }
 
+// renderTeamValuations needs rostersByTeamId as a second argument, unlike
+// every other sortable table's single-arg renderFn(data) — this wrapper
+// closes over the current state so registerSortable's uniform signature
+// still works for it.
+function renderTeamsWrapper(sortedTeams) {
+  renderTeamValuations(sortedTeams, state.rostersByTeamId || {});
+}
+
 // ---------- App state & data loading ----------
 // Always shows the most recent scrape — no date navigation. A picker over
 // static daily snapshots wasn't actually useful without trend context;
@@ -312,6 +423,7 @@ function groupRostersByTeam(teamPlayers) {
 
 const state = {
   date: window.__selectedDate || (window.__availableDates || [])[0] || null,
+  rostersByTeamId: {},
 };
 
 function setLoading(isLoading) {
@@ -347,13 +459,14 @@ function loadData() {
     })
     .then((data) => {
       if (data.error) throw new Error(data.error);
-      renderStandings(data.standings);
-      renderMarket(data.market);
-      renderTeamValuations(data.teams, groupRostersByTeam(data.team_players));
-      renderHoldings(data.my_holdings);
-      renderSales(data.my_sales);
-      renderBuyRecommendations(data.buy_recommendations);
-      renderSellRecommendations(data.sell_recommendations);
+      state.rostersByTeamId = groupRostersByTeam(data.team_players);
+      setTableData('standingsTable', data.standings);
+      setTableData('marketTable', data.market);
+      setTableData('teamsTable', data.teams);
+      setTableData('holdingsTable', data.my_holdings);
+      setTableData('salesTable', data.my_sales);
+      setTableData('buyTable', data.buy_recommendations);
+      setTableData('sellTable', data.sell_recommendations);
     })
     .catch((err) => {
       showError(`Couldn't load data: ${err.message}`);
@@ -385,7 +498,20 @@ function initTabs() {
   });
 }
 
+function initSortableTables() {
+  registerSortable('standingsTable', renderStandings, 'pos', 'asc');
+  // Explicit default: biggest value gains first, so the market tab opens
+  // on "what's rising" rather than an arbitrary price ordering.
+  registerSortable('marketTable', renderMarket, 'change', 'desc');
+  registerSortable('teamsTable', renderTeamsWrapper, 'total_value', 'desc');
+  registerSortable('holdingsTable', renderHoldings, 'profit', 'desc');
+  registerSortable('salesTable', renderSales, 'profit', 'desc');
+  registerSortable('buyTable', renderBuyRecommendations, 'score', 'desc');
+  registerSortable('sellTable', renderSellRecommendations, 'score', 'desc');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initTabs();
+  initSortableTables();
   loadData();
 });

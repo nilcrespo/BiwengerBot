@@ -297,6 +297,30 @@ th.num, td.num {
   text-align: right;
 }
 
+th[data-sort] {
+  cursor: pointer;
+  user-select: none;
+}
+
+th[data-sort]:hover {
+  color: var(--text);
+}
+
+th[data-sort].sort-asc::after,
+th[data-sort].sort-desc::after {
+  margin-left: 4px;
+  color: var(--accent);
+  font-size: 9px;
+}
+
+th[data-sort].sort-asc::after {
+  content: "▲";
+}
+
+th[data-sort].sort-desc::after {
+  content: "▼";
+}
+
 tbody td {
   padding: var(--space-2) var(--space-4);
   border-bottom: 1px solid var(--border-subtle);

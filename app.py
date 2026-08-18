@@ -315,23 +315,36 @@ def get_data():
     buy.loc[:, 'bucket_avg_bids'] = buy['bid_bucket'].map(bucket_avg_bids)
     buy.loc[:, 'bucket_sample'] = buy['bid_bucket'].map(bucket_sample_size)
     buy.loc[:, 'suggested_bid'] = buy['price'].apply(_suggested_bid)
-    buy_recommendations = buy.sort_values('score', ascending=False).head(12)
+    # A relative 0-100 score only ever measures "best of today's market" —
+    # even a mediocre snapshot has a top scorer. That's fine for ranking,
+    # but not for deciding whether a suggested bid should exist at all:
+    # a real chance of actually starting (>=40%) is a hard requirement,
+    # and the score itself must clear a real quality bar, not just be the
+    # least-bad option on a thin day.
+    buy_candidates = buy[buy['start_pct'] >= 40]
+    buy_recommendations = buy_candidates[buy_candidates['score'] >= 45].sort_values('score', ascending=False).head(12)
 
     # --- Sell recommender: my full roster, ranked by a mix of bench risk
     # (low starting-XI probability) and profit already banked (where a
     # purchase price is known — original-squad players have none, so they
-    # rank purely on bench risk instead of being excluded). ---
+    # rank purely on bench risk instead of being excluded). A live
+    # purchase offer from another manager (see scraper.get_my_offers) is
+    # the single strongest signal available — someone is offering real
+    # money right now — so it overrides the heuristic score outright. ---
     sell_pool = pd.read_sql(
         f"""
         SELECT tp.name AS player, tp.club, tp.position, tp.price AS current_price,
-               tp.this_season_pts, tp.last_season_pts, tp.status, op.buy_price
+               tp.this_season_pts, tp.last_season_pts, tp.status, op.buy_price,
+               po.price AS offer_price
         FROM team_players tp
         JOIN team_balance tb ON tb.team_id = tp.team_id AND tb.is_me = 1 AND tb.scraped_at LIKE ?
         LEFT JOIN open_positions op ON op.team_id = tp.team_id AND op.scraped_at LIKE ?
           AND {_accent_fold_sql('op.player')} = {_accent_fold_sql('tp.name')}
+        LEFT JOIN player_offers po ON po.scraped_at LIKE ?
+          AND {_accent_fold_sql('po.player_name')} = {_accent_fold_sql('tp.name')}
         WHERE tp.scraped_at LIKE ?
         """,
-        conn, params=(f"{date}%", f"{date}%", f"{date}%")
+        conn, params=(f"{date}%", f"{date}%", f"{date}%", f"{date}%")
     )
     sell_pool = _attach_probabilities(sell_pool, prob_df, name_col='player', club_col='club')
     sell_pool.loc[:, 'start_pct'] = sell_pool['probability'].apply(_parse_pct)
@@ -339,12 +352,30 @@ def get_data():
     sell_pool.loc[:, 'profit'] = sell_pool['current_price'] - sell_pool['buy_price']
     sell_pool.loc[:, 'profit_pct'] = (sell_pool['profit'] / sell_pool['buy_price']).where(sell_pool['buy_price'] > 0)
     sell_pool.loc[:, 'injured'] = sell_pool['status'].fillna('').str.startswith(('Injured', 'Doubtful'))
+    sell_pool.loc[:, 'has_offer'] = sell_pool['offer_price'].notna()
     sell_pool.loc[:, 'score'] = (
         0.5 * _normalize(sell_pool['bench_score']) +
         0.4 * _normalize(sell_pool['profit_pct'].fillna(0).clip(lower=0)) +
         0.1 * sell_pool['injured'].map({True: 100.0, False: 0.0})
     ).round(1)
-    sell_recommendations = sell_pool.sort_values('score', ascending=False)
+    sell_pool.loc[sell_pool['has_offer'], 'score'] = 100.0
+
+    # Only surface sells that actually make sense: a live cash offer
+    # (always worth a look), meaningful banked profit on a player who
+    # isn't nailed to the starting XI, a clear loss worth cutting before
+    # it drops further, or bench fodder with no games and no cost basis
+    # to protect. A nailed-on starter (>=70% start odds) only qualifies
+    # if the payday is large enough to outweigh the points they'd score.
+    profit_pct = sell_pool['profit_pct']
+    is_starter = sell_pool['start_pct'] >= 70
+    worth_selling = (
+        sell_pool['has_offer']
+        | (profit_pct.notna() & (profit_pct >= 0.15) & ~is_starter)
+        | (profit_pct.notna() & (profit_pct <= -0.15))
+        | (sell_pool['buy_price'].isna() & (sell_pool['start_pct'] <= 20))
+        | (profit_pct.notna() & (profit_pct >= 0.5))
+    )
+    sell_recommendations = sell_pool[worth_selling].sort_values('score', ascending=False)
 
     # --- My trades: current holdings (unrealized profit) and completed
     # sales (realized profit), for the "My Trades" tab. Only meaningful

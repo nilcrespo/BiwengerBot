@@ -350,6 +350,26 @@ def migrate_csv_to_db(days_behind=0):
         except Exception as e:
             print(f"Error computing team balances/trades: {str(e)}")
 
+    # Pending purchase offers on my players (see scraper.get_my_offers).
+    # Independent of unique_posts.json, so this loads even when the forum
+    # ledger step above is skipped/fails.
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS player_offers (
+        player_id INTEGER,
+        player_name TEXT,
+        price REAL,
+        date INTEGER,
+        until INTEGER,
+        raw_json TEXT,
+        scraped_at TIMESTAMP
+    )''')
+    conn.commit()
+    if os.path.exists('csvs/others/my_offers.csv'):
+        offers_df = pd.read_csv('csvs/others/my_offers.csv')
+        if len(offers_df):
+            offers_df.to_sql('player_offers', conn, if_exists='append', index=False)
+        print(f"→ Migrated {len(offers_df)} pending player offers")
+
     conn.close()
     print("\nMigration complete!")
 

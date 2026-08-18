@@ -541,6 +541,87 @@ def get_my_team_balance(page) -> dict:
     print(f"💶 My balance: €{balance:,.0f}")
     return {"balance": balance, "raw": raw, "scraped_at": pd.Timestamp.now().strftime("%Y-%m-%d")}
 
+def get_player_id_lookup() -> dict:
+    """Fetch Biwenger's public La Liga player database (id -> name), used
+    to resolve the numeric playerID references in /api/v2/user's market
+    and offers arrays back to a name we can join against our own
+    name-based tables. Public, no auth needed — the same cf.biwenger.com
+    endpoint the app itself loads to render player cards.
+    """
+    import json
+    import urllib.request
+
+    url = "https://cf.biwenger.com/api/v2/competitions/la-liga/data?lang=en&score=5"
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": DESKTOP_CHROME_UA})
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            data = json.load(resp)
+        players = data.get("data", {}).get("players", {})
+        return {int(pid): p.get("name") for pid, p in players.items()}
+    except Exception as e:
+        print(f"⚠️ Could not fetch player id lookup: {e}")
+        return {}
+
+def get_my_offers(page) -> list:
+    """Scrape pending purchase offers other managers (human or AI-run
+    rivals) have placed on the logged-in user's players.
+
+    Distinct from the market's own passive "on sale" listing — every
+    owned player already has one of those by default, at roughly market
+    value, which we already capture via team_players.price. An entry
+    here means someone has actively offered real money for a specific
+    player right now, which the sell recommender should treat as a much
+    stronger signal than any heuristic score.
+
+    The app's own /team page requests this via
+    /api/v2/user?fields=...,offers,... with a bearer token attached by
+    its own HTTP client. Rather than reimplementing that auth flow,
+    this captures the token (and league/user headers) off the real
+    request the page makes, then reuses them for one follow-up,
+    narrower request asking only for `offers`.
+
+    As of writing, this account has zero pending offers, so the exact
+    shape of a populated offer object is unverified beyond what
+    Biwenger's market entries look like (playerID, price, date, until).
+    Every field on each raw offer is preserved as-is (not just a
+    hand-picked subset) so nothing is lost once real examples start
+    showing up — check the raw_json column in bad-scrape cases.
+    """
+    captured_headers = {}
+
+    def _capture_headers(req):
+        if "api/v2/user?fields" in req.url and not captured_headers:
+            captured_headers.update({
+                k: v for k, v in req.headers.items()
+                if k in ("authorization", "x-version", "x-lang", "x-user", "x-league", "accept", "accept-language")
+            })
+
+    page.on("request", _capture_headers)
+    try:
+        page.goto("https://biwenger.as.com/team", wait_until="networkidle", timeout=20000)
+        page.wait_for_timeout(1000)
+    finally:
+        page.remove_listener("request", _capture_headers)
+
+    if not captured_headers:
+        print("⚠️ Could not capture auth headers for offers request")
+        return []
+
+    try:
+        resp = page.request.get(
+            "https://biwenger.as.com/api/v2/user?fields=offers",
+            headers=captured_headers,
+        )
+        if resp.status != 200:
+            print(f"⚠️ Offers request failed: HTTP {resp.status}")
+            return []
+        offers = resp.json().get("data", {}).get("offers", []) or []
+        print(f"📨 {len(offers)} pending offer(s) on my players")
+        return offers
+    except Exception as e:
+        print(f"⚠️ Could not fetch offers: {e}")
+        return []
+
 def extract_market_players(page) -> pd.DataFrame:
     """Extract player data from the market table view"""
     print("\nExtracting market players...")
@@ -833,6 +914,24 @@ def run(playwright: Playwright) -> None:
     my_balance = get_my_team_balance(page)
     if my_balance:
         pd.DataFrame([my_balance]).to_csv("csvs/others/my_balance.csv", index=False)
+
+    # Pending purchase offers on my players + the id->name lookup needed
+    # to resolve them (see get_my_offers' docstring — offers reference
+    # players by Biwenger's internal numeric id, not by name).
+    offers = get_my_offers(page)
+    id_lookup = get_player_id_lookup() if offers else {}
+    offer_rows = [{
+        "player_id": o.get("playerID"),
+        "player_name": id_lookup.get(o.get("playerID")),
+        "price": o.get("price"),
+        "date": o.get("date"),
+        "until": o.get("until"),
+        "raw_json": json.dumps(o),
+        "scraped_at": pd.Timestamp.now().strftime("%Y-%m-%d"),
+    } for o in offers]
+    offer_columns = ["player_id", "player_name", "price", "date", "until", "raw_json", "scraped_at"]
+    pd.DataFrame(offer_rows, columns=offer_columns).to_csv("csvs/others/my_offers.csv", index=False)
+    print(f"Saved {len(offer_rows)} pending offers → my_offers.csv")
 
     # NOTE: extract_all_players() (full player database, not just market/rosters)
     # is intentionally left disabled here — nothing downstream consumes it yet

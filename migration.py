@@ -219,7 +219,7 @@ def migrate_csv_to_db(days_behind=0):
 
             with open(posts_path, encoding='utf-8') as f:
                 posts = json.load(f)
-            balances, _ledger = money_left.compute_balances(posts)
+            balances, ledger = money_left.compute_balances(posts)
 
             # Which team_id is mine, and what does Biwenger say my balance
             # actually is (ground truth for validation)?
@@ -260,8 +260,54 @@ def migrate_csv_to_db(days_behind=0):
                     status = "MATCH" if abs(diff) < 1 else f"MISMATCH (diff €{diff:,.0f})"
                     print(f"  ↳ balance validation for {mine['team_name']}: "
                           f"ledger=€{mine['ledger_balance']:,.0f} actual=€{actual_balance:,.0f} [{status}]")
+
+            # Trade history — reconstructed buy/sell pairs per player from
+            # the same ledger, for the "my purchases / profit" tab.
+            cursor.execute('''
+            CREATE TABLE IF NOT EXISTS realized_trades (
+                team_id TEXT,
+                team_name TEXT,
+                player TEXT,
+                buy_price REAL,
+                sell_price REAL,
+                profit REAL,
+                scraped_at TIMESTAMP
+            )''')
+            cursor.execute('''
+            CREATE TABLE IF NOT EXISTS open_positions (
+                team_id TEXT,
+                team_name TEXT,
+                player TEXT,
+                buy_price REAL,
+                count INTEGER,
+                scraped_at TIMESTAMP
+            )''')
+            conn.commit()
+
+            trades = money_left.compute_trades(ledger)
+            realized_rows, open_rows = [], []
+            for team_name, t in trades.items():
+                team_id = normalize_team_key(team_name)
+                for r in t["realized"]:
+                    realized_rows.append({
+                        'team_id': team_id, 'team_name': team_name,
+                        'player': r['player'], 'buy_price': r['buy_price'],
+                        'sell_price': r['sell_price'], 'profit': r['profit'],
+                        'scraped_at': now,
+                    })
+                for player, info in t["open"].items():
+                    open_rows.append({
+                        'team_id': team_id, 'team_name': team_name,
+                        'player': player, 'buy_price': info['buy_price'],
+                        'count': info['count'], 'scraped_at': now,
+                    })
+            if realized_rows:
+                pd.DataFrame(realized_rows).to_sql('realized_trades', conn, if_exists='append', index=False)
+            if open_rows:
+                pd.DataFrame(open_rows).to_sql('open_positions', conn, if_exists='append', index=False)
+            print(f"→ Migrated {len(realized_rows)} realized trades, {len(open_rows)} open positions")
         except Exception as e:
-            print(f"Error computing team balances: {str(e)}")
+            print(f"Error computing team balances/trades: {str(e)}")
 
     conn.close()
     print("\nMigration complete!")

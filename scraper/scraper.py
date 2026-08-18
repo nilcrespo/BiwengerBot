@@ -56,7 +56,17 @@ def login(page):
             pass
 
 def safe_get_attribute(locator, name, default="", timeout=1000):
-    """Safely get attribute with timeout handling"""
+    """Safely get attribute with timeout handling.
+
+    Many callers probe for elements that are conditionally rendered
+    (e.g. Angular *ngIf) and legitimately absent on most rows. Checking
+    count() first (instant, no wait) avoids paying the full `timeout`
+    on every row where the element simply isn't there — across a large
+    table that difference is the gap between a few seconds and several
+    minutes.
+    """
+    if locator.count() == 0:
+        return default
     try:
         locator.first.wait_for(state="attached", timeout=timeout)
         val = locator.first.get_attribute(name, timeout=timeout)
@@ -65,7 +75,9 @@ def safe_get_attribute(locator, name, default="", timeout=1000):
         return default
 
 def safe_inner_text(locator, default="", timeout=1000):
-    """Safely get inner text with timeout handling"""
+    """Safely get inner text with timeout handling (see safe_get_attribute)."""
+    if locator.count() == 0:
+        return default
     try:
         locator.first.wait_for(state="visible", timeout=timeout)
         txt = locator.first.inner_text(timeout=timeout)
@@ -565,8 +577,8 @@ def extract_market_players(page) -> pd.DataFrame:
     # Clean numerical columns
     numeric_cols = ["price", "demand", "this_season_pts", "last_season_pts"]
     for col in numeric_cols:
-        df[col] = df[col].str.replace(r"[^\d\.]", "", regex=True)
-        df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
+        cleaned = df[col].astype(str).str.replace(r"[^\d\.]", "", regex=True)
+        df.loc[:, col] = pd.to_numeric(cleaned, errors="coerce").fillna(0)
 
     filename = "csvs/market/market_players.csv"
     df.to_csv(filename, index=False)

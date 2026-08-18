@@ -2,9 +2,78 @@ from flask import Flask, render_template, request, jsonify
 import sqlite3
 import pandas as pd
 import os
+import unicodedata
 from datetime import datetime
 
 app = Flask(__name__)
+
+# ---------- Player <-> start-probability matching ----------
+# Biwenger (player/club names) and futbolfantasy.com (probability source)
+# don't always agree on how to write the same real person: accents differ
+# ("Atlético" vs "Atletico"), and some show a full name where the other
+# shows a bare surname ("Antonio Rudiger" vs "Rudiger"). Exact match after
+# accent-folding handles the first; a club-scoped surname/subset fallback
+# (accepted only when it resolves to exactly one candidate, never a guess
+# among several) handles the second.
+
+def _strip_accents(s):
+    if not s:
+        return ''
+    return ''.join(c for c in unicodedata.normalize('NFKD', str(s)) if not unicodedata.combining(c))
+
+def _normalize_name(s):
+    return _strip_accents(s).lower().strip()
+
+def _build_probability_lookup(prob_df):
+    """{normalized_club: [(normalized_name, probability), ...]}"""
+    lookup = {}
+    for _, row in prob_df.iterrows():
+        club = _normalize_name(row['team_name'])
+        lookup.setdefault(club, []).append((_normalize_name(row['player_name']), row['probability']))
+    return lookup
+
+def _find_probability(name, club, lookup):
+    candidates = lookup.get(_normalize_name(club))
+    if not candidates:
+        return None
+    target = _normalize_name(name)
+    target_tokens = target.split()
+    if not target_tokens:
+        return None
+
+    for cand_name, prob in candidates:
+        if cand_name == target:
+            return prob
+
+    # Surname match: most reliable single signal for "Rudiger" vs
+    # "Antonio Rudiger" — only trust it if exactly one squad-mate shares
+    # that surname.
+    target_last = target_tokens[-1]
+    surname_matches = [p for cn, p in candidates if cn.split() and cn.split()[-1] == target_last]
+    if len(surname_matches) == 1:
+        return surname_matches[0]
+
+    # Fallback: one name's full token set contained in the other's
+    # ("El Hilali" ⊂ "Omar El Hilali"). Same one-candidate-only guard.
+    target_set = set(target_tokens)
+    subset_matches = []
+    for cand_name, prob in candidates:
+        cand_set = set(cand_name.split())
+        shorter, longer = (target_set, cand_set) if len(target_set) <= len(cand_set) else (cand_set, target_set)
+        if shorter and shorter.issubset(longer):
+            subset_matches.append(prob)
+    if len(subset_matches) == 1:
+        return subset_matches[0]
+
+    return None
+
+def _attach_probabilities(df, prob_df, name_col='name', club_col='club'):
+    lookup = _build_probability_lookup(prob_df)
+    df = df.copy()
+    df['probability'] = df.apply(
+        lambda r: _find_probability(r[name_col], r[club_col], lookup) or '0%', axis=1
+    )
+    return df
 
 def get_available_dates():
     conn = sqlite3.connect('data/biwenger_data.db')
@@ -56,26 +125,14 @@ def get_data():
     # --- Market ---
     market = pd.read_sql(
         """
-        SELECT m.position, m.club, m.name, m.price, m.change, m.status, m.recent_pts,
-               m.this_season_pts, m.last_season_pts,
-               COALESCE(pp.probability, '0%') AS probability
-        FROM market m
-        LEFT JOIN (
-            SELECT player_name, team_name, probability
-            FROM player_probabilities
-            WHERE scraped_at LIKE ? AND probability != '0%'
-        ) pp
-          ON LOWER(
-               REPLACE(REPLACE(REPLACE(REPLACE(m.name,'á','a'),'é','e'),'í','i'),'ó','o')
-             ) = LOWER(
-               REPLACE(REPLACE(REPLACE(REPLACE(pp.player_name,'á','a'),'é','e'),'í','i'),'ó','o')
-             )
-         AND LOWER(REPLACE(m.club, ' ', '')) = LOWER(REPLACE(pp.team_name, ' ', ''))
-        WHERE m.scraped_at LIKE ?
-        ORDER BY m.price DESC
+        SELECT position, club, name, price, change, status, recent_pts,
+               this_season_pts, last_season_pts
+        FROM market
+        WHERE scraped_at LIKE ?
+        ORDER BY price DESC
         LIMIT 50
         """,
-        conn, params=(f"{date}%", f"{date}%")
+        conn, params=(f"{date}%",)
     )
 
     # --- Team valuations summary ---
@@ -127,28 +184,28 @@ def get_data():
 
     # --- Team players for every team (the dashboard expands rosters inline
     # under each team's row rather than filtering to one team at a time) ---
-    base_team_players_sql = """
-        SELECT tp.team_id, tp.position, tp.club, tp.name, tp.price, tp.change, tp.this_season_pts,
-               tp.points_per_match, tp.status,
-               COALESCE(pp.probability, '0%') AS probability
-        FROM team_players tp
-        LEFT JOIN (
-            SELECT player_name, team_name, probability
-            FROM player_probabilities
-            WHERE scraped_at LIKE ? AND probability != '0%'
-        ) pp
-          ON LOWER(
-               REPLACE(REPLACE(REPLACE(REPLACE(tp.name,'á','a'),'é','e'),'í','i'),'ó','o')
-             ) = LOWER(
-               REPLACE(REPLACE(REPLACE(REPLACE(pp.player_name,'á','a'),'é','e'),'í','i'),'ó','o')
-             )
-         AND LOWER(REPLACE(tp.club, ' ', '')) = LOWER(REPLACE(pp.team_name, ' ', ''))
-        WHERE tp.scraped_at LIKE ?
-    """
-    params = [f"{date}%", f"{date}%"]
-    base_team_players_sql += " ORDER BY tp.team_id, tp.price DESC"
+    team_players = pd.read_sql(
+        """
+        SELECT team_id, position, club, name, price, change, this_season_pts,
+               points_per_match, status
+        FROM team_players
+        WHERE scraped_at LIKE ?
+        ORDER BY team_id, price DESC
+        """,
+        conn, params=(f"{date}%",)
+    )
 
-    team_players = pd.read_sql(base_team_players_sql, conn, params=params)
+    # --- Start-probability matching (see _find_probability for why this
+    # is done in Python rather than a SQL join: exact match after accent
+    # folding, falling back to a club-scoped surname/subset match that's
+    # only trusted when it resolves to exactly one candidate) ---
+    prob_df = pd.read_sql(
+        "SELECT player_name, team_name, probability FROM player_probabilities "
+        "WHERE scraped_at LIKE ? AND probability != '0%'",
+        conn, params=(f"{date}%",)
+    )
+    market = _attach_probabilities(market, prob_df)
+    team_players = _attach_probabilities(team_players, prob_df)
 
     # --- My trades: current holdings (unrealized profit) and completed
     # sales (realized profit), for the "My Trades" tab. Only meaningful

@@ -306,6 +306,47 @@ def migrate_csv_to_db(days_behind=0):
             if open_rows:
                 pd.DataFrame(open_rows).to_sql('open_positions', conn, if_exists='append', index=False)
             print(f"→ Migrated {len(realized_rows)} realized trades, {len(open_rows)} open positions")
+
+            # Bid history — per-transaction market price vs. number of
+            # competing bids, plus a price-bucketed aggregate. Underlying
+            # data for a future "how much should I bid" recommender (not
+            # built here); raw rows in bid_history let that recommender
+            # work at whatever precision it needs, bid_history_buckets is
+            # a coarse precomputed summary for quick lookups.
+            cursor.execute('''
+            CREATE TABLE IF NOT EXISTS bid_history (
+                player TEXT,
+                position TEXT,
+                price REAL,
+                bids INTEGER,
+                scraped_at TIMESTAMP
+            )''')
+            cursor.execute('''
+            CREATE TABLE IF NOT EXISTS bid_history_buckets (
+                bucket TEXT,
+                count INTEGER,
+                avg_bids REAL,
+                median_bids REAL,
+                min_price REAL,
+                max_price REAL,
+                scraped_at TIMESTAMP
+            )''')
+            conn.commit()
+
+            bid_transactions = money_left.compute_bid_history(posts)
+            bid_rows = [{
+                'player': t['player'], 'position': t['position'],
+                'price': t['price'], 'bids': t['bids'], 'scraped_at': now,
+            } for t in bid_transactions]
+            if bid_rows:
+                pd.DataFrame(bid_rows).to_sql('bid_history', conn, if_exists='append', index=False)
+
+            bucket_rows = money_left.compute_bid_buckets(bid_transactions)
+            for b in bucket_rows:
+                b['scraped_at'] = now
+            if bucket_rows:
+                pd.DataFrame(bucket_rows).to_sql('bid_history_buckets', conn, if_exists='append', index=False)
+            print(f"→ Migrated {len(bid_rows)} bid history transactions across {len(bucket_rows)} price buckets")
         except Exception as e:
             print(f"Error computing team balances/trades: {str(e)}")
 

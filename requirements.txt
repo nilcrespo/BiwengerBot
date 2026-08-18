@@ -4,3 +4,5 @@ pandas==2.2.2
 plotly==5.15.0
 gunicorn==21.2.0
 matplotlib
+playwright==1.52.0
+python-dotenv

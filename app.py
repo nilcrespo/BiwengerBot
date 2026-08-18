@@ -60,10 +60,10 @@ def get_data():
     conn = sqlite3.connect('data/biwenger_data.db')
     conn.row_factory = sqlite3.Row
 
-    # --- League standings (keep original SQL; just rename for UI) ---
+    # --- League standings ---
     standings = pd.read_sql(
         """
-        SELECT position, name, points
+        SELECT position, name, points, is_me
         FROM teams
         WHERE scraped_at LIKE ?    -- match 'YYYY-MM-DD%'
         ORDER BY position
@@ -72,10 +72,11 @@ def get_data():
     )
     standings = standings.rename(columns={'position': 'pos', 'name': 'team'})
 
-    # --- Market (unchanged) ---
+    # --- Market ---
     market = pd.read_sql(
         """
-        SELECT m.position, m.club, m.name, m.price, m.demand, m.this_season_pts,
+        SELECT m.position, m.club, m.name, m.price, m.change, m.demand,
+               m.this_season_pts, m.last_season_pts,
                COALESCE(pp.probability, '0%') AS probability
         FROM market m
         LEFT JOIN (
@@ -101,14 +102,37 @@ def get_data():
     # the human-readable team name, not the normalized slug.
     teams_summary = pd.read_sql(
         """
-        SELECT team_id, MAX(team) AS team_name, COUNT(*) AS player_count, SUM(price) AS total_value
-        FROM team_players
-        WHERE scraped_at LIKE ?
-        GROUP BY team_id
+        SELECT tp.team_id, MAX(tp.team) AS team_name, COUNT(*) AS player_count,
+               SUM(tp.price) AS total_value,
+               MAX(tb.ledger_balance) AS balance,
+               MAX(tb.is_me) AS is_me
+        FROM team_players tp
+        LEFT JOIN team_balance tb
+          ON tb.team_id = tp.team_id AND tb.scraped_at LIKE ?
+        WHERE tp.scraped_at LIKE ?
+        GROUP BY tp.team_id
         ORDER BY total_value DESC
         """,
+        conn, params=(f"{date}%", f"{date}%")
+    )
+
+    # Position breakdown per team (GK/DEF/MID/FWD counts) — dual-position
+    # players ("Defender/Midfielder") count toward each position they cover.
+    positions_df = pd.read_sql(
+        "SELECT team_id, position FROM team_players WHERE scraped_at LIKE ?",
         conn, params=(f"{date}%",)
     )
+    POSITION_LABELS = {'Goalkeeper': 'GK', 'Defender': 'DEF', 'Midfielder': 'MID', 'Forward': 'FWD'}
+    pos_counts = {}
+    for _, row in positions_df.iterrows():
+        counts = pos_counts.setdefault(row['team_id'], {'GK': 0, 'DEF': 0, 'MID': 0, 'FWD': 0})
+        for token in str(row['position']).split('/'):
+            label = POSITION_LABELS.get(token.strip())
+            if label:
+                counts[label] += 1
+
+    teams_summary = teams_summary.copy()
+    teams_summary.loc[:, 'positions'] = teams_summary['team_id'].map(pos_counts)
     teams_summary = teams_summary.drop(columns=['team_id']).rename(
         columns={'team_name': 'team', 'player_count': 'players'}
     )

@@ -14,6 +14,31 @@ function formatNumber(num) {
   return n.toLocaleString('en-US', { maximumFractionDigits: 1 });
 }
 
+// A delta (day-over-day price change) — sign is the whole point, so show
+// an explicit +/-.
+function formatDelta(num, { hideZero = false } = {}) {
+  if (num === undefined || num === null || num === '') return '—';
+  const n = parseFloat(num);
+  if (Number.isNaN(n)) return '—';
+  if (n === 0) return hideZero ? '<span class="cell-muted">—</span>' : '€0';
+  const cls = n > 0 ? 'money-pos' : 'money-neg';
+  const sign = n > 0 ? '+' : '−';
+  const abs = Math.abs(n).toLocaleString('en-US', { maximumFractionDigits: 0 });
+  return `<span class="${cls}">${sign}€${abs}</span>`;
+}
+
+// An absolute balance — color communicates sign (red = in the red), but
+// no +/- prefix since it isn't a delta.
+function formatBalance(num) {
+  if (num === undefined || num === null || num === '') return '—';
+  const n = parseFloat(num);
+  if (Number.isNaN(n)) return '—';
+  const cls = n >= 0 ? 'money-pos' : 'money-neg';
+  const sign = n < 0 ? '−' : '';
+  const abs = Math.abs(n).toLocaleString('en-US', { maximumFractionDigits: 0 });
+  return `<span class="${cls}">${sign}€${abs}</span>`;
+}
+
 function escapeHtml(str) {
   if (str === undefined || str === null) return '';
   return String(str)
@@ -64,9 +89,9 @@ function renderTable(tbodyEl, data, colCount, rowFn) {
 function renderStandings(data) {
   const tbody = document.querySelector('#standingsTable tbody');
   renderTable(tbody, data, 3, (team) => `
-    <tr>
+    <tr class="${team.is_me ? 'row-me' : ''}">
       <td>${rankBadge(team.pos)}</td>
-      <td class="cell-primary">${escapeHtml(team.team)}</td>
+      <td class="cell-primary">${escapeHtml(team.team)}${team.is_me ? ' <span class="pill pill-me">You</span>' : ''}</td>
       <td class="num">${escapeHtml(team.points)}</td>
     </tr>
   `);
@@ -74,27 +99,37 @@ function renderStandings(data) {
 
 function renderMarket(data) {
   const tbody = document.querySelector('#marketTable tbody');
-  renderTable(tbody, data, 6, (p) => `
+  renderTable(tbody, data, 8, (p) => `
     <tr>
       <td><span class="pos-badge">${escapeHtml(p.position)}</span></td>
       <td class="cell-muted">${escapeHtml(p.club)}</td>
       <td class="cell-primary">${escapeHtml(p.name)} ${probabilityPill(p.probability)}</td>
       <td class="num">${formatMoney(p.price)}</td>
+      <td class="num">${formatDelta(p.change, { hideZero: true })}</td>
       <td class="num cell-muted">${escapeHtml(p.demand)}</td>
       <td class="num">${escapeHtml(p.this_season_pts)}</td>
+      <td class="num cell-muted">${escapeHtml(p.last_season_pts)}</td>
     </tr>
   `);
 }
 
 function renderTeamValuations(data) {
   const tbody = document.querySelector('#teamsTable tbody');
-  renderTable(tbody, data, 3, (t) => `
-    <tr>
-      <td class="cell-primary">${escapeHtml(t.team)}</td>
+  renderTable(tbody, data, 8, (t) => {
+    const pos = t.positions || {};
+    return `
+    <tr class="${t.is_me ? 'row-me' : ''}">
+      <td class="cell-primary">${escapeHtml(t.team)}${t.is_me ? ' <span class="pill pill-me">You</span>' : ''}</td>
       <td class="num cell-muted">${escapeHtml(t.players)}</td>
+      <td class="num cell-muted">${escapeHtml(pos.GK ?? '—')}</td>
+      <td class="num cell-muted">${escapeHtml(pos.DEF ?? '—')}</td>
+      <td class="num cell-muted">${escapeHtml(pos.MID ?? '—')}</td>
+      <td class="num cell-muted">${escapeHtml(pos.FWD ?? '—')}</td>
       <td class="num">${formatMoney(t.total_value)}</td>
+      <td class="num">${formatBalance(t.balance)}</td>
     </tr>
-  `);
+  `;
+  });
 }
 
 function renderTeamPlayers(data) {

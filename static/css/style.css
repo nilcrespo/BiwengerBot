@@ -281,6 +281,14 @@ tbody tr:hover td {
   color: var(--text-muted);
 }
 
+.money-pos {
+  color: var(--accent);
+}
+
+.money-neg {
+  color: var(--danger);
+}
+
 .empty-row td {
   color: var(--text-faint);
   text-align: center;
@@ -308,6 +316,18 @@ tbody tr:hover td {
 .prob-high { background: rgba(63, 185, 80, 0.15); color: var(--accent); }
 .prob-mid { background: rgba(210, 153, 34, 0.15); color: var(--warning); }
 .prob-low { background: rgba(139, 148, 158, 0.15); color: var(--text-muted); }
+
+.pill-me {
+  background: rgba(63, 185, 80, 0.2);
+  color: var(--accent);
+}
+
+tr.row-me td {
+  background: rgba(63, 185, 80, 0.05);
+}
+tr.row-me:hover td {
+  background: rgba(63, 185, 80, 0.1);
+}
 
 .rank {
   display: inline-flex;

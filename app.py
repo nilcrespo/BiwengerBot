@@ -22,13 +22,16 @@ def get_available_dates():
     return dates
 
 def get_available_teams():
+    """Returns [{'team_id': ..., 'team_name': ...}, ...] — team_id is the
+    stable filter key, team_name is the human-readable label for display."""
     conn = sqlite3.connect('data/biwenger_data.db')
     query = """
-    SELECT DISTINCT team_id 
+    SELECT team_id, MAX(team) AS team_name
     FROM team_players
-    ORDER BY team_id
+    GROUP BY team_id
+    ORDER BY team_name
     """
-    teams = pd.read_sql(query, conn)['team_id'].tolist()
+    teams = pd.read_sql(query, conn).to_dict('records')
     conn.close()
     return teams
 
@@ -37,7 +40,7 @@ def dashboard():
     dates = get_available_dates()
     teams = get_available_teams()
     selected_date = request.args.get('date', dates[0] if dates else None)
-    selected_team = request.args.get('team', teams[0] if teams else None)
+    selected_team = request.args.get('team', teams[0]['team_id'] if teams else None)
     
     return render_template(
         'dashboard.html',
@@ -93,10 +96,12 @@ def get_data():
         conn, params=(f"{date}%", f"{date}%")
     )
 
-    # --- Team valuations summary (keep SQL; just rename for UI) ---
+    # --- Team valuations summary ---
+    # Group by team_id (stable across accent/casing variants) but display
+    # the human-readable team name, not the normalized slug.
     teams_summary = pd.read_sql(
         """
-        SELECT team_id, COUNT(*) AS player_count, SUM(price) AS total_value
+        SELECT team_id, MAX(team) AS team_name, COUNT(*) AS player_count, SUM(price) AS total_value
         FROM team_players
         WHERE scraped_at LIKE ?
         GROUP BY team_id
@@ -104,7 +109,9 @@ def get_data():
         """,
         conn, params=(f"{date}%",)
     )
-    teams_summary = teams_summary.rename(columns={'team_id': 'team', 'player_count': 'players'})
+    teams_summary = teams_summary.drop(columns=['team_id']).rename(
+        columns={'team_name': 'team', 'player_count': 'players'}
+    )
 
     # --- Team players (unchanged) ---
     base_team_players_sql = """

@@ -4,175 +4,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biwenger Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
-    <style>
-        .card {
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .table-responsive {
-            max-height: 500px;
-            overflow-y: auto;
-        }
-        .filter-section {
-            margin: 20px 0;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 5px;
-        }
-        .team-players {
-            margin-top: 20px;
-        }
-        .team-header {
-            background-color: #e9ecef;
-            padding: 10px;
-            margin-top: 20px;
-            border-radius: 5px;
-        }
-        .status-fit {
-            color: green;
-        }
-        .status-injured {
-            color: red;
-        }
-        .status-doubt {
-            color: orange;
-        }
-        .high-probability {
-            background-color: rgba(0, 255, 0, 0.1);
-            font-weight: bold;
-        }
-        .probability-badge {
-            display: inline-block;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-size: 0.8em;
-            margin-left: 5px;
-        }
-        .prob-high {
-            background-color: #28a745;
-            color: white;
-        }
-        .prob-medium {
-            background-color: #ffc107;
-            color: black;
-        }
-    </style>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div class="container mt-4">
-        <h1 class="text-center mb-4">Biwenger Analytics</h1>
-        
-        <div class="filter-section">
-            <div class="row">
-                <div class="col-md-4">
-                    <label for="datePicker" class="form-label">Date</label>
-                    <input type="text" class="form-control" id="datePicker" placeholder="Select date">
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="brand">
+                <span class="brand-mark">⚽</span>
+                <span class="brand-title">Biwenger Dashboard</span>
+                <span class="brand-sub">League analytics</span>
+            </div>
+
+            <div class="filters">
+                <div class="field">
+                    <label for="datePicker">Date</label>
+                    <input type="text" id="datePicker" class="control" placeholder="Select date" readonly>
                 </div>
-                <div class="col-md-4">
-                    <label for="teamSelect" class="form-label">Team</label>
-                    <select class="form-select" id="teamSelect">
-                        <option value="">All Teams</option>
+
+                <div class="btn-group">
+                    <button class="btn prev-date" aria-label="Previous date">&larr;</button>
+                    <button class="btn next-date" aria-label="Next date">&rarr;</button>
+                </div>
+
+                <div class="field">
+                    <label for="teamSelect">Team</label>
+                    <select id="teamSelect" class="control">
+                        <option value="">All teams</option>
                     </select>
                 </div>
-                <div class="col-md-4 d-flex align-items-end">
-                    <div class="btn-group w-100">
-                        <button class="btn btn-outline-primary prev-date">Previous</button>
-                        <button class="btn btn-outline-primary next-date">Next</button>
-                    </div>
-                </div>
             </div>
         </div>
-        
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        <h3>League Standings - <span id="currentDate"></span></h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped" id="standingsTable">
-                                <thead>
-                                    <tr>
-                                        <th>Pos</th>
-                                        <th>Team</th>
-                                        <th>Points</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                    </div>
+    </header>
+
+    <main class="page">
+        <div id="errorBanner" class="error-banner" style="display:none;"></div>
+
+        <section class="grid">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title"><span class="icon">🏆</span> League standings</span>
+                    <span class="card-meta" id="currentDate"></span>
                 </div>
-            </div>
-            
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header bg-success text-white">
-                        <h3>Top Market Players</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped" id="marketTable">
-                                <thead>
-                                    <tr>
-                                        <th>Position</th>
-                                        <th>Club</th>
-                                        <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Demand</th>
-                                        <th>Points</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header bg-info text-white">
-                        <h3>Team Valuations</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped" id="teamsTable">
-                                <thead>
-                                    <tr>
-                                        <th>Team</th>
-                                        <th>Players</th>
-                                        <th>Total Value</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="card">
-            <div class="card-header bg-warning text-dark">
-                <h3>Team Players - <span id="currentTeam"></span></h3>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-striped" id="teamPlayersTable">
+                <div class="card-body scroll">
+                    <table id="standingsTable">
                         <thead>
                             <tr>
-                                <th>Position</th>
+                                <th>Pos</th>
+                                <th>Team</th>
+                                <th class="num">Points</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title"><span class="icon">💰</span> Team valuations</span>
+                </div>
+                <div class="card-body scroll">
+                    <table id="teamsTable">
+                        <thead>
+                            <tr>
+                                <th>Team</th>
+                                <th class="num">Players</th>
+                                <th class="num">Total value</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid single">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title"><span class="icon">🛒</span> Market — top listings</span>
+                </div>
+                <div class="card-body scroll">
+                    <table id="marketTable">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
                                 <th>Club</th>
                                 <th>Name</th>
-                                <th>Price</th>
-                                <th>Points</th>
-                                <th>Pts/Match</th>
+                                <th class="num">Price</th>
+                                <th class="num">Demand</th>
+                                <th class="num">Points</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid single">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title"><span class="icon">👥</span> Team roster —
+                        <span id="currentTeam"></span>
+                    </span>
+                </div>
+                <div class="card-body">
+                    <table id="teamPlayersTable">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Club</th>
+                                <th>Name</th>
+                                <th class="num">Price</th>
+                                <th class="num">Points</th>
+                                <th class="num">Pts/match</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -180,162 +126,16 @@
                     </table>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        let availableDates = {{ available_dates|tojson|safe }};
-        let availableTeams = {{ available_teams|tojson|safe }};
-        let currentDate = {{ selected_date|tojson|safe }} || (availableDates.length > 0 ? availableDates[0] : null);
-        let currentTeam = {{ selected_team|tojson|safe }} || (availableTeams.length > 0 ? availableTeams[0] : null);
-        
-        // Initialize date picker
-        const datePicker = flatpickr("#datePicker", {
-            dateFormat: "Y-m-d",
-            defaultDate: currentDate,
-            onChange: function(selectedDates, dateStr) {
-                if (dateStr) {
-                    currentDate = dateStr;
-                    loadData();
-                }
-            }
-        });
-        
-        // Initialize team select
-        const teamSelect = document.getElementById('teamSelect');
-        availableTeams.forEach(team => {
-            const option = document.createElement('option');
-            option.value = team;
-            option.textContent = team;
-            if (team === currentTeam) option.selected = true;
-            teamSelect.appendChild(option);
-        });
-        
-        teamSelect.addEventListener('change', function() {
-            currentTeam = this.value;
-            loadData();
-        });
-        
-        // Load initial data
-        document.addEventListener('DOMContentLoaded', function() {
-            if (currentDate) {
-                datePicker.setDate(currentDate);
-                loadData();
-            }
-        });
-        
-        // Navigation buttons
-        document.querySelector('.prev-date').addEventListener('click', function() {
-            navigateDate(-1);
-        });
-        
-        document.querySelector('.next-date').addEventListener('click', function() {
-            navigateDate(1);
-        });
-        
-        function navigateDate(offset) {
-            if (!availableDates.length) return;
-            
-            const currentIndex = availableDates.indexOf(currentDate);
-            let newIndex = currentIndex + offset;
-            
-            if (newIndex < 0) newIndex = 0;
-            if (newIndex >= availableDates.length) newIndex = availableDates.length - 1;
-            
-            currentDate = availableDates[newIndex];
-            datePicker.setDate(currentDate);
-            loadData();
-        }
-        
-        function loadData() {
-            document.getElementById('currentDate').textContent = currentDate;
-            document.getElementById('currentTeam').textContent = currentTeam || 'All Teams';
-            
-            let url = `/api/data?date=${currentDate}`;
-            if (currentTeam) {
-                url += `&team=${encodeURIComponent(currentTeam)}`;
-            }
-            
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    console.log("Loaded data:", data);
-                    
-                    // Update standings table
-                    updateTable('#standingsTable', data.standings, team => `
-                        <tr>
-                            <td>${team.position}</td>
-                            <td>${team.name}</td>
-                            <td>${team.points}</td>
-                        </tr>
-                    `);
-                    
-                    // Update market table with probability
-                    updateTable('#marketTable', data.market, player => `
-                        <td>${player.position}</td>
-                        <td>${player.club}</td>
-                        <td>${player.name}${player.probability ? ` <span class="badge bg-${parseInt(player.probability) > 50 ? 'success' : 'warning'}">${player.probability}</span>` : ''}</td>
-                        <td>€${formatNumber(player.price)}</td>
-                        <td>${player.demand}</td>
-                        <td>${player.this_season_pts}</td>
-                    `);
-                    
-                    // Update teams table
-                    updateTable('#teamsTable', data.teams, team => `
-                        <tr>
-                            <td>${team.team_name}</td>
-                            <td>${team.player_count}</td>
-                            <td>€${formatNumber(team.total_value)}</td>
-                        </tr>
-                    `);
-                    
-                    // Update team players table with probability
-                    updateTable('#teamPlayersTable', data.team_players, player => `
-                        <td>${player.position}</td>
-                        <td>${player.club}</td>
-                        <td>${player.name}${player.probability ? ` <span class="badge bg-${parseInt(player.probability) > 50 ? 'success' : 'warning'}">${player.probability}</span>` : ''}</td>
-                        <td>€${formatNumber(player.price)}</td>
-                        <td>${player.this_season_pts}</td>
-                        <td>${player.points_per_match}</td>
-                        <td class="${getStatusClass(player.status)}">${player.status}</td>
-                    `);
-                });
-        }
-        
-        function updateTable(selector, data, rowTemplate) {
-            const tableBody = document.querySelector(`${selector} tbody`);
-            if (data && data.length > 0) {
-                tableBody.innerHTML = data.map(item => {
-                    // Add high-probability class to row if >50%
-                    const rowClass = item.probability && parseInt(item.probability.replace('%', '')) > 50 ? 
-                        'high-probability' : '';
-                    
-                    return `
-                        <tr class="${rowClass}">
-                            ${rowTemplate(item)}
-                        </tr>
-                    `;
-                }).join('');
-            } else {
-                tableBody.innerHTML = '<tr><td colspan="10" class="text-center">No data available</td></tr>';
-            }
-        }
-        
-        function formatNumber(num) {
-            if (num === undefined || num === null) return '0';
-            return parseFloat(num).toLocaleString('en-US', {maximumFractionDigits: 0});
-        }
-        
-        function getStatusClass(status) {
-            if (!status) return '';
-            status = status.toLowerCase();
-            if (status.includes('fit') || status.includes('en forma')) return 'status-fit';
-            if (status.includes('injured') || status.includes('lesion')) return 'status-injured';
-            if (status.includes('doubt')) return 'status-doubt';
-            return '';
-        }
+        window.__availableDates = {{ available_dates|tojson|safe }};
+        window.__availableTeams = {{ available_teams|tojson|safe }};
+        window.__selectedDate = {{ selected_date|tojson|safe }};
+        window.__selectedTeam = {{ selected_team|tojson|safe }};
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 </body>
 </html>

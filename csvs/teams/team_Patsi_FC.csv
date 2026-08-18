@@ -1,0 +1,20 @@
+team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
+Patsi F.C,Patsi_FC,Goalkeeper,Valencia,Dimitrievski,0,98,3910000,20000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Defender,Villarreal,Carlos Romero,6,0,7290000,50000,Fit,1,6.0,0,0.0,6,6.0
+Patsi F.C,Patsi_FC,Defender,Deportivo,Ximo Navarro,2,0,1340000,20000,Fit,1,2.0,2,2.0,0,0.0
+Patsi F.C,Patsi_FC,Defender,Celta,Starfelt,0,76,2880000,60000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Defender,Malaga,Puga,0,0,2270000,0,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Defender/Midfielder,Celta,Javier Rueda,0,107,1990000,20000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Defender/Midfielder,Barcelona,Christensen,0,36,400000,20000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Defender/Midfielder,Sevilla,Pedrosa,0,68,320000,0,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Midfielder,Deportivo,Amatucci,6,0,3040000,10000,Fit,1,6.0,6,6.0,0,0.0
+Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,5,0,4870000,10000,Fit,1,5.0,5,5.0,0,0.0
+Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,5,0,3300000,30000,Fit,1,5.0,0,0.0,5,5.0
+Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,0,84,2470000,190000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Midfielder,Real Sociedad,Turrientes,0,99,1820000,10000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Midfielder,Valencia,Filip Ugrinic,0,102,1340000,30000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,0,224,12780000,60000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Forward,Barcelona,Gordon,0,0,9680000,50000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,0,211,8630000,80000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Forward,Rayo Vallecano,De Tomas,0,0,210000,10000,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Forward/Midfielder,Levante,Tay Abed,0,9,150000,0,Fit,0,0.0,0,0.0,0,0.0

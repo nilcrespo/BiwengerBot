@@ -1,0 +1,14 @@
+team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
+RaiFC,Raifc,Goalkeeper,Celta,Ionut Radu,0,170,3880000,10000,Fit,0,0.0,0,0.0,0,0.0
+RaiFC,Raifc,Defender/Midfielder,Sevilla,Oso,2,0,2770000,20000,Fit,1,2.0,2,2.0,0,0.0
+RaiFC,Raifc,Defender,Levante,Manu Sanchez,1,0,1690000,10000,Fit,1,1.0,0,0.0,1,1.0
+RaiFC,Raifc,Defender,Athletic,Laporte,0,104,5540000,30000,Fit,0,0.0,0,0.0,0,0.0
+RaiFC,Raifc,Midfielder,Villarreal,Pape Gueye,12,0,7700000,130000,Fit,1,12.0,0,0.0,12,12.0
+RaiFC,Raifc,Midfielder,Sevilla,Guridi,8,0,2580000,120000,Fit,1,8.0,8,8.0,0,0.0
+RaiFC,Raifc,Midfielder,Racing,Gustavo Puerta,4,0,3570000,20000,Fit,1,4.0,4,4.0,0,0.0
+RaiFC,Raifc,Forward/Midfielder,Rayo Vallecano,Alvaro Garcia,6,0,4170000,80000,Fit,1,6.0,0,0.0,6,6.0
+RaiFC,Raifc,Forward,Real Madrid,Vinicius Jr,0,263,18190000,0,Fit,0,0.0,0,0.0,0,0.0
+RaiFC,Raifc,Forward/Midfielder,Betis,Antony,0,171,10250000,110000,Fit,0,0.0,0,0.0,0,0.0
+RaiFC,Raifc,Forward,Athletic,Guruzeta,0,132,4100000,20000,Fit,0,0.0,0,0.0,0,0.0
+RaiFC,Raifc,Forward/Midfielder,Espanyol,Puado,0,36,360000,0,Injured. Anterior cruciate ligament tear. Estimated return: Early October.,0,0.0,0,0.0,0,0.0
+RaiFC,Raifc,Coach,Villarreal,Inigo Perez,1,0,2480000,20000,Fit,1,1.0,0,0.0,1,1.0

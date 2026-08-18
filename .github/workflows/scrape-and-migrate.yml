@@ -57,6 +57,19 @@ jobs:
         run: |
           python migration.py
 
+      - name: Send Telegram digest
+        # Buy/sell recommendations, pending offers, and the renewal
+        # outcome. No-ops cleanly (prints a warning, exits 0) if the
+        # Telegram secrets below aren't set yet — continue-on-error is
+        # still set as a second guard so a Telegram outage can never
+        # block today's data from being committed.
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python notify.py
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:

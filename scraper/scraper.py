@@ -541,12 +541,13 @@ def get_my_team_balance(page) -> dict:
     print(f"💶 My balance: €{balance:,.0f}")
     return {"balance": balance, "raw": raw, "scraped_at": pd.Timestamp.now().strftime("%Y-%m-%d")}
 
-def get_player_id_lookup() -> dict:
-    """Fetch Biwenger's public La Liga player database (id -> name), used
-    to resolve the numeric playerID references in /api/v2/user's market
-    and offers arrays back to a name we can join against our own
-    name-based tables. Public, no auth needed — the same cf.biwenger.com
-    endpoint the app itself loads to render player cards.
+def get_la_liga_players() -> dict:
+    """Fetch Biwenger's public La Liga player database (id -> full player
+    record: name, price, teamID, position, ...). Public, no auth needed —
+    the same cf.biwenger.com endpoint the app itself loads to render
+    player cards. Used to resolve the numeric playerID references in
+    /api/v2/user's market/offers/players arrays back to a name (and, for
+    renewals, today's current price) we can act on.
     """
     import json
     import urllib.request
@@ -557,10 +558,36 @@ def get_player_id_lookup() -> dict:
         with urllib.request.urlopen(req, timeout=15) as resp:
             data = json.load(resp)
         players = data.get("data", {}).get("players", {})
-        return {int(pid): p.get("name") for pid, p in players.items()}
+        return {int(pid): p for pid, p in players.items()}
     except Exception as e:
-        print(f"⚠️ Could not fetch player id lookup: {e}")
+        print(f"⚠️ Could not fetch la liga player database: {e}")
         return {}
+
+def _capture_auth_headers(page, path="/team") -> dict:
+    """Capture the auth headers (bearer token, league/user/version) the
+    app's own HTTP client attaches to its API calls, by watching the
+    real request the page fires when loading `path`. Reused by every
+    function here that needs to call an authenticated Biwenger endpoint
+    directly (offers, renewals) — replicating the app's own token/header
+    logic from scratch would be far more fragile than just capturing it
+    off a request the app makes itself.
+    """
+    captured = {}
+
+    def _capture(req):
+        if "api/v2/user?fields" in req.url and not captured:
+            captured.update({
+                k: v for k, v in req.headers.items()
+                if k in ("authorization", "x-version", "x-lang", "x-user", "x-league", "accept", "accept-language", "content-type")
+            })
+
+    page.on("request", _capture)
+    try:
+        page.goto(f"https://biwenger.as.com{path}", wait_until="networkidle", timeout=20000)
+        page.wait_for_timeout(1000)
+    finally:
+        page.remove_listener("request", _capture)
+    return captured
 
 def get_my_offers(page) -> list:
     """Scrape pending purchase offers other managers (human or AI-run
@@ -573,13 +600,6 @@ def get_my_offers(page) -> list:
     player right now, which the sell recommender should treat as a much
     stronger signal than any heuristic score.
 
-    The app's own /team page requests this via
-    /api/v2/user?fields=...,offers,... with a bearer token attached by
-    its own HTTP client. Rather than reimplementing that auth flow,
-    this captures the token (and league/user headers) off the real
-    request the page makes, then reuses them for one follow-up,
-    narrower request asking only for `offers`.
-
     As of writing, this account has zero pending offers, so the exact
     shape of a populated offer object is unverified beyond what
     Biwenger's market entries look like (playerID, price, date, until).
@@ -587,30 +607,15 @@ def get_my_offers(page) -> list:
     hand-picked subset) so nothing is lost once real examples start
     showing up — check the raw_json column in bad-scrape cases.
     """
-    captured_headers = {}
-
-    def _capture_headers(req):
-        if "api/v2/user?fields" in req.url and not captured_headers:
-            captured_headers.update({
-                k: v for k, v in req.headers.items()
-                if k in ("authorization", "x-version", "x-lang", "x-user", "x-league", "accept", "accept-language")
-            })
-
-    page.on("request", _capture_headers)
-    try:
-        page.goto("https://biwenger.as.com/team", wait_until="networkidle", timeout=20000)
-        page.wait_for_timeout(1000)
-    finally:
-        page.remove_listener("request", _capture_headers)
-
-    if not captured_headers:
+    headers = _capture_auth_headers(page)
+    if not headers:
         print("⚠️ Could not capture auth headers for offers request")
         return []
 
     try:
         resp = page.request.get(
             "https://biwenger.as.com/api/v2/user?fields=offers",
-            headers=captured_headers,
+            headers=headers,
         )
         if resp.status != 200:
             print(f"⚠️ Offers request failed: HTTP {resp.status}")
@@ -621,6 +626,78 @@ def get_my_offers(page) -> list:
     except Exception as e:
         print(f"⚠️ Could not fetch offers: {e}")
         return []
+
+def renew_player_sales(page, la_liga_players=None) -> list:
+    """Re-list every currently-owned player for sale at today's market
+    value, keeping every listing continuously alive.
+
+    Biwenger auto-lists every owned player for sale, but the listing
+    expires after a fixed 48h window — confirmed live: the /team page
+    shows "On sale for €X · tomorrow" (a rolling countdown) next to every
+    squad player, and a real test renewal (with explicit user sign-off)
+    returned "<Player> sale has been renewed." The UI's own Renew button
+    simply re-POSTs the same {type, player, price} payload used to
+    create the listing in the first place — confirmed by intercepting
+    that exact network call. Running this on the same ~24h cadence as
+    the rest of the daily scrape keeps every listing comfortably inside
+    its 48h window, so nothing should ever lapse as long as the daily
+    scrape keeps running.
+
+    Renews at the CURRENT market price (from the public player
+    database), not whatever price was last set — "auto-renew at market
+    value" is what was asked for, not just resetting the timer on a
+    possibly-stale price.
+    """
+    headers = _capture_auth_headers(page)
+    if not headers:
+        print("⚠️ Could not capture auth headers for renewal")
+        return []
+
+    try:
+        resp = page.request.get(
+            "https://biwenger.as.com/api/v2/user?fields=players(id,owner)",
+            headers=headers,
+        )
+        if resp.status != 200:
+            print(f"⚠️ Could not fetch owned player ids: HTTP {resp.status}")
+            return []
+        owned_ids = [p["id"] for p in resp.json().get("data", {}).get("players", []) or []]
+    except Exception as e:
+        print(f"⚠️ Could not fetch owned player ids: {e}")
+        return []
+
+    if la_liga_players is None:
+        la_liga_players = get_la_liga_players()
+
+    results = []
+    for pid in owned_ids:
+        info = la_liga_players.get(pid) or {}
+        price = info.get("price")
+        name = info.get("name") or str(pid)
+        if not price:
+            print(f"⚠️ Skipping renewal for player id {pid}: no current price found")
+            results.append({"player_id": pid, "player_name": name, "price": None, "ok": False, "http_status": None})
+            continue
+        try:
+            resp = page.request.post(
+                "https://biwenger.as.com/api/v2/market",
+                headers=headers,
+                data=json.dumps({"type": "sell", "player": pid, "price": price}),
+            )
+            # Confirmed live: this endpoint returns 204 (No Content) on
+            # success, not 200 — the UI's own success toast ("<player>
+            # sale has been renewed.") fired for the exact same 204
+            # response during testing, so treat any 2xx as success.
+            ok = 200 <= resp.status < 300
+            print(f"{'✅' if ok else '⚠️'} Renewed {name} @ €{price:,.0f} (HTTP {resp.status})")
+            results.append({"player_id": pid, "player_name": name, "price": price, "ok": ok, "http_status": resp.status})
+        except Exception as e:
+            print(f"⚠️ Renewal failed for {name}: {e}")
+            results.append({"player_id": pid, "player_name": name, "price": price, "ok": False, "http_status": None, "error": str(e)})
+
+    succeeded = sum(1 for r in results if r["ok"])
+    print(f"🔄 Renewed {succeeded}/{len(results)} listings")
+    return results
 
 def extract_market_players(page) -> pd.DataFrame:
     """Extract player data from the market table view"""
@@ -915,14 +992,14 @@ def run(playwright: Playwright) -> None:
     if my_balance:
         pd.DataFrame([my_balance]).to_csv("csvs/others/my_balance.csv", index=False)
 
-    # Pending purchase offers on my players + the id->name lookup needed
-    # to resolve them (see get_my_offers' docstring — offers reference
-    # players by Biwenger's internal numeric id, not by name).
+    # Pending purchase offers on my players, plus the public player
+    # database needed both to resolve offers' numeric playerID -> name
+    # and (below) to price today's renewals.
     offers = get_my_offers(page)
-    id_lookup = get_player_id_lookup() if offers else {}
+    la_liga_players = get_la_liga_players()
     offer_rows = [{
         "player_id": o.get("playerID"),
-        "player_name": id_lookup.get(o.get("playerID")),
+        "player_name": (la_liga_players.get(o.get("playerID")) or {}).get("name"),
         "price": o.get("price"),
         "date": o.get("date"),
         "until": o.get("until"),
@@ -932,6 +1009,17 @@ def run(playwright: Playwright) -> None:
     offer_columns = ["player_id", "player_name", "price", "date", "until", "raw_json", "scraped_at"]
     pd.DataFrame(offer_rows, columns=offer_columns).to_csv("csvs/others/my_offers.csv", index=False)
     print(f"Saved {len(offer_rows)} pending offers → my_offers.csv")
+
+    # Keep every owned player's sale listing alive at current market
+    # value (see renew_player_sales' docstring for why this is safe/
+    # needed). Written to a JSON file rather than sent straight to
+    # Telegram from here — notify.py folds this into the same daily
+    # digest as the buy/sell recommendations, after migration.py has run,
+    # so it's one message instead of two, and only notify.py needs the
+    # Telegram secret.
+    renewal_results = renew_player_sales(page, la_liga_players)
+    with open("csvs/others/renewal_results.json", "w") as f:
+        json.dump(renewal_results, f, indent=2)
 
     # NOTE: extract_all_players() (full player database, not just market/rosters)
     # is intentionally left disabled here — nothing downstream consumes it yet

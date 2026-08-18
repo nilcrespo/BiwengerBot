@@ -249,8 +249,16 @@ def extract_team_players(page, team_name: str) -> pd.DataFrame:
             price_raw = row.locator("td.tr").nth(0).inner_text().strip()
             price = re.sub(r"[^\d\.]", "", price_raw)
 
-            change_raw = safe_get_attribute(row.locator("increment"), "aria-label", "0%")
-            change = re.sub(r"[^\d\.-]", "", change_raw)
+            # Same trap as the market's price-change field: aria-label uses
+            # a Unicode minus sign ("−€10,000") on decreases, which a plain
+            # ASCII-hyphen regex silently drops — every decrease was being
+            # recorded as a positive number. Sign comes from the CSS class
+            # instead, matching extract_value_and_delta()'s approach.
+            change_label = row.evaluate("tr => tr.querySelector('increment')?.getAttribute('aria-label') || null")
+            change_cls = row.evaluate("tr => tr.querySelector('increment')?.className || ''")
+            change = parse_money(change_label) if change_label else 0.0
+            if "decrement" in change_cls:
+                change = -change
 
             status = safe_get_attribute(row.locator("player-status"), "title", "Unknown")
             played = safe_inner_text(row.locator("td").nth(6), "0")
@@ -592,18 +600,23 @@ def extract_market_players(page) -> pd.DataFrame:
             if "decrement" in change_cls:
                 change = -change
 
-            fit_cell = row.locator("td").nth(5)  # Fit
-            fit = safe_inner_text(fit_cell, "Yes")
-            
-            demand_cell = row.locator("td").nth(6)  # Demand column
-            demand = safe_inner_text(demand_cell, "0")
-            
+            status_cell = row.locator("td").nth(5)  # Status (Fit/Injured/Doubtful)
+            status = safe_inner_text(status_cell, "Fit")
+
+            # Was mislabeled "demand" — this column's title attribute is
+            # literally "Points from the last rounds" (recent form), not
+            # bid/interest count. Checked the market table headers and a
+            # player's own detail page directly: Biwenger doesn't expose
+            # live bid/demand data anywhere in the UI.
+            recent_pts_cell = row.locator("td").nth(6)
+            recent_pts = safe_inner_text(recent_pts_cell, "0")
+
             owner_cell = row.locator("td").nth(7)  # Owner column
             owner = safe_inner_text(owner_cell, "Free Agent")
             if owner.lower() != "free agent":
                 print(f"Skipping player {name} owned by {owner}")
                 continue
-            
+
             sale_price_cell = row.locator("td").nth(8)  # Last sale price
             sale_price = safe_inner_text(sale_price_cell, "0").replace("€", "").strip()
 
@@ -613,9 +626,10 @@ def extract_market_players(page) -> pd.DataFrame:
                 "name": name,
                 "price": price,
                 "change": change,
+                "status": status,
                 "owner": owner,
                 "last_sale": sale_price,
-                "demand": demand,
+                "recent_pts": recent_pts,
                 "this_season_pts": this_season_pts,
                 "last_season_pts": last_season_pts,
                 "scraped_at": pd.Timestamp.now().strftime("%Y-%m-%d")
@@ -628,7 +642,7 @@ def extract_market_players(page) -> pd.DataFrame:
     df = pd.DataFrame(all_rows)
 
     # Clean numerical columns (raw scraped strings, e.g. "€7,690,000")
-    numeric_cols = ["price", "demand", "this_season_pts", "last_season_pts"]
+    numeric_cols = ["price", "recent_pts", "this_season_pts", "last_season_pts"]
     for col in numeric_cols:
         cleaned = df[col].astype(str).str.replace(r"[^\d\.]", "", regex=True)
         df.loc[:, col] = pd.to_numeric(cleaned, errors="coerce").fillna(0)

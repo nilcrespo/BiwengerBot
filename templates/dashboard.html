@@ -4,15 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biwenger Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 </head>
 <body>
     <header class="topbar">
         <div class="topbar-inner">
             <div class="brand">
-                <span class="brand-mark">⚽</span>
-                <span class="brand-title">Biwenger Dashboard</span>
-                <span class="brand-sub">League analytics</span>
+                <span class="brand-mark">B</span>
+                <div class="brand-text">
+                    <span class="brand-title">Biwenger</span>
+                    <span class="brand-sub">league instrument panel</span>
+                </div>
             </div>
         </div>
     </header>
@@ -23,7 +28,7 @@
         <section class="grid single">
             <div class="card">
                 <div class="card-header">
-                    <span class="card-title"><span class="icon">🏆</span> League standings</span>
+                    <span class="card-title">Standings</span>
                     <span class="card-meta" id="currentDate"></span>
                 </div>
                 <div class="card-body scroll">
@@ -44,8 +49,8 @@
         <section class="grid single">
             <div class="card">
                 <div class="card-header">
-                    <span class="card-title"><span class="icon">💰</span> Team valuations</span>
-                    <span class="card-meta">Click a team to see its roster</span>
+                    <span class="card-title">Team valuations</span>
+                    <span class="card-meta">click a team to see its roster</span>
                 </div>
                 <div class="card-body">
                     <table id="teamsTable">
@@ -71,7 +76,7 @@
         <section class="grid single">
             <div class="card">
                 <div class="card-header">
-                    <span class="card-title"><span class="icon">🛒</span> Market — top listings</span>
+                    <span class="card-title">Market — top listings</span>
                 </div>
                 <div class="card-body scroll">
                     <table id="marketTable">

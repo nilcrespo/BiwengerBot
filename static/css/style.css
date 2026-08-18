@@ -130,7 +130,14 @@ body {
   border-bottom-color: var(--accent);
 }
 
+.tab-panel[hidden] {
+  display: none;
+}
+
 .tab-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
   margin-bottom: var(--space-5);
 }
 

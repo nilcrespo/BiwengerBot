@@ -146,6 +146,39 @@ def get_data():
 
     team_players = pd.read_sql(base_team_players_sql, conn, params=params)
 
+    # --- My trades: current holdings (unrealized profit) and completed
+    # sales (realized profit), for the "My Trades" tab. Only meaningful
+    # for the logged-in user's own team (is_me) — that's the only account
+    # whose purchase history the forum ledger can be trusted to be complete
+    # for from the moment we started scraping.
+    accent_fold = lambda col: (
+        f"LOWER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE({col},'á','a'),'é','e'),'í','i'),'ó','o'),'ñ','n'))"
+    )
+    my_holdings = pd.read_sql(
+        f"""
+        SELECT op.player, op.buy_price, op.count, tp.price AS current_price,
+               tp.price - op.buy_price AS profit, tp.club, tp.position
+        FROM open_positions op
+        JOIN team_balance tb ON tb.team_id = op.team_id AND tb.is_me = 1 AND tb.scraped_at LIKE ?
+        JOIN team_players tp ON tp.team_id = op.team_id AND tp.scraped_at LIKE ?
+          AND {accent_fold('tp.name')} = {accent_fold('op.player')}
+        WHERE op.scraped_at LIKE ?
+        ORDER BY profit DESC
+        """,
+        conn, params=(f"{date}%", f"{date}%", f"{date}%")
+    )
+
+    my_sales = pd.read_sql(
+        """
+        SELECT rt.player, rt.buy_price, rt.sell_price, rt.profit
+        FROM realized_trades rt
+        JOIN team_balance tb ON tb.team_id = rt.team_id AND tb.is_me = 1 AND tb.scraped_at LIKE ?
+        WHERE rt.scraped_at LIKE ? AND rt.profit IS NOT NULL
+        ORDER BY rt.profit DESC
+        """,
+        conn, params=(f"{date}%", f"{date}%")
+    )
+
     conn.close()
 
     return jsonify({
@@ -153,6 +186,8 @@ def get_data():
         'market': market.to_dict('records'),
         'teams': teams_summary.to_dict('records'),
         'team_players': team_players.to_dict('records'),
+        'my_holdings': my_holdings.to_dict('records'),
+        'my_sales': my_sales.to_dict('records'),
         'date': date
     })
 

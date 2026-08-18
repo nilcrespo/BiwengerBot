@@ -114,6 +114,32 @@ function renderMarket(data) {
   `);
 }
 
+function renderHoldings(data) {
+  const tbody = document.querySelector('#holdingsTable tbody');
+  renderTable(tbody, data, 6, (p) => `
+    <tr>
+      <td><span class="pos-badge">${escapeHtml(p.position)}</span></td>
+      <td class="cell-muted">${escapeHtml(p.club)}</td>
+      <td class="cell-primary">${escapeHtml(p.player)}</td>
+      <td class="num">${formatMoney(p.buy_price)}</td>
+      <td class="num">${formatMoney(p.current_price)}</td>
+      <td class="num">${formatDelta(p.profit)}</td>
+    </tr>
+  `);
+}
+
+function renderSales(data) {
+  const tbody = document.querySelector('#salesTable tbody');
+  renderTable(tbody, data, 4, (p) => `
+    <tr>
+      <td class="cell-primary">${escapeHtml(p.player)}</td>
+      <td class="num">${formatMoney(p.buy_price)}</td>
+      <td class="num">${formatMoney(p.sell_price)}</td>
+      <td class="num">${formatDelta(p.profit)}</td>
+    </tr>
+  `);
+}
+
 // Team valuations doubles as the roster browser: click a team row to
 // expand its squad inline instead of a separate dropdown-driven section.
 function renderRosterRows(players) {
@@ -234,6 +260,8 @@ function loadData() {
       renderStandings(data.standings);
       renderMarket(data.market);
       renderTeamValuations(data.teams, groupRostersByTeam(data.team_players));
+      renderHoldings(data.my_holdings);
+      renderSales(data.my_sales);
     })
     .catch((err) => {
       showError(`Couldn't load data: ${err.message}`);

@@ -19,6 +19,7 @@
             <button class="tab active" role="tab" data-tab="standings" aria-selected="true">Standings</button>
             <button class="tab" role="tab" data-tab="teams" aria-selected="false">Team valuations</button>
             <button class="tab" role="tab" data-tab="market" aria-selected="false">Market</button>
+            <button class="tab" role="tab" data-tab="trades" aria-selected="false">My trades</button>
         </nav>
     </header>
 
@@ -91,6 +92,48 @@
                                 <th class="num">Points</th>
                                 <th class="num">Form</th>
                                 <th class="num">Last szn</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="tab-panel" data-tab-panel="trades" hidden>
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title"><span class="icon">📈</span> Current holdings — profit vs. purchase price</span>
+                </div>
+                <div class="card-body scroll">
+                    <table id="holdingsTable">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Club</th>
+                                <th>Name</th>
+                                <th class="num">Bought for</th>
+                                <th class="num">Current price</th>
+                                <th class="num">Profit</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title"><span class="icon">💵</span> Sale history — ranked by profit</span>
+                </div>
+                <div class="card-body scroll">
+                    <table id="salesTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th class="num">Bought for</th>
+                                <th class="num">Sold for</th>
+                                <th class="num">Profit</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

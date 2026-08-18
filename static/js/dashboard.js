@@ -99,15 +99,16 @@ function renderStandings(data) {
 
 function renderMarket(data) {
   const tbody = document.querySelector('#marketTable tbody');
-  renderTable(tbody, data, 8, (p) => `
+  renderTable(tbody, data, 9, (p) => `
     <tr>
       <td><span class="pos-badge">${escapeHtml(p.position)}</span></td>
       <td class="cell-muted">${escapeHtml(p.club)}</td>
       <td class="cell-primary">${escapeHtml(p.name)} ${probabilityPill(p.probability)}</td>
       <td class="num">${formatMoney(p.price)}</td>
       <td class="num">${formatDelta(p.change, { hideZero: true })}</td>
-      <td class="num cell-muted">${escapeHtml(p.demand)}</td>
+      <td>${statusPill(p.status)}</td>
       <td class="num">${escapeHtml(p.this_season_pts)}</td>
+      <td class="num cell-muted">${escapeHtml(p.recent_pts)}</td>
       <td class="num cell-muted">${escapeHtml(p.last_season_pts)}</td>
     </tr>
   `);
@@ -117,12 +118,12 @@ function renderMarket(data) {
 // expand its squad inline instead of a separate dropdown-driven section.
 function renderRosterRows(players) {
   if (!players || players.length === 0) {
-    return `<tr><td colspan="7" class="roster-empty">No roster data</td></tr>`;
+    return `<tr><td colspan="8" class="roster-empty">No roster data</td></tr>`;
   }
   const head = `
     <tr class="roster-head">
       <th>Pos</th><th>Club</th><th>Name</th>
-      <th class="num">Price</th><th class="num">Points</th>
+      <th class="num">Price</th><th class="num">Change</th><th class="num">Points</th>
       <th class="num">Pts/match</th><th>Status</th>
     </tr>`;
   const rows = players.map((p) => `
@@ -131,6 +132,7 @@ function renderRosterRows(players) {
       <td class="cell-muted">${escapeHtml(p.club)}</td>
       <td class="cell-primary">${escapeHtml(p.name)} ${probabilityPill(p.probability)}</td>
       <td class="num">${formatMoney(p.price)}</td>
+      <td class="num">${formatDelta(p.change, { hideZero: true })}</td>
       <td class="num">${escapeHtml(p.this_season_pts)}</td>
       <td class="num cell-muted">${formatNumber(p.points_per_match)}</td>
       <td>${statusPill(p.status)}</td>
@@ -142,7 +144,7 @@ function renderRosterRows(players) {
 function renderTeamValuations(teams, rostersByTeamId) {
   const tbody = document.querySelector('#teamsTable tbody');
   if (!teams || teams.length === 0) {
-    tbody.innerHTML = `<tr class="empty-row"><td colspan="8">No data available</td></tr>`;
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="9">No data available</td></tr>`;
     return;
   }
   tbody.innerHTML = teams.map((t) => {
@@ -157,10 +159,11 @@ function renderTeamValuations(teams, rostersByTeamId) {
       <td class="num cell-muted">${escapeHtml(pos.MID ?? '—')}</td>
       <td class="num cell-muted">${escapeHtml(pos.FWD ?? '—')}</td>
       <td class="num">${formatMoney(t.total_value)}</td>
+      <td class="num">${formatDelta(t.value_change, { hideZero: true })}</td>
       <td class="num">${formatBalance(t.balance)}</td>
     </tr>
     <tr class="roster-detail" hidden>
-      <td colspan="8">
+      <td colspan="9">
         <table class="roster-table">${renderRosterRows(roster)}</table>
       </td>
     </tr>

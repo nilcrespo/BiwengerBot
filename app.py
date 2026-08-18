@@ -44,7 +44,7 @@ def get_data():
     # --- League standings ---
     standings = pd.read_sql(
         """
-        SELECT position, name, points, is_me
+        SELECT position, name, points, value_change, is_me
         FROM teams
         WHERE scraped_at LIKE ?    -- match 'YYYY-MM-DD%'
         ORDER BY position
@@ -56,7 +56,7 @@ def get_data():
     # --- Market ---
     market = pd.read_sql(
         """
-        SELECT m.position, m.club, m.name, m.price, m.change, m.demand,
+        SELECT m.position, m.club, m.name, m.price, m.change, m.status, m.recent_pts,
                m.this_season_pts, m.last_season_pts,
                COALESCE(pp.probability, '0%') AS probability
         FROM market m
@@ -86,15 +86,18 @@ def get_data():
         SELECT tp.team_id, MAX(tp.team) AS team_name, COUNT(*) AS player_count,
                SUM(tp.price) AS total_value,
                MAX(tb.ledger_balance) AS balance,
-               MAX(tb.is_me) AS is_me
+               MAX(tb.is_me) AS is_me,
+               MAX(t.value_change) AS value_change
         FROM team_players tp
         LEFT JOIN team_balance tb
           ON tb.team_id = tp.team_id AND tb.scraped_at LIKE ?
+        LEFT JOIN teams t
+          ON t.name = tp.team AND t.scraped_at LIKE ?
         WHERE tp.scraped_at LIKE ?
         GROUP BY tp.team_id
         ORDER BY total_value DESC
         """,
-        conn, params=(f"{date}%", f"{date}%")
+        conn, params=(f"{date}%", f"{date}%", f"{date}%")
     )
 
     # Position breakdown per team (GK/DEF/MID/FWD counts) — dual-position
@@ -121,7 +124,7 @@ def get_data():
     # --- Team players for every team (the dashboard expands rosters inline
     # under each team's row rather than filtering to one team at a time) ---
     base_team_players_sql = """
-        SELECT tp.team_id, tp.position, tp.club, tp.name, tp.price, tp.this_season_pts,
+        SELECT tp.team_id, tp.position, tp.club, tp.name, tp.price, tp.change, tp.this_season_pts,
                tp.points_per_match, tp.status,
                COALESCE(pp.probability, '0%') AS probability
         FROM team_players tp

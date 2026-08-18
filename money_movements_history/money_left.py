@@ -150,6 +150,62 @@ def compute_balances(posts: list) -> tuple[dict, dict]:
     return dict(balances), dict(ledger)
 
 
+def compute_trades(ledger: dict) -> dict:
+    """Reconstruct buy/sell pairs per team from the ledger's Purchase/Sale
+    entries, to compute realized profit on completed sales and unrealized
+    profit on currently-held players that were actually bought (not part
+    of the original free starting squad, which has no purchase record).
+
+    ledger[team] entries are newest-first (the order posts were scraped
+    in); processed oldest-first here (reversed) so a sale is matched
+    against the purchase that actually preceded it, FIFO. Matching is by
+    player name string, scoped per team — good enough for a first version,
+    but two different real players who happen to share a short display
+    name would collide; not handled.
+
+    Returns {team: {"realized": [...], "open": {player_name: {"buy_price", "count"}}}}
+    realized entries with buy_price=None mean a sale with no matching
+    purchase in our window (e.g. part of the original squad, or the
+    purchase happened before this season's scraped history starts).
+    """
+    results = {}
+    for team, entries in ledger.items():
+        chronological = list(reversed(entries))
+        open_positions = {}  # player -> FIFO queue of purchase prices
+        realized = []
+        for e in chronological:
+            if e["type"] == "Purchase":
+                open_positions.setdefault(e["movement"], []).append(e["amount"])
+            elif e["type"] == "Sale":
+                player = e["movement"]
+                queue = open_positions.get(player)
+                if queue:
+                    buy_price = queue.pop(0)
+                    realized.append({
+                        "player": player,
+                        "buy_price": buy_price,
+                        "sell_price": e["amount"],
+                        "profit": e["amount"] - buy_price,
+                    })
+                else:
+                    realized.append({
+                        "player": player,
+                        "buy_price": None,
+                        "sell_price": e["amount"],
+                        "profit": None,
+                    })
+
+        open_summary = {}
+        for player, queue in open_positions.items():
+            if queue:
+                open_summary[player] = {
+                    "buy_price": sum(queue) / len(queue),
+                    "count": len(queue),
+                }
+        results[team] = {"realized": realized, "open": open_summary}
+    return results
+
+
 if __name__ == "__main__":
     OUT_DIR.mkdir(exist_ok=True, parents=True)
 

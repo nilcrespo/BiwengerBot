@@ -623,9 +623,28 @@ def get_all_posts(page, max_scrolls=300, initial_wait=3, load_timeout_ms=6000,
     of a new season. That post is kept (need it for the money ledger);
     nothing older than it is fetched.
     """
+    # Resume support: if we already have posts from a previous run, don't
+    # re-scrape them — stop as soon as we catch up to already-known content.
+    output_path = "unique_posts.json"
+    existing_posts = []
+    if os.path.exists(output_path):
+        try:
+            with open(output_path, "r", encoding="utf-8") as f:
+                existing_posts = json.load(f)
+        except (json.JSONDecodeError, OSError):
+            existing_posts = []
+    existing_ids = {json.dumps(p, ensure_ascii=False) for p in existing_posts}
+    if existing_ids:
+        print(f"Resuming: {len(existing_ids)} posts already saved from a "
+              f"previous run, will stop once caught up to them.")
+
+    new_posts = []
     seen = set()
-    all_posts = []
     processed_count = 0  # DOM index of the last post we've already read
+
+    def save(posts):
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(posts + existing_posts, f, ensure_ascii=False, indent=2)
 
     print(f"⏳ Waiting {initial_wait}s for first posts to render...")
     time.sleep(initial_wait)
@@ -646,23 +665,28 @@ def get_all_posts(page, max_scrolls=300, initial_wait=3, load_timeout_ms=6000,
         page.wait_for_selector("league-board-post", timeout=5000)
     except PlaywrightTimeoutError:
         print("⚠️ No posts found at start.")
-        return []
+        return existing_posts
 
     print(f"Start: {post_locator.count()} posts")
 
     stale_scrolls = 0
+    caught_up_scrolls = 0
     for i in range(max_scrolls):
         count_now = post_locator.count()
 
         new_this_round = 0
+        already_known_this_round = 0
         hit_stop_marker = False
         for idx in range(processed_count, count_now):
             title = post_locator.nth(idx)
             post_data = title.inner_text().split("\n")
             post_id = json.dumps(post_data, ensure_ascii=False)
+            if post_id in existing_ids:
+                already_known_this_round += 1
+                continue
             if post_id not in seen:
                 seen.add(post_id)
-                all_posts.append(post_data)
+                new_posts.append(post_data)
                 new_this_round += 1
                 if stop_when_contains and any(stop_when_contains in str(x) for x in post_data):
                     hit_stop_marker = True
@@ -670,21 +694,29 @@ def get_all_posts(page, max_scrolls=300, initial_wait=3, load_timeout_ms=6000,
         processed_count = count_now
 
         print(f"Scroll {i+1}: {count_now} posts on page, "
-              f"{new_this_round} new, {len(all_posts)} total")
+              f"{new_this_round} new, {already_known_this_round} already "
+              f"saved, {len(new_posts)} new total")
 
         if hit_stop_marker:
-            with open("unique_posts.json", "w", encoding="utf-8") as f:
-                json.dump(all_posts, f, ensure_ascii=False, indent=2)
+            save(new_posts)
             print(f"Found '{stop_when_contains}' marker — that's the season "
-                  f"start, stopping here ({len(all_posts)} posts).")
+                  f"start, stopping here ({len(new_posts)} new posts).")
             break
 
         if (i + 1) % checkpoint_every == 0:
-            with open("unique_posts.json", "w", encoding="utf-8") as f:
-                json.dump(all_posts, f, ensure_ascii=False, indent=2)
-            print(f"  ↳ checkpoint saved ({len(all_posts)} posts)")
+            save(new_posts)
+            print(f"  ↳ checkpoint saved ({len(new_posts)} new posts)")
 
-        if new_this_round == 0:
+        if existing_ids and new_this_round == 0 and already_known_this_round > 0:
+            caught_up_scrolls += 1
+            if caught_up_scrolls >= stale_limit:
+                print(f"Caught up to previously saved posts — stopping "
+                      f"({len(new_posts)} new posts found).")
+                break
+        else:
+            caught_up_scrolls = 0
+
+        if new_this_round == 0 and already_known_this_round == 0:
             stale_scrolls += 1
             if stale_scrolls >= stale_limit:
                 print(f"No new posts for {stale_limit} scrolls in a row — "
@@ -697,10 +729,11 @@ def get_all_posts(page, max_scrolls=300, initial_wait=3, load_timeout_ms=6000,
         page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
         page.wait_for_timeout(1200)  # give posts time to load
 
-    with open("unique_posts.json", "w", encoding="utf-8") as f:
-        json.dump(all_posts, f, ensure_ascii=False, indent=2)
-    print(f"✅ Saved {len(all_posts)} unique posts to unique_posts.json")
-    return all_posts
+    combined = new_posts + existing_posts
+    save(new_posts)
+    print(f"✅ Saved {len(combined)} total posts to {output_path} "
+          f"({len(new_posts)} new, {len(existing_posts)} carried over)")
+    return combined
 
 # Usage in your run() function:
 def run(playwright: Playwright) -> None:

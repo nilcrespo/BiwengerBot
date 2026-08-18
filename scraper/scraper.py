@@ -180,6 +180,10 @@ def get_league_standings(page):
             num_players_cell = row.locator("td").nth(6)
             num_players = safe_inner_text(num_players_cell, "0")
 
+            # Biwenger marks the logged-in user's own row with class="selected"
+            row_class = row.get_attribute("class") or ""
+            is_me = "selected" in row_class.split()
+
             all_rows.append({
                 "position": position,
                 "name": name,
@@ -187,6 +191,7 @@ def get_league_standings(page):
                 "team_value": team_value,
                 "value_change": value_change,
                 "num_players": num_players,
+                "is_me": is_me,
                 "scraped_at": pd.Timestamp.now().strftime("%Y-%m-%d")
             })
             
@@ -505,6 +510,29 @@ def extract_all_players(page) -> pd.DataFrame:
     print(f"Extracted {len(df)} players → players.csv")
     return df
 
+def get_my_team_balance(page) -> dict:
+    """Scrape the logged-in user's own cash balance from /team.
+
+    This is Biwenger's own authoritative figure (the <balance> element in
+    the squad-stats widget), used to sanity-check the forum-post-derived
+    ledger balance for the user's own team — the ledger can be computed
+    for every team from public posts, but this ground truth is only ever
+    available for whichever team is logged in.
+    """
+    page.goto("https://biwenger.as.com/team", wait_until="domcontentloaded", timeout=15000)
+    try:
+        page.wait_for_selector("squad-stats balance", timeout=8000)
+    except TimeoutError:
+        print("⚠️ Could not find balance widget on /team")
+        return {}
+
+    raw = safe_inner_text(page.locator("squad-stats balance"), "")
+    balance = parse_money(raw)
+
+    manager_name = safe_inner_text(page.locator("a.avatar-container span, .user-name"), "")
+    print(f"💶 My balance: €{balance:,.0f}")
+    return {"balance": balance, "raw": raw, "scraped_at": pd.Timestamp.now().strftime("%Y-%m-%d")}
+
 def extract_market_players(page) -> pd.DataFrame:
     """Extract player data from the market table view"""
     print("\nExtracting market players...")
@@ -549,9 +577,21 @@ def extract_market_players(page) -> pd.DataFrame:
             price_cell = row.locator("td").nth(3)  # Price column
             price = safe_inner_text(price_cell, "0").replace("€", "").strip()
             
-            increase_cell = row.locator("td").nth(4)  # % increase column
-            increase = safe_inner_text(increase_cell, 0)
-            
+            # Price change vs yesterday. Same <increment> pattern as
+            # extract_value_and_delta() — sign comes from the CSS class
+            # (increment/decrement), not the label text, since the "−"
+            # character Biwenger uses isn't a plain ASCII hyphen.
+            change_cell = row.locator("td").nth(4)
+            change_label = change_cell.evaluate(
+                "td => td.querySelector('increment')?.getAttribute('aria-label') || null"
+            )
+            change_cls = change_cell.evaluate(
+                "td => td.querySelector('increment')?.className || ''"
+            )
+            change = parse_money(change_label) if change_label else 0.0
+            if "decrement" in change_cls:
+                change = -change
+
             fit_cell = row.locator("td").nth(5)  # Fit
             fit = safe_inner_text(fit_cell, "Yes")
             
@@ -572,6 +612,7 @@ def extract_market_players(page) -> pd.DataFrame:
                 "club": club,
                 "name": name,
                 "price": price,
+                "change": change,
                 "owner": owner,
                 "last_sale": sale_price,
                 "demand": demand,
@@ -579,18 +620,22 @@ def extract_market_players(page) -> pd.DataFrame:
                 "last_season_pts": last_season_pts,
                 "scraped_at": pd.Timestamp.now().strftime("%Y-%m-%d")
             })
-            
+
         except Exception as e:
             print(f"⚠️ Error processing market row: {e}")
             continue
-    
+
     df = pd.DataFrame(all_rows)
-    
-    # Clean numerical columns
+
+    # Clean numerical columns (raw scraped strings, e.g. "€7,690,000")
     numeric_cols = ["price", "demand", "this_season_pts", "last_season_pts"]
     for col in numeric_cols:
         cleaned = df[col].astype(str).str.replace(r"[^\d\.]", "", regex=True)
         df.loc[:, col] = pd.to_numeric(cleaned, errors="coerce").fillna(0)
+
+    # 'change' is already a signed float from parse_money() — stripping
+    # non-digit chars here would silently drop the minus sign.
+    df.loc[:, "change"] = pd.to_numeric(df["change"], errors="coerce").fillna(0)
 
     filename = "csvs/market/market_players.csv"
     df.to_csv(filename, index=False)
@@ -768,6 +813,12 @@ def run(playwright: Playwright) -> None:
     # Extract market players
     market_players_df = extract_market_players(page)
     print(f"Extracted {len(market_players_df)} market players → market_players.csv")
+
+    # My own cash balance, scraped from /team — ground truth used to
+    # sanity-check the forum-post-derived ledger balance in migration.py.
+    my_balance = get_my_team_balance(page)
+    if my_balance:
+        pd.DataFrame([my_balance]).to_csv("csvs/others/my_balance.csv", index=False)
 
     # NOTE: extract_all_players() (full player database, not just market/rosters)
     # is intentionally left disabled here — nothing downstream consumes it yet

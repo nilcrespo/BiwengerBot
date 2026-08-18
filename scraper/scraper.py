@@ -902,161 +902,226 @@ def normalize_team_key(name):
     key = re.sub(r"\s+", "_", key.strip())
     return key
 
-def scrape_player_probabilities(team):
-    """Scrape player probabilities for a given team."""
+
+def _accept_futbolfantasy_cookies(page):
+    """Best-effort dismissal of futbolfantasy.com's Sirdata CMP consent banner.
+
+    Only appears once per browser context (first navigation) — a no-op
+    (caught below) on every team page after the first. The button's CSS
+    class is build-generated (e.g. "sd-cmp-7Ga7b") and not stable across
+    deploys, and its text language depends on the browser's effective
+    Accept-Language: a fresh headless context with no locale configured
+    (what this scraper uses) rendered it as "Accept all" (English) when
+    checked live, not the "Aceptar todo" a Spanish-locale browser shows —
+    match both, plus the old "ACEPTO" this code used to look for (never
+    actually seen live against the current site, kept just in case some
+    locale/AB-test still renders it).
+    """
+    try:
+        page.get_by_role(
+            "button", name=re.compile(r"Accept all|Aceptar todo|ACEPTO", re.I)
+        ).click(timeout=5000)
+    except Exception:
+        pass
+
+
+def _block_heavy_resources(context):
+    """Abort images/fonts/media/stylesheets and known ad/tracker hosts.
+
+    futbolfantasy.com team pages pull in a large amount of ad-tech (Twitch
+    embeds, Amazon's ad system, Sirdata consent-sync pixels, Google ad
+    scripts...) that has nothing to do with the lineup data this scraper
+    reads. None of it is needed to see the `data-probabilidad` /
+    `data-nombre` attributes we scrape (those are already present in the
+    team page's own markup once the "Lista" tab renders, not fetched by
+    any of these third parties) — cutting it out makes each page load
+    faster and lighter on the renderer.
+    """
+    def route_handler(route, request):
+        if request.resource_type in {"image", "media", "font", "stylesheet"} or any(
+            s in request.url for s in (
+                "googletagmanager", "google-analytics", "doubleclick",
+                "facebook", "twitch", "amazon-adsystem", "sddan.com",
+                "googlesyndication",
+            )
+        ):
+            route.abort()
+        else:
+            route.continue_()
+    context.route("**/*", route_handler)
+
+
+def _scrape_team_probabilities(page, team: str) -> list:
+    """Extract every squad player's start probability for `team`.
+
+    Navigates to the futbolfantasy.com team page, switches its "Posible
+    alineación" widget to the "Lista" tab, and reads the probability
+    straight off each player row's `data-probabilidad` attribute — e.g.
+    `<div class="jugador_7279 jugador tipo_lista block-new"
+    data-nombre="joan-garcia" data-probabilidad="80%" ...>`. Confirmed live
+    against Barcelona/Real Madrid/Atlético/Elche/Valencia/Villarreal/Betis
+    team pages.
+
+    This deliberately does NOT open each player's own page (that's what the
+    retired `scrape_player_probabilities_async`/`_fast` used to do, up to
+    20+ page navigations per team, 6 concurrent) — the same probability is
+    already sitting in the Lista view's DOM, so there is nothing to gain
+    from the extra navigations and they were almost certainly the source of
+    the "Target crashed" failures reported when this was last debugged:
+    that many concurrent/sequential page objects is a lot of renderer churn
+    for headless Chromium, especially under a memory-constrained CI/sandbox.
+    Reading the data already on the page sidesteps that failure mode
+    entirely instead of retrying around it.
+
+    Two selector traps to be aware of if this breaks again:
+    - The "Lista" tab must be matched as `a.lista-tab`, not by role/name
+      "Lista" text — the team page also has an unrelated news article
+      link whose title happens to contain "Lista", which makes any
+      name-text match ambiguous (Playwright strict-mode violation).
+    - Not every team has this widget at all. Newly-promoted/less-covered
+      teams (confirmed live: Real Oviedo, early in the 25/26 season) can
+      have no "Posible alineación" section published yet — no Campo/Lista
+      toggle exists on the page. That's a legitimate empty result, not a
+      broken selector, so it's handled as a skip rather than an error.
+    """
+    team_url = f"https://www.futbolfantasy.com/laliga/equipos/{team}"
+    page.goto(team_url, timeout=30000, wait_until="domcontentloaded")
+    _accept_futbolfantasy_cookies(page)
+
+    lista_tab = page.locator("a.lista-tab")
+    if lista_tab.count() == 0:
+        print(f"⚠️ {team}: no 'Posible alineación' widget on this team page — skipping")
+        return []
+
+    try:
+        lista_tab.first.click(timeout=5000)
+    except Exception as e:
+        print(f"⚠️ {team}: could not click the Lista tab: {e}")
+        return []
+
+    # Before the click, the widget's default "Campo" (pitch) view already
+    # has the container in the DOM with just the 11 starters (used to place
+    # the pitch icons). Clicking "Lista" re-renders it to include the bench
+    # too (rows carry an extra "isSuplente" class) — wait for that so we
+    # don't read a stale, starters-only snapshot from before the click took
+    # effect. Confirmed live this settles in well under a second.
+    container_selector = "div[class*='jugadores-titulares-'].mod.lesionados.mb-0"
+    try:
+        page.wait_for_function(
+            """(sel) => {
+                const c = document.querySelector(sel);
+                return !!(c && c.querySelector('.isSuplente'));
+            }""",
+            arg=container_selector,
+            timeout=8000,
+        )
+    except Exception:
+        # Very short benches could in principle never produce an
+        # ".isSuplente" row — fall back to just "some rows are there".
+        try:
+            page.wait_for_selector(f"{container_selector} > div[data-nombre]", timeout=5000)
+        except Exception as e:
+            print(f"⚠️ {team}: player list never appeared: {e}")
+            return []
+
+    rows = page.locator(f"{container_selector} > div[data-nombre]")
+    count = rows.count()
+
     data = []
+    for i in range(count):
+        row = rows.nth(i)
+        try:
+            name = row.locator("span.nombre").inner_text(timeout=2000).strip()
+        except Exception:
+            # Fall back to the URL-style slug if the name span is missing.
+            slug = row.get_attribute("data-nombre") or ""
+            name = slug.replace("-", " ").title()
+
+        probability = (row.get_attribute("data-probabilidad") or "").strip()
+        if not probability:
+            continue
+
+        data.append({
+            "Team": team.replace("-", " ").title(),
+            "Player": normalize_player_name(name),
+            "Probability": probability,
+        })
+        print(f"✅ {team} - {name}: {probability}")
+
+    return data
+
+
+def scrape_player_probabilities(team: str) -> pd.DataFrame:
+    """Scrape start probabilities for every squad player of `team`.
+
+    Standalone entry point that launches and tears down its own browser —
+    handy for testing a single team. `get_starting_player_data()` below
+    reuses one browser/page across all teams instead, since (per
+    `_scrape_team_probabilities`'s docstring) each team is now just a
+    single page load, so there's no benefit to a fresh browser per team.
+    """
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=HEADLESS)
         context = browser.new_context()
+        _block_heavy_resources(context)
         page = context.new_page()
-
-        # Navigate to team page
-        team_url = f"https://www.futbolfantasy.com/laliga/equipos/{team}"
-        page.goto(team_url, timeout=30000)
         try:
-            page.get_by_role("button", name="ACEPTO").click()
-        except:
-            pass
-        page.get_by_role("link", name=" Lista").click()
-        
-        # Get player list
-        tab = page.locator("div[class*='jugadores-titulares-'].mod.lesionados.mb-0")
-        players = tab.locator("a.jugador.my-auto").all()
-        
-        for player in players:
-            try:
-                # Get player info
-                href = player.get_attribute("href")
-                name = href.split("/")[-1].replace("-", " ").title()
-                
-                # Navigate to player page
-                page.goto(href, timeout=30000, wait_until="domcontentloaded")
-                
-                # Get probability
-                page.wait_for_selector('span.mx-auto[class*="prob-"]', state="attached", timeout=10000)
-                percentage = page.locator('span.mx-auto[class*="prob-"]').first.inner_text()
-                
-                # Store data
-                data.append({
-                    "Team": team.title(),
-                    "Player": normalize_player_name(name),
-                    "Probability": percentage
-                })
-                
-                print(f"✅ {team} - {name}: {percentage}")
-                
-            except Exception as e:
-                print(f"❌ Failed for {team} - {name}: {str(e)}")
-            
-            finally:
-                # Return to team page
-                page.go_back(wait_until="domcontentloaded")
-                page.get_by_role("link", name=" Lista").click()
-                tab = page.locator("div.jugadores-titulares-20078.mod.lesionados.mb-0")
-        
-        browser.close()
-    
+            data = _scrape_team_probabilities(page, team)
+        finally:
+            browser.close()
     return pd.DataFrame(data)
 
-import re
-import asyncio
-import pandas as pd
-from playwright.async_api import async_playwright
-
-HEADLESS = True
-
-async def scrape_player_probabilities_async(team: str, concurrency: int = 6) -> pd.DataFrame:
-    """Scrape player probabilities for a given team (async concurrent version)."""
-    def normalize_player_name(name: str) -> str:
-        return name  # keep your existing implementation
-
-    async with async_playwright() as pw:
-        browser = await pw.chromium.launch(headless=HEADLESS, args=["--disable-dev-shm-usage"])
-        context = await browser.new_context()
-
-        async def route_handler(route, request):
-            if request.resource_type in {"image", "media", "font", "stylesheet"} or any(
-                s in request.url for s in ["googletagmanager", "google-analytics", "doubleclick", "facebook"]
-            ):
-                await route.abort()
-            else:
-                await route.continue_()
-
-        await context.route("**/*", route_handler)
-
-        page = await context.new_page()
-        team_url = f"https://www.futbolfantasy.com/laliga/equipos/{team}"
-        await page.goto(team_url, timeout=30000, wait_until="domcontentloaded")
-
-        try:
-            await page.get_by_role("button", name=re.compile("ACEPTO|ACEPTAR|Aceptar", re.I)).click(timeout=2000)
-        except Exception:
-            pass
-
-        try:
-            await page.get_by_role("link", name=re.compile("Lista", re.I)).click(timeout=5000)
-        except Exception:
-            pass
-
-        hrefs = await page.locator("div[class*='jugadores-titulares-'].mod.lesionados.mb-0 a.jugador.my-auto") \
-                          .evaluate_all("els => els.map(e => e.href)")
-
-        sem = asyncio.Semaphore(concurrency)
-        results = []
-
-        async def fetch(href: str):
-            name = href.rstrip("/").split("/")[-1].replace("-", " ").title()
-            async with sem:
-                p = await context.new_page()
-                try:
-                    await p.goto(href, timeout=20000, wait_until="domcontentloaded")
-                    await p.wait_for_selector('span.mx-auto[class*="prob-"]', state="attached", timeout=5000)
-                    percentage = await p.locator('span.mx-auto[class*="prob-"]').first.text_content()
-                    results.append({
-                        "Team": team.title(),
-                        "Player": normalize_player_name(name),
-                        "Probability": (percentage or "").strip()
-                    })
-                    print(f"✅ {team} - {name}: {percentage}")
-                except Exception as e:
-                    print(f"❌ {team} - {name}: {e}")
-                finally:
-                    await p.close()
-
-        await asyncio.gather(*(fetch(h) for h in hrefs))
-        await browser.close()
-
-    return pd.DataFrame(results)
-
-# If you want a simple sync wrapper:
-def scrape_player_probabilities_fast(team: str, concurrency: int = 6) -> pd.DataFrame:
-    return asyncio.run(scrape_player_probabilities_async(team, concurrency=concurrency))
 
 def get_starting_player_data():
+    """Scrape start probabilities for every player on every La Liga team.
+
+    Slow (~20 sequential external page loads) and deliberately NOT part of
+    the daily `run()` pipeline — see the note above `if __name__ ==
+    "__main__":` below for how to invoke it directly. If this ends up
+    needing its own cadence (e.g. a couple of times a week, ahead of each
+    matchday, since lineups firm up close to kickoff), that should be a
+    separate scheduled workflow rather than folded into the daily Biwenger
+    scrape — a slow or blocked futbolfantasy.com shouldn't be able to hold
+    up the core pipeline. Out of scope here; not built.
+    """
     teams = [
-        'alaves', 'athletic', 'atletico', 'barcelona', 'betis', 
-        'celta', 'elche', 'espanyol', 'getafe', 'girona', 
-        'levante', 'mallorca', 'osasuna', 'rayo-vallecano', 
-        'real-madrid', 'real-oviedo', 'real-sociedad', 
+        'alaves', 'athletic', 'atletico', 'barcelona', 'betis',
+        'celta', 'elche', 'espanyol', 'getafe', 'girona',
+        'levante', 'mallorca', 'osasuna', 'rayo-vallecano',
+        'real-madrid', 'real-oviedo', 'real-sociedad',
         'sevilla', 'valencia', 'villarreal'
     ]
-    
-    all_data = pd.DataFrame()
-    
-    for team in teams:
-        print(f"\n=== Scraping {team.title()} ===")
-        team_df = scrape_player_probabilities_fast(team)
-        all_data = pd.concat([all_data, team_df], ignore_index=True)
-        
-        # Save progress after each team
-        all_data.to_csv("csvs/others/player_probabilities.csv", index=False)
-        print(f"Saved data for {team.title()}")
-    
-    print("\n=== All teams scraped successfully ===")
-    print(all_data)
-    all_data.to_csv("csvs/others/player_probabilities.csv", index=False)
 
-        
+    all_rows = []
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(headless=HEADLESS)
+        context = browser.new_context()
+        _block_heavy_resources(context)
+        page = context.new_page()
+
+        for team in teams:
+            print(f"\n=== Scraping {team.title()} ===")
+            try:
+                team_rows = _scrape_team_probabilities(page, team)
+            except Exception as e:
+                print(f"❌ {team}: unexpected error, skipping: {e}")
+                team_rows = []
+
+            all_rows.extend(team_rows)
+
+            # Save progress after each team so a later failure doesn't lose
+            # everything scraped so far.
+            pd.DataFrame(all_rows).to_csv("csvs/others/player_probabilities.csv", index=False)
+            print(f"Saved data for {team.title()} ({len(team_rows)} players, {len(all_rows)} total so far)")
+
+        browser.close()
+
+    df = pd.DataFrame(all_rows)
+    print(f"\n=== All teams scraped: {len(df)} total player probabilities ===")
+    df.to_csv("csvs/others/player_probabilities.csv", index=False)
+    return df
+
+
 if __name__ == "__main__":
     with sync_playwright() as playwright:
         run(playwright)

@@ -1,19 +1,19 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-CD Numancia,Cd_Numancia,Goalkeeper,Deportivo,Leo Roman,9,0,5020000,50000.0,Fit,1,9.0,9,9.0,0,0.0
-CD Numancia,Cd_Numancia,Goalkeeper,Levante,Ryan,5,0,4020000,20000.0,Fit,1,5.0,0,0.0,5,5.0
-CD Numancia,Cd_Numancia,Defender,Elche,Affengruber,4,0,3880000,-10000.0,Fit,1,4.0,0,0.0,4,4.0
-CD Numancia,Cd_Numancia,Defender,Villarreal,Foyth,4,0,3100000,140000.0,Fit,1,4.0,0,0.0,4,4.0
-CD Numancia,Cd_Numancia,Defender,Atletico,Grimaldo,0,0,7040000,30000.0,Fit,0,0.0,0,0.0,0,0.0
-CD Numancia,Cd_Numancia,Defender,Barcelona,Gerard Martin,0,146,4590000,20000.0,Fit,0,0.0,0,0.0,0,0.0
-CD Numancia,Cd_Numancia,Defender,Celta,Marcos Alonso,0,147,3820000,10000.0,Fit,0,0.0,0,0.0,0,0.0
-CD Numancia,Cd_Numancia,Defender,Celta,Javi Rodriguez,0,120,2250000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
-CD Numancia,Cd_Numancia,Defender,Athletic,Yeray,0,24,1900000,-30000.0,Fit,0,0.0,0,0.0,0,0.0
-CD Numancia,Cd_Numancia,Midfielder,Racing,Canales,5,0,7690000,30000.0,Fit,1,5.0,5,5.0,0,0.0
-CD Numancia,Cd_Numancia,Midfielder,Betis,Fornals,0,234,10270000,10000.0,Fit,0,0.0,0,0.0,0,0.0
-CD Numancia,Cd_Numancia,Midfielder,Atletico,Morten Hjulmand,0,0,5360000,-50000.0,Fit,0,0.0,0,0.0,0,0.0
-CD Numancia,Cd_Numancia,Midfielder,Celta,Miguel Roman,0,98,3240000,10000.0,Fit,0,0.0,0,0.0,0,0.0
-CD Numancia,Cd_Numancia,Midfielder,Malaga,Izan Merino,0,0,2510000,-30000.0,Fit,0,0.0,0,0.0,0,0.0
-CD Numancia,Cd_Numancia,Midfielder,Osasuna,Iker Munoz,0,61,570000,40000.0,Fit,0,0.0,0,0.0,0,0.0
-CD Numancia,Cd_Numancia,Forward,Racing,Inigo Vicente,6,0,5810000,60000.0,Fit,1,6.0,6,6.0,0,0.0
-CD Numancia,Cd_Numancia,Forward,Deportivo,Nsongo,5,0,2830000,60000.0,Fit,1,5.0,5,5.0,0,0.0
-CD Numancia,Cd_Numancia,Forward,Celta,Jutgla,0,146,4320000,10000.0,Fit,0,0.0,0,0.0,0,0.0
+CD Numancia,Cd_Numancia,Goalkeeper,Deportivo,Leo Roman,9,0,5070000,50000.0,Fit,1,9.0,9,9.0,0,0.0
+CD Numancia,Cd_Numancia,Goalkeeper,Levante,Ryan,5,0,4030000,10000.0,Fit,1,5.0,0,0.0,5,5.0
+CD Numancia,Cd_Numancia,Defender,Elche,Affengruber,4,0,3850000,-30000.0,Fit,1,4.0,0,0.0,4,4.0
+CD Numancia,Cd_Numancia,Defender,Villarreal,Foyth,4,0,3170000,70000.0,Fit,1,4.0,0,0.0,4,4.0
+CD Numancia,Cd_Numancia,Defender,Atletico,Grimaldo,0,0,7060000,20000.0,Fit,0,0.0,0,0.0,0,0.0
+CD Numancia,Cd_Numancia,Defender,Barcelona,Gerard Martin,0,146,4600000,10000.0,Fit,0,0.0,0,0.0,0,0.0
+CD Numancia,Cd_Numancia,Defender,Celta,Marcos Alonso,0,147,3830000,10000.0,Fit,0,0.0,0,0.0,0,0.0
+CD Numancia,Cd_Numancia,Defender,Celta,Javi Rodriguez,0,120,2230000,-20000.0,Fit,0,0.0,0,0.0,0,0.0
+CD Numancia,Cd_Numancia,Defender,Athletic,Yeray,0,24,1880000,-20000.0,Fit,0,0.0,0,0.0,0,0.0
+CD Numancia,Cd_Numancia,Midfielder,Racing,Canales,5,0,7720000,30000.0,Fit,1,5.0,5,5.0,0,0.0
+CD Numancia,Cd_Numancia,Midfielder,Betis,Fornals,0,234,10270000,0.0,Fit,0,0.0,0,0.0,0,0.0
+CD Numancia,Cd_Numancia,Midfielder,Atletico,Morten Hjulmand,0,0,5320000,-40000.0,Fit,0,0.0,0,0.0,0,0.0
+CD Numancia,Cd_Numancia,Midfielder,Celta,Miguel Roman,0,98,3240000,0.0,Fit,0,0.0,0,0.0,0,0.0
+CD Numancia,Cd_Numancia,Midfielder,Malaga,Izan Merino,0,0,2480000,-30000.0,Fit,0,0.0,0,0.0,0,0.0
+CD Numancia,Cd_Numancia,Midfielder,Osasuna,Iker Munoz,0,61,600000,30000.0,Fit,0,0.0,0,0.0,0,0.0
+CD Numancia,Cd_Numancia,Forward,Racing,Inigo Vicente,6,0,5850000,40000.0,Fit,1,6.0,6,6.0,0,0.0
+CD Numancia,Cd_Numancia,Forward,Deportivo,Nsongo,5,0,2890000,60000.0,Fit,1,5.0,5,5.0,0,0.0
+CD Numancia,Cd_Numancia,Forward,Celta,Jutgla,0,146,4330000,10000.0,Fit,0,0.0,0,0.0,0,0.0

@@ -1,17 +1,17 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Rayo Vallecano,Batalla,3,0,4010000,-30000.0,Fit,1,3.0,0,0.0,3,3.0
+Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Rayo Vallecano,Batalla,3,0,3980000,-30000.0,Fit,1,3.0,0,0.0,3,3.0
 Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Celta,Ivan Villar,0,0,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Defender,Alaves,Jonny Castro,4,0,1690000,40000.0,Fit,1,4.0,4,4.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Defender,Getafe,Abqar,2,0,1530000,10000.0,Fit,1,2.0,0,0.0,2,2.0
-Minabo de Kiev,Minabo_De_Kiev,Defender,Atletico,Pubill,0,114,6440000,-50000.0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Defender,Barcelona,Kounde,0,130,4770000,-30000.0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Rayo Vallecano,Oscar Valentin,3,0,1770000,10000.0,Fit,1,3.0,0,0.0,3,3.0
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Elche,Redondo,3,0,160000,10000.0,Fit,1,3.0,0,0.0,3,3.0
-Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Barcelona,Fermin,0,190,11710000,30000.0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Atletico,Barrios,0,119,6390000,20000.0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Barcelona,Marc Bernal,0,105,4520000,-60000.0,Fit,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Minabo_De_Kiev,Defender,Alaves,Jonny Castro,4,0,1720000,30000.0,Fit,1,4.0,4,4.0,0,0.0
+Minabo de Kiev,Minabo_De_Kiev,Defender,Getafe,Abqar,2,0,1540000,10000.0,Fit,1,2.0,0,0.0,2,2.0
+Minabo de Kiev,Minabo_De_Kiev,Defender,Atletico,Pubill,0,114,6390000,-50000.0,Fit,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Minabo_De_Kiev,Defender,Barcelona,Kounde,0,130,4750000,-20000.0,Fit,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Rayo Vallecano,Oscar Valentin,3,0,1780000,10000.0,Fit,1,3.0,0,0.0,3,3.0
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Elche,Redondo,3,0,180000,20000.0,Fit,1,3.0,0,0.0,3,3.0
+Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Barcelona,Fermin,0,190,11720000,10000.0,Fit,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Atletico,Barrios,0,119,6410000,20000.0,Fit,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Barcelona,Marc Bernal,0,105,4450000,-70000.0,Fit,0,0.0,0,0.0,0,0.0
 Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Real Sociedad,Pablo Marin,0,88,520000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Rayo Vallecano,De Frutos,2,0,6100000,-170000.0,Fit,1,2.0,0,0.0,2,2.0
-Minabo de Kiev,Minabo_De_Kiev,Forward,Racing,Villalibre,1,0,2870000,-130000.0,Fit,1,1.0,1,1.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Forward,Valencia,Hugo Duro,0,143,2870000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Forward,Getafe,Mayoral,0,58,1980000,-150000.0,Fit,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Rayo Vallecano,De Frutos,2,0,5960000,-140000.0,Fit,1,2.0,0,0.0,2,2.0
+Minabo de Kiev,Minabo_De_Kiev,Forward,Racing,Villalibre,1,0,2720000,-150000.0,Fit,1,1.0,1,1.0,0,0.0
+Minabo de Kiev,Minabo_De_Kiev,Forward,Valencia,Hugo Duro,0,143,2860000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Minabo_De_Kiev,Forward,Getafe,Mayoral,0,58,1870000,-110000.0,Fit,0,0.0,0,0.0,0,0.0

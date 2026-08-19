@@ -241,14 +241,20 @@ def build_recommendations(conn, date):
         # No historical signings in this bracket yet -> fall back to a
         # flat 5% cushion above asking price rather than no suggestion.
         bucket_markup = min(avg_bids, 10) * 0.02 if avg_bids else 0.05
-        # Momentum: a player already rising fast is likely still rising
-        # by the time a bid actually resolves, and fast risers typically
-        # draw more competing interest in the first place — a plain
-        # percentage-of-today's-price markup doesn't account for either.
-        # Add today's own growth as a floor on top of the competition
-        # markup (only when rising — a flat/falling price adds nothing).
-        momentum = max(change, 0) if pd.notna(change) else 0
-        return round((price * (1 + bucket_markup) + momentum) / 10_000) * 10_000
+        change = change if pd.notna(change) else 0
+        if change > 0:
+            # Rising: a fast riser is likely still rising by the time a
+            # bid resolves, and tends to draw more competing interest in
+            # the first place — add today's own growth on top of the
+            # full competition markup, not just a plain % of today's price.
+            return round((price * (1 + bucket_markup) + change) / 10_000) * 10_000
+        # Flat or falling: the bucket markup is a bracket-wide average
+        # of how much competition players in this price range typically
+        # draw — but a falling price is itself evidence THIS player
+        # isn't in demand right now, so that average doesn't really
+        # apply to him. Bid only a small fraction of the usual cushion,
+        # not the full competitive markup, on top of today's price.
+        return round(price * (1 + bucket_markup * 0.25) / 10_000) * 10_000
 
     buy = market.copy()
     buy.loc[:, 'start_pct'] = buy['probability'].apply(_parse_pct)

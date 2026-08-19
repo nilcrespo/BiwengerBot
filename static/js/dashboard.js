@@ -308,11 +308,11 @@ function renderBuyRecommendations(data) {
   renderTable(tbody, data, 9, (p) => {
     const bucketNote = p.bucket_avg_bids
       ? `${p.bucket_sample} historical signings in the ${p.bid_bucket} range drew ${parseFloat(p.bucket_avg_bids).toFixed(1)} bids on average`
-      : 'no historical signings in this price range yet, flat 5% cushion applied';
+      : 'no historical signings in this price range yet';
     const change = parseFloat(p.change);
     const momentumNote = change > 0
       ? ` + today's own +${formatMoney(change)} rise (a fast riser tends to keep rising and draw more competition)`
-      : '';
+      : ' — but the price is flat or falling, so that average competition doesn\'t really apply right now; only a small cushion above market price is added';
     const bidTitle = `Estimate: ${bucketNote}${momentumNote}`;
     return `
     <tr>

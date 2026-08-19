@@ -152,17 +152,30 @@ def _normalize(series):
         return pd.Series([50.0] * len(s), index=s.index)
     return (s - lo) / (hi - lo) * 100
 
-def _blended_pts(df):
-    """A talent/output estimate blending both seasons. last_season_pts
-    carries the full weight and this_season_pts only half — early in a
-    season, this_season is one or two matches of noisy signal, while
-    last_season is a full season of it, so it's the more reliable read
-    even though it's older. (A player with 0 last_season_pts is usually
-    on a newly-promoted club or a new/young signing, not necessarily
-    bad — the discount on this_season_pts still lets him be judged on
-    what he's shown so far, just not overweighted on a tiny sample.)
+# Rounds into the season at which this_season_pts is trusted as the
+# whole picture and last_season_pts stops counting at all. La Liga runs
+# 38 rounds; ~10 (roughly a quarter of the season) is the rough point
+# real analytics starts treating current-season sample size as reliable
+# on its own. Adjustable without touching the interpolation logic below.
+BLEND_TRANSITION_ROUNDS = 10
+
+def _blended_pts(df, rounds_played):
+    """A talent/output estimate blending both seasons, with the mix
+    sliding from "mostly last season" to "only this season" as the
+    season itself progresses — not a fixed split. At round 0,
+    last_season_pts carries full weight and this_season_pts half (one
+    or two matches is noisy; a full season isn't, even though it's
+    older). By BLEND_TRANSITION_ROUNDS, last_season_pts has decayed to
+    zero weight and this_season_pts carries full weight — enough matches
+    have been played that current form should stand on its own, and a
+    club promoted since last season (last_season_pts=0, not necessarily
+    a worse player) stops being penalized for something that was never a
+    real signal about them in the first place.
     """
-    return df['last_season_pts'].fillna(0) + df['this_season_pts'].fillna(0) * 0.5
+    progress = min(max(rounds_played, 0) / BLEND_TRANSITION_ROUNDS, 1.0)
+    last_weight = 1.0 - progress
+    this_weight = 0.5 + 0.5 * progress
+    return df['last_season_pts'].fillna(0) * last_weight + df['this_season_pts'].fillna(0) * this_weight
 
 def build_recommendations(conn, date):
     """Returns (buy_recommendations, sell_recommendations) — both filtered
@@ -173,6 +186,17 @@ def build_recommendations(conn, date):
     # span more than one run from the same calendar day — see
     # resolve_scraped_at's docstring.
     d = resolve_scraped_at(conn, date)
+
+    # How far into the season are we? team_players.played (matches
+    # actually appeared in) isn't itself a round counter, but the
+    # highest value across the whole scraped roster set is a reliable
+    # proxy for it — anyone who's played every match so far has played
+    # == rounds elapsed. Feeds _blended_pts' last-season/this-season mix.
+    rounds_row = pd.read_sql(
+        "SELECT MAX(played) AS rounds FROM team_players WHERE scraped_at LIKE ?",
+        conn, params=(d,)
+    )
+    rounds_played = int(rounds_row['rounds'].iloc[0]) if len(rounds_row) and pd.notna(rounds_row['rounds'].iloc[0]) else 0
 
     market = pd.read_sql(
         """
@@ -271,7 +295,7 @@ def build_recommendations(conn, date):
 
     buy = market.copy()
     buy.loc[:, 'start_pct'] = buy['probability'].apply(_parse_pct)
-    buy.loc[:, 'blended_pts'] = _blended_pts(buy)
+    buy.loc[:, 'blended_pts'] = _blended_pts(buy, rounds_played)
     # Two different lenses on blended_pts: talent_score is "how good is
     # this player, full stop" (rewards proven output regardless of
     # price); value_score is "how good per euro" (rewards bargains).
@@ -369,7 +393,7 @@ def build_recommendations(conn, date):
     # every other component (100 - normalize(talent)) so a proven
     # performer pulls the score DOWN regardless of how good the offer
     # looks, instead of a good offer unconditionally maxing the score.
-    sell_pool.loc[:, 'blended_pts'] = _blended_pts(sell_pool)
+    sell_pool.loc[:, 'blended_pts'] = _blended_pts(sell_pool, rounds_played)
     sell_pool.loc[:, 'talent_keep'] = 100 - _normalize(sell_pool['blended_pts'])
     sell_pool.loc[:, 'score'] = (
         0.25 * _normalize(sell_pool['bench_score']) +
@@ -457,7 +481,7 @@ def build_recommendations(conn, date):
     # unrelated reasons (e.g. a generous offer) doesn't make him the
     # right size for THIS shortfall if he costs 10M and the gap is 1.4M.
     funding_pool = sell_pool.copy()
-    funding_pool.loc[:, 'blended_pts'] = _blended_pts(funding_pool)
+    funding_pool.loc[:, 'blended_pts'] = _blended_pts(funding_pool, rounds_played)
     funding_pool.loc[:, 'keep_value'] = funding_pool['blended_pts'] + funding_pool['start_pct'] * 0.5
     funding_pool.loc[:, 'already_recommended'] = funding_pool.index.isin(sell_recommendations.index)
     # Top quartile of keep_value on the squad = a "star" — someone worth
@@ -571,7 +595,22 @@ def build_recommendations(conn, date):
         0.6 * _normalize(buy_recommendations['funding_points_given_up']) +
         0.4 * _normalize(buy_recommendations['funding_players_sold'])
     ) * 0.3  # secondary adjustment, not the dominant factor in the score
-    # Leaving the squad unable to field 11 isn't a matter of degree.
+
+    # A candidate whose own price is climbing fast has real upside that
+    # offsets some of what funding him costs — today's rise is money on
+    # the table for as long as it holds. Discount the penalty for that,
+    # but only partially (capped at 40%) and visibly (momentum_discount_pct
+    # is its own field, not folded away): one day's price movement is a
+    # real signal, not a forecast, and shouldn't erase a genuine funding
+    # cost just because a player looks hot today.
+    buy_recommendations.loc[:, 'momentum_discount_pct'] = (
+        (_normalize(buy_recommendations['momentum_pct']) / 100).clip(lower=0, upper=1) * 40
+    ).round(1)
+    buy_recommendations.loc[:, 'funding_penalty'] = (
+        buy_recommendations['funding_penalty'] * (1 - buy_recommendations['momentum_discount_pct'] / 100)
+    )
+    # Leaving the squad unable to field 11 isn't a matter of degree — no
+    # amount of momentum makes that an acceptable trade.
     buy_recommendations.loc[buy_recommendations['funding_leaves_squad_thin'], 'funding_penalty'] = 100.0
     buy_recommendations.loc[:, 'score'] = (
         buy_recommendations['score'] - buy_recommendations['funding_penalty']

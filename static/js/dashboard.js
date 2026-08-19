@@ -294,12 +294,21 @@ function affordabilityCell(p) {
   if (!shortfall || shortfall <= 0) {
     return '<span class="pill prob-high">✅ In balance</span>';
   }
+  if (p.funding_leaves_squad_thin) {
+    const title = `Short ${formatMoney(shortfall)} — covering it would require selling enough players `
+      + `(${p.funding_players_sold}, worth ${p.funding_points_given_up.toFixed(0)} pts of output) to leave the squad `
+      + `unable to field a full lineup. Already factored into the score above.`;
+    return `<span class="pill prob-low" title="${escapeHtml(title)}">⚠️ Would gut the squad</span>`;
+  }
   const funded = p.funded_without_hard_choices;
   const cls = funded ? 'prob-mid' : 'prob-low';
   const label = funded ? '⚠️ Needs a sale' : '⚠️ Short even after sells';
+  const costNote = p.funding_players_sold
+    ? ` (${p.funding_players_sold} player${p.funding_players_sold === 1 ? '' : 's'}, ~${p.funding_points_given_up.toFixed(0)} pts of output given up — already factored into the score)`
+    : '';
   const title = p.funding_plan
-    ? `Short ${formatMoney(shortfall)} of balance — would need to sell: ${p.funding_plan}`
-    : `Short ${formatMoney(shortfall)} of balance — no sell recommendations available to cover it today`;
+    ? `Short ${formatMoney(shortfall)} of balance — would need to sell: ${p.funding_plan}${costNote}`
+    : `Short ${formatMoney(shortfall)} of balance — no sell candidates available to cover it today`;
   return `<span class="pill ${cls}" title="${escapeHtml(title)}">${label}</span>`;
 }
 
@@ -330,6 +339,21 @@ function renderBuyRecommendations(data) {
   });
 }
 
+function offerCell(p) {
+  if (!p.offer_price) return '<span class="cell-muted">—</span>';
+  const premium = parseFloat(p.offer_premium_pct);
+  let cls = 'prob-mid';
+  let title = 'Roughly fair value — no strong reason to rush or wait';
+  if (p.offer_is_generous) {
+    cls = 'prob-high';
+    title = `Beats current market price by ${premium.toFixed(1)}% — worth grabbing even if you weren't already planning to sell`;
+  } else if (p.offer_is_lowball) {
+    cls = 'prob-low';
+    title = `${Math.abs(premium).toFixed(1)}% below current market price — consider waiting for a better one instead of taking this`;
+  }
+  return `<span class="pill ${cls}" title="${escapeHtml(title)}">${formatMoney(p.offer_price)}</span>`;
+}
+
 function renderSellRecommendations(data) {
   const tbody = document.querySelector('#sellTable tbody');
   renderTable(tbody, data, 9, (p) => `
@@ -339,7 +363,7 @@ function renderSellRecommendations(data) {
       <td class="cell-primary">${escapeHtml(p.player)}</td>
       <td class="num">${formatMoney(p.current_price)}</td>
       <td class="num">${p.profit === null || p.profit === undefined ? '<span class="cell-muted">—</span>' : formatDelta(p.profit)}</td>
-      <td class="num">${p.offer_price ? `<span class="pill prob-high">${formatMoney(p.offer_price)}</span>` : '<span class="cell-muted">—</span>'}</td>
+      <td class="num">${offerCell(p)}</td>
       <td class="num">${startPctCell(p.probability)}</td>
       <td>${statusPill(p.status)}</td>
       <td class="num">${scoreBadge(p.score)}</td>

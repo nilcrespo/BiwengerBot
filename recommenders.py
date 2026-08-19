@@ -326,32 +326,86 @@ def build_recommendations(conn, date):
     sell_pool = attach_probabilities(sell_pool, prob_df, name_col='player', club_col='club')
     sell_pool.loc[:, 'start_pct'] = sell_pool['probability'].apply(_parse_pct)
     sell_pool.loc[:, 'bench_score'] = 100 - sell_pool['start_pct']
-    sell_pool.loc[:, 'profit'] = sell_pool['current_price'] - sell_pool['buy_price']
+    sell_pool.loc[:, 'has_offer'] = sell_pool['offer_price'].notna()
+    # Profit should reflect what you'd actually be paid, not an abstract
+    # valuation — when there's a live offer, that's the real number
+    # (offer_price is a guaranteed instant sale, current_price is just
+    # today's listed value, never actually paid to you as-is).
+    sell_pool.loc[:, 'effective_price'] = sell_pool['offer_price'].where(sell_pool['has_offer'], sell_pool['current_price'])
+    sell_pool.loc[:, 'profit'] = sell_pool['effective_price'] - sell_pool['buy_price']
     sell_pool.loc[:, 'profit_pct'] = (sell_pool['profit'] / sell_pool['buy_price']).where(sell_pool['buy_price'] > 0)
     sell_pool.loc[:, 'injured'] = sell_pool['status'].fillna('').str.startswith(('Injured', 'Doubtful'))
-    sell_pool.loc[:, 'has_offer'] = sell_pool['offer_price'].notna()
-    sell_pool.loc[:, 'score'] = (
-        0.5 * _normalize(sell_pool['bench_score']) +
-        0.4 * _normalize(sell_pool['profit_pct'].fillna(0).clip(lower=0)) +
-        0.1 * sell_pool['injured'].map({True: 100.0, False: 0.0})
-    ).round(1)
-    sell_pool.loc[sell_pool['has_offer'], 'score'] = 100.0
+    # An offer existing isn't itself the signal — biwenger.as.com/market/
+    # offers shows one of these for basically every squad player (its own
+    # algorithmic "instant sale" price), and it's routinely BELOW the
+    # listed price, not just above. What matters is whether it's actually
+    # a good deal: offer_premium_pct compares it to today's market price
+    # (positive = the guaranteed offer beats what he's listed for;
+    # meaningfully negative = a discount not worth taking, i.e. "wait for
+    # a better one" rather than an automatic reason to sell).
+    sell_pool.loc[:, 'offer_premium_pct'] = (
+        (sell_pool['offer_price'] - sell_pool['current_price']) / sell_pool['current_price'] * 100
+    ).where(sell_pool['has_offer'] & (sell_pool['current_price'] > 0))
+    sell_pool.loc[:, 'offer_is_generous'] = sell_pool['has_offer'] & (sell_pool['offer_premium_pct'] >= 3)
+    sell_pool.loc[:, 'offer_is_lowball'] = sell_pool['has_offer'] & (sell_pool['offer_premium_pct'] < -3)
 
-    # Only surface sells that actually make sense: a live cash offer
-    # (always worth a look), meaningful banked profit on a player who
-    # isn't nailed to the starting XI, a clear loss worth cutting before
-    # it drops further, or bench fodder with no games and no cost basis
-    # to protect. A nailed-on starter (>=70% start odds) only qualifies
-    # if the payday is large enough to outweigh the points they'd score.
+    # A good offer alone doesn't mean sell — a productive starter is
+    # still worth keeping for the points, not just the cash (the goal is
+    # points AND money). talent_keep is how much output he'd be taking
+    # with him, expressed the same "more = more sellable" direction as
+    # every other component (100 - normalize(talent)) so a proven
+    # performer pulls the score DOWN regardless of how good the offer
+    # looks, instead of a good offer unconditionally maxing the score.
+    sell_pool.loc[:, 'blended_pts'] = sell_pool['this_season_pts'].fillna(0) + sell_pool['last_season_pts'].fillna(0) * 0.5
+    sell_pool.loc[:, 'talent_keep'] = 100 - _normalize(sell_pool['blended_pts'])
+    sell_pool.loc[:, 'score'] = (
+        0.25 * _normalize(sell_pool['bench_score']) +
+        0.20 * _normalize(sell_pool['profit_pct'].fillna(0).clip(lower=0)) +
+        0.10 * sell_pool['injured'].map({True: 100.0, False: 0.0}) +
+        0.20 * _normalize(sell_pool['offer_premium_pct'].fillna(0)) +
+        0.25 * sell_pool['talent_keep']
+    ).round(1)
+
+    # Positional depth veto: don't recommend selling a player if he's
+    # currently the ONLY viable (start_pct >= 40) cover at a position he
+    # plays — no offer or profit is worth leaving a lineup hole. Counts
+    # are taken before any hypothetical sale, per position, across the
+    # whole squad.
+    viable_by_position = {'GK': 0, 'DEF': 0, 'MID': 0, 'FWD': 0}
+    for _, row in sell_pool[sell_pool['start_pct'] >= 40].iterrows():
+        for token in str(row['position']).split('/'):
+            label = POSITION_LABELS.get(token.strip())
+            if label:
+                viable_by_position[label] += 1
+
+    def _leaves_thin(position_str, start_pct):
+        if start_pct < 40:
+            return False  # wasn't part of the viable count to begin with
+        tokens = [POSITION_LABELS.get(t.strip()) for t in str(position_str).split('/')]
+        return any(viable_by_position.get(t, 0) <= 1 for t in tokens if t)
+
+    sell_pool.loc[:, 'leaves_thin'] = sell_pool.apply(
+        lambda r: _leaves_thin(r['position'], r['start_pct']), axis=1
+    )
+
+    # Only surface sells that actually make sense: an offer that beats
+    # market value (worth grabbing even for a player you weren't
+    # otherwise planning to move), meaningful banked profit on a player
+    # who isn't nailed to the starting XI, a clear loss worth cutting
+    # before it drops further, or bench fodder with no games and no cost
+    # basis to protect. A nailed-on starter (>=70% start odds) only
+    # qualifies if the payday is large enough to outweigh the points
+    # they'd score, or the going-rate offer itself is what's compelling —
+    # and never if it would leave a position with no viable cover at all.
     profit_pct = sell_pool['profit_pct']
     is_starter = sell_pool['start_pct'] >= 70
     worth_selling = (
-        sell_pool['has_offer']
+        sell_pool['offer_is_generous']
         | (profit_pct.notna() & (profit_pct >= 0.15) & ~is_starter)
         | (profit_pct.notna() & (profit_pct <= -0.15))
         | (sell_pool['buy_price'].isna() & (sell_pool['start_pct'] <= 20))
         | (profit_pct.notna() & (profit_pct >= 0.5))
-    )
+    ) & ~sell_pool['leaves_thin']
     sell_recommendations = sell_pool[worth_selling].sort_values('score', ascending=False)
 
     # --- Affordability: Biwenger requires a non-negative balance heading
@@ -375,30 +429,115 @@ def build_recommendations(conn, date):
         conn, params=(d,)
     )
     my_balance = float(balance_row['balance'].iloc[0]) if len(balance_row) else 0.0
-    sorted_sells = sell_recommendations.sort_values('score', ascending=False)
-    sell_names = sorted_sells['player'].tolist()
-    sell_prices = sorted_sells['current_price'].tolist()
-    raisable_from_sells = float(sum(sell_prices))
+
+    # Funding candidates draw from the WHOLE roster, not just today's sell
+    # recommendations — restricting to that short list meant a modest
+    # shortfall with no small "worth selling anyway" candidates available
+    # had nowhere to go but a star player (e.g. suggesting Pedri to cover
+    # a 1.3M gap, wildly disproportionate — "overkill", per the user).
+    # Price ascending is the PRIMARY sort — cheapest, least-disruptive
+    # sells get used first, which is what actually avoids overkill.
+    # is_star is a hard-ish gate ahead of that (protect proven players
+    # even if one happens to be cheap-ish relative to a big shortfall);
+    # "already recommended for other reasons" is deliberately only a
+    # tiebreaker, not a priority driver — a player being a good sell for
+    # unrelated reasons (e.g. a generous offer) doesn't make him the
+    # right size for THIS shortfall if he costs 10M and the gap is 1.4M.
+    funding_pool = sell_pool.copy()
+    funding_pool.loc[:, 'blended_pts'] = funding_pool['this_season_pts'].fillna(0) + funding_pool['last_season_pts'].fillna(0) * 0.5
+    funding_pool.loc[:, 'keep_value'] = funding_pool['blended_pts'] + funding_pool['start_pct'] * 0.5
+    funding_pool.loc[:, 'already_recommended'] = funding_pool.index.isin(sell_recommendations.index)
+    # Top quartile of keep_value on the squad = a "star" — someone worth
+    # actively protecting, only tapped if nothing smaller covers the gap.
+    star_cutoff = funding_pool['keep_value'].quantile(0.75) if len(funding_pool) else 0
+    funding_pool.loc[:, 'is_star'] = funding_pool['keep_value'] >= star_cutoff
+    funding_pool = funding_pool.sort_values(
+        by=['is_star', 'current_price', 'already_recommended'],
+        ascending=[True, True, False]
+    )
+    funding_candidates = funding_pool[['player', 'current_price', 'is_star']].to_dict('records')
+    raisable_from_sells = float(funding_pool['current_price'].sum())
 
     def _funding_plan(shortfall):
-        """Greedy: your best sell-candidates first (the ones you'd want
-        to move anyway), stopping as soon as they cover the shortfall —
-        names the actual players, not just a euro total, so "is this
-        worth it" is a real judgment call instead of a hidden number."""
+        """Greedy over funding_candidates (already ordered cheapest/most-
+        expendable first): stop as soon as the shortfall is covered.
+        Returns the plan as both a name list (for a UI breakdown) and a
+        flag for whether it had to reach into a star player — that's a
+        materially different, worse answer than "sell some squad depth"
+        and callers should be able to warn about it distinctly."""
         if shortfall <= 0:
-            return ''
-        total, names = 0.0, []
-        for name, price in zip(sell_names, sell_prices):
-            names.append(name)
-            total += price
+            return {'names': '', 'details': [], 'requires_star': False}
+        total, details = 0.0, []
+        for c in funding_candidates:
             if total >= shortfall:
                 break
-        return ', '.join(names)
+            details.append({'player': c['player'], 'price': c['current_price'], 'is_star': bool(c['is_star'])})
+            total += c['current_price']
+        return {
+            'names': ', '.join(d['player'] for d in details),
+            'details': details,
+            'requires_star': any(d['is_star'] for d in details),
+        }
 
     buy_recommendations = buy_recommendations.copy()
     buy_recommendations.loc[:, 'shortfall'] = (buy_recommendations['suggested_bid'] - my_balance).clip(lower=0)
     buy_recommendations.loc[:, 'raisable_from_sells'] = raisable_from_sells
     buy_recommendations.loc[:, 'funded_without_hard_choices'] = buy_recommendations['shortfall'] <= raisable_from_sells
-    buy_recommendations.loc[:, 'funding_plan'] = buy_recommendations['shortfall'].apply(_funding_plan)
+    plans = buy_recommendations['shortfall'].apply(_funding_plan)
+    buy_recommendations.loc[:, 'funding_plan'] = plans.apply(lambda p: p['names'])
+    buy_recommendations.loc[:, 'funding_details'] = plans.apply(lambda p: p['details'])
+    buy_recommendations.loc[:, 'funding_requires_star'] = plans.apply(lambda p: p['requires_star'])
+
+    # The score so far only judges the player himself — it's blind to
+    # what funding the bid actually costs. Selling a pile of players (or
+    # ones with real point potential) to afford a bid is a worse deal
+    # than the same bid funded from cash on hand, and could leave the
+    # rest of the squad unable to field a full, credible XI — that has
+    # to feed back into the score, not just sit in a side panel. Broken
+    # into visible parts ("desgranable") rather than one opaque number:
+    # how many players, how many points those players would have scored,
+    # and whether the remaining squad can still field a real lineup.
+    def _funding_impact(details):
+        if not details:
+            return {'players_sold': 0, 'points_given_up': 0.0, 'leaves_squad_thin': False}
+        names = {d['player'] for d in details}
+        sold = funding_pool[funding_pool['player'].isin(names)]
+        remaining = funding_pool[~funding_pool['player'].isin(names)]
+        points_given_up = float(sold['blended_pts'].sum())
+        # Rough "can still field 11" proxy: at least one viable GK, and
+        # at least 10 more viable (start_pct >= 40) outfield players
+        # left across the rest of the squad. An approximation, not an
+        # exact lineup-legality check (formations vary) — but a squad
+        # that fails this is clearly in trouble.
+        viable_after = {'GK': 0, 'DEF': 0, 'MID': 0, 'FWD': 0}
+        for _, row in remaining[remaining['start_pct'] >= 40].iterrows():
+            for token in str(row['position']).split('/'):
+                label = POSITION_LABELS.get(token.strip())
+                if label:
+                    viable_after[label] += 1
+        leaves_squad_thin = viable_after['GK'] == 0 or sum(viable_after.values()) < 11
+        return {
+            'players_sold': len(names),
+            'points_given_up': points_given_up,
+            'leaves_squad_thin': leaves_squad_thin,
+        }
+
+    impact = buy_recommendations['funding_details'].apply(_funding_impact)
+    buy_recommendations.loc[:, 'funding_players_sold'] = impact.apply(lambda i: i['players_sold'])
+    buy_recommendations.loc[:, 'funding_points_given_up'] = impact.apply(lambda i: i['points_given_up'])
+    buy_recommendations.loc[:, 'funding_leaves_squad_thin'] = impact.apply(lambda i: i['leaves_squad_thin'])
+    buy_recommendations.loc[:, 'funding_penalty'] = (
+        0.6 * _normalize(buy_recommendations['funding_points_given_up']) +
+        0.4 * _normalize(buy_recommendations['funding_players_sold'])
+    ) * 0.3  # secondary adjustment, not the dominant factor in the score
+    # Leaving the squad unable to field 11 isn't a matter of degree.
+    buy_recommendations.loc[buy_recommendations['funding_leaves_squad_thin'], 'funding_penalty'] = 100.0
+    buy_recommendations.loc[:, 'score'] = (
+        buy_recommendations['score'] - buy_recommendations['funding_penalty']
+    ).clip(lower=0).round(1)
+    # Re-apply the same quality bar now that funding cost is factored in
+    # — a bid that only cleared 40 before accounting for what it costs to
+    # fund isn't actually a real deal once that's priced in.
+    buy_recommendations = buy_recommendations[buy_recommendations['score'] >= 40].sort_values('score', ascending=False)
 
     return buy_recommendations, sell_recommendations

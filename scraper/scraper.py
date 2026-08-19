@@ -590,22 +590,28 @@ def _capture_auth_headers(page, path="/team") -> dict:
     return captured
 
 def get_my_offers(page) -> list:
-    """Scrape pending purchase offers other managers (human or AI-run
-    rivals) have placed on the logged-in user's players.
+    """Scrape purchase offers currently open on the logged-in user's
+    players — what shows on biwenger.as.com/market/offers under
+    "Purchase offers received for your players".
 
-    Distinct from the market's own passive "on sale" listing — every
-    owned player already has one of those by default, at roughly market
-    value, which we already capture via team_players.price. An entry
-    here means someone has actively offered real money for a specific
-    player right now, which the sell recommender should treat as a much
-    stronger signal than any heuristic score.
+    /api/v2/user?fields=offers (tried first, historically) is a red
+    herring — it's scoped to something else and was empty even with 14
+    real offers live and visible on the actual offers page. The real
+    data is /api/v2/market's `data.offers` array: one entry per squad
+    player, `to` is the logged-in user, `from` is null (these are
+    Biwenger's own algorithmic "instant sale to the Market" price, not a
+    specific rival manager), `amount` is the offer, `requestedPlayers`
+    is a one-element list with the numeric player id. Confirmed live —
+    every amount matched the real page's numbers exactly (e.g. De la
+    Fuente: listed €3,230,000, offer €3,380,200, a +€150,200 premium).
 
-    As of writing, this account has zero pending offers, so the exact
-    shape of a populated offer object is unverified beyond what
-    Biwenger's market entries look like (playerID, price, date, until).
-    Every field on each raw offer is preserved as-is (not just a
-    hand-picked subset) so nothing is lost once real examples start
-    showing up — check the raw_json column in bad-scrape cases.
+    Distinct from the market's own passive "on sale" listing (every
+    owned player already has one of those, at roughly market value,
+    already captured via team_players.price): this is what you'd
+    actually be paid for an immediate guaranteed sale right now, which
+    can be above OR below the listed price — the gap between the two is
+    exactly the "is this offer worth taking" signal the sell recommender
+    needs, not just whether an offer exists at all.
     """
     headers = _capture_auth_headers(page)
     if not headers:
@@ -614,14 +620,14 @@ def get_my_offers(page) -> list:
 
     try:
         resp = page.request.get(
-            "https://biwenger.as.com/api/v2/user?fields=offers",
+            "https://biwenger.as.com/api/v2/market",
             headers=headers,
         )
         if resp.status != 200:
             print(f"⚠️ Offers request failed: HTTP {resp.status}")
             return []
         offers = resp.json().get("data", {}).get("offers", []) or []
-        print(f"📨 {len(offers)} pending offer(s) on my players")
+        print(f"📨 {len(offers)} offer(s) on my players")
         return offers
     except Exception as e:
         print(f"⚠️ Could not fetch offers: {e}")
@@ -997,11 +1003,16 @@ def run(playwright: Playwright) -> None:
     # and (below) to price today's renewals.
     offers = get_my_offers(page)
     la_liga_players = get_la_liga_players()
+
+    def _offer_player_id(o):
+        players = o.get("requestedPlayers") or []
+        return players[0] if players else None
+
     offer_rows = [{
-        "player_id": o.get("playerID"),
-        "player_name": (la_liga_players.get(o.get("playerID")) or {}).get("name"),
-        "price": o.get("price"),
-        "date": o.get("date"),
+        "player_id": _offer_player_id(o),
+        "player_name": (la_liga_players.get(_offer_player_id(o)) or {}).get("name"),
+        "price": o.get("amount"),
+        "date": o.get("created"),
         "until": o.get("until"),
         "raw_json": json.dumps(o),
         "scraped_at": pd.Timestamp.now().strftime("%Y-%m-%d"),

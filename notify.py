@@ -108,7 +108,11 @@ def build_digest(conn, date) -> str:
     if len(sell_df):
         lines = [f"📤 <b>Sell: {len(sell_df)} candidate(s)</b>"]
         for _, r in sell_df.head(5).iterrows():
-            tag = " 🔥 LIVE OFFER" if r.get('has_offer') else ""
+            tag = ""
+            if r.get('offer_is_generous'):
+                tag = f" 🔥 offer beats market by {r['offer_premium_pct']:.1f}% — worth grabbing"
+            elif r.get('offer_is_lowball'):
+                tag = f" ⏳ offer is {abs(r['offer_premium_pct']):.1f}% under market — consider waiting"
             profit = _money(r['profit']) if pd.notna(r['profit']) else "—"
             lines.append(f"  • {r['player']} ({r['club']}) — profit {profit}, score {r['score']}{tag}")
         sections.append("\n".join(lines))

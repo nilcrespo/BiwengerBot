@@ -101,13 +101,19 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Add and commit files
+          # Add and commit files. unique_posts.json is the forum-post
+          # scrape checkpoint (get_all_posts() reads it back in on the
+          # next run to fetch only what's new) — it was missing from
+          # this list, so any run where new posts actually showed up
+          # left it as an uncommitted change that blocked the rebase
+          # below with "cannot rebase: you have unstaged changes",
+          # losing that whole run's data (the commit never got pushed).
           git add csvs/others/league_standings.csv || true
           git add csvs/market/market_players.csv || true
-          git add csvs/others/players.csv || true
           git add csvs/others/player_probabilities.csv || true
           git add csvs/teams/team_*.csv 2>/dev/null || true
           git add data/biwenger_data.db || true
+          git add unique_posts.json || true
 
           git commit -m "data: update CSV/DB from run ${GITHUB_RUN_NUMBER}" || echo "No changes"
 

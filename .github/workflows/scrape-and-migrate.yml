@@ -84,6 +84,18 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
+      - name: Export static site
+        # /api/data is just a once-daily SQLite query — freeze today's
+        # snapshot to docs/ instead of paying for an always-on host to
+        # serve it live. Deployed by the deploy-pages job below.
+        run: |
+          python export_static.py
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
       - name: Update repository
         run: |
           git config user.name "github-actions[bot]"
@@ -114,3 +126,17 @@ jobs:
           git fetch origin main
           git rebase origin/main -X ours
           git push
+
+  deploy-pages:
+    needs: run
+    runs-on: ubuntu-22.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

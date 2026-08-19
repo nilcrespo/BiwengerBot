@@ -508,7 +508,14 @@ function loadData() {
   setLoading(true);
   showError(null);
 
-  fetch(`/api/data?date=${encodeURIComponent(state.date)}`)
+  // On the static (GitHub Pages) export there's no Flask backend to hit
+  // — the daily Action freezes today's snapshot to this file instead.
+  // window.__staticMode is only set in that exported page.
+  const dataUrl = window.__staticMode
+    ? 'data.json'
+    : `/api/data?date=${encodeURIComponent(state.date)}`;
+
+  fetch(dataUrl)
     .then((response) => {
       if (!response.ok) throw new Error(`Server returned ${response.status}`);
       return response.json();

@@ -43,15 +43,23 @@ def get_data():
     conn = sqlite3.connect('data/biwenger_data.db')
     conn.row_factory = sqlite3.Row
 
+    # A calendar date can have more than one scrape behind it (manual
+    # reruns, retries) — resolve to the single latest run's exact
+    # timestamp up front so every query below pulls one consistent
+    # snapshot instead of unioning rows across runs. See
+    # recommenders.resolve_scraped_at's docstring for the failure mode
+    # this fixes (accumulating/duplicated-looking data).
+    d = recommenders.resolve_scraped_at(conn, date)
+
     # --- League standings ---
     standings = pd.read_sql(
         """
         SELECT position, name, points, value_change, is_me
         FROM teams
-        WHERE scraped_at LIKE ?    -- match 'YYYY-MM-DD%'
+        WHERE scraped_at LIKE ?
         ORDER BY position
         """,
-        conn, params=(f"{date}%",)
+        conn, params=(d,)
     )
     standings = standings.rename(columns={'position': 'pos', 'name': 'team'})
 
@@ -65,7 +73,7 @@ def get_data():
         ORDER BY price DESC
         LIMIT 50
         """,
-        conn, params=(f"{date}%",)
+        conn, params=(d,)
     )
 
     # --- Team valuations summary ---
@@ -87,14 +95,14 @@ def get_data():
         GROUP BY tp.team_id
         ORDER BY total_value DESC
         """,
-        conn, params=(f"{date}%", f"{date}%", f"{date}%")
+        conn, params=(d, d, d)
     )
 
     # Position breakdown per team (GK/DEF/MID/FWD counts) — dual-position
     # players ("Defender/Midfielder") count toward each position they cover.
     positions_df = pd.read_sql(
         "SELECT team_id, position FROM team_players WHERE scraped_at LIKE ?",
-        conn, params=(f"{date}%",)
+        conn, params=(d,)
     )
     pos_counts = {}
     for _, row in positions_df.iterrows():
@@ -124,7 +132,7 @@ def get_data():
         WHERE scraped_at LIKE ?
         ORDER BY team_id, price DESC
         """,
-        conn, params=(f"{date}%",)
+        conn, params=(d,)
     )
 
     # --- Start-probability matching (see recommenders._find_probability
@@ -134,7 +142,7 @@ def get_data():
     prob_df = pd.read_sql(
         "SELECT player_name, team_name, probability FROM player_probabilities "
         "WHERE scraped_at LIKE ? AND probability != '0%'",
-        conn, params=(f"{date}%",)
+        conn, params=(d,)
     )
     market = attach_probabilities(market, prob_df)
     team_players = attach_probabilities(team_players, prob_df)
@@ -159,7 +167,7 @@ def get_data():
         WHERE op.scraped_at LIKE ?
         ORDER BY profit DESC
         """,
-        conn, params=(f"{date}%", f"{date}%", f"{date}%")
+        conn, params=(d, d, d)
     )
 
     my_sales = pd.read_sql(
@@ -170,7 +178,7 @@ def get_data():
         WHERE rt.scraped_at LIKE ? AND rt.profit IS NOT NULL
         ORDER BY rt.profit DESC
         """,
-        conn, params=(f"{date}%", f"{date}%")
+        conn, params=(d, d)
     )
 
     conn.close()

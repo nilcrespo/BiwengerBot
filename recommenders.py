@@ -85,6 +85,28 @@ def to_records(df):
     (and pandas NaT) for None before to_dict."""
     return df.astype(object).where(pd.notna(df), None).to_dict('records')
 
+def resolve_scraped_at(conn, date):
+    """A calendar date can have more than one scrape behind it — a manual
+    workflow_dispatch rerun, a retry after a failure, testing — and every
+    one of those runs shares the same 'YYYY-MM-DD' prefix. Querying with
+    `scraped_at LIKE 'date%'` (the old approach, used everywhere) silently
+    unions rows from ALL of that date's runs instead of picking one,
+    which is exactly what looked like "accumulating instead of
+    refreshing": double-counted market listings, duplicated squad rows,
+    inflated recommendation pools.
+
+    This resolves `date` to the single latest run's exact scraped_at
+    timestamp, so callers can filter with `scraped_at = ?` and always get
+    one consistent snapshot. Falls back to the `date%` prefix itself if
+    nothing matches, so a caller that doesn't get a real hit here still
+    behaves the same (correctly empty) way it did before.
+    """
+    row = conn.execute(
+        "SELECT MAX(scraped_at) FROM teams WHERE scraped_at LIKE ?",
+        (f"{date}%",)
+    ).fetchone()
+    return row[0] if row and row[0] else f"{date}%"
+
 POSITION_LABELS = {'Goalkeeper': 'GK', 'Defender': 'DEF', 'Midfielder': 'MID', 'Forward': 'FWD'}
 
 # ---------- Buy/sell recommenders ----------
@@ -134,7 +156,10 @@ def build_recommendations(conn, date):
     to candidates that actually clear a real quality bar, not just "top N
     of whatever's available today" (see the buy/sell filtering comments
     below for what "clears the bar" means for each)."""
-    d = f"{date}%"
+    # Exact match on one resolved run, not a `date%` prefix that could
+    # span more than one run from the same calendar day — see
+    # resolve_scraped_at's docstring.
+    d = resolve_scraped_at(conn, date)
 
     market = pd.read_sql(
         """

@@ -25,9 +25,18 @@ def normalize_team_key(name):
 def migrate_csv_to_db(days_behind=0):
     # Ensure data directory exists
     os.makedirs('data', exist_ok=True)
-    
+
     conn = sqlite3.connect('data/biwenger_data.db')
     cursor = conn.cursor()
+
+    # One shared timestamp for every table written by this run. Calling
+    # datetime.now() separately per table (the old behavior) let two
+    # tables from the *same* migration run end up with different
+    # scraped_at values if a second boundary happened to fall between
+    # them — harmless-looking, but it broke the assumption every
+    # dashboard/recommender query relies on: that a single scraped_at
+    # value identifies one complete, self-consistent snapshot.
+    now = (datetime.now() - timedelta(days=days_behind)).strftime('%Y-%m-%d %H:%M:%S')
     
     # Initialize tables if they don't exist
     cursor.execute('''
@@ -107,7 +116,7 @@ def migrate_csv_to_db(days_behind=0):
             # exact literal "Free agent".
             df = df[df['owner'].str.lower() == 'free agent']
 
-            df['scraped_at'] = ((datetime.now()-timedelta(days=days_behind))).strftime('%Y-%m-%d %H:%M:%S')
+            df['scraped_at'] = now
 
             # Select only the columns we need. Older CSVs (pre-rename) won't
             # have 'change'/'status'/'recent_pts', or will still have the
@@ -141,7 +150,7 @@ def migrate_csv_to_db(days_behind=0):
             if 'points' not in df.columns:
                 df['points'] = 0
 
-            df['scraped_at'] = (datetime.now()-timedelta(days=days_behind)).strftime('%Y-%m-%d %H:%M:%S')
+            df['scraped_at'] = now
 
             df.to_sql('teams', conn, if_exists='append', index=False)
             print(f"→ Migrated {len(df)} records to teams table")
@@ -161,7 +170,7 @@ def migrate_csv_to_db(days_behind=0):
         # human-readable display name; app.py needs it alongside team_id)
         players_df = df.copy()
         players_df['team_id'] = team_id
-        players_df['scraped_at'] = ((datetime.now()-timedelta(days=days_behind))).strftime('%Y-%m-%d %H:%M:%S')
+        players_df['scraped_at'] = now
 
         # Append into team_players
         players_df.to_sql('team_players', conn, if_exists='append', index=False)
@@ -174,8 +183,8 @@ def migrate_csv_to_db(days_behind=0):
             df = pd.read_csv(file)
             print(f"\nProcessing {file} with columns: {list(df.columns)}")
             
-            df['scraped_at'] = (datetime.now()-timedelta(days=days_behind)).strftime('%Y-%m-%d %H:%M:%S')
-            df['match_date'] = (datetime.now()-timedelta(days=days_behind)).strftime('%Y-%m-%d')  # Current date as match date
+            df['scraped_at'] = now
+            df['match_date'] = now[:10]  # Current date as match date
             
             # Select only the columns we need
             df = df[['Player', 'Team', 'Probability', 'match_date', 'scraped_at']]
@@ -237,7 +246,6 @@ def migrate_csv_to_db(days_behind=0):
                 if len(my_bal_df):
                     actual_balance = float(my_bal_df.iloc[0]['balance'])
 
-            now = (datetime.now() - timedelta(days=days_behind)).strftime('%Y-%m-%d %H:%M:%S')
             rows = []
             for team_name, bal in balances.items():
                 team_id = normalize_team_key(team_name)
@@ -367,6 +375,13 @@ def migrate_csv_to_db(days_behind=0):
     if os.path.exists('csvs/others/my_offers.csv'):
         offers_df = pd.read_csv('csvs/others/my_offers.csv')
         if len(offers_df):
+            # Overwrite the CSV's own scrape-time timestamp with this
+            # migration run's shared `now` — every other table's
+            # scraped_at is migration-time, not scrape-time, and the
+            # date-only format scraper.py wrote here couldn't be matched
+            # exactly against the full 'YYYY-MM-DD HH:MM:SS' values the
+            # rest of this run uses anyway.
+            offers_df['scraped_at'] = now
             offers_df.to_sql('player_offers', conn, if_exists='append', index=False)
         print(f"→ Migrated {len(offers_df)} pending player offers")
 

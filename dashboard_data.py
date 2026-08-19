@@ -162,13 +162,20 @@ def build_dashboard_data(conn, date):
         conn, params=(d, d)
     )
 
+    # NaN isn't valid JSON — Python's json module (and Flask's jsonify,
+    # built on it) emits a bare `NaN` token anyway by default, which
+    # every browser's strict JSON.parse() rejects outright, breaking the
+    # ENTIRE payload rather than just the affected field. Caught live:
+    # a LEFT JOIN gap in teams_summary.value_change for one team NaN'd
+    # a single field and took down the whole published dashboard. Every
+    # frame gets the same NaN-to-None cleanup buy/sell already had.
     return {
-        'standings': standings.to_dict('records'),
-        'market': market.to_dict('records'),
-        'teams': teams_summary.to_dict('records'),
-        'team_players': team_players.to_dict('records'),
-        'my_holdings': my_holdings.to_dict('records'),
-        'my_sales': my_sales.to_dict('records'),
+        'standings': to_records(standings),
+        'market': to_records(market),
+        'teams': to_records(teams_summary),
+        'team_players': to_records(team_players),
+        'my_holdings': to_records(my_holdings),
+        'my_sales': to_records(my_sales),
         'buy_recommendations': to_records(buy_recommendations),
         'sell_recommendations': to_records(sell_recommendations),
         'date': date,

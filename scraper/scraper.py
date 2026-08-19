@@ -825,6 +825,28 @@ import json
 import json, time
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 
+# Matches Biwenger's Catalan relative-time strings ("Fa 2 hores" — "2
+# hours ago", "Fa 1 dia", "Ara mateix" — "just now"). A recent post
+# renders one of these instead of a fixed date, and the text changes
+# between scrapes of the exact same post as time passes.
+_RELATIVE_TIME_RE = re.compile(r"^(Fa \d+ \S+|Ara mateix)$")
+
+def _post_identity(post_data):
+    """A stable identity for a scraped post, for deduplication across
+    scrapes. Hashing the whole post text seems safe but isn't: two
+    scrapes of the exact same post minutes apart can carry different
+    relative-time text ("Fa 3 hores" vs "Fa 2 hores" for the identical
+    sale), and were silently treated as two different posts — this
+    double-counted real transactions in the money ledger (confirmed
+    live: a single sale appeared twice, a single purchase three times,
+    each visibly wrong once the resulting team balances were checked
+    against reality). Stripping any relative-time token before hashing
+    fixes it: the post's actual content still has to match exactly,
+    just not the ever-changing "how long ago" text.
+    """
+    stable = [x for x in post_data if not (isinstance(x, str) and _RELATIVE_TIME_RE.match(x.strip()))]
+    return json.dumps(stable, ensure_ascii=False)
+
 def get_all_posts(page, max_scrolls=300, initial_wait=3, load_timeout_ms=6000,
                    stale_limit=3, checkpoint_every=5, stop_when_contains="Inici de joc"):
     """Scroll the league forum feed and collect every post.
@@ -856,7 +878,7 @@ def get_all_posts(page, max_scrolls=300, initial_wait=3, load_timeout_ms=6000,
                 existing_posts = json.load(f)
         except (json.JSONDecodeError, OSError):
             existing_posts = []
-    existing_ids = {json.dumps(p, ensure_ascii=False) for p in existing_posts}
+    existing_ids = {_post_identity(p) for p in existing_posts}
     if existing_ids:
         print(f"Resuming: {len(existing_ids)} posts already saved from a "
               f"previous run, will stop once caught up to them.")
@@ -903,7 +925,7 @@ def get_all_posts(page, max_scrolls=300, initial_wait=3, load_timeout_ms=6000,
         for idx in range(processed_count, count_now):
             title = post_locator.nth(idx)
             post_data = title.inner_text().split("\n")
-            post_id = json.dumps(post_data, ensure_ascii=False)
+            post_id = _post_identity(post_data)
             if post_id in existing_ids:
                 already_known_this_round += 1
                 continue

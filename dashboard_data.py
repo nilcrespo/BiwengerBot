@@ -64,7 +64,7 @@ def build_dashboard_data(conn, date):
         """
         SELECT tp.team_id, MAX(tp.team) AS team_name, COUNT(*) AS player_count,
                SUM(tp.price) AS total_value,
-               MAX(tb.ledger_balance) AS balance,
+               MAX(COALESCE(tb.actual_balance, tb.ledger_balance)) AS balance,
                MAX(tb.is_me) AS is_me,
                MAX(t.value_change) AS value_change
         FROM team_players tp

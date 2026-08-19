@@ -236,30 +236,56 @@ def build_recommendations(conn, date):
     bucket_avg_bids = dict(zip(bid_buckets['bucket'], bid_buckets['avg_bids']))
     bucket_sample_size = dict(zip(bid_buckets['bucket'], bid_buckets['count']))
 
-    def _suggested_bid(price):
+    def _suggested_bid(price, change):
         avg_bids = bucket_avg_bids.get(_bucket_label(price))
         # No historical signings in this bracket yet -> fall back to a
         # flat 5% cushion above asking price rather than no suggestion.
-        markup = 1 + min(avg_bids, 10) * 0.02 if avg_bids else 1.05
-        return round(price * markup / 10_000) * 10_000
+        bucket_markup = min(avg_bids, 10) * 0.02 if avg_bids else 0.05
+        # Momentum: a player already rising fast is likely still rising
+        # by the time a bid actually resolves, and fast risers typically
+        # draw more competing interest in the first place — a plain
+        # percentage-of-today's-price markup doesn't account for either.
+        # Add today's own growth as a floor on top of the competition
+        # markup (only when rising — a flat/falling price adds nothing).
+        momentum = max(change, 0) if pd.notna(change) else 0
+        return round((price * (1 + bucket_markup) + momentum) / 10_000) * 10_000
 
     buy = market.copy()
     buy.loc[:, 'start_pct'] = buy['probability'].apply(_parse_pct)
     buy.loc[:, 'blended_pts'] = buy['this_season_pts'].fillna(0) + buy['last_season_pts'].fillna(0) * 0.5
+    # Two different lenses on blended_pts: talent_score is "how good is
+    # this player, full stop" (rewards proven output regardless of
+    # price); value_score is "how good per euro" (rewards bargains).
+    # Scoring on value_score alone systematically buried expensive,
+    # clearly-good players — a €9M player with a strong points history
+    # scores terribly on points-per-euro next to a €200k bench option,
+    # even though "clearly a good player" is exactly the kind of signal
+    # a buy recommender should surface.
+    buy.loc[:, 'talent_score'] = buy['blended_pts']
     buy.loc[:, 'value_score'] = buy.apply(
         lambda r: (r['blended_pts'] / (r['price'] / 1_000_000)) if r['price'] else 0, axis=1
     )
     buy.loc[:, 'recent_score'] = buy['recent_pts'].fillna(0)
+    # Percentage move, not raw euros — a €90 drop matters differently on
+    # a €150k player than an €12M one. Rewards a price the market is
+    # actively bidding up (real demand) and penalizes one sliding down
+    # (a real risk signal — declining form, a doubt, reduced role — not
+    # just noise to ignore, even though it's only one day's reading).
+    buy.loc[:, 'momentum_pct'] = buy.apply(
+        lambda r: (r['change'] / r['price'] * 100) if r['price'] else 0, axis=1
+    )
     buy.loc[:, 'score'] = (
-        0.45 * _normalize(buy['start_pct']) +
-        0.35 * _normalize(buy['value_score']) +
-        0.20 * _normalize(buy['recent_score'])
+        0.30 * _normalize(buy['start_pct']) +
+        0.25 * _normalize(buy['talent_score']) +
+        0.20 * _normalize(buy['value_score']) +
+        0.10 * _normalize(buy['recent_score']) +
+        0.15 * _normalize(buy['momentum_pct'])
     ).round(1)
     buy.loc[:, 'squad_need'] = buy['position'].apply(_needed_positions)
     buy.loc[:, 'bid_bucket'] = buy['price'].apply(_bucket_label)
     buy.loc[:, 'bucket_avg_bids'] = buy['bid_bucket'].map(bucket_avg_bids)
     buy.loc[:, 'bucket_sample'] = buy['bid_bucket'].map(bucket_sample_size)
-    buy.loc[:, 'suggested_bid'] = buy['price'].apply(_suggested_bid)
+    buy.loc[:, 'suggested_bid'] = buy.apply(lambda r: _suggested_bid(r['price'], r['change']), axis=1)
     # A relative 0-100 score only ever measures "best of today's market" —
     # even a mediocre snapshot has a top scorer. That's fine for ranking,
     # but not for deciding whether a suggested bid should exist at all:
@@ -267,7 +293,7 @@ def build_recommendations(conn, date):
     # and the score itself must clear a real quality bar, not just be the
     # least-bad option on a thin day.
     buy_candidates = buy[buy['start_pct'] >= 40]
-    buy_recommendations = buy_candidates[buy_candidates['score'] >= 45].sort_values('score', ascending=False).head(12)
+    buy_recommendations = buy_candidates[buy_candidates['score'] >= 40].sort_values('score', ascending=False).head(12)
 
     # --- Sell recommender: my full roster, ranked by a mix of bench risk
     # (low starting-XI probability) and profit already banked (where a
@@ -321,5 +347,46 @@ def build_recommendations(conn, date):
         | (profit_pct.notna() & (profit_pct >= 0.5))
     )
     sell_recommendations = sell_pool[worth_selling].sort_values('score', ascending=False)
+
+    # --- Affordability: Biwenger requires a non-negative balance heading
+    # into each round, so "can I bid this" isn't just "is it under my
+    # max-bid limit" (balance + 25% of squad value — a credit line, not
+    # cash on hand). A bid can be within that limit and still force
+    # panic-selling before the next round if it's not actually covered
+    # by cash plus players that were worth selling anyway. shortfall is
+    # what's left to cover after today's balance; raisable_from_sells is
+    # what today's own sell recommendations would free up if all sold —
+    # if that doesn't cover the shortfall, funding this buy would mean
+    # selling players that don't otherwise make sense to let go of. ---
+    balance_row = pd.read_sql(
+        "SELECT ledger_balance FROM team_balance WHERE is_me = 1 AND scraped_at LIKE ?",
+        conn, params=(d,)
+    )
+    my_balance = float(balance_row['ledger_balance'].iloc[0]) if len(balance_row) else 0.0
+    sorted_sells = sell_recommendations.sort_values('score', ascending=False)
+    sell_names = sorted_sells['player'].tolist()
+    sell_prices = sorted_sells['current_price'].tolist()
+    raisable_from_sells = float(sum(sell_prices))
+
+    def _funding_plan(shortfall):
+        """Greedy: your best sell-candidates first (the ones you'd want
+        to move anyway), stopping as soon as they cover the shortfall —
+        names the actual players, not just a euro total, so "is this
+        worth it" is a real judgment call instead of a hidden number."""
+        if shortfall <= 0:
+            return ''
+        total, names = 0.0, []
+        for name, price in zip(sell_names, sell_prices):
+            names.append(name)
+            total += price
+            if total >= shortfall:
+                break
+        return ', '.join(names)
+
+    buy_recommendations = buy_recommendations.copy()
+    buy_recommendations.loc[:, 'shortfall'] = (buy_recommendations['suggested_bid'] - my_balance).clip(lower=0)
+    buy_recommendations.loc[:, 'raisable_from_sells'] = raisable_from_sells
+    buy_recommendations.loc[:, 'funded_without_hard_choices'] = buy_recommendations['shortfall'] <= raisable_from_sells
+    buy_recommendations.loc[:, 'funding_plan'] = buy_recommendations['shortfall'].apply(_funding_plan)
 
     return buy_recommendations, sell_recommendations

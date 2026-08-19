@@ -289,12 +289,31 @@ function renderSales(data) {
   }
 }
 
+function affordabilityCell(p) {
+  const shortfall = parseFloat(p.shortfall);
+  if (!shortfall || shortfall <= 0) {
+    return '<span class="pill prob-high">✅ In balance</span>';
+  }
+  const funded = p.funded_without_hard_choices;
+  const cls = funded ? 'prob-mid' : 'prob-low';
+  const label = funded ? '⚠️ Needs a sale' : '⚠️ Short even after sells';
+  const title = p.funding_plan
+    ? `Short ${formatMoney(shortfall)} of balance — would need to sell: ${p.funding_plan}`
+    : `Short ${formatMoney(shortfall)} of balance — no sell recommendations available to cover it today`;
+  return `<span class="pill ${cls}" title="${escapeHtml(title)}">${label}</span>`;
+}
+
 function renderBuyRecommendations(data) {
   const tbody = document.querySelector('#buyTable tbody');
-  renderTable(tbody, data, 8, (p) => {
-    const bidTitle = p.bucket_avg_bids
-      ? `Estimate: ${p.bucket_sample} historical signings in the ${p.bid_bucket} range drew ${parseFloat(p.bucket_avg_bids).toFixed(1)} bids on average`
-      : 'Estimate: no historical signings in this price range yet, flat 5% cushion applied';
+  renderTable(tbody, data, 9, (p) => {
+    const bucketNote = p.bucket_avg_bids
+      ? `${p.bucket_sample} historical signings in the ${p.bid_bucket} range drew ${parseFloat(p.bucket_avg_bids).toFixed(1)} bids on average`
+      : 'no historical signings in this price range yet, flat 5% cushion applied';
+    const change = parseFloat(p.change);
+    const momentumNote = change > 0
+      ? ` + today's own +${formatMoney(change)} rise (a fast riser tends to keep rising and draw more competition)`
+      : '';
+    const bidTitle = `Estimate: ${bucketNote}${momentumNote}`;
     return `
     <tr>
       <td><span class="pos-badge">${escapeHtml(p.position)}</span></td>
@@ -305,6 +324,7 @@ function renderBuyRecommendations(data) {
       <td class="num">${scoreBadge(p.score)}</td>
       <td>${needBadge(p.squad_need)}</td>
       <td class="num" title="${escapeHtml(bidTitle)}">${formatMoney(p.suggested_bid)}</td>
+      <td>${affordabilityCell(p)}</td>
     </tr>
   `;
   });

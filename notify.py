@@ -93,9 +93,15 @@ def build_digest(conn, date) -> str:
         lines = [f"🎯 <b>Buy: {len(buy_df)} real deal(s)</b>"]
         for _, r in buy_df.head(5).iterrows():
             need = f" [{r['squad_need']}]" if r.get('squad_need') else ""
+            afford = ""
+            if r.get('shortfall', 0) > 0:
+                if r.get('funding_plan'):
+                    afford = f"\n    ⚠️ short {_money(r['shortfall'])} — would need to sell: {r['funding_plan']}"
+                else:
+                    afford = f"\n    ⚠️ short {_money(r['shortfall'])}, no sells available to cover it"
             lines.append(
                 f"  • {r['name']} ({r['club']}, {r['position']}) — {_money(r['price'])}, "
-                f"{r['probability']} start, score {r['score']}{need} → bid ~{_money(r['suggested_bid'])}"
+                f"{r['probability']} start, score {r['score']}{need} → bid ~{_money(r['suggested_bid'])}{afford}"
             )
         sections.append("\n".join(lines))
 

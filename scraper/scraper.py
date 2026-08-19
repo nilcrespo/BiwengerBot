@@ -825,26 +825,40 @@ import json
 import json, time
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 
-# Matches Biwenger's Catalan relative-time strings ("Fa 2 hores" — "2
-# hours ago", "Fa 1 dia", "Ara mateix" — "just now"). A recent post
-# renders one of these instead of a fixed date, and the text changes
-# between scrapes of the exact same post as time passes.
-_RELATIVE_TIME_RE = re.compile(r"^(Fa \d+ \S+|Ara mateix)$")
+# Matches every date-like token Biwenger's forum feed renders, both
+# while a post is recent (relative — "Ara mateix"/"just now", "Fa 2
+# hores"/"2 hours ago", "Ahir"/"yesterday") AND once it's aged into a
+# fixed Catalan date ("15 d'ag.", "8 de set. 2025"). A single post's
+# own timestamp text changes across ALL of these forms over its life —
+# confirmed live: the identical "Fitxat per" block first seen as
+# "Fa 3 hores" was seen again, unchanged otherwise, as "Ahir" the next
+# day. Stripping only the relative forms (an earlier version of this
+# fix) caught same-day re-scrapes but not the eventual settle into an
+# absolute date, which itself then read as a "new" post — verified
+# against all ~500 distinct date-like tokens actually present in
+# unique_posts.json to confirm this doesn't also match real content
+# (player names, amounts, team names never matched).
+_DATE_TOKEN_RE = re.compile(
+    r"^(Ara mateix|Avui|Ahir|Demà"
+    r"|Fa \d+ \S+"
+    r"|\d{1,2} d['’]?e?\.?\s?\S+\.?(\s\d{4})?)$"
+)
 
 def _post_identity(post_data):
     """A stable identity for a scraped post, for deduplication across
-    scrapes. Hashing the whole post text seems safe but isn't: two
-    scrapes of the exact same post minutes apart can carry different
-    relative-time text ("Fa 3 hores" vs "Fa 2 hores" for the identical
-    sale), and were silently treated as two different posts — this
-    double-counted real transactions in the money ledger (confirmed
-    live: a single sale appeared twice, a single purchase three times,
-    each visibly wrong once the resulting team balances were checked
-    against reality). Stripping any relative-time token before hashing
-    fixes it: the post's actual content still has to match exactly,
-    just not the ever-changing "how long ago" text.
+    scrapes. Hashing the whole post text seems safe but isn't: the same
+    real post's timestamp text changes every time it's re-scraped until
+    it finally settles (see _DATE_TOKEN_RE), and each distinct rendering
+    was silently treated as a new post — this double/triple-counted real
+    transactions in the money ledger, confirmed live against multiple
+    teams' balances not matching reality. The date is dropped from the
+    identity entirely rather than partially: the transaction content
+    (type, team, player, exact euro amount) is already a near-unique key
+    on its own, so the risk of two genuinely different transactions
+    colliding is far smaller than the risk of missing another still-
+    unrecognized timestamp format down the line.
     """
-    stable = [x for x in post_data if not (isinstance(x, str) and _RELATIVE_TIME_RE.match(x.strip()))]
+    stable = [x for x in post_data if not (isinstance(x, str) and _DATE_TOKEN_RE.match(x.strip()))]
     return json.dumps(stable, ensure_ascii=False)
 
 def get_all_posts(page, max_scrolls=300, initial_wait=3, load_timeout_ms=6000,

@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 position,name,points,team_value,value_change,num_players,is_me,scraped_at
 1,CD Numancia,0,78420000.0,200000.0,18,False,2026-08-19
 2,The National,0,66910000.0,60000.0,20,False,2026-08-19
@@ -10,6 +9,3 @@ position,name,points,team_value,value_change,num_players,is_me,scraped_at
 8,Hernan Krezzpo,0,67820000.0,-230000.0,14,True,2026-08-19
 9,Manchester Tity,0,69500000.0,-60000.0,18,False,2026-08-19
 10,"General ""Hansi” Topete",0,74140000.0,300000.0,20,False,2026-08-19
-=======
-
->>>>>>> Stashed changes

@@ -4,6 +4,7 @@ each just calls build_recommendations(conn, date) against its own DB
 connection and gets back the same two ranked DataFrames.
 """
 import unicodedata
+from itertools import combinations
 
 import pandas as pd
 
@@ -151,6 +152,18 @@ def _normalize(series):
         return pd.Series([50.0] * len(s), index=s.index)
     return (s - lo) / (hi - lo) * 100
 
+def _blended_pts(df):
+    """A talent/output estimate blending both seasons. last_season_pts
+    carries the full weight and this_season_pts only half — early in a
+    season, this_season is one or two matches of noisy signal, while
+    last_season is a full season of it, so it's the more reliable read
+    even though it's older. (A player with 0 last_season_pts is usually
+    on a newly-promoted club or a new/young signing, not necessarily
+    bad — the discount on this_season_pts still lets him be judged on
+    what he's shown so far, just not overweighted on a tiny sample.)
+    """
+    return df['last_season_pts'].fillna(0) + df['this_season_pts'].fillna(0) * 0.5
+
 def build_recommendations(conn, date):
     """Returns (buy_recommendations, sell_recommendations) — both filtered
     to candidates that actually clear a real quality bar, not just "top N
@@ -258,7 +271,7 @@ def build_recommendations(conn, date):
 
     buy = market.copy()
     buy.loc[:, 'start_pct'] = buy['probability'].apply(_parse_pct)
-    buy.loc[:, 'blended_pts'] = buy['this_season_pts'].fillna(0) + buy['last_season_pts'].fillna(0) * 0.5
+    buy.loc[:, 'blended_pts'] = _blended_pts(buy)
     # Two different lenses on blended_pts: talent_score is "how good is
     # this player, full stop" (rewards proven output regardless of
     # price); value_score is "how good per euro" (rewards bargains).
@@ -356,7 +369,7 @@ def build_recommendations(conn, date):
     # every other component (100 - normalize(talent)) so a proven
     # performer pulls the score DOWN regardless of how good the offer
     # looks, instead of a good offer unconditionally maxing the score.
-    sell_pool.loc[:, 'blended_pts'] = sell_pool['this_season_pts'].fillna(0) + sell_pool['last_season_pts'].fillna(0) * 0.5
+    sell_pool.loc[:, 'blended_pts'] = _blended_pts(sell_pool)
     sell_pool.loc[:, 'talent_keep'] = 100 - _normalize(sell_pool['blended_pts'])
     sell_pool.loc[:, 'score'] = (
         0.25 * _normalize(sell_pool['bench_score']) +
@@ -444,7 +457,7 @@ def build_recommendations(conn, date):
     # unrelated reasons (e.g. a generous offer) doesn't make him the
     # right size for THIS shortfall if he costs 10M and the gap is 1.4M.
     funding_pool = sell_pool.copy()
-    funding_pool.loc[:, 'blended_pts'] = funding_pool['this_season_pts'].fillna(0) + funding_pool['last_season_pts'].fillna(0) * 0.5
+    funding_pool.loc[:, 'blended_pts'] = _blended_pts(funding_pool)
     funding_pool.loc[:, 'keep_value'] = funding_pool['blended_pts'] + funding_pool['start_pct'] * 0.5
     funding_pool.loc[:, 'already_recommended'] = funding_pool.index.isin(sell_recommendations.index)
     # Top quartile of keep_value on the squad = a "star" — someone worth
@@ -455,18 +468,46 @@ def build_recommendations(conn, date):
         by=['is_star', 'current_price', 'already_recommended'],
         ascending=[True, True, False]
     )
-    funding_candidates = funding_pool[['player', 'current_price', 'is_star']].to_dict('records')
+    funding_candidates = funding_pool[['player', 'current_price', 'keep_value', 'is_star']].to_dict('records')
+    non_star_candidates = [c for c in funding_candidates if not c['is_star']]
     raisable_from_sells = float(funding_pool['current_price'].sum())
 
     def _funding_plan(shortfall):
-        """Greedy over funding_candidates (already ordered cheapest/most-
-        expendable first): stop as soon as the shortfall is covered.
-        Returns the plan as both a name list (for a UI breakdown) and a
-        flag for whether it had to reach into a star player — that's a
-        materially different, worse answer than "sell some squad depth"
-        and callers should be able to warn about it distinctly."""
+        """Fewest players first, and — among combinations of that size
+        that clear the shortfall — the one giving up the LEAST keep_value
+        (talent + how nailed-on to start), not the one costing the
+        fewest euros. Cheapest-first was the earlier version of this and
+        it picked purely by price: e.g. it once chose a 92-last-season-
+        point squad player over several near-zero-output ones just
+        because he happened to be the cheapest single option, which
+        undersells exactly what "worth keeping" means. Stars (top
+        quartile of squad keep_value) are excluded from this search
+        entirely — never offered as an option — up to 3 players; only
+        the last-resort fallback below will ever reach for one, and only
+        if nothing smaller-scale works at all."""
         if shortfall <= 0:
             return {'names': '', 'details': [], 'requires_star': False}
+
+        for group_size in (1, 2, 3):
+            best_combo, best_keep = None, None
+            for combo in combinations(non_star_candidates, group_size):
+                total_price = sum(c['current_price'] for c in combo)
+                if total_price < shortfall:
+                    continue
+                total_keep = sum(c['keep_value'] for c in combo)
+                if best_keep is None or total_keep < best_keep:
+                    best_combo, best_keep = combo, total_keep
+            if best_combo is not None:
+                details = [{'player': c['player'], 'price': c['current_price'], 'is_star': bool(c['is_star'])} for c in best_combo]
+                return {
+                    'names': ', '.join(d['player'] for d in details),
+                    'details': details,
+                    'requires_star': any(d['is_star'] for d in details),
+                }
+
+        # Nothing up to 3 players covers it — fall back to the ordered
+        # walk (cheapest/most-expendable first) regardless of how many
+        # that takes.
         total, details = 0.0, []
         for c in funding_candidates:
             if total >= shortfall:

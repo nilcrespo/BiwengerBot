@@ -158,9 +158,21 @@ def _bucket_label(price):
 #      it's shrunk toward the old 2%/bidder assumption in proportion to
 #      how many real transactions we have (see _markup_per_bidder).
 
-# What the old _suggested_bid assumed each competing bidder adds, as a
-# fraction of asking price. Still the prior; real data pulls away from it
-# as it accumulates.
+# What each COMPETING bidder adds to the winning bid, as a fraction of
+# asking price. This is the old _suggested_bid's own 2% assumption, moved
+# from "per bidder" to "per bidder beyond the first" — a small,
+# deliberate reduction, because the old reading implied a markup even on
+# an uncontested signing and the captured data shows that isn't how it
+# works: Biwenger's minimum bid IS the asking price, a lone bidder pays
+# exactly that, and a real losing bid in the captured data landed on the
+# market price to the euro.
+#
+# The "bidders" figure means the same thing in both data sources, which
+# is worth stating because the model mixes them: the forum ledger's
+# "7 licitacions" for the Miguel Sierra sale matches the board feed's
+# winner + 6 losing bids exactly, and "2 licitacions" matches Bauzà's
+# winner + 1. So bid_history.bids and market_bid_history.num_bidders both
+# count the winner, and competing bidders is that number minus one.
 FALLBACK_MARKUP_PER_BIDDER = 0.02
 # Real transactions needed before the observed premium is trusted on its
 # own. Below this, observed and fallback are blended proportionally
@@ -175,6 +187,15 @@ BIDDER_UNCERTAINTY = 1.5
 # reasoning from the original _suggested_bid — it's what keeps an
 # expensive, sliding player from being handed a big markup).
 FALLING_PRICE_DAMPEN = 0.25
+# A rising price isn't just a forecast that it'll keep rising — in
+# Biwenger it's the demand signal itself, since prices move on how much
+# the player is being bought and bid on. So it belongs in the expected
+# BIDDER count too, not only in the price the bid resolves at. Applied
+# only on the way up: on the way down FALLING_PRICE_DAMPEN above already
+# encodes the (deliberately asymmetric) view that a sliding price means
+# no competition worth paying for.
+MOMENTUM_FULL_RISE_PCT = 0.05   # a 5%-in-a-day rise is as loud as this signal gets
+MOMENTUM_BIDDER_BOOST = 0.5     # ...and it draws at most 50% more bidders
 MAX_EXPECTED_BIDDERS = 10
 # Used only when a price bracket has no historical signings at all. 2.5
 # bidders at the fallback 2%/bidder reproduces the flat 5% cushion the
@@ -293,9 +314,10 @@ class BidCompetitionModel:
                 out.append({'team_id': r['team_id'], 'team_name': r['team_name'], 'weight': weight})
         return sorted(out, key=lambda c: c['weight'], reverse=True)
 
-    def expected_bidders(self, price, position_str):
-        """How many managers are likely to bid, as the bracket's own
-        historical average scaled by how contested THIS player looks.
+    def expected_bidders(self, price, position_str, change=0.0):
+        """How many managers are likely to bid (winner included), as the
+        bracket's own historical average scaled by how contested THIS
+        player looks and by how hard his price is currently rising.
 
         The bucket average stays the anchor deliberately: it's backed by
         hundreds of real signings, where the competitor model is backed
@@ -303,6 +325,13 @@ class BidCompetitionModel:
         plausibly interested, i.e. an unremarkable player — reproduces
         the bucket average exactly; a player every rival needs and can
         afford gets 1.5x it, one nobody can touch gets 0.5x.
+
+        That 0.5x floor is deliberate rather than zero: rival capacity is
+        a known LOWER bound (see build_bid_competition_model on why their
+        balances can't be trusted), so "nobody can afford him" really
+        means "nobody can afford him out of the credit line we can see",
+        and the bracket's own history still says players at this price do
+        get bid on.
         """
         bucket_avg = self.bucket_avg_bids.get(_bucket_label(price))
         base = bucket_avg if bucket_avg else NO_BUCKET_DATA_BIDDERS
@@ -311,7 +340,11 @@ class BidCompetitionModel:
             pressure = 0.5  # no lineup data — fall back to the bucket average as-is
         else:
             pressure = sum(c['weight'] for c in comps) / len(self.rivals)
-        return min(base * (0.5 + pressure), MAX_EXPECTED_BIDDERS), comps, pressure
+        momentum = 0.0
+        if price and change > 0:
+            momentum = min(change / price / MOMENTUM_FULL_RISE_PCT, 1.0)
+        bidders = base * (0.5 + pressure) * (1 + MOMENTUM_BIDDER_BOOST * momentum)
+        return min(bidders, MAX_EXPECTED_BIDDERS), comps, pressure
 
     # --- bid range ------------------------------------------------------------
     def suggest(self, price, change, position_str):
@@ -323,7 +356,7 @@ class BidCompetitionModel:
         """
         price = float(price or 0)
         change = float(change) if pd.notna(change) else 0.0
-        bidders, comps, pressure = self.expected_bidders(price, position_str)
+        bidders, comps, pressure = self.expected_bidders(price, position_str, change)
 
         dampen = 1.0 if change > 0 else FALLING_PRICE_DAMPEN
         # A fast riser is likely still rising by the time a bid resolves,
@@ -332,7 +365,9 @@ class BidCompetitionModel:
         base = price + max(change, 0.0)
 
         def _at(n_bidders):
-            markup = max(n_bidders, 0.0) * self.markup_per_bidder * dampen
+            # Bidders beyond the first: an uncontested signing goes for
+            # the asking price, not the asking price plus a cushion.
+            markup = max(n_bidders - 1, 0.0) * self.markup_per_bidder * dampen
             return base * (1 + markup)
 
         low = max(_at(bidders - BIDDER_UNCERTAINTY), price)
@@ -390,12 +425,18 @@ def _markup_per_bidder(conn, date):
         return FALLBACK_MARKUP_PER_BIDDER, 0
 
     asking = txns['player_price'] - txns['price_change'].fillna(0)
-    usable = txns[(asking > 0) & (txns['num_bidders'] > 0) & txns['winning_amount'].notna()].copy()
+    # An uncontested signing (num_bidders == 1) carries no information
+    # about what competition costs, and would divide by zero besides.
+    usable = txns[(asking > 0) & (txns['num_bidders'] > 1) & txns['winning_amount'].notna()].copy()
     usable.loc[:, 'asking'] = asking[usable.index]
     if not len(usable):
         return FALLBACK_MARKUP_PER_BIDDER, 0
 
-    per_bidder = ((usable['winning_amount'] / usable['asking'] - 1) / usable['num_bidders']).clip(lower=0)
+    competitors = usable['num_bidders'] - 1
+    per_bidder = ((usable['winning_amount'] / usable['asking'] - 1) / competitors).clip(lower=0)
+    # Median, not mean: one runaway auction shouldn't reset the league's
+    # whole price level, and with a sample this small the mean is exactly
+    # what one such auction would do.
     observed = float(per_bidder.median())
     n = len(usable)
     weight = min(n / MIN_CALIBRATION_SAMPLES, 1.0)

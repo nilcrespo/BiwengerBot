@@ -162,6 +162,27 @@ def build_dashboard_data(conn, date):
         conn, params=(d, d)
     )
 
+    # --- Per-round, per-player scores (see scraper.get_round_scores) ---
+    # Deliberately NOT filtered by scraped_at like every other frame here.
+    # round_scores is a cumulative history keyed by (round_id, player_id),
+    # not a daily snapshot: each row keeps the scraped_at of the run that
+    # last refreshed that round, so an old round's rows carry an old
+    # timestamp and filtering to today's run would hide the entire season
+    # bar the round that just changed.
+    #
+    # points is NULL both for a fixture that hasn't been played yet and for
+    # a player whose fixture finished without him; game_status and played
+    # are what tell those apart (see get_round_scores' docstring).
+    round_scores = pd.read_sql(
+        """
+        SELECT round_id, round_name, game_status, player, club, position,
+               team_id, team, lineup_slot, points, played
+        FROM round_scores
+        ORDER BY round_id, team, lineup_slot, points DESC
+        """,
+        conn
+    )
+
     # NaN isn't valid JSON — Python's json module (and Flask's jsonify,
     # built on it) emits a bare `NaN` token anyway by default, which
     # every browser's strict JSON.parse() rejects outright, breaking the
@@ -176,6 +197,7 @@ def build_dashboard_data(conn, date):
         'team_players': to_records(team_players),
         'my_holdings': to_records(my_holdings),
         'my_sales': to_records(my_sales),
+        'round_scores': to_records(round_scores),
         'buy_recommendations': to_records(buy_recommendations),
         'sell_recommendations': to_records(sell_recommendations),
         'date': date,

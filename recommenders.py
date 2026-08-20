@@ -136,6 +136,339 @@ def _bucket_label(price):
             return label
     return BID_BUCKETS[-1][2]
 
+# ---------- Bid competition model ----------
+# Replaces the original flat "bucket markup" bid suggestion, which knew
+# only one thing about a player: which price bracket he fell into. It had
+# no idea WHO would compete for him, whether those managers could even
+# afford him, or what real bids have historically looked like in euros
+# (bid_history only ever recovers a bid *count* from the forum ledger —
+# no amounts, no bidder identity).
+#
+# Three inputs now, in decreasing order of how much history backs them:
+#   1. bid_history_buckets — the anchor. Hundreds of real signings,
+#      bucketed by price, telling us how many bidders a player in this
+#      bracket typically draws. Kept exactly as the prior it always was.
+#   2. rival_lineups + team values — who could actually compete for THIS
+#      player: can they afford him, and does their locked lineup show a
+#      hole at his position or are they already stocked there. This
+#      modulates the bucket prior up or down; it never replaces it.
+#   3. market_bid_history — real euro amounts from the league board.
+#      Calibrates how much each additional bidder is actually worth as a
+#      premium over asking price. One day old at the time of writing, so
+#      it's shrunk toward the old 2%/bidder assumption in proportion to
+#      how many real transactions we have (see _markup_per_bidder).
+
+# What the old _suggested_bid assumed each competing bidder adds, as a
+# fraction of asking price. Still the prior; real data pulls away from it
+# as it accumulates.
+FALLBACK_MARKUP_PER_BIDDER = 0.02
+# Real transactions needed before the observed premium is trusted on its
+# own. Below this, observed and fallback are blended proportionally
+# rather than switching over at a cliff.
+MIN_CALIBRATION_SAMPLES = 5
+# The predicted range is "what if a couple more (or fewer) managers show
+# up than expected" — a real, interpretable quantity, rather than an
+# arbitrary ± percentage band.
+BIDDER_UNCERTAINTY = 1.5
+# A falling price is evidence THIS player isn't in demand, so the
+# bracket-wide competition average doesn't apply to him (unchanged
+# reasoning from the original _suggested_bid — it's what keeps an
+# expensive, sliding player from being handed a big markup).
+FALLING_PRICE_DAMPEN = 0.25
+MAX_EXPECTED_BIDDERS = 10
+# Used only when a price bracket has no historical signings at all. 2.5
+# bidders at the fallback 2%/bidder reproduces the flat 5% cushion the
+# original _suggested_bid fell back to in exactly this situation.
+NO_BUCKET_DATA_BIDDERS = 2.5
+
+FORMATION_POSITION_ORDER = ('DEF', 'MID', 'FWD')
+
+
+def _table_exists(conn, name):
+    row = conn.execute(
+        "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (name,)
+    ).fetchone()
+    return row is not None
+
+
+def _formation_requirements(formation):
+    """'4-4-2' -> {'GK': 1, 'DEF': 4, 'MID': 4, 'FWD': 2}.
+
+    Biwenger formations are always outfield-only and always in
+    defender-midfielder-forward order (the goalkeeper is implicit), which
+    matches how it orders `lineup.players` — verified live against every
+    team in the league.
+    """
+    parts = [p for p in str(formation or '').split('-') if p.strip().isdigit()]
+    if len(parts) != len(FORMATION_POSITION_ORDER):
+        return None
+    reqs = {'GK': 1}
+    reqs.update({label: int(n) for label, n in zip(FORMATION_POSITION_ORDER, parts)})
+    return reqs
+
+
+SHORT_POSITIONS = frozenset(POSITION_LABELS.values())
+
+
+def _player_position_labels(position_str):
+    """Position tokens as GK/DEF/MID/FWD, accepting either the market
+    table's long form ("Forward/Midfielder") or the short form Biwenger's
+    own APIs use (rival_lineups, market_bid_history). Unknown tokens —
+    notably "Coach", which the market really does list — drop out, and
+    the caller treats an empty result as "no positional read on this
+    one" rather than as "nobody needs him".
+    """
+    labels = []
+    for token in str(position_str).split('/'):
+        token = token.strip()
+        label = POSITION_LABELS.get(token) or (token if token in SHORT_POSITIONS else None)
+        if label:
+            labels.append(label)
+    return labels
+
+
+class BidCompetitionModel:
+    """Predicts a winning-bid RANGE for a market listing, given who in
+    this specific league is actually in a position to compete for him.
+
+    Built once per build_recommendations() call (it does a handful of
+    queries), then asked for a suggestion per player. Also used directly
+    by analysis/backtest_bid_model.py, which is why it's a module-level
+    class rather than a closure inside build_recommendations.
+    """
+
+    def __init__(self, rivals, bucket_avg_bids, markup_per_bidder, calibration_samples):
+        # rivals: [{'team_id', 'team_name', 'capacity', 'depth': {POS: float}}]
+        self.rivals = rivals
+        self.bucket_avg_bids = bucket_avg_bids
+        self.markup_per_bidder = markup_per_bidder
+        self.calibration_samples = calibration_samples
+
+    # --- competitor weighting -------------------------------------------------
+    @staticmethod
+    def _afford_weight(capacity, price):
+        """How freely a manager could bid on a player at this price.
+
+        capacity is Biwenger's own max-bid limit — a credit line, not
+        cash — so "can afford" isn't binary: a bid that would eat a
+        manager's entire limit is one they're far less likely to actually
+        make than one that costs them a fraction of it.
+        """
+        if not price or not capacity or capacity < price:
+            return 0.0
+        return 1.0 if capacity >= 2 * price else 0.5
+
+    @staticmethod
+    def _need_weight(depth):
+        """How badly a manager needs another player at this position,
+        from squad depth relative to what his own locked formation
+        actually fields there (1.0 = exactly enough bodies to field it,
+        2.0 = two full sets).
+
+        A team already carrying two deep at a position is a much weaker
+        bidder for a third than one running with no cover at all — but
+        not a zero: managers do buy upgrades, and they buy to flip.
+        """
+        if depth is None:
+            return 0.6  # lineup unknown for this team — stay neutral
+        if depth < 1.35:
+            return 1.0
+        if depth < 2.0:
+            return 0.6
+        return 0.25
+
+    def competitors(self, price, position_str):
+        """Per-rival competition weight for this specific player, biggest
+        threat first. A dual-position player is judged on whichever of
+        his positions a given rival most needs."""
+        labels = _player_position_labels(position_str)
+        out = []
+        for r in self.rivals:
+            afford = self._afford_weight(r['capacity'], price)
+            if not afford:
+                continue
+            needs = [self._need_weight(r['depth'].get(l)) for l in labels] or [0.6]
+            weight = afford * max(needs)
+            if weight > 0:
+                out.append({'team_id': r['team_id'], 'team_name': r['team_name'], 'weight': weight})
+        return sorted(out, key=lambda c: c['weight'], reverse=True)
+
+    def expected_bidders(self, price, position_str):
+        """How many managers are likely to bid, as the bracket's own
+        historical average scaled by how contested THIS player looks.
+
+        The bucket average stays the anchor deliberately: it's backed by
+        hundreds of real signings, where the competitor model is backed
+        by one round of lineups. Pressure of 0.5 — half the league
+        plausibly interested, i.e. an unremarkable player — reproduces
+        the bucket average exactly; a player every rival needs and can
+        afford gets 1.5x it, one nobody can touch gets 0.5x.
+        """
+        bucket_avg = self.bucket_avg_bids.get(_bucket_label(price))
+        base = bucket_avg if bucket_avg else NO_BUCKET_DATA_BIDDERS
+        comps = self.competitors(price, position_str)
+        if not self.rivals:
+            pressure = 0.5  # no lineup data — fall back to the bucket average as-is
+        else:
+            pressure = sum(c['weight'] for c in comps) / len(self.rivals)
+        return min(base * (0.5 + pressure), MAX_EXPECTED_BIDDERS), comps, pressure
+
+    # --- bid range ------------------------------------------------------------
+    def suggest(self, price, change, position_str):
+        """Predicted winning-bid range for one listing.
+
+        Returns low / mid / high plus every input that produced them, so
+        the number stays checkable rather than opaque (same principle as
+        the rest of the recommender).
+        """
+        price = float(price or 0)
+        change = float(change) if pd.notna(change) else 0.0
+        bidders, comps, pressure = self.expected_bidders(price, position_str)
+
+        dampen = 1.0 if change > 0 else FALLING_PRICE_DAMPEN
+        # A fast riser is likely still rising by the time a bid resolves,
+        # so today's own growth is added on top of asking price rather
+        # than being folded into a percentage of it.
+        base = price + max(change, 0.0)
+
+        def _at(n_bidders):
+            markup = max(n_bidders, 0.0) * self.markup_per_bidder * dampen
+            return base * (1 + markup)
+
+        low = max(_at(bidders - BIDDER_UNCERTAINTY), price)
+        high = _at(bidders + BIDDER_UNCERTAINTY)
+        mid = _at(bidders)
+
+        def _round(v):
+            return round(v / 10_000) * 10_000
+
+        return {
+            'suggested_bid': _round(mid),
+            'suggested_bid_low': _round(low),
+            'suggested_bid_high': _round(high),
+            'expected_bidders': round(bidders, 1),
+            'competitor_pressure': round(pressure, 2),
+            'markup_per_bidder': round(self.markup_per_bidder, 4),
+            'bid_calibration_samples': self.calibration_samples,
+            'top_competitors': ', '.join(c['team_name'] for c in comps[:3]) or None,
+            'competitor_count': len(comps),
+        }
+
+
+def _markup_per_bidder(conn, date):
+    """How much each additional bidder actually adds to the winning bid,
+    as a fraction of asking price, learned from real completed auctions.
+
+    Only transactions first captured on or before `date` are used, so a
+    backtest can ask what the model would have said at the time instead
+    of quietly reading the answer off future data.
+
+    Two approximations worth knowing about:
+    - Asking price is reconstructed as (price at capture − that day's own
+      price increment). Biwenger bumps a player's price the day he sells,
+      and the price bidders actually saw is not recoverable afterwards at
+      all, so this is the closest available stand-in.
+    - The result is shrunk toward FALLBACK_MARKUP_PER_BIDDER in
+      proportion to how few transactions back it. At the time of writing
+      that's 2 auctions, which is not a sample — it's an anecdote, and it
+      should not be allowed to overrule a bucket table built from
+      hundreds of signings. As the board feed accumulates day by day, the
+      observed number takes over on its own.
+    """
+    if not _table_exists(conn, 'market_bid_history'):
+        return FALLBACK_MARKUP_PER_BIDDER, 0
+
+    txns = pd.read_sql(
+        """
+        SELECT DISTINCT txn_key, player_price, price_change, winning_amount, num_bidders
+        FROM market_bid_history
+        WHERE is_winner = 1 AND DATE(scraped_at) <= ?
+        """,
+        conn, params=(date,)
+    )
+    if not len(txns):
+        return FALLBACK_MARKUP_PER_BIDDER, 0
+
+    asking = txns['player_price'] - txns['price_change'].fillna(0)
+    usable = txns[(asking > 0) & (txns['num_bidders'] > 0) & txns['winning_amount'].notna()].copy()
+    usable.loc[:, 'asking'] = asking[usable.index]
+    if not len(usable):
+        return FALLBACK_MARKUP_PER_BIDDER, 0
+
+    per_bidder = ((usable['winning_amount'] / usable['asking'] - 1) / usable['num_bidders']).clip(lower=0)
+    observed = float(per_bidder.median())
+    n = len(usable)
+    weight = min(n / MIN_CALIBRATION_SAMPLES, 1.0)
+    return weight * observed + (1 - weight) * FALLBACK_MARKUP_PER_BIDDER, n
+
+
+def build_bid_competition_model(conn, date, my_team_id=None):
+    """Assemble the per-league inputs the bid model needs: every rival's
+    spending capacity and positional depth, the historical bid-count
+    buckets, and the euro calibration from real auctions.
+
+    Degrades cleanly: with no rival_lineups rows (an older DB, or a date
+    scraped before that capture existed) the competitor model contributes
+    nothing and the bucket prior is used exactly as it was before.
+    """
+    d = resolve_scraped_at(conn, date)
+    bid_buckets = pd.read_sql(
+        "SELECT bucket, avg_bids, count FROM bid_history_buckets WHERE scraped_at LIKE ?",
+        conn, params=(d,)
+    )
+    bucket_avg_bids = dict(zip(bid_buckets['bucket'], bid_buckets['avg_bids']))
+    bucket_sample_size = dict(zip(bid_buckets['bucket'], bid_buckets['count']))
+
+    markup, samples = _markup_per_bidder(conn, date)
+
+    rivals = []
+    if _table_exists(conn, 'rival_lineups'):
+        lineups = pd.read_sql(
+            """
+            SELECT team_id, team_name, team_value, formation, slot, position
+            FROM rival_lineups
+            WHERE scraped_at = (SELECT MAX(scraped_at) FROM rival_lineups WHERE DATE(scraped_at) <= ?)
+            """,
+            conn, params=(date,)
+        )
+        for team_id, group in lineups.groupby('team_id'):
+            if my_team_id is not None and team_id == my_team_id:
+                continue
+            reqs = _formation_requirements(group['formation'].iloc[0])
+            squad = group['position'].value_counts().to_dict()
+            depth = {}
+            for label in ('GK', 'DEF', 'MID', 'FWD'):
+                need = (reqs or {}).get(label)
+                if need:
+                    depth[label] = squad.get(label, 0) / need
+            # Spending capacity. Deliberately NOT balance + 25% of squad
+            # value, the formula dashboard_data.py uses for our own team:
+            # the only balance available for a rival is the forum-ledger
+            # reconstruction, and that is measurably wrong — migration.py's
+            # own validation prints a €37M mismatch against the one team
+            # whose real balance we can see. Feeding it in here would put
+            # every rival tens of millions in the red and silently declare
+            # that nobody in the league can afford anyone.
+            #
+            # 25% of squad value alone is instead a true LOWER bound on a
+            # rival's max bid: Biwenger requires a non-negative balance
+            # heading into each round, so their real limit is this plus
+            # some cash we can't see. Under-crediting rivals is the safe
+            # direction — it can only ever make the model predict less
+            # competition than there really is, never invent competition
+            # out of a broken number.
+            capacity = 0.25 * float(group['team_value'].iloc[0] or 0)
+            rivals.append({
+                'team_id': team_id,
+                'team_name': group['team_name'].iloc[0],
+                'capacity': capacity,
+                'depth': depth,
+            })
+
+    model = BidCompetitionModel(rivals, bucket_avg_bids, markup, samples)
+    return model, bucket_avg_bids, bucket_sample_size
+
+
 def _parse_pct(s):
     try:
         return float(str(s).rstrip('%'))
@@ -245,8 +578,10 @@ def build_recommendations(conn, date):
     # --- Buy recommender: rank market listings by starting-XI probability,
     # a points-per-euro value score, and recent form, with a squad-need
     # flag (position counts below the league median for my team) and a
-    # suggested-bid range derived from historical bid counts in the same
-    # price bracket. ---
+    # predicted winning-bid range from BidCompetitionModel — historical
+    # bid counts for the price bracket, scaled by which rivals could
+    # actually afford and need this specific player, priced in euros
+    # against real observed auction premiums. ---
     my_team_row = teams_summary[teams_summary['is_me'] == 1]
     my_team_id = my_team_row['team_id'].iloc[0] if len(my_team_row) else None
     my_counts = pos_counts.get(my_team_id, {'GK': 0, 'DEF': 0, 'MID': 0, 'FWD': 0})
@@ -266,32 +601,13 @@ def build_recommendations(conn, date):
         ]
         return ', '.join(needed) or None
 
-    bid_buckets = pd.read_sql(
-        "SELECT bucket, avg_bids, count FROM bid_history_buckets WHERE scraped_at LIKE ?",
-        conn, params=(d,)
+    # Who in this league would actually compete for a given player, and
+    # what does a competing bidder really cost in euros — see
+    # BidCompetitionModel. My own team is excluded from the rival set
+    # (bidding against yourself isn't a thing).
+    bid_model, bucket_avg_bids, bucket_sample_size = build_bid_competition_model(
+        conn, date, my_team_id=my_team_id
     )
-    bucket_avg_bids = dict(zip(bid_buckets['bucket'], bid_buckets['avg_bids']))
-    bucket_sample_size = dict(zip(bid_buckets['bucket'], bid_buckets['count']))
-
-    def _suggested_bid(price, change):
-        avg_bids = bucket_avg_bids.get(_bucket_label(price))
-        # No historical signings in this bracket yet -> fall back to a
-        # flat 5% cushion above asking price rather than no suggestion.
-        bucket_markup = min(avg_bids, 10) * 0.02 if avg_bids else 0.05
-        change = change if pd.notna(change) else 0
-        if change > 0:
-            # Rising: a fast riser is likely still rising by the time a
-            # bid resolves, and tends to draw more competing interest in
-            # the first place — add today's own growth on top of the
-            # full competition markup, not just a plain % of today's price.
-            return round((price * (1 + bucket_markup) + change) / 10_000) * 10_000
-        # Flat or falling: the bucket markup is a bracket-wide average
-        # of how much competition players in this price range typically
-        # draw — but a falling price is itself evidence THIS player
-        # isn't in demand right now, so that average doesn't really
-        # apply to him. Bid only a small fraction of the usual cushion,
-        # not the full competitive markup, on top of today's price.
-        return round(price * (1 + bucket_markup * 0.25) / 10_000) * 10_000
 
     buy = market.copy()
     buy.loc[:, 'start_pct'] = buy['probability'].apply(_parse_pct)
@@ -328,7 +644,15 @@ def build_recommendations(conn, date):
     buy.loc[:, 'bid_bucket'] = buy['price'].apply(_bucket_label)
     buy.loc[:, 'bucket_avg_bids'] = buy['bid_bucket'].map(bucket_avg_bids)
     buy.loc[:, 'bucket_sample'] = buy['bid_bucket'].map(bucket_sample_size)
-    buy.loc[:, 'suggested_bid'] = buy.apply(lambda r: _suggested_bid(r['price'], r['change']), axis=1)
+    # Predicted winning-bid range, one dict per listing, unpacked into
+    # columns. Written this way (rather than one apply per field) so the
+    # model is only asked once per player.
+    bid_fields = ('suggested_bid', 'suggested_bid_low', 'suggested_bid_high',
+                  'expected_bidders', 'competitor_pressure', 'markup_per_bidder',
+                  'bid_calibration_samples', 'top_competitors', 'competitor_count')
+    bids = [bid_model.suggest(r['price'], r['change'], r['position']) for _, r in buy.iterrows()]
+    for field in bid_fields:
+        buy.loc[:, field] = [b[field] for b in bids]
     # A relative 0-100 score only ever measures "best of today's market" —
     # even a mediocre snapshot has a top scorer. That's fine for ranking,
     # but not for deciding whether a suggested bid should exist at all:
@@ -545,7 +869,12 @@ def build_recommendations(conn, date):
         }
 
     buy_recommendations = buy_recommendations.copy()
-    buy_recommendations.loc[:, 'shortfall'] = (buy_recommendations['suggested_bid'] - my_balance).clip(lower=0)
+    # Affordability is checked against the TOP of the predicted range,
+    # not its midpoint: the point of a range is that the high end is what
+    # it takes to win a contested auction, and "✅ in balance" followed by
+    # not actually being able to fund the bid you needed to place is the
+    # exact failure this is meant to catch.
+    buy_recommendations.loc[:, 'shortfall'] = (buy_recommendations['suggested_bid_high'] - my_balance).clip(lower=0)
     buy_recommendations.loc[:, 'raisable_from_sells'] = raisable_from_sells
     buy_recommendations.loc[:, 'funded_without_hard_choices'] = buy_recommendations['shortfall'] <= raisable_from_sells
     plans = buy_recommendations['shortfall'].apply(_funding_plan)

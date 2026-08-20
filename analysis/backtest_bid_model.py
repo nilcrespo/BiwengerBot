@@ -63,10 +63,27 @@ def old_model_bid(price, change, bucket_avg_bids):
 
 
 def load_transactions(conn):
-    """One row per completed auction, with the asking price bidders would
-    have seen reconstructed as (price at capture − that day's own
-    increment) — see recommenders._markup_per_bidder for why that
-    reconstruction is necessary and what it costs in accuracy."""
+    """One row per completed auction, with the asking price and daily
+    price move bidders would actually have seen.
+
+    Two sources for that, in order of preference:
+
+    1. The player's own row in the `market` table from the last scrape
+       BEFORE the sale. This is ground truth — the exact listing the
+       bidders were looking at — and it carries no contamination from
+       the sale itself. It only exists when the player happened to be
+       scraped as a free agent that day, which is the common case for a
+       market signing but not guaranteed.
+
+    2. Failing that, the reconstruction (price at capture − that day's
+       own increment) that recommenders._markup_per_bidder has to use.
+       Worth knowing: on the transactions available so far this
+       reconstruction reproduced the real prior-day asking price to the
+       euro (€1,440,000 and €230,000), so it is a sound fallback — but
+       the price CHANGE it implies is not, because Biwenger rewrites the
+       increment on the sale (it read +€110,000/+€40,000 after the fact
+       where the real prior-day moves were +€130,000/+€30,000).
+    """
     txns = pd.read_sql(
         """
         SELECT DISTINCT txn_key, DATE(scraped_at) AS captured_on, player_name,
@@ -77,8 +94,29 @@ def load_transactions(conn):
         """,
         conn
     )
-    if len(txns):
-        txns.loc[:, 'asking'] = txns['player_price'] - txns['price_change'].fillna(0)
+    if not len(txns):
+        return txns
+
+    txns.loc[:, 'asking'] = txns['player_price'] - txns['price_change'].fillna(0)
+    txns.loc[:, 'listed_change'] = txns['price_change']
+    txns.loc[:, 'price_source'] = 'reconstructed from the post-sale price'
+
+    # Matched in Python via recommenders._normalize_name rather than with
+    # accent_fold_sql: that SQL helper only folds á/é/í/ó/ñ, and the board
+    # feed spells names with the accents Biwenger itself uses ("Bauzà"),
+    # where the scraped market table has already flattened them ("Bauza").
+    market = pd.read_sql("SELECT name, price, change, scraped_at FROM market", conn)
+    market.loc[:, 'key'] = market['name'].apply(recommenders._normalize_name)
+    market.loc[:, 'day'] = market['scraped_at'].str[:10]
+
+    for i, t in txns.iterrows():
+        prior = market[(market['key'] == recommenders._normalize_name(t['player_name']))
+                       & (market['day'] < t['captured_on'])]
+        if len(prior):
+            row = prior.sort_values('scraped_at').iloc[-1]
+            txns.loc[i, ['asking', 'listed_change', 'price_source']] = [
+                row['price'], row['change'], 'real listing from the last scrape before the sale'
+            ]
     return txns
 
 
@@ -142,23 +180,24 @@ def backtest(conn, txns, latest_date):
         print(f"⚠️  {len(txns)} transaction(s) is an anecdote, not a sample. Every number\n"
               f"    below is illustrative only — no error rate here is meaningful until\n"
               f"    the board feed has accumulated over many more days.")
-    print("⚠️  Asking price is reconstructed by subtracting the player's own daily price\n"
-          "    increment, and Biwenger bumps a player's price ON the sale — so for a\n"
-          "    just-sold player that increment is partly caused by the very auction being\n"
-          "    scored. Both the reconstructed asking price and any momentum read off it\n"
-          "    are contaminated in a way a live market listing's are not. Treat the\n"
-          "    direction of these results, not their precision.\n")
+    reconstructed = (txns['price_source'] != 'real listing from the last scrape before the sale').sum()
+    if reconstructed:
+        print(f"⚠️  {reconstructed} of {len(txns)} auction(s) have no pre-sale market listing to\n"
+              "    price against, so their asking price is reconstructed from the POST-sale\n"
+              "    price. Biwenger rewrites a player's price increment on the sale, so the\n"
+              "    daily move those rows imply is partly an effect of the auction being\n"
+              "    scored. Rows sourced from a real prior-day listing have no such problem.\n")
 
     old_rows, prior_rows, tuned_rows = [], [], []
     for t in txns.itertuples():
         rival_name, rival_amount = runner_up(conn, t.txn_key)
-        old = old_model_bid(t.asking, t.price_change, bucket_avg_bids)
-        prior = prior_model.suggest(t.asking, t.price_change, t.player_position)
-        tuned = tuned_model.suggest(t.asking, t.price_change, t.player_position)
+        old = old_model_bid(t.asking, t.listed_change, bucket_avg_bids)
+        prior = prior_model.suggest(t.asking, t.listed_change, t.player_position)
+        tuned = tuned_model.suggest(t.asking, t.listed_change, t.player_position)
 
         print(f"\n  {t.player_name} ({t.player_position}) — captured {t.captured_on}")
-        print(f"    asking ≈ {money(t.asking)} (price {money(t.player_price)} "
-              f"− that day's {money(t.price_change)} increment)")
+        print(f"    asking {money(t.asking)}, moving {money(t.listed_change)} that day "
+              f"— {t.price_source}")
         print(f"    ACTUAL: sold for {money(t.winning_amount)} "
               f"({pct(t.winning_amount / t.asking - 1)} over asking) to {t.num_bidders} bidder(s); "
               f"runner-up {rival_name} at {money(rival_amount)}")

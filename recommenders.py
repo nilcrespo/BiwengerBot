@@ -195,7 +195,8 @@ FALLING_PRICE_DAMPEN = 0.25
 # encodes the (deliberately asymmetric) view that a sliding price means
 # no competition worth paying for.
 MOMENTUM_FULL_RISE_PCT = 0.05   # a 5%-in-a-day rise is as loud as this signal gets
-MOMENTUM_BIDDER_BOOST = 0.5     # ...and it draws at most 50% more bidders
+MOMENTUM_FULL_RISE_EUR = 100_000  # ...and so is a €100k one
+MOMENTUM_BIDDER_BOOST = 0.5     # a maxed-out rise draws at most 50% more bidders
 MAX_EXPECTED_BIDDERS = 10
 # Used only when a price bracket has no historical signings at all. 2.5
 # bidders at the fallback 2%/bidder reproduces the flat 5% cushion the
@@ -340,9 +341,17 @@ class BidCompetitionModel:
             pressure = 0.5  # no lineup data — fall back to the bucket average as-is
         else:
             pressure = sum(c['weight'] for c in comps) / len(self.rivals)
+        # The rise has to be meaningful in BOTH relative and absolute
+        # terms — hence the smaller of the two readings. Biwenger moves
+        # prices in coarse steps, so on a cheap listing a single step is
+        # already several percent: Bauzà's €30,000 move was +13% in a day
+        # and drew all of two bidders, where the same percentage on a
+        # mid-price player is a genuine stampede. Percentage alone
+        # mistakes quantization for demand at the bottom of the market.
         momentum = 0.0
         if price and change > 0:
-            momentum = min(change / price / MOMENTUM_FULL_RISE_PCT, 1.0)
+            momentum = min(change / price / MOMENTUM_FULL_RISE_PCT,
+                           change / MOMENTUM_FULL_RISE_EUR, 1.0)
         bidders = base * (0.5 + pressure) * (1 + MOMENTUM_BIDDER_BOOST * momentum)
         return min(bidders, MAX_EXPECTED_BIDDERS), comps, pressure
 
@@ -374,8 +383,15 @@ class BidCompetitionModel:
         high = _at(bidders + BIDDER_UNCERTAINTY)
         mid = _at(bidders)
 
+        # The original flat €10,000 rounding collapses the whole range to
+        # a single number on cheap players — a €210k listing's realistic
+        # spread is a few thousand euros, which rounds away entirely and
+        # renders as "€210,000 – €210,000". Bids are per-euro anyway, so
+        # the rounding is only ever about not implying false precision.
+        unit = 10_000 if price >= 1_000_000 else 1_000
+
         def _round(v):
-            return round(v / 10_000) * 10_000
+            return round(v / unit) * unit
 
         return {
             'suggested_bid': _round(mid),
@@ -400,9 +416,13 @@ def _markup_per_bidder(conn, date):
 
     Two approximations worth knowing about:
     - Asking price is reconstructed as (price at capture − that day's own
-      price increment). Biwenger bumps a player's price the day he sells,
-      and the price bidders actually saw is not recoverable afterwards at
-      all, so this is the closest available stand-in.
+      price increment), since Biwenger bumps a player's price the day he
+      sells. Checked against the real prior-day market listings for the
+      transactions captured so far and it reproduced them to the euro
+      (€1,440,000 and €230,000), so this is a sound reconstruction — but
+      only of the price. The increment ITSELF is rewritten on the sale
+      and can't be trusted as that day's momentum, which is why nothing
+      here reads a price change off these rows.
     - The result is shrunk toward FALLBACK_MARKUP_PER_BIDDER in
       proportion to how few transactions back it. At the time of writing
       that's 2 auctions, which is not a sample — it's an anecdote, and it

@@ -101,19 +101,20 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Add and commit files. unique_posts.json is the forum-post
-          # scrape checkpoint (get_all_posts() reads it back in on the
-          # next run to fetch only what's new) — it was missing from
-          # this list, so any run where new posts actually showed up
-          # left it as an uncommitted change that blocked the rebase
-          # below with "cannot rebase: you have unstaged changes",
-          # losing that whole run's data (the commit never got pushed).
-          git add csvs/others/league_standings.csv || true
-          git add csvs/market/market_players.csv || true
-          git add csvs/others/player_probabilities.csv || true
-          git add csvs/teams/team_*.csv 2>/dev/null || true
-          git add data/biwenger_data.db || true
-          git add unique_posts.json || true
+          # Stage every already-tracked file the scrape/migration steps
+          # touched. A hand-maintained list of exact paths lived here
+          # before — it missed unique_posts.json (fixed once), then
+          # missed csvs/others/my_balance.csv too (a different file, same
+          # bug: rewritten every run, never added to the list). Both
+          # times the miss left a real change uncommitted, which blocked
+          # the rebase below with "cannot rebase: you have unstaged
+          # changes" and silently lost that whole run's data — the
+          # runner is ephemeral, so an uncommitted commit just vanishes.
+          # `-u` stages modifications to anything ALREADY tracked, so a
+          # future new/renamed output file can't cause this again — it
+          # can't pick up a stray untracked file (like scraper/.env,
+          # which has never been tracked) since -u never adds new paths.
+          git add -u
 
           git commit -m "data: update CSV/DB from run ${GITHUB_RUN_NUMBER}" || echo "No changes"
 

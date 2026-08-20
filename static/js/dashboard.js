@@ -312,6 +312,14 @@ function affordabilityCell(p) {
   return `<span class="pill ${cls}" title="${escapeHtml(title)}">${label}</span>`;
 }
 
+// Predicted winning bid is a range. On a cheap listing the two ends can
+// round to the same figure — show one number rather than "€X – €X".
+function formatBidRange(p) {
+  const low = formatMoney(p.suggested_bid_low);
+  const high = formatMoney(p.suggested_bid_high);
+  return low === high ? low : `${low} – ${high}`;
+}
+
 function renderBuyRecommendations(data) {
   const tbody = document.querySelector('#buyTable tbody');
   renderTable(tbody, data, 9, (p) => {
@@ -322,7 +330,17 @@ function renderBuyRecommendations(data) {
     const momentumNote = change > 0
       ? ` + today's own +${formatMoney(change)} rise (a fast riser tends to keep rising and draw more competition)`
       : ' — but the price is flat or falling, so that average competition doesn\'t really apply right now; only a small cushion above market price is added';
-    const bidTitle = `Estimate: ${bucketNote}${momentumNote}`;
+    const rivalNote = p.competitor_count
+      ? `\n${p.competitor_count} rival(s) could afford him and have room at his position`
+        + (p.top_competitors ? `, most likely ${p.top_competitors}` : '')
+        + ` → ~${p.expected_bidders} bidders expected.`
+      : '\nNo rival looks able to afford him out of the squad-value credit line we can see.';
+    const calibNote = p.bid_calibration_samples
+      ? ` Each competing bidder is worth ~${(parseFloat(p.markup_per_bidder) * 100).toFixed(1)}% over asking, from ${p.bid_calibration_samples} real auction(s).`
+      : ' No real auction data captured yet — using the default per-bidder premium.';
+    const bidTitle = `Low ${formatMoney(p.suggested_bid_low)} wins a quiet auction, `
+      + `high ${formatMoney(p.suggested_bid_high)} wins a contested one.\n`
+      + `${bucketNote}${momentumNote}${rivalNote}${calibNote}`;
     return `
     <tr>
       <td><span class="pos-badge">${escapeHtml(p.position)}</span></td>
@@ -332,7 +350,7 @@ function renderBuyRecommendations(data) {
       <td class="num">${startPctCell(p.probability)}</td>
       <td class="num">${scoreBadge(p.score)}</td>
       <td>${needBadge(p.squad_need)}</td>
-      <td class="num" title="${escapeHtml(bidTitle)}">${formatMoney(p.suggested_bid)}</td>
+      <td class="num" title="${escapeHtml(bidTitle)}">${formatBidRange(p)}</td>
       <td>${affordabilityCell(p)}</td>
     </tr>
   `;

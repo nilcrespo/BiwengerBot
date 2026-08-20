@@ -99,9 +99,15 @@ def build_digest(conn, date) -> str:
                     afford = f"\n    ⚠️ short {_money(r['shortfall'])} — would need to sell: {r['funding_plan']}"
                 else:
                     afford = f"\n    ⚠️ short {_money(r['shortfall'])}, no sells available to cover it"
+            # The bid is a predicted RANGE now, not a point estimate —
+            # the low end wins a quiet auction, the high end a contested
+            # one. Both are shown, with who's expected to turn up.
+            rivals = f", vs {r['top_competitors']}" if r.get('top_competitors') else ""
+            bid = f"{_money(r['suggested_bid_low'])}–{_money(r['suggested_bid_high'])}"
             lines.append(
                 f"  • {r['name']} ({r['club']}, {r['position']}) — {_money(r['price'])}, "
-                f"{r['probability']} start, score {r['score']}{need} → bid ~{_money(r['suggested_bid'])}{afford}"
+                f"{r['probability']} start, score {r['score']}{need} → bid {bid} "
+                f"(~{r['expected_bidders']:g} bidders expected{rivals}){afford}"
             )
         sections.append("\n".join(lines))
 

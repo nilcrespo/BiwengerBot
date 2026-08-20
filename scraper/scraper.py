@@ -789,6 +789,26 @@ def _fetch_round_ownership(page, headers, round_id) -> dict:
                 }
     return owners
 
+def _report_points(entry):
+    """The score the site actually shows for one match report.
+
+    Not simply `points`: this competition runs "Super Pica" on scoring
+    systems 1, 5 and 8 (competition config `superPicaScores`, which
+    LEAGUE_SCORE_ID is one of), and when a performance qualifies, the
+    API returns the plain total in `points` AND the one the site
+    displays in `optionalPoints.superPicaExtraPoints.points`. Reading
+    `points` alone quietly undercounts exactly the standout games that
+    matter most — caught against the live match pages: Mariano 16 vs the
+    17 shown, Roberto Fernández 17 vs 19, Kang-in Lee 14 vs 16.
+
+    The field is absent whenever it doesn't apply, so its presence is
+    the whole test — `star`/`profitable` are not: Tenaglia was flagged
+    star with no Super Pica bonus and the site showed his base 16.
+    """
+    optional = entry.get("optionalPoints") or {}
+    super_pica = (optional.get("superPicaExtraPoints") or {}).get("points")
+    return super_pica if super_pica is not None else entry.get("points")
+
 def _round_score_rows(round_data, owners, la_liga_players) -> list:
     """Flatten one round's payload into one row per (fixture side, player).
 
@@ -850,7 +870,7 @@ def _round_score_rows(round_data, owners, la_liga_players) -> list:
                     continue
                 reported.add(player_id)
                 rows.append(_row(player_id, player.get("name"),
-                                 player.get("position"), entry.get("points")))
+                                 player.get("position"), _report_points(entry)))
 
             # Anyone owned in this league whose club played this fixture but
             # who has no report at all — the DNP case. Only owned players get

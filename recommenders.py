@@ -77,9 +77,27 @@ def attach_probabilities(df, prob_df, name_col='name', club_col='club'):
     return df
 
 def accent_fold_sql(col):
-    return (
-        f"LOWER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE({col},'á','a'),'é','e'),'í','i'),'ó','o'),'ñ','n'))"
-    )
+    """SQL equivalent of _normalize_name's accent-stripping, for joins that
+    have to happen in SQL rather than pandas. Must cover the same character
+    set _normalize_name (NFKD-based, strips any accent) and scraper.py's
+    normalize_player_name handle, plus their uppercase forms explicitly:
+    SQLite's LOWER() only folds ASCII without the ICU extension, so an
+    accented capital (e.g. the Á in "Álvaro") survives a trailing LOWER()
+    untouched and needs its own REPLACE.
+    """
+    pairs = [
+        ('á', 'a'), ('Á', 'a'), ('à', 'a'), ('À', 'a'), ('ã', 'a'), ('Ã', 'a'),
+        ('é', 'e'), ('É', 'e'), ('è', 'e'), ('È', 'e'),
+        ('í', 'i'), ('Í', 'i'), ('ï', 'i'), ('Ï', 'i'),
+        ('ó', 'o'), ('Ó', 'o'), ('ò', 'o'), ('Ò', 'o'),
+        ('ú', 'u'), ('Ú', 'u'), ('ü', 'u'), ('Ü', 'u'),
+        ('ñ', 'n'), ('Ñ', 'n'),
+        ('ç', 'c'), ('Ç', 'c'),
+    ]
+    expr = col
+    for accented, plain in pairs:
+        expr = f"REPLACE({expr},'{accented}','{plain}')"
+    return f"LOWER({expr})"
 
 def to_records(df):
     """NaN isn't valid JSON (and prints ugly in an f-string); swap it

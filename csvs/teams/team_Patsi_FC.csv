@@ -1,19 +1,21 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Patsi F.C,Patsi_FC,Goalkeeper,Valencia,Dimitrievski,0,98,3810000,-40000.0,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Patsi_FC,Defender,Villarreal,Carlos Romero,6,0,7360000,20000.0,Fit,1,6.0,0,0.0,6,6.0
-Patsi F.C,Patsi_FC,Defender,Malaga,Puga,5,0,2270000,10000.0,Fit,1,5.0,0,0.0,5,5.0
+Patsi F.C,Patsi_FC,Goalkeeper,Valencia,Dimitrievski,0,98,3800000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Defender,Villarreal,Carlos Romero,6,0,7400000,40000.0,Fit,1,6.0,0,0.0,6,6.0
+Patsi F.C,Patsi_FC,Defender,Malaga,Puga,5,0,2290000,20000.0,Fit,1,5.0,0,0.0,5,5.0
 Patsi F.C,Patsi_FC,Defender,Deportivo,Ximo Navarro,2,0,1370000,0.0,Fit,1,2.0,2,2.0,0,0.0
-Patsi F.C,Patsi_FC,Defender,Celta,Starfelt,0,76,2750000,-50000.0,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Defender,Celta,Starfelt,0,76,2730000,-20000.0,Fit,0,0.0,0,0.0,0,0.0
 Patsi F.C,Patsi_FC,Defender/Midfielder,Celta,Javier Rueda,0,107,2030000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Patsi_FC,Defender/Midfielder,Barcelona,Christensen,0,36,450000,10000.0,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Patsi_FC,Midfielder,Deportivo,Amatucci,6,0,3140000,30000.0,Fit,1,6.0,6,6.0,0,0.0
-Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,5,0,4840000,-20000.0,Fit,1,5.0,5,5.0,0,0.0
-Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,5,0,3360000,10000.0,Fit,1,5.0,0,0.0,5,5.0
-Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,0,84,2190000,-70000.0,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Patsi_FC,Midfielder,Real Sociedad,Turrientes,0,99,1770000,-40000.0,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Patsi_FC,Midfielder,Valencia,Filip Ugrinic,0,102,1390000,10000.0,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,0,224,12510000,-100000.0,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Patsi_FC,Forward,Barcelona,Gordon,0,0,9740000,10000.0,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,0,211,8670000,-60000.0,Injured. Knee sprain. Estimated return: Late August.,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Defender/Midfielder,Barcelona,Christensen,0,36,460000,10000.0,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Midfielder,Deportivo,Amatucci,6,0,3180000,40000.0,Fit,1,6.0,6,6.0,0,0.0
+Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,5,0,4830000,-10000.0,Fit,1,5.0,5,5.0,0,0.0
+Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,5,0,3380000,20000.0,Fit,1,5.0,0,0.0,5,5.0
+Patsi F.C,Patsi_FC,Midfielder,Real Sociedad,Turrientes,3,0,1740000,-30000.0,Fit,1,3.0,0,0.0,3,3.0
+Patsi F.C,Patsi_FC,Midfielder/Defender,Valencia,Pepelu,0,125,2680000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,0,84,2160000,-30000.0,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Midfielder,Valencia,Filip Ugrinic,0,102,1410000,20000.0,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,4,0,12470000,-40000.0,Fit,1,4.0,0,0.0,4,4.0
+Patsi F.C,Patsi_FC,Forward,Barcelona,Gordon,0,0,9800000,60000.0,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,0,211,8440000,-230000.0,Injured. Knee sprain. Estimated return: Late August.,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Forward,Atletico,Sørloth,0,148,3920000,-50000.0,Injured. Muscle injury. Estimated return: Early September.,0,0.0,0,0.0,0,0.0
 Patsi F.C,Patsi_FC,Forward,Rayo Vallecano,De Tomas,0,0,210000,0.0,Fit,0,0.0,0,0.0,0,0.0
 Patsi F.C,Patsi_FC,Forward/Midfielder,Levante,Tay Abed,0,9,150000,0.0,Fit,0,0.0,0,0.0,0,0.0

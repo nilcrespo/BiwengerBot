@@ -1,24 +1,23 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-FerranGoaT,Ferrangoat,Goalkeeper,Alaves,Sivera,10,0,4130000,20000.0,Fit,2,5.0,5,5.0,5,5.0
-FerranGoaT,Ferrangoat,Defender,Espanyol,Unai Nunez,7,0,2350000,110000.0,Fit,1,7.0,7,7.0,0,0.0
-FerranGoaT,Ferrangoat,Defender,Espanyol,Riedel,3,0,1450000,10000.0,Fit,1,3.0,3,3.0,0,0.0
+FerranGoaT,Ferrangoat,Goalkeeper,Alaves,Sivera,10,0,4160000,30000.0,Fit,2,5.0,5,5.0,5,5.0
+FerranGoaT,Ferrangoat,Defender,Espanyol,Unai Nunez,7,0,2470000,120000.0,Fit,1,7.0,7,7.0,0,0.0
+FerranGoaT,Ferrangoat,Defender,Espanyol,Riedel,3,0,1470000,20000.0,Fit,1,3.0,3,3.0,0,0.0
 FerranGoaT,Ferrangoat,Defender,Getafe,Andres Garcia,2,0,1460000,0.0,Fit,1,2.0,0,0.0,2,2.0
-FerranGoaT,Ferrangoat,Defender,Barcelona,Balde,0,101,2970000,-30000.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Defender,Athletic,Yuri,0,137,2880000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
+FerranGoaT,Ferrangoat,Defender,Barcelona,Balde,0,101,2950000,-20000.0,Fit,0,0.0,0,0.0,0,0.0
 FerranGoaT,Ferrangoat,Defender/Midfielder,Celta,Alvaro Nunez,0,100,540000,0.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Defender,Villarreal,Kambwala,0,1,250000,10000.0,Fit,0,0.0,0,0.0,0,0.0
+FerranGoaT,Ferrangoat,Defender,Villarreal,Kambwala,0,1,250000,0.0,Fit,0,0.0,0,0.0,0,0.0
 FerranGoaT,Ferrangoat,Defender,Real Madrid,Mendy,0,10,150000,0.0,Injured. Tear of the rectus femoris tendon with bone separation. Estimated return: Mid-October.,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Midfielder,Atletico,Koke,5,0,2580000,60000.0,Fit,1,5.0,5,5.0,0,0.0
-FerranGoaT,Ferrangoat,Midfielder/Forward,Barcelona,Dani Olmo,0,188,10270000,-90000.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Midfielder,Real Madrid,Tchouameni,0,178,6380000,-140000.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Midfielder,Valencia,Guido Rodriguez,0,96,5030000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
+FerranGoaT,Ferrangoat,Midfielder,Betis,Marc Roca,6,0,2530000,30000.0,Fit,1,6.0,6,6.0,0,0.0
+FerranGoaT,Ferrangoat,Midfielder,Atletico,Koke,5,0,2660000,80000.0,Fit,1,5.0,5,5.0,0,0.0
+FerranGoaT,Ferrangoat,Midfielder,Real Sociedad,Yangel Herrera,3,0,2330000,20000.0,Fit,1,3.0,0,0.0,3,3.0
+FerranGoaT,Ferrangoat,Midfielder/Forward,Barcelona,Dani Olmo,0,188,10260000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
+FerranGoaT,Ferrangoat,Midfielder,Real Madrid,Tchouameni,0,178,6280000,-100000.0,Injured. Muscle soreness. Estimated return: Imminent.,0,0.0,0,0.0,0,0.0
+FerranGoaT,Ferrangoat,Midfielder,Valencia,Guido Rodriguez,0,96,5010000,-20000.0,Fit,0,0.0,0,0.0,0,0.0
 FerranGoaT,Ferrangoat,Midfielder/Forward,Osasuna,Aimar Oroz,0,121,4130000,0.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Midfielder,Betis,Marc Roca,0,110,2500000,-30000.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Midfielder,Real Sociedad,Yangel Herrera,0,38,2310000,10000.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Midfielder,Atletico,Lemar,0,112,840000,-30000.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Forward,Villarreal,Ayoze,3,0,5200000,10000.0,Fit,1,3.0,0,0.0,3,3.0
-FerranGoaT,Ferrangoat,Forward,Betis,Cucho,0,177,7510000,-30000.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Forward,Celta,Borja Iglesias,0,187,5240000,-60000.0,Fit,0,0.0,0,0.0,0,0.0
+FerranGoaT,Ferrangoat,Midfielder,Atletico,Lemar,0,112,820000,-20000.0,Fit,0,0.0,0,0.0,0,0.0
+FerranGoaT,Ferrangoat,Forward,Betis,Cucho,6,0,7520000,10000.0,Fit,1,6.0,6,6.0,0,0.0
+FerranGoaT,Ferrangoat,Forward,Villarreal,Ayoze,3,0,5240000,40000.0,Fit,1,3.0,0,0.0,3,3.0
+FerranGoaT,Ferrangoat,Forward,Celta,Borja Iglesias,0,187,5220000,-20000.0,Fit,0,0.0,0,0.0,0,0.0
 FerranGoaT,Ferrangoat,Forward/Midfielder,Levante,Brugue,0,44,250000,0.0,Fit,0,0.0,0,0.0,0,0.0
 FerranGoaT,Ferrangoat,Forward,Athletic,Sannadi,0,26,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Coach,Valencia,Corberan,0,49,620000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
+FerranGoaT,Ferrangoat,Coach,Valencia,Corberan,0,49,620000,0.0,Fit,0,0.0,0,0.0,0,0.0

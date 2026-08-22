@@ -1,18 +1,18 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Rayo Vallecano,Batalla,9,0,3890000,-60000.0,Fit,2,4.5,6,6.0,3,3.0
+Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Rayo Vallecano,Batalla,9,0,3670000,-220000.0,Injured. Tibia fracture. Estimated return: Early January.,2,4.5,6,6.0,3,3.0
 Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Celta,Ivan Villar,0,0,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Defender,Alaves,Jonny Castro,7,0,1770000,20000.0,Fit,2,3.5,4,4.0,3,3.0
-Minabo de Kiev,Minabo_De_Kiev,Defender,Getafe,Abqar,2,0,1540000,-10000.0,Fit,1,2.0,0,0.0,2,2.0
-Minabo de Kiev,Minabo_De_Kiev,Defender,Atletico,Pubill,0,114,6030000,-260000.0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Defender,Barcelona,Kounde,0,130,4700000,-20000.0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Atletico,Barrios,7,0,6510000,60000.0,Fit,1,7.0,7,7.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Rayo Vallecano,Oscar Valentin,6,0,1780000,-10000.0,Fit,2,3.0,3,3.0,3,3.0
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Elche,Redondo,3,0,240000,30000.0,Fit,1,3.0,0,0.0,3,3.0
-Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Barcelona,Fermin,0,190,11630000,-80000.0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Barcelona,Marc Bernal,0,105,4320000,-70000.0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Real Sociedad,Pablo Marin,0,88,510000,-10000.0,Injured. Undetermined issues. Estimated return: Late August.,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Rayo Vallecano,De Frutos,6,0,5760000,-110000.0,Fit,2,3.0,4,4.0,2,2.0
-Minabo de Kiev,Minabo_De_Kiev,Forward,Racing,Villalibre,1,0,2580000,-60000.0,Fit,1,1.0,1,1.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Forward,Valencia,Hugo Duro,0,143,2830000,-20000.0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Forward,Celta,Hugo Gonzalez,0,1,2460000,80000.0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Forward,Getafe,Mayoral,0,58,1760000,-50000.0,Fit,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Minabo_De_Kiev,Defender,Alaves,Jonny Castro,7,0,1800000,30000.0,Fit,2,3.5,4,4.0,3,3.0
+Minabo de Kiev,Minabo_De_Kiev,Defender,Getafe,Abqar,2,0,1530000,-10000.0,Fit,1,2.0,0,0.0,2,2.0
+Minabo de Kiev,Minabo_De_Kiev,Defender,Atletico,Pubill,0,114,5920000,-110000.0,Fit,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Minabo_De_Kiev,Defender,Barcelona,Kounde,0,130,4700000,0.0,Fit,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Atletico,Barrios,7,0,6600000,90000.0,Fit,1,7.0,7,7.0,0,0.0
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Rayo Vallecano,Oscar Valentin,6,0,1770000,-10000.0,Fit,2,3.0,3,3.0,3,3.0
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Elche,Redondo,3,0,270000,30000.0,Fit,1,3.0,0,0.0,3,3.0
+Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Barcelona,Fermin,0,190,11600000,-30000.0,Fit,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Barcelona,Marc Bernal,0,105,4290000,-30000.0,Fit,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Real Sociedad,Pablo Marin,0,88,490000,-20000.0,Injured. Undetermined issues. Estimated return: Late August.,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Rayo Vallecano,De Frutos,6,0,5710000,-50000.0,Fit,2,3.0,4,4.0,2,2.0
+Minabo de Kiev,Minabo_De_Kiev,Forward,Racing,Villalibre,1,0,2560000,-20000.0,Fit,1,1.0,1,1.0,0,0.0
+Minabo de Kiev,Minabo_De_Kiev,Forward,Valencia,Hugo Duro,0,143,2830000,0.0,Fit,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Minabo_De_Kiev,Forward,Celta,Hugo Gonzalez,0,1,2530000,70000.0,Fit,0,0.0,0,0.0,0,0.0
+Minabo de Kiev,Minabo_De_Kiev,Forward,Getafe,Mayoral,0,58,1740000,-20000.0,Fit,0,0.0,0,0.0,0,0.0

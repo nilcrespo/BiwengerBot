@@ -312,12 +312,17 @@ function affordabilityCell(p) {
   return `<span class="pill ${cls}" title="${escapeHtml(title)}">${label}</span>`;
 }
 
-// Predicted winning bid is a range. On a cheap listing the two ends can
-// round to the same figure — show one number rather than "€X – €X".
+// Biwenger's market is a first-price sealed-bid auction (winner pays
+// exactly what they bid — confirmed on 9/9 real transactions), so "the
+// average price" is the wrong number to show: every euro bid above the
+// true minimum needed to win is pure waste. Show the minimum bid for a
+// coin-flip chance instead. On a cheap listing this can round to the
+// same figure as the 90%-safe number — show one number rather than
+// "€X – €X" in that case.
 function formatBidRange(p) {
-  const low = formatMoney(p.suggested_bid_low);
-  const high = formatMoney(p.suggested_bid_high);
-  return low === high ? low : `${low} – ${high}`;
+  const win50 = formatMoney(p.win_bid_50);
+  const win90 = formatMoney(p.win_bid_90);
+  return win50 === win90 ? win50 : `${win50} (safe: ${win90})`;
 }
 
 function renderBuyRecommendations(data) {
@@ -338,8 +343,8 @@ function renderBuyRecommendations(data) {
     const calibNote = p.bid_calibration_samples
       ? ` Each competing bidder is worth ~${(parseFloat(p.markup_per_bidder) * 100).toFixed(1)}% over asking, from ${p.bid_calibration_samples} real auction(s).`
       : ' No real auction data captured yet — using the default per-bidder premium.';
-    const bidTitle = `Low ${formatMoney(p.suggested_bid_low)} wins a quiet auction, `
-      + `high ${formatMoney(p.suggested_bid_high)} wins a contested one.\n`
+    const bidTitle = `${formatMoney(p.win_bid_50)} for roughly a coin-flip chance of winning, `
+      + `${formatMoney(p.win_bid_90)} to be pretty confident.\n`
       + `${bucketNote}${momentumNote}${rivalNote}${calibNote}`;
     return `
     <tr>

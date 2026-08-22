@@ -99,14 +99,20 @@ def build_digest(conn, date) -> str:
                     afford = f"\n    ⚠️ short {_money(r['shortfall'])} — would need to sell: {r['funding_plan']}"
                 else:
                     afford = f"\n    ⚠️ short {_money(r['shortfall'])}, no sells available to cover it"
-            # The bid is a predicted RANGE now, not a point estimate —
-            # the low end wins a quiet auction, the high end a contested
-            # one. Both are shown, with who's expected to turn up.
+            # Biwenger's market is a first-price sealed-bid auction — the
+            # winner pays exactly what they bid, never the runner-up's
+            # amount plus an increment (confirmed on 9/9 real transactions
+            # captured so far). That makes "bid the predicted average
+            # price" the wrong advice: every euro above the true minimum
+            # needed to clear the field is pure waste. win_bid_50/90 are
+            # framed as what they actually are — the minimum bid for a
+            # roughly-coin-flip vs. a pretty-safe chance of winning — not
+            # a range around an expected price.
             rivals = f", vs {r['top_competitors']}" if r.get('top_competitors') else ""
-            bid = f"{_money(r['suggested_bid_low'])}–{_money(r['suggested_bid_high'])}"
             lines.append(
                 f"  • {r['name']} ({r['club']}, {r['position']}) — {_money(r['price'])}, "
-                f"{r['probability']} start, score {r['score']}{need} → bid {bid} "
+                f"{r['probability']} start, score {r['score']}{need} → "
+                f"bid {_money(r['win_bid_50'])} for even odds, {_money(r['win_bid_90'])} to be safe "
                 f"(~{r['expected_bidders']:g} bidders expected{rivals}){afford}"
             )
         sections.append("\n".join(lines))

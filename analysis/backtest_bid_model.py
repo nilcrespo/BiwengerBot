@@ -188,7 +188,7 @@ def backtest(conn, txns, latest_date):
               "    daily move those rows imply is partly an effect of the auction being\n"
               "    scored. Rows sourced from a real prior-day listing have no such problem.\n")
 
-    old_rows, prior_rows, tuned_rows = [], [], []
+    old_rows, prior_rows, tuned_rows, win_prob_rows = [], [], [], []
     for t in txns.itertuples():
         rival_name, rival_amount = runner_up(conn, t.txn_key)
         old = old_model_bid(t.asking, t.listed_change, bucket_avg_bids)
@@ -212,17 +212,44 @@ def backtest(conn, txns, latest_date):
         print(f"    new (calibrated in-sample): {money(tuned['suggested_bid_low'])} – "
               f"{money(tuned['suggested_bid_high'])}, mid {money(tuned['suggested_bid'])}  "
               f"[{pct(tuned['suggested_bid'] / t.winning_amount - 1)} vs actual]")
+        would_win_50 = prior['win_bid_50'] >= t.winning_amount
+        would_win_75 = prior['win_bid_75'] >= t.winning_amount
+        would_win_90 = prior['win_bid_90'] >= t.winning_amount
+        print(f"    win-probability bids:       50%→{money(prior['win_bid_50'])} "
+              f"({'would win' if would_win_50 else 'would LOSE'})   "
+              f"75%→{money(prior['win_bid_75'])} ({'would win' if would_win_75 else 'would LOSE'})   "
+              f"90%→{money(prior['win_bid_90'])} ({'would win' if would_win_90 else 'would LOSE'})")
 
         old_rows.append({'pred': old, 'actual': t.winning_amount})
         prior_rows.append({'pred': prior['suggested_bid'], 'actual': t.winning_amount,
                            'low': prior['suggested_bid_low'], 'high': prior['suggested_bid_high']})
         tuned_rows.append({'pred': tuned['suggested_bid'], 'actual': t.winning_amount,
                            'low': tuned['suggested_bid_low'], 'high': tuned['suggested_bid_high']})
+        win_prob_rows.append({'win_50': would_win_50, 'win_75': would_win_75, 'win_90': would_win_90,
+                              'bid_50': prior['win_bid_50'], 'asking': t.asking, 'actual': t.winning_amount})
 
     print("\n  --- summary ---")
     score("old (flat bucket markup)  ", old_rows)
     score("new (prior knowledge only)", prior_rows)
     score("new (in-sample, NOT a validation — shows where calibration heads)", tuned_rows)
+
+    # Calibration check for the win-probability framing: a well-calibrated
+    # "bid for 50% win chance" should win roughly half the time across many
+    # auctions, not every time (that would mean it's overpaying) or rarely
+    # (underpaying). With single-digit auctions this can't be trusted yet —
+    # printed anyway so the gap between claimed and observed is visible
+    # from day one, same spirit as the MAPE warning above.
+    n = len(win_prob_rows)
+    if n:
+        w50 = sum(r['win_50'] for r in win_prob_rows)
+        w75 = sum(r['win_75'] for r in win_prob_rows)
+        w90 = sum(r['win_90'] for r in win_prob_rows)
+        avg_50_vs_asking = sum(r['bid_50'] / r['asking'] - 1 for r in win_prob_rows) / n
+        print(f"\n  --- win-probability calibration (target vs observed hit-rate, n={n}) ---")
+        print(f"  bid at 50% target: won {w50}/{n} ({w50/n:.0%}) — bid_50 averaged "
+              f"{pct(avg_50_vs_asking)} over asking")
+        print(f"  bid at 75% target: won {w75}/{n} ({w75/n:.0%})")
+        print(f"  bid at 90% target: won {w90}/{n} ({w90/n:.0%})")
 
 
 def sanity_checks(conn, date):

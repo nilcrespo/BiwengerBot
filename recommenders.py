@@ -5,6 +5,7 @@ connection and gets back the same two ranked DataFrames.
 """
 import unicodedata
 from itertools import combinations
+from statistics import NormalDist
 
 import pandas as pd
 
@@ -181,6 +182,18 @@ MIN_CALIBRATION_SAMPLES = 5
 # The predicted range is "what if a couple more (or fewer) managers show
 # up than expected" — a real, interpretable quantity, rather than an
 # arbitrary ± percentage band.
+#
+# KNOWN LIMITATION (checked against 9 real auctions, 2026-08-22): this is a
+# fixed constant, not learned from data, and it is too narrow to separate
+# win_bid_50/75/90 in practice — on all 9 real auctions checked, the three
+# win-probability bids either all won or all lost together, because a ±1.5
+# bidder swing moves the price by only a few percent while two of the 9 real
+# auctions (Miguel Sierra +73.6% over asking, Nacho Pérez +52.5%) were
+# blowouts the bidder-count model can't reach at any reasonable win
+# probability. Making this the observed spread of real outcomes (once
+# there's enough of them to estimate a spread from, not just 9 points) is
+# the natural next step — same "needs more volume first" situation as
+# per-rival behavioral profiling.
 BIDDER_UNCERTAINTY = 1.5
 # A falling price is evidence THIS player isn't in demand, so the
 # bracket-wide competition average doesn't apply to him (unchanged
@@ -357,11 +370,25 @@ class BidCompetitionModel:
 
     # --- bid range ------------------------------------------------------------
     def suggest(self, price, change, position_str):
-        """Predicted winning-bid range for one listing.
+        """Predicted winning-bid range for one listing, PLUS the bid
+        actually worth acting on: the minimum euro amount needed to clear
+        a chosen win probability.
 
-        Returns low / mid / high plus every input that produced them, so
-        the number stays checkable rather than opaque (same principle as
-        the rest of the recommender).
+        Why the range alone isn't the answer: checked against 9 real
+        auctions (analysis/backtest_bid_model.py), every real listing here
+        turned out to be a first-price sealed-bid auction — the winner
+        pays exactly what they bid, never the runner-up's amount plus an
+        increment (confirmed on all 9: winning_amount == the winner's own
+        bid_amount, to the euro, every time). In a first-price auction,
+        matching the historical AVERAGE clearing price is the wrong
+        target — every euro bid above the true minimum needed to clear
+        the field is pure waste, not a safety margin. A user who bid
+        below both this model's and the old model's suggestion on 2 of 3
+        real auctions still won both, €50,000-€80,000 cheaper than either
+        model would have told them to pay. The range fields below are
+        kept for backward compatibility (shortfall affordability checks
+        key off suggested_bid_high); win_bid_50/75/90 are what should
+        actually inform a bid decision.
         """
         price = float(price or 0)
         change = float(change) if pd.notna(change) else 0.0
@@ -383,6 +410,23 @@ class BidCompetitionModel:
         high = _at(bidders + BIDDER_UNCERTAINTY)
         mid = _at(bidders)
 
+        # Win-probability bids: treat the number of bidders who show up as
+        # roughly Normal(mean=bidders, sd=BIDDER_UNCERTAINTY) — the same
+        # spread already used for low/high — and invert it. Since _at() is
+        # monotonic in n_bidders, "the bid that clears win probability p"
+        # is just _at() evaluated at the bidder count whose CDF is p. A
+        # bid can never need fewer than 1 bidder's worth (nobody signs for
+        # under asking), so n is floored at 1 regardless of how low p is.
+        bidder_dist = NormalDist(bidders, max(BIDDER_UNCERTAINTY, 1e-6))
+
+        def _bid_for_win_prob(p):
+            n_needed = max(bidder_dist.inv_cdf(min(max(p, 0.001), 0.999)), 1.0)
+            return _at(n_needed)
+
+        win_50 = _bid_for_win_prob(0.50)
+        win_75 = _bid_for_win_prob(0.75)
+        win_90 = _bid_for_win_prob(0.90)
+
         # The original flat €10,000 rounding collapses the whole range to
         # a single number on cheap players — a €210k listing's realistic
         # spread is a few thousand euros, which rounds away entirely and
@@ -397,6 +441,9 @@ class BidCompetitionModel:
             'suggested_bid': _round(mid),
             'suggested_bid_low': _round(low),
             'suggested_bid_high': _round(high),
+            'win_bid_50': _round(win_50),
+            'win_bid_75': _round(win_75),
+            'win_bid_90': _round(win_90),
             'expected_bidders': round(bidders, 1),
             'competitor_pressure': round(pressure, 2),
             'markup_per_bidder': round(self.markup_per_bidder, 4),
@@ -709,6 +756,7 @@ def build_recommendations(conn, date):
     # columns. Written this way (rather than one apply per field) so the
     # model is only asked once per player.
     bid_fields = ('suggested_bid', 'suggested_bid_low', 'suggested_bid_high',
+                  'win_bid_50', 'win_bid_75', 'win_bid_90',
                   'expected_bidders', 'competitor_pressure', 'markup_per_bidder',
                   'bid_calibration_samples', 'top_competitors', 'competitor_count')
     bids = [bid_model.suggest(r['price'], r['change'], r['position']) for _, r in buy.iterrows()]

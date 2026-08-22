@@ -843,22 +843,40 @@ _DATE_TOKEN_RE = re.compile(
     r"|Fa \d+ \S+"
     r"|\d{1,2} d['’]?e?\.?\s?\S+\.?(\s\d{4})?)$"
 )
+# A bare integer, standing alone with no unit/currency/word attached, is a
+# reaction/like count on that post (or on each item within a batch post) —
+# never real transaction content, which is always tagged ("X licitacions",
+# "€X", a name, a position code). Confirmed at scale across the real
+# dataset: every one of 670 bare-integer tokens found immediately follows a
+# "Venut per X€" / "Per X€" / "X licitacions" token, never appears as
+# content on its own. Like a date string, this field re-renders as people
+# react to a post after it's first scraped, so hashing it double/triple-
+# counted real sales exactly like the timestamp did (caught live: the same
+# real Bartra sale, scraped on two days with reaction counts '5' and '0',
+# produced two different identities and was recorded as two separate
+# sales in realized_trades).
+_BARE_INT_RE = re.compile(r"^\d+$")
 
 def _post_identity(post_data):
     """A stable identity for a scraped post, for deduplication across
     scrapes. Hashing the whole post text seems safe but isn't: the same
     real post's timestamp text changes every time it's re-scraped until
-    it finally settles (see _DATE_TOKEN_RE), and each distinct rendering
-    was silently treated as a new post — this double/triple-counted real
-    transactions in the money ledger, confirmed live against multiple
-    teams' balances not matching reality. The date is dropped from the
-    identity entirely rather than partially: the transaction content
-    (type, team, player, exact euro amount) is already a near-unique key
-    on its own, so the risk of two genuinely different transactions
-    colliding is far smaller than the risk of missing another still-
-    unrecognized timestamp format down the line.
+    it finally settles (see _DATE_TOKEN_RE), and a trailing reaction
+    count changes too as people react to a post after it's first seen
+    (see _BARE_INT_RE) — either was silently treated as turning one real
+    post into a new one. This double/triple-counted real transactions in
+    the money ledger, confirmed live against multiple teams' balances not
+    matching reality. Both are dropped from the identity entirely rather
+    than partially: the transaction content (type, team, player, exact
+    euro amount) is already a near-unique key on its own, so the risk of
+    two genuinely different transactions colliding is far smaller than
+    the risk of missing another still-unrecognized volatile field down
+    the line.
     """
-    stable = [x for x in post_data if not (isinstance(x, str) and _DATE_TOKEN_RE.match(x.strip()))]
+    stable = [
+        x for x in post_data
+        if not (isinstance(x, str) and (_DATE_TOKEN_RE.match(x.strip()) or _BARE_INT_RE.match(x.strip())))
+    ]
     return json.dumps(stable, ensure_ascii=False)
 
 def get_all_posts(page, max_scrolls=300, initial_wait=3, load_timeout_ms=6000,

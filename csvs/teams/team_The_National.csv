@@ -1,21 +1,22 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-The National,The_National,Goalkeeper,Osasuna,Sergio Herrera,0,159,4600000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
+The National,The_National,Goalkeeper,Osasuna,Sergio Herrera,0,159,4580000,-20000.0,Fit,0,0.0,0,0.0,0,0.0
 The National,The_National,Goalkeeper,Atletico,Juan Musso,0,33,320000,0.0,Fit,0,0.0,0,0.0,0,0.0
-The National,The_National,Defender,Racing,Pablo Ramon,5,0,1320000,110000.0,Fit,1,5.0,5,5.0,0,0.0
-The National,The_National,Defender/Midfielder,Atletico,Marcos Llorente,3,0,6020000,-10000.0,Fit,1,3.0,3,3.0,0,0.0
-The National,The_National,Defender/Midfielder,Sevilla,Gabriel Suazo,3,0,1850000,10000.0,Fit,1,3.0,3,3.0,0,0.0
-The National,The_National,Defender,Real Sociedad,Zubeldia,0,81,1800000,-20000.0,Fit,1,0.0,0,0.0,0,0.0
-The National,The_National,Defender,Athletic,Areso,0,80,1150000,0.0,Fit,0,0.0,0,0.0,0,0.0
-The National,The_National,Midfielder,Rayo Vallecano,Unai Lopez,10,0,1740000,70000.0,Fit,2,5.0,6,6.0,4,4.0
-The National,The_National,Midfielder,Betis,Facundo Bernal,3,0,2400000,20000.0,Fit,1,3.0,3,3.0,0,0.0
-The National,The_National,Midfielder,Levante,Oriol Rey,3,0,390000,20000.0,Fit,1,3.0,0,0.0,3,3.0
-The National,The_National,Midfielder,Athletic,Sancet,0,99,6370000,30000.0,Fit,0,0.0,0,0.0,0,0.0
-The National,The_National,Midfielder,Valencia,Javi Guerra,0,151,4810000,-20000.0,Fit,0,0.0,0,0.0,0,0.0
-The National,The_National,Midfielder/Forward,Celta,Swedberg,0,122,2740000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
-The National,The_National,Midfielder,Real Madrid,Camavinga,0,112,1680000,20000.0,Fit,0,0.0,0,0.0,0,0.0
-The National,The_National,Forward/Midfielder,Villarreal,Pepe,11,0,10280000,100000.0,Fit,1,11.0,0,0.0,11,11.0
-The National,The_National,Forward,Rayo Vallecano,Nteka,5,0,330000,30000.0,Fit,2,2.5,3,3.0,2,2.0
-The National,The_National,Forward,Rayo Vallecano,Alemão,4,0,1500000,-80000.0,Fit,1,4.0,0,0.0,4,4.0
-The National,The_National,Forward,Barcelona,Raphinha,0,182,16340000,60000.0,Fit,0,0.0,0,0.0,0,0.0
-The National,The_National,Forward/Midfielder,Osasuna,Raul Moro,0,41,3290000,-20000.0,Fit,0,0.0,0,0.0,0,0.0
-The National,The_National,Coach,Real Sociedad,Matarazzo,0,29,1690000,-10000.0,Fit,1,0.0,0,0.0,0,0.0
+The National,The_National,Defender/Midfielder,Sevilla,Gabriel Suazo,6,0,1860000,10000.0,Fit,2,3.0,3,3.0,3,3.0
+The National,The_National,Defender,Racing,Pablo Ramon,5,0,1400000,80000.0,Fit,1,5.0,5,5.0,0,0.0
+The National,The_National,Defender/Midfielder,Atletico,Marcos Llorente,3,0,6000000,-20000.0,Fit,1,3.0,3,3.0,0,0.0
+The National,The_National,Defender,Real Sociedad,Zubeldia,0,81,1760000,-40000.0,Fit,1,0.0,0,0.0,0,0.0
+The National,The_National,Defender,Athletic,Areso,0,80,1140000,-10000.0,Fit,1,0.0,0,0.0,0,0.0
+The National,The_National,Midfielder,Rayo Vallecano,Unai Lopez,10,0,1800000,60000.0,Fit,2,5.0,6,6.0,4,4.0
+The National,The_National,Midfielder,Valencia,Javi Guerra,5,0,4790000,-20000.0,Fit,1,5.0,5,5.0,0,0.0
+The National,The_National,Midfielder,Athletic,Sancet,3,0,6370000,0.0,Fit,1,3.0,3,3.0,0,0.0
+The National,The_National,Midfielder/Forward,Celta,Swedberg,3,0,2700000,-40000.0,Fit,1,3.0,0,0.0,3,3.0
+The National,The_National,Midfielder,Betis,Facundo Bernal,3,0,2410000,10000.0,Fit,1,3.0,3,3.0,0,0.0
+The National,The_National,Midfielder,Real Madrid,Camavinga,3,0,1690000,10000.0,Fit,1,3.0,0,0.0,3,3.0
+The National,The_National,Midfielder,Levante,Oriol Rey,3,0,410000,20000.0,Fit,1,3.0,0,0.0,3,3.0
+The National,The_National,Forward/Midfielder,Villarreal,Pepe,11,0,10350000,70000.0,Fit,1,11.0,0,0.0,11,11.0
+The National,The_National,Forward,Athletic,Nico Williams,5,0,9010000,-70000.0,Fit,1,5.0,5,5.0,0,0.0
+The National,The_National,Forward,Rayo Vallecano,Nteka,5,0,360000,30000.0,Fit,2,2.5,3,3.0,2,2.0
+The National,The_National,Forward,Rayo Vallecano,Alemão,4,0,1430000,-70000.0,Fit,1,4.0,0,0.0,4,4.0
+The National,The_National,Forward,Barcelona,Raphinha,0,182,16360000,20000.0,Fit,0,0.0,0,0.0,0,0.0
+The National,The_National,Forward/Midfielder,Osasuna,Raul Moro,0,41,3270000,-20000.0,Fit,0,0.0,0,0.0,0,0.0
+The National,The_National,Coach,Real Sociedad,Matarazzo,0,29,1690000,0.0,Fit,1,0.0,0,0.0,0,0.0

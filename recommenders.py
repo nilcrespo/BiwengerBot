@@ -428,12 +428,19 @@ def build_recommendations(conn, date):
     # looks, instead of a good offer unconditionally maxing the score.
     sell_pool.loc[:, 'blended_pts'] = _blended_pts(sell_pool, rounds_played)
     sell_pool.loc[:, 'talent_keep'] = 100 - _normalize(sell_pool['blended_pts'])
+    # injured was 0.10 — barely more than a rounding nudge next to bench
+    # risk and talent. An injury/doubt is a concrete, near-term reason to
+    # sell (he can't score points he doesn't play, on top of whatever his
+    # start_pct already implies), not a marginal tiebreaker, so it's
+    # doubled to 0.20, taken from profit_pct and talent_keep equally —
+    # bench risk and offer quality are left untouched since neither one
+    # is a proxy for this.
     sell_pool.loc[:, 'score'] = (
         0.25 * _normalize(sell_pool['bench_score']) +
-        0.20 * _normalize(sell_pool['profit_pct'].fillna(0).clip(lower=0)) +
-        0.10 * sell_pool['injured'].map({True: 100.0, False: 0.0}) +
+        0.15 * _normalize(sell_pool['profit_pct'].fillna(0).clip(lower=0)) +
+        0.20 * sell_pool['injured'].map({True: 100.0, False: 0.0}) +
         0.20 * _normalize(sell_pool['offer_premium_pct'].fillna(0)) +
-        0.25 * sell_pool['talent_keep']
+        0.20 * sell_pool['talent_keep']
     ).round(1)
 
     # Positional depth veto: don't recommend selling a player if he's

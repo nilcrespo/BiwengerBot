@@ -854,8 +854,12 @@ _DATE_TOKEN_RE = re.compile(
 # counted real sales exactly like the timestamp did (caught live: the same
 # real Bartra sale, scraped on two days with reaction counts '5' and '0',
 # produced two different identities and was recorded as two separate
-# sales in realized_trades).
-_BARE_INT_RE = re.compile(r"^\d+$")
+# sales in realized_trades). It can go negative too (a net score, not a
+# raw count) — first regex version only matched bare positive digits and
+# missed a real duplicate as a result: the same Mantilla/Hernan Krezzpo
+# transfer, scraped once with a trailing '-2' and once with '0', produced
+# two distinct identities and was double-counted in realized_trades.
+_BARE_INT_RE = re.compile(r"^-?\d+$")
 
 def _post_identity(post_data):
     """A stable identity for a scraped post, for deduplication across

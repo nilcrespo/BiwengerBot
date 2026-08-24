@@ -1,21 +1,21 @@
 position,club,name,price,change,status,owner,last_sale,recent_pts,this_season_pts,last_season_pts,scraped_at
-Midfielder,Osasuna,Moi Gomez,610000,0.0,,Free Agent,"610,000",0.0,0,103,2026-08-23
-Midfielder,Alaves,Antonio Blanco,3600000,-50000.0,,Free Agent,"3,600,000",32.0,5,0,2026-08-23
-Midfielder,Alaves,Denis Suarez,1240000,30000.0,,Free Agent,"1,240,000",43.0,7,0,2026-08-23
-Midfielder,Malaga,Pablo Martinez,1670000,0.0,,Free Agent,"1,670,000",0.0,0,116,2026-08-23
-Forward,Getafe,Enes Unal,3340000,110000.0,,Free Agent,"3,340,000",2.0,2,0,2026-08-23
-Defender,Atletico,Cristian Romero,6320000,-50000.0,,Free Agent,"6,320,000",0.0,0,0,2026-08-23
-Midfielder,Celta,Febas,6490000,-10000.0,,Free Agent,"6,490,000",5.0,5,0,2026-08-23
-Defender,Alaves,Tenaglia,3790000,50000.0,,Free Agent,"3,790,000",516.0,21,0,2026-08-23
-Defender,Rayo Vallecano,Ratiu,4380000,-90000.0,,Free Agent,"4,380,000",21.0,3,0,2026-08-23
-Midfielder/Forward,Celta,Hugo Alvarez,1610000,-10000.0,,Free Agent,"1,610,000",2.0,2,0,2026-08-23
-Defender,Rayo Vallecano,Pelayo,190000,10000.0,,Free Agent,"190,000",12.0,3,0,2026-08-23
-Goalkeeper,Levante,Dani Martin,150000,0.0,,Free Agent,"150,000",0.0,0,0,2026-08-23
-Midfielder,Rayo Vallecano,Pedro Diaz,950000,-30000.0,,Free Agent,"950,000",3.0,3,0,2026-08-23
-Forward,Real Sociedad,Oskarsson,3100000,-90000.0,,Free Agent,"3,100,000",1.0,1,0,2026-08-23
-Defender,Sevilla,Andres Castrin,940000,40000.0,,Free Agent,"940,000",8.0,8,0,2026-08-23
-Midfielder/Forward,Elche,Ali Houary,390000,40000.0,,Free Agent,"390,000",3.0,3,0,2026-08-23
-Midfielder/Forward,Elche,Diangana,190000,0.0,,Free Agent,"190,000",0.0,0,54,2026-08-23
-Midfielder,Deportivo,Patino,150000,0.0,,Free Agent,"150,000",0.0,0,0,2026-08-23
-Defender,Levante,Marc Santos,150000,0.0,,Free Agent,"150,000",2.0,2,0,2026-08-23
-Forward,Betis,Parrott,8700000,-40000.0,,Free Agent,"8,700,000",0.0,0,0,2026-08-23
+Goalkeeper,Getafe,David Soria,5560000,20000.0,,Free Agent,"5,560,000",106.0,16,0,2026-08-24
+Midfielder,Osasuna,Moi Gomez,610000,0.0,,Free Agent,"610,000",0.0,0,103,2026-08-24
+Forward/Midfielder,Real Sociedad,Guedes,4650000,-50000.0,,Free Agent,"4,650,000",0.0,0,156,2026-08-24
+Forward,Alaves,Boye,2770000,-10000.0,,Free Agent,"2,770,000",3.0,3,0,2026-08-24
+Defender,Espanyol,El Hilali,2540000,-20000.0,,Free Agent,"2,540,000",33.0,6,0,2026-08-24
+Forward,Atletico,Arnau Ortiz,670000,20000.0,,Free Agent,"670,000",5.0,5,0,2026-08-24
+Goalkeeper,Rayo Vallecano,Batalla,3200000,-200000.0,,Free Agent,"3,200,000",63.0,9,0,2026-08-24
+Midfielder/Forward,Celta,Hugo Alvarez,1590000,-20000.0,,Free Agent,"1,590,000",2.0,2,0,2026-08-24
+Forward,Levante,Etta Eyong,3220000,-40000.0,,Free Agent,"3,220,000",1.0,1,0,2026-08-24
+Defender,Rayo Vallecano,Kumbulla,750000,-10000.0,,Free Agent,"750,000",0.0,0,20,2026-08-24
+Defender,Villarreal,Pau Navarro,1730000,-30000.0,,Free Agent,"1,730,000",0.0,0,89,2026-08-24
+Midfielder,Athletic,Peio Canales,2080000,70000.0,,Free Agent,"2,080,000",5.0,5,0,2026-08-24
+Defender,Alaves,Facundo Garces,150000,0.0,,Free Agent,"150,000",0.0,0,36,2026-08-24
+Defender,Levante,Xavi Grande,150000,0.0,,Free Agent,"150,000",0.0,0,0,2026-08-24
+Defender,Getafe,Zaid Romero,3520000,-30000.0,,Free Agent,"3,520,000",52.0,7,0,2026-08-24
+Forward,Deportivo,Yeremay Hernandez,6970000,-90000.0,,Free Agent,"6,970,000",0.0,0,0,2026-08-24
+Defender,Malaga,Angel Recio,200000,10000.0,,Free Agent,"200,000",1.0,1,0,2026-08-24
+Defender,Deportivo,Angelino,2650000,-20000.0,,Free Agent,"2,650,000",0.0,0,0,2026-08-24
+Goalkeeper,Celta,Bayindir,570000,-10000.0,,Free Agent,"570,000",0.0,0,0,2026-08-24
+Defender,Levante,Marc Santos,150000,0.0,,Free Agent,"150,000",2.0,2,0,2026-08-24

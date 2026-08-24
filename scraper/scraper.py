@@ -526,6 +526,18 @@ def get_my_team_balance(page) -> dict:
     ledger balance for the user's own team — the ledger can be computed
     for every team from public posts, but this ground truth is only ever
     available for whichever team is logged in.
+
+    The <balance> element's own inner text is ABBREVIATED for display
+    ("-€3.8M"), with the exact figure sitting in its `title` attribute
+    ("-€3,833,280") instead — confirmed live via the rendered DOM. Reading
+    the inner text used to feed straight into parse_money(), which strips
+    "." as a thousands separator (correct for Biwenger's normal
+    "1.234.567 €" format elsewhere) — but here the "." in "3.8" is a
+    decimal point, not a separator, so "-3.8" silently became "-38" and
+    every downstream ledger-vs-actual comparison this season was checked
+    against a balance off by roughly 100,000x. The title attribute is
+    exact and uses the same period-as-thousands-separator format as
+    everywhere else, so it needs no special-case parsing.
     """
     page.goto("https://biwenger.as.com/team", wait_until="domcontentloaded", timeout=15000)
     try:
@@ -534,7 +546,8 @@ def get_my_team_balance(page) -> dict:
         print("⚠️ Could not find balance widget on /team")
         return {}
 
-    raw = safe_inner_text(page.locator("squad-stats balance"), "")
+    balance_locator = page.locator("squad-stats balance")
+    raw = balance_locator.get_attribute("title") or safe_inner_text(balance_locator, "")
     balance = parse_money(raw)
 
     manager_name = safe_inner_text(page.locator("a.avatar-container span, .user-name"), "")

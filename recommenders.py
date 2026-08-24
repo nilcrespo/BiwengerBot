@@ -176,23 +176,38 @@ def _normalize(series):
 # real analytics starts treating current-season sample size as reliable
 # on its own. Adjustable without touching the interpolation logic below.
 BLEND_TRANSITION_ROUNDS = 10
+# How much weight this season's points carry at round 0, before it's had
+# any chance to accumulate a real sample (see _blended_pts's docstring
+# for why this used to be 0.5 and why that was too high this early on).
+THIS_WEIGHT_FLOOR = 0.15
 
 def _blended_pts(df, rounds_played):
     """A talent/output estimate blending both seasons, with the mix
     sliding from "mostly last season" to "only this season" as the
     season itself progresses — not a fixed split. At round 0,
-    last_season_pts carries full weight and this_season_pts half (one
-    or two matches is noisy; a full season isn't, even though it's
-    older). By BLEND_TRANSITION_ROUNDS, last_season_pts has decayed to
-    zero weight and this_season_pts carries full weight — enough matches
-    have been played that current form should stand on its own, and a
-    club promoted since last season (last_season_pts=0, not necessarily
-    a worse player) stops being penalized for something that was never a
-    real signal about them in the first place.
+    last_season_pts carries full weight and this_season_pts a small
+    floor (THIS_WEIGHT_FLOOR — one or two matches is genuinely too
+    noisy to lean on much yet, even though a hot start is real signal
+    worth SOME weight). By BLEND_TRANSITION_ROUNDS, last_season_pts has
+    decayed to zero weight and this_season_pts carries full weight —
+    enough matches have been played that current form should stand on
+    its own, and a club promoted since last season (last_season_pts=0,
+    not necessarily a worse player) stops being penalized for something
+    that was never a real signal about them in the first place.
+
+    THIS_WEIGHT_FLOOR was 0.5 (this season already got HALF weight on
+    day one of the season) until it was pointed out live, early in a new
+    season, that this let one or two rounds of noise compete on close to
+    even footing with a full prior season's real sample — exactly
+    backwards this early on. Doesn't rescue a player with truly zero
+    recorded output in BOTH fields (a genuine outside-league transfer
+    with no history this source tracks) — 0 times any weight is still 0,
+    so a real "insufficient data" flag for that case is a separate,
+    unbuilt piece of work, not something this weighting alone can fix.
     """
     progress = min(max(rounds_played, 0) / BLEND_TRANSITION_ROUNDS, 1.0)
     last_weight = 1.0 - progress
-    this_weight = 0.5 + 0.5 * progress
+    this_weight = THIS_WEIGHT_FLOOR + (1.0 - THIS_WEIGHT_FLOOR) * progress
     return df['last_season_pts'].fillna(0) * last_weight + df['this_season_pts'].fillna(0) * this_weight
 
 def build_recommendations(conn, date):

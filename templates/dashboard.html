@@ -20,6 +20,7 @@
             <button class="tab" role="tab" data-tab="teams" aria-selected="false">Team valuations</button>
             <button class="tab" role="tab" data-tab="market" aria-selected="false">Market</button>
             <button class="tab" role="tab" data-tab="trades" aria-selected="false">My trades</button>
+            <button class="tab" role="tab" data-tab="rounds" aria-selected="false">Round scores</button>
             <button class="tab" role="tab" data-tab="recommendations" aria-selected="false">Recommendations</button>
         </nav>
     </header>
@@ -136,6 +137,31 @@
                                 <th class="num" data-sort="buy_price">Bought for</th>
                                 <th class="num" data-sort="sell_price">Sold for</th>
                                 <th class="num" data-sort="profit">Profit</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="tab-panel" data-tab-panel="rounds" hidden>
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title"><span class="icon">📅</span> Round-by-round scores</span>
+                    <span class="card-meta">Points per player, per matchday — "?" means his fixture hasn't kicked off yet, "–" means the fixture finished without him</span>
+                </div>
+                <div class="card-body scroll">
+                    <table id="roundScoresTable">
+                        <thead>
+                            <tr>
+                                <th data-sort="round_name">Round</th>
+                                <th data-sort="team">Team</th>
+                                <th data-sort="player">Player</th>
+                                <th data-sort="position">Pos</th>
+                                <th data-sort="club">Club</th>
+                                <th data-sort="lineup_slot">Slot</th>
+                                <th class="num" data-sort="points">Points</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

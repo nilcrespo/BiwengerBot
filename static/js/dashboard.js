@@ -289,6 +289,36 @@ function renderSales(data) {
   }
 }
 
+// round_scores.position is Biwenger's own small-int code (see
+// scraper.py's BIWENGER_POSITIONS), not the "Forward"/"Defender" text
+// every other table already has — this table is the one place in the
+// dashboard that needs to resolve it.
+const ROUND_SCORE_POSITIONS = { 1: 'GK', 2: 'DEF', 3: 'MID', 4: 'FWD', 5: 'Coach' };
+
+function roundScorePointsCell(p) {
+  if (p.points === null || p.points === undefined) {
+    // Matches the site's own notation: "?" while the fixture hasn't
+    // kicked off, "–" once it's finished without him (a real DNP).
+    return p.game_status === 'finished' ? '–' : '?';
+  }
+  return escapeHtml(p.points);
+}
+
+function renderRoundScores(data) {
+  const tbody = document.querySelector('#roundScoresTable tbody');
+  renderTable(tbody, data, 7, (p) => `
+    <tr>
+      <td>${escapeHtml(p.round_name)}</td>
+      <td class="cell-muted">${escapeHtml(p.team)}</td>
+      <td class="cell-primary">${escapeHtml(p.player)}</td>
+      <td><span class="pos-badge">${escapeHtml(ROUND_SCORE_POSITIONS[p.position] || p.position)}</span></td>
+      <td class="cell-muted">${escapeHtml(p.club)}</td>
+      <td>${escapeHtml(p.lineup_slot)}</td>
+      <td class="num">${roundScorePointsCell(p)}</td>
+    </tr>
+  `);
+}
+
 function affordabilityCell(p) {
   const shortfall = parseFloat(p.shortfall);
   if (!shortfall || shortfall <= 0) {
@@ -553,6 +583,7 @@ function loadData() {
       setTableData('salesTable', data.my_sales);
       setTableData('buyTable', data.buy_recommendations);
       setTableData('sellTable', data.sell_recommendations);
+      setTableData('roundScoresTable', data.round_scores);
     })
     .catch((err) => {
       showError(`Couldn't load data: ${err.message}`);
@@ -594,6 +625,11 @@ function initSortableTables() {
   registerSortable('salesTable', renderSales, 'profit', 'desc');
   registerSortable('buyTable', renderBuyRecommendations, 'score', 'desc');
   registerSortable('sellTable', renderSellRecommendations, 'score', 'desc');
+  // Free agents get a row too (any La Liga player with a match report),
+  // not just owned squad players — defaulting to top scorers first
+  // surfaces something interesting on load instead of an alphabetical
+  // wall dominated by team=null rows.
+  registerSortable('roundScoresTable', renderRoundScores, 'points', 'desc');
 }
 
 document.addEventListener('DOMContentLoaded', () => {

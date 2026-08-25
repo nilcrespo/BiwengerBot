@@ -385,6 +385,55 @@ def migrate_csv_to_db(days_behind=0):
             offers_df.to_sql('player_offers', conn, if_exists='append', index=False)
         print(f"→ Migrated {len(offers_df)} pending player offers")
 
+    # Per-round, per-player scores (see scraper.get_round_scores).
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS round_scores (
+        round_id INTEGER,
+        round_name TEXT,
+        round_status TEXT,
+        game_id INTEGER,
+        game_status TEXT,
+        player_id INTEGER,
+        player TEXT,
+        club TEXT,
+        position INTEGER,
+        team_id TEXT,
+        team TEXT,
+        lineup_slot TEXT,
+        points REAL,
+        played INTEGER,
+        scraped_at TIMESTAMP
+    )''')
+    conn.commit()
+
+    if os.path.exists('csvs/others/round_scores.csv'):
+        rounds_df = pd.read_csv('csvs/others/round_scores.csv')
+        if len(rounds_df):
+            # Every other table here is a daily snapshot that only ever gets
+            # appended to. This one is a growing history keyed by (round_id,
+            # player_id), and the scraper re-reads every finished round on
+            # every run — so a plain append would add a fresh copy of the
+            # whole season's scores each day. Replacing the rounds this run
+            # actually carries is what keeps re-runs idempotent, and it also
+            # lets a round's rows correct themselves as its remaining
+            # fixtures finish (points NULL -> a real score) instead of
+            # leaving both versions in the table.
+            scraped_rounds = [int(r) for r in rounds_df['round_id'].dropna().unique()]
+            placeholders = ','.join('?' * len(scraped_rounds))
+            cursor.execute(
+                f'DELETE FROM round_scores WHERE round_id IN ({placeholders})',
+                scraped_rounds
+            )
+            replaced = cursor.rowcount
+            conn.commit()
+
+            rounds_df['scraped_at'] = now
+            rounds_df.to_sql('round_scores', conn, if_exists='append', index=False)
+            print(f"→ Migrated {len(rounds_df)} round scores across "
+                  f"{len(scraped_rounds)} round(s), replacing {replaced} existing rows")
+        else:
+            print("→ No round scores to migrate (no finished rounds yet)")
+
     conn.close()
     print("\nMigration complete!")
 

@@ -15,6 +15,14 @@ PASSWORD = os.getenv("BIWENGER_PASSWORD")     # set as repo secret
 HEADLESS = os.getenv("HEADLESS", "1") == "1"
 MAX_RIVALS = 10  # Adjust based on your league size
 
+# Which of Biwenger's seven scoring systems this league plays under
+# (5 = "AS.com and SofaScore average"). Every points figure the API
+# returns is scoped to this — the same performance is worth a different
+# number under each system — so it has to be passed on every call that
+# reads points, and it has to match the league's own setting or the
+# numbers silently disagree with the ones the site shows the user.
+LEAGUE_SCORE_ID = 5
+
 # Biwenger's own /api/v2/auth/login rejects requests whose User-Agent
 # reports "HeadlessChrome" (Playwright's default headless mode) with a
 # 403 "Not allowed" before credentials are even checked. A normal desktop
@@ -565,7 +573,7 @@ def get_la_liga_players() -> dict:
     import json
     import urllib.request
 
-    url = "https://cf.biwenger.com/api/v2/competitions/la-liga/data?lang=en&score=5"
+    url = f"https://cf.biwenger.com/api/v2/competitions/la-liga/data?lang=en&score={LEAGUE_SCORE_ID}"
     try:
         req = urllib.request.Request(url, headers={"User-Agent": DESKTOP_CHROME_UA})
         with urllib.request.urlopen(req, timeout=15) as resp:
@@ -717,6 +725,237 @@ def renew_player_sales(page, la_liga_players=None) -> list:
     succeeded = sum(1 for r in results if r["ok"])
     print(f"🔄 Renewed {succeeded}/{len(results)} listings")
     return results
+
+def _fetch_round(round_id, version) -> dict:
+    """One round's fixtures and per-player match reports, from the public
+    cf.biwenger.com round endpoint. `round_id=None` asks for the current
+    round, whose payload also carries the full season round list.
+
+    `v` looks like a cache-buster but is not: it selects the scoring
+    engine build, and asking for anything other than the app's own
+    version silently returns DIFFERENT point totals for the same
+    finished fixtures — nothing in the response says which build
+    answered. Confirmed live on round 1: v=631 (the app's x-version at
+    the time) gave Djené 2 / De la Fuente 4, matching the site exactly,
+    while omitting `v` gave 4 / 7 and v=633 gave 5 / 0. So `version` is
+    a required argument here, deliberately not defaulted — it must come
+    from headers the app itself just sent.
+    """
+    import urllib.request
+
+    path = f"/{round_id}" if round_id is not None else ""
+    url = (f"https://cf.biwenger.com/api/v2/rounds/la-liga{path}"
+           f"?score={LEAGUE_SCORE_ID}&lang=en&v={version}")
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": DESKTOP_CHROME_UA})
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            return json.load(resp).get("data", {}) or {}
+    except Exception as e:
+        print(f"⚠️ Could not fetch round {round_id}: {e}")
+        return {}
+
+def _fetch_round_ownership(page, headers, round_id) -> dict:
+    """Who owned (and how they fielded) each player for a given round:
+    player id -> {team_id, team, lineup_slot}.
+
+    Read from the authenticated /api/v2/rounds/league/{roundId}, whose
+    standings carry each manager's locked lineup for that round. Taken
+    per round rather than from today's squads on purpose: ownership and
+    the starter/bench call are what they were *at the time*, which is
+    the only version of them that makes sense next to that round's
+    scores.
+    """
+    try:
+        resp = page.request.get(
+            f"https://biwenger.as.com/api/v2/rounds/league/{round_id}",
+            headers=headers,
+        )
+        if resp.status != 200:
+            print(f"⚠️ Round {round_id} lineups failed: HTTP {resp.status}")
+            return {}
+        standings = resp.json().get("data", {}).get("league", {}).get("standings", []) or []
+    except Exception as e:
+        print(f"⚠️ Could not fetch round {round_id} lineups: {e}")
+        return {}
+
+    owners = {}
+    for team in standings:
+        team_name = team.get("name") or ""
+        lineup = team.get("lineup") or {}
+        # The coach is picked like a player and scores like one, but sits in
+        # his own single-id slot rather than in any of the id lists.
+        coach = (lineup.get("coach") or {}).get("id")
+        slots = [("coach", [coach])] if coach else []
+        slots += [(slot, lineup.get(key) or []) for slot, key in
+                  (("starter", "players"), ("reserve", "reserves"),
+                   ("discarded", "discarded"))]
+        for slot, player_ids in slots:
+            # `reserves` is a fixed-length list with null holes for empty
+            # bench slots, so nulls have to be skipped rather than assumed absent.
+            for player_id in player_ids:
+                if player_id is None:
+                    continue
+                owners[player_id] = {
+                    "team_id": normalize_team_key(team_name),
+                    "team": team_name,
+                    "lineup_slot": slot,
+                }
+    return owners
+
+def _report_points(entry):
+    """The score the site actually shows for one match report.
+
+    Not simply `points`: this competition runs "Super Pica" on scoring
+    systems 1, 5 and 8 (competition config `superPicaScores`, which
+    LEAGUE_SCORE_ID is one of), and when a performance qualifies, the
+    API returns the plain total in `points` AND the one the site
+    displays in `optionalPoints.superPicaExtraPoints.points`. Reading
+    `points` alone quietly undercounts exactly the standout games that
+    matter most — caught against the live match pages: Mariano 16 vs the
+    17 shown, Roberto Fernández 17 vs 19, Kang-in Lee 14 vs 16.
+
+    The field is absent whenever it doesn't apply, so its presence is
+    the whole test — `star`/`profitable` are not: Tenaglia was flagged
+    star with no Super Pica bonus and the site showed his base 16.
+    """
+    optional = entry.get("optionalPoints") or {}
+    super_pica = (optional.get("superPicaExtraPoints") or {}).get("points")
+    return super_pica if super_pica is not None else entry.get("points")
+
+def _round_score_rows(round_data, owners, la_liga_players) -> list:
+    """Flatten one round's payload into one row per (fixture side, player).
+
+    played/DNP is decided from each FIXTURE's own status, never the
+    round's. A round stays "active" while some of its games are still
+    unplayed, so a missing score means two completely different things
+    depending on the game it belongs to: "kick-off hasn't happened yet"
+    (game still pending/preview — what the site renders as "?") versus
+    "the game finished without him" (game finished, no match report —
+    what the site renders as "-"). Both store points=None; `played` and
+    `game_status` are what separate them.
+
+    Coaches are scored too in this league, but they never appear in
+    `reports` — they hang off the fixture side's own `coach` key — so
+    they're folded in here rather than silently dropped as DNP.
+    """
+    rows = []
+    round_id = round_data.get("id")
+    round_name = round_data.get("name")
+    round_status = round_data.get("status")
+
+    for game in round_data.get("games") or []:
+        game_id = game.get("id")
+        game_status = game.get("status")
+        for side in ("home", "away"):
+            club = game.get(side) or {}
+            club_id = club.get("id")
+            club_name = club.get("name")
+
+            entries = list(club.get("reports") or [])
+            coach = club.get("coach")
+            if coach:
+                entries.append(coach)
+
+            def _row(player_id, name, position, points):
+                own = owners.get(player_id) or {}
+                return {
+                    "round_id": round_id,
+                    "round_name": round_name,
+                    "round_status": round_status,
+                    "game_id": game_id,
+                    "game_status": game_status,
+                    "player_id": player_id,
+                    "player": name,
+                    "club": club_name,
+                    "position": position,
+                    "team_id": own.get("team_id"),
+                    "team": own.get("team"),
+                    "lineup_slot": own.get("lineup_slot"),
+                    "points": points,
+                    "played": int(points is not None and game_status == "finished"),
+                }
+
+            reported = set()
+            for entry in entries:
+                player = entry.get("player") or {}
+                player_id = player.get("id")
+                if player_id is None:
+                    continue
+                reported.add(player_id)
+                rows.append(_row(player_id, player.get("name"),
+                                 player.get("position"), _report_points(entry)))
+
+            # Anyone owned in this league whose club played this fixture but
+            # who has no report at all — the DNP case. Only owned players get
+            # these filler rows: a row per unreported La Liga player would
+            # multiply the table's size for data nothing downstream asks for.
+            for player_id, own in owners.items():
+                if player_id in reported:
+                    continue
+                info = la_liga_players.get(player_id) or {}
+                if info.get("teamID") != club_id:
+                    continue
+                rows.append(_row(player_id, info.get("name"),
+                                 info.get("position"), None))
+
+    return rows
+
+def get_round_scores(page, la_liga_players=None) -> list:
+    """Every player's score, round by round, for every round that has at
+    least one finished fixture — the per-matchday history the DB
+    otherwise only had season aggregates for.
+
+    Rounds are taken from the season list rather than a range of ids
+    because Biwenger's ids aren't in calendar order (round 1 is 4899 but
+    its postponed sibling is 4937, sitting between rounds 2 and 3), and
+    they're filtered on "has a finished game" rather than on the round's
+    own `status` because that status is unreliable in both directions:
+    the round holding round 1's finished games is still "active", and
+    the duplicate "(postponed)" round is "pending" despite listing those
+    same finished games.
+
+    Those "(postponed)" rounds are skipped outright (`part` > 1). They
+    exist so managers can field a second lineup for the fixtures that
+    slipped, but they re-list the *same* game ids with the same reports,
+    so ingesting them would file every score in the round twice.
+    """
+    headers = _capture_auth_headers(page)
+    version = headers.get("x-version") if headers else None
+    if not version:
+        # Guessing a version is worse than returning nothing: see
+        # _fetch_round for why a wrong `v` yields wrong numbers quietly.
+        print("⚠️ No x-version in captured headers — skipping round scores")
+        return []
+
+    if la_liga_players is None:
+        la_liga_players = get_la_liga_players()
+
+    season = _fetch_round(None, version).get("season") or {}
+    rounds = season.get("rounds") or []
+    if not rounds:
+        print("⚠️ Could not list the season's rounds — skipping round scores")
+        return []
+
+    rows = []
+    for entry in rounds:
+        round_id = entry.get("id")
+        round_data = _fetch_round(round_id, version)
+        if not round_data or (round_data.get("part") or 1) != 1:
+            continue
+        games = round_data.get("games") or []
+        if not any(g.get("status") == "finished" for g in games):
+            continue
+
+        owners = _fetch_round_ownership(page, headers, round_id)
+        round_rows = _round_score_rows(round_data, owners, la_liga_players)
+        rows.extend(round_rows)
+        finished = sum(1 for g in games if g.get("status") == "finished")
+        print(f"📅 {round_data.get('name')}: {len(round_rows)} player rows "
+              f"({finished}/{len(games)} fixtures finished)")
+
+    print(f"🗓️ {len(rows)} round-score rows across "
+          f"{len({r['round_id'] for r in rows})} round(s)")
+    return rows
 
 def extract_market_players(page) -> pd.DataFrame:
     """Extract player data from the market table view"""
@@ -1091,6 +1330,19 @@ def run(playwright: Playwright) -> None:
     offer_columns = ["player_id", "player_name", "price", "date", "until", "raw_json", "scraped_at"]
     pd.DataFrame(offer_rows, columns=offer_columns).to_csv("csvs/others/my_offers.csv", index=False)
     print(f"Saved {len(offer_rows)} pending offers → my_offers.csv")
+
+    # Per-round, per-player scores. Written with an explicit column list so
+    # the CSV still has a usable header on a season's very first run, when
+    # no round has finished yet and there are no rows to infer one from.
+    round_score_columns = [
+        "round_id", "round_name", "round_status", "game_id", "game_status",
+        "player_id", "player", "club", "position", "team_id", "team",
+        "lineup_slot", "points", "played",
+    ]
+    round_scores = get_round_scores(page, la_liga_players)
+    pd.DataFrame(round_scores, columns=round_score_columns).to_csv(
+        "csvs/others/round_scores.csv", index=False)
+    print(f"Saved {len(round_scores)} round scores → round_scores.csv")
 
     # Keep every owned player's sale listing alive at current market
     # value (see renew_player_sales' docstring for why this is safe/

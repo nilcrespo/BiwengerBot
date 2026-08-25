@@ -1,0 +1,69 @@
+name: Scrape start probabilities
+
+# Runs independently of the daily Biwenger scrape (scrape-and-migrate.yml)
+# on purpose — this hits futbolfantasy.com, not Biwenger, needs no
+# credentials, and a slow/blocked external source here shouldn't be able
+# to hold up the core pipeline. Previously this only ever ran when
+# someone manually uncommented a line in scraper.py's __main__ — found
+# live that player_probabilities had exactly one distinct scraped_at in
+# the whole table despite the daily scrape running every day, which is
+# why a new signing (no squad-page match yet) or anyone whose lineup
+# status changed recently could show a stale or missing start
+# probability. A few times a week, not daily: lineups firm up close to
+# kickoff, but this is a slower scrape (~20 sequential external page
+# loads) and doesn't need to be fresher than "this week".
+on:
+  schedule:
+    - cron: "0 9 * * 1,3,5"  # Mon/Wed/Fri 09:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+concurrency:
+  group: biwengerbot-daily
+  cancel-in-progress: false
+
+jobs:
+  scrape-probabilities:
+    runs-on: ubuntu-22.04
+    env:
+      HEADLESS: "1"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python deps (pin numpy/pandas + playwright)
+        env:
+          PIP_NO_CACHE_DIR: "1"
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pip install "numpy==1.26.4"
+          pip install "lxml==5.2.2"
+          pip install "beautifulsoup4==4.12.3"
+          pip install "pandas==2.2.2"
+          pip install "playwright==1.52.0"
+          pip install -r requirements.txt --no-deps || true
+
+      - name: Install Playwright browsers + OS deps
+        run: |
+          python -m playwright install --with-deps chromium
+
+      - name: Scrape start probabilities
+        run: |
+          python scraper/scrape_probabilities.py
+
+      - name: Update repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -u
+          git commit -m "data: refresh start probabilities" || echo "No changes"
+          git fetch origin main
+          git rebase origin/main -X ours
+          git push

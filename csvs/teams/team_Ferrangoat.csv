@@ -1,24 +1,23 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-FerranGoaT,Ferrangoat,Goalkeeper,Alaves,Sivera,5,0,4110000,10000.0,Fit,1,5.0,5,5.0,0,0.0
-FerranGoaT,Ferrangoat,Defender,Espanyol,Unai Nunez,7,0,2240000,140000.0,Fit,1,7.0,7,7.0,0,0.0
-FerranGoaT,Ferrangoat,Defender,Espanyol,Riedel,3,0,1440000,10000.0,Fit,1,3.0,3,3.0,0,0.0
-FerranGoaT,Ferrangoat,Defender,Getafe,Andres Garcia,2,0,1460000,10000.0,Fit,1,2.0,0,0.0,2,2.0
-FerranGoaT,Ferrangoat,Defender,Barcelona,Balde,0,101,3000000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Defender,Athletic,Yuri,0,137,2890000,10000.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Defender/Midfielder,Celta,Alvaro Nunez,0,100,540000,0.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Defender,Villarreal,Kambwala,0,1,240000,10000.0,Fit,0,0.0,0,0.0,0,0.0
+FerranGoaT,Ferrangoat,Goalkeeper,Alaves,Sivera,10,0,4190000,10000.0,Fit,2,5.0,5,5.0,5,5.0
+FerranGoaT,Ferrangoat,Defender,Getafe,Andres Garcia,11,0,1500000,40000.0,Fit,2,5.5,9,9.0,2,2.0
+FerranGoaT,Ferrangoat,Defender,Espanyol,Unai Nunez,10,0,2630000,70000.0,Fit,2,5.0,10,5.0,0,0.0
+FerranGoaT,Ferrangoat,Defender,Espanyol,Riedel,6,0,1510000,20000.0,Fit,2,3.0,6,3.0,0,0.0
+FerranGoaT,Ferrangoat,Defender,Barcelona,Balde,0,101,2730000,-170000.0,Fit,0,0.0,0,0.0,0,0.0
+FerranGoaT,Ferrangoat,Defender/Midfielder,Celta,Alvaro Nunez,0,100,510000,-20000.0,Fit,0,0.0,0,0.0,0,0.0
+FerranGoaT,Ferrangoat,Defender,Villarreal,Kambwala,0,1,240000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
 FerranGoaT,Ferrangoat,Defender,Real Madrid,Mendy,0,10,150000,0.0,Injured. Tear of the rectus femoris tendon with bone separation. Estimated return: Mid-October.,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Midfielder,Atletico,Koke,5,0,2520000,50000.0,Fit,1,5.0,5,5.0,0,0.0
-FerranGoaT,Ferrangoat,Midfielder/Forward,Barcelona,Dani Olmo,0,188,10360000,-100000.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Midfielder,Real Madrid,Tchouameni,0,178,6520000,-60000.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Midfielder,Valencia,Guido Rodriguez,0,96,5040000,0.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Midfielder/Forward,Osasuna,Aimar Oroz,0,121,4130000,10000.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Midfielder,Betis,Marc Roca,0,110,2530000,-20000.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Midfielder,Real Sociedad,Yangel Herrera,0,38,2300000,20000.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Midfielder,Atletico,Lemar,0,112,870000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Forward,Villarreal,Ayoze,3,0,5190000,20000.0,Fit,1,3.0,0,0.0,3,3.0
-FerranGoaT,Ferrangoat,Forward,Betis,Cucho,0,177,7540000,0.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Forward,Celta,Borja Iglesias,0,187,5300000,-50000.0,Fit,0,0.0,0,0.0,0,0.0
+FerranGoaT,Ferrangoat,Midfielder,Atletico,Koke,12,0,2870000,130000.0,Fit,2,6.0,12,6.0,0,0.0
+FerranGoaT,Ferrangoat,Midfielder,Valencia,Guido Rodriguez,7,0,5040000,30000.0,Fit,1,7.0,7,7.0,0,0.0
+FerranGoaT,Ferrangoat,Midfielder,Betis,Marc Roca,6,0,2720000,110000.0,Fit,1,6.0,6,6.0,0,0.0
+FerranGoaT,Ferrangoat,Midfielder/Forward,Barcelona,Dani Olmo,4,0,10190000,-50000.0,Fit,1,4.0,0,0.0,4,4.0
+FerranGoaT,Ferrangoat,Midfielder,Real Sociedad,Yangel Herrera,3,0,2370000,20000.0,Fit,1,3.0,0,0.0,3,3.0
+FerranGoaT,Ferrangoat,Midfielder,Real Madrid,Tchouameni,0,178,5870000,-170000.0,Fit,0,0.0,0,0.0,0,0.0
+FerranGoaT,Ferrangoat,Midfielder/Forward,Osasuna,Aimar Oroz,0,121,4090000,-30000.0,Fit,0,0.0,0,0.0,0,0.0
+FerranGoaT,Ferrangoat,Midfielder,Atletico,Lemar,0,112,800000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
+FerranGoaT,Ferrangoat,Forward,Betis,Cucho,6,0,7570000,30000.0,Fit,1,6.0,6,6.0,0,0.0
+FerranGoaT,Ferrangoat,Forward,Villarreal,Ayoze,6,0,5280000,10000.0,Fit,2,3.0,0,0.0,6,3.0
+FerranGoaT,Ferrangoat,Forward,Athletic,Sannadi,2,0,150000,0.0,Fit,1,2.0,2,2.0,0,0.0
+FerranGoaT,Ferrangoat,Forward,Celta,Borja Iglesias,0,187,5070000,-100000.0,Fit,0,0.0,0,0.0,0,0.0
 FerranGoaT,Ferrangoat,Forward/Midfielder,Levante,Brugue,0,44,250000,0.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Forward,Athletic,Sannadi,0,26,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
-FerranGoaT,Ferrangoat,Coach,Valencia,Corberan,0,49,630000,0.0,Fit,0,0.0,0,0.0,0,0.0
+FerranGoaT,Ferrangoat,Coach,Valencia,Corberan,1,0,620000,0.0,Fit,1,1.0,1,1.0,0,0.0

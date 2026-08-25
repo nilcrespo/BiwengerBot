@@ -78,9 +78,27 @@ def attach_probabilities(df, prob_df, name_col='name', club_col='club'):
     return df
 
 def accent_fold_sql(col):
-    return (
-        f"LOWER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE({col},'á','a'),'é','e'),'í','i'),'ó','o'),'ñ','n'))"
-    )
+    """SQL equivalent of _normalize_name's accent-stripping, for joins that
+    have to happen in SQL rather than pandas. Must cover the same character
+    set _normalize_name (NFKD-based, strips any accent) and scraper.py's
+    normalize_player_name handle, plus their uppercase forms explicitly:
+    SQLite's LOWER() only folds ASCII without the ICU extension, so an
+    accented capital (e.g. the Á in "Álvaro") survives a trailing LOWER()
+    untouched and needs its own REPLACE.
+    """
+    pairs = [
+        ('á', 'a'), ('Á', 'a'), ('à', 'a'), ('À', 'a'), ('ã', 'a'), ('Ã', 'a'),
+        ('é', 'e'), ('É', 'e'), ('è', 'e'), ('È', 'e'),
+        ('í', 'i'), ('Í', 'i'), ('ï', 'i'), ('Ï', 'i'),
+        ('ó', 'o'), ('Ó', 'o'), ('ò', 'o'), ('Ò', 'o'),
+        ('ú', 'u'), ('Ú', 'u'), ('ü', 'u'), ('Ü', 'u'),
+        ('ñ', 'n'), ('Ñ', 'n'),
+        ('ç', 'c'), ('Ç', 'c'),
+    ]
+    expr = col
+    for accented, plain in pairs:
+        expr = f"REPLACE({expr},'{accented}','{plain}')"
+    return f"LOWER({expr})"
 
 def to_records(df):
     """NaN isn't valid JSON (and prints ugly in an f-string); swap it
@@ -599,23 +617,38 @@ def _normalize(series):
 # real analytics starts treating current-season sample size as reliable
 # on its own. Adjustable without touching the interpolation logic below.
 BLEND_TRANSITION_ROUNDS = 10
+# How much weight this season's points carry at round 0, before it's had
+# any chance to accumulate a real sample (see _blended_pts's docstring
+# for why this used to be 0.5 and why that was too high this early on).
+THIS_WEIGHT_FLOOR = 0.15
 
 def _blended_pts(df, rounds_played):
     """A talent/output estimate blending both seasons, with the mix
     sliding from "mostly last season" to "only this season" as the
     season itself progresses — not a fixed split. At round 0,
-    last_season_pts carries full weight and this_season_pts half (one
-    or two matches is noisy; a full season isn't, even though it's
-    older). By BLEND_TRANSITION_ROUNDS, last_season_pts has decayed to
-    zero weight and this_season_pts carries full weight — enough matches
-    have been played that current form should stand on its own, and a
-    club promoted since last season (last_season_pts=0, not necessarily
-    a worse player) stops being penalized for something that was never a
-    real signal about them in the first place.
+    last_season_pts carries full weight and this_season_pts a small
+    floor (THIS_WEIGHT_FLOOR — one or two matches is genuinely too
+    noisy to lean on much yet, even though a hot start is real signal
+    worth SOME weight). By BLEND_TRANSITION_ROUNDS, last_season_pts has
+    decayed to zero weight and this_season_pts carries full weight —
+    enough matches have been played that current form should stand on
+    its own, and a club promoted since last season (last_season_pts=0,
+    not necessarily a worse player) stops being penalized for something
+    that was never a real signal about them in the first place.
+
+    THIS_WEIGHT_FLOOR was 0.5 (this season already got HALF weight on
+    day one of the season) until it was pointed out live, early in a new
+    season, that this let one or two rounds of noise compete on close to
+    even footing with a full prior season's real sample — exactly
+    backwards this early on. Doesn't rescue a player with truly zero
+    recorded output in BOTH fields (a genuine outside-league transfer
+    with no history this source tracks) — 0 times any weight is still 0,
+    so a real "insufficient data" flag for that case is a separate,
+    unbuilt piece of work, not something this weighting alone can fix.
     """
     progress = min(max(rounds_played, 0) / BLEND_TRANSITION_ROUNDS, 1.0)
     last_weight = 1.0 - progress
-    this_weight = 0.5 + 0.5 * progress
+    this_weight = THIS_WEIGHT_FLOOR + (1.0 - THIS_WEIGHT_FLOOR) * progress
     return df['last_season_pts'].fillna(0) * last_weight + df['this_season_pts'].fillna(0) * this_weight
 
 def build_recommendations(conn, date):
@@ -828,12 +861,19 @@ def build_recommendations(conn, date):
     # looks, instead of a good offer unconditionally maxing the score.
     sell_pool.loc[:, 'blended_pts'] = _blended_pts(sell_pool, rounds_played)
     sell_pool.loc[:, 'talent_keep'] = 100 - _normalize(sell_pool['blended_pts'])
+    # injured was 0.10 — barely more than a rounding nudge next to bench
+    # risk and talent. An injury/doubt is a concrete, near-term reason to
+    # sell (he can't score points he doesn't play, on top of whatever his
+    # start_pct already implies), not a marginal tiebreaker, so it's
+    # doubled to 0.20, taken from profit_pct and talent_keep equally —
+    # bench risk and offer quality are left untouched since neither one
+    # is a proxy for this.
     sell_pool.loc[:, 'score'] = (
         0.25 * _normalize(sell_pool['bench_score']) +
-        0.20 * _normalize(sell_pool['profit_pct'].fillna(0).clip(lower=0)) +
-        0.10 * sell_pool['injured'].map({True: 100.0, False: 0.0}) +
+        0.15 * _normalize(sell_pool['profit_pct'].fillna(0).clip(lower=0)) +
+        0.20 * sell_pool['injured'].map({True: 100.0, False: 0.0}) +
         0.20 * _normalize(sell_pool['offer_premium_pct'].fillna(0)) +
-        0.25 * sell_pool['talent_keep']
+        0.20 * sell_pool['talent_keep']
     ).round(1)
 
     # Positional depth veto: don't recommend selling a player if he's

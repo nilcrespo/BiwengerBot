@@ -1,6 +1,7 @@
 import json
 import re
 from collections import defaultdict
+from datetime import datetime, timedelta
 from pathlib import Path
 import pandas as pd
 
@@ -16,6 +17,91 @@ OUT_DIR = Path("ledgers")  # folder to write per-team JSONs (created if missing)
 money_pattern_inline = re.compile(r"([\d\.]+(?:,\d{3})*|\d+)\s*€")
 bids_pattern_inline = re.compile(r"^(\d+)\s*licitacions")
 ROLE_TOKENS = {"PT","DF","MC","DV","E","/"}
+
+# ---- Post chronology (see _post_sort_key's docstring for why this exists) ----
+_CATALAN_MONTHS = {
+    'gen': 1, 'gener': 1, 'feb': 2, 'febrer': 2, 'mar': 3, 'març': 3,
+    'abr': 4, 'abril': 4, 'maig': 5, 'jun': 6, 'juny': 6,
+    'jul': 7, 'juliol': 7, 'ag': 8, 'agost': 8, 'set': 9, 'setembre': 9,
+    'oct': 10, 'octubre': 10, 'nov': 11, 'novembre': 11, 'des': 12, 'desembre': 12,
+}
+_ABS_DATE_RE = re.compile(r"^(\d{1,2}) d['’]?e?\.?\s?([a-zçA-ZÇ]+)\.?(?:\s(\d{4}))?$")
+_RELATIVE_UNIT_RE = re.compile(r"^Fa (\d+) (hora|dia|setmana|mes)")
+_UNIT_TO_TIMEDELTA = {
+    'hora': lambda n: timedelta(hours=n),
+    'dia': lambda n: timedelta(days=n),
+    'setmana': lambda n: timedelta(weeks=n),
+    'mes': lambda n: timedelta(days=30 * n),  # approximate; only used to order posts, not for exact dates
+}
+
+def _post_sort_key(post, now):
+    """Best-effort real timestamp for a scraped post, for sorting the
+    ledger into true chronological order before FIFO-matching sales to
+    purchases in compute_trades.
+
+    Why this exists: compute_trades used to assume unique_posts.json's own
+    scrape order WAS chronological order (just reversed or not). It isn't,
+    reliably — confirmed live: a real purchase dated "3 d'ag." sits at file
+    index 39, its matching sale dated "15 d'ag." sits at index 1017, and
+    39 < 1017 in a file whose first post is "Fa una hora" and last is "26
+    de jul." (i.e. newest-to-oldest overall) — meaning the file's own
+    position wrongly implies the Aug 3 purchase is NEWER than the Aug 15
+    sale that came after it. Post order drifts out of true chronology
+    after enough incremental scroll-scrapes and merges across many runs;
+    trusting file position for FIFO silently broke effectively every
+    realized trade (buy_price=None) rather than a handful.
+
+    Absolute dates ("15 d'ag.", optionally with a year) resolve to the
+    most recent past occurrence of that day/month when no year is given —
+    this is a genuinely long-running league (some posts DO carry an
+    explicit year, e.g. "8 d'oct. 2025"), so a year-less date is
+    ambiguous across years, not just months; "most recent match not after
+    `now`" is the standard resolution and is exact whenever a year IS
+    present. Relative tokens (Avui/Ahir/Fa X hores...) resolve against
+    `now` directly. A post with no recognizable date token at all sorts
+    as the oldest possible entry rather than crashing — better to put an
+    unparseable post in a plausible-but-wrong place than to lose it.
+    """
+    for x in post:
+        if not isinstance(x, str):
+            continue
+        tok = x.strip()
+        if tok == 'Ara mateix':
+            return now
+        if tok == 'Avui':
+            return now.replace(hour=12, minute=0, second=0, microsecond=0)
+        if tok == 'Ahir':
+            return (now - timedelta(days=1)).replace(hour=12, minute=0, second=0, microsecond=0)
+        if tok == 'Demà':
+            return (now + timedelta(days=1)).replace(hour=12, minute=0, second=0, microsecond=0)
+        m = _RELATIVE_UNIT_RE.match(tok)
+        if m:
+            n, unit = int(m.group(1)), m.group(2)
+            return now - _UNIT_TO_TIMEDELTA[unit](n)
+        m = _ABS_DATE_RE.match(tok)
+        if m:
+            day = int(m.group(1))
+            month = _CATALAN_MONTHS.get(m.group(2).lower())
+            if month is None:
+                continue
+            if m.group(3):
+                try:
+                    return datetime(int(m.group(3)), month, day)
+                except ValueError:
+                    continue
+            # No year given: the most recent past (or today's) occurrence
+            # of this day/month, walking back a year at a time in the
+            # rare case the naive current-year guess is still in the
+            # future (e.g. parsing a January post in February).
+            for year in range(now.year, now.year - 5, -1):
+                try:
+                    candidate = datetime(year, month, day)
+                except ValueError:
+                    continue
+                if candidate <= now:
+                    return candidate
+            continue
+    return datetime.min
 
 def parse_amount(amount_str: str) -> float:
     """Parse '1.234.567 €' style strings with NBSPs into float euros."""
@@ -41,11 +127,21 @@ def compute_balances(posts: list) -> tuple[dict, dict]:
     credits/penalties — including the season-start budget credit, which is
     just another admin credit entry, not special-cased).
 
+    Sorted into true chronological order (oldest first) via
+    _post_sort_key before processing — see its docstring for why file
+    order can't be trusted. compute_balances's own running total is
+    order-independent (it's just a sum), but ledger[team]'s ORDER is what
+    compute_trades relies on for FIFO matching, so it has to be right
+    here, once, rather than re-guessed downstream.
+
     Returns (balances, ledger): balances maps team display name -> float
-    euros; ledger maps team display name -> list of transaction dicts.
+    euros; ledger maps team display name -> list of transaction dicts,
+    oldest first.
     """
     balances = defaultdict(lambda: 0)
     ledger = defaultdict(list)
+    now = datetime.now()
+    posts = sorted(posts, key=lambda p: _post_sort_key(p, now))
 
     for post in posts:
         # 1) Salaries (SOUS) — subtract
@@ -157,12 +253,13 @@ def compute_trades(ledger: dict) -> dict:
     profit on currently-held players that were actually bought (not part
     of the original free starting squad, which has no purchase record).
 
-    ledger[team] entries are newest-first (the order posts were scraped
-    in); processed oldest-first here (reversed) so a sale is matched
-    against the purchase that actually preceded it, FIFO. Matching is by
-    player name string, scoped per team — good enough for a first version,
-    but two different real players who happen to share a short display
-    name would collide; not handled.
+    ledger[team] entries are already oldest-first (compute_balances sorts
+    them by real parsed date, see _post_sort_key), so a sale is matched
+    here against the purchase that actually preceded it, FIFO, just by
+    walking the list in order. Matching is by player name string, scoped
+    per team — good enough for a first version, but two different real
+    players who happen to share a short display name would collide; not
+    handled.
 
     Returns {team: {"realized": [...], "open": {player_name: {"buy_price", "count"}}}}
     realized entries with buy_price=None mean a sale with no matching
@@ -171,7 +268,7 @@ def compute_trades(ledger: dict) -> dict:
     """
     results = {}
     for team, entries in ledger.items():
-        chronological = list(reversed(entries))
+        chronological = entries
         open_positions = {}  # player -> FIFO queue of purchase prices
         realized = []
         for e in chronological:

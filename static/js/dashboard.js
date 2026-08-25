@@ -319,6 +319,31 @@ function renderRoundScores(data) {
   `);
 }
 
+// Not a generic sortable table like the rest of the dashboard — a
+// starting lineup has a natural order (goalkeeper first, then outfield
+// by role) that a click-to-sort column header would only scramble, and
+// there's exactly one row per squad slot rather than an open-ended list.
+function renderBestEleven(payload) {
+  const tbody = document.querySelector('#bestElevenTable tbody');
+  const meta = document.getElementById('bestElevenMeta');
+  const starters = (payload && payload.starters) || [];
+  if (!starters.length) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="5">Not enough squad data to fill a valid formation</td></tr>';
+    meta.textContent = 'Highest-scoring valid formation from your own squad';
+    return;
+  }
+  meta.textContent = `Formation ${payload.formation} — ${formatNumber(payload.total_expected_points)} expected pts this round`;
+  tbody.innerHTML = starters.map((p) => `
+    <tr>
+      <td><span class="pos-badge">${escapeHtml(p.position)}</span></td>
+      <td class="cell-muted">${escapeHtml(p.club)}</td>
+      <td class="cell-primary">${escapeHtml(p.player)}${p.is_captain ? ' <span class="pill pill-me">C</span>' : ''}</td>
+      <td class="num">${escapeHtml(p.start_pct)}%</td>
+      <td class="num">${formatNumber(p.expected_value)}</td>
+    </tr>
+  `).join('');
+}
+
 function affordabilityCell(p) {
   const shortfall = parseFloat(p.shortfall);
   if (!shortfall || shortfall <= 0) {
@@ -584,6 +609,7 @@ function loadData() {
       setTableData('buyTable', data.buy_recommendations);
       setTableData('sellTable', data.sell_recommendations);
       setTableData('roundScoresTable', data.round_scores);
+      renderBestEleven(data.best_eleven);
     })
     .catch((err) => {
       showError(`Couldn't load data: ${err.message}`);

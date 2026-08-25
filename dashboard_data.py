@@ -131,6 +131,7 @@ def build_dashboard_data(conn, date):
     # --- Buy/sell recommenders — shared with the Telegram digest
     # (notify.py) via recommenders.py so the two never drift apart. ---
     buy_recommendations, sell_recommendations = recommenders.build_recommendations(conn, date)
+    best_eleven = recommenders.build_best_eleven(conn, date)
 
     # --- My trades: current holdings (unrealized profit) and completed
     # sales (realized profit), for the "My Trades" tab. Only meaningful
@@ -200,5 +201,6 @@ def build_dashboard_data(conn, date):
         'round_scores': to_records(round_scores),
         'buy_recommendations': to_records(buy_recommendations),
         'sell_recommendations': to_records(sell_recommendations),
+        'best_eleven': best_eleven,
         'date': date,
     }

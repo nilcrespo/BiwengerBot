@@ -1099,3 +1099,154 @@ def build_recommendations(conn, date):
     buy_recommendations = buy_recommendations[buy_recommendations['score'] >= 40].sort_values('score', ascending=False)
 
     return buy_recommendations, sell_recommendations
+
+
+# ---------- Best XI recommender ----------
+# The five formations Biwenger actually allows (confirmed against every
+# formation seen in real rival_lineups data: 4-4-2, 3-4-3, 3-5-2, 4-5-1,
+# 4-3-3 — all five of Biwenger's known valid shapes turned up, none other
+# did), as (DEF, MID, FWD) outfield counts alongside the fixed 1 GK.
+BEST_XI_FORMATIONS = [(4, 4, 2), (4, 3, 3), (3, 5, 2), (3, 4, 3), (4, 5, 1)]
+
+
+def _position_labels(position_str):
+    return [
+        POSITION_LABELS[t.strip()] for t in str(position_str).split('/')
+        if POSITION_LABELS.get(t.strip())
+    ]
+
+
+def build_best_eleven(conn, date):
+    """The best valid starting XI from the user's own squad: for each of
+    Biwenger's 5 legal formations, fill GK/DEF/MID/FWD slots by expected
+    value (blended talent x start probability — a great player who won't
+    play contributes nothing), then keep whichever complete formation
+    scores highest. The captain is whoever scores highest among the 11
+    (Biwenger doubles the captain's points, so that's always the same
+    player who'd be picked regardless of formation).
+
+    Dual-position players (e.g. "Defender/Midfielder") are filled in two
+    passes rather than solved as a true assignment problem: pass one
+    fills each slot type from players whose FIRST listed position matches
+    it (their primary registration), pass two uses leftover dual-eligible
+    players to patch any slot a formation still can't fill from primaries
+    alone. This is a heuristic, not a guaranteed-optimal solver — with a
+    ~16-man squad and only two adjacent-position combinations possible in
+    real football (DEF/MID, MID/FWD), a genuine conflict where the greedy
+    order picks worse than optimal is rare enough not to justify a real
+    bipartite-matching solver here, matching the rest of this module's
+    "good heuristic over data we actually have" approach rather than a
+    from-scratch optimizer.
+    """
+    d = resolve_scraped_at(conn, date)
+
+    rounds_row = pd.read_sql(
+        "SELECT MAX(played) AS rounds FROM team_players WHERE scraped_at LIKE ?",
+        conn, params=(d,)
+    )
+    rounds_played = int(rounds_row['rounds'].iloc[0]) if len(rounds_row) and pd.notna(rounds_row['rounds'].iloc[0]) else 0
+
+    roster = pd.read_sql(
+        """
+        SELECT tp.name AS player, tp.position, tp.club, tp.price, tp.status,
+               tp.this_season_pts, tp.last_season_pts, tp.played
+        FROM team_players tp
+        JOIN team_balance tb ON tb.team_id = tp.team_id AND tb.is_me = 1 AND tb.scraped_at LIKE ?
+        WHERE tp.scraped_at LIKE ?
+        """,
+        conn, params=(d, d)
+    )
+    if not len(roster):
+        return {'formation': None, 'starters': [], 'bench': [], 'total_expected_points': 0}
+
+    prob_df = pd.read_sql(
+        "SELECT player_name, team_name, probability FROM player_probabilities "
+        "WHERE scraped_at LIKE ? AND probability != '0%'",
+        conn, params=(d,)
+    )
+    roster = attach_probabilities(roster, prob_df, name_col='player', club_col='club')
+    roster.loc[:, 'start_pct'] = roster['probability'].apply(_parse_pct)
+    # _blended_pts (used everywhere else) blends season TOTALS, which is
+    # right for a buy/sell "how good is this player overall" score but
+    # wrong here: a player with a full last season on record (30+ games)
+    # would always dwarf one judged only on this season's 2 games so far,
+    # regardless of actual per-match quality — caught live, a player with
+    # 92 last-season points and zero appearances yet this year scored 15x
+    # every other candidate's expected value on the same 0-100ish scale.
+    # Blending PER-MATCH rates instead keeps every player on the same
+    # scale. Last season's games-played isn't tracked (only this
+    # season's `played` is), so a fixed 38-game season is the
+    # approximation; this_season's rate is undefined (not just small)
+    # with zero games played, not zero.
+    LAST_SEASON_GAMES = 38
+    this_ppm = (roster['this_season_pts'] / roster['played'].replace(0, pd.NA)).fillna(0)
+    last_ppm = roster['last_season_pts'].fillna(0) / LAST_SEASON_GAMES
+    progress = min(max(rounds_played, 0) / BLEND_TRANSITION_ROUNDS, 1.0)
+    blended_ppm = last_ppm * (1.0 - progress) + this_ppm * (THIS_WEIGHT_FLOOR + (1.0 - THIS_WEIGHT_FLOOR) * progress)
+    # A player with literally zero recorded output in both fields hasn't
+    # been observed to be bad — he just hasn't been observed. Leaving him
+    # at exactly 0 makes "no data" beat a real, if poor, track record: a
+    # trusted 90%-start regular coming off one rough match (a real
+    # negative rate) lost his own starting slot to a 20%-start benchwarmer
+    # with zero appearances ever, purely because 0 > negative. Imputing
+    # the roster's own median rate (among players who DO have a real
+    # rate) for the truly-unobserved ones keeps that comparison honest —
+    # start_pct is still what mostly decides it, this just stops a
+    # results-based over-punish from outweighing a much stronger,
+    # directly-observed start-probability signal.
+    has_signal = (roster['played'] > 0) | (roster['last_season_pts'] > 0)
+    if has_signal.any():
+        blended_ppm = blended_ppm.where(has_signal, blended_ppm[has_signal].median())
+    # A great player who's a doubtful bench risk contributes little to an
+    # actual matchday score — expected value has to price in whether he
+    # actually plays, not just how good he is when he does.
+    roster.loc[:, 'expected_value'] = (blended_ppm * roster['start_pct'] / 100).round(2)
+    roster.loc[:, 'labels'] = roster['position'].apply(_position_labels)
+    roster.loc[:, 'primary'] = roster['labels'].apply(lambda ls: ls[0] if ls else None)
+
+    best = None
+    for def_n, mid_n, fwd_n in BEST_XI_FORMATIONS:
+        needed = [('GK', 1), ('DEF', def_n), ('MID', mid_n), ('FWD', fwd_n)]
+        assigned = []
+
+        def _take(pool, count):
+            pool = pool[~pool.index.isin(assigned)].sort_values('expected_value', ascending=False)
+            picked = pool.head(count).index.tolist()
+            assigned.extend(picked)
+            return picked
+
+        filled = {}
+        for label, count in needed:
+            filled[label] = len(_take(roster[roster['primary'] == label], count))
+        # Second pass: any formation slot a primary-only fill couldn't
+        # complete gets patched from remaining dual-position-eligible
+        # players (e.g. a MID slot short a body pulled from a leftover
+        # Defender/Midfielder), best expected value first.
+        for label, count in needed:
+            shortfall = count - filled[label]
+            if shortfall > 0:
+                eligible = roster[roster['labels'].apply(lambda ls: label in ls)]
+                _take(eligible, shortfall)
+
+        if len(assigned) != 11:
+            continue  # squad can't fill this formation at all — skip it
+        total = roster.loc[assigned, 'expected_value'].sum()
+        if best is None or total > best['total']:
+            best = {'formation': f"{def_n}-{mid_n}-{fwd_n}", 'assigned': assigned, 'total': total}
+
+    if best is None:
+        return {'formation': None, 'starters': [], 'bench': [], 'total_expected_points': 0}
+
+    starters = roster.loc[best['assigned']].sort_values('expected_value', ascending=False)
+    captain_idx = starters.index[0]
+    starters = starters.assign(is_captain=starters.index == captain_idx)
+    bench = roster[~roster.index.isin(best['assigned'])].sort_values('expected_value', ascending=False)
+
+    keep_cols = ['player', 'position', 'club', 'price', 'status', 'start_pct',
+                 'expected_value', 'is_captain']
+    return {
+        'formation': best['formation'],
+        'starters': to_records(starters[keep_cols]),
+        'bench': to_records(bench[[c for c in keep_cols if c != 'is_captain']]),
+        'total_expected_points': round(float(best['total']), 1),
+    }

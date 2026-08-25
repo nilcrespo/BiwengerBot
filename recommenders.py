@@ -1182,7 +1182,19 @@ def build_best_eleven(conn, date):
     this_ppm = (roster['this_season_pts'] / roster['played'].replace(0, pd.NA)).fillna(0)
     last_ppm = roster['last_season_pts'].fillna(0) / LAST_SEASON_GAMES
     progress = min(max(rounds_played, 0) / BLEND_TRANSITION_ROUNDS, 1.0)
-    blended_ppm = last_ppm * (1.0 - progress) + this_ppm * (THIS_WEIGHT_FLOOR + (1.0 - THIS_WEIGHT_FLOOR) * progress)
+    # THIS_WEIGHT_FLOOR exists to distrust a hot streak against a real,
+    # longer track record (the buy recommender's job: rank overall
+    # talent). Predicting THIS round's score is a different job — with
+    # no real last season to shrink toward, there's nothing better to
+    # fall back on, so suppressing this season's rate anyway just throws
+    # away the only signal there is. Caught live: applying the floor
+    # unconditionally (as if every player had a prior worth shrinking
+    # toward) cut a full starting XI's total expected points roughly in
+    # half versus using the real observed rate wherever no prior exists.
+    has_last_season = roster['last_season_pts'] > 0
+    this_weight = pd.Series(1.0, index=roster.index)
+    this_weight[has_last_season] = THIS_WEIGHT_FLOOR + (1.0 - THIS_WEIGHT_FLOOR) * progress
+    blended_ppm = last_ppm * (1.0 - progress) + this_ppm * this_weight
     # A player with literally zero recorded output in both fields hasn't
     # been observed to be bad — he just hasn't been observed. Leaving him
     # at exactly 0 makes "no data" beat a real, if poor, track record: a

@@ -434,6 +434,81 @@ def migrate_csv_to_db(days_behind=0):
         else:
             print("→ No round scores to migrate (no finished rounds yet)")
 
+    # Real per-bid market history (see scraper.get_league_board_market).
+    # Unlike every other table here, this one ACCUMULATES rather than
+    # snapshots: the league board only exposes a shallow rolling window
+    # with no paging, so each run contributes whatever few transactions
+    # it can see and the useful history is the union of all runs. That
+    # makes append-everything wrong — the same transaction stays visible
+    # in the feed for days and would be re-inserted on every run in
+    # between, inflating exactly the bid counts and amounts the buy model
+    # reads. Only genuinely-new txn_keys are inserted; scraped_at is
+    # therefore "first seen", which is also what makes a point-in-time
+    # backtest possible (filter scraped_at <= the date being modelled).
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS market_bid_history (
+        txn_key TEXT,
+        txn_date INTEGER,
+        player_id INTEGER,
+        player_name TEXT,
+        player_position TEXT,
+        player_price REAL,
+        price_change REAL,
+        winner_id INTEGER,
+        winner_name TEXT,
+        winning_amount REAL,
+        num_bidders INTEGER,
+        bidder_id INTEGER,
+        bidder_name TEXT,
+        bid_amount REAL,
+        is_winner INTEGER,
+        bid_rank INTEGER,
+        scraped_at TIMESTAMP
+    )''')
+    conn.commit()
+    if os.path.exists('csvs/others/market_bids.csv'):
+        bids_df = pd.read_csv('csvs/others/market_bids.csv')
+        if len(bids_df):
+            known = {r[0] for r in cursor.execute("SELECT DISTINCT txn_key FROM market_bid_history")}
+            new_bids = bids_df[~bids_df['txn_key'].isin(known)].copy()
+            if len(new_bids):
+                new_bids['scraped_at'] = now
+                new_bids.to_sql('market_bid_history', conn, if_exists='append', index=False)
+            skipped = bids_df['txn_key'].nunique() - new_bids['txn_key'].nunique()
+            print(f"→ Migrated {new_bids['txn_key'].nunique()} new market transaction(s) "
+                  f"({len(new_bids)} bids); skipped {skipped} already stored")
+
+    # Rival locked lineups per round (see scraper.get_rival_lineups).
+    # A per-run snapshot like team_players, not an accumulating log —
+    # a team can change its lineup any time before the round locks, so
+    # the latest run's version is the one that matters.
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS rival_lineups (
+        round_id INTEGER,
+        user_id INTEGER,
+        team_name TEXT,
+        team_id TEXT,
+        league_position INTEGER,
+        points INTEGER,
+        team_value REAL,
+        team_value_inc REAL,
+        formation TEXT,
+        slot TEXT,
+        player_id INTEGER,
+        player_name TEXT,
+        position TEXT,
+        price REAL,
+        is_captain INTEGER,
+        scraped_at TIMESTAMP
+    )''')
+    conn.commit()
+    if os.path.exists('csvs/others/rival_lineups.csv'):
+        lineups_df = pd.read_csv('csvs/others/rival_lineups.csv')
+        if len(lineups_df):
+            lineups_df['scraped_at'] = now
+            lineups_df.to_sql('rival_lineups', conn, if_exists='append', index=False)
+        print(f"→ Migrated {len(lineups_df)} rival lineup slots")
+
     conn.close()
     print("\nMigration complete!")
 

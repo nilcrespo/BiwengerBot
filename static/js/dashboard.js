@@ -312,6 +312,19 @@ function affordabilityCell(p) {
   return `<span class="pill ${cls}" title="${escapeHtml(title)}">${label}</span>`;
 }
 
+// Biwenger's market is a first-price sealed-bid auction (winner pays
+// exactly what they bid — confirmed on 9/9 real transactions), so "the
+// average price" is the wrong number to show: every euro bid above the
+// true minimum needed to win is pure waste. Show the minimum bid for a
+// coin-flip chance instead. On a cheap listing this can round to the
+// same figure as the 90%-safe number — show one number rather than
+// "€X – €X" in that case.
+function formatBidRange(p) {
+  const win50 = formatMoney(p.win_bid_50);
+  const win90 = formatMoney(p.win_bid_90);
+  return win50 === win90 ? win50 : `${win50} (safe: ${win90})`;
+}
+
 function renderBuyRecommendations(data) {
   const tbody = document.querySelector('#buyTable tbody');
   renderTable(tbody, data, 9, (p) => {
@@ -322,7 +335,17 @@ function renderBuyRecommendations(data) {
     const momentumNote = change > 0
       ? ` + today's own +${formatMoney(change)} rise (a fast riser tends to keep rising and draw more competition)`
       : ' — but the price is flat or falling, so that average competition doesn\'t really apply right now; only a small cushion above market price is added';
-    const bidTitle = `Estimate: ${bucketNote}${momentumNote}`;
+    const rivalNote = p.competitor_count
+      ? `\n${p.competitor_count} rival(s) could afford him and have room at his position`
+        + (p.top_competitors ? `, most likely ${p.top_competitors}` : '')
+        + ` → ~${p.expected_bidders} bidders expected.`
+      : '\nNo rival looks able to afford him out of the squad-value credit line we can see.';
+    const calibNote = p.bid_calibration_samples
+      ? ` Each competing bidder is worth ~${(parseFloat(p.markup_per_bidder) * 100).toFixed(1)}% over asking, from ${p.bid_calibration_samples} real auction(s).`
+      : ' No real auction data captured yet — using the default per-bidder premium.';
+    const bidTitle = `${formatMoney(p.win_bid_50)} for roughly a coin-flip chance of winning, `
+      + `${formatMoney(p.win_bid_90)} to be pretty confident.\n`
+      + `${bucketNote}${momentumNote}${rivalNote}${calibNote}`;
     return `
     <tr>
       <td><span class="pos-badge">${escapeHtml(p.position)}</span></td>
@@ -332,7 +355,7 @@ function renderBuyRecommendations(data) {
       <td class="num">${startPctCell(p.probability)}</td>
       <td class="num">${scoreBadge(p.score)}</td>
       <td>${needBadge(p.squad_need)}</td>
-      <td class="num" title="${escapeHtml(bidTitle)}">${formatMoney(p.suggested_bid)}</td>
+      <td class="num" title="${escapeHtml(bidTitle)}">${formatBidRange(p)}</td>
       <td>${affordabilityCell(p)}</td>
     </tr>
   `;

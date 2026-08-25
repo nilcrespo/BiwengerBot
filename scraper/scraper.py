@@ -957,6 +957,207 @@ def get_round_scores(page, la_liga_players=None) -> list:
           f"{len({r['round_id'] for r in rows})} round(s)")
     return rows
 
+# Biwenger encodes a player's position as a small int everywhere in its
+# own APIs (player database, lineups). Confirmed by cross-checking each
+# rival's locked lineup against its declared formation: a "4-4-2" team's
+# `lineup.players` array resolves to positions [1,2,2,2,2,3,3,3,3,4,4]
+# and a "3-4-3" to [1,2,2,2,3,3,3,3,4,4,4] — GK first, then defenders,
+# midfielders, forwards, in formation order, every time.
+BIWENGER_POSITIONS = {1: "GK", 2: "DEF", 3: "MID", 4: "FWD"}
+
+def _board_txn_key(player_id, winner_id, amount) -> str:
+    """Stable identity for one completed market transaction, used to
+    append only genuinely-new rows to market_bid_history across runs.
+
+    Deliberately excludes the board entry's own `date` timestamp, for the
+    same reason _post_identity drops the forum post's date (see its
+    docstring, and the double-counted-ledger bug that motivated it): a
+    timestamp is the one field a feed can legitimately re-render, and any
+    such re-rendering silently turns one real transaction into two. The
+    content triple (which player, which buyer, exact euro amount) is
+    already a near-unique key on its own — two genuinely distinct sales
+    of the same player to the same manager for the exact same amount to
+    the euro is far less likely than another unnoticed timestamp quirk.
+    """
+    return f"{player_id}:{winner_id}:{int(amount)}"
+
+def get_league_board_market(page, la_liga_players=None) -> list:
+    """Capture every completed market transaction currently visible in the
+    league activity feed, with the FULL list of competing bids — who bid
+    and exactly how much, not just how many people bid.
+
+    Source is /api/v2/home's `data.league.board`: a mixed activity feed
+    (transfer / playerMovements / salaries / market entries). The `market`
+    entries carry `content`, a list of one dict per completed signing:
+    `{"player": <id>, "to": {"id","name"}, "amount": <winning bid>,
+      "bids": [{"user": {"id","name"}, "amount": <losing bid>}, ...]}`.
+    Confirmed live: `bids` holds the LOSING bids only — the winner appears
+    solely as `to`/`amount` and never inside `bids` — so the real number of
+    bidders is len(bids) + 1.
+
+    This is a strict upgrade over the bid_history table built from the
+    forum ledger, which only ever recovers a bid *count* per sale. But it
+    comes with a hard constraint: the board is a fixed, shallow rolling
+    window (8 entries total, all types combined, confirmed live) with no
+    paging — ?offset/?limit/?type are all accepted and all ignored, and
+    /api/v2/board 400s. There is no way to backfill it. So this has to run
+    on every daily scrape and accumulate, and the useful sample size grows
+    one day at a time.
+
+    Each bid gets its own row (the winner too, flagged is_winner=1) so a
+    consumer can look at the whole auction — the gap to the runner-up is
+    what says whether the winner overpaid or just barely cleared the pack.
+
+    player_price is today's market price from the public player database,
+    recorded alongside because the bid amounts are meaningless without a
+    price to compare them against, and that price is NOT recoverable
+    later — it moves daily. It is an approximation of the price bidders
+    actually saw: the board window can be a couple of days deep, and a
+    just-sold player's price typically jumps on the sale, so price_change
+    (the same day's own increment) is stored too, letting a consumer back
+    out roughly what the pre-sale price was.
+    """
+    headers = _capture_auth_headers(page)
+    if not headers:
+        print("⚠️ Could not capture auth headers for league board request")
+        return []
+
+    try:
+        resp = page.request.get("https://biwenger.as.com/api/v2/home", headers=headers)
+        if resp.status != 200:
+            print(f"⚠️ League board request failed: HTTP {resp.status}")
+            return []
+        board = resp.json().get("data", {}).get("league", {}).get("board", []) or []
+    except Exception as e:
+        print(f"⚠️ Could not fetch league board: {e}")
+        return []
+
+    if la_liga_players is None:
+        la_liga_players = get_la_liga_players()
+
+    scraped_at = pd.Timestamp.now().strftime("%Y-%m-%d")
+    rows = []
+    for entry in board:
+        if entry.get("type") != "market":
+            continue
+        entry_date = entry.get("date")
+        for txn in entry.get("content") or []:
+            player_id = txn.get("player")
+            winner = txn.get("to") or {}
+            amount = txn.get("amount")
+            if player_id is None or amount is None or not winner.get("id"):
+                continue
+            losing_bids = txn.get("bids") or []
+            info = la_liga_players.get(player_id) or {}
+            common = {
+                "txn_key": _board_txn_key(player_id, winner["id"], amount),
+                "txn_date": entry_date,
+                "player_id": player_id,
+                "player_name": info.get("name"),
+                "player_position": BIWENGER_POSITIONS.get(info.get("position")),
+                "player_price": info.get("price"),
+                "price_change": info.get("priceIncrement"),
+                "winner_id": winner["id"],
+                "winner_name": winner.get("name"),
+                "winning_amount": amount,
+                # Total bidders in the auction, winner included — the
+                # directly comparable number to bid_history.bids.
+                "num_bidders": len(losing_bids) + 1,
+                "scraped_at": scraped_at,
+            }
+            # bid_rank 0 is the winner, then the losing bids from highest
+            # down (the feed already returns them descending; sorted here
+            # anyway rather than trusting that ordering).
+            ranked = [(winner["id"], winner.get("name"), amount, 1)]
+            for b in sorted(losing_bids, key=lambda x: x.get("amount") or 0, reverse=True):
+                user = b.get("user") or {}
+                ranked.append((user.get("id"), user.get("name"), b.get("amount"), 0))
+            for rank, (bidder_id, bidder_name, bid_amount, is_winner) in enumerate(ranked):
+                rows.append({**common, "bidder_id": bidder_id, "bidder_name": bidder_name,
+                             "bid_amount": bid_amount, "is_winner": is_winner, "bid_rank": rank})
+
+    txns = len({r["txn_key"] for r in rows})
+    print(f"🧾 Captured {txns} completed market transaction(s), {len(rows)} individual bid(s) from the league board")
+    return rows
+
+def get_rival_lineups(page, la_liga_players=None) -> list:
+    """Capture every team's locked-in lineup for the upcoming round.
+
+    /api/v2/rounds/league's `data.league.standings` gives, per team, its
+    Biwenger user id, name, points, teamValue/teamValueInc, position, and
+    a `lineup` block: the chosen formation (`type`, e.g. "4-4-2"), the
+    captain, and three disjoint player-id lists — `players` (the starting
+    XI, ordered to match the formation), `reserves` (the bench, which can
+    contain nulls for unfilled slots) and `discarded`.
+
+    Nothing else scraped here has this: team_players is a flat roster with
+    no notion of who its owner is actually fielding. That distinction is
+    what makes a competitor model possible — a team starting four
+    defenders out of a five-defender squad has no room for another one,
+    while a team fielding a defender it also has on the bench-and-discard
+    pile is a real bidder for an upgrade.
+
+    One row per player per team per run, tagged with the slot it occupies.
+    Positions are resolved through the public player database rather than
+    inferred from the array index, so this doesn't silently break if
+    Biwenger ever stops ordering `players` by formation.
+    """
+    headers = _capture_auth_headers(page)
+    if not headers:
+        print("⚠️ Could not capture auth headers for lineups request")
+        return []
+
+    try:
+        resp = page.request.get("https://biwenger.as.com/api/v2/rounds/league", headers=headers)
+        if resp.status != 200:
+            print(f"⚠️ Lineups request failed: HTTP {resp.status}")
+            return []
+        data = resp.json().get("data", {})
+    except Exception as e:
+        print(f"⚠️ Could not fetch rival lineups: {e}")
+        return []
+
+    standings = (data.get("league") or {}).get("standings") or []
+    round_id = (data.get("round") or {}).get("id")
+
+    if la_liga_players is None:
+        la_liga_players = get_la_liga_players()
+
+    scraped_at = pd.Timestamp.now().strftime("%Y-%m-%d")
+    rows = []
+    for team in standings:
+        lineup = team.get("lineup") or {}
+        captain = (lineup.get("captain") or {}).get("id")
+        base = {
+            "round_id": round_id,
+            "user_id": team.get("id"),
+            "team_name": team.get("name"),
+            # normalize_team_key so this joins to the team_id every other
+            # table (team_players, team_balance) is keyed on.
+            "team_id": normalize_team_key(team.get("name") or ""),
+            "league_position": team.get("position"),
+            "points": team.get("points"),
+            "team_value": team.get("teamValue"),
+            "team_value_inc": team.get("teamValueInc"),
+            "formation": lineup.get("type"),
+            "scraped_at": scraped_at,
+        }
+        for slot, ids in (("starter", lineup.get("players")),
+                          ("reserve", lineup.get("reserves")),
+                          ("discarded", lineup.get("discarded"))):
+            for pid in ids or []:
+                if pid is None:  # unfilled bench slot
+                    continue
+                info = la_liga_players.get(pid) or {}
+                rows.append({**base, "slot": slot, "player_id": pid,
+                             "player_name": info.get("name"),
+                             "position": BIWENGER_POSITIONS.get(info.get("position")),
+                             "price": info.get("price"),
+                             "is_captain": int(pid == captain)})
+
+    print(f"📋 Captured lineups for {len(standings)} team(s) ({len(rows)} player slots) in round {round_id}")
+    return rows
+
 def extract_market_players(page) -> pd.DataFrame:
     """Extract player data from the market table view"""
     print("\nExtracting market players...")
@@ -1343,6 +1544,28 @@ def run(playwright: Playwright) -> None:
     pd.DataFrame(round_scores, columns=round_score_columns).to_csv(
         "csvs/others/round_scores.csv", index=False)
     print(f"Saved {len(round_scores)} round scores → round_scores.csv")
+
+    # Real bid competition: who actually bid on recently-sold players and
+    # exactly how much, plus every rival's locked lineup for the upcoming
+    # round. Both feed recommenders.py's buy-price model. The board is a
+    # shallow rolling window with no paging (see get_league_board_market),
+    # so this only ever accumulates by running daily — migration.py
+    # appends just the transactions it hasn't already stored.
+    board_rows = get_league_board_market(page, la_liga_players)
+    board_columns = ["txn_key", "txn_date", "player_id", "player_name", "player_position",
+                     "player_price", "price_change", "winner_id", "winner_name",
+                     "winning_amount", "num_bidders", "bidder_id", "bidder_name",
+                     "bid_amount", "is_winner", "bid_rank", "scraped_at"]
+    pd.DataFrame(board_rows, columns=board_columns).to_csv("csvs/others/market_bids.csv", index=False)
+    print(f"Saved {len(board_rows)} market bids → market_bids.csv")
+
+    lineup_rows = get_rival_lineups(page, la_liga_players)
+    lineup_columns = ["round_id", "user_id", "team_name", "team_id", "league_position",
+                      "points", "team_value", "team_value_inc", "formation", "slot",
+                      "player_id", "player_name", "position", "price", "is_captain",
+                      "scraped_at"]
+    pd.DataFrame(lineup_rows, columns=lineup_columns).to_csv("csvs/others/rival_lineups.csv", index=False)
+    print(f"Saved {len(lineup_rows)} lineup slots → rival_lineups.csv")
 
     # Keep every owned player's sale listing alive at current market
     # value (see renew_player_sales' docstring for why this is safe/

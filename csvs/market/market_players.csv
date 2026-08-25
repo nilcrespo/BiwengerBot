@@ -1,21 +1,21 @@
 position,club,name,price,change,status,owner,last_sale,recent_pts,this_season_pts,last_season_pts,scraped_at
-Forward,Getafe,Juanmi,150000,0.0,,Free Agent,"150,000",0.0,0,22,2026-08-20
-Forward/Midfielder,Celta,Iago Aspas,2360000,-20000.0,,Free Agent,"2,360,000",0.0,0,137,2026-08-20
-Midfielder,Real Madrid,Camavinga,1650000,20000.0,,Free Agent,"1,650,000",0.0,0,112,2026-08-20
-Forward/Midfielder,Celta,Carles Perez,160000,0.0,,Free Agent,"160,000",0.0,0,0,2026-08-20
-Coach,Celta,Claudio Giraldez,1340000,0.0,,Free Agent,"1,340,000",0.0,0,54,2026-08-20
-Defender,Celta,Galan,2320000,-30000.0,,Free Agent,"2,320,000",0.0,0,102,2026-08-20
-Coach,Atletico,Simeone,3000000,-10000.0,,Free Agent,"3,000,000",3.0,3,0,2026-08-20
-Goalkeeper,Rayo Vallecano,Dani Cardenas,180000,0.0,,Free Agent,"180,000",0.0,0,27,2026-08-20
-Defender,Espanyol,Miguel Rubio,150000,0.0,,Free Agent,"150,000",0.0,0,36,2026-08-20
-Forward,Valencia,Sadiq,2330000,-20000.0,,Free Agent,"2,330,000",0.0,0,93,2026-08-20
-Forward,Celta,Hugo Gonzalez,2380000,110000.0,,Free Agent,"2,380,000",0.0,0,1,2026-08-20
-Forward/Midfielder,Valencia,Sergi Canos,150000,0.0,,Free Agent,"150,000",0.0,0,0,2026-08-20
-Defender,Rayo Vallecano,Pelayo,160000,0.0,,Free Agent,"160,000",2.0,2,0,2026-08-20
-Midfielder,Athletic,Peio Canales,2020000,0.0,,Free Agent,"2,020,000",0.0,0,0,2026-08-20
-Forward,Betis,Gonzalo Petit,150000,0.0,,Free Agent,"150,000",0.0,0,0,2026-08-20
-Forward/Midfielder,Levante,Paco Cortes,150000,0.0,,Free Agent,"150,000",1.0,1,0,2026-08-20
-Midfielder,Deportivo,Jose Jurado,150000,0.0,,Free Agent,"150,000",0.0,0,0,2026-08-20
-Midfielder,Villarreal,Alassane Diatta,210000,-10000.0,,Free Agent,"210,000",0.0,0,4,2026-08-20
-Coach,Osasuna,Ramis,700000,0.0,,Free Agent,"700,000",0.0,0,0,2026-08-20
-Defender,Racing,Mantilla,1510000,-10000.0,,Free Agent,"1,510,000",2.0,2,0,2026-08-20
+Defender/Midfielder,Getafe,Kiko Femenia,960000,-10000.0,,Free Agent,"960,000",6.0,6,0,2026-08-25
+Defender,Valencia,Diakhaby,800000,40000.0,,Free Agent,"800,000",4.0,4,0,2026-08-25
+Defender/Midfielder,Sevilla,Pedrosa,280000,0.0,,Free Agent,"280,000",0.0,0,68,2026-08-25
+Midfielder,Barcelona,De Jong,710000,-10000.0,,Free Agent,"710,000",0.0,0,133,2026-08-25
+Midfielder,Osasuna,Osambela,150000,0.0,,Free Agent,"150,000",0.0,0,37,2026-08-25
+Forward,Elche,Fer Nino,2740000,-40000.0,,Free Agent,"2,740,000",32.0,5,0,2026-08-25
+Defender,Elche,Barzic,150000,0.0,,Free Agent,"150,000",0.0,0,0,2026-08-25
+Defender,Espanyol,El Hilali,2520000,-20000.0,,Free Agent,"2,520,000",33.0,6,0,2026-08-25
+Forward,Valencia,Alberto Mari,150000,0.0,,Free Agent,"150,000",0.0,0,0,2026-08-25
+Defender,Villarreal,Sergi Cardona,1320000,-40000.0,,Free Agent,"1,320,000",0.0,0,107,2026-08-25
+Midfielder,Barcelona,Marc Casado,490000,-10000.0,,Free Agent,"490,000",0.0,0,63,2026-08-25
+Defender,Levante,Cabello,150000,0.0,,Free Agent,"150,000",0.0,0,11,2026-08-25
+Midfielder,Real Sociedad,Gorrotxategi,1100000,-20000.0,,Free Agent,"1,100,000",0.0,0,125,2026-08-25
+Defender,Levante,Toljan,1100000,-10000.0,,Free Agent,"1,100,000",22.0,4,0,2026-08-25
+Defender,Villarreal,Renato Veiga,4030000,20000.0,,Free Agent,"4,030,000",36.0,9,0,2026-08-25
+Midfielder,Malaga,Izan Merino,2320000,-20000.0,,Free Agent,"2,320,000",33.0,6,0,2026-08-25
+Defender,Alaves,Valentini,540000,0.0,,Free Agent,"540,000",3.0,3,0,2026-08-25
+Forward,Rayo Vallecano,Tsitaishvili,610000,-20000.0,,Free Agent,"610,000",0.0,0,0,2026-08-25
+Defender,Malaga,Moussa Diarra,150000,0.0,,Free Agent,"150,000",0.0,0,0,2026-08-25
+Forward,Betis,Parrott,8150000,-340000.0,,Free Agent,"8,150,000",0.0,0,0,2026-08-25

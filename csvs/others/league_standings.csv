@@ -1,11 +1,10 @@
 position,name,points,team_value,value_change,num_players,is_me,scraped_at
-1,CD Numancia,0,71740000.0,130000.0,19,False,2026-08-24
-2,The National,0,84510000.0,230000.0,23,False,2026-08-24
-3,FerranGoaT,0,66350000.0,-90000.0,22,False,2026-08-24
-4,Manchester Tity,0,61440000.0,50000.0,12,False,2026-08-24
-5,RaiFC,0,68100000.0,140000.0,14,False,2026-08-24
-6,Locombia FC,0,70820000.0,-40000.0,14,False,2026-08-24
-7,Minabo de Kiev,0,55260000.0,100000.0,15,False,2026-08-24
-8,Patsi F.C,0,73070000.0,20000.0,21,False,2026-08-24
-9,Hernan Krezzpo,0,69310000.0,-560000.0,16,True,2026-08-24
-10,"General ""Hansi” Topete",0,73420000.0,630000.0,18,False,2026-08-24
+1,CD Numancia,0,66440000.0,100000.0,17,False,2026-08-25
+2,The National,0,70510000.0,360000.0,19,False,2026-08-25
+3,FreeJulian,0,69240000.0,70000.0,24,False,2026-08-25
+4,RaiFC,0,68170000.0,70000.0,14,False,2026-08-25
+5,Manchester Tity,0,63550000.0,30000.0,13,False,2026-08-25
+6,Locombia FC,0,70610000.0,-210000.0,14,False,2026-08-25
+7,Patsi F.C,0,73260000.0,190000.0,21,False,2026-08-25
+8,Minabo de Kiev,0,60890000.0,70000.0,16,False,2026-08-25
+9,"General ""Hansi” Topete",0,65870000.0,590000.0,16,False,2026-08-25

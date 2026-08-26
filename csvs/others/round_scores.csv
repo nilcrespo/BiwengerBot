@@ -210,33 +210,42 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4899,Round 1,finished,50710,finished,42571,Funes,Málaga,5,,,,0.0,1
 4899,Round 1,finished,50710,finished,41091,Carlos López,Málaga,1,Hernan_Krezzpo,Hernan Krezzpo,reserve,,0
 4899,Round 1,finished,50710,finished,15642,Lobete,Málaga,4,Manchester_Tity,Manchester Tity,reserve,,0
-4899,Round 1,finished,50716,preview,6259,Hugo Duro,Valencia,4,Minabo_De_Kiev,Minabo de Kiev,starter,,0
-4899,Round 1,finished,50716,preview,24509,Danjuma,Valencia,4,Freejulian,FreeJulian,reserve,,0
-4899,Round 1,finished,50716,preview,163,Guido Rodríguez,Valencia,3,Freejulian,FreeJulian,starter,,0
-4899,Round 1,finished,50716,preview,30123,Javi Guerra,Valencia,3,The_National,The National,starter,,0
-4899,Round 1,finished,50716,preview,42389,Ryunosuke Sato,Valencia,4,Locombia_Fc,Locombia FC,starter,,0
-4899,Round 1,finished,50716,preview,24734,Jesús Vázquez,Valencia,2,,,,,0
-4899,Round 1,finished,50716,preview,15464,Diakhaby,Valencia,2,,,,,0
-4899,Round 1,finished,50716,preview,12221,Pepelu,Valencia,3,,,,,0
-4899,Round 1,finished,50716,preview,26592,Tárrega,Valencia,2,Locombia_Fc,Locombia FC,starter,,0
-4899,Round 1,finished,50716,preview,10030,Maffeo,Valencia,2,,,,,0
-4899,Round 1,finished,50716,preview,11677,Dimitrievski,Valencia,1,Patsi_FC,Patsi F.C,starter,,0
-4899,Round 1,finished,50716,preview,35316,Corberán,Valencia,5,Freejulian,FreeJulian,coach,,0
-4899,Round 1,finished,50716,preview,38368,Filip Ugrinic,Valencia,3,Patsi_FC,Patsi F.C,starter,,0
-4899,Round 1,finished,50716,preview,10276,Cucho,Betis,4,Freejulian,FreeJulian,starter,,0
-4899,Round 1,finished,50716,preview,8670,Roro Riquelme,Betis,3,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
-4899,Round 1,finished,50716,preview,2597,Fornals,Betis,3,Cd_Numancia,CD Numancia,starter,,0
-4899,Round 1,finished,50716,preview,35770,Antony,Betis,4,Raifc,RaiFC,starter,,0
-4899,Round 1,finished,50716,preview,5807,Marc Roca,Betis,3,Freejulian,FreeJulian,reserve,,0
-4899,Round 1,finished,50716,preview,42370,Facundo Bernal,Betis,3,,,,,0
-4899,Round 1,finished,50716,preview,5220,Fran García,Betis,2,Manchester_Tity,Manchester Tity,starter,,0
-4899,Round 1,finished,50716,preview,19614,Natan,Betis,2,,,,,0
-4899,Round 1,finished,50716,preview,1125,Bartra,Betis,2,,,,,0
-4899,Round 1,finished,50716,preview,2247,Bellerín,Betis,2,,,,,0
-4899,Round 1,finished,50716,preview,30487,Álvaro Valles,Betis,1,,,,,0
-4899,Round 1,finished,50716,preview,1249,Isco,Betis,3,Hernan_Krezzpo,Hernan Krezzpo,starter,,0
-4899,Round 1,finished,50716,preview,37416,Deossa,Betis,3,Locombia_Fc,Locombia FC,reserve,,0
-4899,Round 1,finished,50716,preview,25127,Ez Abde,Betis,4,Patsi_FC,Patsi F.C,starter,,0
+4899,Round 1,finished,50716,finished,17442,Rioja,Valencia,4,,,,5.0,1
+4899,Round 1,finished,50716,finished,26077,Sadiq,Valencia,4,,,,1.0,1
+4899,Round 1,finished,50716,finished,34599,David Otorbi,Valencia,4,,,,2.0,1
+4899,Round 1,finished,50716,finished,38368,Filip Ugrinic,Valencia,3,Patsi_FC,Patsi F.C,starter,2.0,1
+4899,Round 1,finished,50716,finished,42396,Aliou Dieng,Valencia,3,,,,1.0,1
+4899,Round 1,finished,50716,finished,11677,Dimitrievski,Valencia,1,Patsi_FC,Patsi F.C,starter,1.0,1
+4899,Round 1,finished,50716,finished,24734,Jesús Vázquez,Valencia,2,,,,3.0,1
+4899,Round 1,finished,50716,finished,15464,Diakhaby,Valencia,2,,,,2.0,1
+4899,Round 1,finished,50716,finished,12221,Pepelu,Valencia,3,,,,2.0,1
+4899,Round 1,finished,50716,finished,26592,Tárrega,Valencia,2,Locombia_Fc,Locombia FC,starter,4.0,1
+4899,Round 1,finished,50716,finished,10030,Maffeo,Valencia,2,,,,4.0,1
+4899,Round 1,finished,50716,finished,24509,Danjuma,Valencia,4,Freejulian,FreeJulian,reserve,3.0,1
+4899,Round 1,finished,50716,finished,163,Guido Rodríguez,Valencia,3,Freejulian,FreeJulian,starter,5.0,1
+4899,Round 1,finished,50716,finished,30123,Javi Guerra,Valencia,3,The_National,The National,starter,4.0,1
+4899,Round 1,finished,50716,finished,42389,Ryunosuke Sato,Valencia,4,Locombia_Fc,Locombia FC,starter,4.0,1
+4899,Round 1,finished,50716,finished,6259,Hugo Duro,Valencia,4,Minabo_De_Kiev,Minabo de Kiev,starter,2.0,1
+4899,Round 1,finished,50716,finished,35316,Corberán,Valencia,5,Freejulian,FreeJulian,coach,0.0,1
+4899,Round 1,finished,50716,finished,1249,Isco,Betis,3,Hernan_Krezzpo,Hernan Krezzpo,starter,2.0,1
+4899,Round 1,finished,50716,finished,2247,Bellerín,Betis,2,,,,5.0,1
+4899,Round 1,finished,50716,finished,5220,Fran García,Betis,2,Manchester_Tity,Manchester Tity,starter,6.0,1
+4899,Round 1,finished,50716,finished,35763,Pablo García,Betis,4,,,,10.0,1
+4899,Round 1,finished,50716,finished,42748,Parrott,Betis,4,,,,3.0,1
+4899,Round 1,finished,50716,finished,30487,Álvaro Valles,Betis,1,,,,10.0,1
+4899,Round 1,finished,50716,finished,12596,Firpo,Betis,2,,,,4.0,1
+4899,Round 1,finished,50716,finished,1679,Diego Llorente,Betis,2,,,,4.0,1
+4899,Round 1,finished,50716,finished,38318,Valentín Gómez,Betis,2,,,,4.0,1
+4899,Round 1,finished,50716,finished,35765,Angel Ortiz,Betis,2,,,,4.0,1
+4899,Round 1,finished,50716,finished,2597,Fornals,Betis,3,Cd_Numancia,CD Numancia,starter,2.0,1
+4899,Round 1,finished,50716,finished,42370,Facundo Bernal,Betis,3,,,,4.0,1
+4899,Round 1,finished,50716,finished,8670,Roro Riquelme,Betis,3,General_Hansi_Topete,"General ""Hansi” Topete",starter,3.0,1
+4899,Round 1,finished,50716,finished,37416,Deossa,Betis,3,Locombia_Fc,Locombia FC,reserve,5.0,1
+4899,Round 1,finished,50716,finished,35770,Antony,Betis,4,Raifc,RaiFC,starter,6.0,1
+4899,Round 1,finished,50716,finished,10276,Cucho,Betis,4,Freejulian,FreeJulian,starter,2.0,1
+4899,Round 1,finished,50716,finished,19513,Pellegrini,Betis,5,,,,3.0,1
+4899,Round 1,finished,50716,finished,5807,Marc Roca,Betis,3,Freejulian,FreeJulian,reserve,,0
+4899,Round 1,finished,50716,finished,25127,Ez Abde,Betis,4,Patsi_FC,Patsi F.C,starter,,0
 4899,Round 1,finished,50718,preview,19577,Mbappé,Real Madrid,4,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
 4899,Round 1,finished,50718,preview,15568,Vinícius Jr,Real Madrid,4,Raifc,RaiFC,starter,,0
 4899,Round 1,finished,50718,preview,30477,Bellingham,Real Madrid,3,Locombia_Fc,Locombia FC,starter,,0
@@ -270,7 +279,7 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4899,Round 1,finished,50711,preview,10574,Carreira,Celta,2,Locombia_Fc,Locombia FC,starter,,0
 4899,Round 1,finished,50711,preview,19860,Febas,Celta,3,,,,,0
 4899,Round 1,finished,50711,preview,3259,Miguel Román,Celta,3,Cd_Numancia,CD Numancia,starter,,0
-4899,Round 1,finished,50711,preview,33473,Javier Rueda,Celta,2,Patsi_FC,Patsi F.C,reserve,,0
+4899,Round 1,finished,50711,preview,37719,Álvaro Núñez,Celta,2,,,,,0
 4899,Round 1,finished,50711,preview,28087,Marcos Alonso,Celta,2,Cd_Numancia,CD Numancia,starter,,0
 4899,Round 1,finished,50711,preview,33474,Yoel Lago,Celta,2,,,,,0
 4899,Round 1,finished,50711,preview,33839,Javi Rodríguez,Celta,2,Cd_Numancia,CD Numancia,reserve,,0
@@ -278,6 +287,7 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4899,Round 1,finished,50711,preview,10117,Iván Villar,Celta,1,Minabo_De_Kiev,Minabo de Kiev,reserve,,0
 4899,Round 1,finished,50711,preview,2009,Borja Iglesias,Celta,4,Freejulian,FreeJulian,starter,,0
 4899,Round 1,finished,50711,preview,31321,Starfelt,Celta,2,Patsi_FC,Patsi F.C,starter,,0
+4899,Round 1,finished,50711,preview,33473,Javier Rueda,Celta,2,Patsi_FC,Patsi F.C,reserve,,0
 4899,Round 1,finished,50711,preview,18398,Budimir,Osasuna,4,,,,,0
 4899,Round 1,finished,50711,preview,18382,Raul García,Osasuna,4,,,,,0
 4899,Round 1,finished,50711,preview,27591,Aimar Oroz,Osasuna,3,Freejulian,FreeJulian,starter,,0

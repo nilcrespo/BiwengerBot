@@ -319,29 +319,37 @@ function renderRoundScores(data) {
   `);
 }
 
-// Not a generic sortable table like the rest of the dashboard — a
-// starting lineup has a natural order (goalkeeper first, then outfield
-// by role) that a click-to-sort column header would only scramble, and
-// there's exactly one row per squad slot rather than an open-ended list.
+// A pitch, not a table — a starting XI reads far more naturally laid out
+// by row (forwards up top, keeper at the back) than as a sortable list,
+// and there's exactly one fixed slot per formation position rather than
+// an open-ended dataset a column-sort would make sense of.
+function playerChipHtml(p) {
+  const captain = p.is_captain
+    ? '<span class="chip-captain" title="Captain — scores double">C</span>' : '';
+  return `
+    <div class="player-chip" title="${escapeHtml(p.player)} (${escapeHtml(p.club)}) — ${escapeHtml(p.start_pct)}% start chance">
+      <span class="chip-name">${escapeHtml(p.player)}${captain}</span>
+      <span class="chip-club">${escapeHtml(p.club)}</span>
+      <span class="chip-pts">${formatNumber(p.projected_points)} pts</span>
+    </div>
+  `;
+}
+
 function renderBestEleven(payload) {
-  const tbody = document.querySelector('#bestElevenTable tbody');
+  const pitch = document.getElementById('pitch');
   const meta = document.getElementById('bestElevenMeta');
   const starters = (payload && payload.starters) || [];
   if (!starters.length) {
-    tbody.innerHTML = '<tr class="empty-row"><td colspan="5">Not enough squad data to fill a valid formation</td></tr>';
+    pitch.innerHTML = '<div class="pitch-empty">Not enough squad data to fill a valid formation</div>';
     meta.textContent = 'Highest-scoring valid formation from your own squad';
     return;
   }
-  meta.textContent = `Formation ${payload.formation} — ${formatNumber(payload.total_expected_points)} expected pts this round`;
-  tbody.innerHTML = starters.map((p) => `
-    <tr>
-      <td><span class="pos-badge">${escapeHtml(p.position)}</span></td>
-      <td class="cell-muted">${escapeHtml(p.club)}</td>
-      <td class="cell-primary">${escapeHtml(p.player)}${p.is_captain ? ' <span class="pill pill-me">C</span>' : ''}</td>
-      <td class="num">${escapeHtml(p.start_pct)}%</td>
-      <td class="num">${formatNumber(p.expected_value)}</td>
-    </tr>
-  `).join('');
+  meta.textContent = `Formation ${payload.formation} — ${formatNumber(payload.total_projected_points)} projected pts this round`;
+  ['FWD', 'MID', 'DEF', 'GK'].forEach((row) => {
+    const rowEl = pitch.querySelector(`.pitch-row[data-row="${row}"]`);
+    const players = starters.filter((p) => p.slot === row);
+    rowEl.innerHTML = players.map(playerChipHtml).join('');
+  });
 }
 
 function affordabilityCell(p) {

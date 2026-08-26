@@ -1157,7 +1157,7 @@ def build_best_eleven(conn, date):
         conn, params=(d, d)
     )
     if not len(roster):
-        return {'formation': None, 'starters': [], 'bench': [], 'total_expected_points': 0}
+        return {'formation': None, 'starters': [], 'bench': [], 'total_projected_points': 0}
 
     prob_df = pd.read_sql(
         "SELECT player_name, team_name, probability FROM player_probabilities "
@@ -1209,10 +1209,20 @@ def build_best_eleven(conn, date):
     has_signal = (roster['played'] > 0) | (roster['last_season_pts'] > 0)
     if has_signal.any():
         blended_ppm = blended_ppm.where(has_signal, blended_ppm[has_signal].median())
-    # A great player who's a doubtful bench risk contributes little to an
-    # actual matchday score — expected value has to price in whether he
-    # actually plays, not just how good he is when he does.
-    roster.loc[:, 'expected_value'] = (blended_ppm * roster['start_pct'] / 100).round(2)
+    # Two different numbers, deliberately kept apart. selection_value
+    # prices in whether a player actually plays at all — a doubtful bench
+    # risk shouldn't outrank a nailed-on starter just because he's more
+    # talented when he does play — and drives which 11 get picked below.
+    # projected_points is what's actually shown per player: his own
+    # per-match rate, NOT discounted by start_pct again. A player already
+    # selected into the XI has had his start risk priced in once, at
+    # selection; showing his points discounted a second time understates
+    # him for no reason — caught live: Eric García, one game played for 8
+    # points (his real per-match rate), was shown scoring "4" once he'd
+    # already been picked to start, because his 50% start_pct was applied
+    # on top of a selection decision that had already accounted for it.
+    roster.loc[:, 'projected_points'] = blended_ppm.round(2)
+    roster.loc[:, 'selection_value'] = (blended_ppm * roster['start_pct'] / 100).round(2)
     roster.loc[:, 'labels'] = roster['position'].apply(_position_labels)
     roster.loc[:, 'primary'] = roster['labels'].apply(lambda ls: ls[0] if ls else None)
 
@@ -1220,45 +1230,60 @@ def build_best_eleven(conn, date):
     for def_n, mid_n, fwd_n in BEST_XI_FORMATIONS:
         needed = [('GK', 1), ('DEF', def_n), ('MID', mid_n), ('FWD', fwd_n)]
         assigned = []
+        slot_of = {}  # player index -> which row (GK/DEF/MID/FWD) he fills
 
-        def _take(pool, count):
-            pool = pool[~pool.index.isin(assigned)].sort_values('expected_value', ascending=False)
+        def _take(pool, count, label):
+            pool = pool[~pool.index.isin(assigned)].sort_values('selection_value', ascending=False)
             picked = pool.head(count).index.tolist()
             assigned.extend(picked)
+            slot_of.update({i: label for i in picked})
             return picked
 
         filled = {}
         for label, count in needed:
-            filled[label] = len(_take(roster[roster['primary'] == label], count))
+            filled[label] = len(_take(roster[roster['primary'] == label], count, label))
         # Second pass: any formation slot a primary-only fill couldn't
         # complete gets patched from remaining dual-position-eligible
         # players (e.g. a MID slot short a body pulled from a leftover
-        # Defender/Midfielder), best expected value first.
+        # Defender/Midfielder), best expected value first. His pitch row
+        # is the SLOT he fills here, not his own primary position — a
+        # Defender/Midfielder patched into a MID gap lines up with the
+        # midfielders, not the defenders.
         for label, count in needed:
             shortfall = count - filled[label]
             if shortfall > 0:
                 eligible = roster[roster['labels'].apply(lambda ls: label in ls)]
-                _take(eligible, shortfall)
+                _take(eligible, shortfall, label)
 
         if len(assigned) != 11:
             continue  # squad can't fill this formation at all — skip it
-        total = roster.loc[assigned, 'expected_value'].sum()
+        # The formation itself is still picked on selection_value (start
+        # risk has to matter when comparing formations — an 11 built
+        # around iffy starters shouldn't win just because their ceiling
+        # is high), even though projected_points is what gets displayed.
+        total = roster.loc[assigned, 'selection_value'].sum()
         if best is None or total > best['total']:
-            best = {'formation': f"{def_n}-{mid_n}-{fwd_n}", 'assigned': assigned, 'total': total}
+            best = {'formation': f"{def_n}-{mid_n}-{fwd_n}", 'assigned': assigned, 'slot_of': slot_of, 'total': total}
 
     if best is None:
-        return {'formation': None, 'starters': [], 'bench': [], 'total_expected_points': 0}
+        return {'formation': None, 'starters': [], 'bench': [], 'total_projected_points': 0}
 
-    starters = roster.loc[best['assigned']].sort_values('expected_value', ascending=False)
+    # Captain is whoever's projected to outscore everyone else GIVEN he
+    # plays — not discounted by his own start risk a second time, same
+    # reasoning as projected_points itself.
+    starters = roster.loc[best['assigned']].sort_values('projected_points', ascending=False)
     captain_idx = starters.index[0]
-    starters = starters.assign(is_captain=starters.index == captain_idx)
-    bench = roster[~roster.index.isin(best['assigned'])].sort_values('expected_value', ascending=False)
+    starters = starters.assign(
+        is_captain=starters.index == captain_idx,
+        slot=[best['slot_of'][i] for i in starters.index],
+    )
+    bench = roster[~roster.index.isin(best['assigned'])].sort_values('projected_points', ascending=False)
 
     keep_cols = ['player', 'position', 'club', 'price', 'status', 'start_pct',
-                 'expected_value', 'is_captain']
+                 'projected_points', 'is_captain', 'slot']
     return {
         'formation': best['formation'],
         'starters': to_records(starters[keep_cols]),
-        'bench': to_records(bench[[c for c in keep_cols if c != 'is_captain']]),
-        'total_expected_points': round(float(best['total']), 1),
+        'bench': to_records(bench[[c for c in keep_cols if c not in ('is_captain', 'slot')]]),
+        'total_projected_points': round(float(starters['projected_points'].sum()), 1),
     }

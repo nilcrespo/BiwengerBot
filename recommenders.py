@@ -645,10 +645,22 @@ def _blended_pts(df, rounds_played):
     with no history this source tracks) — 0 times any weight is still 0,
     so a real "insufficient data" flag for that case is a separate,
     unbuilt piece of work, not something this weighting alone can fix.
+
+    THIS_WEIGHT_FLOOR only applies when there's an actual last-season
+    number to shrink toward — applying it unconditionally suppressed
+    this season's real points to ~32% of themselves for anyone with NO
+    last-season record at all, floor or not: caught live, Aubameyang (23
+    points in 2 games, 0 last season — a newly-promoted-club signing
+    with no prior here) blended down to 7.4, well below market players
+    with a weaker real record but an old last-season number to lean on.
+    There's nothing to distrust the current-season number IN FAVOR OF
+    when no prior exists, so it gets full weight instead.
     """
     progress = min(max(rounds_played, 0) / BLEND_TRANSITION_ROUNDS, 1.0)
     last_weight = 1.0 - progress
-    this_weight = THIS_WEIGHT_FLOOR + (1.0 - THIS_WEIGHT_FLOOR) * progress
+    has_last_season = df['last_season_pts'].fillna(0) > 0
+    this_weight = pd.Series(1.0, index=df.index)
+    this_weight[has_last_season] = THIS_WEIGHT_FLOOR + (1.0 - THIS_WEIGHT_FLOOR) * progress
     return df['last_season_pts'].fillna(0) * last_weight + df['this_season_pts'].fillna(0) * this_weight
 
 def build_recommendations(conn, date):

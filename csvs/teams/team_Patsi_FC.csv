@@ -1,22 +1,22 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Patsi F.C,Patsi_FC,Goalkeeper,Valencia,Dimitrievski,5,0,3820000,10000.0,Fit,1,5.0,5,5.0,0,0.0
-Patsi F.C,Patsi_FC,Defender,Malaga,Puga,9,0,2350000,20000.0,Fit,2,4.5,4,4.0,5,5.0
-Patsi F.C,Patsi_FC,Defender,Sevilla,Andres Castrin,8,0,1100000,80000.0,Fit,1,8.0,0,0.0,8,8.0
-Patsi F.C,Patsi_FC,Defender,Villarreal,Carlos Romero,7,0,7440000,-10000.0,Fit,2,3.5,0,0.0,7,3.5
-Patsi F.C,Patsi_FC,Defender/Midfielder,Barcelona,Christensen,6,0,610000,90000.0,Fit,1,6.0,0,0.0,6,6.0
-Patsi F.C,Patsi_FC,Defender,Deportivo,Ximo Navarro,4,0,1340000,-10000.0,Fit,2,2.0,2,2.0,2,2.0
-Patsi F.C,Patsi_FC,Defender,Valencia,Jesus Vazquez,3,0,860000,50000.0,Fit,1,3.0,3,3.0,0,0.0
-Patsi F.C,Patsi_FC,Defender/Midfielder,Celta,Javier Rueda,2,0,1890000,-50000.0,Fit,1,2.0,0,0.0,2,2.0
-Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,11,0,4890000,30000.0,Fit,2,5.5,11,5.5,0,0.0
-Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,11,0,3460000,40000.0,Fit,2,5.5,6,6.0,5,5.0
-Patsi F.C,Patsi_FC,Midfielder,Deportivo,Amatucci,10,0,3260000,30000.0,Fit,2,5.0,6,6.0,4,4.0
-Patsi F.C,Patsi_FC,Midfielder/Defender,Valencia,Pepelu,7,0,2970000,150000.0,Fit,1,7.0,7,7.0,0,0.0
-Patsi F.C,Patsi_FC,Midfielder,Valencia,Filip Ugrinic,4,0,1490000,30000.0,Fit,1,4.0,4,4.0,0,0.0
-Patsi F.C,Patsi_FC,Midfielder,Real Sociedad,Turrientes,3,0,1650000,-20000.0,Fit,1,3.0,0,0.0,3,3.0
-Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,0,84,2050000,-50000.0,Fit,1,0.0,0,0.0,0,0.0
-Patsi F.C,Patsi_FC,Forward,Barcelona,Gordon,10,0,9980000,90000.0,Fit,1,10.0,0,0.0,10,10.0
-Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,4,0,12160000,-100000.0,Fit,1,4.0,0,0.0,4,4.0
-Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,0,211,7830000,-140000.0,Injured. Knee sprain. Estimated return: Late August.,0,0.0,0,0.0,0,0.0
-Patsi F.C,Patsi_FC,Forward,Atletico,Sørloth,0,148,3750000,-50000.0,Injured. Muscle injury. Estimated return: Early September.,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Goalkeeper,Valencia,Dimitrievski,6,0,3820000,0.0,Fit,2,3.0,6,3.0,0,0.0
+Patsi F.C,Patsi_FC,Defender,Malaga,Puga,9,0,2370000,20000.0,Fit,2,4.5,4,4.0,5,5.0
+Patsi F.C,Patsi_FC,Defender,Sevilla,Andres Castrin,8,0,1170000,70000.0,Fit,1,8.0,0,0.0,8,8.0
+Patsi F.C,Patsi_FC,Defender,Villarreal,Carlos Romero,7,0,7350000,-90000.0,Fit,2,3.5,0,0.0,7,3.5
+Patsi F.C,Patsi_FC,Defender,Valencia,Jesus Vazquez,6,0,890000,30000.0,Fit,2,3.0,6,3.0,0,0.0
+Patsi F.C,Patsi_FC,Defender/Midfielder,Barcelona,Christensen,6,0,700000,90000.0,Fit,1,6.0,0,0.0,6,6.0
+Patsi F.C,Patsi_FC,Defender,Deportivo,Ximo Navarro,4,0,1330000,-10000.0,Fit,2,2.0,2,2.0,2,2.0
+Patsi F.C,Patsi_FC,Defender/Midfielder,Celta,Javier Rueda,2,0,1850000,-40000.0,Fit,1,2.0,0,0.0,2,2.0
+Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,11,0,4920000,30000.0,Fit,2,5.5,11,5.5,0,0.0
+Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,11,0,3500000,40000.0,Fit,2,5.5,6,6.0,5,5.0
+Patsi F.C,Patsi_FC,Midfielder,Deportivo,Amatucci,10,0,3280000,20000.0,Fit,2,5.0,6,6.0,4,4.0
+Patsi F.C,Patsi_FC,Midfielder/Defender,Valencia,Pepelu,9,0,3080000,110000.0,Fit,2,4.5,9,4.5,0,0.0
+Patsi F.C,Patsi_FC,Midfielder,Valencia,Filip Ugrinic,6,0,1510000,20000.0,Fit,2,3.0,6,3.0,0,0.0
+Patsi F.C,Patsi_FC,Midfielder,Real Sociedad,Turrientes,3,0,1630000,-20000.0,Fit,1,3.0,0,0.0,3,3.0
+Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,0,84,1990000,-60000.0,Fit,1,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Forward,Barcelona,Gordon,10,0,10070000,90000.0,Fit,1,10.0,0,0.0,10,10.0
+Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,4,0,12060000,-100000.0,Fit,1,4.0,0,0.0,4,4.0
+Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,0,211,7740000,-90000.0,Doubtful. Knee sprain.,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Forward,Atletico,Sørloth,0,148,3700000,-50000.0,Injured. Muscle injury. Estimated return: Early September.,0,0.0,0,0.0,0,0.0
 Patsi F.C,Patsi_FC,Forward,Rayo Vallecano,De Tomas,0,0,210000,0.0,Fit,0,0.0,0,0.0,0,0.0
 Patsi F.C,Patsi_FC,Forward/Midfielder,Levante,Tay Abed,0,9,150000,0.0,Fit,0,0.0,0,0.0,0,0.0

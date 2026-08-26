@@ -149,7 +149,10 @@
             <div class="card">
                 <div class="card-header">
                     <span class="card-title"><span class="icon">📅</span> Round-by-round scores</span>
-                    <span class="card-meta">Points per player, per matchday — "?" means his fixture hasn't kicked off yet, "–" means the fixture finished without him</span>
+                    <label class="card-meta" style="cursor:pointer;" title='"?" = fixture hasn&apos;t kicked off yet, "&ndash;" = fixture finished without him'>
+                        <input type="checkbox" id="roundScoresMineOnly" checked>
+                        My team only
+                    </label>
                 </div>
                 <div class="card-body scroll">
                     <table id="roundScoresTable">
@@ -204,6 +207,7 @@
                                 <th data-sort="squad_need">Squad need</th>
                                 <th class="num" data-sort="suggested_bid">Predicted winning bid</th>
                                 <th data-sort="shortfall">Affordable?</th>
+                                <th class="num" data-sort="potential_points_gain">Best XI Δ</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

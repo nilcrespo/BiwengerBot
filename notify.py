@@ -109,11 +109,18 @@ def build_digest(conn, date) -> str:
             # roughly-coin-flip vs. a pretty-safe chance of winning — not
             # a range around an expected price.
             rivals = f", vs {r['top_competitors']}" if r.get('top_competitors') else ""
+            # A high buy score only ever judges the incoming player alone.
+            # potential_points_gain re-runs Best XI with him swapped in
+            # and the funded sells swapped out — a good player on paper
+            # can still be a net-zero (or worse) squad upgrade once that
+            # actually plays out, and this is the only place that shows.
+            gain = r.get('potential_points_gain')
+            xi_note = f"\n    📈 Best XI: +{gain:.1f} pts/round net of the sells above" if gain and gain > 0 else ""
             lines.append(
                 f"  • {r['name']} ({r['club']}, {r['position']}) — {_money(r['price'])}, "
                 f"{r['probability']} start, score {r['score']}{need} → "
                 f"bid {_money(r['win_bid_50'])} for even odds, {_money(r['win_bid_90'])} to be safe "
-                f"(~{r['expected_bidders']:g} bidders expected{rivals}){afford}"
+                f"(~{r['expected_bidders']:g} bidders expected{rivals}){afford}{xi_note}"
             )
         sections.append("\n".join(lines))
 

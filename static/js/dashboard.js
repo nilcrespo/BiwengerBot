@@ -304,6 +304,16 @@ function roundScorePointsCell(p) {
   return escapeHtml(p.points);
 }
 
+// A flat league-wide dump (335+ rows, mostly free agents nobody owns)
+// wasn't useful — what's actually actionable is "how did MY players do
+// each round." Defaults to on; data is refiltered from the full set
+// kept in state rather than re-fetched, so toggling is instant.
+function applyRoundScoresFilter() {
+  const mineOnly = document.getElementById('roundScoresMineOnly').checked;
+  const all = state.allRoundScores || [];
+  setTableData('roundScoresTable', mineOnly ? all.filter((p) => p.is_me) : all);
+}
+
 function renderRoundScores(data) {
   const tbody = document.querySelector('#roundScoresTable tbody');
   renderTable(tbody, data, 7, (p) => `
@@ -388,9 +398,26 @@ function formatBidRange(p) {
   return win50 === win90 ? win50 : `${win50} (safe: ${win90})`;
 }
 
+// Positive = your own squad's best XI would score more points net of
+// whoever gets sold to fund him; zero or negative = a fine player on
+// paper, but not actually an upgrade once the cost of funding him is
+// played out against Best XI, not just deducted from the buy score.
+function pointsGainCell(p) {
+  const gain = parseFloat(p.potential_points_gain);
+  if (Number.isNaN(gain)) return '—';
+  if (gain <= 0) {
+    const title = 'Best XI\'s projected points barely change (or get worse) even after funding this '
+      + '— a good player on paper isn\'t always a real upgrade to the squad';
+    return `<span class="cell-muted" title="${escapeHtml(title)}">${gain > -0.05 ? '0.0' : gain.toFixed(1)}</span>`;
+  }
+  const title = `Swap him in, sell who's needed to fund him, and your squad's own Best XI `
+    + `projects +${gain.toFixed(1)} pts/round more than it does today`;
+  return `<span class="money-pos" title="${escapeHtml(title)}">+${gain.toFixed(1)}/rd</span>`;
+}
+
 function renderBuyRecommendations(data) {
   const tbody = document.querySelector('#buyTable tbody');
-  renderTable(tbody, data, 9, (p) => {
+  renderTable(tbody, data, 10, (p) => {
     const bucketNote = p.bucket_avg_bids
       ? `${p.bucket_sample} historical signings in the ${p.bid_bucket} range drew ${parseFloat(p.bucket_avg_bids).toFixed(1)} bids on average`
       : 'no historical signings in this price range yet';
@@ -420,6 +447,7 @@ function renderBuyRecommendations(data) {
       <td>${needBadge(p.squad_need)}</td>
       <td class="num" title="${escapeHtml(bidTitle)}">${formatBidRange(p)}</td>
       <td>${affordabilityCell(p)}</td>
+      <td class="num">${pointsGainCell(p)}</td>
     </tr>
   `;
   });
@@ -616,7 +644,8 @@ function loadData() {
       setTableData('salesTable', data.my_sales);
       setTableData('buyTable', data.buy_recommendations);
       setTableData('sellTable', data.sell_recommendations);
-      setTableData('roundScoresTable', data.round_scores);
+      state.allRoundScores = data.round_scores;
+      applyRoundScoresFilter();
       renderBestEleven(data.best_eleven);
     })
     .catch((err) => {
@@ -659,15 +688,15 @@ function initSortableTables() {
   registerSortable('salesTable', renderSales, 'profit', 'desc');
   registerSortable('buyTable', renderBuyRecommendations, 'score', 'desc');
   registerSortable('sellTable', renderSellRecommendations, 'score', 'desc');
-  // Free agents get a row too (any La Liga player with a match report),
-  // not just owned squad players — defaulting to top scorers first
-  // surfaces something interesting on load instead of an alphabetical
-  // wall dominated by team=null rows.
-  registerSortable('roundScoresTable', renderRoundScores, 'points', 'desc');
+  // Defaults to "my team only" (see applyRoundScoresFilter) — round order
+  // reads naturally for a short own-squad list; sorting a full league-
+  // wide dump by round would just be a wall of free agents in between.
+  registerSortable('roundScoresTable', renderRoundScores, 'round_name', 'asc');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   initTabs();
   initSortableTables();
+  document.getElementById('roundScoresMineOnly').addEventListener('change', applyRoundScoresFilter);
   loadData();
 });

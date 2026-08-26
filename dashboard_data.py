@@ -176,10 +176,13 @@ def build_dashboard_data(conn, date):
     # are what tell those apart (see get_round_scores' docstring).
     round_scores = pd.read_sql(
         """
-        SELECT round_id, round_name, game_status, player, club, position,
-               team_id, team, lineup_slot, points, played
-        FROM round_scores
-        ORDER BY round_id, team, lineup_slot, points DESC
+        SELECT rs.round_id, rs.round_name, rs.game_status, rs.player, rs.club, rs.position,
+               rs.team_id, rs.team, rs.lineup_slot, rs.points, rs.played,
+               COALESCE(MAX(tb.is_me), 0) AS is_me
+        FROM round_scores rs
+        LEFT JOIN team_balance tb ON tb.team_id = rs.team_id AND tb.is_me = 1
+        GROUP BY rs.round_id, rs.player_id
+        ORDER BY rs.round_id, rs.team, rs.lineup_slot, rs.points DESC
         """,
         conn
     )

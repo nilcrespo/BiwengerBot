@@ -814,8 +814,8 @@ def build_recommendations(conn, date):
     sell_pool = pd.read_sql(
         f"""
         SELECT tp.name AS player, tp.club, tp.position, tp.price AS current_price,
-               tp.this_season_pts, tp.last_season_pts, tp.status, op.buy_price,
-               po.price AS offer_price
+               tp.this_season_pts, tp.last_season_pts, tp.status, tp.played,
+               op.buy_price, po.price AS offer_price
         FROM team_players tp
         JOIN team_balance tb ON tb.team_id = tp.team_id AND tb.is_me = 1 AND tb.scraped_at LIKE ?
         LEFT JOIN open_positions op ON op.team_id = tp.team_id AND op.scraped_at LIKE ?
@@ -1098,6 +1098,47 @@ def build_recommendations(conn, date):
     # fund isn't actually a real deal once that's priced in.
     buy_recommendations = buy_recommendations[buy_recommendations['score'] >= 40].sort_values('score', ascending=False)
 
+    # Does this signing actually make the SQUAD better, net of whoever it
+    # costs to fund? A high buy score only ever judged the incoming
+    # player in isolation — funding_penalty already dings the score for
+    # sells that cost real points, but never asked the more direct
+    # question: swap him in, the funded sells out, and re-run Best XI —
+    # does the squad's own best lineup score more or less? Only computed
+    # for the handful of candidates that already cleared the bar above,
+    # not the whole market — this is a real (if approximate) simulation
+    # per candidate, not a cheap heuristic.
+    base_roster = funding_pool.rename(columns={'current_price': 'price'})[
+        ['player', 'position', 'club', 'price', 'status', 'start_pct', 'last_season_pts', 'played', 'this_season_pts']
+    ].copy()
+    base_roster.loc[:, 'this_ppm'] = (base_roster['this_season_pts'] / base_roster['played'].replace(0, pd.NA)).fillna(0)
+    base_roster.loc[:, 'has_this_signal'] = base_roster['played'] > 0
+    baseline_total = _solve_best_eleven(base_roster, rounds_played)['total_projected_points']
+
+    def _potential_points_gain(row):
+        names = {d['player'] for d in row['funding_details']}
+        remaining = base_roster[~base_roster['player'].isin(names)]
+        # No exact games-played count exists for a market listing (unlike
+        # the owned roster, where team_players tracks it exactly) — a
+        # player showing real season points is assumed to have played
+        # every round so far, which is the same "has he actually been
+        # getting picked" question start_pct itself answers for whether
+        # he plays GOING forward.
+        candidate_ppm = row['this_season_pts'] / rounds_played if rounds_played > 0 else 0.0
+        candidate = pd.DataFrame([{
+            'player': row['name'], 'position': row['position'], 'club': row['club'],
+            'price': row['price'], 'status': row['status'], 'start_pct': row['start_pct'],
+            'last_season_pts': row['last_season_pts'], 'this_ppm': candidate_ppm,
+            'has_this_signal': row['this_season_pts'] > 0,
+        }])
+        simulated = pd.concat([remaining, candidate], ignore_index=True)
+        simulated_total = _solve_best_eleven(simulated, rounds_played)['total_projected_points']
+        return round(simulated_total - baseline_total, 1)
+
+    if len(buy_recommendations):
+        buy_recommendations.loc[:, 'potential_points_gain'] = buy_recommendations.apply(_potential_points_gain, axis=1)
+    else:
+        buy_recommendations.loc[:, 'potential_points_gain'] = pd.Series(dtype=float)
+
     return buy_recommendations, sell_recommendations
 
 
@@ -1166,6 +1207,25 @@ def build_best_eleven(conn, date):
     )
     roster = attach_probabilities(roster, prob_df, name_col='player', club_col='club')
     roster.loc[:, 'start_pct'] = roster['probability'].apply(_parse_pct)
+    # this_ppm undefined (not just small) with zero games played, not
+    # zero — team_players tracks exact `played`; a market candidate
+    # (see build_recommendations' potential_points_gain) has no such
+    # count, so its caller approximates this differently.
+    roster.loc[:, 'this_ppm'] = (roster['this_season_pts'] / roster['played'].replace(0, pd.NA)).fillna(0)
+    roster.loc[:, 'has_this_signal'] = roster['played'] > 0
+    return _solve_best_eleven(roster, rounds_played)
+
+
+def _solve_best_eleven(roster, rounds_played):
+    """Shared core behind build_best_eleven and build_recommendations'
+    potential_points_gain: given a roster (needs player/position/club/
+    price/status/start_pct/last_season_pts/this_ppm/has_this_signal —
+    NOT this_season_pts/played directly, so a hypothetical roster with a
+    market candidate swapped in can supply an approximated this_ppm
+    without needing his exact games-played count too), pick the best
+    valid formation.
+    """
+    roster = roster.reset_index(drop=True)
     # _blended_pts (used everywhere else) blends season TOTALS, which is
     # right for a buy/sell "how good is this player overall" score but
     # wrong here: a player with a full last season on record (30+ games)
@@ -1176,10 +1236,9 @@ def build_best_eleven(conn, date):
     # Blending PER-MATCH rates instead keeps every player on the same
     # scale. Last season's games-played isn't tracked (only this
     # season's `played` is), so a fixed 38-game season is the
-    # approximation; this_season's rate is undefined (not just small)
-    # with zero games played, not zero.
+    # approximation.
     LAST_SEASON_GAMES = 38
-    this_ppm = (roster['this_season_pts'] / roster['played'].replace(0, pd.NA)).fillna(0)
+    this_ppm = roster['this_ppm']
     last_ppm = roster['last_season_pts'].fillna(0) / LAST_SEASON_GAMES
     progress = min(max(rounds_played, 0) / BLEND_TRANSITION_ROUNDS, 1.0)
     # THIS_WEIGHT_FLOOR exists to distrust a hot streak against a real,
@@ -1206,7 +1265,7 @@ def build_best_eleven(conn, date):
     # start_pct is still what mostly decides it, this just stops a
     # results-based over-punish from outweighing a much stronger,
     # directly-observed start-probability signal.
-    has_signal = (roster['played'] > 0) | (roster['last_season_pts'] > 0)
+    has_signal = roster['has_this_signal'] | (roster['last_season_pts'] > 0)
     if has_signal.any():
         blended_ppm = blended_ppm.where(has_signal, blended_ppm[has_signal].median())
     # Two different numbers, deliberately kept apart. selection_value

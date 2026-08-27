@@ -1,15 +1,14 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Manchester Tity,Manchester_Tity,Goalkeeper,Elche,Dituro,2,0,3210000,-50000.0,Fit,2,1.0,0,0.0,2,2.0
-Manchester Tity,Manchester_Tity,Defender,Betis,Fran Garcia,12,0,5720000,20000.0,Fit,2,6.0,6,6.0,6,6.0
-Manchester Tity,Manchester_Tity,Defender,Barcelona,Xavi Espart,8,0,1230000,220000.0,Fit,1,8.0,0,0.0,8,8.0
-Manchester Tity,Manchester_Tity,Defender,Real Sociedad,Jon Martin,3,0,4130000,-60000.0,Fit,1,3.0,0,0.0,3,3.0
-Manchester Tity,Manchester_Tity,Midfielder,Atletico,Mendoza,6,0,860000,40000.0,Fit,2,3.0,6,3.0,0,0.0
-Manchester Tity,Manchester_Tity,Midfielder,Celta,Febas,5,0,6430000,-30000.0,Fit,1,5.0,0,0.0,5,5.0
-Manchester Tity,Manchester_Tity,Midfielder,Athletic,Peio Canales,5,0,2260000,90000.0,Fit,1,5.0,5,5.0,0,0.0
-Manchester Tity,Manchester_Tity,Midfielder,Villarreal,Carlos Macia,5,0,1110000,-10000.0,Fit,2,2.5,0,0.0,5,2.5
-Manchester Tity,Manchester_Tity,Midfielder,Real Sociedad,Soler,3,0,5770000,-110000.0,Fit,1,3.0,0,0.0,3,3.0
+Manchester Tity,Manchester_Tity,Goalkeeper,Elche,Dituro,2,0,3170000,-40000.0,Fit,2,1.0,0,0.0,2,2.0
+Manchester Tity,Manchester_Tity,Defender,Betis,Fran Garcia,12,0,5760000,40000.0,Fit,2,6.0,6,6.0,6,6.0
+Manchester Tity,Manchester_Tity,Defender,Barcelona,Xavi Espart,8,0,1430000,200000.0,Fit,1,8.0,0,0.0,8,8.0
+Manchester Tity,Manchester_Tity,Defender,Real Sociedad,Jon Martin,6,0,4090000,-40000.0,Fit,2,3.0,0,0.0,6,3.0
+Manchester Tity,Manchester_Tity,Midfielder,Atletico,Mendoza,6,0,900000,40000.0,Fit,2,3.0,6,3.0,0,0.0
+Manchester Tity,Manchester_Tity,Midfielder,Celta,Febas,5,0,6400000,-30000.0,Fit,1,5.0,0,0.0,5,5.0
+Manchester Tity,Manchester_Tity,Midfielder,Athletic,Peio Canales,5,0,2350000,90000.0,Fit,1,5.0,5,5.0,0,0.0
+Manchester Tity,Manchester_Tity,Midfielder,Villarreal,Carlos Macia,5,0,1090000,-20000.0,Fit,2,2.5,0,0.0,5,2.5
 Manchester Tity,Manchester_Tity,Midfielder,Elche,Javi Morcillo,3,0,230000,0.0,Fit,1,3.0,0,0.0,3,3.0
-Manchester Tity,Manchester_Tity,Forward,Villarreal,Mikautadze,13,0,10420000,70000.0,Fit,2,6.5,0,0.0,13,6.5
-Manchester Tity,Manchester_Tity,Forward,Elche,Fer Nino,5,0,2700000,-40000.0,Fit,2,2.5,3,3.0,2,2.0
-Manchester Tity,Manchester_Tity,Forward,Barcelona,Yamal,3,0,21570000,-170000.0,Fit,1,3.0,0,0.0,3,3.0
-Manchester Tity,Manchester_Tity,Forward,Barcelona,Bisiwu,0,0,590000,-30000.0,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Manchester_Tity,Forward,Villarreal,Mikautadze,13,0,10500000,80000.0,Fit,2,6.5,0,0.0,13,6.5
+Manchester Tity,Manchester_Tity,Forward,Elche,Fer Nino,5,0,2680000,-20000.0,Fit,2,2.5,3,3.0,2,2.0
+Manchester Tity,Manchester_Tity,Forward,Barcelona,Yamal,3,0,21460000,-110000.0,Fit,1,3.0,0,0.0,3,3.0
+Manchester Tity,Manchester_Tity,Forward,Barcelona,Bisiwu,0,0,560000,-30000.0,Fit,0,0.0,0,0.0,0,0.0

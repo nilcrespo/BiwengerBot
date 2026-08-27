@@ -246,33 +246,42 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4899,Round 1,finished,50716,finished,19513,Pellegrini,Betis,5,,,,3.0,1
 4899,Round 1,finished,50716,finished,5807,Marc Roca,Betis,3,Freejulian,FreeJulian,reserve,,0
 4899,Round 1,finished,50716,finished,25127,Ez Abde,Betis,4,Patsi_FC,Patsi F.C,starter,,0
-4899,Round 1,finished,50718,preview,19577,Mbappé,Real Madrid,4,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
-4899,Round 1,finished,50718,preview,15568,Vinícius Jr,Real Madrid,4,Raifc,RaiFC,starter,,0
-4899,Round 1,finished,50718,preview,30477,Bellingham,Real Madrid,3,Locombia_Fc,Locombia FC,starter,,0
-4899,Round 1,finished,50718,preview,31027,Arda Güler,Real Madrid,3,,,,,0
-4899,Round 1,finished,50718,preview,9402,Valverde,Real Madrid,3,The_National,The National,starter,,0
-4899,Round 1,finished,50718,preview,41086,Bernardo Silva,Real Madrid,3,,,,,0
-4899,Round 1,finished,50718,preview,15410,Cucurella,Real Madrid,2,,,,,0
-4899,Round 1,finished,50718,preview,37495,Huijsen,Real Madrid,2,,,,,0
-4899,Round 1,finished,50718,preview,41087,Konaté,Real Madrid,2,,,,,0
-4899,Round 1,finished,50718,preview,37499,Trent,Real Madrid,2,,,,,0
-4899,Round 1,finished,50718,preview,16738,Courtois,Real Madrid,1,Locombia_Fc,Locombia FC,starter,,0
-4899,Round 1,finished,50718,preview,33796,Endrick,Real Madrid,4,General_Hansi_Topete,"General ""Hansi” Topete",reserve,,0
-4899,Round 1,finished,50718,preview,26048,Tchouameni,Real Madrid,3,Freejulian,FreeJulian,starter,,0
-4899,Round 1,finished,50718,preview,2603,Oyarzabal,Real Sociedad,4,Patsi_FC,Patsi F.C,starter,,0
-4899,Round 1,finished,50718,preview,2602,Barrenetxea,Real Sociedad,3,Hernan_Krezzpo,Hernan Krezzpo,starter,,0
-4899,Round 1,finished,50718,preview,6837,Soler,Real Sociedad,3,,,,,0
-4899,Round 1,finished,50718,preview,20102,Kubo,Real Sociedad,3,,,,,0
-4899,Round 1,finished,50718,preview,34469,Luka Sucic,Real Sociedad,3,,,,,0
-4899,Round 1,finished,50718,preview,17344,Yangel Herrera,Real Sociedad,3,,,,,0
-4899,Round 1,finished,50718,preview,19299,Sergio Gómez,Real Sociedad,2,,,,,0
-4899,Round 1,finished,50718,preview,33447,Jon Martín,Real Sociedad,2,Manchester_Tity,Manchester Tity,starter,,0
-4899,Round 1,finished,50718,preview,8376,Zubeldia,Real Sociedad,2,The_National,The National,starter,,0
-4899,Round 1,finished,50718,preview,32020,Aramburu,Real Sociedad,2,,,,,0
-4899,Round 1,finished,50718,preview,7003,Remiro,Real Sociedad,1,,,,,0
-4899,Round 1,finished,50718,preview,39399,Matarazzo,Real Sociedad,5,The_National,The National,coach,,0
-4899,Round 1,finished,50718,preview,31228,Unai Marrero,Real Sociedad,1,Locombia_Fc,Locombia FC,reserve,,0
-4899,Round 1,finished,50718,preview,24979,Turrientes,Real Sociedad,3,Patsi_FC,Patsi F.C,reserve,,0
+4899,Round 1,finished,50718,finished,129,Brahim,Real Madrid,4,,,,2.0,1
+4899,Round 1,finished,50718,finished,1733,Camavinga,Real Madrid,3,,,,2.0,1
+4899,Round 1,finished,50718,finished,8555,Diomande,Real Madrid,4,,,,2.0,1
+4899,Round 1,finished,50718,finished,15410,Cucurella,Real Madrid,2,,,,5.0,1
+4899,Round 1,finished,50718,finished,37711,Espí,Real Madrid,4,,,,1.0,1
+4899,Round 1,finished,50718,finished,16738,Courtois,Real Madrid,1,Locombia_Fc,Locombia FC,starter,3.0,1
+4899,Round 1,finished,50718,finished,31707,Álvaro Carreras,Real Madrid,2,,,,2.0,1
+4899,Round 1,finished,50718,finished,41087,Konaté,Real Madrid,2,,,,6.0,1
+4899,Round 1,finished,50718,finished,37495,Huijsen,Real Madrid,2,,,,4.0,1
+4899,Round 1,finished,50718,finished,42362,Dumfries,Real Madrid,2,,,,3.0,1
+4899,Round 1,finished,50718,finished,41086,Bernardo Silva,Real Madrid,3,,,,6.0,1
+4899,Round 1,finished,50718,finished,9402,Valverde,Real Madrid,3,The_National,The National,starter,6.0,1
+4899,Round 1,finished,50718,finished,15568,Vinícius Jr,Real Madrid,4,Raifc,RaiFC,starter,11.0,1
+4899,Round 1,finished,50718,finished,30477,Bellingham,Real Madrid,3,Locombia_Fc,Locombia FC,starter,13.0,1
+4899,Round 1,finished,50718,finished,31027,Arda Güler,Real Madrid,3,,,,9.0,1
+4899,Round 1,finished,50718,finished,19577,Mbappé,Real Madrid,4,General_Hansi_Topete,"General ""Hansi” Topete",starter,21.0,1
+4899,Round 1,finished,50718,finished,41386,Mourinho,Real Madrid,5,,,,3.0,1
+4899,Round 1,finished,50718,finished,33796,Endrick,Real Madrid,4,General_Hansi_Topete,"General ""Hansi” Topete",reserve,,0
+4899,Round 1,finished,50718,finished,2602,Barrenetxea,Real Sociedad,3,Hernan_Krezzpo,Hernan Krezzpo,starter,1.0,1
+4899,Round 1,finished,50718,finished,6837,Soler,Real Sociedad,3,,,,1.0,1
+4899,Round 1,finished,50718,finished,8376,Zubeldia,Real Sociedad,2,The_National,The National,starter,-1.0,1
+4899,Round 1,finished,50718,finished,10745,Guedes,Real Sociedad,4,,,,1.0,1
+4899,Round 1,finished,50718,finished,35055,Óskarsson,Real Sociedad,4,,,,0.0,1
+4899,Round 1,finished,50718,finished,7003,Remiro,Real Sociedad,1,,,,8.0,1
+4899,Round 1,finished,50718,finished,19299,Sergio Gómez,Real Sociedad,2,,,,1.0,1
+4899,Round 1,finished,50718,finished,36538,Beitia,Real Sociedad,2,,,,0.0,1
+4899,Round 1,finished,50718,finished,33447,Jon Martín,Real Sociedad,2,Manchester_Tity,Manchester Tity,starter,3.0,1
+4899,Round 1,finished,50718,finished,32020,Aramburu,Real Sociedad,2,,,,3.0,1
+4899,Round 1,finished,50718,finished,24979,Turrientes,Real Sociedad,3,Patsi_FC,Patsi F.C,reserve,4.0,1
+4899,Round 1,finished,50718,finished,17344,Yangel Herrera,Real Sociedad,3,Freejulian,FreeJulian,starter,2.0,1
+4899,Round 1,finished,50718,finished,40037,Ochieng,Real Sociedad,4,,,,2.0,1
+4899,Round 1,finished,50718,finished,34469,Luka Sucic,Real Sociedad,3,,,,8.0,1
+4899,Round 1,finished,50718,finished,20102,Kubo,Real Sociedad,3,,,,2.0,1
+4899,Round 1,finished,50718,finished,2603,Oyarzabal,Real Sociedad,4,Patsi_FC,Patsi F.C,starter,2.0,1
+4899,Round 1,finished,50718,finished,39399,Matarazzo,Real Sociedad,5,The_National,The National,coach,0.0,1
+4899,Round 1,finished,50718,finished,31228,Unai Marrero,Real Sociedad,1,Locombia_Fc,Locombia FC,reserve,,0
 4899,Round 1,finished,50711,preview,26879,Swedberg,Celta,3,The_National,The National,reserve,,0
 4899,Round 1,finished,50711,preview,3159,Jutglà,Celta,4,Cd_Numancia,CD Numancia,reserve,,0
 4899,Round 1,finished,50711,preview,1523,Iago Aspas,Celta,4,,,,,0
@@ -289,7 +298,7 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4899,Round 1,finished,50711,preview,31321,Starfelt,Celta,2,Patsi_FC,Patsi F.C,starter,,0
 4899,Round 1,finished,50711,preview,33473,Javier Rueda,Celta,2,Patsi_FC,Patsi F.C,reserve,,0
 4899,Round 1,finished,50711,preview,18398,Budimir,Osasuna,4,,,,,0
-4899,Round 1,finished,50711,preview,18382,Raul García,Osasuna,4,,,,,0
+4899,Round 1,finished,50711,preview,33697,Raúl Moro,Osasuna,4,The_National,The National,starter,,0
 4899,Round 1,finished,50711,preview,27591,Aimar Oroz,Osasuna,3,Freejulian,FreeJulian,starter,,0
 4899,Round 1,finished,50711,preview,1602,Rubén García,Osasuna,3,,,,,0
 4899,Round 1,finished,50711,preview,18128,Iker Muñoz,Osasuna,3,,,,,0
@@ -299,7 +308,6 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4899,Round 1,finished,50711,preview,17731,Catena,Osasuna,2,,,,,0
 4899,Round 1,finished,50711,preview,10292,Arguibide,Osasuna,2,,,,,0
 4899,Round 1,finished,50711,preview,18251,Sergio Herrera,Osasuna,1,The_National,The National,starter,,0
-4899,Round 1,finished,50711,preview,33697,Raúl Moro,Osasuna,4,The_National,The National,starter,,0
 4899,Round 1,finished,50711,preview,33694,Boyomo,Osasuna,2,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
 4899,Round 1,finished,50714,preview,26930,Raphinha,Barcelona,4,The_National,The National,starter,,0
 4899,Round 1,finished,50714,preview,41200,Gordon,Barcelona,4,Patsi_FC,Patsi F.C,reserve,,0

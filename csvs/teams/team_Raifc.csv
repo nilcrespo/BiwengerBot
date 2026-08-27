@@ -1,16 +1,16 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-RaiFC,Raifc,Goalkeeper,Celta,Ionut Radu,3,0,3700000,-30000.0,Fit,1,3.0,0,0.0,3,3.0
-RaiFC,Raifc,Defender/Midfielder,Sevilla,Oso,16,0,3130000,80000.0,Fit,2,8.0,2,2.0,14,14.0
-RaiFC,Raifc,Defender,Valencia,Diakhaby,6,0,850000,50000.0,Fit,2,3.0,6,3.0,0,0.0
-RaiFC,Raifc,Defender,Athletic,Laporte,5,0,5440000,10000.0,Fit,1,5.0,5,5.0,0,0.0
+RaiFC,Raifc,Goalkeeper,Celta,Ionut Radu,3,0,3680000,-20000.0,Fit,1,3.0,0,0.0,3,3.0
+RaiFC,Raifc,Defender/Midfielder,Sevilla,Oso,16,0,3200000,70000.0,Fit,2,8.0,2,2.0,14,14.0
+RaiFC,Raifc,Defender,Valencia,Diakhaby,6,0,910000,60000.0,Fit,2,3.0,6,3.0,0,0.0
+RaiFC,Raifc,Defender,Athletic,Laporte,5,0,5450000,10000.0,Fit,1,5.0,5,5.0,0,0.0
 RaiFC,Raifc,Defender,Levante,Manu Sanchez,5,0,1550000,0.0,Fit,2,2.5,0,0.0,5,2.5
-RaiFC,Raifc,Midfielder,Villarreal,Pape Gueye,18,0,8390000,90000.0,Fit,2,9.0,0,0.0,18,9.0
-RaiFC,Raifc,Midfielder,Sevilla,Guridi,10,0,3140000,20000.0,Fit,2,5.0,8,8.0,2,2.0
-RaiFC,Raifc,Midfielder,Espanyol,Bauza,7,0,440000,30000.0,Fit,2,3.5,7,3.5,0,0.0
-RaiFC,Raifc,Midfielder,Racing,Gustavo Puerta,6,0,3480000,-50000.0,Fit,2,3.0,4,4.0,2,2.0
-RaiFC,Raifc,Forward/Midfielder,Betis,Antony,15,0,10360000,70000.0,Fit,2,7.5,9,9.0,6,6.0
-RaiFC,Raifc,Forward/Midfielder,Rayo Vallecano,Alvaro Garcia,8,0,4300000,-40000.0,Fit,2,4.0,2,2.0,6,6.0
-RaiFC,Raifc,Forward,Real Madrid,Vinicius Jr,4,0,17520000,-150000.0,Fit,1,4.0,0,0.0,4,4.0
-RaiFC,Raifc,Forward,Athletic,Guruzeta,3,0,3970000,-80000.0,Fit,1,3.0,3,3.0,0,0.0
+RaiFC,Raifc,Midfielder,Villarreal,Pape Gueye,18,0,8480000,90000.0,Fit,2,9.0,0,0.0,18,9.0
+RaiFC,Raifc,Midfielder,Sevilla,Guridi,10,0,3160000,20000.0,Fit,2,5.0,8,8.0,2,2.0
+RaiFC,Raifc,Midfielder,Espanyol,Bauza,7,0,470000,30000.0,Fit,2,3.5,7,3.5,0,0.0
+RaiFC,Raifc,Midfielder,Racing,Gustavo Puerta,6,0,3440000,-40000.0,Fit,2,3.0,4,4.0,2,2.0
+RaiFC,Raifc,Forward,Real Madrid,Vinicius Jr,15,0,17490000,-30000.0,Fit,2,7.5,11,11.0,4,4.0
+RaiFC,Raifc,Forward/Midfielder,Betis,Antony,15,0,10450000,90000.0,Fit,2,7.5,9,9.0,6,6.0
+RaiFC,Raifc,Forward/Midfielder,Rayo Vallecano,Alvaro Garcia,8,0,4260000,-40000.0,Fit,2,4.0,2,2.0,6,6.0
+RaiFC,Raifc,Forward,Athletic,Guruzeta,3,0,3910000,-60000.0,Fit,1,3.0,3,3.0,0,0.0
 RaiFC,Raifc,Forward/Midfielder,Espanyol,Puado,0,36,360000,0.0,Injured. Anterior cruciate ligament tear. Estimated return: Early October.,0,0.0,0,0.0,0,0.0
-RaiFC,Raifc,Coach,Villarreal,Inigo Perez,2,0,2330000,-10000.0,Fit,2,1.0,0,0.0,2,1.0
+RaiFC,Raifc,Coach,Villarreal,Inigo Perez,2,0,2330000,0.0,Fit,2,1.0,0,0.0,2,1.0

@@ -438,13 +438,23 @@ def migrate_csv_to_db(days_behind=0):
     # Unlike every other table here, this one ACCUMULATES rather than
     # snapshots: the league board only exposes a shallow rolling window
     # with no paging, so each run contributes whatever few transactions
-    # it can see and the useful history is the union of all runs. That
-    # makes append-everything wrong — the same transaction stays visible
-    # in the feed for days and would be re-inserted on every run in
-    # between, inflating exactly the bid counts and amounts the buy model
-    # reads. Only genuinely-new txn_keys are inserted; scraped_at is
-    # therefore "first seen", which is also what makes a point-in-time
-    # backtest possible (filter scraped_at <= the date being modelled).
+    # it can see and the useful history is the union of all runs — a
+    # transaction that scrolls off the board before the next scrape is
+    # gone forever, uncapturable by anyone, not just recoverable later.
+    #
+    # The DB table used to be the ONLY place this accumulation lived,
+    # which made it one `rm -f data/biwenger_data.db` away from silently
+    # losing everything already captured — happened for real: several
+    # binary-merge-conflict resets during one session's work dropped the
+    # sample from 11 real auctions back down to as few as 2-4, each time
+    # invisibly (no error, migration.py just re-derives from whatever
+    # that day's CSV happens to hold). MARKET_BID_HISTORY_LOG is the
+    # durable, git-tracked, append-only fix: every genuinely-new bid ever
+    # captured gets written there and never removed, and the DB table is
+    # always fully REBUILT from it below rather than incrementally
+    # appended to — so the DB is disposable again. Losing the DB file
+    # now costs one migration.py re-run, not the underlying data.
+    MARKET_BID_HISTORY_LOG = 'csvs/others/market_bid_history_log.csv'
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS market_bid_history (
         txn_key TEXT,
@@ -466,17 +476,25 @@ def migrate_csv_to_db(days_behind=0):
         scraped_at TIMESTAMP
     )''')
     conn.commit()
+
+    log_df = pd.read_csv(MARKET_BID_HISTORY_LOG) if os.path.exists(MARKET_BID_HISTORY_LOG) else pd.DataFrame()
     if os.path.exists('csvs/others/market_bids.csv'):
         bids_df = pd.read_csv('csvs/others/market_bids.csv')
         if len(bids_df):
-            known = {r[0] for r in cursor.execute("SELECT DISTINCT txn_key FROM market_bid_history")}
+            known = set(log_df['txn_key']) if len(log_df) else set()
             new_bids = bids_df[~bids_df['txn_key'].isin(known)].copy()
             if len(new_bids):
                 new_bids['scraped_at'] = now
-                new_bids.to_sql('market_bid_history', conn, if_exists='append', index=False)
+                log_df = pd.concat([log_df, new_bids], ignore_index=True)
+                log_df.to_csv(MARKET_BID_HISTORY_LOG, index=False)
             skipped = bids_df['txn_key'].nunique() - new_bids['txn_key'].nunique()
             print(f"→ Migrated {new_bids['txn_key'].nunique()} new market transaction(s) "
                   f"({len(new_bids)} bids); skipped {skipped} already stored")
+
+    if len(log_df):
+        cursor.execute('DELETE FROM market_bid_history')
+        log_df.to_sql('market_bid_history', conn, if_exists='append', index=False)
+        conn.commit()
 
     # Rival locked lineups per round (see scraper.get_rival_lineups).
     # A per-run snapshot like team_players, not an accumulating log —

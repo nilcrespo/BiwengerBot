@@ -1,15 +1,15 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Locombia FC,Locombia_Fc,Goalkeeper,Real Madrid,Courtois,5,0,6700000,-80000.0,Fit,2,2.5,3,3.0,2,2.0
+Locombia FC,Locombia_Fc,Goalkeeper,Real Madrid,Courtois,5,0,6670000,-30000.0,Fit,2,2.5,3,3.0,2,2.0
 Locombia FC,Locombia_Fc,Goalkeeper,Real Sociedad,Unai Marrero,0,7,220000,0.0,Fit,0,0.0,0,0.0,0,0.0
 Locombia FC,Locombia_Fc,Defender,Racing,Jorge Salinas,13,0,3170000,0.0,Fit,3,4.3,9,4.5,4,4.0
-Locombia FC,Locombia_Fc,Defender/Midfielder,Celta,Carreira,12,0,2630000,20000.0,Fit,2,6.0,8,8.0,4,4.0
-Locombia FC,Locombia_Fc,Defender,Valencia,Tarrega,10,0,2300000,70000.0,Fit,2,5.0,10,5.0,0,0.0
-Locombia FC,Locombia_Fc,Defender,Athletic,Hugo Rincon,5,0,710000,10000.0,Fit,2,2.5,3,3.0,2,2.0
-Locombia FC,Locombia_Fc,Defender,Atletico,Cristian Romero,0,0,5790000,-100000.0,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Locombia_Fc,Midfielder,Real Madrid,Bellingham,25,0,16560000,120000.0,Fit,2,12.5,13,13.0,12,12.0
-Locombia FC,Locombia_Fc,Midfielder,Atletico,Kang-In Lee,17,0,7930000,60000.0,Fit,2,8.5,17,8.5,0,0.0
-Locombia FC,Locombia_Fc,Midfielder/Forward,Villarreal,Moleiro,11,0,8510000,-90000.0,Fit,3,3.7,0,0.0,11,3.7
-Locombia FC,Locombia_Fc,Midfielder/Defender,Osasuna,Moncayola,6,0,3010000,-40000.0,Fit,2,3.0,4,4.0,2,2.0
-Locombia FC,Locombia_Fc,Forward/Midfielder,Sevilla,Ejuke,14,0,1780000,110000.0,Fit,2,7.0,2,2.0,12,12.0
-Locombia FC,Locombia_Fc,Forward,Valencia,Ryunosuke Sato,7,0,3480000,-40000.0,Fit,2,3.5,7,3.5,0,0.0
-Locombia FC,Locombia_Fc,Forward,Malaga,Larrubia,6,0,5490000,-90000.0,Fit,2,3.0,4,4.0,2,2.0
+Locombia FC,Locombia_Fc,Defender/Midfielder,Celta,Carreira,12,0,2700000,70000.0,Fit,2,6.0,8,8.0,4,4.0
+Locombia FC,Locombia_Fc,Defender,Valencia,Tarrega,10,0,2370000,70000.0,Fit,2,5.0,10,5.0,0,0.0
+Locombia FC,Locombia_Fc,Defender,Athletic,Hugo Rincon,5,0,730000,20000.0,Fit,2,2.5,3,3.0,2,2.0
+Locombia FC,Locombia_Fc,Defender,Atletico,Cristian Romero,0,0,5720000,-70000.0,Fit,0,0.0,0,0.0,0,0.0
+Locombia FC,Locombia_Fc,Midfielder,Real Madrid,Bellingham,25,0,16740000,180000.0,Fit,2,12.5,13,13.0,12,12.0
+Locombia FC,Locombia_Fc,Midfielder,Atletico,Kang-In Lee,23,0,8050000,120000.0,Fit,3,7.7,17,8.5,6,6.0
+Locombia FC,Locombia_Fc,Midfielder/Forward,Villarreal,Moleiro,11,0,8400000,-110000.0,Fit,3,3.7,0,0.0,11,3.7
+Locombia FC,Locombia_Fc,Midfielder/Defender,Osasuna,Moncayola,6,0,2980000,-30000.0,Fit,2,3.0,4,4.0,2,2.0
+Locombia FC,Locombia_Fc,Forward/Midfielder,Sevilla,Ejuke,21,0,1920000,140000.0,Fit,3,7.0,9,4.5,12,12.0
+Locombia FC,Locombia_Fc,Forward,Valencia,Ryunosuke Sato,7,0,3450000,-30000.0,Fit,2,3.5,7,3.5,0,0.0
+Locombia FC,Locombia_Fc,Forward,Malaga,Larrubia,6,0,5440000,-50000.0,Fit,2,3.0,4,4.0,2,2.0

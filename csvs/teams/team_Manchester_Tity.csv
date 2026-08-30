@@ -1,16 +1,16 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Manchester Tity,Manchester_Tity,Goalkeeper,Espanyol,Dmitrovic,10,0,4690000,0.0,Fit,2,5.0,10,5.0,0,0.0
-Manchester Tity,Manchester_Tity,Defender,Barcelona,Xavi Espart,13,0,1910000,250000.0,Fit,2,6.5,5,5.0,8,8.0
-Manchester Tity,Manchester_Tity,Defender,Betis,Fran Garcia,12,0,5830000,40000.0,Fit,2,6.0,6,6.0,6,6.0
-Manchester Tity,Manchester_Tity,Defender,Getafe,Zaid Romero,7,0,3400000,-30000.0,Fit,2,3.5,5,5.0,2,2.0
-Manchester Tity,Manchester_Tity,Defender,Real Sociedad,Jon Martin,6,0,4000000,-50000.0,Fit,2,3.0,0,0.0,6,3.0
-Manchester Tity,Manchester_Tity,Defender,Betis,Angel Ortiz,4,0,180000,10000.0,Fit,1,4.0,0,0.0,4,4.0
-Manchester Tity,Manchester_Tity,Midfielder,Athletic,Peio Canales,9,0,2550000,100000.0,Fit,2,4.5,5,5.0,4,4.0
-Manchester Tity,Manchester_Tity,Midfielder,Atletico,Mendoza,6,0,960000,20000.0,Fit,2,3.0,6,3.0,0,0.0
-Manchester Tity,Manchester_Tity,Midfielder,Celta,Febas,5,0,6160000,-150000.0,Fit,1,5.0,0,0.0,5,5.0
+Manchester Tity,Manchester_Tity,Goalkeeper,Espanyol,Dmitrovic,18,0,4710000,20000.0,Fit,3,6.0,10,5.0,8,8.0
+Manchester Tity,Manchester_Tity,Goalkeeper,Espanyol,Fortuno,0,8,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Manchester_Tity,Defender,Barcelona,Xavi Espart,13,0,2200000,290000.0,Fit,2,6.5,5,5.0,8,8.0
+Manchester Tity,Manchester_Tity,Defender,Real Sociedad,Jon Martin,10,0,3980000,-20000.0,Fit,3,3.3,4,4.0,6,3.0
+Manchester Tity,Manchester_Tity,Defender,Getafe,Zaid Romero,7,0,3380000,-20000.0,Fit,2,3.5,5,5.0,2,2.0
+Manchester Tity,Manchester_Tity,Defender,Betis,Angel Ortiz,4,0,180000,0.0,Fit,1,4.0,0,0.0,4,4.0
+Manchester Tity,Manchester_Tity,Midfielder,Athletic,Peio Canales,9,0,2660000,110000.0,Fit,2,4.5,5,5.0,4,4.0
+Manchester Tity,Manchester_Tity,Midfielder,Atletico,Mendoza,7,0,970000,10000.0,Fit,3,2.3,6,3.0,1,1.0
+Manchester Tity,Manchester_Tity,Midfielder,Celta,Febas,5,0,6080000,-80000.0,Fit,1,5.0,0,0.0,5,5.0
 Manchester Tity,Manchester_Tity,Midfielder,Elche,Javi Morcillo,5,0,230000,0.0,Fit,2,2.5,0,0.0,5,2.5
-Manchester Tity,Manchester_Tity,Forward,Villarreal,Mikautadze,17,0,10600000,50000.0,Fit,3,5.7,0,0.0,17,5.7
-Manchester Tity,Manchester_Tity,Forward,Elche,Fer Nino,15,0,2650000,0.0,Fit,3,5.0,3,3.0,12,6.0
-Manchester Tity,Manchester_Tity,Forward,Barcelona,Yamal,10,0,21150000,-110000.0,Fit,2,5.0,7,7.0,3,3.0
-Manchester Tity,Manchester_Tity,Forward/Midfielder,Espanyol,Dolan,9,0,3080000,0.0,Fit,2,4.5,9,4.5,0,0.0
-Manchester Tity,Manchester_Tity,Forward,Barcelona,Bisiwu,0,0,510000,-20000.0,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Manchester_Tity,Forward,Villarreal,Mikautadze,17,0,10660000,60000.0,Fit,3,5.7,0,0.0,17,5.7
+Manchester Tity,Manchester_Tity,Forward,Elche,Fer Nino,15,0,2690000,40000.0,Fit,3,5.0,3,3.0,12,6.0
+Manchester Tity,Manchester_Tity,Forward/Midfielder,Espanyol,Dolan,11,0,3070000,-10000.0,Fit,3,3.7,9,4.5,2,2.0
+Manchester Tity,Manchester_Tity,Forward,Barcelona,Yamal,10,0,21070000,-80000.0,Fit,2,5.0,7,7.0,3,3.0
+Manchester Tity,Manchester_Tity,Forward,Barcelona,Bisiwu,0,0,500000,-10000.0,Fit,0,0.0,0,0.0,0,0.0

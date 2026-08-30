@@ -1,20 +1,20 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-The National,The_National,Goalkeeper,Osasuna,Sergio Herrera,6,0,4370000,-50000.0,Fit,2,3.0,4,4.0,2,2.0
+The National,The_National,Goalkeeper,Osasuna,Sergio Herrera,6,0,4340000,-30000.0,Fit,2,3.0,4,4.0,2,2.0
 The National,The_National,Goalkeeper,Atletico,Juan Musso,0,33,320000,0.0,Fit,0,0.0,0,0.0,0,0.0
-The National,The_National,Defender,Racing,Pablo Ramon,11,0,2050000,70000.0,Fit,2,5.5,5,5.0,6,6.0
-The National,The_National,Defender/Midfielder,Atletico,Marcos Llorente,8,0,5860000,-30000.0,Fit,2,4.0,8,4.0,0,0.0
-The National,The_National,Defender/Midfielder,Sevilla,Gabriel Suazo,6,0,1970000,0.0,Fit,2,3.0,3,3.0,3,3.0
-The National,The_National,Defender/Midfielder,Rayo Vallecano,Pedrosa,0,68,410000,80000.0,Fit,0,0.0,0,0.0,0,0.0
-The National,The_National,Midfielder/Forward,Villarreal,Buchanan,10,0,3040000,-20000.0,Fit,3,3.3,0,0.0,10,3.3
-The National,The_National,Midfielder,Rayo Vallecano,Unai Lopez,10,0,2140000,40000.0,Fit,2,5.0,6,6.0,4,4.0
-The National,The_National,Midfielder,Alaves,Denis Suarez,10,0,1350000,0.0,Fit,3,3.3,6,3.0,4,4.0
-The National,The_National,Midfielder,Valencia,Javi Guerra,9,0,4590000,-40000.0,Fit,2,4.5,9,4.5,0,0.0
-The National,The_National,Midfielder/Forward,Osasuna,Ruben Garcia,9,0,2730000,20000.0,Fit,2,4.5,4,4.0,5,5.0
-The National,The_National,Midfielder,Betis,Facundo Bernal,7,0,2510000,10000.0,Fit,2,3.5,3,3.0,4,4.0
-The National,The_National,Midfielder,Levante,Oriol Rey,6,0,560000,20000.0,Fit,2,3.0,0,0.0,6,3.0
-The National,The_National,Forward,Barcelona,Raphinha,32,0,17310000,160000.0,Fit,2,16.0,13,13.0,19,19.0
-The National,The_National,Forward/Midfielder,Villarreal,Pepe,21,0,10720000,40000.0,Fit,3,7.0,0,0.0,21,7.0
-The National,The_National,Forward,Getafe,Enes Unal,13,0,4210000,140000.0,Fit,2,6.5,11,11.0,2,2.0
-The National,The_National,Forward,Rayo Vallecano,Nteka,5,0,470000,10000.0,Fit,2,2.5,3,3.0,2,2.0
-The National,The_National,Forward,Rayo Vallecano,Alemão,4,0,1260000,-20000.0,Fit,1,4.0,0,0.0,4,4.0
+The National,The_National,Defender/Midfielder,Atletico,Marcos Llorente,14,0,5870000,10000.0,Fit,3,4.7,8,4.0,6,6.0
+The National,The_National,Defender,Racing,Pablo Ramon,11,0,2100000,50000.0,Fit,2,5.5,5,5.0,6,6.0
+The National,The_National,Defender/Midfielder,Sevilla,Gabriel Suazo,5,0,1960000,-10000.0,Fit,3,1.7,2,1.0,3,3.0
+The National,The_National,Defender/Midfielder,Rayo Vallecano,Pedrosa,0,68,510000,100000.0,Fit,0,0.0,0,0.0,0,0.0
+The National,The_National,Midfielder,Levante,Oriol Rey,11,0,600000,40000.0,Fit,3,3.7,5,5.0,6,3.0
+The National,The_National,Midfielder/Forward,Villarreal,Buchanan,10,0,3040000,0.0,Fit,3,3.3,0,0.0,10,3.3
+The National,The_National,Midfielder,Betis,Facundo Bernal,10,0,2520000,10000.0,Fit,3,3.3,3,3.0,7,3.5
+The National,The_National,Midfielder,Rayo Vallecano,Unai Lopez,10,0,2180000,40000.0,Fit,2,5.0,6,6.0,4,4.0
+The National,The_National,Midfielder,Alaves,Denis Suarez,10,0,1360000,10000.0,Fit,3,3.3,6,3.0,4,4.0
+The National,The_National,Midfielder,Valencia,Javi Guerra,9,0,4570000,-20000.0,Fit,2,4.5,9,4.5,0,0.0
+The National,The_National,Midfielder/Forward,Osasuna,Ruben Garcia,9,0,2760000,30000.0,Fit,2,4.5,4,4.0,5,5.0
+The National,The_National,Forward,Barcelona,Raphinha,32,0,17570000,260000.0,Fit,2,16.0,13,13.0,19,19.0
+The National,The_National,Forward/Midfielder,Villarreal,Pepe,21,0,10780000,60000.0,Fit,3,7.0,0,0.0,21,7.0
+The National,The_National,Forward,Getafe,Enes Unal,13,0,4380000,170000.0,Fit,2,6.5,11,11.0,2,2.0
+The National,The_National,Forward,Rayo Vallecano,Nteka,5,0,480000,10000.0,Fit,2,2.5,3,3.0,2,2.0
+The National,The_National,Forward,Rayo Vallecano,Alemão,4,0,1240000,-20000.0,Fit,1,4.0,0,0.0,4,4.0
 The National,The_National,Coach,Osasuna,Ramis,4,0,700000,0.0,Fit,2,2.0,1,1.0,3,3.0

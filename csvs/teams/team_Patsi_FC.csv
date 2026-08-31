@@ -1,23 +1,22 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Patsi F.C,Patsi_FC,Goalkeeper,Valencia,Dimitrievski,6,0,3700000,-30000.0,Fit,2,3.0,6,3.0,0,0.0
-Patsi F.C,Patsi_FC,Goalkeeper,Valencia,Van Oevelen,0,0,360000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Patsi_FC,Defender,Villarreal,Carlos Romero,10,0,6820000,-130000.0,Fit,3,3.3,0,0.0,10,3.3
-Patsi F.C,Patsi_FC,Defender,Sevilla,Andres Castrin,10,0,1370000,40000.0,Fit,2,5.0,2,2.0,8,8.0
-Patsi F.C,Patsi_FC,Defender,Malaga,Einar Galilea,6,0,1390000,0.0,Fit,2,3.0,3,3.0,3,3.0
-Patsi F.C,Patsi_FC,Defender,Deportivo,Bright Ede,6,0,1280000,-10000.0,Fit,2,3.0,3,3.0,3,3.0
-Patsi F.C,Patsi_FC,Defender,Valencia,Jesus Vazquez,6,0,1020000,20000.0,Fit,2,3.0,6,3.0,0,0.0
-Patsi F.C,Patsi_FC,Defender/Midfielder,Barcelona,Christensen,6,0,880000,10000.0,Fit,1,6.0,0,0.0,6,6.0
-Patsi F.C,Patsi_FC,Defender,Deportivo,Ximo Navarro,4,0,1290000,-10000.0,Fit,2,2.0,2,2.0,2,2.0
-Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,16,0,5020000,30000.0,Fit,3,5.3,11,5.5,5,5.0
-Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,11,0,3650000,40000.0,Fit,2,5.5,6,6.0,5,5.0
-Patsi F.C,Patsi_FC,Midfielder,Deportivo,Amatucci,10,0,3380000,20000.0,Fit,2,5.0,6,6.0,4,4.0
-Patsi F.C,Patsi_FC,Midfielder,Real Sociedad,Turrientes,10,0,1630000,10000.0,Fit,3,3.3,3,3.0,7,3.5
-Patsi F.C,Patsi_FC,Midfielder/Defender,Valencia,Pepelu,9,0,3230000,30000.0,Fit,2,4.5,9,4.5,0,0.0
-Patsi F.C,Patsi_FC,Midfielder,Valencia,Filip Ugrinic,6,0,1540000,0.0,Fit,2,3.0,6,3.0,0,0.0
-Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,5,0,1850000,-20000.0,Fit,2,2.5,5,5.0,0,0.0
-Patsi F.C,Patsi_FC,Forward,Barcelona,Gordon,16,0,10530000,170000.0,Fit,2,8.0,6,6.0,10,10.0
-Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,15,0,11720000,0.0,Fit,3,5.0,9,9.0,6,3.0
-Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,3,0,7670000,50000.0,Fit,1,3.0,0,0.0,3,3.0
-Patsi F.C,Patsi_FC,Forward,Atletico,Sørloth,0,148,3540000,-20000.0,Injured. Muscle injury. Estimated return: Early September.,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Goalkeeper,Valencia,Dimitrievski,10,0,3670000,-30000.0,Fit,3,3.3,6,3.0,4,4.0
+Patsi F.C,Patsi_FC,Goalkeeper,Valencia,Van Oevelen,0,0,350000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Defender,Villarreal,Carlos Romero,10,0,6710000,-110000.0,Fit,3,3.3,0,0.0,10,3.3
+Patsi F.C,Patsi_FC,Defender,Sevilla,Andres Castrin,10,0,1400000,30000.0,Fit,2,5.0,2,2.0,8,8.0
+Patsi F.C,Patsi_FC,Defender,Deportivo,Ximo Navarro,8,0,1280000,-10000.0,Fit,3,2.7,6,3.0,2,2.0
+Patsi F.C,Patsi_FC,Defender,Malaga,Einar Galilea,7,0,1380000,-10000.0,Fit,3,2.3,3,3.0,4,2.0
+Patsi F.C,Patsi_FC,Defender,Deportivo,Bright Ede,6,0,1260000,-20000.0,Fit,3,2.0,3,1.5,3,3.0
+Patsi F.C,Patsi_FC,Defender/Midfielder,Barcelona,Christensen,6,0,890000,10000.0,Fit,1,6.0,0,0.0,6,6.0
+Patsi F.C,Patsi_FC,Defender,Valencia,Jesus Vazquez,5,0,1020000,0.0,Fit,3,1.7,6,3.0,-1,-1.0
+Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,16,0,5060000,40000.0,Fit,3,5.3,11,5.5,5,5.0
+Patsi F.C,Patsi_FC,Midfielder,Deportivo,Amatucci,16,0,3410000,30000.0,Fit,3,5.3,12,6.0,4,4.0
+Patsi F.C,Patsi_FC,Midfielder/Defender,Valencia,Pepelu,12,0,3240000,10000.0,Fit,3,4.0,9,4.5,3,3.0
+Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,11,0,3680000,30000.0,Fit,2,5.5,6,6.0,5,5.0
+Patsi F.C,Patsi_FC,Midfielder,Real Sociedad,Turrientes,10,0,1650000,20000.0,Fit,3,3.3,3,3.0,7,3.5
+Patsi F.C,Patsi_FC,Midfielder,Valencia,Filip Ugrinic,9,0,1540000,0.0,Fit,3,3.0,6,3.0,3,3.0
+Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,5,0,1830000,-20000.0,Fit,2,2.5,5,5.0,0,0.0
+Patsi F.C,Patsi_FC,Forward,Barcelona,Gordon,16,0,10660000,130000.0,Fit,2,8.0,6,6.0,10,10.0
+Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,15,0,11750000,30000.0,Fit,3,5.0,9,9.0,6,3.0
+Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,3,0,7720000,50000.0,Fit,1,3.0,0,0.0,3,3.0
+Patsi F.C,Patsi_FC,Forward,Atletico,Sørloth,0,148,3520000,-20000.0,Doubtful. Muscle injury.,0,0.0,0,0.0,0,0.0
 Patsi F.C,Patsi_FC,Forward,Rayo Vallecano,De Tomas,0,0,210000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Patsi F.C,Patsi_FC,Forward/Midfielder,Levante,Tay Abed,0,9,150000,0.0,Fit,0,0.0,0,0.0,0,0.0

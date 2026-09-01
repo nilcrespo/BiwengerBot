@@ -1291,6 +1291,17 @@ from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 # against all ~500 distinct date-like tokens actually present in
 # unique_posts.json to confirm this doesn't also match real content
 # (player names, amounts, team names never matched).
+# Known manager renames — confirmed via league_standings.csv history that
+# the two names never coexist as separate teams across the whole season,
+# only ever one or the other (same team_id, same roster size/value
+# trajectory, just a different display name after some date). Map old
+# name -> current canonical name; add a new entry here if another rename
+# is ever caught the same way (a real transaction duplicate-counted
+# because a team's name differs between two scrapes of the same post).
+TEAM_NAME_ALIASES = {
+    'FerranGoaT': 'FreeJulian',
+}
+
 _DATE_TOKEN_RE = re.compile(
     r"^(Ara mateix|Avui|Ahir|Demà"
     r"|Fa \d+ \S+"
@@ -1329,11 +1340,39 @@ def _post_identity(post_data):
     two genuinely different transactions colliding is far smaller than
     the risk of missing another still-unrecognized volatile field down
     the line.
+
+    A THIRD volatile field, of a completely different kind: a manager's
+    team NAME itself can change mid-season (a rename), and Biwenger
+    re-renders old posts with whatever name is current at scrape time —
+    confirmed live, two "Inici de joc" (season-start budget credit)
+    posts were byte-identical except one read "FreeJulian" where the
+    other read "FerranGoaT", the same team before/after a rename. That's
+    not a token this function can generically recognize and strip (it's
+    an arbitrary string, not a date or a number) — but there is exactly
+    one Inici de joc event per season ever, by construction, so any post
+    containing it collapses to one constant identity regardless of which
+    team names happen to appear in it, rather than trying to strip just
+    the renamed token.
     """
+    if any(isinstance(x, str) and x.strip() == 'Inici de joc' for x in post_data):
+        return '"__SEASON_START_CREDIT__"'
     stable = [
         x for x in post_data
         if not (isinstance(x, str) and (_DATE_TOKEN_RE.match(x.strip()) or _BARE_INT_RE.match(x.strip())))
     ]
+    # The Inici de joc case above is one symptom of a bigger issue: a
+    # rename can hit ANY post, not just that one, and a batch post
+    # ("MERCAT DE FITXATGES" etc.) bundles many teams' real transactions
+    # together — a rename on ONE of them makes the whole post's text
+    # differ, duplicate-counting every OTHER real transaction bundled
+    # alongside it too, including ones that have nothing to do with the
+    # renamed team. Confirmed via league_standings.csv history: FerranGoaT
+    # and FreeJulian never coexist as two teams, only ever one or the
+    # other — the same manager, renamed mid-season. Normalizing known
+    # aliases to one canonical name before hashing fixes every post this
+    # touches at once, not just the one that happened to be caught live.
+    for old_name, canonical in TEAM_NAME_ALIASES.items():
+        stable = [x.replace(old_name, canonical) if isinstance(x, str) else x for x in stable]
     return json.dumps(stable, ensure_ascii=False)
 
 def get_all_posts(page, max_scrolls=300, initial_wait=3, load_timeout_ms=6000,

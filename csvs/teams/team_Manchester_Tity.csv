@@ -1,16 +1,18 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Manchester Tity,Manchester_Tity,Goalkeeper,Espanyol,Dmitrovic,18,0,4740000,30000.0,Fit,3,6.0,10,5.0,8,8.0
+Manchester Tity,Manchester_Tity,Goalkeeper,Espanyol,Dmitrovic,18,0,4770000,30000.0,Fit,3,6.0,10,5.0,8,8.0
 Manchester Tity,Manchester_Tity,Goalkeeper,Espanyol,Fortuno,0,8,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Manchester_Tity,Defender,Levante,Mandi,14,0,2460000,50000.0,Fit,3,4.7,4,4.0,10,5.0
-Manchester Tity,Manchester_Tity,Defender,Barcelona,Xavi Espart,13,0,2490000,290000.0,Fit,2,6.5,5,5.0,8,8.0
-Manchester Tity,Manchester_Tity,Defender,Real Sociedad,Jon Martin,10,0,3960000,-20000.0,Fit,3,3.3,4,4.0,6,3.0
-Manchester Tity,Manchester_Tity,Defender,Getafe,Zaid Romero,7,0,3360000,-20000.0,Fit,2,3.5,5,5.0,2,2.0
+Manchester Tity,Manchester_Tity,Defender,Barcelona,Xavi Espart,19,0,2810000,320000.0,Fit,3,6.3,11,5.5,8,8.0
+Manchester Tity,Manchester_Tity,Defender,Levante,Mandi,14,0,2510000,50000.0,Fit,3,4.7,4,4.0,10,5.0
+Manchester Tity,Manchester_Tity,Defender,Getafe,Zaid Romero,11,0,3350000,-10000.0,Fit,3,3.7,5,5.0,6,3.0
+Manchester Tity,Manchester_Tity,Defender,Real Sociedad,Jon Martin,10,0,3950000,-10000.0,Fit,3,3.3,4,4.0,6,3.0
 Manchester Tity,Manchester_Tity,Defender,Betis,Angel Ortiz,4,0,180000,0.0,Fit,1,4.0,0,0.0,4,4.0
-Manchester Tity,Manchester_Tity,Midfielder,Athletic,Peio Canales,12,0,2740000,80000.0,Fit,3,4.0,5,5.0,7,3.5
-Manchester Tity,Manchester_Tity,Midfielder,Atletico,Mendoza,7,0,970000,0.0,Fit,3,2.3,6,3.0,1,1.0
+Manchester Tity,Manchester_Tity,Defender,Malaga,Moussa Diarra,0,0,150000,0.0,Injured. Muscle injury. Estimated return: Indefinite return.,0,0.0,0,0.0,0,0.0
+Manchester Tity,Manchester_Tity,Midfielder,Malaga,Dani Lorenzo,12,0,3680000,10000.0,Fit,2,6.0,6,6.0,6,6.0
+Manchester Tity,Manchester_Tity,Midfielder,Athletic,Peio Canales,12,0,2780000,40000.0,Fit,3,4.0,5,5.0,7,3.5
+Manchester Tity,Manchester_Tity,Midfielder,Atletico,Mendoza,7,0,960000,-10000.0,Fit,3,2.3,6,3.0,1,1.0
 Manchester Tity,Manchester_Tity,Midfielder,Elche,Javi Morcillo,5,0,230000,0.0,Fit,2,2.5,0,0.0,5,2.5
-Manchester Tity,Manchester_Tity,Forward,Villarreal,Mikautadze,17,0,10700000,40000.0,Fit,3,5.7,0,0.0,17,5.7
-Manchester Tity,Manchester_Tity,Forward,Elche,Fer Nino,15,0,2740000,50000.0,Fit,3,5.0,3,3.0,12,6.0
-Manchester Tity,Manchester_Tity,Forward/Midfielder,Espanyol,Dolan,11,0,3030000,-40000.0,Fit,3,3.7,9,4.5,2,2.0
-Manchester Tity,Manchester_Tity,Forward,Barcelona,Yamal,10,0,21010000,-60000.0,Fit,2,5.0,7,7.0,3,3.0
-Manchester Tity,Manchester_Tity,Forward,Barcelona,Bisiwu,0,0,490000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Manchester_Tity,Forward,Barcelona,Yamal,28,0,21020000,10000.0,Fit,3,9.3,25,12.5,3,3.0
+Manchester Tity,Manchester_Tity,Forward,Villarreal,Mikautadze,17,0,10730000,30000.0,Fit,3,5.7,0,0.0,17,5.7
+Manchester Tity,Manchester_Tity,Forward,Elche,Fer Nino,15,0,2800000,60000.0,Fit,3,5.0,3,3.0,12,6.0
+Manchester Tity,Manchester_Tity,Forward/Midfielder,Espanyol,Dolan,11,0,2980000,-50000.0,Fit,3,3.7,9,4.5,2,2.0
+Manchester Tity,Manchester_Tity,Forward,Barcelona,Bisiwu,0,0,480000,-10000.0,Fit,0,0.0,0,0.0,0,0.0

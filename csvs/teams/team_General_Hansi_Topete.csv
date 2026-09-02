@@ -1,16 +1,17 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-"General ""Hansi” Topete",General_Hansi_Topete,Goalkeeper,Sevilla,Odysseas,8,0,3900000,-30000.0,Fit,3,2.7,2,1.0,6,6.0
-"General ""Hansi” Topete",General_Hansi_Topete,Goalkeeper,Rayo Vallecano,Dani Cardenas,4,0,1720000,30000.0,Fit,2,2.0,3,3.0,1,1.0
-"General ""Hansi” Topete",General_Hansi_Topete,Defender,Athletic,Paredes,18,0,1880000,90000.0,Fit,2,9.0,12,12.0,6,6.0
-"General ""Hansi” Topete",General_Hansi_Topete,Defender,Espanyol,Hinojo,13,0,1950000,70000.0,Fit,3,4.3,8,4.0,5,5.0
-"General ""Hansi” Topete",General_Hansi_Topete,Defender,Alaves,Yusi Enriquez,12,0,1010000,50000.0,Fit,3,4.0,8,4.0,4,4.0
-"General ""Hansi” Topete",General_Hansi_Topete,Defender,Levante,Nacho Perez,8,0,840000,30000.0,Fit,3,2.7,1,1.0,7,3.5
-"General ""Hansi” Topete",General_Hansi_Topete,Defender,Celta,Galan,7,0,2590000,-50000.0,Fit,2,3.5,2,2.0,5,5.0
-"General ""Hansi” Topete",General_Hansi_Topete,Midfielder/Forward,Betis,Roro Riquelme,25,0,3790000,110000.0,Fit,3,8.3,14,14.0,11,5.5
-"General ""Hansi” Topete",General_Hansi_Topete,Midfielder,Espanyol,Alex Calatrava,16,0,4680000,0.0,Fit,3,5.3,14,7.0,2,2.0
+"General ""Hansi” Topete",General_Hansi_Topete,Goalkeeper,Sevilla,Odysseas,8,0,3850000,-50000.0,Fit,3,2.7,2,1.0,6,6.0
+"General ""Hansi” Topete",General_Hansi_Topete,Goalkeeper,Rayo Vallecano,Dani Cardenas,5,0,1730000,10000.0,Fit,2,2.5,3,3.0,2,2.0
+"General ""Hansi” Topete",General_Hansi_Topete,Defender,Athletic,Paredes,18,0,1980000,100000.0,Fit,2,9.0,12,12.0,6,6.0
+"General ""Hansi” Topete",General_Hansi_Topete,Defender,Espanyol,Hinojo,13,0,2020000,70000.0,Fit,3,4.3,8,4.0,5,5.0
+"General ""Hansi” Topete",General_Hansi_Topete,Defender,Alaves,Yusi Enriquez,12,0,1060000,50000.0,Fit,3,4.0,8,4.0,4,4.0
+"General ""Hansi” Topete",General_Hansi_Topete,Defender,Levante,Nacho Perez,8,0,860000,20000.0,Fit,3,2.7,1,1.0,7,3.5
+"General ""Hansi” Topete",General_Hansi_Topete,Defender,Celta,Galan,7,0,2530000,-60000.0,Fit,2,3.5,2,2.0,5,5.0
+"General ""Hansi” Topete",General_Hansi_Topete,Midfielder/Forward,Betis,Roro Riquelme,25,0,3890000,100000.0,Fit,3,8.3,14,14.0,11,5.5
+"General ""Hansi” Topete",General_Hansi_Topete,Midfielder,Espanyol,Alex Calatrava,16,0,4670000,-10000.0,Fit,3,5.3,14,7.0,2,2.0
 "General ""Hansi” Topete",General_Hansi_Topete,Midfielder/Defender/Forward,Betis,Ruibal,0,120,310000,0.0,Injured. Surgery on the external meniscus of his right knee. Estimated return: Indefinite return.,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",General_Hansi_Topete,Forward,Real Madrid,Mbappe,38,0,24750000,30000.0,Fit,3,12.7,34,17.0,4,4.0
-"General ""Hansi” Topete",General_Hansi_Topete,Forward/Defender/Midfielder,Alaves,Angel Perez,16,0,3500000,50000.0,Fit,3,5.3,11,5.5,5,5.0
-"General ""Hansi” Topete",General_Hansi_Topete,Forward/Midfielder,Levante,Thiago Fernandez,7,0,1370000,10000.0,Fit,2,3.5,4,4.0,3,3.0
-"General ""Hansi” Topete",General_Hansi_Topete,Forward,Atletico,Julian Alvarez,0,114,7940000,-110000.0,Doubtful. Indisposition.,1,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",General_Hansi_Topete,Forward,Real Madrid,Endrick,0,-1,1450000,-20000.0,Doubtful. Muscle injury involving the tendon.,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Forward,Real Madrid,Mbappe,38,0,24770000,20000.0,Fit,3,12.7,34,17.0,4,4.0
+"General ""Hansi” Topete",General_Hansi_Topete,Forward/Defender/Midfielder,Alaves,Angel Perez,16,0,3540000,40000.0,Fit,3,5.3,11,5.5,5,5.0
+"General ""Hansi” Topete",General_Hansi_Topete,Forward/Midfielder,Levante,Thiago Fernandez,7,0,1380000,10000.0,Fit,2,3.5,4,4.0,3,3.0
+"General ""Hansi” Topete",General_Hansi_Topete,Forward,Atletico,Julian Alvarez,0,114,7870000,-70000.0,Fit,1,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Forward,Real Madrid,Endrick,0,-1,1430000,-20000.0,Doubtful. Muscle injury involving the tendon.,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Coach,Barcelona,Hansi Flick,9,0,4950000,-10000.0,Fit,3,3.0,6,3.0,3,3.0

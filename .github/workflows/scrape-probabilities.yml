@@ -48,6 +48,7 @@ jobs:
           pip install "beautifulsoup4==4.12.3"
           pip install "pandas==2.2.2"
           pip install "playwright==1.52.0"
+          pip install "matplotlib"
           pip install -r requirements.txt --no-deps || true
 
       - name: Install Playwright browsers + OS deps

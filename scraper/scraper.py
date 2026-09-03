@@ -1554,19 +1554,37 @@ def run(playwright: Playwright) -> None:
     offers = get_my_offers(page)
     la_liga_players = get_la_liga_players()
 
-    def _offer_player_id(o):
+    def _offer_player(o):
+        """requestedPlayers[0] is a bare numeric id for Biwenger's own
+        algorithmic "instant sale" offers (from: null), which is all this
+        was ever built against — see get_my_offers' docstring. A live
+        manager-to-manager offer (like the direct offers this bot can
+        place) embeds a full player object there instead, which broke the
+        bare-id assumption with `TypeError: unhashable type: 'dict'` from
+        la_liga_players.get(<dict>). Handle both shapes, and use the
+        embedded name directly when there is one instead of a second
+        la_liga_players lookup.
+        """
         players = o.get("requestedPlayers") or []
-        return players[0] if players else None
+        if not players:
+            return None, None
+        p = players[0]
+        if isinstance(p, dict):
+            return p.get("id"), p.get("name")
+        return p, None
 
-    offer_rows = [{
-        "player_id": _offer_player_id(o),
-        "player_name": (la_liga_players.get(_offer_player_id(o)) or {}).get("name"),
-        "price": o.get("amount"),
-        "date": o.get("created"),
-        "until": o.get("until"),
-        "raw_json": json.dumps(o),
-        "scraped_at": pd.Timestamp.now().strftime("%Y-%m-%d"),
-    } for o in offers]
+    offer_rows = []
+    for o in offers:
+        player_id, embedded_name = _offer_player(o)
+        offer_rows.append({
+            "player_id": player_id,
+            "player_name": embedded_name or (la_liga_players.get(player_id) or {}).get("name"),
+            "price": o.get("amount"),
+            "date": o.get("created"),
+            "until": o.get("until"),
+            "raw_json": json.dumps(o),
+            "scraped_at": pd.Timestamp.now().strftime("%Y-%m-%d"),
+        })
     offer_columns = ["player_id", "player_name", "price", "date", "until", "raw_json", "scraped_at"]
     pd.DataFrame(offer_rows, columns=offer_columns).to_csv("csvs/others/my_offers.csv", index=False)
     print(f"Saved {len(offer_rows)} pending offers → my_offers.csv")

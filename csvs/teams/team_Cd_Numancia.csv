@@ -1,20 +1,19 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-CD Numancia,Cd_Numancia,Goalkeeper,Levante,Ryan,21,0,4390000,20000.0,Fit,3,7.0,4,4.0,17,8.5
-CD Numancia,Cd_Numancia,Goalkeeper,Deportivo,Leo Roman,20,0,5570000,10000.0,Fit,3,6.7,13,6.5,7,7.0
-CD Numancia,Cd_Numancia,Defender,Osasuna,Arguibide,16,0,1560000,130000.0,Fit,3,5.3,12,6.0,4,4.0
-CD Numancia,Cd_Numancia,Defender,Barcelona,Gerard Martin,14,0,5270000,20000.0,Fit,2,7.0,7,7.0,7,7.0
-CD Numancia,Cd_Numancia,Defender,Villarreal,Foyth,14,0,3700000,-20000.0,Doubtful. Muscle discomfort.,3,4.7,0,0.0,14,4.7
-CD Numancia,Cd_Numancia,Defender,Atletico,Grimaldo,5,0,5760000,-70000.0,Fit,2,2.5,3,3.0,2,2.0
-CD Numancia,Cd_Numancia,Defender,Celta,Marcos Alonso,5,0,3590000,-10000.0,Fit,2,2.5,-2,-2.0,7,7.0
-CD Numancia,Cd_Numancia,Defender,Athletic,Yeray,5,0,1620000,-30000.0,Fit,2,2.5,3,3.0,2,2.0
-CD Numancia,Cd_Numancia,Defender,Espanyol,Cabrera,0,174,3070000,20000.0,Fit,0,0.0,0,0.0,0,0.0
-CD Numancia,Cd_Numancia,Midfielder,Alaves,Mikel Rodriguez,18,0,2510000,70000.0,Fit,3,6.0,15,7.5,3,3.0
-CD Numancia,Cd_Numancia,Midfielder,Celta,Miguel Roman,17,0,3550000,40000.0,Fit,3,5.7,10,5.0,7,7.0
-CD Numancia,Cd_Numancia,Midfielder,Osasuna,Iker Munoz,15,0,1600000,110000.0,Fit,3,5.0,10,5.0,5,5.0
-CD Numancia,Cd_Numancia,Midfielder,Betis,Fornals,6,0,8330000,-120000.0,Fit,3,2.0,4,4.0,2,1.0
-CD Numancia,Cd_Numancia,Forward,Deportivo,Aubameyang,36,0,10510000,210000.0,Fit,3,12.0,25,12.5,11,11.0
-CD Numancia,Cd_Numancia,Forward,Osasuna,Budimir,22,0,10650000,80000.0,Fit,3,7.3,16,8.0,6,6.0
-CD Numancia,Cd_Numancia,Forward,Sevilla,Miguel Sierra,22,0,3410000,90000.0,Fit,3,7.3,16,8.0,6,6.0
-CD Numancia,Cd_Numancia,Forward,Racing,Inigo Vicente,20,0,6340000,40000.0,Fit,3,6.7,16,8.0,4,4.0
+CD Numancia,Cd_Numancia,Goalkeeper,Levante,Ryan,21,0,4400000,10000.0,Fit,3,7.0,4,4.0,17,8.5
+CD Numancia,Cd_Numancia,Goalkeeper,Deportivo,Leo Roman,20,0,5580000,10000.0,Fit,3,6.7,13,6.5,7,7.0
+CD Numancia,Cd_Numancia,Defender,Osasuna,Arguibide,16,0,1690000,130000.0,Fit,3,5.3,12,6.0,4,4.0
+CD Numancia,Cd_Numancia,Defender,Barcelona,Gerard Martin,14,0,5280000,10000.0,Fit,2,7.0,7,7.0,7,7.0
+CD Numancia,Cd_Numancia,Defender,Celta,Marcos Alonso,10,0,3560000,-30000.0,Fit,3,3.3,-2,-2.0,12,6.0
+CD Numancia,Cd_Numancia,Defender,Atletico,Grimaldo,5,0,5680000,-80000.0,Fit,2,2.5,3,3.0,2,2.0
+CD Numancia,Cd_Numancia,Defender,Athletic,Yeray,5,0,1580000,-40000.0,Fit,2,2.5,3,3.0,2,2.0
+CD Numancia,Cd_Numancia,Defender,Espanyol,Cabrera,0,174,3080000,10000.0,Fit,0,0.0,0,0.0,0,0.0
+CD Numancia,Cd_Numancia,Midfielder,Celta,Miguel Roman,20,0,3580000,30000.0,Fit,4,5.0,10,5.0,10,5.0
+CD Numancia,Cd_Numancia,Midfielder,Alaves,Mikel Rodriguez,18,0,2510000,0.0,Doubtful. Possible serious knee injury.,3,6.0,15,7.5,3,3.0
+CD Numancia,Cd_Numancia,Midfielder,Osasuna,Iker Munoz,15,0,1710000,110000.0,Fit,3,5.0,10,5.0,5,5.0
+CD Numancia,Cd_Numancia,Midfielder,Betis,Fornals,6,0,8190000,-140000.0,Fit,3,2.0,4,4.0,2,1.0
+CD Numancia,Cd_Numancia,Forward,Deportivo,Aubameyang,36,0,10720000,210000.0,Fit,3,12.0,25,12.5,11,11.0
+CD Numancia,Cd_Numancia,Forward,Osasuna,Budimir,22,0,10720000,70000.0,Fit,3,7.3,16,8.0,6,6.0
+CD Numancia,Cd_Numancia,Forward,Sevilla,Miguel Sierra,22,0,3500000,90000.0,Fit,3,7.3,16,8.0,6,6.0
+CD Numancia,Cd_Numancia,Forward,Racing,Inigo Vicente,20,0,6380000,40000.0,Fit,3,6.7,16,8.0,4,4.0
 CD Numancia,Cd_Numancia,Forward/Midfielder,Valencia,Sergi Canos,0,0,150000,0.0,Injured. Cruciate ligament injury. Estimated return: Undetermined.,0,0.0,0,0.0,0,0.0
 CD Numancia,Cd_Numancia,Coach,Athletic,Terzić,3,0,1120000,0.0,Fit,3,1.0,0,0.0,3,1.5

@@ -1030,6 +1030,16 @@ def build_recommendations(conn, date):
         }
 
     buy_recommendations = buy_recommendations.copy()
+    # A thin day — nothing cleared the score/start_pct bar above — leaves
+    # buy_recommendations with 0 rows, which crashes several of the
+    # scalar column assignments below: `df.loc[:, col] = scalar` raises
+    # ValueError: cannot set a frame with no defined index and a scalar
+    # on an empty-index frame (confirmed live, 2026-09-04 — a real "no
+    # buy candidates today" market state, not a code path anyone had hit
+    # before). sell_recommendations is already fully computed above, so
+    # it's safe to return here with nothing further to add.
+    if not len(buy_recommendations):
+        return buy_recommendations, sell_recommendations
     # Affordability is checked against the TOP of the predicted range,
     # not its midpoint: the point of a range is that the high end is what
     # it takes to win a contested auction, and "✅ in balance" followed by

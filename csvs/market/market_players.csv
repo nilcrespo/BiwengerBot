@@ -1,21 +1,21 @@
 position,club,name,price,change,status,owner,last_sale,recent_pts,this_season_pts,last_season_pts,scraped_at
-Defender,Deportivo,Gimenez,1040000,250000.0,,Free Agent,"1,040,000",33.0,6,0,2026-09-04
-Midfielder,Athletic,De Galarreta,2740000,50000.0,,Free Agent,"2,740,000",92.0,11,0,2026-09-04
-Goalkeeper,Sevilla,Fran Gonzalez,270000,0.0,,Free Agent,"270,000",0.0,0,0,2026-09-04
-Goalkeeper,Valencia,Dimitrievski,3510000,-50000.0,,Free Agent,"3,510,000",415.0,10,0,2026-09-04
-Defender,Espanyol,Gorosabel,380000,40000.0,,Free Agent,"380,000",0.0,0,69,2026-09-04
-Midfielder,Osasuna,Torro,1420000,-20000.0,,Free Agent,"1,420,000",333.0,9,0,2026-09-04
-Forward/Midfielder,Valencia,Danjuma,1990000,0.0,,Free Agent,"1,990,000",433.0,10,0,2026-09-04
-Forward/Midfielder,Espanyol,Jofre Carreras,250000,0.0,,Free Agent,"250,000",201.0,3,0,2026-09-04
-Forward,Deportivo,Adama Traore,3630000,50000.0,,Free Agent,"3,630,000",0.0,0,0,2026-09-04
-Defender,Rayo Vallecano,Ratiu,3420000,-60000.0,,Free Agent,"3,420,000",21.0,3,0,2026-09-04
-Defender,Espanyol,El Hilali,2540000,20000.0,,Free Agent,"2,540,000",533.0,11,0,2026-09-04
-Forward/Midfielder,Sevilla,Peque,2800000,10000.0,,Free Agent,"2,800,000",3410.0,17,0,2026-09-04
-Goalkeeper,Getafe,Letacek,150000,0.0,,Free Agent,"150,000",0.0,0,0,2026-09-04
-Goalkeeper,Villarreal,Luiz Junior,2600000,-20000.0,,Free Agent,"2,600,000",512.0,2,0,2026-09-04
-Defender,Villarreal,Renato Veiga,3830000,-50000.0,,Free Agent,"3,830,000",336.0,12,0,2026-09-04
-Defender,Getafe,Boselli,380000,-10000.0,,Free Agent,"380,000",31.0,4,0,2026-09-04
-Defender,Racing,Mantilla,1430000,10000.0,,Free Agent,"1,430,000",522.0,9,0,2026-09-04
-Midfielder,Malaga,Ramon Enriquez,340000,0.0,,Free Agent,"340,000",32.0,5,0,2026-09-04
-Defender,Espanyol,Drkusic,1790000,-30000.0,,Free Agent,"1,790,000",33.0,6,0,2026-09-04
-Coach,Deportivo,Hidalgo,720000,20000.0,,Free Agent,"720,000",311.0,5,0,2026-09-04
+Defender,Valencia,Maffeo,2350000,-30000.0,,Free Agent,"2,350,000",43.0,7,0,2026-09-05
+Midfielder,Osasuna,Osambela,150000,0.0,,Free Agent,"150,000",3.0,3,0,2026-09-05
+Goalkeeper,Valencia,Cristian Rivero,150000,0.0,,Free Agent,"150,000",0.0,0,3,2026-09-05
+Defender/Midfielder,Elche,Ruben Sanchez,330000,30000.0,,Free Agent,"330,000",0.0,0,73,2026-09-05
+Midfielder,Espanyol,Javi Hernandez,3540000,50000.0,,Free Agent,"3,540,000",467.0,17,0,2026-09-05
+Defender,Elche,Barzic,150000,0.0,,Free Agent,"150,000",0.0,0,0,2026-09-05
+Midfielder/Forward,Real Sociedad,Zakharyan,150000,0.0,,Free Agent,"150,000",2.0,2,0,2026-09-05
+Forward/Midfielder,Sevilla,Isaac Romero,2850000,-40000.0,,Free Agent,"2,850,000",2141.0,15,0,2026-09-05
+Forward/Midfielder,Getafe,Uche,1690000,-20000.0,,Free Agent,"1,690,000",0.0,0,22,2026-09-05
+Forward,Malaga,Adrian Nino,810000,-10000.0,,Free Agent,"810,000",0.0,0,0,2026-09-05
+Defender,Sevilla,Julio Diaz,870000,-10000.0,,Free Agent,"870,000",23.0,5,0,2026-09-05
+Defender,Villarreal,Freeman,620000,10000.0,,Free Agent,"620,000",40.0,4,0,2026-09-05
+Defender,Alaves,Ville Koski,1830000,20000.0,,Free Agent,"1,830,000",523.0,10,0,2026-09-05
+Forward,Real Sociedad,Ochieng,170000,-10000.0,,Free Agent,"170,000",2.0,2,0,2026-09-05
+Defender,Malaga,Diego Murillo,150000,0.0,,Free Agent,"150,000",0.0,0,0,2026-09-05
+Defender,Malaga,Angel Recio,380000,0.0,,Free Agent,"380,000",121.0,2,0,2026-09-05
+Forward,Rayo Vallecano,Tsitaishvili,470000,-10000.0,,Free Agent,"470,000",0.0,0,0,2026-09-05
+Defender,Espanyol,Hartman,1180000,-20000.0,,Free Agent,"1,180,000",0.0,0,0,2026-09-05
+Forward,Racing,Yassir Zabiri,3230000,240000.0,,Free Agent,"3,230,000",2112.0,24,0,2026-09-05
+Defender,Elche,Revivo,2390000,-130000.0,,Free Agent,"2,390,000",0.0,0,0,2026-09-05

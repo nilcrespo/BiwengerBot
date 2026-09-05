@@ -1,17 +1,18 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Manchester Tity,Manchester_Tity,Goalkeeper,Espanyol,Dmitrovic,18,0,4800000,10000.0,Fit,3,6.0,10,5.0,8,8.0
+Manchester Tity,Manchester_Tity,Goalkeeper,Espanyol,Dmitrovic,18,0,4810000,10000.0,Fit,3,6.0,10,5.0,8,8.0
 Manchester Tity,Manchester_Tity,Goalkeeper,Espanyol,Fortuno,0,8,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Manchester Tity,Manchester_Tity,Defender,Barcelona,Xavi Espart,18,0,3480000,140000.0,Fit,3,6.0,10,5.0,8,8.0
-Manchester Tity,Manchester_Tity,Defender,Real Sociedad,Jon Martin,16,0,3910000,-20000.0,Fit,4,4.0,10,5.0,6,3.0
-Manchester Tity,Manchester_Tity,Defender,Levante,Mandi,14,0,2650000,40000.0,Fit,3,4.7,4,4.0,10,5.0
-Manchester Tity,Manchester_Tity,Defender,Getafe,Zaid Romero,11,0,3290000,-30000.0,Fit,3,3.7,5,5.0,6,3.0
+Manchester Tity,Manchester_Tity,Defender,Barcelona,Xavi Espart,18,0,3600000,120000.0,Fit,3,6.0,10,5.0,8,8.0
+Manchester Tity,Manchester_Tity,Defender,Real Sociedad,Jon Martin,16,0,3910000,0.0,Fit,4,4.0,10,5.0,6,3.0
+Manchester Tity,Manchester_Tity,Defender,Levante,Mandi,14,0,2670000,20000.0,Fit,3,4.7,4,4.0,10,5.0
+Manchester Tity,Manchester_Tity,Defender,Getafe,Zaid Romero,11,0,3270000,-20000.0,Fit,3,3.7,5,5.0,6,3.0
 Manchester Tity,Manchester_Tity,Defender,Betis,Angel Ortiz,4,0,180000,0.0,Fit,1,4.0,0,0.0,4,4.0
 Manchester Tity,Manchester_Tity,Defender,Malaga,Moussa Diarra,0,0,150000,0.0,Injured. Muscle injury. Estimated return: Indefinite return.,0,0.0,0,0.0,0,0.0
-Manchester Tity,Manchester_Tity,Midfielder,Malaga,Dani Lorenzo,12,0,3670000,-10000.0,Fit,2,6.0,6,6.0,6,6.0
-Manchester Tity,Manchester_Tity,Midfielder,Atletico,Mendoza,7,0,920000,-20000.0,Fit,3,2.3,6,3.0,1,1.0
-Manchester Tity,Manchester_Tity,Midfielder,Elche,Javi Morcillo,5,0,250000,10000.0,Fit,2,2.5,0,0.0,5,2.5
-Manchester Tity,Manchester_Tity,Forward,Barcelona,Yamal,28,0,21120000,40000.0,Fit,3,9.3,25,12.5,3,3.0
-Manchester Tity,Manchester_Tity,Forward,Barcelona,Adeyemi,20,0,8520000,-60000.0,Fit,3,6.7,10,5.0,10,10.0
-Manchester Tity,Manchester_Tity,Forward,Villarreal,Mikautadze,17,0,10760000,-10000.0,Fit,3,5.7,0,0.0,17,5.7
-Manchester Tity,Manchester_Tity,Forward,Elche,Fer Nino,15,0,2690000,-70000.0,Fit,3,5.0,3,3.0,12,6.0
-Manchester Tity,Manchester_Tity,Forward,Barcelona,Bisiwu,0,0,420000,-30000.0,Injured. Severe ankle injury. Estimated return: Mid-September.,0,0.0,0,0.0,0,0.0
+Manchester Tity,Manchester_Tity,Midfielder,Malaga,Dani Lorenzo,12,0,3640000,-30000.0,Fit,2,6.0,6,6.0,6,6.0
+Manchester Tity,Manchester_Tity,Midfielder,Atletico,Mendoza,7,0,910000,-10000.0,Fit,3,2.3,6,3.0,1,1.0
+Manchester Tity,Manchester_Tity,Midfielder,Elche,Javi Morcillo,5,0,250000,0.0,Fit,2,2.5,0,0.0,5,2.5
+Manchester Tity,Manchester_Tity,Forward,Barcelona,Yamal,28,0,21170000,50000.0,Fit,3,9.3,25,12.5,3,3.0
+Manchester Tity,Manchester_Tity,Forward,Barcelona,Adeyemi,20,0,8470000,-50000.0,Fit,3,6.7,10,5.0,10,10.0
+Manchester Tity,Manchester_Tity,Forward,Villarreal,Mikautadze,17,0,10730000,-30000.0,Fit,3,5.7,0,0.0,17,5.7
+Manchester Tity,Manchester_Tity,Forward/Midfielder,Sevilla,Peque,17,0,2800000,0.0,Fit,3,5.7,13,6.5,4,4.0
+Manchester Tity,Manchester_Tity,Forward,Elche,Fer Nino,15,0,2660000,-30000.0,Fit,3,5.0,3,3.0,12,6.0
+Manchester Tity,Manchester_Tity,Forward,Barcelona,Bisiwu,0,0,400000,-20000.0,Injured. Severe ankle injury. Estimated return: Mid-September.,0,0.0,0,0.0,0,0.0

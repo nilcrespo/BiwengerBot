@@ -1,14 +1,15 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Locombia FC,Locombia_Fc,Goalkeeper,Betis,Alvaro Valles,16,0,4480000,10000.0,Fit,3,5.3,5,5.0,11,5.5
-Locombia FC,Locombia_Fc,Defender/Midfielder,Celta,Carreira,15,0,2760000,-20000.0,Fit,4,3.8,8,4.0,7,3.5
+Locombia FC,Locombia_Fc,Goalkeeper,Betis,Alvaro Valles,28,0,4530000,50000.0,Fit,4,7.0,17,8.5,11,5.5
+Locombia FC,Locombia_Fc,Defender/Midfielder,Celta,Carreira,15,0,2740000,-20000.0,Fit,4,3.8,8,4.0,7,3.5
 Locombia FC,Locombia_Fc,Defender,Racing,Jorge Salinas,13,0,3170000,0.0,Fit,3,4.3,9,4.5,4,4.0
-Locombia FC,Locombia_Fc,Defender,Atletico,Cristian Romero,0,0,5360000,-80000.0,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Locombia_Fc,Midfielder,Real Madrid,Bellingham,40,0,17570000,130000.0,Fit,3,13.3,28,14.0,12,12.0
-Locombia FC,Locombia_Fc,Midfielder,Atletico,Kang-In Lee,23,0,8670000,120000.0,Fit,3,7.7,17,8.5,6,6.0
-Locombia FC,Locombia_Fc,Midfielder/Forward,Real Sociedad,Luka Sucic,15,0,3050000,60000.0,Fit,4,3.8,5,2.5,10,5.0
-Locombia FC,Locombia_Fc,Midfielder/Forward,Villarreal,Moleiro,11,0,7880000,-100000.0,Fit,3,3.7,0,0.0,11,3.7
-Locombia FC,Locombia_Fc,Midfielder/Defender,Osasuna,Moncayola,10,0,2900000,-20000.0,Fit,3,3.3,8,4.0,2,2.0
-Locombia FC,Locombia_Fc,Forward/Midfielder,Sevilla,Ejuke,21,0,2790000,160000.0,Fit,3,7.0,9,4.5,12,12.0
-Locombia FC,Locombia_Fc,Forward,Alaves,Boye,13,0,3310000,40000.0,Fit,2,6.5,10,10.0,3,3.0
-Locombia FC,Locombia_Fc,Forward,Villarreal,Gerard Moreno,12,0,6480000,-40000.0,Fit,3,4.0,0,0.0,12,4.0
-Locombia FC,Locombia_Fc,Forward,Valencia,Ryunosuke Sato,8,0,2990000,-70000.0,Fit,3,2.7,7,3.5,1,1.0
+Locombia FC,Locombia_Fc,Defender,Atletico,Cristian Romero,0,0,5320000,-40000.0,Fit,0,0.0,0,0.0,0,0.0
+Locombia FC,Locombia_Fc,Midfielder,Real Madrid,Bellingham,44,0,17680000,110000.0,Fit,4,11.0,28,14.0,16,8.0
+Locombia FC,Locombia_Fc,Midfielder,Atletico,Kang-In Lee,23,0,8770000,100000.0,Fit,3,7.7,17,8.5,6,6.0
+Locombia FC,Locombia_Fc,Midfielder/Forward,Real Sociedad,Luka Sucic,15,0,3070000,20000.0,Fit,4,3.8,5,2.5,10,5.0
+Locombia FC,Locombia_Fc,Midfielder/Forward,Villarreal,Moleiro,11,0,7810000,-70000.0,Fit,3,3.7,0,0.0,11,3.7
+Locombia FC,Locombia_Fc,Midfielder,Athletic,De Galarreta,11,0,2780000,40000.0,Fit,2,5.5,2,2.0,9,9.0
+Locombia FC,Locombia_Fc,Midfielder/Defender,Osasuna,Moncayola,10,0,2880000,-20000.0,Fit,3,3.3,8,4.0,2,2.0
+Locombia FC,Locombia_Fc,Forward/Midfielder,Sevilla,Ejuke,21,0,2920000,130000.0,Fit,3,7.0,9,4.5,12,12.0
+Locombia FC,Locombia_Fc,Forward,Alaves,Boye,13,0,3340000,30000.0,Fit,2,6.5,10,10.0,3,3.0
+Locombia FC,Locombia_Fc,Forward,Villarreal,Gerard Moreno,12,0,6450000,-30000.0,Fit,3,4.0,0,0.0,12,4.0
+Locombia FC,Locombia_Fc,Forward,Valencia,Ryunosuke Sato,8,0,2950000,-40000.0,Fit,3,2.7,7,3.5,1,1.0

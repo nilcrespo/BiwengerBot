@@ -167,6 +167,12 @@ def backtest(conn, txns, latest_date):
     )
     prior_model.markup_per_bidder = recommenders.FALLBACK_MARKUP_PER_BIDDER
     prior_model.calibration_samples = 0
+    # Same reasoning: bidder_ratio_samples would otherwise include every
+    # auction being scored below, which is exactly the future-knowledge
+    # leak this "prior knowledge only" run exists to avoid. Emptying it
+    # drops suggest() back to the Normal-distribution fallback, matching
+    # what the model would genuinely have had on day one of the board feed.
+    prior_model.bidder_ratio_samples = []
     # (2) Calibrated on everything, including the rows being scored.
     tuned_model, _, _ = recommenders.build_bid_competition_model(
         conn, latest_date, my_team_id=my_team_id

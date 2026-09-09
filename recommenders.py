@@ -195,23 +195,31 @@ def _bucket_label(price):
 FALLBACK_MARKUP_PER_BIDDER = 0.02
 # Real transactions needed before the observed premium is trusted on its
 # own. Below this, observed and fallback are blended proportionally
-# rather than switching over at a cliff.
-MIN_CALIBRATION_SAMPLES = 5
-# The predicted range is "what if a couple more (or fewer) managers show
-# up than expected" — a real, interpretable quantity, rather than an
-# arbitrary ± percentage band.
-#
-# KNOWN LIMITATION (checked against 9 real auctions, 2026-08-22): this is a
-# fixed constant, not learned from data, and it is too narrow to separate
-# win_bid_50/75/90 in practice — on all 9 real auctions checked, the three
-# win-probability bids either all won or all lost together, because a ±1.5
-# bidder swing moves the price by only a few percent while two of the 9 real
-# auctions (Miguel Sierra +73.6% over asking, Nacho Pérez +52.5%) were
-# blowouts the bidder-count model can't reach at any reasonable win
-# probability. Making this the observed spread of real outcomes (once
-# there's enough of them to estimate a spread from, not just 9 points) is
-# the natural next step — same "needs more volume first" situation as
-# per-rival behavioral profiling.
+# rather than switching over at a cliff. Raised from 5 to 20 on
+# 2026-09-09: with just 5, a backtest against 90 real auctions showed the
+# "fully calibrated" (weight=1.0 at n=51) markup made predictions WORSE
+# than the untuned fallback (MAPE 11.1% in-sample vs 7.3% out-of-sample) —
+# 5 real transactions is an anecdote, not enough to earn full trust over a
+# deliberately conservative default.
+MIN_CALIBRATION_SAMPLES = 20
+# Real auctions needed before the empirical bidder-count spread (see
+# BidCompetitionModel.suggest's use of bidder_ratio_samples) replaces the
+# Normal-distribution fallback below. Same reasoning as
+# MIN_CALIBRATION_SAMPLES: read the real shape once there's enough of it,
+# don't lean on a handful of points.
+MIN_QUANTILE_SAMPLES = 20
+# FALLBACK ONLY as of 2026-09-09 — used solely when fewer than
+# MIN_QUANTILE_SAMPLES real auctions are available to read the spread off
+# directly (see bidder_ratio_samples). Checked against 9 real auctions on
+# 2026-08-22 and again against 90 on 2026-09-09: bidder counts are NOT
+# Normally distributed around the mean — 43% of the 90 auctions (39/90)
+# had exactly ONE bidder while a handful ran to 6-10, a right-skewed,
+# near-bimodal shape no symmetric bell curve can represent. That mismatch
+# was the direct cause of two measured symptoms: bids up to 33% short on
+# real bidding wars (mean error worsens monotonically from +1.6% at 1
+# actual bidder to -33.5% at 10), and a bid aimed at "90% safe" that only
+# actually won 64% of the time. BIDDER_UNCERTAINTY stays only for the
+# cold-start case (a fresh board feed with too few real auctions yet).
 BIDDER_UNCERTAINTY = 1.5
 # A falling price is evidence THIS player isn't in demand, so the
 # bracket-wide competition average doesn't apply to him (unchanged
@@ -290,12 +298,17 @@ class BidCompetitionModel:
     class rather than a closure inside build_recommendations.
     """
 
-    def __init__(self, rivals, bucket_avg_bids, markup_per_bidder, calibration_samples):
+    def __init__(self, rivals, bucket_avg_bids, markup_per_bidder, calibration_samples,
+                 bidder_ratio_samples=None):
         # rivals: [{'team_id', 'team_name', 'capacity', 'depth': {POS: float}}]
         self.rivals = rivals
         self.bucket_avg_bids = bucket_avg_bids
         self.markup_per_bidder = markup_per_bidder
         self.calibration_samples = calibration_samples
+        # Sorted list of real_bidders / bucket_avg_bidders ratios from
+        # completed auctions — the empirical spread that replaces
+        # BIDDER_UNCERTAINTY's Normal assumption once there's enough of it.
+        self.bidder_ratio_samples = bidder_ratio_samples or []
 
     # --- competitor weighting -------------------------------------------------
     @staticmethod
@@ -424,26 +437,42 @@ class BidCompetitionModel:
             markup = max(n_bidders - 1, 0.0) * self.markup_per_bidder * dampen
             return base * (1 + markup)
 
-        low = max(_at(bidders - BIDDER_UNCERTAINTY), price)
-        high = _at(bidders + BIDDER_UNCERTAINTY)
+        # Win-probability bids: "how many bidders actually show up" is NOT
+        # well modeled as Normal(mean=bidders, sd=BIDDER_UNCERTAINTY) — a
+        # backtest against 90 real auctions (2026-09-09) found bidder
+        # counts right-skewed/near-bimodal (43% had exactly 1, a handful
+        # ran 6-10), which a symmetric bell curve can't represent. Instead,
+        # read the spread directly off real auctions: bidder_ratio_samples
+        # holds real_bidders / bucket_avg_bidders from completed auctions,
+        # sorted, so its p-th percentile IS the empirical answer to "how
+        # much more (or less) contested than the bucket average does the
+        # top p% of real auctions get" — applied multiplicatively to this
+        # player's own pressure-adjusted `bidders` estimate rather than
+        # the bucket average alone, since pressure already knows more
+        # about THIS listing than the bucket does. Falls back to the old
+        # Normal approximation only when too few real auctions exist yet
+        # to trust an empirical quantile (see MIN_QUANTILE_SAMPLES).
+        use_empirical = len(self.bidder_ratio_samples) >= MIN_QUANTILE_SAMPLES
+
+        def _n_at_quantile(p):
+            if use_empirical:
+                ratio = _empirical_quantile(self.bidder_ratio_samples, p)
+                return max(bidders * ratio, 1.0)
+            bidder_dist = NormalDist(bidders, max(BIDDER_UNCERTAINTY, 1e-6))
+            return max(bidder_dist.inv_cdf(min(max(p, 0.001), 0.999)), 1.0)
+
+        # Since _at() is monotonic in n_bidders, "the bid that clears win
+        # probability p" is just _at() evaluated at the bidder count whose
+        # quantile is p. A bid can never need fewer than 1 bidder's worth
+        # (nobody signs for under asking), so n is floored at 1 regardless
+        # of how low p is — enforced inside _n_at_quantile.
+        low = max(_at(_n_at_quantile(0.25)), price)
+        high = _at(_n_at_quantile(0.75))
         mid = _at(bidders)
 
-        # Win-probability bids: treat the number of bidders who show up as
-        # roughly Normal(mean=bidders, sd=BIDDER_UNCERTAINTY) — the same
-        # spread already used for low/high — and invert it. Since _at() is
-        # monotonic in n_bidders, "the bid that clears win probability p"
-        # is just _at() evaluated at the bidder count whose CDF is p. A
-        # bid can never need fewer than 1 bidder's worth (nobody signs for
-        # under asking), so n is floored at 1 regardless of how low p is.
-        bidder_dist = NormalDist(bidders, max(BIDDER_UNCERTAINTY, 1e-6))
-
-        def _bid_for_win_prob(p):
-            n_needed = max(bidder_dist.inv_cdf(min(max(p, 0.001), 0.999)), 1.0)
-            return _at(n_needed)
-
-        win_50 = _bid_for_win_prob(0.50)
-        win_75 = _bid_for_win_prob(0.75)
-        win_90 = _bid_for_win_prob(0.90)
+        win_50 = _at(_n_at_quantile(0.50))
+        win_75 = _at(_n_at_quantile(0.75))
+        win_90 = _at(_n_at_quantile(0.90))
 
         # The original flat €10,000 rounding collapses the whole range to
         # a single number on cheap players — a €210k listing's realistic
@@ -469,6 +498,61 @@ class BidCompetitionModel:
             'top_competitors': ', '.join(c['team_name'] for c in comps[:3]) or None,
             'competitor_count': len(comps),
         }
+
+
+def _empirical_quantile(sorted_values, p):
+    """Nearest-rank percentile from a pre-sorted sample — reads off what
+    real observations actually did at/below this percentile, with no
+    assumption about the shape of the distribution they came from."""
+    if not sorted_values:
+        return None
+    idx = min(int(p * len(sorted_values)), len(sorted_values) - 1)
+    return sorted_values[idx]
+
+
+def _bidder_ratio_samples(conn, date, bucket_avg_bids):
+    """Sorted real_bidders / bucket_avg_bidders ratios from completed
+    auctions — the empirical spread BidCompetitionModel.suggest reads
+    quantiles off, in place of assuming bidder counts are Normally
+    distributed (see BIDDER_UNCERTAINTY's docstring for why that
+    assumption was rejected).
+
+    Only transactions first captured on or before `date`, same
+    look-ahead discipline as _markup_per_bidder — a backtest should see
+    only what would genuinely have been known at the time.
+
+    Approximation worth knowing about: bucket_avg_bids is the CURRENT
+    run's bucket table, not a reconstruction of what the bucket average
+    was on each historical transaction's own day (bid_history_buckets
+    isn't indexed for that lookup cheaply). Bucket averages move slowly
+    round to round, so this is a minor approximation — the same kind
+    this module already accepts elsewhere (e.g. _markup_per_bidder's
+    price-reconstruction note) — not a structural one.
+    """
+    if not _table_exists(conn, 'market_bid_history'):
+        return []
+
+    txns = pd.read_sql(
+        """
+        SELECT DISTINCT txn_key, player_price, price_change, num_bidders
+        FROM market_bid_history
+        WHERE is_winner = 1 AND DATE(scraped_at) <= ?
+        """,
+        conn, params=(date,)
+    )
+    if not len(txns):
+        return []
+
+    asking = txns['player_price'] - txns['price_change'].fillna(0)
+    usable = txns[(asking > 0) & txns['num_bidders'].notna()].copy()
+    if not len(usable):
+        return []
+    usable.loc[:, 'asking'] = asking[usable.index]
+    usable.loc[:, 'bucket_avg'] = usable['asking'].apply(
+        lambda p: bucket_avg_bids.get(_bucket_label(p)) or NO_BUCKET_DATA_BIDDERS
+    )
+    ratios = (usable['num_bidders'] / usable['bucket_avg']).tolist()
+    return sorted(ratios)
 
 
 def _markup_per_bidder(conn, date):
@@ -546,6 +630,7 @@ def build_bid_competition_model(conn, date, my_team_id=None):
     bucket_sample_size = dict(zip(bid_buckets['bucket'], bid_buckets['count']))
 
     markup, samples = _markup_per_bidder(conn, date)
+    bidder_ratio_samples = _bidder_ratio_samples(conn, date, bucket_avg_bids)
 
     rivals = []
     if _table_exists(conn, 'rival_lineups'):
@@ -591,7 +676,7 @@ def build_bid_competition_model(conn, date, my_team_id=None):
                 'depth': depth,
             })
 
-    model = BidCompetitionModel(rivals, bucket_avg_bids, markup, samples)
+    model = BidCompetitionModel(rivals, bucket_avg_bids, markup, samples, bidder_ratio_samples)
     return model, bucket_avg_bids, bucket_sample_size
 
 

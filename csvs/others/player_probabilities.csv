@@ -29,66 +29,66 @@ Athletic,Aymeric Laporte,90%
 Athletic,Jesus Areso,70%
 Athletic,Yuri Berchiche,80%
 Athletic,Inigo Ruiz De Galarreta,70%
-Athletic,Benat Gerenabarrena,70%
-Athletic,Oihan Sancet,80%
+Athletic,Benat Gerenabarrena,80%
+Athletic,Oihan Sancet,90%
 Athletic,Robert Navarro,70%
 Athletic,Nico Williams,80%
-Athletic,Inaki Williams,70%
+Athletic,Inaki Williams,80%
 Athletic,Alex Berenguer,50%
 Athletic,Aitor Paredes,50%
-Athletic,Gorka Guruzeta,40%
 Athletic,Mikel Jauregizar,30%
 Athletic,Hugo Rincon,30%
+Athletic,Benat Prados,20%
 Athletic,Alejandro Rego,20%
 Athletic,Johaneko Louis-Jean,20%
-Athletic,Benat Prados,10%
 Athletic,Maroan Sannadi,10%
 Athletic,Alex Padilla,5%
 Athletic,Nico Serrano,0%
-Athletic,Dani Vivian,0%
 Athletic,Alvaro Djalo,0%
+Athletic,Gorka Guruzeta,0%
 Athletic,Peio Canales,0%
 Athletic,Unai Egiluz,0%
+Athletic,Dani Vivian,0%
 Atletico,Jan Oblak,95%
 Atletico,Marc Pubill,80%
-Atletico,David Hancko,70%
+Atletico,Cristian Romero,50%
 Atletico,Marcos Llorente,70%
-Atletico,Alex Grimaldo,50%
-Atletico,Koke Resurreccion,50%
+Atletico,David Hancko,60%
+Atletico,Morten Hjulmand,60%
 Atletico,Pablo Barrios,80%
-Atletico,Alex Baena,80%
+Atletico,Alex Baena,70%
 Atletico,Giuliano Simeone,70%
 Atletico,Ademola Lookman,50%
 Atletico,Julian Alvarez,70%
-Atletico,Morten Hjulmand,50%
+Atletico,Koke Resurreccion,50%
 Atletico,Kang-In Lee,50%
-Atletico,Cristian Romero,50%
-Atletico,Robin Le Normand,40%
-Atletico,Rodrigo Mendoza,30%
+Atletico,Robin Le Normand,50%
+Atletico,Alex Grimaldo,50%
+Atletico,Johnny Cardoso,40%
+Atletico,Rodrigo Mendoza,40%
 Atletico,Arnau Ortiz,30%
 Atletico,Jonathan David,30%
-Atletico,Johnny Cardoso,20%
 Atletico,Juan Musso,5%
 Atletico,Alexander Sorloth,0%
 Atletico,Obed Vargas,0%
 Barcelona,Joan Garcia,95%
-Barcelona,Andreas Christensen,70%
-Barcelona,Gerard Martin,50%
+Barcelona,Andreas Christensen,50%
+Barcelona,Gerard Martin,80%
 Barcelona,Eric Garcia,70%
-Barcelona,Xavi Espart,50%
-Barcelona,Pedri Gonzalez,70%
-Barcelona,Rodri Hernandez,50%
-Barcelona,Fermin Lopez,50%
-Barcelona,Lamine Yamal,90%
-Barcelona,Anthony Gordon,50%
-Barcelona,Raphinha,80%
+Barcelona,Xavi Espart,70%
+Barcelona,Pedri Gonzalez,50%
+Barcelona,Marc Bernal,70%
+Barcelona,Fermin Lopez,80%
+Barcelona,Lamine Yamal,80%
+Barcelona,Anthony Gordon,70%
+Barcelona,Raphinha,70%
 Barcelona,Jules Kounde,50%
-Barcelona,Dani Olmo,50%
-Barcelona,Joao Cancelo,50%
 Barcelona,Pau Cubarsi,50%
-Barcelona,Marc Bernal,50%
-Barcelona,Karim Adeyemi,50%
+Barcelona,Rodri Hernandez,50%
 Barcelona,Pablo Gavi,40%
+Barcelona,Dani Olmo,30%
+Barcelona,Joao Cancelo,30%
+Barcelona,Karim Adeyemi,30%
 Barcelona,Gabriel Jesus,10%
 Barcelona,Alejandro Balde,10%
 Barcelona,Hamza Abdelkarim,10%
@@ -107,8 +107,8 @@ Betis,Facundo Bernal,70%
 Betis,Isco Alarcon,70%
 Betis,Antony,80%
 Betis,Pablo Fornals,70%
-Betis,Cucho Hernandez,70%
-Betis,Troy Parrott,30%
+Betis,Cucho Hernandez,60%
+Betis,Troy Parrott,40%
 Betis,Abde Ezzalzouli,30%
 Betis,Alvaro Fidalgo,30%
 Betis,Nelson Deossa,30%
@@ -130,17 +130,17 @@ Celta,Yoel Lago,50%
 Celta,Marcos Alonso,80%
 Celta,Javi Rueda,50%
 Celta,Sergio Carreira,50%
-Celta,Miguel Roman,60%
+Celta,Miguel Roman,70%
 Celta,Ilaix Moriba,70%
 Celta,Hugo Gonzalez,50%
 Celta,Williot Swedberg,50%
 Celta,Ferran Jutgla,70%
 Celta,Javi Galan,50%
 Celta,Javi Rodriguez,50%
-Celta,Aleix Febas,40%
 Celta,Couhaib Driouech,40%
 Celta,Hugo Alvarez,40%
 Celta,Andres Antanon,30%
+Celta,Aleix Febas,30%
 Celta,Jones El-Abdellaoui,30%
 Celta,Sebastian Caceres,30%
 Celta,Alvaro Nunez,30%
@@ -158,13 +158,13 @@ Elche,Tete Morente,50%
 Elche,German Valera,70%
 Elche,Javi Morcillo,70%
 Elche,Gonzalo Villar,80%
-Elche,Facundo Buonanotte,60%
 Elche,Thomas Lemar,70%
 Elche,Fernando Nino,70%
+Elche,Abiel Osorio,50%
 Elche,Pedro Bigas,50%
+Elche,Facundo Buonanotte,40%
 Elche,Marc Aguado,40%
 Elche,Alejandro Iturbe,40%
-Elche,Abiel Osorio,30%
 Elche,Lucas Cepeda,30%
 Elche,Ezequiel Ponce,30%
 Elche,Roy Revivo,30%
@@ -175,9 +175,9 @@ Elche,Grady Diangana,20%
 Elche,Federico Redondo,20%
 Elche,Josan Ferrandez,10%
 Elche,Adam Boayar,0%
-Elche,Yago Santiago,0%
 Elche,Bambo Diaby,0%
 Elche,Matia Barzic,0%
+Elche,Yago Santiago,0%
 Espanyol,Marko Dmitrovic,95%
 Espanyol,Unai Nunez,70%
 Espanyol,Leandro Cabrera,80%
@@ -214,12 +214,12 @@ Getafe,Mario Martin,70%
 Getafe,Ramon Terrats,80%
 Getafe,Enes Unal,80%
 Getafe,Martin Satriano,70%
-Getafe,Saba Sazonov,40%
+Getafe,Saba Sazonov,50%
 Getafe,Ivan Azon,40%
 Getafe,Francho Serrano,40%
-Getafe,Jean Ives Valou,30%
+Getafe,Jean Ives Valou,40%
+Getafe,Borja Mayoral,30%
 Getafe,Davinchi,20%
-Getafe,Borja Mayoral,20%
 Getafe,Jiri Letacek,5%
 Getafe,Zaid Romero,0%
 Getafe,Abdel Abqar,0%
@@ -249,36 +249,36 @@ Levante,Ifeanyi Ndukwe,20%
 Levante,Jorge Cabello,10%
 Levante,Pablo Campos,5%
 Levante,Dani Requena,0%
-Levante,Alejandro Primo,0%
 Levante,Karl Etta Eyong,0%
-Osasuna,Sergio Herrera,90%
-Osasuna,Boyomo,50%
+Levante,Alejandro Primo,0%
+Osasuna,Sergio Herrera,70%
+Osasuna,Rockson Yeboah,50%
 Osasuna,Alejandro Catena,90%
-Osasuna,Inigo Arguibide,70%
+Osasuna,Inigo Arguibide,80%
 Osasuna,Abel Bretones,70%
-Osasuna,Iker Munoz,50%
+Osasuna,Iker Munoz,60%
 Osasuna,Jon Moncayola,90%
 Osasuna,Ruben Garcia,60%
+Osasuna,Romain Del Castillo,50%
 Osasuna,Jonathan Dubasin,60%
-Osasuna,Raul Moro,50%
 Osasuna,Ante Budimir,90%
-Osasuna,Rockson Yeboah,50%
-Osasuna,Kike Barja,50%
+Osasuna,Boyomo,50%
 Osasuna,Lucas Torro,50%
-Osasuna,Raul Garcia,50%
-Osasuna,Romain Del Castillo,40%
+Osasuna,Raul Moro,50%
+Osasuna,Kike Barja,40%
+Osasuna,Raul Garcia,40%
 Osasuna,Diego Rico,30%
-Osasuna,Valentin Rosier,30%
+Osasuna,Aitor Fernandez,30%
 Osasuna,Asier Osambela,20%
-Osasuna,Aitor Fernandez,10%
+Osasuna,Valentin Rosier,20%
 Osasuna,Aimar Oroz,0%
 Osasuna,Moi Gomez,0%
 Osasuna,Jorge Herrando,0%
 Rayo Vallecano,Emil Audero,50%
 Rayo Vallecano,Florian Lejeune,95%
-Rayo Vallecano,Pathe Ciss,80%
+Rayo Vallecano,Pathe Ciss,90%
 Rayo Vallecano,Andrei Ratiu,80%
-Rayo Vallecano,Adria Pedrosa,70%
+Rayo Vallecano,Adria Pedrosa,80%
 Rayo Vallecano,Oscar Valentin,80%
 Rayo Vallecano,Gnangoro Bouare,50%
 Rayo Vallecano,Unai Lopez,90%
@@ -287,38 +287,38 @@ Rayo Vallecano,Alvaro Garcia,80%
 Rayo Vallecano,Sergio Camello,90%
 Rayo Vallecano,Mujaid Sadick,50%
 Rayo Vallecano,Dani Cardenas,50%
-Rayo Vallecano,Ivan Balliu,40%
 Rayo Vallecano,Georgiy Tsitaishvili,40%
 Rayo Vallecano,Rayane Belaid,30%
-Rayo Vallecano,Randy Nteka,30%
-Rayo Vallecano,Alemão,20%
-Rayo Vallecano,Pelayo Fernandez,10%
+Rayo Vallecano,Ivan Balliu,30%
+Rayo Vallecano,Alemão,30%
+Rayo Vallecano,Pelayo Fernandez,20%
 Rayo Vallecano,Marash Kumbulla,5%
-Rayo Vallecano,Isi Palazon,0%
 Rayo Vallecano,Raul De Tomas,0%
 Rayo Vallecano,Jozhua Vertrouwd,0%
+Rayo Vallecano,Isi Palazon,0%
 Rayo Vallecano,Jorge De Frutos,0%
+Rayo Vallecano,Randy Nteka,0%
 Rayo Vallecano,Luiz Felipe,0%
 Rayo Vallecano,Fran Perez,0%
 Rayo Vallecano,Augusto Batalla,0%
 Real Madrid,Thibaut Courtois,95%
 Real Madrid,Antonio Rudiger,50%
 Real Madrid,Dean Huijsen,70%
-Real Madrid,Denzel Dumfries,50%
-Real Madrid,Marc Cucurella,60%
+Real Madrid,Trent Alexander-Arnold,50%
+Real Madrid,Alvaro F. Carreras,50%
 Real Madrid,Eduardo Camavinga,50%
 Real Madrid,Bernardo Silva,70%
-Real Madrid,Jude Bellingham,80%
+Real Madrid,Jude Bellingham,70%
 Real Madrid,Arda Guler,90%
 Real Madrid,Vinicius Junior,80%
 Real Madrid,Kylian Mbappe,90%
 Real Madrid,Federico Valverde,50%
 Real Madrid,Ibrahima Konate,50%
-Real Madrid,Trent Alexander-Arnold,50%
-Real Madrid,Alvaro F. Carreras,40%
+Real Madrid,Marc Cucurella,50%
+Real Madrid,Denzel Dumfries,50%
+Real Madrid,Yan Diomande,40%
 Real Madrid,Brahim Diaz,30%
 Real Madrid,Carlos Espi,30%
-Real Madrid,Yan Diomande,30%
 Real Madrid,Sergio Martinez,10%
 Real Madrid,Thiago Pitarch,10%
 Real Madrid,Aurelien Tchouameni,10%
@@ -330,25 +330,25 @@ Real Madrid,Eder Militão,0%
 Real Madrid,Rodrygo Goes,0%
 Real Sociedad,Alex Remiro,50%
 Real Sociedad,Igor Zubeldia,90%
-Real Sociedad,Mamadou Sarr,90%
+Real Sociedad,Mamadou Sarr,80%
 Real Sociedad,Jon Aramburu,80%
 Real Sociedad,Sergio Gomez,80%
-Real Sociedad,Carlos Soler,50%
-Real Sociedad,Yangel Herrera,70%
-Real Sociedad,Luka Sucic,60%
+Real Sociedad,Benat Turrientes,70%
+Real Sociedad,Yangel Herrera,50%
 Real Sociedad,Job Ochieng,50%
-Real Sociedad,Gonçalo Guedes,60%
-Real Sociedad,Mikel Oyarzabal,90%
 Real Sociedad,Ander Barrenetxea,50%
-Real Sociedad,Benat Turrientes,50%
+Real Sociedad,Mikel Oyarzabal,90%
+Real Sociedad,Orri Steinn Oskarsson,50%
+Real Sociedad,Orri Steinn Oskarsson,50%
+Real Sociedad,Gonçalo Guedes,50%
+Real Sociedad,Carlos Soler,50%
 Real Sociedad,Takefusa Kubo,50%
 Real Sociedad,Unai Marrero,50%
-Real Sociedad,Orri Steinn Oskarsson,40%
 Real Sociedad,Jon Gorrotxategi,20%
+Real Sociedad,Luken Beitia,20%
 Real Sociedad,Hector Fort,20%
+Real Sociedad,Jon Pacheco,20%
 Real Sociedad,Aihen Munoz,20%
-Real Sociedad,Luken Beitia,10%
-Real Sociedad,Jon Pacheco,10%
 Real Sociedad,Alex Marchal,10%
 Real Sociedad,Arsen Zakharyan,0%
 Real Sociedad,Pablo Marin,0%
@@ -361,72 +361,72 @@ Sevilla,Juan Iglesias,80%
 Sevilla,Gabriel Suazo,80%
 Sevilla,Youssouf Fofana,50%
 Sevilla,Lucien Agoume,90%
-Sevilla,Miguel Sierra,70%
 Sevilla,Jon Guridi,50%
+Sevilla,Miguel Sierra,70%
+Sevilla,Felix Correia,50%
 Sevilla,Robbie Ure,70%
-Sevilla,Lucas Stassin,70%
 Sevilla,Giorgi Kochorashvili,50%
-Sevilla,Chidera Ejuke,50%
+Sevilla,Lucas Stassin,50%
+Sevilla,Isaac Romero,50%
+Sevilla,Chidera Ejuke,40%
 Sevilla,Peque,30%
-Sevilla,Felix Correia,30%
-Sevilla,Isaac Romero,30%
 Sevilla,Alfonso Gonzalez,20%
 Sevilla,Julio Diaz,20%
 Sevilla,Jose Angel Carmona,20%
-Sevilla,Ruben Vargas,10%
 Sevilla,Fran Gonzalez,5%
 Sevilla,Nico Guillen,0%
 Sevilla,Manu Bueno,0%
 Sevilla,Marcão,0%
 Sevilla,Fabio Cardoso,0%
 Sevilla,Arouna Sangante,0%
+Sevilla,Ruben Vargas,0%
 Valencia,Stole Dimitrievski,95%
-Valencia,Pepelu,70%
-Valencia,Cesar Tarrega,70%
+Valencia,Cesar Tarrega,90%
+Valencia,Pepelu,60%
 Valencia,Arnau Martinez,70%
-Valencia,Pablo Maffeo,70%
 Valencia,Jose Gaya,50%
 Valencia,Javi Guerra,80%
 Valencia,Filip Ugrinic,60%
 Valencia,Harvey Elliott,70%
-Valencia,Arnaut Danjuma,50%
+Valencia,David Otorbi,80%
 Valencia,Ryunosuke Sato,50%
 Valencia,Hugo Duro,50%
+Valencia,Arnaut Danjuma,50%
 Valencia,Aliou Dieng,50%
-Valencia,David Otorbi,50%
+Valencia,Pablo Maffeo,50%
 Valencia,Jesus Vazquez,50%
-Valencia,Mouctar Diakhaby,50%
+Valencia,Justin De Haas,50%
 Valencia,Iker Cordoba,30%
-Valencia,Luis Rioja,20%
 Valencia,Daniel Raba,20%
-Valencia,Guido Rodriguez,10%
-Valencia,Justin De Haas,10%
 Valencia,Kayne Van Oevelen,5%
 Valencia,Cristian Rivero,0%
 Valencia,Sergi Canos,0%
+Valencia,Luis Rioja,0%
+Valencia,Guido Rodriguez,0%
 Valencia,Dimitri Foulquier,0%
 Valencia,Jose Manuel Copete,0%
 Valencia,Umar Sadiq,0%
 Valencia,Diego Lopez,0%
+Valencia,Mouctar Diakhaby,0%
 Villarreal,Peter Gulacsi,50%
-Villarreal,Juan Foyth,50%
+Villarreal,Pau Navarro,50%
 Villarreal,Renato Veiga,70%
-Villarreal,Santiago Mourino,70%
+Villarreal,Alex Freeman,50%
 Villarreal,Carlos Romero,50%
-Villarreal,Pape Gueye,80%
-Villarreal,Santi Comesana,60%
-Villarreal,Gerard Moreno,70%
+Villarreal,Pape Gueye,70%
+Villarreal,Nathan-Dylan Saliba,70%
+Villarreal,Gerard Moreno,60%
 Villarreal,Nicolas Pepe,80%
 Villarreal,Alberto Moleiro,70%
 Villarreal,Georges Mikautadze,70%
 Villarreal,Sergi Cardona,50%
+Villarreal,Santiago Mourino,50%
+Villarreal,Santi Comesana,50%
 Villarreal,Luiz Junior,50%
 Villarreal,Tajon Buchanan,40%
 Villarreal,Logan Costa,40%
-Villarreal,Pau Navarro,40%
+Villarreal,Juan Foyth,40%
 Villarreal,Ayoze Perez,40%
-Villarreal,Nathan-Dylan Saliba,40%
-Villarreal,Alex Freeman,30%
 Villarreal,Ilias Akhomach,20%
 Villarreal,Carlos Macia,20%
 Villarreal,Tani Oluwaseyi,10%
@@ -460,31 +460,31 @@ Deportivo,Leo Roman,95%
 Deportivo,Lucas Noubi,80%
 Deportivo,Jose Maria Gimenez,70%
 Deportivo,Ximo Navarro,70%
-Deportivo,Giacomo Quagliata,70%
+Deportivo,Giacomo Quagliata,80%
 Deportivo,Lorenzo Amatucci,90%
 Deportivo,Luismi Cruz,70%
 Deportivo,Marc Casado,50%
 Deportivo,Mario Soriano,70%
 Deportivo,Pierre-Emerick Aubameyang,90%
 Deportivo,Bil Nsongo,70%
-Deportivo,Yeremay Hernandez,50%
 Deportivo,Riki Rodriguez,50%
+Deportivo,Yeremay Hernandez,30%
 Deportivo,Bright Ede,30%
-Deportivo,Angelino,30%
 Deportivo,Miguel Loureiro,30%
-Deportivo,Jonathan Asp Jensen,30%
 Deportivo,Zakaria Eddahchouri,20%
 Deportivo,Adria Altimira,20%
 Deportivo,David Mella,20%
+Deportivo,Angelino,20%
+Deportivo,Jonathan Asp Jensen,20%
 Deportivo,Teun Gijselhart,10%
 Deportivo,Adama Traore,10%
 Deportivo,Alvaro Fernandez,5%
+Deportivo,Noe Carrillo,0%
 Deportivo,Diego Villares,0%
 Deportivo,Dani Barcia,0%
 Deportivo,Arnau Comas,0%
 Deportivo,Kevin Sanchez,0%
 Deportivo,German Parreno,0%
-Deportivo,Noe Carrillo,0%
 Malaga,Alfonso Herrero,90%
 Malaga,Angel Recio,70%
 Malaga,Einar Galilea,90%
@@ -511,6 +511,6 @@ Malaga,Fernando Calero,10%
 Malaga,Carlos Lopez,10%
 Malaga,Adrian Nino,0%
 Malaga,Pablo Arriaza,0%
-Malaga,Diego Murillo,0%
 Malaga,Julen Lobete,0%
 Malaga,Aaron Ochoa,0%
+Malaga,Diego Murillo,0%

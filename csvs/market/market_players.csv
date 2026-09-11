@@ -1,21 +1,21 @@
 position,club,name,price,change,status,owner,last_sale,recent_pts,this_season_pts,last_season_pts,scraped_at
-Forward,Espanyol,Kike Garcia,540000,-10000.0,,Free Agent,"540,000",0.0,0,140,2026-09-10
-Midfielder/Forward,Osasuna,Ruben Garcia,2740000,-20000.0,,Free Agent,"2,740,000",2354.0,14,0,2026-09-10
-Defender/Midfielder,Valencia,Gaya,1700000,-20000.0,,Free Agent,"1,700,000",43.0,7,0,2026-09-10
-Midfielder/Defender,Getafe,Gudelj,1590000,30000.0,,Free Agent,"1,590,000",23.0,5,0,2026-09-10
-Midfielder,Osasuna,Torro,1280000,-20000.0,,Free Agent,"1,280,000",333.0,9,0,2026-09-10
-Midfielder/Forward,Real Sociedad,Kubo,4950000,-140000.0,,Free Agent,"4,950,000",3226.0,13,0,2026-09-10
-Midfielder,Athletic,Benat Prados,150000,0.0,,Free Agent,"150,000",0.0,0,5,2026-09-10
-Midfielder,Celta,Ilaix Moriba,1930000,0.0,,Free Agent,"1,930,000",24003.0,9,0,2026-09-10
-Defender,Elche,Barzic,150000,0.0,,Free Agent,"150,000",0.0,0,0,2026-09-10
-Forward/Midfielder,Getafe,Uche,1580000,-20000.0,,Free Agent,"1,580,000",0.0,0,22,2026-09-10
-Midfielder,Betis,Deossa,1200000,0.0,,Free Agent,"1,200,000",3152.0,11,0,2026-09-10
-Goalkeeper,Villarreal,Gulacsi,1560000,10000.0,,Free Agent,"1,560,000",0.0,0,0,2026-09-10
-Forward,Getafe,Satriano,3460000,20000.0,,Free Agent,"3,460,000",10241.0,17,0,2026-09-10
-Defender,Getafe,Zaid Romero,2800000,-150000.0,,Free Agent,"2,800,000",3452.0,8,0,2026-09-10
-Defender,Sevilla,Sangante,1100000,-30000.0,,Free Agent,"1,100,000",331.0,1,0,2026-09-10
-Midfielder,Racing,Maguette Gueye,1810000,-40000.0,,Free Agent,"1,810,000",233.0,8,0,2026-09-10
-Defender,Racing,Facundo Gonzalez,1590000,-10000.0,,Free Agent,"1,590,000",1623.0,12,0,2026-09-10
-Midfielder,Levante,Bardeli,2000000,60000.0,,Free Agent,"2,000,000",41432.0,23,0,2026-09-10
-Forward/Midfielder,Osasuna,Del Castillo,2830000,-90000.0,,Free Agent,"2,830,000",0.0,0,0,2026-09-10
-Defender,Levante,Ndukwe,250000,-10000.0,,Free Agent,"250,000",0.0,0,0,2026-09-10
+Defender/Midfielder,Valencia,Gaya,1690000,-10000.0,,Free Agent,"1,690,000",43.0,7,0,2026-09-11
+Midfielder/Forward,Alaves,Alena,740000,30000.0,,Free Agent,"740,000",330.0,6,0,2026-09-11
+Goalkeeper,Sevilla,Fran Gonzalez,270000,0.0,,Free Agent,"270,000",0.0,0,0,2026-09-11
+Goalkeeper,Betis,Diego Conde,240000,0.0,,Free Agent,"240,000",0.0,0,0,2026-09-11
+Forward/Defender/Midfielder,Valencia,Rioja,1510000,-50000.0,,Free Agent,"1,510,000",15.0,6,0,2026-09-11
+Coach,Betis,Pellegrini,2290000,0.0,,Free Agent,"2,290,000",3033.0,9,0,2026-09-11
+Midfielder,Celta,Febas,4320000,-100000.0,,Free Agent,"4,320,000",15.0,4,0,2026-09-11
+Defender,Rayo Vallecano,Balliu,950000,-10000.0,,Free Agent,"950,000",404.0,8,0,2026-09-11
+Goalkeeper,Rayo Vallecano,Cardenas,1540000,-10000.0,,Free Agent,"1,540,000",223.0,7,0,2026-09-11
+Midfielder/Forward,Atletico,Giuliano Simeone,5370000,-80000.0,,Free Agent,"5,370,000",21123.0,14,0,2026-09-11
+Goalkeeper,Real Sociedad,Marrero,330000,30000.0,,Free Agent,"330,000",7.0,7,0,2026-09-11
+Defender,Rayo Vallecano,Pelayo,220000,0.0,,Free Agent,"220,000",12.0,3,0,2026-09-11
+Midfielder,Athletic,Peio Canales,2070000,-30000.0,,Free Agent,"2,070,000",345.0,12,0,2026-09-11
+Forward/Midfielder,Espanyol,Dolan,2770000,-10000.0,,Free Agent,"2,770,000",4218.0,15,0,2026-09-11
+Defender,Deportivo,Loureiro,1200000,-10000.0,,Free Agent,"1,200,000",431.0,8,0,2026-09-11
+Defender,Malaga,Alex Pastor,180000,0.0,,Free Agent,"180,000",0.0,0,0,2026-09-11
+Midfielder,Racing,Maguette Gueye,1770000,-40000.0,,Free Agent,"1,770,000",233.0,8,0,2026-09-11
+Forward,Sevilla,Robbie Ure,3590000,-30000.0,,Free Agent,"3,590,000",2227.0,13,0,2026-09-11
+Forward,Betis,Parrott,6440000,0.0,,Free Agent,"6,440,000",913.0,13,0,2026-09-11
+Defender,Racing,Belocian,1680000,10000.0,,Free Agent,"1,680,000",4.0,4,0,2026-09-11

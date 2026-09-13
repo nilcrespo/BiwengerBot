@@ -1,20 +1,20 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Locombia FC,Locombia_Fc,Goalkeeper,Betis,Alvaro Valles,28,0,4890000,50000.0,Fit,4,7.0,17,8.5,11,5.5
+Locombia FC,Locombia_Fc,Goalkeeper,Betis,Alvaro Valles,28,0,4930000,40000.0,Fit,4,7.0,17,8.5,11,5.5
 Locombia FC,Locombia_Fc,Goalkeeper,Betis,Diego Conde,0,0,240000,0.0,Fit,0,0.0,0,0.0,0,0.0
 Locombia FC,Locombia_Fc,Defender/Midfielder,Celta,Carreira,18,0,2750000,0.0,Fit,5,3.6,8,4.0,10,3.3
-Locombia FC,Locombia_Fc,Defender,Malaga,Jose Salinas,10,0,900000,20000.0,Fit,3,3.3,6,6.0,4,2.0
-Locombia FC,Locombia_Fc,Defender,Atletico,Cristian Romero,3,0,4930000,-60000.0,Fit,1,3.0,0,0.0,3,3.0
-Locombia FC,Locombia_Fc,Defender,Athletic,Yuri,3,0,2630000,20000.0,Fit,3,1.0,-3,-1.5,6,6.0
+Locombia FC,Locombia_Fc,Defender,Malaga,Jose Salinas,10,0,920000,20000.0,Fit,3,3.3,6,6.0,4,2.0
+Locombia FC,Locombia_Fc,Defender,Athletic,Yuri,7,0,2650000,20000.0,Fit,4,1.8,1,0.3,6,6.0
+Locombia FC,Locombia_Fc,Defender,Atletico,Cristian Romero,3,0,4910000,-20000.0,Fit,1,3.0,0,0.0,3,3.0
 Locombia FC,Locombia_Fc,Defender,Valencia,Foulquier,0,26,150000,0.0,Injured. Muscle injury. Estimated return: Indefinite return.,0,0.0,0,0.0,0,0.0
-Locombia FC,Locombia_Fc,Midfielder,Real Madrid,Bellingham,44,0,18190000,60000.0,Fit,4,11.0,28,14.0,16,8.0
-Locombia FC,Locombia_Fc,Midfielder/Forward,Real Sociedad,Luka Sucic,28,0,3410000,60000.0,Fit,5,5.6,5,2.5,23,7.7
-Locombia FC,Locombia_Fc,Midfielder/Forward,Atletico,Kang-In Lee,25,0,9000000,20000.0,Fit,4,6.3,17,8.5,8,4.0
-Locombia FC,Locombia_Fc,Midfielder/Forward,Villarreal,Moleiro,16,0,7330000,-90000.0,Fit,4,4.0,5,5.0,11,3.7
-Locombia FC,Locombia_Fc,Midfielder,Athletic,De Galarreta,14,0,2970000,10000.0,Fit,3,4.7,5,2.5,9,9.0
-Locombia FC,Locombia_Fc,Midfielder/Defender,Osasuna,Moncayola,11,0,2700000,-40000.0,Fit,4,2.8,8,4.0,3,1.5
-Locombia FC,Locombia_Fc,Midfielder,Celta,Febas,4,0,4230000,-90000.0,Doubtful. Rib contusion.,2,2.0,-1,-1.0,5,5.0
+Locombia FC,Locombia_Fc,Midfielder,Real Madrid,Bellingham,56,0,18290000,100000.0,Fit,5,11.2,40,13.3,16,8.0
+Locombia FC,Locombia_Fc,Midfielder/Forward,Real Sociedad,Luka Sucic,28,0,3460000,50000.0,Fit,5,5.6,5,2.5,23,7.7
+Locombia FC,Locombia_Fc,Midfielder/Forward,Atletico,Kang-In Lee,25,0,9040000,40000.0,Fit,4,6.3,17,8.5,8,4.0
+Locombia FC,Locombia_Fc,Midfielder,Athletic,De Galarreta,18,0,2990000,20000.0,Fit,4,4.5,9,3.0,9,9.0
+Locombia FC,Locombia_Fc,Midfielder/Forward,Villarreal,Moleiro,16,0,7290000,-40000.0,Fit,4,4.0,5,5.0,11,3.7
+Locombia FC,Locombia_Fc,Midfielder,Celta,Febas,4,0,4170000,-60000.0,Injured. Rib contusion. Estimated return: Mid-September.,2,2.0,-1,-1.0,5,5.0
+Locombia FC,Locombia_Fc,Midfielder,Barcelona,De Jong,0,133,600000,0.0,Injured. Tear of the medial collateral ligament in the right knee. Estimated return: Mid-November.,0,0.0,0,0.0,0,0.0
 Locombia FC,Locombia_Fc,Midfielder,Barcelona,Farinas,0,0,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Locombia_Fc,Forward,Alaves,Boye,36,0,4360000,160000.0,Fit,3,12.0,33,16.5,3,3.0
-Locombia FC,Locombia_Fc,Forward/Midfielder,Sevilla,Ejuke,26,0,3240000,0.0,Fit,5,5.2,11,3.7,15,7.5
-Locombia FC,Locombia_Fc,Forward,Villarreal,Gerard Moreno,19,0,6580000,20000.0,Fit,4,4.8,7,7.0,12,4.0
-Locombia FC,Locombia_Fc,Forward/Defender/Midfielder,Valencia,Rioja,6,0,1470000,-40000.0,Doubtful. Ankle pain.,2,3.0,5,5.0,1,1.0
+Locombia FC,Locombia_Fc,Forward,Alaves,Boye,38,0,4470000,110000.0,Fit,4,9.5,33,16.5,5,2.5
+Locombia FC,Locombia_Fc,Forward,Villarreal,Gerard Moreno,19,0,6600000,20000.0,Fit,4,4.8,7,7.0,12,4.0
+Locombia FC,Locombia_Fc,Forward/Defender/Midfielder,Valencia,Rioja,6,0,1450000,-20000.0,Doubtful. Ankle pain.,2,3.0,5,5.0,1,1.0
+Locombia FC,Locombia_Fc,Forward,Real Madrid,Rodrygo,0,67,570000,0.0,Injured. Rupture of the anterior cruciate ligament and tear of the external meniscus of the right leg. Estimated return: Mid-October.,0,0.0,0,0.0,0,0.0

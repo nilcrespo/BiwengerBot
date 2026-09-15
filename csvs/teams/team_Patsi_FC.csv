@@ -1,21 +1,21 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Patsi F.C,Patsi_FC,Goalkeeper,Real Sociedad,Marrero,7,0,380000,10000.0,Fit,1,7.0,0,0.0,7,7.0
-Patsi F.C,Patsi_FC,Goalkeeper,Rayo Vallecano,Audero,3,0,3610000,-90000.0,Fit,1,3.0,0,0.0,3,3.0
-Patsi F.C,Patsi_FC,Defender,Alaves,Koski,21,0,1870000,60000.0,Fit,5,4.2,8,2.7,13,6.5
-Patsi F.C,Patsi_FC,Defender,Sevilla,Castrin,18,0,1710000,60000.0,Fit,4,4.5,8,4.0,10,5.0
-Patsi F.C,Patsi_FC,Defender,Deportivo,Ximo Navarro,14,0,1700000,20000.0,Fit,5,2.8,6,3.0,8,2.7
+Patsi F.C,Patsi_FC,Goalkeeper,Real Sociedad,Marrero,7,0,380000,0.0,Fit,1,7.0,0,0.0,7,7.0
+Patsi F.C,Patsi_FC,Goalkeeper,Rayo Vallecano,Audero,3,0,3530000,-80000.0,Fit,1,3.0,0,0.0,3,3.0
+Patsi F.C,Patsi_FC,Defender,Alaves,Koski,21,0,1930000,60000.0,Fit,5,4.2,8,2.7,13,6.5
+Patsi F.C,Patsi_FC,Defender,Sevilla,Castrin,18,0,1770000,60000.0,Fit,4,4.5,8,4.0,10,5.0
+Patsi F.C,Patsi_FC,Defender,Deportivo,Ximo Navarro,14,0,1710000,10000.0,Fit,5,2.8,6,3.0,8,2.7
 Patsi F.C,Patsi_FC,Defender,Malaga,Galilea,14,0,1300000,0.0,Fit,5,2.8,7,3.5,7,2.3
-Patsi F.C,Patsi_FC,Defender,Sevilla,Kike Salas,13,0,2770000,30000.0,Fit,4,3.3,11,3.7,2,2.0
-Patsi F.C,Patsi_FC,Defender/Midfielder,Barcelona,Christensen,13,0,1310000,30000.0,Fit,4,3.3,1,1.0,12,4.0
-Patsi F.C,Patsi_FC,Defender,Villarreal,Carlos Romero,10,0,5100000,-60000.0,Fit,3,3.3,0,0.0,10,3.3
-Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,32,0,4030000,30000.0,Fit,5,6.4,21,7.0,11,5.5
-Patsi F.C,Patsi_FC,Midfielder,Deportivo,Amatucci,27,0,4010000,40000.0,Fit,5,5.4,12,6.0,15,5.0
-Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,26,0,5300000,20000.0,Fit,5,5.2,17,5.7,9,4.5
-Patsi F.C,Patsi_FC,Midfielder,Racing,Ivan Martin,18,0,3570000,30000.0,Fit,4,4.5,9,4.5,9,4.5
-Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,12,0,1550000,-10000.0,Fit,4,3.0,9,4.5,3,1.5
-Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,21,0,11000000,-160000.0,Fit,6,3.5,12,4.0,9,3.0
-Patsi F.C,Patsi_FC,Forward/Defender/Midfielder,Elche,Tete Morente,16,0,1080000,40000.0,Fit,5,3.2,5,2.5,11,3.7
-Patsi F.C,Patsi_FC,Forward,Betis,Parrott,13,0,6480000,10000.0,Fit,3,4.3,9,9.0,4,2.0
-Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,3,0,7420000,-10000.0,Fit,1,3.0,0,0.0,3,3.0
-Patsi F.C,Patsi_FC,Forward,Atletico,Sørloth,0,148,3010000,-20000.0,Doubtful. Muscle injury.,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Defender,Sevilla,Kike Salas,13,0,2800000,30000.0,Fit,4,3.3,11,3.7,2,2.0
+Patsi F.C,Patsi_FC,Defender/Midfielder,Barcelona,Christensen,13,0,1330000,20000.0,Fit,4,3.3,1,1.0,12,4.0
+Patsi F.C,Patsi_FC,Defender,Villarreal,Carlos Romero,11,0,5020000,-80000.0,Fit,4,2.8,1,1.0,10,3.3
+Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,32,0,4110000,80000.0,Fit,5,6.4,21,7.0,11,5.5
+Patsi F.C,Patsi_FC,Midfielder,Deportivo,Amatucci,27,0,4080000,70000.0,Fit,5,5.4,12,6.0,15,5.0
+Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,26,0,5320000,20000.0,Fit,5,5.2,17,5.7,9,4.5
+Patsi F.C,Patsi_FC,Midfielder,Racing,Ivan Martin,18,0,3590000,20000.0,Fit,4,4.5,9,4.5,9,4.5
+Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,12,0,1540000,-10000.0,Fit,4,3.0,9,4.5,3,1.5
+Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,21,0,10740000,-260000.0,Fit,6,3.5,12,4.0,9,3.0
+Patsi F.C,Patsi_FC,Forward/Defender/Midfielder,Elche,Tete Morente,16,0,1120000,40000.0,Fit,5,3.2,5,2.5,11,3.7
+Patsi F.C,Patsi_FC,Forward,Betis,Parrott,13,0,6420000,-60000.0,Fit,3,4.3,9,9.0,4,2.0
+Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,11,0,7480000,60000.0,Fit,2,5.5,0,0.0,11,5.5
+Patsi F.C,Patsi_FC,Forward,Atletico,Sørloth,0,148,3000000,-10000.0,Doubtful. Muscle injury.,0,0.0,0,0.0,0,0.0
 Patsi F.C,Patsi_FC,Forward,Rayo Vallecano,De Tomas,0,0,210000,0.0,Fit,0,0.0,0,0.0,0,0.0

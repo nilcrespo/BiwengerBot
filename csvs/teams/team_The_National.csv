@@ -1,24 +1,24 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-The National,The_National,Goalkeeper,Osasuna,Sergio Herrera,13,0,3790000,-60000.0,Fit,5,2.6,13,4.3,0,0.0
+The National,The_National,Goalkeeper,Osasuna,Sergio Herrera,13,0,3730000,-60000.0,Fit,5,2.6,13,4.3,0,0.0
 The National,The_National,Goalkeeper,Atletico,Musso,0,33,320000,0.0,Fit,0,0.0,0,0.0,0,0.0
-The National,The_National,Defender,Espanyol,El Hilali,25,0,2880000,110000.0,Fit,5,5.0,11,3.7,14,7.0
-The National,The_National,Defender,Celta,Lago,23,0,1580000,50000.0,Fit,6,3.8,13,4.3,10,3.3
-The National,The_National,Defender,Real Sociedad,Sergio Gomez,20,0,3550000,0.0,Fit,6,3.3,12,4.0,8,2.7
-The National,The_National,Defender,Racing,Pablo Ramon,20,0,2200000,40000.0,Fit,4,5.0,10,5.0,10,5.0
-The National,The_National,Defender/Midfielder,Atletico,Marcos Llorente,19,0,5640000,-30000.0,Fit,5,3.8,8,4.0,11,3.7
+The National,The_National,Defender,Espanyol,El Hilali,25,0,3010000,130000.0,Fit,5,5.0,11,3.7,14,7.0
+The National,The_National,Defender,Celta,Lago,23,0,1640000,60000.0,Fit,6,3.8,13,4.3,10,3.3
+The National,The_National,Defender,Real Sociedad,Sergio Gomez,20,0,3540000,-10000.0,Fit,6,3.3,12,4.0,8,2.7
+The National,The_National,Defender,Racing,Pablo Ramon,20,0,2260000,60000.0,Fit,4,5.0,10,5.0,10,5.0
+The National,The_National,Defender/Midfielder,Atletico,Marcos Llorente,19,0,5600000,-40000.0,Fit,5,3.8,8,4.0,11,3.7
 The National,The_National,Defender,Elche,Chust,18,0,1900000,0.0,Fit,5,3.6,3,1.5,15,5.0
-The National,The_National,Defender,Sevilla,Suazo,17,0,1800000,40000.0,Fit,5,3.4,10,3.3,7,3.5
-The National,The_National,Defender,Rayo Vallecano,Pedrosa,7,0,1250000,-20000.0,Fit,3,2.3,3,3.0,4,2.0
-The National,The_National,Midfielder,Athletic,Gerenabarrena,21,0,3160000,40000.0,Fit,5,4.2,10,3.3,11,5.5
-The National,The_National,Midfielder,Rayo Vallecano,Unai Lopez,20,0,2660000,10000.0,Fit,5,4.0,11,5.5,9,3.0
-The National,The_National,Midfielder,Levante,Oriol Rey,19,0,1120000,20000.0,Fit,5,3.8,10,5.0,9,3.0
-The National,The_National,Midfielder,Celta,Ilaix Moriba,15,0,1920000,10000.0,Fit,6,2.5,6,2.0,9,3.0
-The National,The_National,Midfielder/Forward,Villarreal,Buchanan,13,0,2800000,-20000.0,Fit,4,3.3,3,3.0,10,3.3
-The National,The_National,Midfielder/Forward,Valencia,Javi Guerra,12,0,3290000,-40000.0,Fit,5,2.4,8,2.7,4,2.0
-The National,The_National,Midfielder,Atletico,Johnny,7,0,640000,0.0,Fit,3,2.3,0,0.0,7,2.3
-The National,The_National,Forward,Barcelona,Raphinha,71,0,20030000,160000.0,Fit,5,14.2,31,15.5,40,13.3
-The National,The_National,Forward/Midfielder,Villarreal,Pepe,32,0,11490000,50000.0,Fit,4,8.0,11,11.0,21,7.0
-The National,The_National,Forward,Deportivo,Nsongo,23,0,3410000,30000.0,Fit,5,4.6,12,6.0,11,3.7
-The National,The_National,Forward,Getafe,Enes Unal,20,0,5040000,-40000.0,Fit,5,4.0,16,5.3,4,2.0
-The National,The_National,Forward,Rayo Vallecano,Alemão,12,0,1040000,-10000.0,Fit,4,3.0,1,1.0,11,3.7
+The National,The_National,Defender,Sevilla,Suazo,17,0,1850000,50000.0,Fit,5,3.4,10,3.3,7,3.5
+The National,The_National,Defender,Rayo Vallecano,Pedrosa,7,0,1240000,-10000.0,Fit,3,2.3,3,3.0,4,2.0
+The National,The_National,Midfielder,Athletic,Gerenabarrena,21,0,3190000,30000.0,Fit,5,4.2,10,3.3,11,5.5
+The National,The_National,Midfielder,Rayo Vallecano,Unai Lopez,20,0,2670000,10000.0,Fit,5,4.0,11,5.5,9,3.0
+The National,The_National,Midfielder,Levante,Oriol Rey,19,0,1150000,30000.0,Fit,5,3.8,10,5.0,9,3.0
+The National,The_National,Midfielder/Forward,Villarreal,Buchanan,15,0,2780000,-20000.0,Fit,5,3.0,5,2.5,10,3.3
+The National,The_National,Midfielder,Celta,Ilaix Moriba,15,0,1950000,30000.0,Fit,6,2.5,6,2.0,9,3.0
+The National,The_National,Midfielder/Forward,Valencia,Javi Guerra,12,0,3250000,-40000.0,Fit,5,2.4,8,2.7,4,2.0
+The National,The_National,Midfielder,Atletico,Johnny,7,0,650000,10000.0,Fit,3,2.3,0,0.0,7,2.3
+The National,The_National,Forward,Barcelona,Raphinha,71,0,20190000,160000.0,Fit,5,14.2,31,15.5,40,13.3
+The National,The_National,Forward/Midfielder,Villarreal,Pepe,36,0,11500000,10000.0,Fit,5,7.2,15,7.5,21,7.0
+The National,The_National,Forward,Deportivo,Nsongo,23,0,3430000,20000.0,Fit,5,4.6,12,6.0,11,3.7
+The National,The_National,Forward,Getafe,Enes Unal,20,0,4910000,-130000.0,Fit,5,4.0,16,5.3,4,2.0
+The National,The_National,Forward,Rayo Vallecano,Alemão,12,0,1030000,-10000.0,Fit,4,3.0,1,1.0,11,3.7
 The National,The_National,Coach,Deportivo,Hidalgo,9,0,970000,0.0,Fit,5,1.8,4,2.0,5,1.7

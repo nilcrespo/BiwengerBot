@@ -133,6 +133,35 @@ def extract_value_and_delta(cell):
         delta = -delta
     return value_eur, delta
 
+def parse_recent_points(cell) -> int:
+    """Sum the market table's 'recent form' cell (title="Points from the
+    last rounds"): up to 5 <player-points> chips, one per recent round —
+    a plain digit ('4'), a negative score ('-1', '-6'), or a bare '-'
+    meaning exactly zero that round (CSS class 'zero').
+
+    Reading this cell's own inner_text (the previous approach) silently
+    concatenates every chip into one string — confirmed live: Marc Roca's
+    real per-round chips [7, 4, 5, 0, 6] rendered as inner_text '745-6'
+    (the zero round's '-' swallowed, the minus sign fused onto the
+    following digit), and Zubeldia's [2, 4, 6, -1] became '246-1'. Fed
+    through the generic numeric cleanup used elsewhere (strip everything
+    but digits/dot), those become 7456 and 2461 — three-to-four-digit
+    numbers next to genuine single-digit recent-form scores everywhere
+    else, which blows out _normalize()'s min-max scaling for the whole
+    market snapshot, not just the affected rows.
+    """
+    texts = cell.locator("player-points").all_inner_texts()
+    total = 0
+    for t in texts:
+        t = t.strip()
+        if t in ("", "-"):
+            continue
+        try:
+            total += int(t)
+        except ValueError:
+            continue
+    return total
+
 def get_league_standings(page):
     print("\nExtracting league standings...")
 
@@ -1226,7 +1255,7 @@ def extract_market_players(page) -> pd.DataFrame:
             # player's own detail page directly: Biwenger doesn't expose
             # live bid/demand data anywhere in the UI.
             recent_pts_cell = row.locator("td").nth(6)
-            recent_pts = safe_inner_text(recent_pts_cell, "0")
+            recent_pts = parse_recent_points(recent_pts_cell)
 
             owner_cell = row.locator("td").nth(7)  # Owner column
             owner = safe_inner_text(owner_cell, "Free Agent")
@@ -1258,11 +1287,16 @@ def extract_market_players(page) -> pd.DataFrame:
 
     df = pd.DataFrame(all_rows)
 
-    # Clean numerical columns (raw scraped strings, e.g. "€7,690,000")
-    numeric_cols = ["price", "recent_pts", "this_season_pts", "last_season_pts"]
+    # Clean numerical columns (raw scraped strings, e.g. "€7,690,000").
+    # recent_pts is excluded here: parse_recent_points() already returns a
+    # real signed int, and this regex (built for stripping "€"/","/etc.
+    # off strings) would strip a genuine minus sign off a bad recent
+    # round right along with the punctuation it's meant for.
+    numeric_cols = ["price", "this_season_pts", "last_season_pts"]
     for col in numeric_cols:
         cleaned = df[col].astype(str).str.replace(r"[^\d\.]", "", regex=True)
         df.loc[:, col] = pd.to_numeric(cleaned, errors="coerce").fillna(0)
+    df.loc[:, "recent_pts"] = pd.to_numeric(df["recent_pts"], errors="coerce").fillna(0)
 
     # 'change' is already a signed float from parse_money() — stripping
     # non-digit chars here would silently drop the minus sign.

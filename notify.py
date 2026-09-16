@@ -56,6 +56,22 @@ def _money(n):
     return f"{sign}€{abs(n):,.0f}"
 
 
+def _balance_section(conn, date) -> str:
+    """Warn when the live balance is negative — Biwenger requires a
+    non-negative balance heading into each round (see
+    recommenders.get_my_balance's docstring), so this is a real,
+    near-term forced-sale risk, not just a low number. Silent otherwise:
+    a healthy balance isn't news worth a line in every digest."""
+    balance = recommenders.get_my_balance(conn, date)
+    if balance >= 0:
+        return ""
+    return (
+        f"🚨 <b>Balance is negative: {_money(balance)}</b>\n"
+        "  Biwenger needs a non-negative balance before the next round — "
+        "sell something or you may be forced to."
+    )
+
+
 def _renewal_section() -> str:
     """One line confirming the auto-renew step ran and succeeded — cheap
     peace of mind that listings aren't quietly lapsing, distinct from the
@@ -84,6 +100,10 @@ def build_digest(conn, date) -> str:
     buy_df, sell_df = recommenders.build_recommendations(conn, date)
 
     sections = []
+
+    balance_warning = _balance_section(conn, date)
+    if balance_warning:
+        sections.append(balance_warning)
 
     renewal = _renewal_section()
     if renewal:

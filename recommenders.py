@@ -127,6 +127,28 @@ def resolve_scraped_at(conn, date):
     ).fetchone()
     return row[0] if row and row[0] else f"{date}%"
 
+def get_my_balance(conn, date):
+    """Current live balance for the logged-in user's team — prefers the
+    real scraped number (actual_balance) over the forum-post-ledger
+    reconstruction (ledger_balance, a FIFO approximation that can drift
+    from Biwenger's own number) when both exist. actual_balance is only
+    ever populated for our own team, which is the only one this needs
+    anyway.
+
+    Shared by build_recommendations' affordability check and notify.py's
+    balance-health warning — Biwenger requires a non-negative balance
+    heading into each round, so a negative reading here is a real,
+    near-term forced-sale risk, not just a low number.
+    """
+    d = resolve_scraped_at(conn, date)
+    balance_row = pd.read_sql(
+        "SELECT COALESCE(actual_balance, ledger_balance) AS balance "
+        "FROM team_balance WHERE is_me = 1 AND scraped_at LIKE ?",
+        conn, params=(d,)
+    )
+    return float(balance_row['balance'].iloc[0]) if len(balance_row) else 0.0
+
+
 POSITION_LABELS = {'Goalkeeper': 'GK', 'Defender': 'DEF', 'Midfielder': 'MID', 'Forward': 'FWD'}
 
 # ---------- Buy/sell recommenders ----------
@@ -1025,17 +1047,7 @@ def build_recommendations(conn, date):
     # what today's own sell recommendations would free up if all sold —
     # if that doesn't cover the shortfall, funding this buy would mean
     # selling players that don't otherwise make sense to let go of. ---
-    # Prefer the live-scraped ground truth over the forum-post-ledger
-    # reconstruction when we have it — the ledger is an approximation
-    # (FIFO-matched from parsed forum posts) and can drift from Biwenger's
-    # own number; actual_balance is only ever populated for our own team,
-    # which is the only one this check needs anyway.
-    balance_row = pd.read_sql(
-        "SELECT COALESCE(actual_balance, ledger_balance) AS balance "
-        "FROM team_balance WHERE is_me = 1 AND scraped_at LIKE ?",
-        conn, params=(d,)
-    )
-    my_balance = float(balance_row['balance'].iloc[0]) if len(balance_row) else 0.0
+    my_balance = get_my_balance(conn, date)
 
     # Funding candidates draw from the WHOLE roster, not just today's sell
     # recommendations — restricting to that short list meant a modest

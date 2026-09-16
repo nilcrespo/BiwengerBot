@@ -1,21 +1,21 @@
 position,club,name,price,change,status,owner,last_sale,recent_pts,this_season_pts,last_season_pts,scraped_at
-Forward/Midfielder,Rayo Vallecano,Isi Palazon,2240000,10000.0,,Free Agent,"2,240,000",15.0,6,0,2026-09-15
-Defender,Osasuna,Arguibide,2180000,-50000.0,,Free Agent,"2,180,000",20745.0,18,0,2026-09-15
-Defender,Atletico,Dani Martinez,200000,-10000.0,,Free Agent,"200,000",5.0,5,0,2026-09-15
-Forward/Midfielder,Villarreal,Akhomach,720000,-20000.0,,Free Agent,"720,000",222.0,6,0,2026-09-15
-Forward/Midfielder,Osasuna,Dubasin,1800000,-30000.0,,Free Agent,"1,800,000",32422.0,13,0,2026-09-15
-Forward/Midfielder,Malaga,Juan Cruz,1730000,-20000.0,,Free Agent,"1,730,000",43222.0,13,0,2026-09-15
-Forward,Espanyol,Bryan Zaragoza,3820000,-130000.0,,Free Agent,"3,820,000",34.0,7,0,2026-09-15
-Defender/Midfielder,Deportivo,Adria Altimira,1660000,-50000.0,,Free Agent,"1,660,000",124.0,5,0,2026-09-15
-Defender/Midfielder,Celta,Rueda,1850000,10000.0,,Free Agent,"1,850,000",34441.0,18,0,2026-09-15
-Defender,Osasuna,Bretones,1600000,-10000.0,,Free Agent,"1,600,000",42424.0,12,0,2026-09-15
-Forward/Midfielder,Elche,Boayar,150000,0.0,,Free Agent,"150,000",0.0,0,20,2026-09-15
-Forward/Midfielder,Elche,Yago Santiago,150000,0.0,,Free Agent,"150,000",0.0,0,14,2026-09-15
-Defender,Atletico,Hancko,4010000,-20000.0,,Free Agent,"4,010,000",42438.0,21,0,2026-09-15
-Forward/Midfielder,Levante,Paco Cortes,150000,0.0,,Free Agent,"150,000",231.0,4,0,2026-09-15
-Defender,Sevilla,Sangante,1010000,-20000.0,,Free Agent,"1,010,000",331.0,1,0,2026-09-15
-Forward/Midfielder,Malaga,Larrubia,4660000,-50000.0,,Free Agent,"4,660,000",54442.0,19,0,2026-09-15
-Goalkeeper,Celta,Bayindir,370000,-10000.0,,Free Agent,"370,000",0.0,0,0,2026-09-15
-Midfielder,Getafe,Mangala,2340000,-40000.0,,Free Agent,"2,340,000",32335.0,16,0,2026-09-15
-Midfielder/Forward,Espanyol,Calatrava,4150000,-90000.0,,Free Agent,"4,150,000",252104.0,23,0,2026-09-15
-Midfielder,Betis,Facundo Bernal,2540000,-20000.0,,Free Agent,"2,540,000",14343.0,15,0,2026-09-15
+Defender/Midfielder,Getafe,Kiko Femenia,870000,-20000.0,,Free Agent,"870,000",266.0,2,0,2026-09-16
+Midfielder,Atletico,Koke,3140000,0.0,,Free Agent,"3,140,000",53375.0,23,0,2026-09-16
+Defender,Malaga,Calero,880000,-10000.0,,Free Agent,"880,000",0.0,0,108,2026-09-16
+Forward,Athletic,Guruzeta,2230000,-40000.0,,Free Agent,"2,230,000",2223.0,9,0,2026-09-16
+Coach,Betis,Pellegrini,2290000,0.0,,Free Agent,"2,290,000",33033.0,12,0,2026-09-16
+Forward,Athletic,Nico Williams,8370000,70000.0,,Free Agent,"8,370,000",912225.0,30,0,2026-09-16
+Defender,Rayo Vallecano,Balliu,860000,-10000.0,,Free Agent,"860,000",2040.0,10,0,2026-09-16
+Midfielder,Espanyol,Urko,1990000,-20000.0,,Free Agent,"1,990,000",3322.0,15,0,2026-09-16
+Midfielder/Forward,Celta,Swedberg,1900000,-30000.0,,Free Agent,"1,900,000",1313.0,11,0,2026-09-16
+Forward/Midfielder,Getafe,Uche,1450000,-20000.0,,Free Agent,"1,450,000",0.0,0,22,2026-09-16
+Defender,Rayo Vallecano,Kumbulla,520000,-10000.0,,Free Agent,"520,000",0.0,0,20,2026-09-16
+Defender,Real Madrid,Huijsen,5870000,20000.0,,Free Agent,"5,870,000",2764.0,23,0,2026-09-16
+Forward/Midfielder,Levante,Paco Cortes,150000,0.0,,Free Agent,"150,000",231.0,4,0,2026-09-16
+Midfielder,Atletico,Obed Vargas,320000,-10000.0,,Free Agent,"320,000",0.0,0,47,2026-09-16
+Forward,Deportivo,Eddahchouri,720000,10000.0,,Free Agent,"720,000",2102.0,14,0,2026-09-16
+Midfielder,Alaves,Selu Diallo,150000,0.0,,Free Agent,"150,000",0.0,0,0,2026-09-16
+Forward,Sevilla,Robbie Ure,3080000,-50000.0,,Free Agent,"3,080,000",22227.0,15,0,2026-09-16
+Forward/Midfielder,Osasuna,Del Castillo,2480000,-40000.0,,Free Agent,"2,480,000",3.0,3,0,2026-09-16
+Forward,Sevilla,Stassin,3280000,-40000.0,,Free Agent,"3,280,000",212.0,14,0,2026-09-16
+Forward,Levante,Ratkov,1050000,-20000.0,,Free Agent,"1,050,000",2.0,2,0,2026-09-16

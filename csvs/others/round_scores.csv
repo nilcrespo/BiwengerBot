@@ -244,8 +244,8 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4899,Round 1,finished,50716,finished,35770,Antony,Betis,4,Raifc,RaiFC,starter,6.0,1
 4899,Round 1,finished,50716,finished,10276,Cucho,Betis,4,Freejulian,FreeJulian,starter,2.0,1
 4899,Round 1,finished,50716,finished,19513,Pellegrini,Betis,5,,,,3.0,1
-4899,Round 1,finished,50716,finished,5807,Marc Roca,Betis,3,Freejulian,FreeJulian,reserve,,0
 4899,Round 1,finished,50716,finished,25127,Ez Abde,Betis,4,Patsi_FC,Patsi F.C,starter,,0
+4899,Round 1,finished,50716,finished,5807,Marc Roca,Betis,3,Freejulian,FreeJulian,reserve,,0
 4899,Round 1,finished,50718,finished,129,Brahim,Real Madrid,4,,,,2.0,1
 4899,Round 1,finished,50718,finished,1733,Camavinga,Real Madrid,3,,,,2.0,1
 4899,Round 1,finished,50718,finished,8555,Diomande,Real Madrid,4,,,,2.0,1
@@ -375,8 +375,8 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4900,Round 2,finished,50728,finished,18397,De Frutos,Rayo Vallecano,4,Minabo_De_Kiev,Minabo de Kiev,starter,4.0,1
 4900,Round 2,finished,50728,finished,17756,Camello,Rayo Vallecano,4,,,,12.0,1
 4900,Round 2,finished,50728,finished,41088,San José,Rayo Vallecano,5,,,,1.0,1
-4900,Round 2,finished,50728,finished,37450,Alemão,Rayo Vallecano,4,The_National,The National,reserve,,0
 4900,Round 2,finished,50728,finished,21063,Balliu,Rayo Vallecano,2,Manchester_Tity,Manchester Tity,reserve,,0
+4900,Round 2,finished,50728,finished,37450,Alemão,Rayo Vallecano,4,The_National,The National,reserve,,0
 4900,Round 2,finished,50728,finished,1876,Denis Suárez,Alavés,3,,,,4.0,1
 4900,Round 2,finished,50728,finished,5697,Mariano,Alavés,4,,,,12.0,1
 4900,Round 2,finished,50728,finished,10157,Aleñá,Alavés,3,,,,3.0,1
@@ -499,8 +499,8 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4900,Round 2,finished,50727,finished,35606,El-Abdellaoui,Celta,4,,,,2.0,1
 4900,Round 2,finished,50727,finished,14615,Claudio Giráldez,Celta,5,,,,1.0,1
 4900,Round 2,finished,50727,finished,10117,Iván Villar,Celta,1,Minabo_De_Kiev,Minabo de Kiev,reserve,,0
-4900,Round 2,finished,50727,finished,2009,Borja Iglesias,Celta,4,Freejulian,FreeJulian,starter,,0
 4900,Round 2,finished,50727,finished,31321,Starfelt,Celta,2,Patsi_FC,Patsi F.C,starter,,0
+4900,Round 2,finished,50727,finished,2009,Borja Iglesias,Celta,4,Freejulian,FreeJulian,starter,,0
 4900,Round 2,finished,50722,finished,9047,Pere Milla,Espanyol,4,,,,2.0,1
 4900,Round 2,finished,50722,finished,10997,Bauzà,Espanyol,3,Raifc,RaiFC,reserve,3.0,1
 4900,Round 2,finished,50722,finished,17148,Pol Lozano,Espanyol,3,,,,2.0,1
@@ -1100,86 +1100,120 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4904,Round 6,finished,50768,finished,24197,Antañón,Celta,3,,,,1.0,1
 4904,Round 6,finished,50768,finished,14615,Claudio Giráldez,Celta,5,,,,1.0,1
 4904,Round 6,finished,50768,finished,10117,Iván Villar,Celta,1,Minabo_De_Kiev,Minabo de Kiev,reserve,,0
-4904,Round 6,finished,50767,preview,17756,Camello,Rayo Vallecano,4,,,,,0
-4904,Round 6,finished,50767,preview,33,Álvaro García,Rayo Vallecano,4,Raifc,RaiFC,starter,,0
-4904,Round 6,finished,50767,preview,34483,Pedro Díaz,Rayo Vallecano,3,,,,,0
-4904,Round 6,finished,50767,preview,27995,Fran Pérez,Rayo Vallecano,4,,,,,0
-4904,Round 6,finished,50767,preview,1969,Unai López,Rayo Vallecano,3,The_National,The National,reserve,,0
-4904,Round 6,finished,50767,preview,5352,Óscar Valentín,Rayo Vallecano,3,Minabo_De_Kiev,Minabo de Kiev,starter,,0
-4904,Round 6,finished,50767,preview,16889,Pedrosa,Rayo Vallecano,2,,,,,0
-4904,Round 6,finished,50767,preview,24326,Pathé Ciss,Rayo Vallecano,3,,,,,0
-4904,Round 6,finished,50767,preview,2476,Lejeune,Rayo Vallecano,2,,,,,0
-4904,Round 6,finished,50767,preview,26276,Ratiu,Rayo Vallecano,2,,,,,0
-4904,Round 6,finished,50767,preview,43282,Audero,Rayo Vallecano,1,Patsi_FC,Patsi F.C,starter,,0
-4904,Round 6,finished,50767,preview,22975,Cárdenas,Rayo Vallecano,1,General_Hansi_Topete,"General ""Hansi” Topete",reserve,,0
-4904,Round 6,finished,50767,preview,18397,De Frutos,Rayo Vallecano,4,Minabo_De_Kiev,Minabo de Kiev,starter,,0
-4904,Round 6,finished,50767,preview,35678,Roberto Fernández,Espanyol,4,,,,,0
-4904,Round 6,finished,50767,preview,37644,Marcos Fernández,Espanyol,4,,,,,0
-4904,Round 6,finished,50767,preview,38308,Dolan,Espanyol,4,,,,,0
-4904,Round 6,finished,50767,preview,19862,Expósito,Espanyol,3,Patsi_FC,Patsi F.C,starter,,0
-4904,Round 6,finished,50767,preview,42412,Moscardo,Espanyol,3,,,,,0
-4904,Round 6,finished,50767,preview,25322,Javi Hernández,Espanyol,3,,,,,0
-4904,Round 6,finished,50767,preview,14466,Hinojo,Espanyol,2,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
-4904,Round 6,finished,50767,preview,11800,Cabrera,Espanyol,2,Cd_Numancia,CD Numancia,reserve,,0
-4904,Round 6,finished,50767,preview,38517,Riedel,Espanyol,2,,,,,0
-4904,Round 6,finished,50767,preview,28103,El Hilali,Espanyol,2,,,,,0
-4904,Round 6,finished,50767,preview,9090,Dmitrovic,Espanyol,1,Manchester_Tity,Manchester Tity,starter,,0
-4904,Round 6,finished,50767,preview,42327,Calatrava,Espanyol,3,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
-4904,Round 6,finished,50767,preview,10997,Bauzà,Espanyol,3,Raifc,RaiFC,reserve,,0
-4904,Round 6,finished,50767,preview,30334,Fortuño,Espanyol,1,Manchester_Tity,Manchester Tity,reserve,,0
-4904,Round 6,finished,50767,preview,10155,Unai Núñez,Espanyol,2,Freejulian,FreeJulian,starter,,0
-4904,Round 6,finished,50763,preview,12494,Boyé,Alavés,4,Locombia_Fc,Locombia FC,starter,,0
-4904,Round 6,finished,50763,preview,34802,Toni Martínez,Alavés,4,,,,,0
-4904,Round 6,finished,50763,preview,10157,Aleñá,Alavés,3,,,,,0
-4904,Round 6,finished,50763,preview,1612,Antonio Blanco,Alavés,3,,,,,0
-4904,Round 6,finished,50763,preview,14800,Pablo Ibáñez,Alavés,3,Raifc,RaiFC,starter,,0
-4904,Round 6,finished,50763,preview,30510,Abde Rebbach,Alavés,4,Hernan_Krezzpo,Hernan Krezzpo,starter,,0
-4904,Round 6,finished,50763,preview,1599,Jonny,Alavés,2,,,,,0
-4904,Round 6,finished,50763,preview,39924,Koski,Alavés,2,,,,,0
-4904,Round 6,finished,50763,preview,25384,Tenaglia,Alavés,2,Minabo_De_Kiev,Minabo de Kiev,starter,,0
-4904,Round 6,finished,50763,preview,39885,Ángel Pérez,Alavés,4,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
-4904,Round 6,finished,50763,preview,9887,Sivera,Alavés,1,Freejulian,FreeJulian,starter,,0
-4904,Round 6,finished,50763,preview,31069,Mikel Rodriguez,Alavés,3,Cd_Numancia,CD Numancia,reserve,,0
-4904,Round 6,finished,50763,preview,37525,Yusi,Alavés,2,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
-4904,Round 6,finished,50763,preview,24509,Danjuma,Valencia,4,,,,,0
-4904,Round 6,finished,50763,preview,42389,Sato,Valencia,4,Locombia_Fc,Locombia FC,starter,,0
-4904,Round 6,finished,50763,preview,30123,Javi Guerra,Valencia,3,The_National,The National,starter,,0
-4904,Round 6,finished,50763,preview,34599,David Otorbi,Valencia,4,,,,,0
-4904,Round 6,finished,50763,preview,42396,Dieng,Valencia,3,,,,,0
-4904,Round 6,finished,50763,preview,38368,Ugrinic,Valencia,3,Patsi_FC,Patsi F.C,reserve,,0
-4904,Round 6,finished,50763,preview,1844,Gayà,Valencia,2,,,,,0
-4904,Round 6,finished,50763,preview,35308,Córdoba,Valencia,2,,,,,0
-4904,Round 6,finished,50763,preview,12221,Pepelu,Valencia,3,Patsi_FC,Patsi F.C,reserve,,0
-4904,Round 6,finished,50763,preview,26095,Arnau Martínez,Valencia,2,,,,,0
-4904,Round 6,finished,50763,preview,11677,Dimitrievski,Valencia,1,,,,,0
-4904,Round 6,finished,50763,preview,31494,Sergi Canós,Valencia,4,Cd_Numancia,CD Numancia,reserve,,0
-4904,Round 6,finished,50763,preview,15464,Diakhaby,Valencia,2,Raifc,RaiFC,starter,,0
-4904,Round 6,finished,50763,preview,6259,Hugo Duro,Valencia,4,Minabo_De_Kiev,Minabo de Kiev,starter,,0
-4904,Round 6,finished,50764,preview,21132,Fer Niño,Elche,4,Manchester_Tity,Manchester Tity,starter,,0
-4904,Round 6,finished,50764,preview,41608,Buonanotte,Elche,3,,,,,0
-4904,Round 6,finished,50764,preview,20969,Germán Valera,Elche,3,,,,,0
-4904,Round 6,finished,50764,preview,12734,Javi Morcillo,Elche,3,Manchester_Tity,Manchester Tity,reserve,,0
-4904,Round 6,finished,50764,preview,25403,Gonzalo Villar,Elche,3,Hernan_Krezzpo,Hernan Krezzpo,starter,,0
-4904,Round 6,finished,50764,preview,43268,Revivo,Elche,2,,,,,0
-4904,Round 6,finished,50764,preview,1760,Chust,Elche,2,,,,,0
-4904,Round 6,finished,50764,preview,38422,Redondo,Elche,3,,,,,0
-4904,Round 6,finished,50764,preview,40010,Sangaré,Elche,2,,,,,0
-4904,Round 6,finished,50764,preview,22690,Tete Morente,Elche,4,,,,,0
-4904,Round 6,finished,50764,preview,17482,Dituro,Elche,1,,,,,0
-4904,Round 6,finished,50764,preview,38457,Ali Houary,Elche,3,Minabo_De_Kiev,Minabo de Kiev,reserve,,0
-4904,Round 6,finished,50764,preview,19577,Mbappé,Real Madrid,4,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
-4904,Round 6,finished,50764,preview,15568,Vinícius Jr,Real Madrid,4,Raifc,RaiFC,starter,,0
-4904,Round 6,finished,50764,preview,30477,Bellingham,Real Madrid,3,Locombia_Fc,Locombia FC,starter,,0
-4904,Round 6,finished,50764,preview,31027,Arda Güler,Real Madrid,3,,,,,0
-4904,Round 6,finished,50764,preview,9402,Valverde,Real Madrid,3,,,,,0
-4904,Round 6,finished,50764,preview,41086,Bernardo Silva,Real Madrid,3,,,,,0
-4904,Round 6,finished,50764,preview,15410,Cucurella,Real Madrid,2,,,,,0
-4904,Round 6,finished,50764,preview,37495,Huijsen,Real Madrid,2,,,,,0
-4904,Round 6,finished,50764,preview,2253,Rüdiger,Real Madrid,2,,,,,0
-4904,Round 6,finished,50764,preview,37499,Trent,Real Madrid,2,,,,,0
-4904,Round 6,finished,50764,preview,16738,Courtois,Real Madrid,1,,,,,0
+4904,Round 6,finished,50767,finished,5352,Óscar Valentín,Rayo Vallecano,3,Minabo_De_Kiev,Minabo de Kiev,starter,4.0,1
+4904,Round 6,finished,50767,finished,21063,Balliu,Rayo Vallecano,2,,,,2.0,1
+4904,Round 6,finished,50767,finished,27995,Fran Pérez,Rayo Vallecano,4,,,,3.0,1
+4904,Round 6,finished,50767,finished,37450,Alemão,Rayo Vallecano,4,,,,3.0,1
+4904,Round 6,finished,50767,finished,43172,Bouare,Rayo Vallecano,3,,,,5.0,1
+4904,Round 6,finished,50767,finished,43282,Audero,Rayo Vallecano,1,Patsi_FC,Patsi F.C,starter,4.0,1
+4904,Round 6,finished,50767,finished,16889,Pedrosa,Rayo Vallecano,2,,,,13.0,1
+4904,Round 6,finished,50767,finished,2476,Lejeune,Rayo Vallecano,2,,,,3.0,1
+4904,Round 6,finished,50767,finished,43267,Sadick,Rayo Vallecano,2,,,,3.0,1
+4904,Round 6,finished,50767,finished,26276,Ratiu,Rayo Vallecano,2,,,,3.0,1
+4904,Round 6,finished,50767,finished,24326,Pathé Ciss,Rayo Vallecano,3,,,,8.0,1
+4904,Round 6,finished,50767,finished,1969,Unai López,Rayo Vallecano,3,The_National,The National,reserve,5.0,1
+4904,Round 6,finished,50767,finished,33,Álvaro García,Rayo Vallecano,4,Raifc,RaiFC,starter,14.0,1
+4904,Round 6,finished,50767,finished,34483,Pedro Díaz,Rayo Vallecano,3,,,,5.0,1
+4904,Round 6,finished,50767,finished,41940,Tsitaishvili,Rayo Vallecano,4,,,,4.0,1
+4904,Round 6,finished,50767,finished,17756,Camello,Rayo Vallecano,4,,,,6.0,1
+4904,Round 6,finished,50767,finished,41088,San José,Rayo Vallecano,5,,,,3.0,1
+4904,Round 6,finished,50767,finished,22975,Cárdenas,Rayo Vallecano,1,General_Hansi_Topete,"General ""Hansi” Topete",reserve,,0
+4904,Round 6,finished,50767,finished,18397,De Frutos,Rayo Vallecano,4,Minabo_De_Kiev,Minabo de Kiev,starter,,0
+4904,Round 6,finished,50767,finished,17148,Pol Lozano,Espanyol,3,,,,1.0,1
+4904,Round 6,finished,50767,finished,19862,Expósito,Espanyol,3,Patsi_FC,Patsi F.C,starter,3.0,1
+4904,Round 6,finished,50767,finished,30502,Bryan Zaragoza,Espanyol,4,,,,3.0,1
+4904,Round 6,finished,50767,finished,37644,Marcos Fernández,Espanyol,4,,,,5.0,1
+4904,Round 6,finished,50767,finished,42327,Calatrava,Espanyol,3,General_Hansi_Topete,"General ""Hansi” Topete",starter,2.0,1
+4904,Round 6,finished,50767,finished,9090,Dmitrovic,Espanyol,1,Manchester_Tity,Manchester Tity,starter,2.0,1
+4904,Round 6,finished,50767,finished,14466,Hinojo,Espanyol,2,General_Hansi_Topete,"General ""Hansi” Topete",starter,2.0,1
+4904,Round 6,finished,50767,finished,38517,Riedel,Espanyol,2,,,,2.0,1
+4904,Round 6,finished,50767,finished,11800,Cabrera,Espanyol,2,Cd_Numancia,CD Numancia,reserve,1.0,1
+4904,Round 6,finished,50767,finished,28103,El Hilali,Espanyol,2,,,,-2.0,1
+4904,Round 6,finished,50767,finished,42412,Moscardo,Espanyol,3,,,,-2.0,1
+4904,Round 6,finished,50767,finished,22699,Urko,Espanyol,3,,,,0.0,1
+4904,Round 6,finished,50767,finished,42390,Hartman,Espanyol,2,,,,4.0,1
+4904,Round 6,finished,50767,finished,10997,Bauzà,Espanyol,3,Raifc,RaiFC,reserve,-1.0,1
+4904,Round 6,finished,50767,finished,25322,Javi Hernández,Espanyol,3,,,,4.0,1
+4904,Round 6,finished,50767,finished,35678,Roberto Fernández,Espanyol,4,,,,12.0,1
+4904,Round 6,finished,50767,finished,33789,Manolo González,Espanyol,5,,,,0.0,1
+4904,Round 6,finished,50767,finished,30334,Fortuño,Espanyol,1,Manchester_Tity,Manchester Tity,reserve,,0
+4904,Round 6,finished,50767,finished,10155,Unai Núñez,Espanyol,2,Freejulian,FreeJulian,starter,,0
+4904,Round 6,finished,50763,finished,5697,Mariano,Alavés,4,,,,4.0,1
+4904,Round 6,finished,50763,finished,10157,Aleñá,Alavés,3,,,,2.0,1
+4904,Round 6,finished,50763,finished,17369,Guevara,Alavés,3,,,,4.0,1
+4904,Round 6,finished,50763,finished,29446,Miguel Rodríguez,Alavés,4,,,,3.0,1
+4904,Round 6,finished,50763,finished,37525,Yusi,Alavés,2,General_Hansi_Topete,"General ""Hansi” Topete",starter,2.0,1
+4904,Round 6,finished,50763,finished,9887,Sivera,Alavés,1,Freejulian,FreeJulian,starter,5.0,1
+4904,Round 6,finished,50763,finished,41609,Valentini,Alavés,2,,,,3.0,1
+4904,Round 6,finished,50763,finished,39924,Koski,Alavés,2,,,,3.0,1
+4904,Round 6,finished,50763,finished,25384,Tenaglia,Alavés,2,Minabo_De_Kiev,Minabo de Kiev,starter,5.0,1
+4904,Round 6,finished,50763,finished,30510,Abde Rebbach,Alavés,4,Hernan_Krezzpo,Hernan Krezzpo,starter,4.0,1
+4904,Round 6,finished,50763,finished,39885,Ángel Pérez,Alavés,4,General_Hansi_Topete,"General ""Hansi” Topete",starter,7.0,1
+4904,Round 6,finished,50763,finished,14800,Pablo Ibáñez,Alavés,3,Raifc,RaiFC,starter,3.0,1
+4904,Round 6,finished,50763,finished,1876,Denis Suárez,Alavés,3,,,,4.0,1
+4904,Round 6,finished,50763,finished,1612,Antonio Blanco,Alavés,3,,,,3.0,1
+4904,Round 6,finished,50763,finished,12494,Boyé,Alavés,4,Locombia_Fc,Locombia FC,starter,2.0,1
+4904,Round 6,finished,50763,finished,34802,Toni Martínez,Alavés,4,,,,4.0,1
+4904,Round 6,finished,50763,finished,25020,Sánchez Flores,Alavés,5,,,,0.0,1
+4904,Round 6,finished,50763,finished,31069,Mikel Rodriguez,Alavés,3,Cd_Numancia,CD Numancia,reserve,,0
+4904,Round 6,finished,50763,finished,17442,Rioja,Valencia,4,,,,10.0,1
+4904,Round 6,finished,50763,finished,24734,Jesús Vázquez,Valencia,2,,,,2.0,1
+4904,Round 6,finished,50763,finished,26095,Arnau Martínez,Valencia,2,,,,3.0,1
+4904,Round 6,finished,50763,finished,34599,David Otorbi,Valencia,4,,,,3.0,1
+4904,Round 6,finished,50763,finished,35308,Córdoba,Valencia,2,,,,3.0,1
+4904,Round 6,finished,50763,finished,11677,Dimitrievski,Valencia,1,,,,7.0,1
+4904,Round 6,finished,50763,finished,1844,Gayà,Valencia,2,,,,4.0,1
+4904,Round 6,finished,50763,finished,12221,Pepelu,Valencia,3,Patsi_FC,Patsi F.C,starter,5.0,1
+4904,Round 6,finished,50763,finished,42271,De Haas,Valencia,2,,,,4.0,1
+4904,Round 6,finished,50763,finished,10030,Maffeo,Valencia,2,,,,3.0,1
+4904,Round 6,finished,50763,finished,163,Guido Rodríguez,Valencia,3,Freejulian,FreeJulian,starter,4.0,1
+4904,Round 6,finished,50763,finished,23080,Mayol,Valencia,3,,,,5.0,1
+4904,Round 6,finished,50763,finished,24509,Danjuma,Valencia,4,,,,5.0,1
+4904,Round 6,finished,50763,finished,30123,Javi Guerra,Valencia,3,The_National,The National,starter,7.0,1
+4904,Round 6,finished,50763,finished,38368,Ugrinic,Valencia,3,Patsi_FC,Patsi F.C,reserve,4.0,1
+4904,Round 6,finished,50763,finished,6259,Hugo Duro,Valencia,4,Minabo_De_Kiev,Minabo de Kiev,starter,3.0,1
+4904,Round 6,finished,50763,finished,43436,Óscar Sánchez,Valencia,5,,,,3.0,1
+4904,Round 6,finished,50763,finished,42389,Sato,Valencia,4,Locombia_Fc,Locombia FC,starter,,0
+4904,Round 6,finished,50763,finished,31494,Sergi Canós,Valencia,4,Cd_Numancia,CD Numancia,reserve,,0
+4904,Round 6,finished,50763,finished,15464,Diakhaby,Valencia,2,Raifc,RaiFC,starter,,0
+4904,Round 6,finished,50764,finished,11196,Lemar,Elche,3,,,,6.0,1
+4904,Round 6,finished,50764,finished,21132,Fer Niño,Elche,4,Manchester_Tity,Manchester Tity,starter,10.0,1
+4904,Round 6,finished,50764,finished,22061,Josan,Elche,3,,,,2.0,1
+4904,Round 6,finished,50764,finished,23572,Rubén Sánchez,Elche,2,,,,3.0,1
+4904,Round 6,finished,50764,finished,39874,Cepeda,Elche,4,,,,7.0,1
+4904,Round 6,finished,50764,finished,17482,Dituro,Elche,1,,,,2.0,1
+4904,Round 6,finished,50764,finished,43268,Revivo,Elche,2,,,,1.0,1
+4904,Round 6,finished,50764,finished,38422,Redondo,Elche,3,,,,4.0,1
+4904,Round 6,finished,50764,finished,1760,Chust,Elche,2,,,,2.0,1
+4904,Round 6,finished,50764,finished,40010,Sangaré,Elche,2,,,,4.0,1
+4904,Round 6,finished,50764,finished,22690,Tete Morente,Elche,4,,,,5.0,1
+4904,Round 6,finished,50764,finished,38355,Neto,Elche,3,,,,-1.0,1
+4904,Round 6,finished,50764,finished,25403,Gonzalo Villar,Elche,3,Hernan_Krezzpo,Hernan Krezzpo,starter,5.0,1
+4904,Round 6,finished,50764,finished,37717,Marc Aguado,Elche,3,,,,2.0,1
+4904,Round 6,finished,50764,finished,20969,Germán Valera,Elche,3,,,,3.0,1
+4904,Round 6,finished,50764,finished,41565,Osorio,Elche,4,,,,13.0,1
+4904,Round 6,finished,50764,finished,41388,Anselmi,Elche,5,,,,0.0,1
+4904,Round 6,finished,50764,finished,12734,Javi Morcillo,Elche,3,Manchester_Tity,Manchester Tity,reserve,,0
+4904,Round 6,finished,50764,finished,38457,Ali Houary,Elche,3,Minabo_De_Kiev,Minabo de Kiev,reserve,,0
+4904,Round 6,finished,50764,finished,129,Brahim,Real Madrid,4,,,,2.0,1
+4904,Round 6,finished,50764,finished,30477,Bellingham,Real Madrid,3,Locombia_Fc,Locombia FC,starter,5.0,1
+4904,Round 6,finished,50764,finished,33796,Endrick,Real Madrid,4,,,,1.0,1
+4904,Round 6,finished,50764,finished,37711,Espí,Real Madrid,4,,,,13.0,1
+4904,Round 6,finished,50764,finished,42362,Dumfries,Real Madrid,2,,,,0.0,1
+4904,Round 6,finished,50764,finished,16738,Courtois,Real Madrid,1,,,,2.0,1
+4904,Round 6,finished,50764,finished,15410,Cucurella,Real Madrid,2,,,,1.0,1
+4904,Round 6,finished,50764,finished,41087,Konaté,Real Madrid,2,,,,3.0,1
+4904,Round 6,finished,50764,finished,37495,Huijsen,Real Madrid,2,,,,2.0,1
+4904,Round 6,finished,50764,finished,37499,Trent,Real Madrid,2,,,,4.0,1
+4904,Round 6,finished,50764,finished,26048,Tchouameni,Real Madrid,3,,,,3.0,1
+4904,Round 6,finished,50764,finished,9402,Valverde,Real Madrid,3,,,,6.0,1
+4904,Round 6,finished,50764,finished,15568,Vinícius Jr,Real Madrid,4,Raifc,RaiFC,starter,-2.0,1
+4904,Round 6,finished,50764,finished,31027,Arda Güler,Real Madrid,3,,,,8.0,1
+4904,Round 6,finished,50764,finished,8555,Diomande,Real Madrid,4,,,,9.0,1
+4904,Round 6,finished,50764,finished,19577,Mbappé,Real Madrid,4,General_Hansi_Topete,"General ""Hansi” Topete",starter,12.0,1
+4904,Round 6,finished,50764,finished,41386,Mourinho,Real Madrid,5,,,,3.0,1
 4904,Round 6,finished,50760,preview,17687,Kang-in Lee,Atlético,3,Locombia_Fc,Locombia FC,starter,,0
-4904,Round 6,finished,50760,preview,30789,Giuliano Simeone,Atlético,3,,,,,0
+4904,Round 6,finished,50760,preview,43263,Jonathan David,Atlético,4,,,,,0
 4904,Round 6,finished,50760,preview,19547,Baena,Atlético,3,,,,,0
 4904,Round 6,finished,50760,preview,42444,Hjulmand,Atlético,3,,,,,0
 4904,Round 6,finished,50760,preview,1083,Koke,Atlético,3,Freejulian,FreeJulian,starter,,0
@@ -1192,9 +1226,9 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4904,Round 6,finished,50760,preview,15828,Cristian Romero,Atlético,2,Locombia_Fc,Locombia FC,starter,,0
 4904,Round 6,finished,50760,preview,34557,Julián Alvarez,Atlético,4,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
 4904,Round 6,finished,50760,preview,39941,Lookman,Atlético,4,Hernan_Krezzpo,Hernan Krezzpo,starter,,0
+4904,Round 6,finished,50760,preview,37724,Mendoza,Atlético,3,Manchester_Tity,Manchester Tity,starter,,0
 4904,Round 6,finished,50760,preview,34805,Musso,Atlético,1,The_National,The National,reserve,,0
 4904,Round 6,finished,50760,preview,29184,Barrios,Atlético,3,Minabo_De_Kiev,Minabo de Kiev,starter,,0
-4904,Round 6,finished,50760,preview,37724,Mendoza,Atlético,3,Manchester_Tity,Manchester Tity,starter,,0
 4904,Round 6,finished,50760,preview,24576,Sørloth,Atlético,4,Patsi_FC,Patsi F.C,starter,,0
 4904,Round 6,finished,50760,preview,18398,Budimir,Osasuna,4,Cd_Numancia,CD Numancia,starter,,0
 4904,Round 6,finished,50760,preview,42173,Del Castillo,Osasuna,4,,,,,0
@@ -1224,18 +1258,18 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4904,Round 6,finished,50761,preview,41807,Robbie Ure,Sevilla,4,,,,,0
 4904,Round 6,finished,50761,preview,39673,Julio Díaz,Sevilla,2,,,,,0
 4904,Round 6,finished,50761,preview,10158,Guridi,Sevilla,3,Raifc,RaiFC,starter,,0
-4904,Round 6,finished,50761,preview,33531,Ejuke,Sevilla,4,Locombia_Fc,Locombia FC,reserve,,0
+4904,Round 6,finished,50761,preview,39350,Sierra,Sevilla,4,Cd_Numancia,CD Numancia,starter,,0
 4904,Round 6,finished,50761,preview,32338,Agoumé,Sevilla,3,Hernan_Krezzpo,Hernan Krezzpo,starter,,0
-4904,Round 6,finished,50761,preview,37733,Kochorashvili,Sevilla,3,,,,,0
+4904,Round 6,finished,50761,preview,43272,Fofana,Sevilla,3,,,,,0
 4904,Round 6,finished,50761,preview,38194,Suazo,Sevilla,2,The_National,The National,starter,,0
 4904,Round 6,finished,50761,preview,28115,Kike Salas,Sevilla,2,,,,,0
 4904,Round 6,finished,50761,preview,38072,Castrín,Sevilla,2,Patsi_FC,Patsi F.C,starter,,0
 4904,Round 6,finished,50761,preview,23840,Juan Iglesias,Sevilla,2,Minabo_De_Kiev,Minabo de Kiev,starter,,0
 4904,Round 6,finished,50761,preview,38405,Odysseas,Sevilla,1,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
-4904,Round 6,finished,50761,preview,39350,Sierra,Sevilla,4,Cd_Numancia,CD Numancia,starter,,0
+4904,Round 6,finished,50761,preview,33531,Ejuke,Sevilla,4,Locombia_Fc,Locombia FC,reserve,,0
 4904,Round 6,finished,50761,preview,21854,Luis García,Sevilla,5,Hernan_Krezzpo,Hernan Krezzpo,coach,,0
 4904,Round 6,finished,50762,preview,26930,Raphinha,Barcelona,4,The_National,The National,starter,,0
-4904,Round 6,finished,50762,preview,41200,Gordon,Barcelona,4,Patsi_FC,Patsi F.C,starter,,0
+4904,Round 6,finished,50762,preview,42557,Adeyemi,Barcelona,4,Manchester_Tity,Manchester Tity,starter,,0
 4904,Round 6,finished,50762,preview,34527,Dani Olmo,Barcelona,3,Freejulian,FreeJulian,starter,,0
 4904,Round 6,finished,50762,preview,26271,Yamal,Barcelona,4,Manchester_Tity,Manchester Tity,starter,,0
 4904,Round 6,finished,50762,preview,19441,Pedri,Barcelona,3,Hernan_Krezzpo,Hernan Krezzpo,starter,,0
@@ -1246,11 +1280,11 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4904,Round 6,finished,50762,preview,20,Eric García,Barcelona,2,Hernan_Krezzpo,Hernan Krezzpo,starter,,0
 4904,Round 6,finished,50762,preview,15430,Joan García,Barcelona,1,,,,,0
 4904,Round 6,finished,50762,preview,19244,Hansi Flick,Barcelona,5,General_Hansi_Topete,"General ""Hansi” Topete",coach,,0
-4904,Round 6,finished,50762,preview,31243,Fermín,Barcelona,3,Minabo_De_Kiev,Minabo de Kiev,starter,,0
 4904,Round 6,finished,50762,preview,40075,Espart,Barcelona,2,Manchester_Tity,Manchester Tity,starter,,0
-4904,Round 6,finished,50762,preview,42557,Adeyemi,Barcelona,4,Manchester_Tity,Manchester Tity,starter,,0
 4904,Round 6,finished,50762,preview,37817,Bisiwu,Barcelona,4,Manchester_Tity,Manchester Tity,reserve,,0
+4904,Round 6,finished,50762,preview,31243,Fermín,Barcelona,3,Minabo_De_Kiev,Minabo de Kiev,starter,,0
 4904,Round 6,finished,50762,preview,26678,Christensen,Barcelona,2,Patsi_FC,Patsi F.C,starter,,0
+4904,Round 6,finished,50762,preview,41200,Gordon,Barcelona,4,Patsi_FC,Patsi F.C,starter,,0
 4904,Round 6,finished,50762,preview,42610,Zabiri,Racing,4,,,,,0
 4904,Round 6,finished,50762,preview,18564,Iñigo Vicente,Racing,4,Cd_Numancia,CD Numancia,starter,,0
 4904,Round 6,finished,50762,preview,947,Sergio Canales,Racing,3,,,,,0
@@ -1274,8 +1308,7 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4904,Round 6,finished,50765,preview,37739,De la Fuente,Levante,2,Hernan_Krezzpo,Hernan Krezzpo,starter,,0
 4904,Round 6,finished,50765,preview,25815,Nacho Pérez,Levante,2,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
 4904,Round 6,finished,50765,preview,2184,Ryan,Levante,1,Cd_Numancia,CD Numancia,starter,,0
-4904,Round 6,finished,50765,preview,25400,Sotelo,Levante,3,Patsi_FC,Patsi F.C,starter,,0
-4904,Round 6,finished,50765,preview,897,Berenguer,Athletic,4,,,,,0
+4904,Round 6,finished,50765,preview,1995,Iñaki Williams,Athletic,4,,,,,0
 4904,Round 6,finished,50765,preview,21008,Nico Williams,Athletic,4,,,,,0
 4904,Round 6,finished,50765,preview,17057,Sancet,Athletic,3,,,,,0
 4904,Round 6,finished,50765,preview,24474,Robert Navarro,Athletic,4,,,,,0
@@ -1302,7 +1335,6 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4904,Round 6,finished,50759,preview,30487,Álvaro Valles,Betis,1,Locombia_Fc,Locombia FC,starter,,0
 4904,Round 6,finished,50759,preview,8670,Roro Riquelme,Betis,3,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
 4904,Round 6,finished,50759,preview,1249,Isco,Betis,3,Hernan_Krezzpo,Hernan Krezzpo,starter,,0
-4904,Round 6,finished,50759,preview,5807,Marc Roca,Betis,3,Freejulian,FreeJulian,starter,,0
 4904,Round 6,finished,50759,preview,10276,Cucho,Betis,4,Freejulian,FreeJulian,reserve,,0
 4904,Round 6,finished,50759,preview,39792,Satriano,Getafe,4,,,,,0
 4904,Round 6,finished,50759,preview,9045,Enes Ünal,Getafe,4,The_National,The National,starter,,0
@@ -1339,10 +1371,10 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4904,Round 6,finished,50766,preview,35156,Pau Navarro,Villarreal,2,,,,,0
 4904,Round 6,finished,50766,preview,39901,Freeman,Villarreal,2,,,,,0
 4904,Round 6,finished,50766,preview,38433,Gulácsi,Villarreal,1,,,,,0
-4904,Round 6,finished,50766,preview,35344,Buchanan,Villarreal,3,The_National,The National,starter,,0
 4904,Round 6,finished,50766,preview,26780,Íñigo Pérez,Villarreal,5,Raifc,RaiFC,coach,,0
-4904,Round 6,finished,50766,preview,2001,Ayoze,Villarreal,4,Freejulian,FreeJulian,starter,,0
+4904,Round 6,finished,50766,preview,35344,Buchanan,Villarreal,3,The_National,The National,starter,,0
 4904,Round 6,finished,50766,preview,26566,Carlos Romero,Villarreal,2,Patsi_FC,Patsi F.C,starter,,0
+4904,Round 6,finished,50766,preview,2001,Ayoze,Villarreal,4,Freejulian,FreeJulian,starter,,0
 4902,Round 4,finished,50743,finished,1125,Bartra,Betis,2,,,,8.0,1
 4902,Round 4,finished,50743,finished,8670,Roro Riquelme,Betis,3,General_Hansi_Topete,"General ""Hansi” Topete",starter,1.0,1
 4902,Round 4,finished,50743,finished,37416,Deossa,Betis,3,,,,3.0,1
@@ -1413,8 +1445,8 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4902,Round 4,finished,50739,finished,19547,Baena,Atlético,3,,,,3.0,1
 4902,Round 4,finished,50739,finished,17687,Kang-in Lee,Atlético,3,Locombia_Fc,Locombia FC,starter,2.0,1
 4902,Round 4,finished,50739,finished,19501,Simeone,Atlético,5,,,,0.0,1
-4902,Round 4,finished,50739,finished,34805,Musso,Atlético,1,The_National,The National,reserve,,0
 4902,Round 4,finished,50739,finished,37724,Mendoza,Atlético,3,Manchester_Tity,Manchester Tity,starter,,0
+4902,Round 4,finished,50739,finished,34805,Musso,Atlético,1,The_National,The National,reserve,,0
 4902,Round 4,finished,50739,finished,24576,Sørloth,Atlético,4,Patsi_FC,Patsi F.C,reserve,,0
 4902,Round 4,finished,50745,finished,21063,Balliu,Rayo Vallecano,2,,,,4.0,1
 4902,Round 4,finished,50745,finished,27995,Fran Pérez,Rayo Vallecano,4,,,,-4.0,1
@@ -1699,384 +1731,360 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4902,Round 4,finished,50744,finished,34469,Luka Sucic,Real Sociedad,3,Locombia_Fc,Locombia FC,starter,13.0,1
 4902,Round 4,finished,50744,finished,39399,Matarazzo,Real Sociedad,5,,,,3.0,1
 4902,Round 4,finished,50744,finished,35055,Óskarsson,Real Sociedad,4,Raifc,RaiFC,starter,,0
-4903,Round 5,active,50755,finished,10158,Guridi,Sevilla,3,Raifc,RaiFC,starter,3.0,1
-4903,Round 5,active,50755,finished,33531,Ejuke,Sevilla,4,Locombia_Fc,Locombia FC,reserve,2.0,1
-4903,Round 5,active,50755,finished,37733,Kochorashvili,Sevilla,3,,,,6.0,1
-4903,Round 5,active,50755,finished,39673,Julio Díaz,Sevilla,2,,,,3.0,1
-4903,Round 5,active,50755,finished,41807,Robbie Ure,Sevilla,4,,,,2.0,1
-4903,Round 5,active,50755,finished,38405,Odysseas,Sevilla,1,General_Hansi_Topete,"General ""Hansi” Topete",starter,3.0,1
-4903,Round 5,active,50755,finished,38194,Suazo,Sevilla,2,The_National,The National,starter,8.0,1
-4903,Round 5,active,50755,finished,38072,Castrín,Sevilla,2,Patsi_FC,Patsi F.C,reserve,6.0,1
-4903,Round 5,active,50755,finished,28115,Kike Salas,Sevilla,2,Patsi_FC,Patsi F.C,starter,6.0,1
-4903,Round 5,active,50755,finished,23840,Juan Iglesias,Sevilla,2,,,,15.0,1
-4903,Round 5,active,50755,finished,43272,Fofana,Sevilla,3,,,,6.0,1
-4903,Round 5,active,50755,finished,32338,Agoumé,Sevilla,3,Hernan_Krezzpo,Hernan Krezzpo,starter,5.0,1
-4903,Round 5,active,50755,finished,43262,Félix Correia,Sevilla,4,,,,3.0,1
-4903,Round 5,active,50755,finished,32363,Isaac Romero,Sevilla,4,,,,3.0,1
-4903,Round 5,active,50755,finished,39350,Sierra,Sevilla,4,Cd_Numancia,CD Numancia,starter,2.0,1
-4903,Round 5,active,50755,finished,43264,Stassin,Sevilla,4,,,,2.0,1
-4903,Round 5,active,50755,finished,21854,Luis García,Sevilla,5,Hernan_Krezzpo,Hernan Krezzpo,coach,3.0,1
-4903,Round 5,active,50755,finished,6259,Hugo Duro,Valencia,4,Minabo_De_Kiev,Minabo de Kiev,reserve,3.0,1
-4903,Round 5,active,50755,finished,10030,Maffeo,Valencia,2,,,,-1.0,1
-4903,Round 5,active,50755,finished,24734,Jesús Vázquez,Valencia,2,,,,3.0,1
-4903,Round 5,active,50755,finished,35308,Córdoba,Valencia,2,,,,3.0,1
-4903,Round 5,active,50755,finished,43260,Elliott,Valencia,3,,,,2.0,1
-4903,Round 5,active,50755,finished,11677,Dimitrievski,Valencia,1,,,,3.0,1
-4903,Round 5,active,50755,finished,1844,Gayà,Valencia,2,,,,3.0,1
-4903,Round 5,active,50755,finished,26592,Tárrega,Valencia,2,,,,3.0,1
-4903,Round 5,active,50755,finished,12221,Pepelu,Valencia,3,,,,2.0,1
-4903,Round 5,active,50755,finished,26095,Arnau Martínez,Valencia,2,,,,3.0,1
-4903,Round 5,active,50755,finished,42389,Sato,Valencia,4,Locombia_Fc,Locombia FC,starter,1.0,1
-4903,Round 5,active,50755,finished,42396,Dieng,Valencia,3,,,,4.0,1
-4903,Round 5,active,50755,finished,38368,Ugrinic,Valencia,3,,,,3.0,1
-4903,Round 5,active,50755,finished,34599,David Otorbi,Valencia,4,Cd_Numancia,CD Numancia,discarded,3.0,1
-4903,Round 5,active,50755,finished,30123,Javi Guerra,Valencia,3,The_National,The National,reserve,5.0,1
-4903,Round 5,active,50755,finished,24509,Danjuma,Valencia,4,Cd_Numancia,CD Numancia,discarded,4.0,1
-4903,Round 5,active,50755,finished,35316,Corberán,Valencia,5,,,,0.0,1
-4903,Round 5,active,50755,finished,1780,Foulquier,Valencia,2,Locombia_Fc,Locombia FC,discarded,,0
-4903,Round 5,active,50755,finished,17442,Rioja,Valencia,4,Locombia_Fc,Locombia FC,discarded,,0
-4903,Round 5,active,50755,finished,31494,Sergi Canós,Valencia,4,Cd_Numancia,CD Numancia,reserve,,0
-4903,Round 5,active,50755,finished,163,Guido Rodríguez,Valencia,3,Freejulian,FreeJulian,discarded,,0
-4903,Round 5,active,50749,finished,6792,Villalibre,Racing,4,Minabo_De_Kiev,Minabo de Kiev,discarded,3.0,1
-4903,Round 5,active,50749,finished,27929,Almeida,Racing,3,,,,-5.0,1
-4903,Round 5,active,50749,finished,33871,Pedro Felipe,Racing,2,,,,0.0,1
-4903,Round 5,active,50749,finished,40552,Iker Luque,Racing,4,,,,5.0,1
-4903,Round 5,active,50749,finished,41261,Guliashvili,Racing,4,,,,2.0,1
-4903,Round 5,active,50749,finished,41267,Maguette Gueye,Racing,3,,,,2.0,1
-4903,Round 5,active,50749,finished,19192,Agirrezabala,Racing,1,,,,9.0,1
-4903,Round 5,active,50749,finished,41270,Jorge Salinas,Racing,2,Hernan_Krezzpo,Hernan Krezzpo,starter,5.0,1
-4903,Round 5,active,50749,finished,35408,Pablo Ramón,Racing,2,The_National,The National,reserve,5.0,1
-4903,Round 5,active,50749,finished,43259,Belocian,Racing,2,Cd_Numancia,CD Numancia,discarded,5.0,1
-4903,Round 5,active,50749,finished,41264,Mantilla,Racing,2,Minabo_De_Kiev,Minabo de Kiev,discarded,2.0,1
-4903,Round 5,active,50749,finished,42814,Prati,Racing,3,,,,3.0,1
-4903,Round 5,active,50749,finished,12403,Iván Martín,Racing,3,Patsi_FC,Patsi F.C,starter,3.0,1
-4903,Round 5,active,50749,finished,18564,Iñigo Vicente,Racing,4,Cd_Numancia,CD Numancia,starter,11.0,1
-4903,Round 5,active,50749,finished,947,Sergio Canales,Racing,3,,,,3.0,1
-4903,Round 5,active,50749,finished,35763,Pablo García,Racing,4,,,,2.0,1
-4903,Round 5,active,50749,finished,42610,Zabiri,Racing,4,Raifc,RaiFC,starter,19.0,1
-4903,Round 5,active,50749,finished,42570,José Alberto López,Racing,5,,,,3.0,1
-4903,Round 5,active,50749,finished,10157,Aleñá,Alavés,3,Raifc,RaiFC,discarded,2.0,1
-4903,Round 5,active,50749,finished,29446,Miguel Rodríguez,Alavés,4,,,,0.0,1
-4903,Round 5,active,50749,finished,30507,Benavidez,Alavés,3,,,,2.0,1
-4903,Round 5,active,50749,finished,34802,Toni Martínez,Alavés,4,,,,4.0,1
-4903,Round 5,active,50749,finished,39386,Mañas,Alavés,4,,,,2.0,1
-4903,Round 5,active,50749,finished,41609,Valentini,Alavés,2,,,,5.0,1
-4903,Round 5,active,50749,finished,9887,Sivera,Alavés,1,Freejulian,FreeJulian,starter,6.0,1
-4903,Round 5,active,50749,finished,1599,Jonny,Alavés,2,Minabo_De_Kiev,Minabo de Kiev,reserve,4.0,1
-4903,Round 5,active,50749,finished,39924,Koski,Alavés,2,Patsi_FC,Patsi F.C,discarded,11.0,1
-4903,Round 5,active,50749,finished,25384,Tenaglia,Alavés,2,Minabo_De_Kiev,Minabo de Kiev,starter,5.0,1
-4903,Round 5,active,50749,finished,30510,Abde Rebbach,Alavés,4,,,,7.0,1
-4903,Round 5,active,50749,finished,39885,Ángel Pérez,Alavés,4,General_Hansi_Topete,"General ""Hansi” Topete",starter,2.0,1
-4903,Round 5,active,50749,finished,14800,Pablo Ibáñez,Alavés,3,Raifc,RaiFC,reserve,2.0,1
-4903,Round 5,active,50749,finished,1876,Denis Suárez,Alavés,3,,,,3.0,1
-4903,Round 5,active,50749,finished,1612,Antonio Blanco,Alavés,3,General_Hansi_Topete,"General ""Hansi” Topete",starter,1.0,1
-4903,Round 5,active,50749,finished,5697,Mariano,Alavés,4,General_Hansi_Topete,"General ""Hansi” Topete",discarded,3.0,1
-4903,Round 5,active,50749,finished,12494,Boyé,Alavés,4,Locombia_Fc,Locombia FC,starter,2.0,1
-4903,Round 5,active,50749,finished,25020,Sánchez Flores,Alavés,5,,,,0.0,1
-4903,Round 5,active,50749,finished,37525,Yusi,Alavés,2,General_Hansi_Topete,"General ""Hansi” Topete",reserve,,0
-4903,Round 5,active,50749,finished,35426,Facundo Garcés,Alavés,2,Freejulian,FreeJulian,discarded,,0
-4903,Round 5,active,50750,finished,19693,Osambela,Osasuna,3,,,,3.0,1
-4903,Round 5,active,50750,finished,26360,Dubasin,Osasuna,4,,,,3.0,1
-4903,Round 5,active,50750,finished,33697,Raúl Moro,Osasuna,4,,,,3.0,1
-4903,Round 5,active,50750,finished,33971,Bretones,Osasuna,2,,,,4.0,1
-4903,Round 5,active,50750,finished,42173,Del Castillo,Osasuna,4,,,,3.0,1
-4903,Round 5,active,50750,finished,18251,Sergio Herrera,Osasuna,1,The_National,The National,starter,2.0,1
-4903,Round 5,active,50750,finished,5678,Diego Rico,Osasuna,2,,,,3.0,1
-4903,Round 5,active,50750,finished,41932,Yeboah,Osasuna,2,,,,4.0,1
-4903,Round 5,active,50750,finished,17731,Catena,Osasuna,2,,,,2.0,1
-4903,Round 5,active,50750,finished,10292,Arguibide,Osasuna,2,,,,2.0,1
-4903,Round 5,active,50750,finished,18128,Iker Muñoz,Osasuna,3,Cd_Numancia,CD Numancia,starter,5.0,1
-4903,Round 5,active,50750,finished,8747,Moncayola,Osasuna,3,Locombia_Fc,Locombia FC,reserve,3.0,1
-4903,Round 5,active,50750,finished,18256,Barja,Osasuna,3,,,,4.0,1
-4903,Round 5,active,50750,finished,18382,Raul García,Osasuna,4,Freejulian,FreeJulian,reserve,3.0,1
-4903,Round 5,active,50750,finished,1602,Rubén García,Osasuna,3,,,,3.0,1
-4903,Round 5,active,50750,finished,18398,Budimir,Osasuna,4,Cd_Numancia,CD Numancia,starter,4.0,1
-4903,Round 5,active,50750,finished,41253,Ramis,Osasuna,5,,,,0.0,1
-4903,Round 5,active,50750,finished,1462,Moi Gómez,Osasuna,3,Minabo_De_Kiev,Minabo de Kiev,discarded,,0
-4903,Round 5,active,50750,finished,27591,Aimar,Osasuna,3,Freejulian,FreeJulian,discarded,,0
-4903,Round 5,active,50750,finished,9047,Pere Milla,Espanyol,4,,,,3.0,1
-4903,Round 5,active,50750,finished,30502,Bryan Zaragoza,Espanyol,4,,,,3.0,1
-4903,Round 5,active,50750,finished,42119,Drkusic,Espanyol,2,,,,1.0,1
-4903,Round 5,active,50750,finished,42327,Calatrava,Espanyol,3,General_Hansi_Topete,"General ""Hansi” Topete",starter,2.0,1
-4903,Round 5,active,50750,finished,42412,Moscardo,Espanyol,3,,,,3.0,1
-4903,Round 5,active,50750,finished,9090,Dmitrovic,Espanyol,1,Manchester_Tity,Manchester Tity,starter,8.0,1
-4903,Round 5,active,50750,finished,14466,Hinojo,Espanyol,2,General_Hansi_Topete,"General ""Hansi” Topete",starter,3.0,1
-4903,Round 5,active,50750,finished,38517,Riedel,Espanyol,2,,,,3.0,1
-4903,Round 5,active,50750,finished,11800,Cabrera,Espanyol,2,Cd_Numancia,CD Numancia,reserve,4.0,1
-4903,Round 5,active,50750,finished,28103,El Hilali,Espanyol,2,The_National,The National,starter,9.0,1
-4903,Round 5,active,50750,finished,22699,Urko,Espanyol,3,,,,3.0,1
-4903,Round 5,active,50750,finished,19862,Expósito,Espanyol,3,Patsi_FC,Patsi F.C,starter,4.0,1
-4903,Round 5,active,50750,finished,38308,Dolan,Espanyol,4,,,,2.0,1
-4903,Round 5,active,50750,finished,25322,Javi Hernández,Espanyol,3,Cd_Numancia,CD Numancia,reserve,3.0,1
-4903,Round 5,active,50750,finished,37644,Marcos Fernández,Espanyol,4,,,,6.0,1
-4903,Round 5,active,50750,finished,35678,Roberto Fernández,Espanyol,4,,,,16.0,1
-4903,Round 5,active,50750,finished,33789,Manolo González,Espanyol,5,,,,3.0,1
-4903,Round 5,active,50750,finished,16317,Puado,Espanyol,4,Raifc,RaiFC,reserve,,0
-4903,Round 5,active,50750,finished,10997,Bauzà,Espanyol,3,Raifc,RaiFC,discarded,,0
-4903,Round 5,active,50750,finished,30334,Fortuño,Espanyol,1,Manchester_Tity,Manchester Tity,reserve,,0
-4903,Round 5,active,50751,finished,897,Berenguer,Athletic,4,,,,5.0,1
-4903,Round 5,active,50751,finished,30210,Jauregizar,Athletic,3,,,,4.0,1
-4903,Round 5,active,50751,finished,33938,Sannadi,Athletic,4,,,,2.0,1
-4903,Round 5,active,50751,finished,43171,Johaneko,Athletic,2,,,,3.0,1
-4903,Round 5,active,50751,finished,17021,Unai Simón,Athletic,1,Hernan_Krezzpo,Hernan Krezzpo,starter,3.0,1
-4903,Round 5,active,50751,finished,1074,Yuri,Athletic,2,Locombia_Fc,Locombia FC,starter,4.0,1
-4903,Round 5,active,50751,finished,5771,Yeray,Athletic,2,Cd_Numancia,CD Numancia,discarded,3.0,1
-4903,Round 5,active,50751,finished,1613,Laporte,Athletic,2,Raifc,RaiFC,starter,4.0,1
-4903,Round 5,active,50751,finished,8695,Areso,Athletic,2,,,,-2.0,1
-4903,Round 5,active,50751,finished,41566,Gerenabarrena,Athletic,3,The_National,The National,starter,1.0,1
-4903,Round 5,active,50751,finished,2055,De Galarreta,Athletic,3,Locombia_Fc,Locombia FC,reserve,4.0,1
-4903,Round 5,active,50751,finished,21008,Nico Williams,Athletic,4,,,,9.0,1
-4903,Round 5,active,50751,finished,17057,Sancet,Athletic,3,,,,4.0,1
-4903,Round 5,active,50751,finished,24474,Robert Navarro,Athletic,4,,,,4.0,1
-4903,Round 5,active,50751,finished,1995,Iñaki Williams,Athletic,4,,,,4.0,1
-4903,Round 5,active,50751,finished,42572,Terzić,Athletic,5,Cd_Numancia,CD Numancia,coach,1.0,1
-4903,Round 5,active,50751,finished,27996,Paredes,Athletic,2,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
-4903,Round 5,active,50751,finished,11196,Lemar,Elche,3,Freejulian,FreeJulian,reserve,2.0,1
-4903,Round 5,active,50751,finished,23572,Rubén Sánchez,Elche,2,,,,1.0,1
-4903,Round 5,active,50751,finished,38355,Neto,Elche,3,,,,3.0,1
-4903,Round 5,active,50751,finished,39874,Cepeda,Elche,4,,,,2.0,1
-4903,Round 5,active,50751,finished,41565,Osorio,Elche,4,,,,2.0,1
-4903,Round 5,active,50751,finished,17482,Dituro,Elche,1,,,,4.0,1
-4903,Round 5,active,50751,finished,43268,Revivo,Elche,2,,,,3.0,1
-4903,Round 5,active,50751,finished,38422,Redondo,Elche,3,,,,6.0,1
-4903,Round 5,active,50751,finished,1760,Chust,Elche,2,The_National,The National,discarded,5.0,1
-4903,Round 5,active,50751,finished,40010,Sangaré,Elche,2,Patsi_FC,Patsi F.C,starter,3.0,1
-4903,Round 5,active,50751,finished,22690,Tete Morente,Elche,4,Patsi_FC,Patsi F.C,starter,2.0,1
-4903,Round 5,active,50751,finished,12734,Javi Morcillo,Elche,3,Manchester_Tity,Manchester Tity,starter,3.0,1
-4903,Round 5,active,50751,finished,25403,Gonzalo Villar,Elche,3,Hernan_Krezzpo,Hernan Krezzpo,starter,4.0,1
-4903,Round 5,active,50751,finished,20969,Germán Valera,Elche,3,,,,5.0,1
-4903,Round 5,active,50751,finished,41608,Buonanotte,Elche,3,Cd_Numancia,CD Numancia,discarded,10.0,1
-4903,Round 5,active,50751,finished,21132,Fer Niño,Elche,4,Manchester_Tity,Manchester Tity,starter,2.0,1
-4903,Round 5,active,50751,finished,41388,Anselmi,Elche,5,,,,1.0,1
-4903,Round 5,active,50751,finished,38457,Ali Houary,Elche,3,Minabo_De_Kiev,Minabo de Kiev,reserve,,0
-4903,Round 5,active,50757,finished,1733,Camavinga,Real Madrid,3,,,,4.0,1
-4903,Round 5,active,50757,finished,15410,Cucurella,Real Madrid,2,,,,0.0,1
-4903,Round 5,active,50757,finished,26048,Tchouameni,Real Madrid,3,Freejulian,FreeJulian,discarded,5.0,1
-4903,Round 5,active,50757,finished,31027,Arda Güler,Real Madrid,3,,,,12.0,1
-4903,Round 5,active,50757,finished,16738,Courtois,Real Madrid,1,,,,8.0,1
-4903,Round 5,active,50757,finished,31707,Álvaro Carreras,Real Madrid,2,,,,14.0,1
-4903,Round 5,active,50757,finished,41087,Konaté,Real Madrid,2,,,,4.0,1
-4903,Round 5,active,50757,finished,2253,Rüdiger,Real Madrid,2,,,,4.0,1
-4903,Round 5,active,50757,finished,42362,Dumfries,Real Madrid,2,,,,5.0,1
-4903,Round 5,active,50757,finished,41086,Bernardo Silva,Real Madrid,3,,,,5.0,1
-4903,Round 5,active,50757,finished,9402,Valverde,Real Madrid,3,,,,4.0,1
-4903,Round 5,active,50757,finished,15568,Vinícius Jr,Real Madrid,4,Raifc,RaiFC,starter,6.0,1
-4903,Round 5,active,50757,finished,30477,Bellingham,Real Madrid,3,Locombia_Fc,Locombia FC,starter,12.0,1
-4903,Round 5,active,50757,finished,8555,Diomande,Real Madrid,4,,,,6.0,1
-4903,Round 5,active,50757,finished,19577,Mbappé,Real Madrid,4,General_Hansi_Topete,"General ""Hansi” Topete",starter,17.0,1
-4903,Round 5,active,50757,finished,41386,Mourinho,Real Madrid,5,,,,3.0,1
-4903,Round 5,active,50757,finished,18178,Rodrygo,Real Madrid,4,Locombia_Fc,Locombia FC,discarded,,0
-4903,Round 5,active,50757,finished,33796,Endrick,Real Madrid,4,General_Hansi_Topete,"General ""Hansi” Topete",discarded,,0
-4903,Round 5,active,50757,finished,1871,Mendy,Real Madrid,2,Freejulian,FreeJulian,discarded,,0
-4903,Round 5,active,50757,finished,5352,Óscar Valentín,Rayo Vallecano,3,Minabo_De_Kiev,Minabo de Kiev,starter,3.0,1
-4903,Round 5,active,50757,finished,14512,Belaid,Rayo Vallecano,3,,,,3.0,1
-4903,Round 5,active,50757,finished,21063,Balliu,Rayo Vallecano,2,,,,0.0,1
-4903,Round 5,active,50757,finished,37450,Alemão,Rayo Vallecano,4,The_National,The National,discarded,2.0,1
-4903,Round 5,active,50757,finished,43267,Sadick,Rayo Vallecano,2,,,,2.0,1
-4903,Round 5,active,50757,finished,43282,Audero,Rayo Vallecano,1,Patsi_FC,Patsi F.C,starter,3.0,1
-4903,Round 5,active,50757,finished,16889,Pedrosa,Rayo Vallecano,2,The_National,The National,discarded,2.0,1
-4903,Round 5,active,50757,finished,2476,Lejeune,Rayo Vallecano,2,,,,-4.0,1
-4903,Round 5,active,50757,finished,24326,Pathé Ciss,Rayo Vallecano,3,,,,3.0,1
-4903,Round 5,active,50757,finished,26276,Ratiu,Rayo Vallecano,2,,,,-2.0,1
-4903,Round 5,active,50757,finished,1969,Unai López,Rayo Vallecano,3,The_National,The National,starter,2.0,1
-4903,Round 5,active,50757,finished,43172,Bouare,Rayo Vallecano,3,Cd_Numancia,CD Numancia,discarded,1.0,1
-4903,Round 5,active,50757,finished,33,Álvaro García,Rayo Vallecano,4,Raifc,RaiFC,starter,2.0,1
-4903,Round 5,active,50757,finished,34483,Pedro Díaz,Rayo Vallecano,3,,,,4.0,1
-4903,Round 5,active,50757,finished,41940,Tsitaishvili,Rayo Vallecano,4,Raifc,RaiFC,discarded,4.0,1
-4903,Round 5,active,50757,finished,17756,Camello,Rayo Vallecano,4,Hernan_Krezzpo,Hernan Krezzpo,starter,11.0,1
-4903,Round 5,active,50757,finished,41088,San José,Rayo Vallecano,5,,,,0.0,1
-4903,Round 5,active,50757,finished,18397,De Frutos,Rayo Vallecano,4,Minabo_De_Kiev,Minabo de Kiev,discarded,,0
-4903,Round 5,active,50757,finished,34080,Kumbulla,Rayo Vallecano,2,Freejulian,FreeJulian,discarded,,0
-4903,Round 5,active,50757,finished,9475,De Tomás,Rayo Vallecano,4,Patsi_FC,Patsi F.C,discarded,,0
-4903,Round 5,active,50754,finished,1523,Iago Aspas,Celta,4,,,,4.0,1
-4903,Round 5,active,50754,finished,17645,Galán,Celta,2,General_Hansi_Topete,"General ""Hansi” Topete",starter,2.0,1
-4903,Round 5,active,50754,finished,26879,Swedberg,Celta,3,,,,1.0,1
-4903,Round 5,active,50754,finished,39813,Hugo Burcio,Celta,3,,,,5.0,1
-4903,Round 5,active,50754,finished,42813,Driouech,Celta,4,,,,0.0,1
-4903,Round 5,active,50754,finished,37600,Radu,Celta,1,Raifc,RaiFC,starter,3.0,1
-4903,Round 5,active,50754,finished,28087,Marcos Alonso,Celta,2,Cd_Numancia,CD Numancia,starter,3.0,1
-4903,Round 5,active,50754,finished,33474,Lago,Celta,2,The_National,The National,discarded,5.0,1
-4903,Round 5,active,50754,finished,43269,Cáceres,Celta,2,,,,4.0,1
-4903,Round 5,active,50754,finished,10574,Carreira,Celta,2,Locombia_Fc,Locombia FC,starter,4.0,1
-4903,Round 5,active,50754,finished,33473,Rueda,Celta,2,,,,3.0,1
-4903,Round 5,active,50754,finished,3259,Miguel Román,Celta,3,Cd_Numancia,CD Numancia,starter,5.0,1
-4903,Round 5,active,50754,finished,21084,Ilaix Moriba,Celta,3,The_National,The National,discarded,6.0,1
-4903,Round 5,active,50754,finished,32135,Hugo Álvarez,Celta,3,,,,3.0,1
-4903,Round 5,active,50754,finished,3159,Jutglà,Celta,4,,,,11.0,1
-4903,Round 5,active,50754,finished,31468,Hugo González,Celta,4,,,,4.0,1
-4903,Round 5,active,50754,finished,14615,Claudio Giráldez,Celta,5,,,,1.0,1
-4903,Round 5,active,50754,finished,19860,Febas,Celta,3,Locombia_Fc,Locombia FC,discarded,,0
-4903,Round 5,active,50754,finished,10117,Iván Villar,Celta,1,Minabo_De_Kiev,Minabo de Kiev,reserve,,0
-4903,Round 5,active,50754,finished,37719,Álvaro Núñez,Celta,2,Freejulian,FreeJulian,starter,,0
-4903,Round 5,active,50754,finished,2009,Borja Iglesias,Celta,4,Freejulian,FreeJulian,starter,,0
-4903,Round 5,active,50754,finished,12404,Berrocal,Málaga,2,,,,2.0,1
-4903,Round 5,active,50754,finished,28282,Juan Cruz,Málaga,4,,,,4.0,1
-4903,Round 5,active,50754,finished,35706,Adrián Niño,Málaga,4,,,,10.0,1
-4903,Round 5,active,50754,finished,41411,Ramón Enríquez,Málaga,3,,,,4.0,1
-4903,Round 5,active,50754,finished,41416,Puga,Málaga,2,,,,4.0,1
-4903,Round 5,active,50754,finished,41101,Alfonso Herrero,Málaga,1,,,,10.0,1
-4903,Round 5,active,50754,finished,37723,José Salinas,Málaga,2,Locombia_Fc,Locombia FC,discarded,2.0,1
-4903,Round 5,active,50754,finished,41419,Recio,Málaga,2,,,,2.0,1
-4903,Round 5,active,50754,finished,4070,Galilea,Málaga,2,Patsi_FC,Patsi F.C,discarded,3.0,1
-4903,Round 5,active,50754,finished,41093,Rafita,Málaga,2,,,,3.0,1
-4903,Round 5,active,50754,finished,41098,Izan Merino,Málaga,3,,,,2.0,1
-4903,Round 5,active,50754,finished,18570,Joaquín Muñoz,Málaga,4,,,,2.0,1
-4903,Round 5,active,50754,finished,4245,Pablo Martínez,Málaga,3,,,,4.0,1
-4903,Round 5,active,50754,finished,41418,Dani Lorenzo,Málaga,3,Manchester_Tity,Manchester Tity,starter,-1.0,1
-4903,Round 5,active,50754,finished,41412,Larrubia,Málaga,4,,,,5.0,1
-4903,Round 5,active,50754,finished,41420,Chupe,Málaga,4,,,,-1.0,1
-4903,Round 5,active,50754,finished,42571,Funes,Málaga,5,,,,1.0,1
-4903,Round 5,active,50754,finished,41097,Ochoa,Málaga,3,Cd_Numancia,CD Numancia,discarded,,0
-4903,Round 5,active,50754,finished,41091,Carlos López,Málaga,1,Hernan_Krezzpo,Hernan Krezzpo,reserve,,0
-4903,Round 5,active,50754,finished,42328,Moussa Diarra,Málaga,2,Manchester_Tity,Manchester Tity,discarded,,0
-4903,Round 5,active,50752,finished,17937,Iván Romero,Levante,4,,,,13.0,1
-4903,Round 5,active,50752,finished,25815,Nacho Pérez,Levante,2,General_Hansi_Topete,"General ""Hansi” Topete",starter,4.0,1
-4903,Round 5,active,50752,finished,37726,Oriol Rey,Levante,3,The_National,The National,discarded,5.0,1
-4903,Round 5,active,50752,finished,41385,Bardeli,Levante,3,Minabo_De_Kiev,Minabo de Kiev,starter,3.0,1
-4903,Round 5,active,50752,finished,42757,Ndukwe,Levante,2,,,,2.0,1
-4903,Round 5,active,50752,finished,2184,Ryan,Levante,1,Cd_Numancia,CD Numancia,reserve,0.0,1
-4903,Round 5,active,50752,finished,1721,Manu Sánchez,Levante,2,Raifc,RaiFC,starter,5.0,1
-4903,Round 5,active,50752,finished,37739,De la Fuente,Levante,2,Hernan_Krezzpo,Hernan Krezzpo,starter,3.0,1
-4903,Round 5,active,50752,finished,2480,Mandi,Levante,2,Manchester_Tity,Manchester Tity,reserve,3.0,1
-4903,Round 5,active,50752,finished,38143,Toljan,Levante,2,,,,0.0,1
-4903,Round 5,active,50752,finished,15396,Brugué,Levante,4,Freejulian,FreeJulian,discarded,11.0,1
-4903,Round 5,active,50752,finished,25400,Sotelo,Levante,3,Patsi_FC,Patsi F.C,reserve,4.0,1
-4903,Round 5,active,50752,finished,29661,Olasagasti,Levante,3,Manchester_Tity,Manchester Tity,starter,4.0,1
-4903,Round 5,active,50752,finished,17121,Víctor García,Levante,3,,,,5.0,1
-4903,Round 5,active,50752,finished,43270,Ratkov,Levante,4,,,,2.0,1
-4903,Round 5,active,50752,finished,37488,Requena,Levante,3,,,,4.0,1
-4903,Round 5,active,50752,finished,39398,Luis Castro,Levante,5,,,,0.0,1
-4903,Round 5,active,50752,finished,39431,Thiago Fernández,Levante,4,General_Hansi_Topete,"General ""Hansi” Topete",reserve,,0
-4903,Round 5,active,50752,finished,1952,Cancelo,Barcelona,2,,,,3.0,1
-4903,Round 5,active,50752,finished,26678,Christensen,Barcelona,2,Patsi_FC,Patsi F.C,discarded,2.0,1
-4903,Round 5,active,50752,finished,34077,Marc Bernal,Barcelona,3,Minabo_De_Kiev,Minabo de Kiev,starter,1.0,1
-4903,Round 5,active,50752,finished,34527,Dani Olmo,Barcelona,3,Freejulian,FreeJulian,starter,2.0,1
-4903,Round 5,active,50752,finished,42557,Adeyemi,Barcelona,4,Manchester_Tity,Manchester Tity,starter,13.0,1
-4903,Round 5,active,50752,finished,15430,Joan García,Barcelona,1,,,,6.0,1
-4903,Round 5,active,50752,finished,40075,Espart,Barcelona,2,Manchester_Tity,Manchester Tity,starter,11.0,1
-4903,Round 5,active,50752,finished,32440,Cubarsí,Barcelona,2,,,,7.0,1
-4903,Round 5,active,50752,finished,34111,Gerard Martín,Barcelona,2,Cd_Numancia,CD Numancia,starter,1.0,1
-4903,Round 5,active,50752,finished,20,Eric García,Barcelona,2,Hernan_Krezzpo,Hernan Krezzpo,starter,3.0,1
-4903,Round 5,active,50752,finished,429,Rodri,Barcelona,3,,,,8.0,1
-4903,Round 5,active,50752,finished,31243,Fermín,Barcelona,3,Minabo_De_Kiev,Minabo de Kiev,starter,3.0,1
-4903,Round 5,active,50752,finished,19441,Pedri,Barcelona,3,Hernan_Krezzpo,Hernan Krezzpo,starter,3.0,1
-4903,Round 5,active,50752,finished,41200,Gordon,Barcelona,4,Freejulian,FreeJulian,starter,2.0,1
-4903,Round 5,active,50752,finished,26930,Raphinha,Barcelona,4,The_National,The National,starter,10.0,1
-4903,Round 5,active,50752,finished,26271,Yamal,Barcelona,4,Manchester_Tity,Manchester Tity,starter,18.0,1
-4903,Round 5,active,50752,finished,19244,Hansi Flick,Barcelona,5,General_Hansi_Topete,"General ""Hansi” Topete",coach,3.0,1
-4903,Round 5,active,50752,finished,18174,De Jong,Barcelona,3,Locombia_Fc,Locombia FC,discarded,,0
-4903,Round 5,active,50752,finished,24255,Fariñas,Barcelona,3,Locombia_Fc,Locombia FC,discarded,,0
-4903,Round 5,active,50752,finished,42747,Abdelkarim,Barcelona,4,Hernan_Krezzpo,Hernan Krezzpo,reserve,,0
-4903,Round 5,active,50752,finished,18945,Koundé,Barcelona,2,Minabo_De_Kiev,Minabo de Kiev,starter,,0
-4903,Round 5,active,50752,finished,37817,Bisiwu,Barcelona,4,Manchester_Tity,Manchester Tity,reserve,,0
-4903,Round 5,active,50753,finished,32569,Sazonov,Getafe,2,,,,2.0,1
-4903,Round 5,active,50753,finished,38095,Davinchi,Getafe,2,,,,2.0,1
-4903,Round 5,active,50753,finished,39442,Joselu Pérez,Getafe,4,,,,1.0,1
-4903,Round 5,active,50753,finished,42726,Francho,Getafe,3,,,,2.0,1
-4903,Round 5,active,50753,finished,11,David Soria,Getafe,1,Minabo_De_Kiev,Minabo de Kiev,starter,5.0,1
-4903,Round 5,active,50753,finished,10245,Mojica,Getafe,2,,,,4.0,1
-4903,Round 5,active,50753,finished,18916,Gudelj,Getafe,3,Manchester_Tity,Manchester Tity,starter,2.0,1
-4903,Round 5,active,50753,finished,9983,Djené,Getafe,2,,,,6.0,1
-4903,Round 5,active,50753,finished,39801,Boselli,Getafe,2,,,,2.0,1
-4903,Round 5,active,50753,finished,39792,Satriano,Getafe,4,Minabo_De_Kiev,Minabo de Kiev,starter,2.0,1
-4903,Round 5,active,50753,finished,2368,Mario Martín,Getafe,3,,,,2.0,1
-4903,Round 5,active,50753,finished,41606,Mangala,Getafe,3,,,,3.0,1
-4903,Round 5,active,50753,finished,26092,Terrats,Getafe,3,Patsi_FC,Patsi F.C,starter,12.0,1
-4903,Round 5,active,50753,finished,43261,Azón,Getafe,4,,,,6.0,1
-4903,Round 5,active,50753,finished,9045,Enes Ünal,Getafe,4,The_National,The National,starter,2.0,1
-4903,Round 5,active,50753,finished,19506,Bordalás,Getafe,5,,,,1.0,1
-4903,Round 5,active,50753,finished,26131,Andrés García,Getafe,2,Freejulian,FreeJulian,starter,,0
-4903,Round 5,active,50753,finished,25677,Adama Traoré,Deportivo,4,,,,3.0,1
-4903,Round 5,active,50753,finished,41073,Eddahchouri,Deportivo,4,,,,2.0,1
-4903,Round 5,active,50753,finished,41082,Yeremay,Deportivo,4,,,,5.0,1
-4903,Round 5,active,50753,finished,14630,Leo Román,Deportivo,1,Cd_Numancia,CD Numancia,starter,3.0,1
-4903,Round 5,active,50753,finished,40952,Quagliata,Deportivo,2,,,,2.0,1
-4903,Round 5,active,50753,finished,41083,Noubi,Deportivo,2,,,,3.0,1
-4903,Round 5,active,50753,finished,1676,Giménez,Deportivo,2,Cd_Numancia,CD Numancia,starter,3.0,1
-4903,Round 5,active,50753,finished,9065,Ximo Navarro,Deportivo,2,Patsi_FC,Patsi F.C,discarded,1.0,1
-4903,Round 5,active,50753,finished,32629,Marc Casadó,Deportivo,3,,,,4.0,1
-4903,Round 5,active,50753,finished,25777,Luismi Cruz,Deportivo,4,Hernan_Krezzpo,Hernan Krezzpo,starter,6.0,1
-4903,Round 5,active,50753,finished,42425,Amatucci,Deportivo,3,Patsi_FC,Patsi F.C,starter,6.0,1
-4903,Round 5,active,50753,finished,41072,Mario Soriano,Deportivo,3,,,,5.0,1
-4903,Round 5,active,50753,finished,40911,Nsongo,Deportivo,4,The_National,The National,starter,2.0,1
-4903,Round 5,active,50753,finished,25769,Aubameyang,Deportivo,4,Cd_Numancia,CD Numancia,starter,12.0,1
-4903,Round 5,active,50753,finished,42569,Hidalgo,Deportivo,5,The_National,The National,coach,1.0,1
-4903,Round 5,active,50753,finished,41081,Riki Rodríguez,Deportivo,3,General_Hansi_Topete,"General ""Hansi” Topete",discarded,,0
-4903,Round 5,active,50758,finished,20102,Kubo,Real Sociedad,3,Minabo_De_Kiev,Minabo de Kiev,starter,3.0,1
-4903,Round 5,active,50758,finished,31475,Zakharyan,Real Sociedad,3,,,,1.0,1
-4903,Round 5,active,50758,finished,35055,Óskarsson,Real Sociedad,4,Raifc,RaiFC,starter,2.0,1
-4903,Round 5,active,50758,finished,37897,Gorrotxategi,Real Sociedad,3,,,,2.0,1
-4903,Round 5,active,50758,finished,40037,Ochieng,Real Sociedad,4,,,,1.0,1
-4903,Round 5,active,50758,finished,7003,Remiro,Real Sociedad,1,,,,2.0,1
-4903,Round 5,active,50758,finished,19299,Sergio Gómez,Real Sociedad,2,The_National,The National,starter,1.0,1
-4903,Round 5,active,50758,finished,36538,Beitia,Real Sociedad,2,,,,2.0,1
-4903,Round 5,active,50758,finished,43185,Mamadou Sarr,Real Sociedad,2,Manchester_Tity,Manchester Tity,starter,5.0,1
-4903,Round 5,active,50758,finished,32020,Aramburu,Real Sociedad,2,,,,5.0,1
-4903,Round 5,active,50758,finished,6837,Soler,Real Sociedad,3,General_Hansi_Topete,"General ""Hansi” Topete",starter,2.0,1
-4903,Round 5,active,50758,finished,17344,Yangel Herrera,Real Sociedad,3,Freejulian,FreeJulian,starter,2.0,1
-4903,Round 5,active,50758,finished,10745,Guedes,Real Sociedad,4,Freejulian,FreeJulian,starter,1.0,1
-4903,Round 5,active,50758,finished,34469,Luka Sucic,Real Sociedad,3,Locombia_Fc,Locombia FC,starter,4.0,1
-4903,Round 5,active,50758,finished,2602,Barrenetxea,Real Sociedad,3,,,,3.0,1
-4903,Round 5,active,50758,finished,2603,Oyarzabal,Real Sociedad,4,Patsi_FC,Patsi F.C,starter,0.0,1
-4903,Round 5,active,50758,finished,39399,Matarazzo,Real Sociedad,5,,,,0.0,1
-4903,Round 5,active,50758,finished,32460,Héctor Fort,Real Sociedad,2,Hernan_Krezzpo,Hernan Krezzpo,reserve,,0
-4903,Round 5,active,50758,finished,8376,Zubeldia,Real Sociedad,2,Freejulian,FreeJulian,starter,,0
-4903,Round 5,active,50758,finished,31228,Marrero,Real Sociedad,1,Patsi_FC,Patsi F.C,discarded,,0
-4903,Round 5,active,50758,finished,1083,Koke,Atlético,3,,,,5.0,1
-4903,Round 5,active,50758,finished,30802,Arnau Ortiz,Atlético,4,,,,5.0,1
-4903,Round 5,active,50758,finished,32120,Johnny,Atlético,3,The_National,The National,discarded,4.0,1
-4903,Round 5,active,50758,finished,43263,Jonathan David,Atlético,4,,,,11.0,1
-4903,Round 5,active,50758,finished,1897,Oblak,Atlético,1,,,,5.0,1
-4903,Round 5,active,50758,finished,38290,Hancko,Atlético,2,,,,4.0,1
-4903,Round 5,active,50758,finished,15828,Cristian Romero,Atlético,2,Locombia_Fc,Locombia FC,starter,8.0,1
-4903,Round 5,active,50758,finished,25398,Pubill,Atlético,2,Minabo_De_Kiev,Minabo de Kiev,starter,4.0,1
-4903,Round 5,active,50758,finished,41684,Grimaldo,Atlético,2,,,,11.0,1
-4903,Round 5,active,50758,finished,30789,Giuliano Simeone,Atlético,3,,,,10.0,1
-4903,Round 5,active,50758,finished,2600,Marcos Llorente,Atlético,2,The_National,The National,starter,3.0,1
-4903,Round 5,active,50758,finished,42444,Hjulmand,Atlético,3,,,,6.0,1
-4903,Round 5,active,50758,finished,17687,Kang-in Lee,Atlético,3,Locombia_Fc,Locombia FC,starter,3.0,1
-4903,Round 5,active,50758,finished,19547,Baena,Atlético,3,,,,2.0,1
-4903,Round 5,active,50758,finished,39941,Lookman,Atlético,4,Hernan_Krezzpo,Hernan Krezzpo,starter,-1.0,1
-4903,Round 5,active,50758,finished,19501,Simeone,Atlético,5,Freejulian,FreeJulian,coach,3.0,1
-4903,Round 5,active,50758,finished,34557,Julián Alvarez,Atlético,4,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
-4903,Round 5,active,50758,finished,34805,Musso,Atlético,1,The_National,The National,reserve,,0
-4903,Round 5,active,50758,finished,29184,Barrios,Atlético,3,Minabo_De_Kiev,Minabo de Kiev,starter,,0
-4903,Round 5,active,50758,finished,24576,Sørloth,Atlético,4,Patsi_FC,Patsi F.C,reserve,,0
-4903,Round 5,active,50756,finished,2001,Ayoze,Villarreal,4,Freejulian,FreeJulian,starter,2.0,1
-4903,Round 5,active,50756,finished,30495,Moleiro,Villarreal,3,Locombia_Fc,Locombia FC,starter,3.0,1
-4903,Round 5,active,50756,finished,38854,Oluwaseyi,Villarreal,4,,,,1.0,1
-4903,Round 5,active,50756,finished,39901,Freeman,Villarreal,2,Freejulian,FreeJulian,reserve,2.0,1
-4903,Round 5,active,50756,finished,42802,Saliba,Villarreal,3,,,,2.0,1
-4903,Round 5,active,50756,finished,38433,Gulácsi,Villarreal,1,Cd_Numancia,CD Numancia,discarded,12.0,1
-4903,Round 5,active,50756,finished,26566,Carlos Romero,Villarreal,2,Patsi_FC,Patsi F.C,starter,1.0,1
-4903,Round 5,active,50756,finished,35156,Pau Navarro,Villarreal,2,,,,5.0,1
-4903,Round 5,active,50756,finished,38493,Veiga,Villarreal,2,,,,8.0,1
-4903,Round 5,active,50756,finished,31018,Santiago Mouriño,Villarreal,2,,,,-1.0,1
-4903,Round 5,active,50756,finished,35344,Buchanan,Villarreal,3,The_National,The National,reserve,2.0,1
-4903,Round 5,active,50756,finished,30081,Pape Gueye,Villarreal,3,Raifc,RaiFC,starter,3.0,1
-4903,Round 5,active,50756,finished,9480,Comesaña,Villarreal,3,,,,4.0,1
-4903,Round 5,active,50756,finished,34479,Pépé,Villarreal,4,The_National,The National,starter,4.0,1
-4903,Round 5,active,50756,finished,38962,Mikautadze,Villarreal,4,Manchester_Tity,Manchester Tity,starter,2.0,1
-4903,Round 5,active,50756,finished,1927,Gerard Moreno,Villarreal,4,Locombia_Fc,Locombia FC,starter,11.0,1
-4903,Round 5,active,50756,finished,26780,Íñigo Pérez,Villarreal,5,Raifc,RaiFC,coach,0.0,1
-4903,Round 5,active,50756,finished,2044,Ceballos,Betis,3,,,,6.0,1
-4903,Round 5,active,50756,finished,11686,Lo Celso,Betis,3,,,,2.0,1
-4903,Round 5,active,50756,finished,35770,Antony,Betis,4,Raifc,RaiFC,starter,4.0,1
-4903,Round 5,active,50756,finished,37416,Deossa,Betis,3,,,,6.0,1
-4903,Round 5,active,50756,finished,42370,Facundo Bernal,Betis,3,,,,1.0,1
-4903,Round 5,active,50756,finished,30487,Álvaro Valles,Betis,1,Locombia_Fc,Locombia FC,starter,14.0,1
-4903,Round 5,active,50756,finished,5220,Fran García,Betis,2,Raifc,RaiFC,starter,5.0,1
-4903,Round 5,active,50756,finished,1125,Bartra,Betis,2,,,,5.0,1
-4903,Round 5,active,50756,finished,19614,Natan,Betis,2,,,,13.0,1
-4903,Round 5,active,50756,finished,2247,Bellerín,Betis,2,,,,6.0,1
-4903,Round 5,active,50756,finished,5807,Marc Roca,Betis,3,Freejulian,FreeJulian,starter,7.0,1
-4903,Round 5,active,50756,finished,2597,Fornals,Betis,3,Cd_Numancia,CD Numancia,starter,5.0,1
-4903,Round 5,active,50756,finished,25127,Ez Abde,Betis,4,Patsi_FC,Patsi F.C,starter,8.0,1
-4903,Round 5,active,50756,finished,1249,Isco,Betis,3,Hernan_Krezzpo,Hernan Krezzpo,starter,5.0,1
-4903,Round 5,active,50756,finished,8670,Roro Riquelme,Betis,3,General_Hansi_Topete,"General ""Hansi” Topete",reserve,2.0,1
-4903,Round 5,active,50756,finished,10276,Cucho,Betis,4,,,,10.0,1
-4903,Round 5,active,50756,finished,19513,Pellegrini,Betis,5,,,,3.0,1
-4903,Round 5,active,50756,finished,12087,Diego Conde,Betis,1,Locombia_Fc,Locombia FC,discarded,,0
-4903,Round 5,active,50756,finished,19141,Ruibal,Betis,3,General_Hansi_Topete,"General ""Hansi” Topete",discarded,,0
-4903,Round 5,active,50756,finished,35765,Angel Ortiz,Betis,2,Manchester_Tity,Manchester Tity,discarded,,0
-4903,Round 5,active,50756,finished,42748,Parrott,Betis,4,Patsi_FC,Patsi F.C,discarded,,0
+4903,Round 5,finished,50755,finished,10158,Guridi,Sevilla,3,Raifc,RaiFC,starter,3.0,1
+4903,Round 5,finished,50755,finished,33531,Ejuke,Sevilla,4,Locombia_Fc,Locombia FC,reserve,2.0,1
+4903,Round 5,finished,50755,finished,37733,Kochorashvili,Sevilla,3,,,,6.0,1
+4903,Round 5,finished,50755,finished,39673,Julio Díaz,Sevilla,2,,,,3.0,1
+4903,Round 5,finished,50755,finished,41807,Robbie Ure,Sevilla,4,,,,2.0,1
+4903,Round 5,finished,50755,finished,38405,Odysseas,Sevilla,1,General_Hansi_Topete,"General ""Hansi” Topete",starter,3.0,1
+4903,Round 5,finished,50755,finished,38194,Suazo,Sevilla,2,The_National,The National,starter,8.0,1
+4903,Round 5,finished,50755,finished,38072,Castrín,Sevilla,2,Patsi_FC,Patsi F.C,reserve,6.0,1
+4903,Round 5,finished,50755,finished,28115,Kike Salas,Sevilla,2,Patsi_FC,Patsi F.C,starter,6.0,1
+4903,Round 5,finished,50755,finished,23840,Juan Iglesias,Sevilla,2,,,,15.0,1
+4903,Round 5,finished,50755,finished,43272,Fofana,Sevilla,3,,,,6.0,1
+4903,Round 5,finished,50755,finished,32338,Agoumé,Sevilla,3,Hernan_Krezzpo,Hernan Krezzpo,starter,5.0,1
+4903,Round 5,finished,50755,finished,43262,Félix Correia,Sevilla,4,,,,3.0,1
+4903,Round 5,finished,50755,finished,32363,Isaac Romero,Sevilla,4,,,,3.0,1
+4903,Round 5,finished,50755,finished,39350,Sierra,Sevilla,4,Cd_Numancia,CD Numancia,starter,2.0,1
+4903,Round 5,finished,50755,finished,43264,Stassin,Sevilla,4,,,,2.0,1
+4903,Round 5,finished,50755,finished,21854,Luis García,Sevilla,5,Hernan_Krezzpo,Hernan Krezzpo,coach,3.0,1
+4903,Round 5,finished,50755,finished,6259,Hugo Duro,Valencia,4,Minabo_De_Kiev,Minabo de Kiev,reserve,3.0,1
+4903,Round 5,finished,50755,finished,10030,Maffeo,Valencia,2,,,,-1.0,1
+4903,Round 5,finished,50755,finished,24734,Jesús Vázquez,Valencia,2,,,,3.0,1
+4903,Round 5,finished,50755,finished,35308,Córdoba,Valencia,2,,,,3.0,1
+4903,Round 5,finished,50755,finished,43260,Elliott,Valencia,3,,,,2.0,1
+4903,Round 5,finished,50755,finished,11677,Dimitrievski,Valencia,1,,,,3.0,1
+4903,Round 5,finished,50755,finished,1844,Gayà,Valencia,2,,,,3.0,1
+4903,Round 5,finished,50755,finished,26592,Tárrega,Valencia,2,,,,3.0,1
+4903,Round 5,finished,50755,finished,12221,Pepelu,Valencia,3,,,,2.0,1
+4903,Round 5,finished,50755,finished,26095,Arnau Martínez,Valencia,2,,,,3.0,1
+4903,Round 5,finished,50755,finished,42389,Sato,Valencia,4,Locombia_Fc,Locombia FC,starter,1.0,1
+4903,Round 5,finished,50755,finished,42396,Dieng,Valencia,3,,,,4.0,1
+4903,Round 5,finished,50755,finished,38368,Ugrinic,Valencia,3,,,,3.0,1
+4903,Round 5,finished,50755,finished,34599,David Otorbi,Valencia,4,,,,3.0,1
+4903,Round 5,finished,50755,finished,30123,Javi Guerra,Valencia,3,The_National,The National,reserve,5.0,1
+4903,Round 5,finished,50755,finished,24509,Danjuma,Valencia,4,,,,4.0,1
+4903,Round 5,finished,50755,finished,35316,Corberán,Valencia,5,,,,0.0,1
+4903,Round 5,finished,50755,finished,31494,Sergi Canós,Valencia,4,Cd_Numancia,CD Numancia,reserve,,0
+4903,Round 5,finished,50749,finished,6792,Villalibre,Racing,4,,,,3.0,1
+4903,Round 5,finished,50749,finished,27929,Almeida,Racing,3,,,,-5.0,1
+4903,Round 5,finished,50749,finished,33871,Pedro Felipe,Racing,2,,,,0.0,1
+4903,Round 5,finished,50749,finished,40552,Iker Luque,Racing,4,,,,5.0,1
+4903,Round 5,finished,50749,finished,41261,Guliashvili,Racing,4,,,,2.0,1
+4903,Round 5,finished,50749,finished,41267,Maguette Gueye,Racing,3,,,,2.0,1
+4903,Round 5,finished,50749,finished,19192,Agirrezabala,Racing,1,,,,9.0,1
+4903,Round 5,finished,50749,finished,41270,Jorge Salinas,Racing,2,Hernan_Krezzpo,Hernan Krezzpo,starter,5.0,1
+4903,Round 5,finished,50749,finished,35408,Pablo Ramón,Racing,2,The_National,The National,reserve,5.0,1
+4903,Round 5,finished,50749,finished,43259,Belocian,Racing,2,,,,5.0,1
+4903,Round 5,finished,50749,finished,41264,Mantilla,Racing,2,,,,2.0,1
+4903,Round 5,finished,50749,finished,42814,Prati,Racing,3,,,,3.0,1
+4903,Round 5,finished,50749,finished,12403,Iván Martín,Racing,3,Patsi_FC,Patsi F.C,starter,3.0,1
+4903,Round 5,finished,50749,finished,18564,Iñigo Vicente,Racing,4,Cd_Numancia,CD Numancia,starter,11.0,1
+4903,Round 5,finished,50749,finished,947,Sergio Canales,Racing,3,,,,3.0,1
+4903,Round 5,finished,50749,finished,35763,Pablo García,Racing,4,,,,2.0,1
+4903,Round 5,finished,50749,finished,42610,Zabiri,Racing,4,Raifc,RaiFC,starter,19.0,1
+4903,Round 5,finished,50749,finished,42570,José Alberto López,Racing,5,,,,3.0,1
+4903,Round 5,finished,50749,finished,10157,Aleñá,Alavés,3,,,,2.0,1
+4903,Round 5,finished,50749,finished,29446,Miguel Rodríguez,Alavés,4,,,,0.0,1
+4903,Round 5,finished,50749,finished,30507,Benavidez,Alavés,3,,,,2.0,1
+4903,Round 5,finished,50749,finished,34802,Toni Martínez,Alavés,4,,,,4.0,1
+4903,Round 5,finished,50749,finished,39386,Mañas,Alavés,4,,,,2.0,1
+4903,Round 5,finished,50749,finished,41609,Valentini,Alavés,2,,,,5.0,1
+4903,Round 5,finished,50749,finished,9887,Sivera,Alavés,1,Freejulian,FreeJulian,starter,6.0,1
+4903,Round 5,finished,50749,finished,1599,Jonny,Alavés,2,Minabo_De_Kiev,Minabo de Kiev,reserve,4.0,1
+4903,Round 5,finished,50749,finished,39924,Koski,Alavés,2,,,,11.0,1
+4903,Round 5,finished,50749,finished,25384,Tenaglia,Alavés,2,Minabo_De_Kiev,Minabo de Kiev,starter,5.0,1
+4903,Round 5,finished,50749,finished,30510,Abde Rebbach,Alavés,4,,,,7.0,1
+4903,Round 5,finished,50749,finished,39885,Ángel Pérez,Alavés,4,General_Hansi_Topete,"General ""Hansi” Topete",starter,2.0,1
+4903,Round 5,finished,50749,finished,14800,Pablo Ibáñez,Alavés,3,Raifc,RaiFC,reserve,2.0,1
+4903,Round 5,finished,50749,finished,1876,Denis Suárez,Alavés,3,,,,3.0,1
+4903,Round 5,finished,50749,finished,1612,Antonio Blanco,Alavés,3,General_Hansi_Topete,"General ""Hansi” Topete",starter,1.0,1
+4903,Round 5,finished,50749,finished,5697,Mariano,Alavés,4,,,,3.0,1
+4903,Round 5,finished,50749,finished,12494,Boyé,Alavés,4,Locombia_Fc,Locombia FC,starter,2.0,1
+4903,Round 5,finished,50749,finished,25020,Sánchez Flores,Alavés,5,,,,0.0,1
+4903,Round 5,finished,50749,finished,37525,Yusi,Alavés,2,General_Hansi_Topete,"General ""Hansi” Topete",reserve,,0
+4903,Round 5,finished,50750,finished,19693,Osambela,Osasuna,3,,,,3.0,1
+4903,Round 5,finished,50750,finished,26360,Dubasin,Osasuna,4,,,,3.0,1
+4903,Round 5,finished,50750,finished,33697,Raúl Moro,Osasuna,4,,,,3.0,1
+4903,Round 5,finished,50750,finished,33971,Bretones,Osasuna,2,,,,4.0,1
+4903,Round 5,finished,50750,finished,42173,Del Castillo,Osasuna,4,,,,3.0,1
+4903,Round 5,finished,50750,finished,18251,Sergio Herrera,Osasuna,1,The_National,The National,starter,2.0,1
+4903,Round 5,finished,50750,finished,5678,Diego Rico,Osasuna,2,,,,3.0,1
+4903,Round 5,finished,50750,finished,41932,Yeboah,Osasuna,2,,,,4.0,1
+4903,Round 5,finished,50750,finished,17731,Catena,Osasuna,2,,,,2.0,1
+4903,Round 5,finished,50750,finished,10292,Arguibide,Osasuna,2,,,,2.0,1
+4903,Round 5,finished,50750,finished,18128,Iker Muñoz,Osasuna,3,Cd_Numancia,CD Numancia,starter,5.0,1
+4903,Round 5,finished,50750,finished,8747,Moncayola,Osasuna,3,Locombia_Fc,Locombia FC,reserve,3.0,1
+4903,Round 5,finished,50750,finished,18256,Barja,Osasuna,3,,,,4.0,1
+4903,Round 5,finished,50750,finished,18382,Raul García,Osasuna,4,Freejulian,FreeJulian,reserve,3.0,1
+4903,Round 5,finished,50750,finished,1602,Rubén García,Osasuna,3,,,,3.0,1
+4903,Round 5,finished,50750,finished,18398,Budimir,Osasuna,4,Cd_Numancia,CD Numancia,starter,4.0,1
+4903,Round 5,finished,50750,finished,41253,Ramis,Osasuna,5,,,,0.0,1
+4903,Round 5,finished,50750,finished,9047,Pere Milla,Espanyol,4,,,,3.0,1
+4903,Round 5,finished,50750,finished,30502,Bryan Zaragoza,Espanyol,4,,,,3.0,1
+4903,Round 5,finished,50750,finished,42119,Drkusic,Espanyol,2,,,,1.0,1
+4903,Round 5,finished,50750,finished,42327,Calatrava,Espanyol,3,General_Hansi_Topete,"General ""Hansi” Topete",starter,2.0,1
+4903,Round 5,finished,50750,finished,42412,Moscardo,Espanyol,3,,,,3.0,1
+4903,Round 5,finished,50750,finished,9090,Dmitrovic,Espanyol,1,Manchester_Tity,Manchester Tity,starter,8.0,1
+4903,Round 5,finished,50750,finished,14466,Hinojo,Espanyol,2,General_Hansi_Topete,"General ""Hansi” Topete",starter,3.0,1
+4903,Round 5,finished,50750,finished,38517,Riedel,Espanyol,2,,,,3.0,1
+4903,Round 5,finished,50750,finished,11800,Cabrera,Espanyol,2,Cd_Numancia,CD Numancia,reserve,4.0,1
+4903,Round 5,finished,50750,finished,28103,El Hilali,Espanyol,2,The_National,The National,starter,9.0,1
+4903,Round 5,finished,50750,finished,22699,Urko,Espanyol,3,,,,3.0,1
+4903,Round 5,finished,50750,finished,19862,Expósito,Espanyol,3,Patsi_FC,Patsi F.C,starter,4.0,1
+4903,Round 5,finished,50750,finished,38308,Dolan,Espanyol,4,,,,2.0,1
+4903,Round 5,finished,50750,finished,25322,Javi Hernández,Espanyol,3,Cd_Numancia,CD Numancia,reserve,3.0,1
+4903,Round 5,finished,50750,finished,37644,Marcos Fernández,Espanyol,4,,,,6.0,1
+4903,Round 5,finished,50750,finished,35678,Roberto Fernández,Espanyol,4,,,,16.0,1
+4903,Round 5,finished,50750,finished,33789,Manolo González,Espanyol,5,,,,3.0,1
+4903,Round 5,finished,50750,finished,16317,Puado,Espanyol,4,Raifc,RaiFC,reserve,,0
+4903,Round 5,finished,50750,finished,30334,Fortuño,Espanyol,1,Manchester_Tity,Manchester Tity,reserve,,0
+4903,Round 5,finished,50751,finished,897,Berenguer,Athletic,4,,,,5.0,1
+4903,Round 5,finished,50751,finished,30210,Jauregizar,Athletic,3,,,,4.0,1
+4903,Round 5,finished,50751,finished,33938,Sannadi,Athletic,4,,,,2.0,1
+4903,Round 5,finished,50751,finished,43171,Johaneko,Athletic,2,,,,3.0,1
+4903,Round 5,finished,50751,finished,17021,Unai Simón,Athletic,1,Hernan_Krezzpo,Hernan Krezzpo,starter,3.0,1
+4903,Round 5,finished,50751,finished,1074,Yuri,Athletic,2,Locombia_Fc,Locombia FC,starter,4.0,1
+4903,Round 5,finished,50751,finished,5771,Yeray,Athletic,2,,,,3.0,1
+4903,Round 5,finished,50751,finished,1613,Laporte,Athletic,2,Raifc,RaiFC,starter,4.0,1
+4903,Round 5,finished,50751,finished,8695,Areso,Athletic,2,,,,-2.0,1
+4903,Round 5,finished,50751,finished,41566,Gerenabarrena,Athletic,3,The_National,The National,starter,1.0,1
+4903,Round 5,finished,50751,finished,2055,De Galarreta,Athletic,3,Locombia_Fc,Locombia FC,reserve,4.0,1
+4903,Round 5,finished,50751,finished,21008,Nico Williams,Athletic,4,,,,9.0,1
+4903,Round 5,finished,50751,finished,17057,Sancet,Athletic,3,,,,4.0,1
+4903,Round 5,finished,50751,finished,24474,Robert Navarro,Athletic,4,,,,4.0,1
+4903,Round 5,finished,50751,finished,1995,Iñaki Williams,Athletic,4,,,,4.0,1
+4903,Round 5,finished,50751,finished,42572,Terzić,Athletic,5,Cd_Numancia,CD Numancia,coach,1.0,1
+4903,Round 5,finished,50751,finished,27996,Paredes,Athletic,2,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
+4903,Round 5,finished,50751,finished,11196,Lemar,Elche,3,Freejulian,FreeJulian,reserve,2.0,1
+4903,Round 5,finished,50751,finished,23572,Rubén Sánchez,Elche,2,,,,1.0,1
+4903,Round 5,finished,50751,finished,38355,Neto,Elche,3,,,,3.0,1
+4903,Round 5,finished,50751,finished,39874,Cepeda,Elche,4,,,,2.0,1
+4903,Round 5,finished,50751,finished,41565,Osorio,Elche,4,,,,2.0,1
+4903,Round 5,finished,50751,finished,17482,Dituro,Elche,1,,,,4.0,1
+4903,Round 5,finished,50751,finished,43268,Revivo,Elche,2,,,,3.0,1
+4903,Round 5,finished,50751,finished,38422,Redondo,Elche,3,,,,6.0,1
+4903,Round 5,finished,50751,finished,1760,Chust,Elche,2,,,,5.0,1
+4903,Round 5,finished,50751,finished,40010,Sangaré,Elche,2,Patsi_FC,Patsi F.C,starter,3.0,1
+4903,Round 5,finished,50751,finished,22690,Tete Morente,Elche,4,Patsi_FC,Patsi F.C,starter,2.0,1
+4903,Round 5,finished,50751,finished,12734,Javi Morcillo,Elche,3,Manchester_Tity,Manchester Tity,starter,3.0,1
+4903,Round 5,finished,50751,finished,25403,Gonzalo Villar,Elche,3,Hernan_Krezzpo,Hernan Krezzpo,starter,4.0,1
+4903,Round 5,finished,50751,finished,20969,Germán Valera,Elche,3,,,,5.0,1
+4903,Round 5,finished,50751,finished,41608,Buonanotte,Elche,3,,,,10.0,1
+4903,Round 5,finished,50751,finished,21132,Fer Niño,Elche,4,Manchester_Tity,Manchester Tity,starter,2.0,1
+4903,Round 5,finished,50751,finished,41388,Anselmi,Elche,5,,,,1.0,1
+4903,Round 5,finished,50751,finished,38457,Ali Houary,Elche,3,Minabo_De_Kiev,Minabo de Kiev,reserve,,0
+4903,Round 5,finished,50757,finished,1733,Camavinga,Real Madrid,3,,,,4.0,1
+4903,Round 5,finished,50757,finished,15410,Cucurella,Real Madrid,2,,,,0.0,1
+4903,Round 5,finished,50757,finished,26048,Tchouameni,Real Madrid,3,,,,5.0,1
+4903,Round 5,finished,50757,finished,31027,Arda Güler,Real Madrid,3,,,,12.0,1
+4903,Round 5,finished,50757,finished,16738,Courtois,Real Madrid,1,,,,8.0,1
+4903,Round 5,finished,50757,finished,31707,Álvaro Carreras,Real Madrid,2,,,,14.0,1
+4903,Round 5,finished,50757,finished,41087,Konaté,Real Madrid,2,,,,4.0,1
+4903,Round 5,finished,50757,finished,2253,Rüdiger,Real Madrid,2,,,,4.0,1
+4903,Round 5,finished,50757,finished,42362,Dumfries,Real Madrid,2,,,,5.0,1
+4903,Round 5,finished,50757,finished,41086,Bernardo Silva,Real Madrid,3,,,,5.0,1
+4903,Round 5,finished,50757,finished,9402,Valverde,Real Madrid,3,,,,4.0,1
+4903,Round 5,finished,50757,finished,15568,Vinícius Jr,Real Madrid,4,Raifc,RaiFC,starter,6.0,1
+4903,Round 5,finished,50757,finished,30477,Bellingham,Real Madrid,3,Locombia_Fc,Locombia FC,starter,12.0,1
+4903,Round 5,finished,50757,finished,8555,Diomande,Real Madrid,4,,,,6.0,1
+4903,Round 5,finished,50757,finished,19577,Mbappé,Real Madrid,4,General_Hansi_Topete,"General ""Hansi” Topete",starter,17.0,1
+4903,Round 5,finished,50757,finished,41386,Mourinho,Real Madrid,5,,,,3.0,1
+4903,Round 5,finished,50757,finished,5352,Óscar Valentín,Rayo Vallecano,3,Minabo_De_Kiev,Minabo de Kiev,starter,3.0,1
+4903,Round 5,finished,50757,finished,14512,Belaid,Rayo Vallecano,3,,,,3.0,1
+4903,Round 5,finished,50757,finished,21063,Balliu,Rayo Vallecano,2,,,,0.0,1
+4903,Round 5,finished,50757,finished,37450,Alemão,Rayo Vallecano,4,,,,2.0,1
+4903,Round 5,finished,50757,finished,43267,Sadick,Rayo Vallecano,2,,,,2.0,1
+4903,Round 5,finished,50757,finished,43282,Audero,Rayo Vallecano,1,Patsi_FC,Patsi F.C,starter,3.0,1
+4903,Round 5,finished,50757,finished,16889,Pedrosa,Rayo Vallecano,2,,,,2.0,1
+4903,Round 5,finished,50757,finished,2476,Lejeune,Rayo Vallecano,2,,,,-4.0,1
+4903,Round 5,finished,50757,finished,24326,Pathé Ciss,Rayo Vallecano,3,,,,3.0,1
+4903,Round 5,finished,50757,finished,26276,Ratiu,Rayo Vallecano,2,,,,-2.0,1
+4903,Round 5,finished,50757,finished,1969,Unai López,Rayo Vallecano,3,The_National,The National,starter,2.0,1
+4903,Round 5,finished,50757,finished,43172,Bouare,Rayo Vallecano,3,,,,1.0,1
+4903,Round 5,finished,50757,finished,33,Álvaro García,Rayo Vallecano,4,Raifc,RaiFC,starter,2.0,1
+4903,Round 5,finished,50757,finished,34483,Pedro Díaz,Rayo Vallecano,3,,,,4.0,1
+4903,Round 5,finished,50757,finished,41940,Tsitaishvili,Rayo Vallecano,4,,,,4.0,1
+4903,Round 5,finished,50757,finished,17756,Camello,Rayo Vallecano,4,Hernan_Krezzpo,Hernan Krezzpo,starter,11.0,1
+4903,Round 5,finished,50757,finished,41088,San José,Rayo Vallecano,5,,,,0.0,1
+4903,Round 5,finished,50754,finished,1523,Iago Aspas,Celta,4,,,,4.0,1
+4903,Round 5,finished,50754,finished,17645,Galán,Celta,2,General_Hansi_Topete,"General ""Hansi” Topete",starter,2.0,1
+4903,Round 5,finished,50754,finished,26879,Swedberg,Celta,3,,,,1.0,1
+4903,Round 5,finished,50754,finished,39813,Hugo Burcio,Celta,3,,,,5.0,1
+4903,Round 5,finished,50754,finished,42813,Driouech,Celta,4,,,,0.0,1
+4903,Round 5,finished,50754,finished,37600,Radu,Celta,1,Raifc,RaiFC,starter,3.0,1
+4903,Round 5,finished,50754,finished,28087,Marcos Alonso,Celta,2,Cd_Numancia,CD Numancia,starter,3.0,1
+4903,Round 5,finished,50754,finished,33474,Lago,Celta,2,,,,5.0,1
+4903,Round 5,finished,50754,finished,43269,Cáceres,Celta,2,,,,4.0,1
+4903,Round 5,finished,50754,finished,10574,Carreira,Celta,2,Locombia_Fc,Locombia FC,starter,4.0,1
+4903,Round 5,finished,50754,finished,33473,Rueda,Celta,2,,,,3.0,1
+4903,Round 5,finished,50754,finished,3259,Miguel Román,Celta,3,Cd_Numancia,CD Numancia,starter,5.0,1
+4903,Round 5,finished,50754,finished,21084,Ilaix Moriba,Celta,3,,,,6.0,1
+4903,Round 5,finished,50754,finished,32135,Hugo Álvarez,Celta,3,,,,3.0,1
+4903,Round 5,finished,50754,finished,3159,Jutglà,Celta,4,,,,11.0,1
+4903,Round 5,finished,50754,finished,31468,Hugo González,Celta,4,,,,4.0,1
+4903,Round 5,finished,50754,finished,14615,Claudio Giráldez,Celta,5,,,,1.0,1
+4903,Round 5,finished,50754,finished,10117,Iván Villar,Celta,1,Minabo_De_Kiev,Minabo de Kiev,reserve,,0
+4903,Round 5,finished,50754,finished,37719,Álvaro Núñez,Celta,2,Freejulian,FreeJulian,starter,,0
+4903,Round 5,finished,50754,finished,2009,Borja Iglesias,Celta,4,Freejulian,FreeJulian,starter,,0
+4903,Round 5,finished,50754,finished,12404,Berrocal,Málaga,2,,,,2.0,1
+4903,Round 5,finished,50754,finished,28282,Juan Cruz,Málaga,4,,,,4.0,1
+4903,Round 5,finished,50754,finished,35706,Adrián Niño,Málaga,4,,,,10.0,1
+4903,Round 5,finished,50754,finished,41411,Ramón Enríquez,Málaga,3,,,,4.0,1
+4903,Round 5,finished,50754,finished,41416,Puga,Málaga,2,,,,4.0,1
+4903,Round 5,finished,50754,finished,41101,Alfonso Herrero,Málaga,1,,,,10.0,1
+4903,Round 5,finished,50754,finished,37723,José Salinas,Málaga,2,,,,2.0,1
+4903,Round 5,finished,50754,finished,41419,Recio,Málaga,2,,,,2.0,1
+4903,Round 5,finished,50754,finished,4070,Galilea,Málaga,2,,,,3.0,1
+4903,Round 5,finished,50754,finished,41093,Rafita,Málaga,2,,,,3.0,1
+4903,Round 5,finished,50754,finished,41098,Izan Merino,Málaga,3,,,,2.0,1
+4903,Round 5,finished,50754,finished,18570,Joaquín Muñoz,Málaga,4,,,,2.0,1
+4903,Round 5,finished,50754,finished,4245,Pablo Martínez,Málaga,3,,,,4.0,1
+4903,Round 5,finished,50754,finished,41418,Dani Lorenzo,Málaga,3,Manchester_Tity,Manchester Tity,starter,-1.0,1
+4903,Round 5,finished,50754,finished,41412,Larrubia,Málaga,4,,,,5.0,1
+4903,Round 5,finished,50754,finished,41420,Chupe,Málaga,4,,,,-1.0,1
+4903,Round 5,finished,50754,finished,42571,Funes,Málaga,5,,,,1.0,1
+4903,Round 5,finished,50754,finished,41091,Carlos López,Málaga,1,Hernan_Krezzpo,Hernan Krezzpo,reserve,,0
+4903,Round 5,finished,50752,finished,17937,Iván Romero,Levante,4,,,,13.0,1
+4903,Round 5,finished,50752,finished,25815,Nacho Pérez,Levante,2,General_Hansi_Topete,"General ""Hansi” Topete",starter,4.0,1
+4903,Round 5,finished,50752,finished,37726,Oriol Rey,Levante,3,,,,5.0,1
+4903,Round 5,finished,50752,finished,41385,Bardeli,Levante,3,Minabo_De_Kiev,Minabo de Kiev,starter,3.0,1
+4903,Round 5,finished,50752,finished,42757,Ndukwe,Levante,2,,,,2.0,1
+4903,Round 5,finished,50752,finished,2184,Ryan,Levante,1,Cd_Numancia,CD Numancia,reserve,0.0,1
+4903,Round 5,finished,50752,finished,1721,Manu Sánchez,Levante,2,Raifc,RaiFC,starter,5.0,1
+4903,Round 5,finished,50752,finished,37739,De la Fuente,Levante,2,Hernan_Krezzpo,Hernan Krezzpo,starter,3.0,1
+4903,Round 5,finished,50752,finished,2480,Mandi,Levante,2,Manchester_Tity,Manchester Tity,reserve,3.0,1
+4903,Round 5,finished,50752,finished,38143,Toljan,Levante,2,,,,0.0,1
+4903,Round 5,finished,50752,finished,15396,Brugué,Levante,4,,,,11.0,1
+4903,Round 5,finished,50752,finished,25400,Sotelo,Levante,3,Patsi_FC,Patsi F.C,reserve,4.0,1
+4903,Round 5,finished,50752,finished,29661,Olasagasti,Levante,3,Manchester_Tity,Manchester Tity,starter,4.0,1
+4903,Round 5,finished,50752,finished,17121,Víctor García,Levante,3,,,,5.0,1
+4903,Round 5,finished,50752,finished,43270,Ratkov,Levante,4,,,,2.0,1
+4903,Round 5,finished,50752,finished,37488,Requena,Levante,3,,,,4.0,1
+4903,Round 5,finished,50752,finished,39398,Luis Castro,Levante,5,,,,0.0,1
+4903,Round 5,finished,50752,finished,39431,Thiago Fernández,Levante,4,General_Hansi_Topete,"General ""Hansi” Topete",reserve,,0
+4903,Round 5,finished,50752,finished,1952,Cancelo,Barcelona,2,,,,3.0,1
+4903,Round 5,finished,50752,finished,26678,Christensen,Barcelona,2,,,,2.0,1
+4903,Round 5,finished,50752,finished,34077,Marc Bernal,Barcelona,3,Minabo_De_Kiev,Minabo de Kiev,starter,1.0,1
+4903,Round 5,finished,50752,finished,34527,Dani Olmo,Barcelona,3,Freejulian,FreeJulian,starter,2.0,1
+4903,Round 5,finished,50752,finished,42557,Adeyemi,Barcelona,4,Manchester_Tity,Manchester Tity,starter,13.0,1
+4903,Round 5,finished,50752,finished,15430,Joan García,Barcelona,1,,,,6.0,1
+4903,Round 5,finished,50752,finished,40075,Espart,Barcelona,2,Manchester_Tity,Manchester Tity,starter,11.0,1
+4903,Round 5,finished,50752,finished,32440,Cubarsí,Barcelona,2,,,,7.0,1
+4903,Round 5,finished,50752,finished,34111,Gerard Martín,Barcelona,2,Cd_Numancia,CD Numancia,starter,1.0,1
+4903,Round 5,finished,50752,finished,20,Eric García,Barcelona,2,Hernan_Krezzpo,Hernan Krezzpo,starter,3.0,1
+4903,Round 5,finished,50752,finished,429,Rodri,Barcelona,3,,,,8.0,1
+4903,Round 5,finished,50752,finished,31243,Fermín,Barcelona,3,Minabo_De_Kiev,Minabo de Kiev,starter,3.0,1
+4903,Round 5,finished,50752,finished,19441,Pedri,Barcelona,3,Hernan_Krezzpo,Hernan Krezzpo,starter,3.0,1
+4903,Round 5,finished,50752,finished,41200,Gordon,Barcelona,4,Freejulian,FreeJulian,starter,2.0,1
+4903,Round 5,finished,50752,finished,26930,Raphinha,Barcelona,4,The_National,The National,starter,10.0,1
+4903,Round 5,finished,50752,finished,26271,Yamal,Barcelona,4,Manchester_Tity,Manchester Tity,starter,18.0,1
+4903,Round 5,finished,50752,finished,19244,Hansi Flick,Barcelona,5,General_Hansi_Topete,"General ""Hansi” Topete",coach,3.0,1
+4903,Round 5,finished,50752,finished,42747,Abdelkarim,Barcelona,4,Hernan_Krezzpo,Hernan Krezzpo,reserve,,0
+4903,Round 5,finished,50752,finished,37817,Bisiwu,Barcelona,4,Manchester_Tity,Manchester Tity,reserve,,0
+4903,Round 5,finished,50752,finished,18945,Koundé,Barcelona,2,Minabo_De_Kiev,Minabo de Kiev,starter,,0
+4903,Round 5,finished,50753,finished,32569,Sazonov,Getafe,2,,,,2.0,1
+4903,Round 5,finished,50753,finished,38095,Davinchi,Getafe,2,,,,2.0,1
+4903,Round 5,finished,50753,finished,39442,Joselu Pérez,Getafe,4,,,,1.0,1
+4903,Round 5,finished,50753,finished,42726,Francho,Getafe,3,,,,2.0,1
+4903,Round 5,finished,50753,finished,11,David Soria,Getafe,1,Minabo_De_Kiev,Minabo de Kiev,starter,5.0,1
+4903,Round 5,finished,50753,finished,10245,Mojica,Getafe,2,,,,4.0,1
+4903,Round 5,finished,50753,finished,18916,Gudelj,Getafe,3,Manchester_Tity,Manchester Tity,starter,2.0,1
+4903,Round 5,finished,50753,finished,9983,Djené,Getafe,2,,,,6.0,1
+4903,Round 5,finished,50753,finished,39801,Boselli,Getafe,2,,,,2.0,1
+4903,Round 5,finished,50753,finished,39792,Satriano,Getafe,4,Minabo_De_Kiev,Minabo de Kiev,starter,2.0,1
+4903,Round 5,finished,50753,finished,2368,Mario Martín,Getafe,3,,,,2.0,1
+4903,Round 5,finished,50753,finished,41606,Mangala,Getafe,3,,,,3.0,1
+4903,Round 5,finished,50753,finished,26092,Terrats,Getafe,3,Patsi_FC,Patsi F.C,starter,12.0,1
+4903,Round 5,finished,50753,finished,43261,Azón,Getafe,4,,,,6.0,1
+4903,Round 5,finished,50753,finished,9045,Enes Ünal,Getafe,4,The_National,The National,starter,2.0,1
+4903,Round 5,finished,50753,finished,19506,Bordalás,Getafe,5,,,,1.0,1
+4903,Round 5,finished,50753,finished,26131,Andrés García,Getafe,2,Freejulian,FreeJulian,starter,,0
+4903,Round 5,finished,50753,finished,25677,Adama Traoré,Deportivo,4,,,,3.0,1
+4903,Round 5,finished,50753,finished,41073,Eddahchouri,Deportivo,4,,,,2.0,1
+4903,Round 5,finished,50753,finished,41082,Yeremay,Deportivo,4,,,,5.0,1
+4903,Round 5,finished,50753,finished,14630,Leo Román,Deportivo,1,Cd_Numancia,CD Numancia,starter,3.0,1
+4903,Round 5,finished,50753,finished,40952,Quagliata,Deportivo,2,,,,2.0,1
+4903,Round 5,finished,50753,finished,41083,Noubi,Deportivo,2,,,,3.0,1
+4903,Round 5,finished,50753,finished,1676,Giménez,Deportivo,2,Cd_Numancia,CD Numancia,starter,3.0,1
+4903,Round 5,finished,50753,finished,9065,Ximo Navarro,Deportivo,2,,,,1.0,1
+4903,Round 5,finished,50753,finished,32629,Marc Casadó,Deportivo,3,,,,4.0,1
+4903,Round 5,finished,50753,finished,25777,Luismi Cruz,Deportivo,4,Hernan_Krezzpo,Hernan Krezzpo,starter,6.0,1
+4903,Round 5,finished,50753,finished,42425,Amatucci,Deportivo,3,Patsi_FC,Patsi F.C,starter,6.0,1
+4903,Round 5,finished,50753,finished,41072,Mario Soriano,Deportivo,3,,,,5.0,1
+4903,Round 5,finished,50753,finished,40911,Nsongo,Deportivo,4,The_National,The National,starter,2.0,1
+4903,Round 5,finished,50753,finished,25769,Aubameyang,Deportivo,4,Cd_Numancia,CD Numancia,starter,12.0,1
+4903,Round 5,finished,50753,finished,42569,Hidalgo,Deportivo,5,The_National,The National,coach,1.0,1
+4903,Round 5,finished,50758,finished,20102,Kubo,Real Sociedad,3,Minabo_De_Kiev,Minabo de Kiev,starter,3.0,1
+4903,Round 5,finished,50758,finished,31475,Zakharyan,Real Sociedad,3,,,,1.0,1
+4903,Round 5,finished,50758,finished,35055,Óskarsson,Real Sociedad,4,Raifc,RaiFC,starter,2.0,1
+4903,Round 5,finished,50758,finished,37897,Gorrotxategi,Real Sociedad,3,,,,2.0,1
+4903,Round 5,finished,50758,finished,40037,Ochieng,Real Sociedad,4,,,,1.0,1
+4903,Round 5,finished,50758,finished,7003,Remiro,Real Sociedad,1,,,,2.0,1
+4903,Round 5,finished,50758,finished,19299,Sergio Gómez,Real Sociedad,2,The_National,The National,starter,1.0,1
+4903,Round 5,finished,50758,finished,36538,Beitia,Real Sociedad,2,,,,2.0,1
+4903,Round 5,finished,50758,finished,43185,Mamadou Sarr,Real Sociedad,2,Manchester_Tity,Manchester Tity,starter,5.0,1
+4903,Round 5,finished,50758,finished,32020,Aramburu,Real Sociedad,2,,,,5.0,1
+4903,Round 5,finished,50758,finished,6837,Soler,Real Sociedad,3,General_Hansi_Topete,"General ""Hansi” Topete",starter,2.0,1
+4903,Round 5,finished,50758,finished,17344,Yangel Herrera,Real Sociedad,3,Freejulian,FreeJulian,starter,2.0,1
+4903,Round 5,finished,50758,finished,10745,Guedes,Real Sociedad,4,Freejulian,FreeJulian,starter,1.0,1
+4903,Round 5,finished,50758,finished,34469,Luka Sucic,Real Sociedad,3,Locombia_Fc,Locombia FC,starter,4.0,1
+4903,Round 5,finished,50758,finished,2602,Barrenetxea,Real Sociedad,3,,,,3.0,1
+4903,Round 5,finished,50758,finished,2603,Oyarzabal,Real Sociedad,4,Patsi_FC,Patsi F.C,starter,0.0,1
+4903,Round 5,finished,50758,finished,39399,Matarazzo,Real Sociedad,5,,,,0.0,1
+4903,Round 5,finished,50758,finished,32460,Héctor Fort,Real Sociedad,2,Hernan_Krezzpo,Hernan Krezzpo,reserve,,0
+4903,Round 5,finished,50758,finished,8376,Zubeldia,Real Sociedad,2,Freejulian,FreeJulian,starter,,0
+4903,Round 5,finished,50758,finished,1083,Koke,Atlético,3,,,,5.0,1
+4903,Round 5,finished,50758,finished,30802,Arnau Ortiz,Atlético,4,,,,5.0,1
+4903,Round 5,finished,50758,finished,32120,Johnny,Atlético,3,,,,4.0,1
+4903,Round 5,finished,50758,finished,43263,Jonathan David,Atlético,4,,,,11.0,1
+4903,Round 5,finished,50758,finished,1897,Oblak,Atlético,1,,,,5.0,1
+4903,Round 5,finished,50758,finished,38290,Hancko,Atlético,2,,,,4.0,1
+4903,Round 5,finished,50758,finished,15828,Cristian Romero,Atlético,2,Locombia_Fc,Locombia FC,starter,8.0,1
+4903,Round 5,finished,50758,finished,25398,Pubill,Atlético,2,Minabo_De_Kiev,Minabo de Kiev,starter,4.0,1
+4903,Round 5,finished,50758,finished,41684,Grimaldo,Atlético,2,,,,11.0,1
+4903,Round 5,finished,50758,finished,30789,Giuliano Simeone,Atlético,3,,,,10.0,1
+4903,Round 5,finished,50758,finished,2600,Marcos Llorente,Atlético,2,The_National,The National,starter,3.0,1
+4903,Round 5,finished,50758,finished,42444,Hjulmand,Atlético,3,,,,6.0,1
+4903,Round 5,finished,50758,finished,17687,Kang-in Lee,Atlético,3,Locombia_Fc,Locombia FC,starter,3.0,1
+4903,Round 5,finished,50758,finished,19547,Baena,Atlético,3,,,,2.0,1
+4903,Round 5,finished,50758,finished,39941,Lookman,Atlético,4,Hernan_Krezzpo,Hernan Krezzpo,starter,-1.0,1
+4903,Round 5,finished,50758,finished,19501,Simeone,Atlético,5,Freejulian,FreeJulian,coach,3.0,1
+4903,Round 5,finished,50758,finished,34557,Julián Alvarez,Atlético,4,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
+4903,Round 5,finished,50758,finished,34805,Musso,Atlético,1,The_National,The National,reserve,,0
+4903,Round 5,finished,50758,finished,29184,Barrios,Atlético,3,Minabo_De_Kiev,Minabo de Kiev,starter,,0
+4903,Round 5,finished,50758,finished,24576,Sørloth,Atlético,4,Patsi_FC,Patsi F.C,reserve,,0
+4903,Round 5,finished,50756,finished,2001,Ayoze,Villarreal,4,Freejulian,FreeJulian,starter,2.0,1
+4903,Round 5,finished,50756,finished,30495,Moleiro,Villarreal,3,Locombia_Fc,Locombia FC,starter,3.0,1
+4903,Round 5,finished,50756,finished,38854,Oluwaseyi,Villarreal,4,,,,1.0,1
+4903,Round 5,finished,50756,finished,39901,Freeman,Villarreal,2,Freejulian,FreeJulian,reserve,2.0,1
+4903,Round 5,finished,50756,finished,42802,Saliba,Villarreal,3,,,,2.0,1
+4903,Round 5,finished,50756,finished,38433,Gulácsi,Villarreal,1,,,,12.0,1
+4903,Round 5,finished,50756,finished,26566,Carlos Romero,Villarreal,2,Patsi_FC,Patsi F.C,starter,1.0,1
+4903,Round 5,finished,50756,finished,35156,Pau Navarro,Villarreal,2,,,,5.0,1
+4903,Round 5,finished,50756,finished,38493,Veiga,Villarreal,2,,,,8.0,1
+4903,Round 5,finished,50756,finished,31018,Santiago Mouriño,Villarreal,2,,,,-1.0,1
+4903,Round 5,finished,50756,finished,35344,Buchanan,Villarreal,3,The_National,The National,reserve,2.0,1
+4903,Round 5,finished,50756,finished,30081,Pape Gueye,Villarreal,3,Raifc,RaiFC,starter,3.0,1
+4903,Round 5,finished,50756,finished,9480,Comesaña,Villarreal,3,,,,4.0,1
+4903,Round 5,finished,50756,finished,34479,Pépé,Villarreal,4,The_National,The National,starter,4.0,1
+4903,Round 5,finished,50756,finished,38962,Mikautadze,Villarreal,4,Manchester_Tity,Manchester Tity,starter,2.0,1
+4903,Round 5,finished,50756,finished,1927,Gerard Moreno,Villarreal,4,Locombia_Fc,Locombia FC,starter,11.0,1
+4903,Round 5,finished,50756,finished,26780,Íñigo Pérez,Villarreal,5,Raifc,RaiFC,coach,0.0,1
+4903,Round 5,finished,50756,finished,2044,Ceballos,Betis,3,,,,6.0,1
+4903,Round 5,finished,50756,finished,11686,Lo Celso,Betis,3,,,,2.0,1
+4903,Round 5,finished,50756,finished,35770,Antony,Betis,4,Raifc,RaiFC,starter,4.0,1
+4903,Round 5,finished,50756,finished,37416,Deossa,Betis,3,,,,6.0,1
+4903,Round 5,finished,50756,finished,42370,Facundo Bernal,Betis,3,,,,1.0,1
+4903,Round 5,finished,50756,finished,30487,Álvaro Valles,Betis,1,Locombia_Fc,Locombia FC,starter,14.0,1
+4903,Round 5,finished,50756,finished,5220,Fran García,Betis,2,Raifc,RaiFC,starter,5.0,1
+4903,Round 5,finished,50756,finished,1125,Bartra,Betis,2,,,,5.0,1
+4903,Round 5,finished,50756,finished,19614,Natan,Betis,2,,,,13.0,1
+4903,Round 5,finished,50756,finished,2247,Bellerín,Betis,2,,,,6.0,1
+4903,Round 5,finished,50756,finished,5807,Marc Roca,Betis,3,Freejulian,FreeJulian,starter,7.0,1
+4903,Round 5,finished,50756,finished,2597,Fornals,Betis,3,Cd_Numancia,CD Numancia,starter,5.0,1
+4903,Round 5,finished,50756,finished,25127,Ez Abde,Betis,4,Patsi_FC,Patsi F.C,starter,8.0,1
+4903,Round 5,finished,50756,finished,1249,Isco,Betis,3,Hernan_Krezzpo,Hernan Krezzpo,starter,5.0,1
+4903,Round 5,finished,50756,finished,8670,Roro Riquelme,Betis,3,General_Hansi_Topete,"General ""Hansi” Topete",reserve,2.0,1
+4903,Round 5,finished,50756,finished,10276,Cucho,Betis,4,,,,10.0,1
+4903,Round 5,finished,50756,finished,19513,Pellegrini,Betis,5,,,,3.0,1

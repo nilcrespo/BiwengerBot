@@ -1261,6 +1261,149 @@ def build_recommendations(conn, date):
     return buy_recommendations, sell_recommendations
 
 
+# ---------- Speculative ("flip") recommender ----------
+# build_recommendations' buy list answers "is this player good for my
+# starting XI" — start_pct >= 40 is a hard requirement there, and the
+# score itself is 85% about talent/starting odds/recent form. That's
+# exactly wrong for the OTHER reason to buy a player in Biwenger: his
+# price is climbing and reselling him later is the point, whether or not
+# he ever starts for you. A bench/rotation player riding a breakout cameo
+# or transfer hype is a legitimate flip target at 10% start odds — the
+# squad-fit filters above would never let him through.
+#
+# The signal used here is also different in kind, not just threshold: the
+# buy score's only price-direction input is momentum_pct, today's single
+# day of `change` — which can't tell a real multi-day run from one day's
+# noise (a listing can read +0% today after three days of real gains, or
+# -2% today in the middle of an overall uptrend). _price_history_lookup
+# reconstructs an actual multi-day trend per player instead.
+
+def _price_history_lookup(conn, date, lookback_days=14):
+    """Per-player daily price series over the trailing `lookback_days`,
+    keyed by (normalized name, normalized club).
+
+    Biwenger doesn't expose a price-history endpoint this scraper reads,
+    but the daily snapshots already taken for other reasons add up to
+    one: team_players.price on any day the player was owned by someone
+    (his tracked card value), falling back to market.price on a day he
+    was free-agent-listed instead. team_players is preferred when both
+    exist for the same day — confirmed live that a free-agent listing's
+    asking price can be manually set away from true card value (Koke
+    listed at €3,140,000 the same day his card value, read off a squad
+    that later owned him, was €2,870,000) — team_players is Biwenger's
+    own tracked number, not a price a manager chose when listing him.
+
+    Returns {} entries only for players with >=2 days of observations —
+    a single snapshot has no delta to compute a trend from.
+    """
+    d = resolve_scraped_at(conn, date)
+    since = (pd.Timestamp(d[:10]) - pd.Timedelta(days=lookback_days)).strftime('%Y-%m-%d')
+
+    tp = pd.read_sql(
+        "SELECT name, club, DATE(scraped_at) AS day, price FROM team_players "
+        "WHERE DATE(scraped_at) >= ? AND DATE(scraped_at) <= ?",
+        conn, params=(since, d[:10])
+    )
+    mkt = pd.read_sql(
+        "SELECT name, club, DATE(scraped_at) AS day, price FROM market "
+        "WHERE DATE(scraped_at) >= ? AND DATE(scraped_at) <= ?",
+        conn, params=(since, d[:10])
+    )
+    if not len(tp) and not len(mkt):
+        return {}
+
+    tp = tp.assign(key=list(zip(tp['name'].map(_normalize_name), tp['club'].map(_normalize_name))))
+    mkt = mkt.assign(key=list(zip(mkt['name'].map(_normalize_name), mkt['club'].map(_normalize_name))))
+    tp = tp[['key', 'day', 'price']].drop_duplicates(['key', 'day'])
+    mkt = mkt[['key', 'day', 'price']].drop_duplicates(['key', 'day'])
+    # team_players (src=0) wins a same-day tie over market (src=1).
+    combined = pd.concat([tp.assign(src=0), mkt.assign(src=1)])
+    combined = combined.sort_values('src').drop_duplicates(['key', 'day'], keep='first')
+
+    trends = {}
+    for key, g in combined.groupby('key'):
+        g = g.sort_values('day')
+        if len(g) < 2:
+            continue
+        first_price, last_price = float(g['price'].iloc[0]), float(g['price'].iloc[-1])
+        if first_price <= 0:
+            continue
+        days_span = max((pd.Timestamp(g['day'].iloc[-1]) - pd.Timestamp(g['day'].iloc[0])).days, 1)
+        trends[key] = {
+            'days_observed': len(g),
+            'first_price': first_price,
+            'last_price': last_price,
+            'pct_change': (last_price - first_price) / first_price * 100,
+            'pct_change_per_day': (last_price - first_price) / first_price * 100 / days_span,
+        }
+    return trends
+
+
+def build_speculative_recommendations(conn, date, lookback_days=14):
+    """Today's market listings ranked purely on likely PROFIT — a real,
+    sustained multi-day price rise, weighted toward cheap listings (the
+    same euro move is a bigger % gain, and costs less capital/roster risk,
+    lower down the price ladder) — with no requirement that the player
+    would ever start for you. This is the deliberate complement to
+    build_recommendations' buy list, not a replacement for it: this
+    league is won on points, not team value, so money only matters as
+    fuel for a better XI later — this list is meant to run ALONGSIDE the
+    squad-fit buy list, never instead of it.
+
+    Requires >=2 days of observed price history (an actual trend, not
+    one day's reading), a genuinely rising trend (both the whole-window
+    and per-day change must be positive — this is "ride a real run", not
+    "bet on a reversal"), and at least some real season output as a
+    plausibility floor against pure noise. Returns an empty frame on a
+    day with no real candidate, same as the buy/sell recommenders above —
+    manufacturing a "top pick" out of a flat market would be worse than
+    saying there isn't one.
+    """
+    d = resolve_scraped_at(conn, date)
+    market = pd.read_sql(
+        """
+        SELECT position, club, name, price, change, status, recent_pts,
+               this_season_pts, last_season_pts
+        FROM market WHERE scraped_at = ?
+        """,
+        conn, params=(d,)
+    )
+    if not len(market):
+        return market.assign(flip_score=pd.Series(dtype=float))
+
+    trends = _price_history_lookup(conn, date, lookback_days=lookback_days)
+    market = market.assign(
+        key=list(zip(market['name'].map(_normalize_name), market['club'].map(_normalize_name)))
+    )
+    market.loc[:, 'days_observed'] = market['key'].apply(lambda k: trends.get(k, {}).get('days_observed', 1))
+    market.loc[:, 'pct_change_window'] = market['key'].apply(lambda k: trends.get(k, {}).get('pct_change', 0.0))
+    market.loc[:, 'pct_change_per_day'] = market['key'].apply(lambda k: trends.get(k, {}).get('pct_change_per_day', 0.0))
+
+    candidates = market[
+        (market['days_observed'] >= 2)
+        & (market['pct_change_window'] > 0)
+        & (market['pct_change_per_day'] > 0)
+        & (market['this_season_pts'].fillna(0) > 0)
+    ].copy()
+    if not len(candidates):
+        return candidates.assign(flip_score=pd.Series(dtype=float))
+
+    # Cheaper listings score higher on price alone — the opposite bias
+    # from the buy score's value_score, which favors established, pricier
+    # talent. A sustained trend (more days observed) is weighted ahead of
+    # a raw per-day rate so a steady 5-day climb beats a 2-day blip at a
+    # similar daily pace.
+    candidates.loc[:, 'cheap_score'] = 100 - _normalize(candidates['price'])
+    candidates.loc[:, 'flip_score'] = (
+        0.40 * _normalize(candidates['pct_change_per_day']) +
+        0.25 * _normalize(candidates['days_observed']) +
+        0.15 * _normalize(candidates['pct_change_window']) +
+        0.20 * candidates['cheap_score']
+    ).round(1)
+
+    return candidates.drop(columns=['key']).sort_values('flip_score', ascending=False).head(8)
+
+
 # ---------- Best XI recommender ----------
 # The five formations Biwenger actually allows (confirmed against every
 # formation seen in real rival_lineups data: 4-4-2, 3-4-3, 3-5-2, 4-5-1,

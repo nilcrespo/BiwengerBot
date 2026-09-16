@@ -156,6 +156,22 @@ def build_digest(conn, date) -> str:
             lines.append(f"  • {r['player']} ({r['club']}) — profit {profit}, score {r['score']}{tag}")
         sections.append("\n".join(lines))
 
+    # Separate from the buy list above on purpose — these are NOT
+    # squad-fit picks (several may have low or no starting-XI odds) and
+    # are ranked purely on a real multi-day price rise. Only ever
+    # non-empty when the market actually shows one; see
+    # recommenders.build_speculative_recommendations's docstring.
+    flip_df = recommenders.build_speculative_recommendations(conn, date)
+    if len(flip_df):
+        lines = [f"💰 <b>Flip watch: {len(flip_df)} riser(s)</b> (not squad picks — pure profit plays)"]
+        for _, r in flip_df.head(5).iterrows():
+            lines.append(
+                f"  • {r['name']} ({r['club']}, {r['position']}) — {_money(r['price'])}, "
+                f"+{r['pct_change_window']:.1f}% over {r['days_observed']} day(s) "
+                f"(~{r['pct_change_per_day']:.1f}%/day)"
+            )
+        sections.append("\n".join(lines))
+
     return "\n\n".join(sections)
 
 

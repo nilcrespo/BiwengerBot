@@ -933,8 +933,8 @@ def build_recommendations(conn, date):
     sell_pool = pd.read_sql(
         f"""
         SELECT tp.name AS player, tp.club, tp.position, tp.price AS current_price,
-               tp.this_season_pts, tp.last_season_pts, tp.status, tp.played,
-               op.buy_price, po.price AS offer_price
+               tp.change AS price_change_today, tp.this_season_pts, tp.last_season_pts,
+               tp.status, tp.played, op.buy_price, po.price AS offer_price
         FROM team_players tp
         JOIN team_balance tb ON tb.team_id = tp.team_id AND tb.is_me = 1 AND tb.scraped_at LIKE ?
         LEFT JOIN open_positions op ON op.team_id = tp.team_id AND op.scraped_at LIKE ?
@@ -949,6 +949,24 @@ def build_recommendations(conn, date):
     sell_pool.loc[:, 'start_pct'] = sell_pool['probability'].apply(_parse_pct)
     sell_pool.loc[:, 'bench_score'] = 100 - sell_pool['start_pct']
     sell_pool.loc[:, 'has_offer'] = sell_pool['offer_price'].notna()
+    # Forward-looking take-profit signal: was this player's price on a
+    # real multi-day run (see _price_history_lookup), and has today's own
+    # reading just turned negative — i.e. the run stalling right now,
+    # not a fixed profit_pct threshold already crossed after the fact.
+    # >3% over the window is the same "meaningful, not noise" bar
+    # momentum_pct-style signals use elsewhere in this module.
+    price_trends = _price_history_lookup(conn, date)
+    sell_pool.loc[:, 'trend_key'] = list(zip(
+        sell_pool['player'].map(_normalize_name), sell_pool['club'].map(_normalize_name)
+    ))
+    sell_pool.loc[:, 'trend_pct_window'] = sell_pool['trend_key'].apply(
+        lambda k: price_trends.get(k, {}).get('pct_change', 0.0)
+    )
+    sell_pool.loc[:, 'momentum_reversal'] = (
+        (sell_pool['trend_pct_window'] > 3)
+        & (sell_pool['price_change_today'].fillna(0) < 0)
+    )
+    sell_pool = sell_pool.drop(columns=['trend_key'])
     # Profit should reflect what you'd actually be paid, not an abstract
     # valuation — when there's a live offer, that's the real number
     # (offer_price is a guaranteed instant sale, current_price is just
@@ -987,12 +1005,18 @@ def build_recommendations(conn, date):
     # doubled to 0.20, taken from profit_pct and talent_keep equally —
     # bench risk and offer quality are left untouched since neither one
     # is a proxy for this.
+    #
+    # momentum_reversal (0.15, new) is funded by trimming 0.05 each off
+    # bench_score/profit_pct/talent_keep: a real multi-day run stalling
+    # TODAY is worth acting on before the banked gain erodes, not just a
+    # tiebreaker among players who already clear the profit_pct bar.
     sell_pool.loc[:, 'score'] = (
-        0.25 * _normalize(sell_pool['bench_score']) +
-        0.15 * _normalize(sell_pool['profit_pct'].fillna(0).clip(lower=0)) +
+        0.20 * _normalize(sell_pool['bench_score']) +
+        0.10 * _normalize(sell_pool['profit_pct'].fillna(0).clip(lower=0)) +
         0.20 * sell_pool['injured'].map({True: 100.0, False: 0.0}) +
         0.20 * _normalize(sell_pool['offer_premium_pct'].fillna(0)) +
-        0.20 * sell_pool['talent_keep']
+        0.15 * sell_pool['talent_keep'] +
+        0.15 * sell_pool['momentum_reversal'].map({True: 100.0, False: 0.0})
     ).round(1)
 
     # Positional depth veto: don't recommend selling a player if he's
@@ -1021,9 +1045,12 @@ def build_recommendations(conn, date):
     # market value (worth grabbing even for a player you weren't
     # otherwise planning to move), meaningful banked profit on a player
     # who isn't nailed to the starting XI, a clear loss worth cutting
-    # before it drops further, or bench fodder with no games and no cost
-    # basis to protect. A nailed-on starter (>=70% start odds) only
-    # qualifies if the payday is large enough to outweigh the points
+    # before it drops further, bench fodder with no games and no cost
+    # basis to protect, or a real price run that just stalled today with
+    # real profit already banked (take the win before it erodes, rather
+    # than waiting for profit_pct to cross a fixed threshold after the
+    # run has already reversed). A nailed-on starter (>=70% start odds)
+    # only qualifies if the payday is large enough to outweigh the points
     # they'd score, or the going-rate offer itself is what's compelling —
     # and never if it would leave a position with no viable cover at all.
     profit_pct = sell_pool['profit_pct']
@@ -1032,6 +1059,7 @@ def build_recommendations(conn, date):
         sell_pool['offer_is_generous']
         | (profit_pct.notna() & (profit_pct >= 0.15) & ~is_starter)
         | (profit_pct.notna() & (profit_pct <= -0.15))
+        | (sell_pool['momentum_reversal'] & profit_pct.notna() & (profit_pct >= 0.05) & ~is_starter)
         | (sell_pool['buy_price'].isna() & (sell_pool['start_pct'] <= 20))
         | (profit_pct.notna() & (profit_pct >= 0.5))
     ) & ~sell_pool['leaves_thin']

@@ -152,6 +152,8 @@ def build_digest(conn, date) -> str:
                 tag = f" 🔥 offer beats market by {r['offer_premium_pct']:.1f}% — worth grabbing"
             elif r.get('offer_is_lowball'):
                 tag = f" ⏳ offer is {abs(r['offer_premium_pct']):.1f}% under market — consider waiting"
+            if r.get('momentum_reversal'):
+                tag += f" 📉 was +{r['trend_pct_window']:.1f}% but turned down today — lock it in"
             profit = _money(r['profit']) if pd.notna(r['profit']) else "—"
             lines.append(f"  • {r['player']} ({r['club']}) — profit {profit}, score {r['score']}{tag}")
         sections.append("\n".join(lines))

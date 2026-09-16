@@ -1255,6 +1255,15 @@ def build_recommendations(conn, date):
 # 4-3-3 — all five of Biwenger's known valid shapes turned up, none other
 # did), as (DEF, MID, FWD) outfield counts alongside the fixed 1 GK.
 BEST_XI_FORMATIONS = [(4, 4, 2), (4, 3, 3), (3, 5, 2), (3, 4, 3), (4, 5, 1)]
+# Hard price ceiling on the captain and the starting forward (the
+# "ariete") — a standing user requirement independent of who'd otherwise
+# score highest (see feedback_starting_xi_constraints in project memory).
+# Deliberately NOT applied to the other 9 slots: money is instrumental
+# here, not a scoring target in its own right (project_league_scoring_rules
+# — the league ranks by points), so the rest of the XI stays a pure
+# best-points pick. Reused as-is for both the captain and the ariete since
+# the user gave the same €5M figure for both.
+STARTING_XI_PRICE_CAP = 5_000_000
 
 
 def _position_labels(position_str):
@@ -1270,8 +1279,13 @@ def build_best_eleven(conn, date):
     value (blended talent x start probability — a great player who won't
     play contributes nothing), then keep whichever complete formation
     scores highest. The captain is whoever scores highest among the 11
-    (Biwenger doubles the captain's points, so that's always the same
-    player who'd be picked regardless of formation).
+    UNDER STARTING_XI_PRICE_CAP (Biwenger doubles the captain's points,
+    so that's always the same player who'd be picked regardless of
+    formation) — a standing user requirement, not something Biwenger
+    itself enforces. One starting forward under that same cap (the
+    "ariete") is reserved the same way, so a cheap, scoring-capable
+    striker is always part of the XI rather than being outcompeted by
+    the squad's expensive attacking talent.
 
     Dual-position players (e.g. "Defender/Midfielder") are filled in two
     passes rather than solved as a true assignment problem: pass one
@@ -1392,11 +1406,32 @@ def _solve_best_eleven(roster, rounds_played):
     roster.loc[:, 'labels'] = roster['position'].apply(_position_labels)
     roster.loc[:, 'primary'] = roster['labels'].apply(lambda ls: ls[0] if ls else None)
 
+    # The ariete: best FWD-eligible player under STARTING_XI_PRICE_CAP,
+    # chosen ONCE globally (same reasoning as the captain below — it
+    # shouldn't flip depending on which formation wins) and reserved for
+    # a FWD slot before the per-formation fill loop can claim him for
+    # something else. That reservation has to happen before MID is
+    # filled, not just before FWD: a dual Forward/Midfielder under the
+    # cap would otherwise be free to get swept into a MID slot first
+    # (MID is filled before FWD below), leaving no cheap forward at all
+    # by the time the FWD pass runs. None only when literally no
+    # FWD-eligible player in the whole roster is under the cap.
+    fwd_eligible = roster[roster['labels'].apply(lambda ls: 'FWD' in ls)]
+    affordable_fwd = fwd_eligible[fwd_eligible['price'] < STARTING_XI_PRICE_CAP]
+    ariete_idx = (
+        affordable_fwd.sort_values('selection_value', ascending=False).index[0]
+        if len(affordable_fwd) else None
+    )
+
     best = None
     for def_n, mid_n, fwd_n in BEST_XI_FORMATIONS:
         needed = [('GK', 1), ('DEF', def_n), ('MID', mid_n), ('FWD', fwd_n)]
         assigned = []
         slot_of = {}  # player index -> which row (GK/DEF/MID/FWD) he fills
+        reserve_ariete = ariete_idx is not None and fwd_n > 0
+        if reserve_ariete:
+            assigned.append(ariete_idx)
+            slot_of[ariete_idx] = 'FWD'
 
         def _take(pool, count, label):
             pool = pool[~pool.index.isin(assigned)].sort_values('selection_value', ascending=False)
@@ -1405,9 +1440,11 @@ def _solve_best_eleven(roster, rounds_played):
             slot_of.update({i: label for i in picked})
             return picked
 
-        filled = {}
+        filled = {'FWD': 1} if reserve_ariete else {}
         for label, count in needed:
-            filled[label] = len(_take(roster[roster['primary'] == label], count, label))
+            remaining = count - filled.get(label, 0)
+            if remaining > 0:
+                filled[label] = filled.get(label, 0) + len(_take(roster[roster['primary'] == label], remaining, label))
         # Second pass: any formation slot a primary-only fill couldn't
         # complete gets patched from remaining dual-position-eligible
         # players (e.g. a MID slot short a body pulled from a leftover
@@ -1436,20 +1473,25 @@ def _solve_best_eleven(roster, rounds_played):
 
     # Captain is whoever's projected to outscore everyone else GIVEN he
     # plays — not discounted by his own start risk a second time, same
-    # reasoning as projected_points itself.
+    # reasoning as projected_points itself — but restricted to starters
+    # under STARTING_XI_PRICE_CAP first. The ariete reservation above
+    # guarantees at least one starter qualifies, so the unrestricted
+    # fallback below only matters if that ever changes.
     starters = roster.loc[best['assigned']].sort_values('projected_points', ascending=False)
-    captain_idx = starters.index[0]
+    captain_pool = starters[starters['price'] < STARTING_XI_PRICE_CAP]
+    captain_idx = (captain_pool.index[0] if len(captain_pool) else starters.index[0])
     starters = starters.assign(
         is_captain=starters.index == captain_idx,
+        is_ariete=starters.index == ariete_idx,
         slot=[best['slot_of'][i] for i in starters.index],
     )
     bench = roster[~roster.index.isin(best['assigned'])].sort_values('projected_points', ascending=False)
 
     keep_cols = ['player', 'position', 'club', 'price', 'status', 'start_pct',
-                 'projected_points', 'is_captain', 'slot']
+                 'projected_points', 'is_captain', 'is_ariete', 'slot']
     return {
         'formation': best['formation'],
         'starters': to_records(starters[keep_cols]),
-        'bench': to_records(bench[[c for c in keep_cols if c not in ('is_captain', 'slot')]]),
+        'bench': to_records(bench[[c for c in keep_cols if c not in ('is_captain', 'is_ariete', 'slot')]]),
         'total_projected_points': round(float(starters['projected_points'].sum()), 1),
     }

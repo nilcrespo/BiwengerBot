@@ -1,21 +1,22 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Locombia FC,Locombia_Fc,Goalkeeper,Betis,Alvaro Valles,49,0,5280000,80000.0,Fit,6,8.2,26,8.7,23,7.7
+Locombia FC,Locombia_Fc,Goalkeeper,Betis,Alvaro Valles,49,0,5380000,100000.0,Fit,6,8.2,26,8.7,23,7.7
 Locombia FC,Locombia_Fc,Goalkeeper,Betis,Diego Conde,0,0,240000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Locombia_Fc,Defender/Midfielder,Celta,Carreira,22,0,2810000,10000.0,Fit,6,3.7,12,4.0,10,3.3
-Locombia FC,Locombia_Fc,Defender,Atletico,Cristian Romero,20,0,5170000,80000.0,Fit,3,6.7,9,9.0,11,5.5
-Locombia FC,Locombia_Fc,Defender,Malaga,Jose Salinas,11,0,980000,0.0,Fit,5,2.2,5,2.5,6,2.0
-Locombia FC,Locombia_Fc,Defender,Athletic,Yuri,7,0,2720000,20000.0,Fit,4,1.8,1,0.3,6,6.0
+Locombia FC,Locombia_Fc,Defender/Midfielder,Celta,Carreira,22,0,2800000,-10000.0,Fit,6,3.7,12,4.0,10,3.3
+Locombia FC,Locombia_Fc,Defender,Atletico,Cristian Romero,20,0,5240000,70000.0,Fit,3,6.7,9,9.0,11,5.5
+Locombia FC,Locombia_Fc,Defender,Rayo Vallecano,Ratiu,16,0,3650000,-20000.0,Fit,5,3.2,17,5.7,-1,-0.5
+Locombia FC,Locombia_Fc,Defender,Malaga,Jose Salinas,11,0,950000,-30000.0,Fit,5,2.2,5,2.5,6,2.0
+Locombia FC,Locombia_Fc,Defender,Athletic,Yuri,7,0,2720000,0.0,Fit,4,1.8,1,0.3,6,6.0
 Locombia FC,Locombia_Fc,Defender,Valencia,Foulquier,0,26,150000,0.0,Injured. Muscle injury. Estimated return: Indefinite return.,0,0.0,0,0.0,0,0.0
-Locombia FC,Locombia_Fc,Midfielder,Real Madrid,Bellingham,61,0,18730000,40000.0,Fit,6,10.2,40,13.3,21,7.0
-Locombia FC,Locombia_Fc,Midfielder/Forward,Atletico,Kang-In Lee,44,0,9000000,50000.0,Fit,6,7.3,33,11.0,11,3.7
-Locombia FC,Locombia_Fc,Midfielder/Forward,Villarreal,Moleiro,32,0,6850000,-20000.0,Fit,6,5.3,8,4.0,24,6.0
-Locombia FC,Locombia_Fc,Midfielder/Forward,Real Sociedad,Luka Sucic,32,0,3750000,50000.0,Fit,6,5.3,9,3.0,23,7.7
-Locombia FC,Locombia_Fc,Midfielder,Athletic,De Galarreta,18,0,2990000,-20000.0,Fit,4,4.5,9,3.0,9,9.0
-Locombia FC,Locombia_Fc,Midfielder,Celta,Febas,4,0,3870000,-30000.0,Fit,2,2.0,-1,-1.0,5,5.0
-Locombia FC,Locombia_Fc,Midfielder,Barcelona,De Jong,0,133,600000,0.0,Injured. Tear of the medial collateral ligament in the right knee. Estimated return: Mid-November.,0,0.0,0,0.0,0,0.0
+Locombia FC,Locombia_Fc,Midfielder,Real Madrid,Bellingham,61,0,18790000,60000.0,Fit,6,10.2,40,13.3,21,7.0
+Locombia FC,Locombia_Fc,Midfielder/Forward,Atletico,Kang-In Lee,44,0,9060000,60000.0,Fit,6,7.3,33,11.0,11,3.7
+Locombia FC,Locombia_Fc,Midfielder/Forward,Villarreal,Moleiro,32,0,6860000,10000.0,Fit,6,5.3,8,4.0,24,6.0
+Locombia FC,Locombia_Fc,Midfielder/Forward,Real Sociedad,Luka Sucic,32,0,3780000,30000.0,Fit,6,5.3,9,3.0,23,7.7
+Locombia FC,Locombia_Fc,Midfielder,Athletic,De Galarreta,18,0,2930000,-60000.0,Fit,4,4.5,9,3.0,9,9.0
+Locombia FC,Locombia_Fc,Midfielder,Celta,Febas,4,0,3830000,-40000.0,Fit,2,2.0,-1,-1.0,5,5.0
+Locombia FC,Locombia_Fc,Midfielder,Barcelona,De Jong,0,133,590000,-10000.0,Injured. Tear of the medial collateral ligament in the right knee. Estimated return: Mid-November.,0,0.0,0,0.0,0,0.0
 Locombia FC,Locombia_Fc,Midfielder,Barcelona,Farinas,0,0,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Locombia_Fc,Forward,Alaves,Boye,40,0,4890000,50000.0,Fit,5,8.0,35,11.7,5,2.5
-Locombia FC,Locombia_Fc,Forward,Villarreal,Gerard Moreno,30,0,6910000,50000.0,Fit,5,6.0,18,9.0,12,4.0
-Locombia FC,Locombia_Fc,Forward/Defender/Midfielder,Valencia,Rioja,16,0,1500000,0.0,Injured. Swelling on the sole of the foot. Estimated return: Early October.,3,5.3,5,5.0,11,5.5
+Locombia FC,Locombia_Fc,Forward,Alaves,Boye,40,0,4920000,30000.0,Fit,5,8.0,35,11.7,5,2.5
+Locombia FC,Locombia_Fc,Forward,Villarreal,Gerard Moreno,30,0,6950000,40000.0,Fit,5,6.0,18,9.0,12,4.0
+Locombia FC,Locombia_Fc,Forward/Defender/Midfielder,Valencia,Rioja,16,0,1450000,-50000.0,Injured. Swelling on the sole of the foot. Estimated return: Early October.,3,5.3,5,5.0,11,5.5
 Locombia FC,Locombia_Fc,Forward,Real Madrid,Rodrygo,0,67,570000,0.0,Injured. Rupture of the anterior cruciate ligament and tear of the external meniscus of the right leg. Estimated return: Mid-October.,0,0.0,0,0.0,0,0.0
-Locombia FC,Locombia_Fc,Coach,Betis,Pellegrini,15,0,2300000,10000.0,Fit,6,2.5,9,3.0,6,2.0
+Locombia FC,Locombia_Fc,Coach,Betis,Pellegrini,15,0,2310000,10000.0,Fit,6,2.5,9,3.0,6,2.0

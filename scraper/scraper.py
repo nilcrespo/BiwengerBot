@@ -168,18 +168,29 @@ def get_league_standings(page):
     # Navigate to league standings
     page.goto("https://biwenger.as.com/league")
     links = []
-    # Switch to table view
-    try:
-        page.get_by_role("button", name=TABLE_VIEW_LABEL).click(timeout=3000)
-    except:
+    # Switch to table view. Same flakiness as extract_team_players(): the
+    # click can miss or land before the view is ready, so retry once with a
+    # longer wait instead of giving up after a single 3s attempt (that's
+    # what crashed the 2026-09-22 run — the first attempt timed out and the
+    # function fell back to returning a bare empty DataFrame, which the
+    # caller's `rival_teams, links = get_league_standings(page)` can't
+    # unpack). Raise instead of silently degrading, so a real failure here
+    # surfaces as a clear error rather than a confusing unpack crash.
+    for attempt, click_timeout in enumerate((3000, 5000)):
         try:
-            page.locator('i[role="button"][title="Table"]').click(timeout=3000)
-        except Exception as e:
-            print(f"Could not switch to table view: {e}")
-            return pd.DataFrame()
-    
-    # Wait for table to load
-    page.wait_for_selector("table tbody tr", timeout=10000)
+            page.get_by_role("button", name=TABLE_VIEW_LABEL).click(timeout=click_timeout)
+        except Exception:
+            try:
+                page.locator('i[role="button"][title="Table"]').click(timeout=click_timeout)
+            except Exception:
+                pass
+        try:
+            page.wait_for_selector("table tbody tr", timeout=10000)
+            break
+        except Exception:
+            if attempt == 1:
+                raise RuntimeError("Could not switch league page to table view after retrying")
+            page.wait_for_timeout(500)
     
     all_rows = []
     rows = page.locator("table tbody tr").all()

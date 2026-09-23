@@ -192,9 +192,21 @@ def get_league_standings(page):
                 raise RuntimeError("Could not switch league page to table view after retrying")
             page.wait_for_timeout(500)
     
+    # Rows render progressively; the wait above returns on the first one, so
+    # snapshotting immediately can silently drop rivals. Wait for the count
+    # to stop changing.
+    rows_locator = page.locator("table tbody tr")
+    last_count = -1
+    for _ in range(20):
+        count = rows_locator.count()
+        if count == last_count:
+            break
+        last_count = count
+        page.wait_for_timeout(500)
+
     all_rows = []
-    rows = page.locator("table tbody tr").all()
-    
+    rows = rows_locator.all()
+
     for row in rows:
         try:
             # Extract position
@@ -1349,7 +1361,7 @@ TEAM_NAME_ALIASES = {
 
 _DATE_TOKEN_RE = re.compile(
     r"^(Ara mateix|Avui|Ahir|Demà"
-    r"|Fa \d+ \S+"
+    r"|[Ff]a (\d+|una?) \S+"
     r"|\d{1,2} d['’]?e?\.?\s?\S+\.?(\s\d{4})?)$"
 )
 # A bare integer, standing alone with no unit/currency/word attached, is a
@@ -1369,6 +1381,7 @@ _DATE_TOKEN_RE = re.compile(
 # transfer, scraped once with a trailing '-2' and once with '0', produced
 # two distinct identities and was double-counted in realized_trades.
 _BARE_INT_RE = re.compile(r"^-?\d+$")
+_POSITION_TOKENS = {"PT", "DF", "MC", "DV", "E", "DL", "F", "/", ""}
 
 def _post_identity(post_data):
     """A stable identity for a scraped post, for deduplication across
@@ -1418,7 +1431,27 @@ def _post_identity(post_data):
     # touches at once, not just the one that happened to be caught live.
     for old_name, canonical in TEAM_NAME_ALIASES.items():
         stable = [x.replace(old_name, canonical) if isinstance(x, str) else x for x in stable]
-    return json.dumps(stable, ensure_ascii=False)
+    # FOURTH volatile field: on 2026-09-22 Biwenger changed how a player row
+    # renders inside a post. Before: "Yeremay","DV","/","MC","Yeremay",
+    # "Fitxat per"; after: "DV","/","MC","Yeremay","Fitxat per" (name no
+    # longer repeated, position badges moved). Every already-saved post
+    # stopped matching its own re-scrape, so the scroll never "caught up"
+    # and walked the whole feed back to 2024 (600+ "new" posts per run,
+    # which also duplicated them in the ledger and made the league page
+    # fail to load afterwards). Position badges and repeated tokens carry
+    # no transaction content, so drop them: the identity is now the ordered
+    # first occurrence of every other token, identical under both layouts.
+    seen_tokens = set()
+    canonical_tokens = []
+    for x in stable:
+        if isinstance(x, str) and x.strip() in _POSITION_TOKENS:
+            continue
+        key = x.strip() if isinstance(x, str) else x
+        if key in seen_tokens:
+            continue
+        seen_tokens.add(key)
+        canonical_tokens.append(x)
+    return json.dumps(canonical_tokens, ensure_ascii=False)
 
 def get_all_posts(page, max_scrolls=300, initial_wait=3, load_timeout_ms=6000,
                    stale_limit=3, checkpoint_every=5, stop_when_contains="Inici de joc"):
@@ -1501,6 +1534,9 @@ def get_all_posts(page, max_scrolls=300, initial_wait=3, load_timeout_ms=6000,
             post_id = _post_identity(post_data)
             if post_id in existing_ids:
                 already_known_this_round += 1
+                if stop_when_contains and any(stop_when_contains in str(x) for x in post_data):
+                    hit_stop_marker = True
+                    break
                 continue
             if post_id not in seen:
                 seen.add(post_id)

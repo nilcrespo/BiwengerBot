@@ -1,18 +1,16 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-RaiFC,Raifc,Goalkeeper,Celta,Radu,38,0,3700000,20000.0,Fit,7,5.4,23,5.8,15,5.0
-RaiFC,Raifc,Defender,Athletic,Laporte,27,0,5790000,30000.0,Fit,6,4.5,21,5.3,6,3.0
-RaiFC,Raifc,Defender,Betis,Fran Garcia,24,0,4780000,-50000.0,Fit,6,4.0,11,5.5,13,3.3
-RaiFC,Raifc,Defender,Levante,Manu Sanchez,19,0,1800000,-10000.0,Fit,6,3.2,6,3.0,13,3.3
-RaiFC,Raifc,Defender,Athletic,Areso,16,0,2070000,50000.0,Fit,5,3.2,10,2.5,6,6.0
-RaiFC,Raifc,Midfielder,Villarreal,Pape Gueye,50,0,8020000,20000.0,Fit,7,7.1,10,3.3,40,10.0
-RaiFC,Raifc,Midfielder,Alaves,Pablo Ibanez,30,0,2470000,-10000.0,Fit,7,4.3,19,4.8,11,3.7
-RaiFC,Raifc,Midfielder,Sevilla,Guridi,24,0,2270000,-20000.0,Fit,7,3.4,15,3.8,9,3.0
-RaiFC,Raifc,Midfielder/Forward,Alaves,Alena,13,0,690000,-10000.0,Fit,6,2.2,5,1.7,8,2.7
-RaiFC,Raifc,Forward,Racing,Zabiri,54,0,5540000,100000.0,One yellow card away from suspension,7,7.7,40,13.3,14,3.5
-RaiFC,Raifc,Forward/Midfielder,Betis,Antony,38,0,10030000,-100000.0,Fit,7,5.4,21,7.0,17,4.3
-RaiFC,Raifc,Forward/Midfielder,Rayo Vallecano,Alvaro Garcia,37,0,4000000,20000.0,Fit,7,5.3,21,7.0,16,4.0
-RaiFC,Raifc,Forward,Betis,Cucho,33,0,5510000,40000.0,Fit,7,4.7,10,3.3,23,5.8
-RaiFC,Raifc,Forward,Real Madrid,Vinicius Jr,29,0,15090000,-130000.0,Fit,7,4.1,22,7.3,7,1.8
-RaiFC,Raifc,Forward/Midfielder,Rayo Vallecano,Tsitaishvili,12,0,830000,-30000.0,Fit,4,3.0,6,3.0,6,3.0
-RaiFC,Raifc,Forward/Midfielder,Espanyol,Puado,0,36,930000,190000.0,Doubtful. Anterior cruciate ligament tear.,0,0.0,0,0.0,0,0.0
-RaiFC,Raifc,Coach,Villarreal,Inigo Perez,8,0,1650000,-10000.0,Fit,7,1.1,3,1.0,5,1.3
+RaiFC,Raifc,Goalkeeper,Celta,Radu,38,0,3710000,10000.0,Fit,7,5.4,23,5.8,15,5.0
+RaiFC,Raifc,Defender,Athletic,Laporte,27,0,5810000,20000.0,Fit,6,4.5,21,5.3,6,3.0
+RaiFC,Raifc,Defender,Betis,Fran Garcia,24,0,4720000,-60000.0,Fit,6,4.0,11,5.5,13,3.3
+RaiFC,Raifc,Defender,Athletic,Areso,16,0,2120000,50000.0,Fit,5,3.2,10,2.5,6,6.0
+RaiFC,Raifc,Midfielder,Villarreal,Pape Gueye,50,0,8040000,20000.0,Fit,7,7.1,10,3.3,40,10.0
+RaiFC,Raifc,Midfielder,Alaves,Pablo Ibanez,30,0,2450000,-20000.0,Fit,7,4.3,19,4.8,11,3.7
+RaiFC,Raifc,Midfielder,Sevilla,Guridi,24,0,2240000,-30000.0,Fit,7,3.4,15,3.8,9,3.0
+RaiFC,Raifc,Midfielder/Forward,Alaves,Alena,13,0,680000,-10000.0,Fit,6,2.2,5,1.7,8,2.7
+RaiFC,Raifc,Forward,Racing,Zabiri,54,0,5630000,90000.0,One yellow card away from suspension,7,7.7,40,13.3,14,3.5
+RaiFC,Raifc,Forward/Midfielder,Betis,Antony,38,0,9920000,-110000.0,Fit,7,5.4,21,7.0,17,4.3
+RaiFC,Raifc,Forward/Midfielder,Rayo Vallecano,Alvaro Garcia,37,0,4020000,20000.0,Fit,7,5.3,21,7.0,16,4.0
+RaiFC,Raifc,Forward,Betis,Cucho,33,0,5550000,40000.0,Fit,7,4.7,10,3.3,23,5.8
+RaiFC,Raifc,Forward,Real Madrid,Vinicius Jr,29,0,14960000,-130000.0,Fit,7,4.1,22,7.3,7,1.8
+RaiFC,Raifc,Forward/Midfielder,Espanyol,Puado,0,36,1150000,220000.0,Doubtful. Anterior cruciate ligament tear.,0,0.0,0,0.0,0,0.0
+RaiFC,Raifc,Coach,Villarreal,Inigo Perez,8,0,1640000,-10000.0,Fit,7,1.1,3,1.0,5,1.3

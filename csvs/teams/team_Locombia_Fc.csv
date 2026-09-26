@@ -1,22 +1,22 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Locombia FC,Locombia_Fc,Goalkeeper,Betis,Alvaro Valles,58,0,5910000,80000.0,Fit,7,8.3,26,8.7,32,8.0
+Locombia FC,Locombia_Fc,Goalkeeper,Betis,Alvaro Valles,58,0,5990000,80000.0,Fit,7,8.3,26,8.7,32,8.0
 Locombia FC,Locombia_Fc,Goalkeeper,Betis,Diego Conde,0,0,240000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Locombia_Fc,Defender/Midfielder,Celta,Carreira,30,0,2920000,20000.0,Fit,7,4.3,20,5.0,10,3.3
-Locombia FC,Locombia_Fc,Defender,Atletico,Cristian Romero,27,0,5700000,70000.0,Fit,4,6.8,16,8.0,11,5.5
-Locombia FC,Locombia_Fc,Defender,Rayo Vallecano,Ratiu,22,0,3740000,10000.0,Fit,6,3.7,17,5.7,5,1.7
-Locombia FC,Locombia_Fc,Defender,Athletic,Yuri,14,0,2960000,40000.0,Fit,5,2.8,8,2.0,6,6.0
+Locombia FC,Locombia_Fc,Defender/Midfielder,Celta,Carreira,30,0,2930000,10000.0,Fit,7,4.3,20,5.0,10,3.3
+Locombia FC,Locombia_Fc,Defender,Atletico,Cristian Romero,27,0,5770000,70000.0,Fit,4,6.8,16,8.0,11,5.5
+Locombia FC,Locombia_Fc,Defender,Rayo Vallecano,Ratiu,22,0,3750000,10000.0,Fit,6,3.7,17,5.7,5,1.7
+Locombia FC,Locombia_Fc,Defender,Athletic,Yuri,14,0,2990000,30000.0,Fit,5,2.8,8,2.0,6,6.0
 Locombia FC,Locombia_Fc,Defender,Villarreal,Foyth,14,0,2620000,0.0,Fit,3,4.7,0,0.0,14,4.7
-Locombia FC,Locombia_Fc,Defender,Real Madrid,Militão,0,104,2160000,170000.0,Doubtful. Muscle injury in the biceps femoris of his left leg.,0,0.0,0,0.0,0,0.0
+Locombia FC,Locombia_Fc,Defender,Real Madrid,Militão,0,104,2330000,170000.0,Doubtful. Muscle injury in the biceps femoris of his left leg.,0,0.0,0,0.0,0,0.0
 Locombia FC,Locombia_Fc,Defender,Valencia,Foulquier,0,26,150000,0.0,Injured. Muscle injury. Estimated return: Indefinite return.,0,0.0,0,0.0,0,0.0
-Locombia FC,Locombia_Fc,Midfielder,Real Madrid,Bellingham,65,0,19100000,60000.0,Fit,7,9.3,40,13.3,25,6.3
-Locombia FC,Locombia_Fc,Midfielder/Forward,Atletico,Kang-In Lee,49,0,9480000,80000.0,Fit,7,7.0,38,9.5,11,3.7
-Locombia FC,Locombia_Fc,Midfielder/Forward,Villarreal,Moleiro,48,0,7570000,130000.0,Fit,7,6.9,24,8.0,24,6.0
-Locombia FC,Locombia_Fc,Midfielder/Forward,Real Sociedad,Luka Sucic,43,0,4180000,60000.0,Fit,7,6.1,9,3.0,34,8.5
-Locombia FC,Locombia_Fc,Midfielder,Athletic,De Galarreta,23,0,3010000,10000.0,Fit,5,4.6,14,3.5,9,9.0
+Locombia FC,Locombia_Fc,Midfielder,Real Madrid,Bellingham,65,0,19160000,60000.0,Fit,7,9.3,40,13.3,25,6.3
+Locombia FC,Locombia_Fc,Midfielder/Forward,Atletico,Kang-In Lee,49,0,9540000,60000.0,Fit,7,7.0,38,9.5,11,3.7
+Locombia FC,Locombia_Fc,Midfielder/Forward,Villarreal,Moleiro,48,0,7690000,120000.0,Fit,7,6.9,24,8.0,24,6.0
+Locombia FC,Locombia_Fc,Midfielder/Forward,Real Sociedad,Luka Sucic,43,0,4240000,60000.0,Fit,7,6.1,9,3.0,34,8.5
+Locombia FC,Locombia_Fc,Midfielder,Athletic,De Galarreta,23,0,3020000,10000.0,Fit,5,4.6,14,3.5,9,9.0
 Locombia FC,Locombia_Fc,Midfielder,Barcelona,De Jong,0,133,590000,0.0,Injured. Tear of the medial collateral ligament in the right knee. Estimated return: Mid-November.,0,0.0,0,0.0,0,0.0
 Locombia FC,Locombia_Fc,Midfielder,Barcelona,Farinas,0,0,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Locombia_Fc,Forward,Alaves,Boye,44,0,5110000,30000.0,Fit,6,7.3,35,11.7,9,3.0
-Locombia FC,Locombia_Fc,Forward,Villarreal,Gerard Moreno,32,0,6410000,-220000.0,Fit,6,5.3,20,6.7,12,4.0
-Locombia FC,Locombia_Fc,Forward/Defender/Midfielder,Valencia,Rioja,19,0,1690000,50000.0,Fit,4,4.8,8,4.0,11,5.5
+Locombia FC,Locombia_Fc,Forward,Alaves,Boye,44,0,5130000,20000.0,Fit,6,7.3,35,11.7,9,3.0
+Locombia FC,Locombia_Fc,Forward,Villarreal,Gerard Moreno,32,0,6290000,-120000.0,Fit,6,5.3,20,6.7,12,4.0
+Locombia FC,Locombia_Fc,Forward/Defender/Midfielder,Valencia,Rioja,19,0,1740000,50000.0,Fit,4,4.8,8,4.0,11,5.5
 Locombia FC,Locombia_Fc,Forward,Real Madrid,Rodrygo,0,67,570000,0.0,Injured. Torn anterior cruciate ligament and torn outer meniscus in the right leg. Estimated return: Mid-November.,0,0.0,0,0.0,0,0.0
-Locombia FC,Locombia_Fc,Coach,Betis,Pellegrini,16,0,2410000,10000.0,Fit,7,2.3,9,3.0,7,1.8
+Locombia FC,Locombia_Fc,Coach,Betis,Pellegrini,16,0,2420000,10000.0,Fit,7,2.3,9,3.0,7,1.8

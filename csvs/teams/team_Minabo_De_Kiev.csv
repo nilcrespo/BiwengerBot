@@ -1,18 +1,18 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Getafe,David Soria,49,0,5740000,20000.0,Fit,7,7.0,28,7.0,21,7.0
+Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Getafe,David Soria,49,0,5760000,20000.0,Fit,7,7.0,28,7.0,21,7.0
 Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Celta,Ivan Villar,0,0,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Defender/Midfielder,Alaves,Tenaglia,42,0,5110000,-50000.0,Fit,7,6.0,30,7.5,12,4.0
-Minabo de Kiev,Minabo_De_Kiev,Defender,Atletico,Pubill,32,0,5550000,-50000.0,Fit,6,5.3,21,7.0,11,3.7
-Minabo de Kiev,Minabo_De_Kiev,Defender,Racing,Mantilla,11,0,1080000,-10000.0,Fit,6,1.8,9,3.0,2,0.7
-Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Barcelona,Fermin,59,0,15780000,20000.0,Fit,6,9.8,17,8.5,42,10.5
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Barcelona,Marc Bernal,30,0,4180000,-50000.0,Fit,7,4.3,17,5.7,13,3.3
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Levante,Bardeli,28,0,2080000,-30000.0,Fit,6,4.7,17,8.5,11,2.8
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Atletico,Barrios,26,0,6410000,10000.0,Doubtful. Mild myofascial injury.,4,6.5,12,6.0,14,7.0
-Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Real Sociedad,Kubo,16,0,3630000,-70000.0,Fit,5,3.2,8,2.7,8,4.0
+Minabo de Kiev,Minabo_De_Kiev,Defender/Midfielder,Alaves,Tenaglia,42,0,5050000,-60000.0,Fit,7,6.0,30,7.5,12,4.0
+Minabo de Kiev,Minabo_De_Kiev,Defender,Atletico,Pubill,32,0,5520000,-30000.0,Fit,6,5.3,21,7.0,11,3.7
+Minabo de Kiev,Minabo_De_Kiev,Defender,Racing,Mantilla,11,0,1070000,-10000.0,Fit,6,1.8,9,3.0,2,0.7
+Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Barcelona,Fermin,59,0,15800000,20000.0,Fit,6,9.8,17,8.5,42,10.5
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Barcelona,Marc Bernal,30,0,4140000,-40000.0,Fit,7,4.3,17,5.7,13,3.3
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Levante,Bardeli,28,0,2060000,-20000.0,Fit,6,4.7,17,8.5,11,2.8
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Atletico,Barrios,26,0,6430000,20000.0,Doubtful. Mild myofascial injury.,4,6.5,12,6.0,14,7.0
+Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Real Sociedad,Kubo,16,0,3580000,-50000.0,Fit,5,3.2,8,2.7,8,4.0
 Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Osasuna,Moi Gomez,15,0,890000,0.0,Doubtful. Minor injury to the biceps femoris muscle in the left leg.,4,3.8,7,3.5,8,4.0
-Minabo de Kiev,Minabo_De_Kiev,Forward,Athletic,Nico Williams,36,0,9020000,70000.0,Fit,6,6.0,32,8.0,4,2.0
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Getafe,Satriano,28,0,3180000,-20000.0,Fit,7,4.0,23,5.8,5,1.7
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Deportivo,Yeremay,21,0,5210000,-40000.0,Fit,6,3.5,9,3.0,12,4.0
-Minabo de Kiev,Minabo_De_Kiev,Forward,Valencia,Hugo Duro,17,0,1800000,-10000.0,Fit,7,2.4,9,2.3,8,2.7
-Minabo de Kiev,Minabo_De_Kiev,Forward,Racing,Villalibre,14,0,1320000,-20000.0,Fit,6,2.3,8,2.7,6,2.0
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Rayo Vallecano,De Frutos,13,0,3500000,-30000.0,Fit,5,2.6,4,2.0,9,3.0
+Minabo de Kiev,Minabo_De_Kiev,Forward,Athletic,Nico Williams,36,0,9100000,80000.0,Fit,6,6.0,32,8.0,4,2.0
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Getafe,Satriano,28,0,3160000,-20000.0,Fit,7,4.0,23,5.8,5,1.7
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Deportivo,Yeremay,21,0,5180000,-30000.0,Fit,6,3.5,9,3.0,12,4.0
+Minabo de Kiev,Minabo_De_Kiev,Forward,Valencia,Hugo Duro,17,0,1790000,-10000.0,Fit,7,2.4,9,2.3,8,2.7
+Minabo de Kiev,Minabo_De_Kiev,Forward,Racing,Villalibre,14,0,1300000,-20000.0,Fit,6,2.3,8,2.7,6,2.0
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Rayo Vallecano,De Frutos,13,0,3470000,-30000.0,Fit,5,2.6,4,2.0,9,3.0

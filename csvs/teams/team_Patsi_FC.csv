@@ -1,19 +1,18 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Patsi F.C,Patsi_FC,Goalkeeper,Rayo Vallecano,Audero,11,0,2950000,-50000.0,Fit,3,3.7,4,4.0,7,3.5
-Patsi F.C,Patsi_FC,Defender,Alaves,Koski,31,0,2610000,90000.0,Fit,7,4.4,11,2.8,20,6.7
-Patsi F.C,Patsi_FC,Defender,Sevilla,Castrin,24,0,2180000,0.0,Fit,6,4.0,9,3.0,15,5.0
-Patsi F.C,Patsi_FC,Defender,Sevilla,Kike Salas,19,0,3070000,10000.0,Fit,5,3.8,11,3.7,8,4.0
-Patsi F.C,Patsi_FC,Defender,Deportivo,Ximo Navarro,16,0,1540000,-20000.0,Fit,6,2.7,8,2.7,8,2.7
-Patsi F.C,Patsi_FC,Defender/Midfielder,Villarreal,Carlos Romero,15,0,4230000,-70000.0,Fit,5,3.0,1,1.0,14,3.5
-Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,41,0,4460000,40000.0,Fit,6,6.8,30,7.5,11,5.5
-Patsi F.C,Patsi_FC,Midfielder,Atletico,Koke,39,0,3390000,30000.0,Fit,7,5.6,28,7.0,11,3.7
-Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,35,0,5420000,10000.0,Fit,7,5.0,23,5.8,12,4.0
-Patsi F.C,Patsi_FC,Midfielder,Deportivo,Amatucci,33,0,4470000,-10000.0,Doubtful. Discomfort in the abductor muscle.,6,5.5,18,6.0,15,5.0
-Patsi F.C,Patsi_FC,Midfielder,Racing,Ivan Martin,21,0,3030000,-60000.0,Fit,5,4.2,9,4.5,12,4.0
-Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,12,0,1160000,-10000.0,Injured. Sprain in the right knee. Estimated return: Mid-October.,4,3.0,9,4.5,3,1.5
-Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,28,0,8780000,140000.0,Fit,4,7.0,11,11.0,17,5.7
-Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,24,0,9550000,-40000.0,Fit,7,3.4,12,4.0,12,3.0
-Patsi F.C,Patsi_FC,Forward/Defender/Midfielder,Elche,Tete Morente,24,0,1510000,20000.0,Fit,7,3.4,10,3.3,14,3.5
-Patsi F.C,Patsi_FC,Forward,Betis,Parrott,19,0,5030000,-100000.0,Fit,4,4.8,15,7.5,4,2.0
-Patsi F.C,Patsi_FC,Forward,Atletico,Sørloth,0,148,2880000,-20000.0,Doubtful. Muscle injury.,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Goalkeeper,Rayo Vallecano,Audero,11,0,2910000,-40000.0,Fit,3,3.7,4,4.0,7,3.5
+Patsi F.C,Patsi_FC,Defender,Alaves,Koski,31,0,2690000,80000.0,Fit,7,4.4,11,2.8,20,6.7
+Patsi F.C,Patsi_FC,Defender,Sevilla,Castrin,24,0,2170000,-10000.0,Fit,6,4.0,9,3.0,15,5.0
+Patsi F.C,Patsi_FC,Defender,Sevilla,Kike Salas,19,0,3070000,0.0,Fit,5,3.8,11,3.7,8,4.0
+Patsi F.C,Patsi_FC,Defender/Midfielder,Villarreal,Carlos Romero,15,0,4170000,-60000.0,Fit,5,3.0,1,1.0,14,3.5
+Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,41,0,4500000,40000.0,Fit,6,6.8,30,7.5,11,5.5
+Patsi F.C,Patsi_FC,Midfielder,Atletico,Koke,39,0,3410000,20000.0,Fit,7,5.6,28,7.0,11,3.7
+Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,35,0,5420000,0.0,Fit,7,5.0,23,5.8,12,4.0
+Patsi F.C,Patsi_FC,Midfielder,Deportivo,Amatucci,33,0,4430000,-40000.0,Doubtful. Discomfort in the abductor muscle.,6,5.5,18,6.0,15,5.0
+Patsi F.C,Patsi_FC,Midfielder,Racing,Ivan Martin,21,0,2990000,-40000.0,Fit,5,4.2,9,4.5,12,4.0
+Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,12,0,1150000,-10000.0,Injured. Sprain in the right knee. Estimated return: Mid-October.,4,3.0,9,4.5,3,1.5
+Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,28,0,8920000,140000.0,Fit,4,7.0,11,11.0,17,5.7
+Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,24,0,9530000,-20000.0,Fit,7,3.4,12,4.0,12,3.0
+Patsi F.C,Patsi_FC,Forward/Defender/Midfielder,Elche,Tete Morente,24,0,1530000,20000.0,Fit,7,3.4,10,3.3,14,3.5
+Patsi F.C,Patsi_FC,Forward,Betis,Parrott,19,0,4960000,-70000.0,Fit,4,4.8,15,7.5,4,2.0
+Patsi F.C,Patsi_FC,Forward,Atletico,Sørloth,0,148,2860000,-20000.0,Doubtful. Muscle injury.,0,0.0,0,0.0,0,0.0
 Patsi F.C,Patsi_FC,Forward,Rayo Vallecano,De Tomas,0,0,210000,0.0,Fit,0,0.0,0,0.0,0,0.0

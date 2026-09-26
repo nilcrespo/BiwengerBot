@@ -1,21 +1,21 @@
 position,club,name,price,change,status,owner,last_sale,recent_pts,this_season_pts,last_season_pts,scraped_at
-Forward,Getafe,Juanmi,150000,0.0,,Free Agent,"150,000",0,0,22,2026-09-25
-Midfielder,Alaves,Antonio Blanco,3230000,-50000.0,,Free Agent,"3,230,000",18,23,0,2026-09-25
-Defender,Elche,Chust,1730000,-20000.0,,Free Agent,"1,730,000",15,21,0,2026-09-25
-Defender,Malaga,Galilea,1080000,-20000.0,,Free Agent,"1,080,000",9,15,0,2026-09-25
-Forward/Midfielder,Racing,Andres Martin,3190000,-10000.0,,Free Agent,"3,190,000",5,15,0,2026-09-25
-Goalkeeper,Barcelona,Joan Garcia,8020000,-50000.0,,Free Agent,"8,020,000",22,33,0,2026-09-25
-Midfielder/Defender,Levante,Victor Garcia,790000,0.0,,Free Agent,"790,000",14,16,0,2026-09-25
-Midfielder/Forward,Atletico,Baena,10990000,50000.0,,Free Agent,"10,990,000",43,56,0,2026-09-25
-Forward/Midfielder,Deportivo,Adama Traore,2620000,-30000.0,,Free Agent,"2,620,000",11,11,0,2026-09-25
-Defender,Osasuna,Herrando,330000,-10000.0,,Free Agent,"330,000",5,10,0,2026-09-25
-Midfielder/Defender,Alaves,Benavidez,150000,0.0,,Free Agent,"150,000",9,9,0,2026-09-25
-Defender,Osasuna,Boyomo,1570000,-20000.0,,Free Agent,"1,570,000",4,4,0,2026-09-25
-Defender,Rayo Vallecano,Kumbulla,430000,-10000.0,,Free Agent,"430,000",0,0,20,2026-09-25
-Forward,Barcelona,Roony,300000,0.0,,Free Agent,"300,000",0,0,66,2026-09-25
-Defender,Malaga,Rafita,2430000,30000.0,,Free Agent,"2,430,000",20,30,0,2026-09-25
-Defender,Racing,Facundo Gonzalez,1120000,-20000.0,,Free Agent,"1,120,000",6,11,0,2026-09-25
-Forward/Midfielder,Malaga,Larrubia,4270000,-30000.0,,Free Agent,"4,270,000",21,27,0,2026-09-25
-Defender,Atletico,Jorge Dominguez,180000,0.0,,Free Agent,"180,000",0,3,0,2026-09-25
-Defender,Real Madrid,Dumfries,4270000,-80000.0,,Free Agent,"4,270,000",10,18,0,2026-09-25
-Midfielder,Racing,Prati,760000,-10000.0,,Free Agent,"760,000",9,9,0,2026-09-25
+Defender,Betis,Bartra,4090000,-50000.0,,Free Agent,"4,090,000",28,33,0,2026-09-26
+Coach,Getafe,Bordalas,1000000,-10000.0,,Free Agent,"1,000,000",5,8,0,2026-09-26
+Midfielder/Defender/Forward,Elche,German Valera,4850000,30000.0,,Free Agent,"4,850,000",28,33,0,2026-09-26
+Forward/Midfielder,Sevilla,Alfon Gonzalez,170000,0.0,,Free Agent,"170,000",4,4,0,2026-09-26
+Forward/Midfielder,Villarreal,Akhomach,2130000,250000.0,,Free Agent,"2,130,000",19,23,0,2026-09-26
+Defender,Rayo Vallecano,Luiz Felipe,150000,0.0,,Free Agent,"150,000",0,0,29,2026-09-26
+Forward/Midfielder,Valencia,Sergi Canos,150000,0.0,,Free Agent,"150,000",0,0,0,2026-09-26
+Defender,Racing,Pedro Felipe,380000,0.0,,Free Agent,"380,000",-3,1,0,2026-09-26
+Forward,Alaves,Toni Martinez,2940000,-30000.0,,Free Agent,"2,940,000",13,17,0,2026-09-26
+Forward,Levante,Musuayi,580000,-10000.0,,Free Agent,"580,000",5,5,0,2026-09-26
+Midfielder,Real Sociedad,Gorrotxategi,1020000,10000.0,,Free Agent,"1,020,000",11,11,0,2026-09-26
+Midfielder,Elche,Neto,430000,0.0,,Free Agent,"430,000",2,6,0,2026-09-26
+Midfielder/Forward,Elche,Diangana,190000,0.0,,Free Agent,"190,000",0,0,54,2026-09-26
+Defender/Midfielder,Elche,Sangare,1370000,-10000.0,,Free Agent,"1,370,000",20,20,0,2026-09-26
+Forward/Midfielder,Malaga,Larrubia,4240000,-30000.0,,Free Agent,"4,240,000",21,27,0,2026-09-26
+Forward/Midfielder,Malaga,Haitam,170000,0.0,,Free Agent,"170,000",2,7,0,2026-09-26
+Defender,Deportivo,Angelino,1260000,-10000.0,,Free Agent,"1,260,000",-6,6,0,2026-09-26
+Midfielder,Elche,Buonanotte,1260000,-20000.0,,Free Agent,"1,260,000",14,18,0,2026-09-26
+Defender,Espanyol,Drkusic,990000,-10000.0,,Free Agent,"990,000",4,7,0,2026-09-26
+Midfielder,Racing,Prati,750000,-10000.0,,Free Agent,"750,000",9,9,0,2026-09-26

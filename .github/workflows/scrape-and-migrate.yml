@@ -53,6 +53,17 @@ jobs:
         run: |
           python scraper/scraper.py
 
+      - name: Upload debug snapshots
+        # dump_debug() writes a screenshot + HTML here when a table-view
+        # toggle fails, so a broken run shows what the page looked like.
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scraper-debug
+          path: debug/
+          if-no-files-found: ignore
+          retention-days: 14
+
       - name: Run migration
         run: |
           python migration.py

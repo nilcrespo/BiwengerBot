@@ -16,3 +16,4 @@ venv/
 # Action and deployed straight to GitHub Pages as a build artifact, not
 # committed to git.
 docs/
+debug/

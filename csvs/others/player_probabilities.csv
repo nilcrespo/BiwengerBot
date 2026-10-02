@@ -31,12 +31,11 @@ Athletic,Inigo Ruiz De Galarreta,70%
 Athletic,Benat Gerenabarrena,50%
 Athletic,Oihan Sancet,90%
 Athletic,Robert Navarro,70%
-Athletic,Nico Williams,90%
+Athletic,Alex Berenguer,70%
 Athletic,Inaki Williams,70%
 Athletic,Aitor Paredes,50%
 Athletic,Mikel Jauregizar,40%
 Athletic,Peio Canales,40%
-Athletic,Alex Berenguer,40%
 Athletic,Johaneko Louis-Jean,30%
 Athletic,Hugo Rincon,20%
 Athletic,Dani Vivian,20%
@@ -47,6 +46,7 @@ Athletic,Maroan Sannadi,10%
 Athletic,Alex Padilla,5%
 Athletic,Nico Serrano,0%
 Athletic,Unai Egiluz,0%
+Athletic,Nico Williams,0%
 Athletic,Alvaro Djalo,0%
 Atletico,Jan Oblak,95%
 Atletico,Cristian Romero,70%
@@ -78,10 +78,10 @@ Barcelona,Joao Cancelo,50%
 Barcelona,Pedri Gonzalez,80%
 Barcelona,Rodri Hernandez,80%
 Barcelona,Fermin Lopez,50%
-Barcelona,Lamine Yamal,95%
+Barcelona,Lamine Yamal,90%
 Barcelona,Karim Adeyemi,50%
-Barcelona,Raphinha,50%
 Barcelona,Gabriel Jesus,50%
+Barcelona,Raphinha,50%
 Barcelona,Xavi Espart,50%
 Barcelona,Dani Olmo,50%
 Barcelona,Anthony Gordon,50%
@@ -125,7 +125,7 @@ Betis,Jose Antonio Morante,0%
 Betis,Manu Gonzalez,0%
 Celta,Ionut Radu,95%
 Celta,Yoel Lago,50%
-Celta,Sebastian Caceres,50%
+Celta,Javi Rodriguez,50%
 Celta,Marcos Alonso,80%
 Celta,Javi Rueda,70%
 Celta,Hugo Alvarez,50%
@@ -136,7 +136,7 @@ Celta,Williot Swedberg,50%
 Celta,Ferran Jutgla,70%
 Celta,Sergio Carreira,50%
 Celta,Carl Starfelt,50%
-Celta,Javi Rodriguez,50%
+Celta,Sebastian Caceres,50%
 Celta,Hugo Burcio,30%
 Celta,Couhaib Driouech,30%
 Celta,Javi Galan,30%
@@ -298,24 +298,23 @@ Rayo Vallecano,Rayane Belaid,10%
 Rayo Vallecano,Randy Nteka,10%
 Rayo Vallecano,Alemão,10%
 Rayo Vallecano,Pelayo Fernandez,5%
+Rayo Vallecano,Jozhua Vertrouwd,0%
 Rayo Vallecano,Raul De Tomas,0%
 Rayo Vallecano,Luiz Felipe,0%
-Rayo Vallecano,Jozhua Vertrouwd,0%
 Rayo Vallecano,Augusto Batalla,0%
 Real Madrid,Thibaut Courtois,95%
-Real Madrid,Ibrahima Konate,60%
+Real Madrid,Ibrahima Konate,70%
 Real Madrid,Antonio Rudiger,90%
 Real Madrid,Denzel Dumfries,70%
 Real Madrid,Marc Cucurella,70%
-Real Madrid,Bernardo Silva,60%
 Real Madrid,Aurelien Tchouameni,70%
+Real Madrid,Bernardo Silva,60%
 Real Madrid,Jude Bellingham,80%
-Real Madrid,Arda Guler,60%
-Real Madrid,Vinicius Junior,60%
-Real Madrid,Kylian Mbappe,50%
-Real Madrid,Carlos Espi,50%
-Real Madrid,Raul Asencio,50%
+Real Madrid,Arda Guler,70%
 Real Madrid,Yan Diomande,50%
+Real Madrid,Vinicius Junior,70%
+Real Madrid,Carlos Espi,50%
+Real Madrid,Kylian Mbappe,50%
 Real Madrid,Brahim Diaz,40%
 Real Madrid,Eduardo Camavinga,30%
 Real Madrid,Alvaro F. Carreras,30%
@@ -325,6 +324,7 @@ Real Madrid,Andriy Lunin,5%
 Real Madrid,Eder Militão,0%
 Real Madrid,Ferland Mendy,0%
 Real Madrid,Dean Huijsen,0%
+Real Madrid,Raul Asencio,0%
 Real Madrid,Thiago Pitarch,0%
 Real Madrid,Rodrygo Goes,0%
 Real Madrid,Federico Valverde,0%
@@ -351,9 +351,9 @@ Real Sociedad,Unai Marrero,20%
 Real Sociedad,Arsen Zakharyan,0%
 Real Sociedad,Pablo Marin,0%
 Real Sociedad,Jon Pacheco,0%
+Real Sociedad,Alex Marchal,0%
 Real Sociedad,Orri Steinn Oskarsson,0%
 Real Sociedad,Alvaro Odriozola,0%
-Real Sociedad,Alex Marchal,0%
 Sevilla,Odysseas Vlachodimos,95%
 Sevilla,Andres Castrin,50%
 Sevilla,Kike Salas,90%
@@ -382,30 +382,30 @@ Sevilla,Marcão,0%
 Sevilla,Fabio Cardoso,0%
 Valencia,Stole Dimitrievski,95%
 Valencia,Pepelu,50%
-Valencia,Arnau Martinez,50%
 Valencia,Justin De Haas,70%
-Valencia,Pablo Maffeo,70%
-Valencia,Jose Gaya,80%
-Valencia,Aaron Ndive Mayol,70%
+Valencia,Pablo Maffeo,60%
+Valencia,Jose Gaya,70%
+Valencia,Aaron Ndive Mayol,50%
 Valencia,Guido Rodriguez,80%
 Valencia,Javi Guerra,80%
-Valencia,Hugo Duro,60%
+Valencia,Ryunosuke Sato,50%
 Valencia,Arnaut Danjuma,50%
+Valencia,Hugo Duro,60%
+Valencia,Arnau Martinez,50%
 Valencia,Filip Ugrinic,50%
-Valencia,Luis Rioja,50%
 Valencia,David Otorbi,50%
-Valencia,Ryunosuke Sato,30%
+Valencia,Luis Rioja,40%
 Valencia,Harvey Elliott,30%
 Valencia,Aimar Blazquez,30%
 Valencia,Aliou Dieng,30%
+Valencia,Jesus Vazquez,30%
 Valencia,Iker Cordoba,30%
-Valencia,Cesar Tarrega,30%
-Valencia,Jesus Vazquez,20%
+Valencia,Cesar Tarrega,20%
 Valencia,Daniel Raba,20%
+Valencia,Mouctar Diakhaby,10%
 Valencia,Kayne Van Oevelen,5%
 Valencia,Dimitri Foulquier,0%
 Valencia,Jose Manuel Copete,0%
-Valencia,Mouctar Diakhaby,0%
 Valencia,Cristian Rivero,0%
 Valencia,Sergi Canos,0%
 Valencia,Umar Sadiq,0%
@@ -456,8 +456,8 @@ Racing,Juan Carlos Arana,10%
 Racing,Giorgi Guliashvili,10%
 Racing,Asier Villalibre,10%
 Racing,Simon Eriksson,5%
-Racing,Laro Gomez,0%
 Racing,Andres Martin,0%
+Racing,Laro Gomez,0%
 Deportivo,Leo Roman,95%
 Deportivo,Lucas Noubi,50%
 Deportivo,Jose Maria Gimenez,90%

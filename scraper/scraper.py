@@ -37,6 +37,49 @@ DESKTOP_CHROME_UA = (
 # ca-ES locale/Accept-Language we set, so match either.
 TABLE_VIEW_LABEL = re.compile(r"Taula|Table", re.I)
 
+# The grid/table toggle lives in a `.layout-selector` block at the bottom
+# of the list, and the league page now pins a scroll-bottom-sheet over
+# the lower edge of the viewport that covers it (confirmed at 1280x720).
+# Locally Playwright still gets the click through by re-scrolling, but
+# the 2026-10-01/02 CI runs failed to switch the league page to table
+# view, cause not pinned down. If the normal click doesn't land,
+# dispatching the click event directly skips the actionability check
+# and doesn't depend on the label's language; dump_debug() saves what
+# the page looked like when even that fails.
+TABLE_TOGGLE_SELECTOR = '.layout-selector i.icon-table, i[role="button"][title="Table"], i[role="button"][title="Taula"]'
+
+DEBUG_DIR = "debug"
+
+def click_table_view(page, timeout=3000, dispatch=False):
+    """Switch the current list to table view. Returns True if a toggle was clicked.
+
+    dispatch=True skips the normal click and fires the event directly —
+    used on retries, where the normal click already "succeeded" without
+    switching the view.
+    """
+    if not dispatch:
+        try:
+            page.get_by_role("button", name=TABLE_VIEW_LABEL).last.click(timeout=timeout)
+            return True
+        except Exception:
+            pass
+    try:
+        page.locator(TABLE_TOGGLE_SELECTOR).last.dispatch_event("click", timeout=timeout)
+        return True
+    except Exception:
+        return False
+
+def dump_debug(page, name):
+    """Save a screenshot + HTML of the current page so a CI failure can be inspected."""
+    try:
+        os.makedirs(DEBUG_DIR, exist_ok=True)
+        page.screenshot(path=f"{DEBUG_DIR}/{name}.png", full_page=True)
+        with open(f"{DEBUG_DIR}/{name}.html", "w", encoding="utf-8") as f:
+            f.write(page.content())
+        print(f"Saved debug snapshot to {DEBUG_DIR}/{name}.png/.html")
+    except Exception as e:
+        print(f"Could not save debug snapshot: {e}")
+
 def login(page):
     """Handle login process"""
     page.goto("https://biwenger.as.com/", wait_until="domcontentloaded",)
@@ -177,18 +220,13 @@ def get_league_standings(page):
     # unpack). Raise instead of silently degrading, so a real failure here
     # surfaces as a clear error rather than a confusing unpack crash.
     for attempt, click_timeout in enumerate((3000, 5000)):
-        try:
-            page.get_by_role("button", name=TABLE_VIEW_LABEL).click(timeout=click_timeout)
-        except Exception:
-            try:
-                page.locator('i[role="button"][title="Table"]').click(timeout=click_timeout)
-            except Exception:
-                pass
+        click_table_view(page, timeout=click_timeout, dispatch=(attempt == 1))
         try:
             page.wait_for_selector("table tbody tr", timeout=10000)
             break
         except Exception:
             if attempt == 1:
+                dump_debug(page, "league_table_view")
                 raise RuntimeError("Could not switch league page to table view after retrying")
             page.wait_for_timeout(500)
     
@@ -276,15 +314,13 @@ def extract_team_players(page, team_name: str) -> pd.DataFrame:
     # view in time), so retry once with a longer wait rather than trusting
     # a single attempt.
     for attempt, click_timeout in enumerate((3000, 5000)):
-        try:
-            page.get_by_role("button", name=TABLE_VIEW_LABEL).click(timeout=click_timeout)
-        except Exception:
-            pass
+        click_table_view(page, timeout=click_timeout, dispatch=(attempt == 1))
         try:
             page.wait_for_selector("table.table.no-swipe", timeout=5000)
             break
         except Exception:
             if attempt == 1:
+                dump_debug(page, f"team_table_view_{re.sub(r'[^A-Za-z0-9]+', '_', team_name)}")
                 raise
             page.wait_for_timeout(500)
     
@@ -398,14 +434,10 @@ def get_rival_teams(page) -> List[Dict]:
     
     team_elements = page.locator("user-card").all()
     # Switch to table view
-    try:
-        page.get_by_role("button", name=TABLE_VIEW_LABEL).click(timeout=3000)
-    except:
-        try:
-            page.locator('i[role="button"][title="Table"]').click(timeout=3000)
-        except Exception as e:
-            print(f"Could not switch to table view: {e}")
-            return pd.DataFrame()
+    if not click_table_view(page):
+        print("Could not switch to table view")
+        dump_debug(page, "rival_teams_table_view")
+        return pd.DataFrame()
     # Wait for the table to be visible and stable
     table = wait_for_table_ready(page)
     html = table.evaluate("el => el.outerHTML")
@@ -460,10 +492,7 @@ def get_rival_teams(page) -> List[Dict]:
 def extract_all_players(page) -> pd.DataFrame:
     # Navigate
     page.goto("https://biwenger.as.com/players")
-    try:
-        page.get_by_role("button", name=TABLE_VIEW_LABEL).click()
-    except:
-        page.locator('i[role="button"][title="Table"]').click()
+    click_table_view(page, timeout=5000)
 
     all_rows = []
 
@@ -1218,15 +1247,11 @@ def extract_market_players(page) -> pd.DataFrame:
     page.goto("https://biwenger.as.com/market")
     
     # Switch to table view
-    try:
-        page.get_by_role("button", name=TABLE_VIEW_LABEL).click(timeout=3000)
-    except:
-        try:
-            page.locator('i[role="button"][title="Table"]').click(timeout=3000)
-        except Exception as e:
-            print(f"Could not switch to table view: {e}")
-            return pd.DataFrame()
-    
+    if not click_table_view(page):
+        print("Could not switch to table view")
+        dump_debug(page, "market_table_view")
+        return pd.DataFrame()
+
     # Wait for table to load
     page.wait_for_selector("table tbody tr", timeout=10000)
     

@@ -1,21 +1,23 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-CD Numancia,Cd_Numancia,Goalkeeper,Levante,Ryan,33,0,4260000,-40000.0,Fit,6,5.5,4,2.0,29,7.3
-CD Numancia,Cd_Numancia,Goalkeeper,Osasuna,Aitor Fernandez,10,0,1430000,30000.0,Fit,2,5.0,2,2.0,8,8.0
-CD Numancia,Cd_Numancia,Defender,Barcelona,Gerard Martin,29,0,5160000,0.0,Fit,6,4.8,10,5.0,19,4.8
-CD Numancia,Cd_Numancia,Defender,Deportivo,Gimenez,23,0,3500000,10000.0,Fit,6,3.8,11,3.7,12,4.0
-CD Numancia,Cd_Numancia,Defender,Levante,Toljan,19,0,1080000,10000.0,Fit,6,3.2,5,2.5,14,3.5
-CD Numancia,Cd_Numancia,Defender,Celta,Marcos Alonso,17,0,2790000,-30000.0,Fit,5,3.4,1,0.5,16,5.3
-CD Numancia,Cd_Numancia,Defender/Midfielder,Elche,Revivo,13,0,1720000,0.0,Fit,4,3.3,3,1.5,10,5.0
+CD Numancia,Cd_Numancia,Goalkeeper,Levante,Ryan,33,0,4120000,-40000.0,Fit,6,5.5,4,2.0,29,7.3
+CD Numancia,Cd_Numancia,Goalkeeper,Osasuna,Aitor Fernandez,10,0,1470000,10000.0,Fit,2,5.0,2,2.0,8,8.0
+CD Numancia,Cd_Numancia,Defender,Sevilla,Juan Iglesias,39,0,3510000,0.0,Fit,7,5.6,25,6.3,14,4.7
+CD Numancia,Cd_Numancia,Defender,Barcelona,Gerard Martin,29,0,5110000,-20000.0,Fit,6,4.8,10,5.0,19,4.8
+CD Numancia,Cd_Numancia,Defender,Deportivo,Gimenez,23,0,3500000,-10000.0,Fit,6,3.8,11,3.7,12,4.0
+CD Numancia,Cd_Numancia,Defender,Levante,Toljan,19,0,1110000,10000.0,Fit,6,3.2,5,2.5,14,3.5
+CD Numancia,Cd_Numancia,Defender,Celta,Marcos Alonso,17,0,2700000,-30000.0,Fit,5,3.4,1,0.5,16,5.3
+CD Numancia,Cd_Numancia,Defender/Midfielder,Elche,Revivo,13,0,1600000,-80000.0,Doubtful. Undetermined discomfort.,4,3.3,3,1.5,10,5.0
 CD Numancia,Cd_Numancia,Defender,Malaga,Calero,0,108,850000,0.0,Fit,0,0.0,0,0.0,0,0.0
-CD Numancia,Cd_Numancia,Midfielder,Celta,Miguel Roman,44,0,3970000,-60000.0,Injured. He has a loose joint in his right knee. Estimated return: Mid-November.,7,6.3,31,7.8,13,4.3
-CD Numancia,Cd_Numancia,Midfielder,Sevilla,Fofana,27,0,5260000,50000.0,Fit,4,6.8,20,10.0,7,3.5
-CD Numancia,Cd_Numancia,Midfielder/Forward,Betis,Fornals,19,0,6250000,-70000.0,Fit,6,3.2,8,4.0,11,2.8
-CD Numancia,Cd_Numancia,Midfielder,Deportivo,Villares,18,0,660000,10000.0,Fit,3,6.0,15,7.5,3,3.0
-CD Numancia,Cd_Numancia,Midfielder/Forward,Osasuna,Aimar,9,0,2150000,-10000.0,Fit,3,3.0,8,4.0,1,1.0
-CD Numancia,Cd_Numancia,Forward,Espanyol,Roberto Fernandez,59,0,8470000,90000.0,Fit,7,8.4,25,6.3,34,11.3
-CD Numancia,Cd_Numancia,Forward,Osasuna,Budimir,55,0,12690000,40000.0,Fit,7,7.9,30,7.5,25,8.3
-CD Numancia,Cd_Numancia,Forward/Midfielder,Sevilla,Sierra,45,0,4620000,60000.0,Fit,7,6.4,25,6.3,20,6.7
-CD Numancia,Cd_Numancia,Forward/Midfielder,Racing,Inigo Vicente,40,0,6290000,-70000.0,Fit,7,5.7,27,9.0,13,3.3
-CD Numancia,Cd_Numancia,Forward,Real Madrid,Diomande,31,0,10830000,90000.0,Fit,7,4.4,12,4.0,19,4.8
-CD Numancia,Cd_Numancia,Forward/Midfielder,Valencia,Danjuma,29,0,2640000,40000.0,Fit,7,4.1,16,4.0,13,4.3
-CD Numancia,Cd_Numancia,Forward/Midfielder,Valencia,David Otorbi,21,0,1430000,30000.0,Fit,6,3.5,12,4.0,9,3.0
+CD Numancia,Cd_Numancia,Midfielder,Betis,Deossa,28,0,3170000,40000.0,Fit,7,4.0,11,3.7,17,4.3
+CD Numancia,Cd_Numancia,Midfielder,Sevilla,Fofana,27,0,5370000,30000.0,Fit,4,6.8,20,10.0,7,3.5
+CD Numancia,Cd_Numancia,Midfielder/Forward,Betis,Fornals,19,0,6050000,-60000.0,Fit,6,3.2,8,4.0,11,2.8
+CD Numancia,Cd_Numancia,Midfielder,Deportivo,Villares,18,0,690000,10000.0,Fit,3,6.0,15,7.5,3,3.0
+CD Numancia,Cd_Numancia,Midfielder/Forward,Osasuna,Aimar,9,0,2160000,10000.0,Fit,3,3.0,8,4.0,1,1.0
+CD Numancia,Cd_Numancia,Forward,Espanyol,Roberto Fernandez,59,0,8750000,80000.0,Fit,7,8.4,25,6.3,34,11.3
+CD Numancia,Cd_Numancia,Forward,Osasuna,Budimir,55,0,12840000,40000.0,Fit,7,7.9,30,7.5,25,8.3
+CD Numancia,Cd_Numancia,Forward/Midfielder,Sevilla,Sierra,45,0,4820000,70000.0,Fit,7,6.4,25,6.3,20,6.7
+CD Numancia,Cd_Numancia,Forward/Midfielder,Racing,Inigo Vicente,40,0,6080000,-70000.0,Fit,7,5.7,27,9.0,13,3.3
+CD Numancia,Cd_Numancia,Forward,Real Madrid,Diomande,31,0,11110000,90000.0,Fit,7,4.4,12,4.0,19,4.8
+CD Numancia,Cd_Numancia,Forward/Midfielder,Valencia,Danjuma,29,0,2700000,20000.0,Fit,7,4.1,16,4.0,13,4.3
+CD Numancia,Cd_Numancia,Forward/Midfielder,Celta,Hugo Gonzalez,23,0,2710000,40000.0,Fit,4,5.8,17,5.7,6,6.0
+CD Numancia,Cd_Numancia,Forward/Midfielder,Valencia,David Otorbi,21,0,1460000,0.0,Fit,6,3.5,12,4.0,9,3.0

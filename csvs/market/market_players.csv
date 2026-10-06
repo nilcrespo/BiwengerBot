@@ -1,21 +1,21 @@
 position,club,name,price,change,status,owner,last_sale,recent_pts,this_season_pts,last_season_pts,scraped_at
-Defender,Alaves,Jonny,1990000,-10000.0,,Free Agent,"1,990,000",14,21,0,2026-10-05
-Defender/Midfielder,Valencia,Gaya,1630000,-10000.0,,Free Agent,"1,630,000",13,16,0,2026-10-05
-Midfielder,Rayo Vallecano,Oscar Valentin,1410000,-10000.0,,Free Agent,"1,410,000",17,23,0,2026-10-05
-Defender/Midfielder,Getafe,Djene,1650000,-10000.0,,Free Agent,"1,650,000",14,20,0,2026-10-05
-Defender,Espanyol,Hinojo,1520000,-20000.0,,Free Agent,"1,520,000",11,19,0,2026-10-05
-Goalkeeper,Osasuna,Sergio Herrera,2380000,-40000.0,,Free Agent,"2,380,000",7,13,0,2026-10-05
-Defender,Betis,Natan,5210000,60000.0,,Free Agent,"5,210,000",35,42,0,2026-10-05
-Forward/Midfielder,Osasuna,Dubasin,1340000,-20000.0,,Free Agent,"1,340,000",12,16,0,2026-10-05
-Defender,Celta,Starfelt,1470000,-30000.0,,Free Agent,"1,470,000",19,21,0,2026-10-05
-Defender,Real Sociedad,Aramburu,3090000,-30000.0,,Free Agent,"3,090,000",25,29,0,2026-10-05
-Forward/Midfielder,Celta,El-Abdellaoui,200000,0.0,,Free Agent,"200,000",2,6,0,2026-10-05
-Midfielder,Levante,Requena,360000,0.0,,Free Agent,"360,000",9,9,0,2026-10-05
-Forward,Espanyol,Marcos Fernandez,2600000,-30000.0,,Free Agent,"2,600,000",27,28,0,2026-10-05
-Midfielder/Defender,Elche,Redondo,500000,0.0,,Free Agent,"500,000",3,5,0,2026-10-05
-Defender,Real Madrid,Konate,3980000,-50000.0,,Free Agent,"3,980,000",16,26,0,2026-10-05
-Defender,Alaves,Valentini,770000,20000.0,,Free Agent,"770,000",12,15,0,2026-10-05
-Forward,Sevilla,Robbie Ure,2310000,-30000.0,,Free Agent,"2,310,000",10,19,0,2026-10-05
-Coach,Malaga,Funes,380000,0.0,,Free Agent,"380,000",2,3,0,2026-10-05
-Goalkeeper,Atletico,Esquivel,150000,0.0,,Free Agent,"150,000",0,0,0,2026-10-05
-Defender,Alaves,Olaiz,150000,0.0,,Free Agent,"150,000",3,3,0,2026-10-05
+Forward,Getafe,Juanmi,150000,0.0,,Free Agent,"150,000",0,0,22,2026-10-06
+Defender,Elche,Chust,1560000,-10000.0,,Free Agent,"1,560,000",15,21,0,2026-10-06
+Forward,Alaves,Mariano,4520000,-40000.0,,Free Agent,"4,520,000",24,50,0,2026-10-06
+Midfielder/Forward,Betis,Roro Riquelme,3070000,-40000.0,,Free Agent,"3,070,000",13,30,0,2026-10-06
+Midfielder,Betis,Lo Celso,2040000,-20000.0,,Free Agent,"2,040,000",2,2,0,2026-10-06
+Goalkeeper,Elche,Dituro,1870000,-10000.0,,Free Agent,"1,870,000",9,11,0,2026-10-06
+Midfielder,Osasuna,Iker Munoz,1600000,-20000.0,,Free Agent,"1,600,000",13,24,0,2026-10-06
+Midfielder,Osasuna,Torro,930000,-10000.0,,Free Agent,"930,000",10,16,0,2026-10-06
+Midfielder,Espanyol,Urko,1460000,-10000.0,,Free Agent,"1,460,000",8,15,0,2026-10-06
+Forward/Midfielder,Deportivo,Adama Traore,2290000,-20000.0,,Free Agent,"2,290,000",11,11,0,2026-10-06
+Defender,Sevilla,Marcão,150000,0.0,,Free Agent,"150,000",0,0,34,2026-10-06
+Midfielder/Forward,Celta,Swedberg,1520000,-10000.0,,Free Agent,"1,520,000",9,15,0,2026-10-06
+Defender,Osasuna,Herrando,320000,0.0,,Free Agent,"320,000",5,10,0,2026-10-06
+Forward,Espanyol,Marcos Fernandez,2520000,-80000.0,,Free Agent,"2,520,000",27,28,0,2026-10-06
+Midfielder,Elche,Marc Aguado,1480000,-20000.0,,Free Agent,"1,480,000",3,19,0,2026-10-06
+Defender,Deportivo,Comas,150000,0.0,,Free Agent,"150,000",0,0,0,2026-10-06
+Defender,Atletico,Jorge Dominguez,180000,0.0,,Free Agent,"180,000",0,3,0,2026-10-06
+Goalkeeper,Valencia,Van Oevelen,230000,0.0,,Free Agent,"230,000",0,0,0,2026-10-06
+Midfielder,Racing,Prati,680000,0.0,,Free Agent,"680,000",9,9,0,2026-10-06
+Defender,Athletic,Johaneko,780000,0.0,,Free Agent,"780,000",14,14,0,2026-10-06

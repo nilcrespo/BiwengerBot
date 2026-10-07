@@ -1,22 +1,22 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Patsi F.C,Patsi_FC,Goalkeeper,Rayo Vallecano,Audero,11,0,2500000,-30000.0,Fit,3,3.7,4,4.0,7,3.5
-Patsi F.C,Patsi_FC,Defender,Sevilla,Castrin,24,0,1920000,-10000.0,Fit,6,4.0,9,3.0,15,5.0
-Patsi F.C,Patsi_FC,Defender/Midfielder,Getafe,Djene,20,0,1640000,-10000.0,Fit,7,2.9,16,4.0,4,1.3
-Patsi F.C,Patsi_FC,Defender,Sevilla,Kike Salas,19,0,2860000,-10000.0,Fit,5,3.8,11,3.7,8,4.0
+Patsi F.C,Patsi_FC,Goalkeeper,Rayo Vallecano,Audero,11,0,2470000,-30000.0,Fit,3,3.7,4,4.0,7,3.5
+Patsi F.C,Patsi_FC,Defender,Sevilla,Castrin,24,0,1910000,-10000.0,Fit,6,4.0,9,3.0,15,5.0
+Patsi F.C,Patsi_FC,Defender/Midfielder,Getafe,Djene,20,0,1630000,-10000.0,Fit,7,2.9,16,4.0,4,1.3
+Patsi F.C,Patsi_FC,Defender,Sevilla,Kike Salas,19,0,2840000,-20000.0,Fit,5,3.8,11,3.7,8,4.0
 Patsi F.C,Patsi_FC,Defender,Malaga,Recio,18,0,1080000,0.0,Fit,7,2.6,14,4.7,4,1.0
-Patsi F.C,Patsi_FC,Defender/Midfielder,Valencia,Gaya,16,0,1620000,-10000.0,Fit,5,3.2,9,3.0,7,3.5
-Patsi F.C,Patsi_FC,Defender/Midfielder,Villarreal,Carlos Romero,15,0,3620000,-40000.0,Fit,5,3.0,1,1.0,14,3.5
-Patsi F.C,Patsi_FC,Defender,Valencia,Arnau Martinez,9,0,1420000,-20000.0,Fit,4,2.3,1,1.0,8,2.7
-Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,41,0,4800000,20000.0,Fit,6,6.8,30,7.5,11,5.5
-Patsi F.C,Patsi_FC,Midfielder,Atletico,Koke,39,0,3610000,10000.0,Fit,7,5.6,28,7.0,11,3.7
-Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,35,0,5040000,-30000.0,Fit,7,5.0,23,5.8,12,4.0
-Patsi F.C,Patsi_FC,Midfielder,Deportivo,Amatucci,33,0,3890000,-40000.0,Doubtful. Discomfort in the abductor muscle.,6,5.5,18,6.0,15,5.0
-Patsi F.C,Patsi_FC,Midfielder,Racing,Ivan Martin,21,0,2690000,-20000.0,Fit,5,4.2,9,4.5,12,4.0
-Patsi F.C,Patsi_FC,Midfielder,Valencia,Ugrinic,17,0,1170000,-10000.0,Fit,7,2.4,7,1.8,10,3.3
-Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,12,0,1040000,-10000.0,Injured. Sprain in the right knee. Estimated return: Mid-October.,4,3.0,9,4.5,3,1.5
-Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,28,0,10040000,70000.0,Fit,4,7.0,11,11.0,17,5.7
-Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,24,0,9040000,-40000.0,Fit,7,3.4,12,4.0,12,3.0
-Patsi F.C,Patsi_FC,Forward/Defender/Midfielder,Elche,Tete Morente,24,0,1580000,-10000.0,Fit,7,3.4,10,3.3,14,3.5
-Patsi F.C,Patsi_FC,Forward,Betis,Parrott,19,0,4440000,-20000.0,Fit,4,4.8,15,7.5,4,2.0
-Patsi F.C,Patsi_FC,Forward,Atletico,Sørloth,0,148,2630000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
+Patsi F.C,Patsi_FC,Defender/Midfielder,Valencia,Gaya,16,0,1610000,-10000.0,Fit,5,3.2,9,3.0,7,3.5
+Patsi F.C,Patsi_FC,Defender/Midfielder,Villarreal,Carlos Romero,15,0,3570000,-50000.0,Fit,5,3.0,1,1.0,14,3.5
+Patsi F.C,Patsi_FC,Defender,Valencia,Arnau Martinez,9,0,1400000,-20000.0,Fit,4,2.3,1,1.0,8,2.7
+Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,41,0,4820000,20000.0,Fit,6,6.8,30,7.5,11,5.5
+Patsi F.C,Patsi_FC,Midfielder,Atletico,Koke,39,0,3630000,20000.0,Fit,7,5.6,28,7.0,11,3.7
+Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,35,0,5000000,-40000.0,Fit,7,5.0,23,5.8,12,4.0
+Patsi F.C,Patsi_FC,Midfielder,Deportivo,Amatucci,33,0,3850000,-40000.0,Fit,6,5.5,18,6.0,15,5.0
+Patsi F.C,Patsi_FC,Midfielder,Racing,Ivan Martin,21,0,2660000,-30000.0,Fit,5,4.2,9,4.5,12,4.0
+Patsi F.C,Patsi_FC,Midfielder,Valencia,Ugrinic,17,0,1160000,-10000.0,Fit,7,2.4,7,1.8,10,3.3
+Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,12,0,1030000,-10000.0,Injured. Sprain in the right knee. Estimated return: Mid-October.,4,3.0,9,4.5,3,1.5
+Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,28,0,10120000,80000.0,Fit,4,7.0,11,11.0,17,5.7
+Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,24,0,8970000,-70000.0,Fit,7,3.4,12,4.0,12,3.0
+Patsi F.C,Patsi_FC,Forward/Defender/Midfielder,Elche,Tete Morente,24,0,1560000,-20000.0,Fit,7,3.4,10,3.3,14,3.5
+Patsi F.C,Patsi_FC,Forward,Betis,Parrott,19,0,4410000,-30000.0,Fit,4,4.8,15,7.5,4,2.0
+Patsi F.C,Patsi_FC,Forward,Atletico,Sørloth,0,148,2620000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
 Patsi F.C,Patsi_FC,Forward,Rayo Vallecano,De Tomas,0,0,210000,0.0,Fit,0,0.0,0,0.0,0,0.0

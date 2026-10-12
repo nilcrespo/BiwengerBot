@@ -1,23 +1,23 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Patsi F.C,Patsi_FC,Goalkeeper,Rayo Vallecano,Audero,11,0,2360000,-20000.0,Fit,3,3.7,4,4.0,7,3.5
-Patsi F.C,Patsi_FC,Defender,Malaga,Recio,25,0,1130000,40000.0,Fit,8,3.1,21,5.3,4,1.0
-Patsi F.C,Patsi_FC,Defender,Sevilla,Castrin,24,0,1880000,0.0,Fit,6,4.0,9,3.0,15,5.0
-Patsi F.C,Patsi_FC,Defender/Midfielder,Villarreal,Carlos Romero,19,0,3390000,-30000.0,Fit,6,3.2,1,1.0,18,3.6
+Patsi F.C,Patsi_FC,Goalkeeper,Rayo Vallecano,Audero,11,0,2330000,-30000.0,Fit,3,3.7,4,4.0,7,3.5
+Patsi F.C,Patsi_FC,Defender,Malaga,Recio,25,0,1180000,50000.0,Fit,8,3.1,21,5.3,4,1.0
+Patsi F.C,Patsi_FC,Defender,Sevilla,Castrin,24,0,1870000,-10000.0,Fit,6,4.0,9,3.0,15,5.0
+Patsi F.C,Patsi_FC,Defender/Midfielder,Valencia,Gaya,20,0,1610000,0.0,Fit,6,3.3,9,3.0,11,3.7
+Patsi F.C,Patsi_FC,Defender/Midfielder,Villarreal,Carlos Romero,19,0,3360000,-30000.0,Fit,6,3.2,1,1.0,18,3.6
 Patsi F.C,Patsi_FC,Defender,Sevilla,Kike Salas,19,0,2810000,0.0,Fit,5,3.8,11,3.7,8,4.0
-Patsi F.C,Patsi_FC,Defender/Midfielder,Getafe,Djene,19,0,1590000,-10000.0,Fit,8,2.4,16,4.0,3,0.8
-Patsi F.C,Patsi_FC,Defender/Midfielder,Valencia,Gaya,16,0,1610000,0.0,Fit,5,3.2,9,3.0,7,3.5
-Patsi F.C,Patsi_FC,Defender,Valencia,Arnau Martinez,9,0,1320000,-10000.0,Fit,4,2.3,1,1.0,8,2.7
-Patsi F.C,Patsi_FC,Midfielder,Atletico,Koke,47,0,3680000,30000.0,Fit,8,5.9,28,7.0,19,4.8
-Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,44,0,4930000,20000.0,Fit,7,6.3,30,7.5,14,4.7
-Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,39,0,4920000,-10000.0,Fit,8,4.9,23,5.8,16,4.0
-Patsi F.C,Patsi_FC,Midfielder,Deportivo,Amatucci,33,0,3840000,10000.0,Fit,6,5.5,18,6.0,15,5.0
-Patsi F.C,Patsi_FC,Midfielder,Racing,Ivan Martin,21,0,2570000,-20000.0,Fit,5,4.2,9,4.5,12,4.0
-Patsi F.C,Patsi_FC,Midfielder,Valencia,Ugrinic,17,0,1120000,-10000.0,Fit,7,2.4,7,1.8,10,3.3
-Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,12,0,990000,-10000.0,Injured. Sprain in the right knee. Estimated return: Mid-October.,4,3.0,9,4.5,3,1.5
-Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,28,0,10400000,60000.0,Fit,4,7.0,11,11.0,17,5.7
-Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,24,0,8860000,-10000.0,Fit,7,3.4,12,4.0,12,3.0
-Patsi F.C,Patsi_FC,Forward/Defender/Midfielder,Elche,Tete Morente,24,0,1530000,0.0,Fit,7,3.4,10,3.3,14,3.5
-Patsi F.C,Patsi_FC,Forward/Midfielder,Valencia,David Otorbi,21,0,1270000,10000.0,Fit,6,3.5,12,4.0,9,3.0
-Patsi F.C,Patsi_FC,Forward,Betis,Parrott,19,0,4330000,0.0,Fit,4,4.8,15,7.5,4,2.0
-Patsi F.C,Patsi_FC,Forward,Atletico,Sørloth,2,0,2670000,30000.0,Fit,1,2.0,0,0.0,2,2.0
+Patsi F.C,Patsi_FC,Defender/Midfielder,Getafe,Djene,19,0,1570000,-20000.0,Fit,8,2.4,16,4.0,3,0.8
+Patsi F.C,Patsi_FC,Defender,Valencia,Arnau Martinez,11,0,1300000,-20000.0,Fit,5,2.2,1,1.0,10,2.5
+Patsi F.C,Patsi_FC,Midfielder,Atletico,Koke,47,0,3720000,40000.0,Fit,8,5.9,28,7.0,19,4.8
+Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,44,0,4950000,20000.0,Fit,7,6.3,30,7.5,14,4.7
+Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,39,0,4890000,-30000.0,Fit,8,4.9,23,5.8,16,4.0
+Patsi F.C,Patsi_FC,Midfielder,Racing,Ivan Martin,33,0,2590000,20000.0,Fit,6,5.5,21,7.0,12,4.0
+Patsi F.C,Patsi_FC,Midfielder,Deportivo,Amatucci,30,0,3800000,-40000.0,Suspended. Straight red card.,7,4.3,18,6.0,12,3.0
+Patsi F.C,Patsi_FC,Midfielder,Valencia,Ugrinic,20,0,1110000,-10000.0,Fit,8,2.5,7,1.8,13,3.3
+Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,12,0,980000,-10000.0,Injured. Sprain in the right knee. Estimated return: Mid-October.,4,3.0,9,4.5,3,1.5
+Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,37,0,10490000,90000.0,Fit,5,7.4,20,10.0,17,5.7
+Patsi F.C,Patsi_FC,Forward/Midfielder,Valencia,David Otorbi,34,0,1350000,80000.0,Fit,7,4.9,12,4.0,22,5.5
+Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,29,0,8840000,-20000.0,Fit,8,3.6,17,4.3,12,3.0
+Patsi F.C,Patsi_FC,Forward/Defender/Midfielder,Elche,Tete Morente,26,0,1520000,-10000.0,Fit,8,3.3,12,3.0,14,3.5
+Patsi F.C,Patsi_FC,Forward,Betis,Parrott,21,0,4280000,-50000.0,Fit,5,4.2,17,5.7,4,2.0
+Patsi F.C,Patsi_FC,Forward,Atletico,Sørloth,2,0,2700000,30000.0,Fit,1,2.0,0,0.0,2,2.0
 Patsi F.C,Patsi_FC,Forward,Rayo Vallecano,De Tomas,0,0,210000,0.0,Fit,0,0.0,0,0.0,0,0.0

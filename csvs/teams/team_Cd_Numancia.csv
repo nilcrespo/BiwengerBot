@@ -1,26 +1,24 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-CD Numancia,Cd_Numancia,Goalkeeper,Levante,Ryan,33,0,3820000,-30000.0,Fit,6,5.5,4,2.0,29,7.3
-CD Numancia,Cd_Numancia,Goalkeeper,Osasuna,Aitor Fernandez,11,0,1370000,0.0,Fit,3,3.7,2,2.0,9,4.5
-CD Numancia,Cd_Numancia,Defender,Betis,Natan,47,0,5640000,60000.0,Fit,7,6.7,26,6.5,21,7.0
-CD Numancia,Cd_Numancia,Defender,Sevilla,Juan Iglesias,39,0,3410000,-10000.0,Fit,7,5.6,25,6.3,14,4.7
-CD Numancia,Cd_Numancia,Defender,Barcelona,Gerard Martin,37,0,4940000,40000.0,Fit,7,5.3,18,6.0,19,4.8
-CD Numancia,Cd_Numancia,Defender,Deportivo,Gimenez,26,0,3320000,-10000.0,Fit,7,3.7,11,3.7,15,3.8
-CD Numancia,Cd_Numancia,Defender,Celta,Marcos Alonso,23,0,2550000,0.0,Fit,6,3.8,1,0.5,22,5.5
-CD Numancia,Cd_Numancia,Defender,Levante,Toljan,19,0,1170000,0.0,Fit,6,3.2,5,2.5,14,3.5
+CD Numancia,Cd_Numancia,Goalkeeper,Levante,Ryan,36,0,3800000,-20000.0,Fit,7,5.1,7,2.3,29,7.3
+CD Numancia,Cd_Numancia,Defender,Betis,Natan,47,0,5700000,60000.0,Fit,7,6.7,26,6.5,21,7.0
+CD Numancia,Cd_Numancia,Defender,Sevilla,Juan Iglesias,45,0,3410000,0.0,Fit,8,5.6,25,6.3,20,5.0
+CD Numancia,Cd_Numancia,Defender,Barcelona,Gerard Martin,37,0,4980000,40000.0,Fit,7,5.3,18,6.0,19,4.8
+CD Numancia,Cd_Numancia,Defender,Deportivo,Gimenez,26,0,3300000,-20000.0,Fit,7,3.7,11,3.7,15,3.8
+CD Numancia,Cd_Numancia,Defender,Celta,Marcos Alonso,23,0,2570000,20000.0,Fit,6,3.8,1,0.5,22,5.5
+CD Numancia,Cd_Numancia,Defender,Levante,Toljan,21,0,1170000,0.0,Fit,7,3.0,7,2.3,14,3.5
 CD Numancia,Cd_Numancia,Defender,Malaga,Calero,2,0,790000,0.0,Fit,1,2.0,2,2.0,0,0.0
 CD Numancia,Cd_Numancia,Defender,Sevilla,Marcão,0,34,150000,0.0,Injured. Injury to the rectus femoris muscle of the right quadriceps. Estimated return: Early November.,0,0.0,0,0.0,0,0.0
-CD Numancia,Cd_Numancia,Midfielder,Betis,Deossa,31,0,3080000,-60000.0,Fit,8,3.9,14,3.5,17,4.3
-CD Numancia,Cd_Numancia,Midfielder,Sevilla,Fofana,27,0,5590000,20000.0,Fit,4,6.8,20,10.0,7,3.5
-CD Numancia,Cd_Numancia,Midfielder/Forward,Betis,Fornals,25,0,5630000,-30000.0,Fit,7,3.6,14,4.7,11,2.8
-CD Numancia,Cd_Numancia,Midfielder,Deportivo,Villares,23,0,660000,20000.0,Fit,4,5.8,15,7.5,8,4.0
-CD Numancia,Cd_Numancia,Midfielder/Forward,Osasuna,Aimar,9,0,2140000,-140000.0,Doubtful. Muscle injury.,3,3.0,8,4.0,1,1.0
+CD Numancia,Cd_Numancia,Midfielder,Sevilla,Fofana,39,0,5670000,80000.0,Fit,5,7.8,20,10.0,19,6.3
+CD Numancia,Cd_Numancia,Midfielder/Forward,Betis,Fornals,25,0,5630000,0.0,Fit,7,3.6,14,4.7,11,2.8
+CD Numancia,Cd_Numancia,Midfielder,Deportivo,Villares,23,0,700000,40000.0,Fit,4,5.8,15,7.5,8,4.0
+CD Numancia,Cd_Numancia,Midfielder/Forward,Osasuna,Aimar,9,0,2020000,-120000.0,Doubtful. Muscle injury.,3,3.0,8,4.0,1,1.0
 CD Numancia,Cd_Numancia,Midfielder/Defender,Elche,Redondo,5,0,490000,0.0,Fit,5,1.0,3,1.5,2,0.7
-CD Numancia,Cd_Numancia,Forward,Osasuna,Budimir,63,0,12470000,-20000.0,Fit,8,7.9,30,7.5,33,8.3
-CD Numancia,Cd_Numancia,Forward,Espanyol,Roberto Fernandez,62,0,9120000,0.0,Fit,8,7.8,25,6.3,37,9.3
-CD Numancia,Cd_Numancia,Forward/Midfielder,Racing,Inigo Vicente,49,0,5690000,10000.0,Fit,8,6.1,36,9.0,13,3.3
-CD Numancia,Cd_Numancia,Forward/Midfielder,Sevilla,Sierra,45,0,5190000,30000.0,Fit,7,6.4,25,6.3,20,6.7
-CD Numancia,Cd_Numancia,Forward,Real Madrid,Diomande,42,0,11470000,130000.0,Fit,8,5.3,23,5.8,19,4.8
+CD Numancia,Cd_Numancia,Forward,Osasuna,Budimir,62,0,12460000,-10000.0,Fit,8,7.8,30,7.5,32,8.0
+CD Numancia,Cd_Numancia,Forward,Espanyol,Roberto Fernandez,62,0,9110000,-10000.0,Fit,8,7.8,25,6.3,37,9.3
+CD Numancia,Cd_Numancia,Forward,Elche,Fer Nino,57,0,6690000,40000.0,Fit,8,7.1,26,6.5,31,7.8
+CD Numancia,Cd_Numancia,Forward/Midfielder,Sevilla,Sierra,51,0,5220000,30000.0,Doubtful. Shoulder injury.,8,6.4,25,6.3,26,6.5
+CD Numancia,Cd_Numancia,Forward/Midfielder,Racing,Inigo Vicente,49,0,5730000,40000.0,Fit,8,6.1,36,9.0,13,3.3
+CD Numancia,Cd_Numancia,Forward,Real Madrid,Diomande,42,0,11620000,150000.0,Fit,8,5.3,23,5.8,19,4.8
 CD Numancia,Cd_Numancia,Forward/Midfielder,Valencia,Danjuma,33,0,2420000,0.0,Fit,8,4.1,16,4.0,17,4.3
-CD Numancia,Cd_Numancia,Forward/Midfielder,Celta,Hugo Gonzalez,23,0,2680000,-110000.0,Fit,4,5.8,17,5.7,6,6.0
-CD Numancia,Cd_Numancia,Forward,Malaga,Adrian Nino,21,0,1000000,90000.0,Fit,4,5.3,9,4.5,12,6.0
-CD Numancia,Cd_Numancia,Forward,Valencia,Raba,12,0,270000,80000.0,Fit,2,6.0,0,0.0,12,6.0
+CD Numancia,Cd_Numancia,Forward,Malaga,Adrian Nino,21,0,1070000,70000.0,Fit,4,5.3,9,4.5,12,6.0
+CD Numancia,Cd_Numancia,Forward,Valencia,Raba,12,0,410000,140000.0,Fit,2,6.0,0,0.0,12,6.0

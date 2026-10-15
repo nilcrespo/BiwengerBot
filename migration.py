@@ -158,12 +158,25 @@ def migrate_csv_to_db(days_behind=0):
         except Exception as e:
             print(f"Error processing {file}: {str(e)}")
     
-    # Process team players
+    # Process team players. Only teams in today's standings: the scraper
+    # writes one CSV per team but never deletes any, so a renamed team's
+    # file under its old name (team_Ferrangoat.csv, last written Aug 24
+    # before FerranGoaT became FreeJulian) was re-imported every run as a
+    # frozen 11th team with a stale squad.
+    current_team_ids = None
+    if os.path.exists('csvs/others/league_standings.csv'):
+        current_team_ids = {
+            normalize_team_key(n)
+            for n in pd.read_csv('csvs/others/league_standings.csv')['name']
+        }
     team_files = glob.glob('csvs/teams/team_*.csv')
     for file in team_files:
         df = pd.read_csv(file)
         team_name = df['team'].iloc[0]
         team_id = df['team_id'].iloc[0] if 'team_id' in df.columns else normalize_team_key(team_name)
+        if current_team_ids and team_id not in current_team_ids:
+            print(f"\nSkipping {file}: {team_name!r} is not in the current standings (stale file)")
+            continue
         print(f"\nProcessing {file} for team_players of {team_name!r} (team_id={team_id!r})")
 
         # Build and clean your players_df ... (keep 'team' — it's the

@@ -1,9 +1,13 @@
 import json
 import re
+import sys
 from collections import defaultdict
 from datetime import datetime, timedelta
 from pathlib import Path
 import pandas as pd
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scraper"))
+from post_identity import TEAM_NAME_ALIASES, _post_identity  # noqa: E402
 
 # -----------------------
 # Config / input
@@ -26,11 +30,15 @@ _CATALAN_MONTHS = {
     'oct': 10, 'octubre': 10, 'nov': 11, 'novembre': 11, 'des': 12, 'desembre': 12,
 }
 _ABS_DATE_RE = re.compile(r"^(\d{1,2}) d['’]?e?\.?\s?([a-zçA-ZÇ]+)\.?(?:\s(\d{4}))?$")
-_RELATIVE_UNIT_RE = re.compile(r"^Fa (\d+) (hora|dia|setmana|mes)")
+# Matches singular and plural units and "una"/"un" as the count: "Fa 2
+# hores", "Fa una hora", "fa 3 dies" (the round-result posts render it
+# lowercase). The original pattern only matched "Fa <digits> hora|dia...",
+# so every plural and every "una" fell through to the undated bucket.
+_RELATIVE_UNIT_RE = re.compile(r"^[Ff]a (\d+|una?) (hor|di|setman|mes)")
 _UNIT_TO_TIMEDELTA = {
-    'hora': lambda n: timedelta(hours=n),
-    'dia': lambda n: timedelta(days=n),
-    'setmana': lambda n: timedelta(weeks=n),
+    'hor': lambda n: timedelta(hours=n),
+    'di': lambda n: timedelta(days=n),
+    'setman': lambda n: timedelta(weeks=n),
     'mes': lambda n: timedelta(days=30 * n),  # approximate; only used to order posts, not for exact dates
 }
 
@@ -76,7 +84,8 @@ def _post_sort_key(post, now):
             return (now + timedelta(days=1)).replace(hour=12, minute=0, second=0, microsecond=0)
         m = _RELATIVE_UNIT_RE.match(tok)
         if m:
-            n, unit = int(m.group(1)), m.group(2)
+            n = 1 if m.group(1) in ('un', 'una') else int(m.group(1))
+            unit = m.group(2)
             return now - _UNIT_TO_TIMEDELTA[unit](n)
         m = _ABS_DATE_RE.match(tok)
         if m:
@@ -121,6 +130,91 @@ def find_subject_before(idx: int, post: list) -> str:
         j -= 1
     return ""
 
+_RENAME_RE = re.compile(r"^(.+?) ha canviat el seu nom a (.+)$")
+_ROUND_PRIZE_RE = re.compile(r"^\t-?\d+ punts\t(.+€)")
+
+
+def team_aliases(posts: list) -> dict:
+    """old team name -> current name, from Biwenger's own "CANVI DE NOM"
+    posts ("FerranGoaT ha canviat el seu nom a FreeJulian") plus the
+    hand-maintained TEAM_NAME_ALIASES. Chains (A->B, then B->C) resolve
+    straight to the latest name. Without this a renamed manager splits
+    into two ledgers: everything before the rename under the old name
+    (a ghost team with only a few weeks of salaries) and everything after
+    under the new one (missing those same weeks).
+    """
+    aliases = dict(TEAM_NAME_ALIASES)
+    for post in posts:
+        if not post or post[0] != "CANVI DE NOM":
+            continue
+        for x in post:
+            m = _RENAME_RE.match(x.strip()) if isinstance(x, str) else None
+            if m and m.group(1).strip() != m.group(2).strip():
+                aliases[m.group(1).strip()] = m.group(2).strip()
+    resolved = {}
+    for old in aliases:
+        name, seen = old, set()
+        while name in aliases and name not in seen:
+            seen.add(name)
+            name = aliases[name]
+        resolved[old] = name
+    return resolved
+
+
+def current_season_posts(posts: list, now=None) -> list:
+    """The posts that belong in this season's money ledger: one copy of
+    each real post, none older than the season-start credit.
+
+    unique_posts.json holds both kinds of junk, and the ledger summed all
+    of it (every team's balance came out tens of millions too low):
+    - ~700 posts from previous seasons (back to 2023), pulled in when a
+      post-layout change on 2026-09-22 made the scraper think it had
+      never seen anything and scroll past the "Inici de joc" stop marker.
+    - ~200 duplicate copies of the same post, saved before
+      _post_identity learned to ignore the field that differed between
+      them (date text, reaction count, team rename, layout), or differing
+      in a re-rendered player name it can't ignore. Fixing the identity
+      stops new duplicates but doesn't remove old ones.
+
+    A post whose date can't be read is kept: in this file that's the
+    round/salary posts dated "Jornada N" or a relative time, which are
+    all from the live season — the pre-season backlog came in with
+    absolute dates. The newest "Inici de joc" post marks the season start.
+    """
+    now = now or datetime.now()
+    deduped, seen, seen_amounts = [], set(), set()
+    for post in posts:
+        key = _post_identity(post)
+        if key in seen:
+            continue
+        # Second key for batch posts: the exact sequence of euro amounts.
+        # Biwenger also re-renders player names ("Aimar" -> "Aimar Oroz")
+        # and stray tokens ("!"), which no generic text identity can
+        # strip — but two different posts listing the same 2+ amounts to
+        # the euro, in the same order, don't happen. Single-amount posts
+        # are left to _post_identity: one equal price is a real coincidence.
+        amounts = tuple(x.strip() for x in post if isinstance(x, str) and "€" in x)
+        amount_key = (post[0] if post else None, amounts)
+        if len(amounts) >= 2 and amount_key in seen_amounts:
+            continue
+        seen.add(key)
+        seen_amounts.add(amount_key)
+        deduped.append(post)
+
+    starts = [
+        _post_sort_key(p, now) for p in deduped
+        if any(isinstance(x, str) and x.strip() == 'Inici de joc' for x in p)
+    ]
+    starts = [d for d in starts if d != datetime.min]
+    if not starts:
+        return deduped
+    season_start = max(starts)
+    return [
+        p for p in deduped
+        if (d := _post_sort_key(p, now)) == datetime.min or d >= season_start
+    ]
+
+
 def compute_balances(posts: list) -> tuple[dict, dict]:
     """Compute each team's running balance and transaction ledger from the
     league forum posts (SOUS salaries, market sales/purchases, admin
@@ -134,6 +228,10 @@ def compute_balances(posts: list) -> tuple[dict, dict]:
     compute_trades relies on for FIFO matching, so it has to be right
     here, once, rather than re-guessed downstream.
 
+    Only this season's posts count, one copy each (current_season_posts),
+    and a renamed team's old name is folded into its current one
+    (team_aliases).
+
     Returns (balances, ledger): balances maps team display name -> float
     euros; ledger maps team display name -> list of transaction dicts,
     oldest first.
@@ -141,7 +239,8 @@ def compute_balances(posts: list) -> tuple[dict, dict]:
     balances = defaultdict(lambda: 0)
     ledger = defaultdict(list)
     now = datetime.now()
-    posts = sorted(posts, key=lambda p: _post_sort_key(p, now))
+    aliases = team_aliases(posts)
+    posts = sorted(current_season_posts(posts, now), key=lambda p: _post_sort_key(p, now))
 
     for post in posts:
         # 1) Salaries (SOUS) — subtract
@@ -217,7 +316,44 @@ def compute_balances(posts: list) -> tuple[dict, dict]:
                         })
                         continue
 
-        # 5) Market sales/purchases (… Team, Mercat, Per … €) — add/subtract
+        # 5) Round prizes ("Fi de Jornada": every team's points and the
+        # money it earned that round) — add. Never counted before, which
+        # alone left every balance ~€1-3M short per round played.
+        if len(post) > 0 and post[0] == "Fi de":
+            for idx, item in enumerate(post):
+                m = _ROUND_PRIZE_RE.match(item) if isinstance(item, str) else None
+                if m and idx > 0 and isinstance(post[idx - 1], str):
+                    team = post[idx - 1].strip()
+                    amount = parse_amount(m.group(1))
+                    balances[team] += amount
+                    ledger[team].append({
+                        "type": "Round prize",
+                        "movement": post[1].strip() if len(post) > 1 and isinstance(post[1], str) else "Round prize",
+                        "amount": amount,
+                        "signed_amount": +amount
+                    })
+
+        # 6) Daily-streak bonus ("RATXA DIÀRIA": "+250.000 €", then every
+        # team that earned it that day) — add.
+        if len(post) > 0 and post[0] == "RATXA DIÀRIA":
+            amount = None
+            for item in post[2:]:
+                if not isinstance(item, str) or not item.strip():
+                    continue
+                m = money_pattern_inline.search(item)
+                if m:
+                    amount = parse_amount(m.group(1))
+                elif amount is not None:
+                    team = item.strip()
+                    balances[team] += amount
+                    ledger[team].append({
+                        "type": "Streak bonus",
+                        "movement": "Daily streak",
+                        "amount": amount,
+                        "signed_amount": +amount
+                    })
+
+        # 7) Market sales/purchases (… Team, Mercat, Per … €) — add/subtract
         if 'FITXATGES' in post:
             for idx, item in enumerate(post):
                 if isinstance(item, str) and item.strip() in ROLE_TOKENS and post[idx + 1] not in ROLE_TOKENS:
@@ -244,7 +380,12 @@ def compute_balances(posts: list) -> tuple[dict, dict]:
                                 "signed_amount": -amount
                             })
 
-    return dict(balances), dict(ledger)
+    merged_balances, merged_ledger = defaultdict(lambda: 0), defaultdict(list)
+    for team, bal in balances.items():
+        merged_balances[aliases.get(team, team)] += bal
+    for team, entries in ledger.items():
+        merged_ledger[aliases.get(team, team)].extend(entries)
+    return dict(merged_balances), dict(merged_ledger)
 
 
 def compute_trades(ledger: dict) -> dict:

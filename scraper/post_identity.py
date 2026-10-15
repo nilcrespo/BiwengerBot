@@ -33,10 +33,13 @@ TEAM_NAME_ALIASES = {
     'FerranGoaT': 'FreeJulian',
 }
 
+# The round-result ("Fi de Jornada") posts render their date lowercase
+# and with the reaction count glued onto the same token (" fa 6 dies 1",
+# " ahir") — the same real post was saved 7 times before this matched.
 _DATE_TOKEN_RE = re.compile(
-    r"^(Ara mateix|Avui|Ahir|Demà"
+    r"^(Ara mateix|[Aa]vui|[Aa]hir|[Dd]emà"
     r"|[Ff]a (\d+|una?) \S+"
-    r"|\d{1,2} d['’]?e?\.?\s?\S+\.?(\s\d{4})?)$"
+    r"|\d{1,2} d['’]?e?\.?\s?\S+\.?(\s\d{4})?)(\s-?\d+)?$"
 )
 # A bare integer, standing alone with no unit/currency/word attached, is a
 # reaction/like count on that post (or on each item within a batch post) —

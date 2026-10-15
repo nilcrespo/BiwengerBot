@@ -192,10 +192,16 @@ def current_season_posts(posts: list, now=None) -> list:
         # and stray tokens ("!"), which no generic text identity can
         # strip — but two different posts listing the same 2+ amounts to
         # the euro, in the same order, don't happen. Single-amount posts
-        # are left to _post_identity: one equal price is a real coincidence.
+        # are otherwise left to _post_identity.
+        # A one-team sale post ("FITXATGES", then the seller) gets the same
+        # treatment keyed on that team: caught live, FreeJulian's Aimar
+        # sale for €3,284,100 saved once as "Aimar" and once as "Aimar
+        # Oroz" overstated his balance by that amount.
         amounts = tuple(x.strip() for x in post if isinstance(x, str) and "€" in x)
-        amount_key = (post[0] if post else None, amounts)
-        if len(amounts) >= 2 and amount_key in seen_amounts:
+        header = post[1].strip() if len(post) > 1 and isinstance(post[1], str) else None
+        single_team_sale = bool(post) and post[0] == "FITXATGES" and len(amounts) == 1
+        amount_key = (post[0] if post else None, header if single_team_sale else None, amounts)
+        if (len(amounts) >= 2 or single_team_sale) and amount_key in seen_amounts:
             continue
         seen.add(key)
         seen_amounts.add(amount_key)
@@ -355,6 +361,11 @@ def compute_balances(posts: list) -> tuple[dict, dict]:
 
         # 7) Market sales/purchases (… Team, Mercat, Per … €) — add/subtract
         if 'FITXATGES' in post:
+            # A "!" status badge (injured/doubtful) can render right after
+            # the position tokens and shifts every offset below by one —
+            # the entry was silently skipped (caught live: a €2,803,500
+            # Pathé Ciss sale missing from Hernan Krezzpo's balance).
+            post = [x for x in post if not (isinstance(x, str) and x.strip() == '!')]
             for idx, item in enumerate(post):
                 if isinstance(item, str) and item.strip() in ROLE_TOKENS and post[idx + 1] not in ROLE_TOKENS:
                     subject = post[idx + 1].strip() if idx + 1 < len(post) and isinstance(post[idx + 1], str) else None

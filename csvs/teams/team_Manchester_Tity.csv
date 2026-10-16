@@ -1,18 +1,20 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Manchester Tity,Manchester_Tity,Goalkeeper,Real Sociedad,Remiro,41,0,3870000,-20000.0,Fit,7,5.9,17,4.3,24,8.0
-Manchester Tity,Manchester_Tity,Goalkeeper,Espanyol,Fortuno,5,0,360000,40000.0,Fit,1,5.0,0,0.0,5,5.0
-Manchester Tity,Manchester_Tity,Defender,Malaga,Rafita,36,0,2900000,50000.0,Fit,8,4.5,22,5.5,14,3.5
-Manchester Tity,Manchester_Tity,Defender,Athletic,Paredes,30,0,2440000,-10000.0,Fit,4,7.5,24,8.0,6,6.0
-Manchester Tity,Manchester_Tity,Defender,Villarreal,Pau Navarro,18,0,1440000,30000.0,Fit,4,4.5,8,4.0,10,5.0
+Manchester Tity,Manchester_Tity,Goalkeeper,Real Sociedad,Remiro,41,0,3830000,-40000.0,Fit,7,5.9,17,4.3,24,8.0
+Manchester Tity,Manchester_Tity,Goalkeeper,Espanyol,Fortuno,5,0,390000,30000.0,Fit,1,5.0,0,0.0,5,5.0
+Manchester Tity,Manchester_Tity,Defender,Atletico,Grimaldo,45,0,6860000,110000.0,Fit,7,6.4,19,6.3,26,6.5
+Manchester Tity,Manchester_Tity,Defender,Malaga,Rafita,36,0,2940000,40000.0,Fit,8,4.5,22,5.5,14,3.5
+Manchester Tity,Manchester_Tity,Defender,Athletic,Paredes,30,0,2430000,-10000.0,Fit,4,7.5,24,8.0,6,6.0
+Manchester Tity,Manchester_Tity,Defender,Villarreal,Pau Navarro,18,0,1460000,20000.0,Fit,4,4.5,8,4.0,10,5.0
 Manchester Tity,Manchester_Tity,Defender,Betis,Angel Ortiz,7,0,180000,0.0,Fit,2,3.5,3,3.0,4,4.0
 Manchester Tity,Manchester_Tity,Defender,Malaga,Moussa Diarra,0,0,150000,0.0,Injured. Muscle injury. Estimated return: Indefinite return.,0,0.0,0,0.0,0,0.0
-Manchester Tity,Manchester_Tity,Midfielder/Forward,Atletico,Baena,64,0,11550000,60000.0,Fit,8,8.0,31,7.8,33,8.3
-Manchester Tity,Manchester_Tity,Midfielder/Forward,Deportivo,Mario Soriano,45,0,4540000,60000.0,Fit,8,5.6,23,5.8,22,5.5
-Manchester Tity,Manchester_Tity,Midfielder/Defender,Elche,Javi Morcillo,18,0,760000,0.0,Fit,6,3.0,5,2.5,13,3.3
+Manchester Tity,Manchester_Tity,Midfielder/Forward,Atletico,Baena,64,0,11560000,10000.0,Fit,8,8.0,31,7.8,33,8.3
+Manchester Tity,Manchester_Tity,Midfielder/Forward,Deportivo,Mario Soriano,45,0,4590000,50000.0,Fit,8,5.6,23,5.8,22,5.5
+Manchester Tity,Manchester_Tity,Midfielder,Levante,Olasagasti,39,0,2990000,50000.0,Fit,7,5.6,25,8.3,14,3.5
+Manchester Tity,Manchester_Tity,Midfielder/Defender,Elche,Javi Morcillo,18,0,770000,10000.0,Fit,6,3.0,5,2.5,13,3.3
 Manchester Tity,Manchester_Tity,Midfielder/Defender,Getafe,Gudelj,14,0,1240000,0.0,Fit,6,2.3,8,2.7,6,2.0
-Manchester Tity,Manchester_Tity,Forward,Barcelona,Yamal,94,0,25420000,60000.0,Fit,8,11.8,45,11.3,49,12.3
-Manchester Tity,Manchester_Tity,Forward,Barcelona,Adeyemi,58,0,11120000,-130000.0,Fit,8,7.3,25,6.3,33,8.3
-Manchester Tity,Manchester_Tity,Forward,Alaves,Toni Martinez,21,0,2520000,-10000.0,Fit,7,3.0,14,3.5,7,2.3
+Manchester Tity,Manchester_Tity,Forward,Barcelona,Yamal,94,0,25370000,-50000.0,Fit,8,11.8,45,11.3,49,12.3
+Manchester Tity,Manchester_Tity,Forward,Barcelona,Adeyemi,58,0,10990000,-130000.0,Fit,8,7.3,25,6.3,33,8.3
+Manchester Tity,Manchester_Tity,Forward,Alaves,Toni Martinez,21,0,2510000,-10000.0,Fit,7,3.0,14,3.5,7,2.3
 Manchester Tity,Manchester_Tity,Forward,Sevilla,Stassin,20,0,2190000,0.0,Fit,3,6.7,2,2.0,18,9.0
-Manchester Tity,Manchester_Tity,Forward,Barcelona,Bisiwu,0,0,300000,0.0,Fit,0,0.0,0,0.0,0,0.0
+Manchester Tity,Manchester_Tity,Forward,Barcelona,Bisiwu,0,0,290000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
 Manchester Tity,Manchester_Tity,Forward/Midfielder,Elche,Yago Santiago,0,14,150000,0.0,Doubtful. Knee arthroscopy.,0,0.0,0,0.0,0,0.0

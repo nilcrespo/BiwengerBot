@@ -1,22 +1,22 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Patsi F.C,Patsi_FC,Goalkeeper,Rayo Vallecano,Audero,11,0,2260000,-20000.0,Fit,3,3.7,4,4.0,7,3.5
-Patsi F.C,Patsi_FC,Defender,Sevilla,Kike Salas,25,0,2920000,50000.0,Fit,6,4.2,11,3.7,14,4.7
-Patsi F.C,Patsi_FC,Defender,Malaga,Recio,25,0,1340000,50000.0,Fit,8,3.1,21,5.3,4,1.0
-Patsi F.C,Patsi_FC,Defender/Midfielder,Valencia,Gaya,20,0,1640000,10000.0,Fit,6,3.3,9,3.0,11,3.7
-Patsi F.C,Patsi_FC,Defender/Midfielder,Villarreal,Carlos Romero,19,0,3270000,-30000.0,Fit,6,3.2,1,1.0,18,3.6
-Patsi F.C,Patsi_FC,Defender/Midfielder,Getafe,Djene,19,0,1530000,-10000.0,Fit,8,2.4,16,4.0,3,0.8
-Patsi F.C,Patsi_FC,Defender,Valencia,De Haas,16,0,2020000,-30000.0,Fit,4,4.0,9,4.5,7,3.5
-Patsi F.C,Patsi_FC,Defender,Valencia,Arnau Martinez,11,0,1220000,-20000.0,Fit,5,2.2,1,1.0,10,2.5
-Patsi F.C,Patsi_FC,Midfielder,Atletico,Koke,47,0,3900000,70000.0,Fit,8,5.9,28,7.0,19,4.8
-Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,44,0,5000000,20000.0,Fit,7,6.3,30,7.5,14,4.7
-Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,39,0,4830000,-20000.0,Fit,8,4.9,23,5.8,16,4.0
-Patsi F.C,Patsi_FC,Midfielder,Racing,Ivan Martin,33,0,2760000,60000.0,Fit,6,5.5,21,7.0,12,4.0
+Patsi F.C,Patsi_FC,Goalkeeper,Rayo Vallecano,Audero,11,0,2230000,-30000.0,Fit,3,3.7,4,4.0,7,3.5
+Patsi F.C,Patsi_FC,Defender,Sevilla,Kike Salas,25,0,2980000,60000.0,Fit,6,4.2,11,3.7,14,4.7
+Patsi F.C,Patsi_FC,Defender,Malaga,Recio,25,0,1390000,50000.0,Fit,8,3.1,21,5.3,4,1.0
+Patsi F.C,Patsi_FC,Defender/Midfielder,Valencia,Gaya,20,0,1660000,20000.0,Fit,6,3.3,9,3.0,11,3.7
+Patsi F.C,Patsi_FC,Defender/Midfielder,Villarreal,Carlos Romero,19,0,3230000,-40000.0,Fit,6,3.2,1,1.0,18,3.6
+Patsi F.C,Patsi_FC,Defender/Midfielder,Getafe,Djene,19,0,1520000,-10000.0,Fit,8,2.4,16,4.0,3,0.8
+Patsi F.C,Patsi_FC,Defender,Valencia,De Haas,16,0,1980000,-40000.0,Fit,4,4.0,9,4.5,7,3.5
+Patsi F.C,Patsi_FC,Defender,Valencia,Arnau Martinez,11,0,1200000,-20000.0,Fit,5,2.2,1,1.0,10,2.5
+Patsi F.C,Patsi_FC,Midfielder,Atletico,Koke,47,0,3960000,60000.0,Fit,8,5.9,28,7.0,19,4.8
+Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,44,0,4980000,-20000.0,Doubtful. Discomfort in the right shoulder.,7,6.3,30,7.5,14,4.7
+Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,39,0,4790000,-40000.0,Fit,8,4.9,23,5.8,16,4.0
+Patsi F.C,Patsi_FC,Midfielder,Racing,Ivan Martin,33,0,2810000,50000.0,Fit,6,5.5,21,7.0,12,4.0
 Patsi F.C,Patsi_FC,Midfielder,Valencia,Ugrinic,20,0,1110000,0.0,Fit,8,2.5,7,1.8,13,3.3
-Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,12,0,960000,0.0,Doubtful. Sprain in the right knee.,4,3.0,9,4.5,3,1.5
-Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,37,0,10840000,130000.0,Fit,5,7.4,20,10.0,17,5.7
-Patsi F.C,Patsi_FC,Forward/Midfielder,Valencia,David Otorbi,34,0,1780000,170000.0,Fit,7,4.9,12,4.0,22,5.5
-Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,29,0,8690000,-50000.0,Fit,8,3.6,17,4.3,12,3.0
-Patsi F.C,Patsi_FC,Forward/Defender/Midfielder,Elche,Tete Morente,26,0,1470000,-10000.0,Fit,8,3.3,12,3.0,14,3.5
-Patsi F.C,Patsi_FC,Forward,Betis,Parrott,21,0,3990000,-80000.0,Fit,5,4.2,17,5.7,4,2.0
-Patsi F.C,Patsi_FC,Forward,Atletico,Sørloth,2,0,2760000,20000.0,Fit,1,2.0,0,0.0,2,2.0
+Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,12,0,950000,-10000.0,Injured. Sprain in the right knee. Estimated return: Late October.,4,3.0,9,4.5,3,1.5
+Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,37,0,10930000,90000.0,Fit,5,7.4,20,10.0,17,5.7
+Patsi F.C,Patsi_FC,Forward/Midfielder,Valencia,David Otorbi,34,0,1940000,160000.0,Fit,7,4.9,12,4.0,22,5.5
+Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,29,0,8620000,-70000.0,Fit,8,3.6,17,4.3,12,3.0
+Patsi F.C,Patsi_FC,Forward/Defender/Midfielder,Elche,Tete Morente,26,0,1460000,-10000.0,Fit,8,3.3,12,3.0,14,3.5
+Patsi F.C,Patsi_FC,Forward,Betis,Parrott,21,0,3900000,-90000.0,Fit,5,4.2,17,5.7,4,2.0
+Patsi F.C,Patsi_FC,Forward,Atletico,Sørloth,2,0,2770000,10000.0,Fit,1,2.0,0,0.0,2,2.0
 Patsi F.C,Patsi_FC,Forward,Rayo Vallecano,De Tomas,0,0,210000,0.0,Fit,0,0.0,0,0.0,0,0.0

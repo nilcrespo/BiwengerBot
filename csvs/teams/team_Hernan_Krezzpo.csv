@@ -1,15 +1,16 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Hernan Krezzpo,Hernan_Krezzpo,Goalkeeper,Malaga,Alfonso Herrero,41,0,3740000,-50000.0,Fit,9,4.6,14,2.8,27,6.8
-Hernan Krezzpo,Hernan_Krezzpo,Goalkeeper,Athletic,Unai Simon,37,0,4260000,10000.0,Fit,7,5.3,11,2.8,26,8.7
+Hernan Krezzpo,Hernan_Krezzpo,Goalkeeper,Malaga,Alfonso Herrero,41,0,3640000,-100000.0,Fit,9,4.6,14,2.8,27,6.8
+Hernan Krezzpo,Hernan_Krezzpo,Goalkeeper,Athletic,Unai Simon,37,0,4270000,10000.0,Fit,7,5.3,11,2.8,26,8.7
 Hernan Krezzpo,Hernan_Krezzpo,Goalkeeper,Malaga,Carlos Lopez,0,0,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Hernan Krezzpo,Hernan_Krezzpo,Defender,Levante,De La Fuente,58,0,5200000,80000.0,Fit,8,7.3,28,9.3,30,6.0
-Hernan Krezzpo,Hernan_Krezzpo,Defender,Barcelona,Eric Garcia,45,0,5540000,-150000.0,Injured. Muscle injury to the rectus femoris in the right thigh. Estimated return: Mid-November.,8,5.6,20,6.7,25,5.0
-Hernan Krezzpo,Hernan_Krezzpo,Defender,Villarreal,Veiga,41,0,4470000,10000.0,Fit,8,5.1,18,6.0,23,4.6
-Hernan Krezzpo,Hernan_Krezzpo,Defender,Real Sociedad,Hector Fort,10,0,1310000,10000.0,Fit,3,3.3,2,2.0,8,4.0
-Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Barcelona,Pedri,62,0,14320000,-70000.0,Fit,9,6.9,28,7.0,34,6.8
-Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Betis,Isco,45,0,8740000,100000.0,Fit,8,5.6,32,8.0,13,3.3
-Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Sevilla,Agoume,43,0,3300000,-20000.0,Fit,9,4.8,18,4.5,25,5.0
-Hernan Krezzpo,Hernan_Krezzpo,Forward,Rayo Vallecano,Camello,75,0,12860000,90000.0,Fit,7,10.7,36,12.0,39,9.8
-Hernan Krezzpo,Hernan_Krezzpo,Forward/Midfielder,Levante,Ivan Romero,52,0,4480000,90000.0,Fit,8,6.5,30,10.0,22,4.4
-Hernan Krezzpo,Hernan_Krezzpo,Forward/Midfielder,Levante,Brugue,47,0,4440000,-10000.0,Fit,7,6.7,32,10.7,15,3.8
-Hernan Krezzpo,Hernan_Krezzpo,Forward/Midfielder,Deportivo,Luismi Cruz,42,0,2960000,-80000.0,Fit,9,4.7,17,3.4,25,6.3
+Hernan Krezzpo,Hernan_Krezzpo,Defender,Levante,De La Fuente,58,0,5260000,60000.0,Fit,8,7.3,28,9.3,30,6.0
+Hernan Krezzpo,Hernan_Krezzpo,Defender,Barcelona,Eric Garcia,45,0,5220000,-320000.0,Injured. Muscle injury to the rectus femoris in the right thigh. Estimated return: Mid-November.,8,5.6,20,6.7,25,5.0
+Hernan Krezzpo,Hernan_Krezzpo,Defender,Villarreal,Veiga,41,0,4490000,20000.0,Fit,8,5.1,18,6.0,23,4.6
+Hernan Krezzpo,Hernan_Krezzpo,Defender,Real Sociedad,Hector Fort,10,0,1340000,30000.0,Fit,3,3.3,2,2.0,8,4.0
+Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Barcelona,Pedri,62,0,14250000,-70000.0,Fit,9,6.9,28,7.0,34,6.8
+Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Betis,Isco,45,0,8830000,90000.0,Fit,8,5.6,32,8.0,13,3.3
+Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Sevilla,Agoume,43,0,3300000,0.0,Fit,9,4.8,18,4.5,25,5.0
+Hernan Krezzpo,Hernan_Krezzpo,Forward,Rayo Vallecano,Camello,81,0,12950000,90000.0,Fit,8,10.1,36,12.0,45,9.0
+Hernan Krezzpo,Hernan_Krezzpo,Forward/Midfielder,Levante,Ivan Romero,52,0,4590000,110000.0,Fit,8,6.5,30,10.0,22,4.4
+Hernan Krezzpo,Hernan_Krezzpo,Forward/Midfielder,Levante,Brugue,47,0,4390000,-50000.0,Fit,7,6.7,32,10.7,15,3.8
+Hernan Krezzpo,Hernan_Krezzpo,Forward/Midfielder,Deportivo,Luismi Cruz,42,0,2900000,-60000.0,Fit,9,4.7,17,3.4,25,6.3
+Hernan Krezzpo,Hernan_Krezzpo,Forward/Midfielder,Sevilla,Felix Correia,21,0,2770000,40000.0,Fit,5,4.2,9,4.5,12,4.0

@@ -1,24 +1,21 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-The National,The_National,Goalkeeper,Deportivo,Leo Roman,36,0,3470000,-70000.0,Fit,9,4.0,20,4.0,16,4.0
+The National,The_National,Goalkeeper,Deportivo,Leo Roman,36,0,3420000,-50000.0,Fit,9,4.0,20,4.0,16,4.0
 The National,The_National,Goalkeeper,Atletico,Musso,0,33,320000,0.0,Fit,0,0.0,0,0.0,0,0.0
-The National,The_National,Defender/Midfielder,Atletico,Marcos Llorente,39,0,5610000,10000.0,Fit,9,4.3,20,5.0,19,3.8
-The National,The_National,Defender,Celta,Lago,38,0,2640000,-30000.0,One yellow card away from suspension,9,4.2,24,4.8,14,3.5
-The National,The_National,Defender,Elche,Chust,37,0,1750000,70000.0,Fit,9,4.1,13,3.3,24,4.8
-The National,The_National,Defender,Sevilla,Suazo,32,0,2860000,-20000.0,Fit,9,3.6,14,3.5,18,3.6
-The National,The_National,Defender,Real Sociedad,Jon Martin,30,0,3120000,60000.0,Fit,8,3.8,23,7.7,7,1.4
-The National,The_National,Defender,Rayo Vallecano,Pedrosa,28,0,3170000,-10000.0,Fit,6,4.7,16,8.0,12,3.0
-The National,The_National,Defender,Betis,Diego Llorente,17,0,1440000,-10000.0,Fit,4,4.3,13,4.3,4,4.0
-The National,The_National,Defender,Osasuna,Rosier,5,0,1140000,20000.0,Fit,2,2.5,3,3.0,2,2.0
-The National,The_National,Midfielder/Defender/Forward,Elche,German Valera,43,0,5270000,30000.0,Fit,9,4.8,13,3.3,30,6.0
-The National,The_National,Midfielder,Celta,Ilaix Moriba,37,0,3430000,-40000.0,Fit,9,4.1,23,4.6,14,3.5
-The National,The_National,Midfielder/Forward,Valencia,Javi Guerra,34,0,3270000,40000.0,Fit,9,3.8,16,3.2,18,4.5
-The National,The_National,Midfielder,Rayo Vallecano,Unai Lopez,34,0,2350000,0.0,Fit,8,4.3,16,5.3,18,3.6
-The National,The_National,Midfielder,Valencia,Guido Rodriguez,29,0,3380000,10000.0,Fit,6,4.8,20,5.0,9,4.5
-The National,The_National,Midfielder,Atletico,Johnny,28,0,3220000,10000.0,Fit,6,4.7,15,7.5,13,3.3
-The National,The_National,Midfielder,Rayo Vallecano,Pedro Diaz,24,0,1110000,0.0,Fit,7,3.4,9,4.5,15,3.0
-The National,The_National,Midfielder,Athletic,Peio Canales,16,0,1710000,-30000.0,Fit,5,3.2,8,4.0,8,2.7
-The National,The_National,Forward,Barcelona,Raphinha,118,0,24400000,10000.0,Fit,8,14.8,52,17.3,66,13.2
-The National,The_National,Forward,Deportivo,Nsongo,48,0,3610000,30000.0,Fit,9,5.3,31,6.2,17,4.3
-The National,The_National,Forward,Getafe,Enes Unal,28,0,2670000,-20000.0,Fit,8,3.5,22,4.4,6,2.0
-The National,The_National,Forward,Rayo Vallecano,Alemão,19,0,700000,-10000.0,Fit,7,2.7,4,2.0,15,3.0
-The National,The_National,Coach,Athletic,Terzić,9,0,970000,-10000.0,Fit,7,1.3,5,1.3,4,1.3
+The National,The_National,Defender/Midfielder,Atletico,Marcos Llorente,39,0,5620000,10000.0,Fit,9,4.3,20,5.0,19,3.8
+The National,The_National,Defender,Celta,Lago,38,0,2610000,-30000.0,One yellow card away from suspension,9,4.2,24,4.8,14,3.5
+The National,The_National,Defender,Elche,Chust,37,0,1820000,70000.0,Fit,9,4.1,13,3.3,24,4.8
+The National,The_National,Defender,Sevilla,Suazo,32,0,2840000,-20000.0,Fit,9,3.6,14,3.5,18,3.6
+The National,The_National,Defender,Real Sociedad,Jon Martin,30,0,3170000,50000.0,Fit,8,3.8,23,7.7,7,1.4
+The National,The_National,Defender,Osasuna,Rosier,5,0,1160000,20000.0,Fit,2,2.5,3,3.0,2,2.0
+The National,The_National,Midfielder/Defender/Forward,Elche,German Valera,43,0,5290000,20000.0,Fit,9,4.8,13,3.3,30,6.0
+The National,The_National,Midfielder/Forward,Valencia,Javi Guerra,34,0,3300000,30000.0,Fit,9,3.8,16,3.2,18,4.5
+The National,The_National,Midfielder,Rayo Vallecano,Unai Lopez,34,0,2360000,10000.0,Fit,8,4.3,16,5.3,18,3.6
+The National,The_National,Midfielder,Valencia,Guido Rodriguez,29,0,3390000,10000.0,Fit,6,4.8,20,5.0,9,4.5
+The National,The_National,Midfielder,Atletico,Johnny,28,0,3230000,10000.0,Fit,6,4.7,15,7.5,13,3.3
+The National,The_National,Midfielder,Rayo Vallecano,Pedro Diaz,24,0,1100000,-10000.0,Fit,7,3.4,9,4.5,15,3.0
+The National,The_National,Midfielder,Athletic,Peio Canales,16,0,1690000,-20000.0,Fit,5,3.2,8,4.0,8,2.7
+The National,The_National,Forward,Barcelona,Raphinha,118,0,24410000,10000.0,Fit,8,14.8,52,17.3,66,13.2
+The National,The_National,Forward,Deportivo,Nsongo,48,0,3640000,30000.0,Fit,9,5.3,31,6.2,17,4.3
+The National,The_National,Forward,Getafe,Enes Unal,28,0,2660000,-10000.0,Fit,8,3.5,22,4.4,6,2.0
+The National,The_National,Forward,Rayo Vallecano,Alemão,19,0,690000,-10000.0,Fit,7,2.7,4,2.0,15,3.0
+The National,The_National,Coach,Athletic,Terzić,9,0,960000,-10000.0,Fit,7,1.3,5,1.3,4,1.3

@@ -1399,33 +1399,43 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4904,Round 6,finished,50766,finished,26780,Íñigo Pérez,Villarreal,5,Raifc,RaiFC,coach,3.0,1
 4904,Round 6,finished,50766,finished,1927,Gerard Moreno,Villarreal,4,Locombia_Fc,Locombia FC,starter,,0
 4904,Round 6,finished,50766,finished,34479,Pépé,Villarreal,4,The_National,The National,starter,,0
-4904,Round 6,finished,50765,preview,39736,Paco Cortés,Levante,4,,,,,0
-4904,Round 6,finished,50765,preview,25815,Nacho Pérez,Levante,2,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
-4904,Round 6,finished,50765,preview,41385,Bardeli,Levante,3,,,,,0
-4904,Round 6,finished,50765,preview,39431,Thiago Fernández,Levante,4,General_Hansi_Topete,"General ""Hansi” Topete",reserve,,0
-4904,Round 6,finished,50765,preview,17937,Iván Romero,Levante,4,,,,,0
-4904,Round 6,finished,50765,preview,37726,Oriol Rey,Levante,3,The_National,The National,starter,,0
-4904,Round 6,finished,50765,preview,29661,Olasagasti,Levante,3,,,,,0
-4904,Round 6,finished,50765,preview,1721,Manu Sánchez,Levante,2,Raifc,RaiFC,starter,,0
-4904,Round 6,finished,50765,preview,42757,Ndukwe,Levante,2,,,,,0
-4904,Round 6,finished,50765,preview,37739,De la Fuente,Levante,2,Hernan_Krezzpo,Hernan Krezzpo,starter,,0
-4904,Round 6,finished,50765,preview,2184,Ryan,Levante,1,Cd_Numancia,CD Numancia,starter,,0
-4904,Round 6,finished,50765,preview,15396,Brugué,Levante,4,Freejulian,FreeJulian,starter,,0
-4904,Round 6,finished,50765,preview,2480,Mandi,Levante,2,Manchester_Tity,Manchester Tity,starter,,0
-4904,Round 6,finished,50765,preview,43171,Johaneko,Athletic,2,,,,,0
-4904,Round 6,finished,50765,preview,27996,Paredes,Athletic,2,General_Hansi_Topete,"General ""Hansi” Topete",reserve,,0
-4904,Round 6,finished,50765,preview,17057,Sancet,Athletic,3,,,,,0
-4904,Round 6,finished,50765,preview,33938,Sannadi,Athletic,4,,,,,0
-4904,Round 6,finished,50765,preview,897,Berenguer,Athletic,4,,,,,0
-4904,Round 6,finished,50765,preview,24474,Robert Navarro,Athletic,4,,,,,0
-4904,Round 6,finished,50765,preview,2055,De Galarreta,Athletic,3,,,,,0
-4904,Round 6,finished,50765,preview,30210,Jauregizar,Athletic,3,,,,,0
-4904,Round 6,finished,50765,preview,1074,Yuri,Athletic,2,,,,,0
-4904,Round 6,finished,50765,preview,1613,Laporte,Athletic,2,Raifc,RaiFC,starter,,0
-4904,Round 6,finished,50765,preview,17021,Unai Simón,Athletic,1,Hernan_Krezzpo,Hernan Krezzpo,starter,,0
-4904,Round 6,finished,50765,preview,42572,Terzić,Athletic,5,Cd_Numancia,CD Numancia,coach,,0
-4904,Round 6,finished,50765,preview,17056,Guruzeta,Athletic,4,Raifc,RaiFC,reserve,,0
-4904,Round 6,finished,50765,preview,41566,Gerenabarrena,Athletic,3,The_National,The National,starter,,0
+4904,Round 6,finished,50765,finished,17121,Víctor García,Levante,3,,,,3.0,1
+4904,Round 6,finished,50765,finished,25815,Nacho Pérez,Levante,2,General_Hansi_Topete,"General ""Hansi” Topete",starter,3.0,1
+4904,Round 6,finished,50765,finished,32435,Etta Eyong,Levante,4,,,,8.0,1
+4904,Round 6,finished,50765,finished,37726,Oriol Rey,Levante,3,The_National,The National,starter,3.0,1
+4904,Round 6,finished,50765,finished,39736,Paco Cortés,Levante,4,,,,2.0,1
+4904,Round 6,finished,50765,finished,2184,Ryan,Levante,1,Cd_Numancia,CD Numancia,starter,7.0,1
+4904,Round 6,finished,50765,finished,1721,Manu Sánchez,Levante,2,Raifc,RaiFC,starter,3.0,1
+4904,Round 6,finished,50765,finished,2480,Mandi,Levante,2,Manchester_Tity,Manchester Tity,starter,3.0,1
+4904,Round 6,finished,50765,finished,42757,Ndukwe,Levante,2,,,,7.0,1
+4904,Round 6,finished,50765,finished,38143,Toljan,Levante,2,,,,1.0,1
+4904,Round 6,finished,50765,finished,39431,Thiago Fernández,Levante,4,General_Hansi_Topete,"General ""Hansi” Topete",reserve,7.0,1
+4904,Round 6,finished,50765,finished,29661,Olasagasti,Levante,3,,,,5.0,1
+4904,Round 6,finished,50765,finished,37488,Requena,Levante,3,,,,6.0,1
+4904,Round 6,finished,50765,finished,15396,Brugué,Levante,4,Freejulian,FreeJulian,starter,18.0,1
+4904,Round 6,finished,50765,finished,17937,Iván Romero,Levante,4,,,,6.0,1
+4904,Round 6,finished,50765,finished,43270,Ratkov,Levante,4,,,,2.0,1
+4904,Round 6,finished,50765,finished,39398,Luis Castro,Levante,5,,,,3.0,1
+4904,Round 6,finished,50765,finished,37739,De la Fuente,Levante,2,Hernan_Krezzpo,Hernan Krezzpo,starter,,0
+4904,Round 6,finished,50765,finished,1995,Iñaki Williams,Athletic,4,,,,2.0,1
+4904,Round 6,finished,50765,finished,21008,Nico Williams,Athletic,4,,,,3.0,1
+4904,Round 6,finished,50765,finished,27996,Paredes,Athletic,2,General_Hansi_Topete,"General ""Hansi” Topete",reserve,2.0,1
+4904,Round 6,finished,50765,finished,35171,Peio Canales,Athletic,3,,,,3.0,1
+4904,Round 6,finished,50765,finished,38449,Rego,Athletic,3,,,,2.0,1
+4904,Round 6,finished,50765,finished,17021,Unai Simón,Athletic,1,Hernan_Krezzpo,Hernan Krezzpo,starter,3.0,1
+4904,Round 6,finished,50765,finished,1074,Yuri,Athletic,2,,,,5.0,1
+4904,Round 6,finished,50765,finished,5771,Yeray,Athletic,2,,,,3.0,1
+4904,Round 6,finished,50765,finished,1613,Laporte,Athletic,2,Raifc,RaiFC,starter,-1.0,1
+4904,Round 6,finished,50765,finished,37898,Rincón,Athletic,2,,,,3.0,1
+4904,Round 6,finished,50765,finished,30210,Jauregizar,Athletic,3,,,,-2.0,1
+4904,Round 6,finished,50765,finished,2055,De Galarreta,Athletic,3,,,,3.0,1
+4904,Round 6,finished,50765,finished,43171,Johaneko,Athletic,2,,,,-3.0,1
+4904,Round 6,finished,50765,finished,24474,Robert Navarro,Athletic,4,,,,6.0,1
+4904,Round 6,finished,50765,finished,897,Berenguer,Athletic,4,,,,11.0,1
+4904,Round 6,finished,50765,finished,33938,Sannadi,Athletic,4,,,,3.0,1
+4904,Round 6,finished,50765,finished,42572,Terzić,Athletic,5,Cd_Numancia,CD Numancia,coach,0.0,1
+4904,Round 6,finished,50765,finished,17056,Guruzeta,Athletic,4,Raifc,RaiFC,reserve,,0
+4904,Round 6,finished,50765,finished,41566,Gerenabarrena,Athletic,3,The_National,The National,starter,,0
 4902,Round 4,finished,50743,finished,1125,Bartra,Betis,2,,,,8.0,1
 4902,Round 4,finished,50743,finished,8670,Roro Riquelme,Betis,3,General_Hansi_Topete,"General ""Hansi” Topete",starter,1.0,1
 4902,Round 4,finished,50743,finished,37416,Deossa,Betis,3,,,,3.0,1

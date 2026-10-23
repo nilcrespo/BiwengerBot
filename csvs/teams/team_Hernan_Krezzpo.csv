@@ -1,17 +1,17 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Hernan Krezzpo,Hernan_Krezzpo,Goalkeeper,Malaga,Alfonso Herrero,41,0,3510000,-60000.0,Fit,9,4.6,14,2.8,27,6.8
-Hernan Krezzpo,Hernan_Krezzpo,Goalkeeper,Athletic,Unai Simon,40,0,4280000,0.0,Fit,8,5.0,11,2.8,29,7.3
+Hernan Krezzpo,Hernan_Krezzpo,Goalkeeper,Malaga,Alfonso Herrero,41,0,3460000,-50000.0,Fit,9,4.6,14,2.8,27,6.8
+Hernan Krezzpo,Hernan_Krezzpo,Goalkeeper,Athletic,Unai Simon,40,0,4240000,-40000.0,Fit,8,5.0,11,2.8,29,7.3
 Hernan Krezzpo,Hernan_Krezzpo,Goalkeeper,Malaga,Carlos Lopez,0,0,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Hernan Krezzpo,Hernan_Krezzpo,Defender,Levante,De La Fuente,58,0,5340000,30000.0,Doubtful. Undetermined discomfort.,8,7.3,28,9.3,30,6.0
-Hernan Krezzpo,Hernan_Krezzpo,Defender,Villarreal,Veiga,41,0,4500000,10000.0,Fit,8,5.1,18,6.0,23,4.6
-Hernan Krezzpo,Hernan_Krezzpo,Defender,Espanyol,Cabrera,22,0,2480000,40000.0,Fit,6,3.7,9,3.0,13,4.3
-Hernan Krezzpo,Hernan_Krezzpo,Defender,Real Sociedad,Hector Fort,10,0,1410000,40000.0,Fit,3,3.3,2,2.0,8,4.0
-Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Barcelona,Pedri,62,0,14130000,-50000.0,Fit,9,6.9,28,7.0,34,6.8
-Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Betis,Isco,45,0,8990000,90000.0,Fit,8,5.6,32,8.0,13,3.3
-Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Sevilla,Agoume,43,0,3310000,10000.0,Fit,9,4.8,18,4.5,25,5.0
-Hernan Krezzpo,Hernan_Krezzpo,Forward,Rayo Vallecano,Camello,81,0,13100000,90000.0,Fit,8,10.1,36,12.0,45,9.0
-Hernan Krezzpo,Hernan_Krezzpo,Forward/Midfielder,Levante,Brugue,64,0,4390000,40000.0,Fit,8,8.0,49,12.3,15,3.8
-Hernan Krezzpo,Hernan_Krezzpo,Forward/Midfielder,Levante,Ivan Romero,58,0,4780000,100000.0,Fit,9,6.4,36,9.0,22,4.4
-Hernan Krezzpo,Hernan_Krezzpo,Forward/Midfielder,Deportivo,Luismi Cruz,42,0,2830000,-40000.0,Fit,9,4.7,17,3.4,25,6.3
-Hernan Krezzpo,Hernan_Krezzpo,Forward,Celta,Jutgla,39,0,2830000,80000.0,Fit,9,4.3,32,6.4,7,1.8
-Hernan Krezzpo,Hernan_Krezzpo,Forward/Midfielder,Sevilla,Felix Correia,21,0,2810000,20000.0,Fit,5,4.2,9,4.5,12,4.0
+Hernan Krezzpo,Hernan_Krezzpo,Defender,Levante,De La Fuente,58,0,5320000,-20000.0,Doubtful. Minor discomforts.,8,7.3,28,9.3,30,6.0
+Hernan Krezzpo,Hernan_Krezzpo,Defender,Villarreal,Veiga,41,0,4520000,20000.0,Fit,8,5.1,18,6.0,23,4.6
+Hernan Krezzpo,Hernan_Krezzpo,Defender,Espanyol,Cabrera,22,0,2520000,40000.0,Fit,6,3.7,9,3.0,13,4.3
+Hernan Krezzpo,Hernan_Krezzpo,Defender,Real Sociedad,Hector Fort,10,0,1460000,50000.0,Fit,3,3.3,2,2.0,8,4.0
+Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Barcelona,Pedri,62,0,14090000,-40000.0,Fit,9,6.9,28,7.0,34,6.8
+Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Betis,Isco,45,0,9080000,90000.0,Fit,8,5.6,32,8.0,13,3.3
+Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Sevilla,Agoume,43,0,3330000,20000.0,Fit,9,4.8,18,4.5,25,5.0
+Hernan Krezzpo,Hernan_Krezzpo,Forward,Rayo Vallecano,Camello,81,0,13160000,60000.0,Fit,8,10.1,36,12.0,45,9.0
+Hernan Krezzpo,Hernan_Krezzpo,Forward/Midfielder,Levante,Brugue,64,0,4470000,80000.0,Fit,8,8.0,49,12.3,15,3.8
+Hernan Krezzpo,Hernan_Krezzpo,Forward/Midfielder,Levante,Ivan Romero,58,0,4880000,100000.0,Fit,9,6.4,36,9.0,22,4.4
+Hernan Krezzpo,Hernan_Krezzpo,Forward/Midfielder,Deportivo,Luismi Cruz,42,0,2800000,-30000.0,Fit,9,4.7,17,3.4,25,6.3
+Hernan Krezzpo,Hernan_Krezzpo,Forward,Celta,Jutgla,39,0,2910000,80000.0,Fit,9,4.3,32,6.4,7,1.8
+Hernan Krezzpo,Hernan_Krezzpo,Forward/Midfielder,Sevilla,Felix Correia,21,0,2830000,20000.0,Fit,5,4.2,9,4.5,12,4.0

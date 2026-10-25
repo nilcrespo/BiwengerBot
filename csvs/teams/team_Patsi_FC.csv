@@ -1,21 +1,21 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Patsi F.C,Patsi_FC,Goalkeeper,Rayo Vallecano,Audero,17,0,2080000,-30000.0,Fit,4,4.3,4,4.0,13,4.3
-Patsi F.C,Patsi_FC,Defender,Barcelona,Espart,45,0,4730000,70000.0,Fit,7,6.4,17,5.7,28,7.0
-Patsi F.C,Patsi_FC,Defender,Sevilla,Kike Salas,28,0,3150000,10000.0,Fit,7,4.0,11,3.7,17,4.3
-Patsi F.C,Patsi_FC,Defender/Midfielder,Valencia,Gaya,23,0,1740000,0.0,Fit,7,3.3,12,3.0,11,3.7
-Patsi F.C,Patsi_FC,Defender/Midfielder,Villarreal,Carlos Romero,19,0,2620000,-60000.0,Injured. Discomfort in the left adductor. Estimated return: Late October.,6,3.2,1,1.0,18,3.6
-Patsi F.C,Patsi_FC,Defender,Valencia,De Haas,19,0,1570000,-20000.0,Fit,5,3.8,12,4.0,7,3.5
-Patsi F.C,Patsi_FC,Defender,Getafe,Carvajal,3,0,3660000,40000.0,Fit,1,3.0,3,3.0,0,0.0
-Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,46,0,4530000,-60000.0,Fit,8,5.8,32,6.4,14,4.7
-Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,42,0,4460000,-50000.0,Fit,9,4.7,26,5.2,16,4.0
-Patsi F.C,Patsi_FC,Midfielder,Racing,Ivan Martin,34,0,2770000,-40000.0,Fit,7,4.9,21,7.0,13,3.3
-Patsi F.C,Patsi_FC,Midfielder/Forward,Racing,Sergio Canales,30,0,3710000,-40000.0,Fit,9,3.3,15,3.8,15,3.0
-Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,12,0,860000,-10000.0,Fit,4,3.0,9,4.5,3,1.5
-Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,48,0,12140000,180000.0,Fit,6,8.0,31,10.3,17,5.7
-Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,47,0,9020000,100000.0,Fit,9,5.2,17,4.3,30,6.0
-Patsi F.C,Patsi_FC,Forward,Athletic,Nico Williams,39,0,6800000,60000.0,Fit,7,5.6,32,8.0,7,2.3
-Patsi F.C,Patsi_FC,Forward/Midfielder,Valencia,David Otorbi,39,0,2850000,70000.0,Fit,8,4.9,17,4.3,22,5.5
-Patsi F.C,Patsi_FC,Forward/Defender/Midfielder,Elche,Tete Morente,29,0,1340000,-20000.0,Fit,9,3.2,12,3.0,17,3.4
-Patsi F.C,Patsi_FC,Forward,Betis,Parrott,23,0,3760000,30000.0,Fit,6,3.8,19,4.8,4,2.0
-Patsi F.C,Patsi_FC,Forward,Atletico,Sørloth,2,0,2360000,-30000.0,Fit,1,2.0,0,0.0,2,2.0
+Patsi F.C,Patsi_FC,Goalkeeper,Rayo Vallecano,Audero,23,0,2080000,0.0,Fit,5,4.6,10,5.0,13,4.3
+Patsi F.C,Patsi_FC,Defender,Barcelona,Espart,45,0,4800000,70000.0,Fit,7,6.4,17,5.7,28,7.0
+Patsi F.C,Patsi_FC,Defender,Sevilla,Kike Salas,28,0,3160000,10000.0,Fit,7,4.0,11,3.7,17,4.3
+Patsi F.C,Patsi_FC,Defender/Midfielder,Valencia,Gaya,27,0,1740000,0.0,Fit,8,3.4,16,3.2,11,3.7
+Patsi F.C,Patsi_FC,Defender,Valencia,De Haas,22,0,1560000,-10000.0,Fit,6,3.7,15,3.8,7,3.5
+Patsi F.C,Patsi_FC,Defender/Midfielder,Villarreal,Carlos Romero,19,0,2600000,-20000.0,Doubtful. Discomfort in the left adductor.,6,3.2,1,1.0,18,3.6
+Patsi F.C,Patsi_FC,Defender,Getafe,Carvajal,3,0,3690000,30000.0,Fit,1,3.0,3,3.0,0,0.0
+Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,55,0,4470000,10000.0,Fit,10,5.5,26,5.2,29,5.8
+Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,46,0,4500000,-30000.0,Fit,8,5.8,32,6.4,14,4.7
+Patsi F.C,Patsi_FC,Midfielder,Racing,Ivan Martin,39,0,2760000,-10000.0,Fit,8,4.9,26,6.5,13,3.3
+Patsi F.C,Patsi_FC,Midfielder/Forward,Racing,Sergio Canales,38,0,3700000,-10000.0,Fit,10,3.8,23,4.6,15,3.0
+Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,12,0,860000,0.0,Fit,4,3.0,9,4.5,3,1.5
+Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,48,0,12320000,180000.0,Fit,6,8.0,31,10.3,17,5.7
+Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,47,0,9130000,110000.0,Fit,9,5.2,17,4.3,30,6.0
+Patsi F.C,Patsi_FC,Forward/Midfielder,Valencia,David Otorbi,40,0,2860000,10000.0,Injured. Muscle injury. Estimated return: Indefinite return.,9,4.4,18,3.6,22,5.5
+Patsi F.C,Patsi_FC,Forward,Athletic,Nico Williams,39,0,6870000,70000.0,Fit,7,5.6,32,8.0,7,2.3
+Patsi F.C,Patsi_FC,Forward/Defender/Midfielder,Elche,Tete Morente,33,0,1330000,-10000.0,Fit,10,3.3,12,3.0,21,3.5
+Patsi F.C,Patsi_FC,Forward,Betis,Parrott,23,0,3780000,20000.0,Fit,6,3.8,19,4.8,4,2.0
+Patsi F.C,Patsi_FC,Forward,Atletico,Sørloth,4,0,2350000,-10000.0,Fit,2,2.0,2,2.0,2,2.0
 Patsi F.C,Patsi_FC,Forward,Rayo Vallecano,De Tomas,0,0,210000,0.0,Fit,0,0.0,0,0.0,0,0.0

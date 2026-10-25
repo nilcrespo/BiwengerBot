@@ -1,21 +1,21 @@
 position,club,name,price,change,status,owner,last_sale,recent_pts,this_season_pts,last_season_pts,scraped_at
-Defender,Athletic,Yuri,2570000,-30000.0,,Free Agent,"2,570,000",20,19,0,2026-10-24
-Defender,Levante,Mandi,1550000,-20000.0,,Free Agent,"1,550,000",8,27,0,2026-10-24
-Goalkeeper,Alaves,Sivera,4730000,-70000.0,,Free Agent,"4,730,000",22,54,0,2026-10-24
-Defender/Midfielder,Getafe,Djene,1200000,-30000.0,,Free Agent,"1,200,000",5,12,0,2026-10-24
-Defender,Real Sociedad,Sergio Gomez,2620000,10000.0,,Free Agent,"2,620,000",15,31,0,2026-10-24
-Goalkeeper,Rayo Vallecano,Cardenas,700000,-10000.0,,Free Agent,"700,000",2,7,0,2026-10-24
-Forward/Midfielder,Espanyol,Jofre Carreras,170000,0.0,,Free Agent,"170,000",0,3,0,2026-10-24
-Midfielder/Defender,Alaves,Benavidez,150000,0.0,,Free Agent,"150,000",7,12,0,2026-10-24
-Midfielder,Osasuna,Echegoyen,160000,-10000.0,,Free Agent,"160,000",3,3,0,2026-10-24
-Forward/Midfielder,Getafe,Uche,1010000,-10000.0,,Free Agent,"1,010,000",0,0,22,2026-10-24
-Coach,Espanyol,Manolo Gonzalez,550000,-10000.0,,Free Agent,"550,000",4,8,0,2026-10-24
-Goalkeeper,Villarreal,Luiz Junior,1160000,-10000.0,,Free Agent,"1,160,000",0,1,0,2026-10-24
-Forward,Betis,Morante,630000,-20000.0,,Free Agent,"630,000",10,10,0,2026-10-24
-Midfielder,Elche,Neto,380000,0.0,,Free Agent,"380,000",9,13,0,2026-10-24
-Midfielder,Rayo Vallecano,Becerra,150000,0.0,,Free Agent,"150,000",0,0,3,2026-10-24
-Forward,Alaves,Manas,160000,10000.0,,Free Agent,"160,000",14,24,0,2026-10-24
-Defender,Malaga,Alex Pastor,180000,0.0,,Free Agent,"180,000",0,0,0,2026-10-24
-Forward/Midfielder,Racing,Guliashvili,170000,0.0,,Free Agent,"170,000",7,9,0,2026-10-24
-Defender,Malaga,Puga,1310000,-10000.0,,Free Agent,"1,310,000",13,32,0,2026-10-24
-Defender,Espanyol,Drkusic,690000,-10000.0,,Free Agent,"690,000",5,11,0,2026-10-24
+Defender,Levante,Manu Sanchez,1730000,0.0,,Free Agent,"1,730,000",19,31,0,2026-10-25
+Defender,Elche,Bigas,800000,0.0,,Free Agent,"800,000",7,11,0,2026-10-25
+Midfielder,Celta,Miguel Roman,2070000,-20000.0,,Free Agent,"2,070,000",24,44,0,2026-10-25
+Defender,Real Sociedad,Zubeldia,1070000,0.0,,Free Agent,"1,070,000",10,19,0,2026-10-25
+Defender,Real Sociedad,Aihen,220000,0.0,,Free Agent,"220,000",6,9,0,2026-10-25
+Coach,Barcelona,Hansi Flick,4690000,20000.0,,Free Agent,"4,690,000",15,27,0,2026-10-25
+Midfielder,Celta,Ilaix Moriba,3250000,-10000.0,,Free Agent,"3,250,000",30,37,0,2026-10-25
+Defender,Valencia,Copete,150000,0.0,,Free Agent,"150,000",0,0,56,2026-10-25
+Forward/Midfielder,Malaga,Juan Cruz,870000,0.0,,Free Agent,"870,000",6,19,0,2026-10-25
+Defender,Real Madrid,Alvaro Carreras,1000000,0.0,,Free Agent,"1,000,000",18,25,0,2026-10-25
+Defender,Osasuna,Boyomo,1450000,30000.0,,Free Agent,"1,450,000",5,8,0,2026-10-25
+Forward,Alaves,Toni Martinez,2300000,-10000.0,,Free Agent,"2,300,000",15,26,0,2026-10-25
+Defender/Midfielder,Alaves,Yusi,670000,0.0,,Free Agent,"670,000",7,22,0,2026-10-25
+Goalkeeper,Sevilla,Odysseas,2740000,-20000.0,,Free Agent,"2,740,000",19,33,0,2026-10-25
+Goalkeeper,Villarreal,Gulacsi,2500000,0.0,,Free Agent,"2,500,000",17,29,0,2026-10-25
+Midfielder/Forward,Elche,Diangana,190000,0.0,,Free Agent,"190,000",0,0,54,2026-10-25
+Defender,Sevilla,Sangante,620000,0.0,,Free Agent,"620,000",1,0,0,2026-10-25
+Midfielder,Malaga,Ochoa,150000,0.0,,Free Agent,"150,000",0,0,0,2026-10-25
+Coach,Malaga,Funes,340000,0.0,,Free Agent,"340,000",2,5,0,2026-10-25
+Forward,Barcelona,Abdelkarim,420000,0.0,,Free Agent,"420,000",2,5,0,2026-10-25

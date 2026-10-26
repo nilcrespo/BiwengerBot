@@ -1,21 +1,22 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-"General ""Hansi” Topete",General_Hansi_Topete,Goalkeeper,Barcelona,Joan Garcia,43,0,6870000,0.0,Fit,8,5.4,16,4.0,27,6.8
-"General ""Hansi” Topete",General_Hansi_Topete,Defender,Athletic,Paredes,37,0,2740000,20000.0,Fit,6,6.2,24,8.0,13,4.3
-"General ""Hansi” Topete",General_Hansi_Topete,Defender,Barcelona,Kounde,30,0,3060000,-20000.0,Injured. Sprained left ankle. Estimated return: Late October.,6,5.0,15,5.0,15,5.0
-"General ""Hansi” Topete",General_Hansi_Topete,Defender,Barcelona,Cancelo,28,0,4290000,0.0,Fit,6,4.7,20,6.7,8,2.7
-"General ""Hansi” Topete",General_Hansi_Topete,Defender,Athletic,Vivian,0,97,1340000,-10000.0,Fit,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Goalkeeper,Barcelona,Joan Garcia,48,0,6830000,-40000.0,Fit,9,5.3,21,4.2,27,6.8
+"General ""Hansi” Topete",General_Hansi_Topete,Defender,Athletic,Paredes,51,0,2820000,80000.0,Fit,7,7.3,38,9.5,13,4.3
+"General ""Hansi” Topete",General_Hansi_Topete,Defender,Barcelona,Cancelo,31,0,4290000,0.0,Fit,7,4.4,23,5.8,8,2.7
+"General ""Hansi” Topete",General_Hansi_Topete,Defender,Barcelona,Kounde,30,0,2990000,-70000.0,Injured. Sprained left ankle. Estimated return: Late October.,6,5.0,15,5.0,15,5.0
+"General ""Hansi” Topete",General_Hansi_Topete,Defender,Athletic,Vivian,7,0,1380000,40000.0,Fit,1,7.0,7,7.0,0,0.0
 "General ""Hansi” Topete",General_Hansi_Topete,Defender,Rayo Vallecano,Luiz Felipe,0,29,150000,0.0,Injured. Torn anterior cruciate ligament in his right knee. Estimated return: Mid-July.,0,0.0,0,0.0,0,0.0
 "General ""Hansi” Topete",General_Hansi_Topete,Defender,Athletic,Egiluz,0,0,150000,0.0,Injured. Rupture of the anterior cruciate ligament of the right knee. Estimated return: Indefinite return.,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",General_Hansi_Topete,Midfielder,Real Sociedad,Soler,41,0,5190000,40000.0,Fit,9,4.6,13,3.3,28,5.6
-"General ""Hansi” Topete",General_Hansi_Topete,Midfielder/Defender/Forward,Betis,Ruibal,0,120,850000,20000.0,Fit,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",General_Hansi_Topete,Forward,Real Madrid,Mbappe,90,0,24060000,40000.0,Fit,9,10.0,72,14.4,18,4.5
-"General ""Hansi” Topete",General_Hansi_Topete,Forward,Barcelona,Gabriel Jesus,41,0,5920000,80000.0,Fit,5,8.2,25,12.5,16,5.3
-"General ""Hansi” Topete",General_Hansi_Topete,Forward,Villarreal,Ayoze,41,0,4880000,20000.0,Fit,10,4.1,22,5.5,19,3.2
-"General ""Hansi” Topete",General_Hansi_Topete,Forward,Atletico,Julian Alvarez,31,0,7190000,180000.0,Fit,6,5.2,16,5.3,15,5.0
-"General ""Hansi” Topete",General_Hansi_Topete,Forward,Alaves,Manas,24,0,180000,20000.0,Fit,7,3.4,21,4.2,3,1.5
-"General ""Hansi” Topete",General_Hansi_Topete,Forward/Midfielder,Racing,Andres Martin,19,0,2740000,0.0,Fit,6,3.2,19,4.8,0,0.0
-"General ""Hansi” Topete",General_Hansi_Topete,Forward/Midfielder,Rayo Vallecano,Isi Palazon,10,0,2540000,0.0,Fit,4,2.5,3,1.5,7,3.5
-"General ""Hansi” Topete",General_Hansi_Topete,Forward,Real Madrid,Endrick,3,0,1860000,10000.0,Fit,2,1.5,2,2.0,1,1.0
-"General ""Hansi” Topete",General_Hansi_Topete,Forward/Midfielder,Sevilla,Ruben Vargas,1,0,1490000,20000.0,Fit,2,0.5,2,2.0,-1,-1.0
+"General ""Hansi” Topete",General_Hansi_Topete,Midfielder,Real Sociedad,Soler,41,0,5220000,30000.0,Fit,9,4.6,13,3.3,28,5.6
+"General ""Hansi” Topete",General_Hansi_Topete,Midfielder/Defender/Forward,Betis,Ruibal,0,120,870000,20000.0,Fit,0,0.0,0,0.0,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Forward,Real Madrid,Mbappe,105,0,24130000,70000.0,Fit,10,10.5,72,14.4,33,6.6
+"General ""Hansi” Topete",General_Hansi_Topete,Forward,Barcelona,Gabriel Jesus,42,0,5970000,50000.0,Fit,6,7.0,26,8.7,16,5.3
+"General ""Hansi” Topete",General_Hansi_Topete,Forward,Villarreal,Ayoze,41,0,4890000,10000.0,Fit,10,4.1,22,5.5,19,3.2
+"General ""Hansi” Topete",General_Hansi_Topete,Forward,Atletico,Julian Alvarez,31,0,7410000,220000.0,Fit,6,5.2,16,5.3,15,5.0
+"General ""Hansi” Topete",General_Hansi_Topete,Forward,Alaves,Manas,24,0,200000,20000.0,Fit,7,3.4,21,4.2,3,1.5
+"General ""Hansi” Topete",General_Hansi_Topete,Forward/Midfielder,Racing,Andres Martin,19,0,2710000,-30000.0,Fit,6,3.2,19,4.8,0,0.0
+"General ""Hansi” Topete",General_Hansi_Topete,Forward/Midfielder,Rayo Vallecano,Isi Palazon,10,0,2490000,-50000.0,Fit,4,2.5,3,1.5,7,3.5
+"General ""Hansi” Topete",General_Hansi_Topete,Forward,Real Madrid,Endrick,3,0,1820000,-40000.0,Fit,2,1.5,2,2.0,1,1.0
+"General ""Hansi” Topete",General_Hansi_Topete,Forward/Midfielder,Sevilla,Ruben Vargas,1,0,1500000,10000.0,Fit,2,0.5,2,2.0,-1,-1.0
 "General ""Hansi” Topete",General_Hansi_Topete,Forward/Midfielder,Valencia,Sergi Canos,0,0,150000,0.0,Injured. Cruciate ligament injury. Estimated return: Undetermined.,0,0.0,0,0.0,0,0.0
-"General ""Hansi” Topete",General_Hansi_Topete,Coach,Sevilla,Luis Garcia,14,0,1000000,0.0,Fit,9,1.6,6,1.5,8,1.6
+"General ""Hansi” Topete",General_Hansi_Topete,Coach,Barcelona,Hansi Flick,27,0,4660000,-30000.0,Fit,10,2.7,12,2.4,15,3.0
+"General ""Hansi” Topete",General_Hansi_Topete,Coach,Sevilla,Luis Garcia,14,0,990000,-10000.0,Fit,9,1.6,6,1.5,8,1.6

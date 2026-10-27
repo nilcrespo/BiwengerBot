@@ -1,21 +1,19 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
 Patsi F.C,Patsi_FC,Goalkeeper,Rayo Vallecano,Audero,23,0,2080000,0.0,Fit,5,4.6,10,5.0,13,4.3
-Patsi F.C,Patsi_FC,Defender,Barcelona,Espart,49,0,4820000,20000.0,Fit,8,6.1,21,5.3,28,7.0
-Patsi F.C,Patsi_FC,Defender,Sevilla,Kike Salas,28,0,3160000,0.0,Fit,7,4.0,11,3.7,17,4.3
+Patsi F.C,Patsi_FC,Defender,Sevilla,Kike Salas,35,0,3170000,10000.0,Fit,8,4.4,18,4.5,17,4.3
 Patsi F.C,Patsi_FC,Defender/Midfielder,Valencia,Gaya,27,0,1740000,0.0,Fit,8,3.4,16,3.2,11,3.7
-Patsi F.C,Patsi_FC,Defender,Valencia,De Haas,22,0,1540000,-20000.0,Fit,6,3.7,15,3.8,7,3.5
-Patsi F.C,Patsi_FC,Defender/Midfielder,Villarreal,Carlos Romero,19,0,2540000,-60000.0,Doubtful. Discomfort in the left adductor.,6,3.2,1,1.0,18,3.6
-Patsi F.C,Patsi_FC,Defender,Getafe,Carvajal,4,0,3690000,0.0,Fit,2,2.0,3,3.0,1,1.0
-Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,55,0,4500000,30000.0,Fit,10,5.5,26,5.2,29,5.8
-Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,49,0,4420000,-80000.0,One yellow card away from suspension,9,5.4,32,6.4,17,4.3
-Patsi F.C,Patsi_FC,Midfielder,Racing,Ivan Martin,39,0,2750000,-10000.0,Fit,8,4.9,26,6.5,13,3.3
-Patsi F.C,Patsi_FC,Midfielder/Forward,Racing,Sergio Canales,38,0,3700000,0.0,Fit,10,3.8,23,4.6,15,3.0
-Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,12,0,850000,-10000.0,Fit,4,3.0,9,4.5,3,1.5
-Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,53,0,9230000,100000.0,Fit,10,5.3,23,4.6,30,6.0
-Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,52,0,12470000,150000.0,Fit,7,7.4,31,10.3,21,5.3
-Patsi F.C,Patsi_FC,Forward,Athletic,Nico Williams,46,0,6950000,80000.0,Fit,8,5.8,39,7.8,7,2.3
-Patsi F.C,Patsi_FC,Forward/Midfielder,Valencia,David Otorbi,40,0,2610000,-250000.0,Injured. Muscle injury. Estimated return: Indefinite return.,9,4.4,18,3.6,22,5.5
-Patsi F.C,Patsi_FC,Forward/Defender/Midfielder,Elche,Tete Morente,33,0,1320000,-10000.0,Fit,10,3.3,12,3.0,21,3.5
-Patsi F.C,Patsi_FC,Forward,Betis,Parrott,26,0,3760000,-20000.0,Fit,7,3.7,19,4.8,7,2.3
-Patsi F.C,Patsi_FC,Forward,Atletico,Sørloth,4,0,2320000,-30000.0,Fit,2,2.0,2,2.0,2,2.0
+Patsi F.C,Patsi_FC,Defender,Valencia,De Haas,22,0,1530000,-10000.0,Fit,6,3.7,15,3.8,7,3.5
+Patsi F.C,Patsi_FC,Defender/Midfielder,Villarreal,Carlos Romero,19,0,2520000,-20000.0,Fit,6,3.2,1,1.0,18,3.6
+Patsi F.C,Patsi_FC,Defender,Getafe,Carvajal,4,0,3610000,-80000.0,Fit,2,2.0,3,3.0,1,1.0
+Patsi F.C,Patsi_FC,Midfielder,Espanyol,Exposito,55,0,4530000,30000.0,Fit,10,5.5,26,5.2,29,5.8
+Patsi F.C,Patsi_FC,Midfielder/Forward,Getafe,Terrats,49,0,4340000,-80000.0,One yellow card away from suspension,9,5.4,32,6.4,17,4.3
+Patsi F.C,Patsi_FC,Midfielder,Racing,Ivan Martin,39,0,2750000,0.0,Fit,8,4.9,26,6.5,13,3.3
+Patsi F.C,Patsi_FC,Midfielder/Forward,Racing,Sergio Canales,38,0,3710000,10000.0,Fit,10,3.8,23,4.6,15,3.0
+Patsi F.C,Patsi_FC,Midfielder,Levante,Sotelo,12,0,840000,-10000.0,Fit,4,3.0,9,4.5,3,1.5
+Patsi F.C,Patsi_FC,Forward,Real Sociedad,Oyarzabal,53,0,9370000,140000.0,Fit,10,5.3,23,4.6,30,6.0
+Patsi F.C,Patsi_FC,Forward/Midfielder,Betis,Ez Abde,52,0,12590000,120000.0,Fit,7,7.4,31,10.3,21,5.3
+Patsi F.C,Patsi_FC,Forward,Athletic,Nico Williams,46,0,7050000,100000.0,Fit,8,5.8,39,7.8,7,2.3
+Patsi F.C,Patsi_FC,Forward/Defender/Midfielder,Elche,Tete Morente,33,0,1310000,-10000.0,Fit,10,3.3,12,3.0,21,3.5
+Patsi F.C,Patsi_FC,Forward,Betis,Parrott,26,0,3700000,-60000.0,Fit,7,3.7,19,4.8,7,2.3
+Patsi F.C,Patsi_FC,Forward,Atletico,Sørloth,4,0,2300000,-20000.0,Fit,2,2.0,2,2.0,2,2.0
 Patsi F.C,Patsi_FC,Forward,Rayo Vallecano,De Tomas,0,0,210000,0.0,Fit,0,0.0,0,0.0,0,0.0

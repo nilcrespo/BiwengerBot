@@ -3543,30 +3543,38 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4908,Round 10,active,50799,finished,18173,Militão,Real Madrid,2,Locombia_Fc,Locombia FC,reserve,,0
 4908,Round 10,active,50799,finished,16738,Courtois,Real Madrid,1,Raifc,RaiFC,starter,,0
 4908,Round 10,active,50799,finished,33796,Endrick,Real Madrid,4,General_Hansi_Topete,"General ""Hansi” Topete",reserve,,0
-4908,Round 10,active,50807,preview,41807,Robbie Ure,Sevilla,4,,,,,0
-4908,Round 10,active,50807,preview,43262,Félix Correia,Sevilla,4,Hernan_Krezzpo,Hernan Krezzpo,discarded,,0
-4908,Round 10,active,50807,preview,37733,Kochorashvili,Sevilla,3,,,,,0
-4908,Round 10,active,50807,preview,35615,Rubén Vargas,Sevilla,4,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
-4908,Round 10,active,50807,preview,32338,Agoumé,Sevilla,3,Hernan_Krezzpo,Hernan Krezzpo,starter,,0
-4908,Round 10,active,50807,preview,43272,Fofana,Sevilla,3,Cd_Numancia,CD Numancia,starter,,0
-4908,Round 10,active,50807,preview,38194,Suazo,Sevilla,2,The_National,The National,reserve,,0
-4908,Round 10,active,50807,preview,28115,Kike Salas,Sevilla,2,Patsi_FC,Patsi F.C,starter,,0
-4908,Round 10,active,50807,preview,38072,Castrín,Sevilla,2,,,,,0
-4908,Round 10,active,50807,preview,23840,Juan Iglesias,Sevilla,2,Cd_Numancia,CD Numancia,starter,,0
-4908,Round 10,active,50807,preview,38405,Odysseas,Sevilla,1,,,,,0
-4908,Round 10,active,50807,preview,26813,Marcão,Sevilla,2,Cd_Numancia,CD Numancia,discarded,,0
-4908,Round 10,active,50807,preview,21854,Luis García,Sevilla,5,General_Hansi_Topete,"General ""Hansi” Topete",coach,,0
-4908,Round 10,active,50807,preview,43264,Stassin,Sevilla,4,Manchester_Tity,Manchester Tity,starter,,0
-4908,Round 10,active,50807,preview,26360,Dubasin,Osasuna,4,,,,,0
-4908,Round 10,active,50807,preview,18398,Budimir,Osasuna,4,Cd_Numancia,CD Numancia,starter,,0
-4908,Round 10,active,50807,preview,1602,Rubén García,Osasuna,3,Manchester_Tity,Manchester Tity,starter,,0
-4908,Round 10,active,50807,preview,1462,Moi Gómez,Osasuna,3,Minabo_De_Kiev,Minabo de Kiev,starter,,0
-4908,Round 10,active,50807,preview,18128,Iker Muñoz,Osasuna,3,,,,,0
-4908,Round 10,active,50807,preview,8747,Moncayola,Osasuna,3,Locombia_Fc,Locombia FC,starter,,0
-4908,Round 10,active,50807,preview,33971,Bretones,Osasuna,2,,,,,0
-4908,Round 10,active,50807,preview,33694,Boyomo,Osasuna,2,Raifc,RaiFC,discarded,,0
-4908,Round 10,active,50807,preview,17731,Catena,Osasuna,2,,,,,0
-4908,Round 10,active,50807,preview,33970,Rosier,Osasuna,2,The_National,The National,discarded,,0
-4908,Round 10,active,50807,preview,16606,Aitor Fernández,Osasuna,1,Freejulian,FreeJulian,starter,,0
-4908,Round 10,active,50807,preview,27591,Aimar,Osasuna,3,Cd_Numancia,CD Numancia,discarded,,0
-4908,Round 10,active,50807,preview,19508,Arrasate,Osasuna,5,Freejulian,FreeJulian,coach,,0
+4908,Round 10,active,50807,finished,26299,Manu Bueno,Sevilla,3,,,,5.0,1
+4908,Round 10,active,50807,finished,27960,Carmona,Sevilla,2,,,,2.0,1
+4908,Round 10,active,50807,finished,35615,Rubén Vargas,Sevilla,4,General_Hansi_Topete,"General ""Hansi” Topete",starter,3.0,1
+4908,Round 10,active,50807,finished,41807,Robbie Ure,Sevilla,4,,,,2.0,1
+4908,Round 10,active,50807,finished,38405,Odysseas,Sevilla,1,,,,2.0,1
+4908,Round 10,active,50807,finished,38194,Suazo,Sevilla,2,The_National,The National,reserve,4.0,1
+4908,Round 10,active,50807,finished,38072,Castrín,Sevilla,2,,,,6.0,1
+4908,Round 10,active,50807,finished,28115,Kike Salas,Sevilla,2,Patsi_FC,Patsi F.C,starter,7.0,1
+4908,Round 10,active,50807,finished,23840,Juan Iglesias,Sevilla,2,Cd_Numancia,CD Numancia,starter,6.0,1
+4908,Round 10,active,50807,finished,43262,Félix Correia,Sevilla,4,Hernan_Krezzpo,Hernan Krezzpo,discarded,11.0,1
+4908,Round 10,active,50807,finished,43272,Fofana,Sevilla,3,Cd_Numancia,CD Numancia,starter,9.0,1
+4908,Round 10,active,50807,finished,32338,Agoumé,Sevilla,3,Hernan_Krezzpo,Hernan Krezzpo,starter,7.0,1
+4908,Round 10,active,50807,finished,33531,Ejuke,Sevilla,4,,,,5.0,1
+4908,Round 10,active,50807,finished,32363,Isaac Romero,Sevilla,4,,,,10.0,1
+4908,Round 10,active,50807,finished,43264,Stassin,Sevilla,4,Manchester_Tity,Manchester Tity,starter,3.0,1
+4908,Round 10,active,50807,finished,21854,Luis García,Sevilla,5,General_Hansi_Topete,"General ""Hansi” Topete",coach,3.0,1
+4908,Round 10,active,50807,finished,26813,Marcão,Sevilla,2,Cd_Numancia,CD Numancia,discarded,,0
+4908,Round 10,active,50807,finished,10292,Arguibide,Osasuna,2,,,,2.0,1
+4908,Round 10,active,50807,finished,18256,Barja,Osasuna,3,,,,2.0,1
+4908,Round 10,active,50807,finished,18382,Raul García,Osasuna,4,,,,2.0,1
+4908,Round 10,active,50807,finished,19693,Osambela,Osasuna,3,,,,2.0,1
+4908,Round 10,active,50807,finished,33697,Raúl Moro,Osasuna,4,,,,2.0,1
+4908,Round 10,active,50807,finished,16606,Aitor Fernández,Osasuna,1,Freejulian,FreeJulian,starter,4.0,1
+4908,Round 10,active,50807,finished,33971,Bretones,Osasuna,2,,,,2.0,1
+4908,Round 10,active,50807,finished,17731,Catena,Osasuna,2,,,,-1.0,1
+4908,Round 10,active,50807,finished,33694,Boyomo,Osasuna,2,Raifc,RaiFC,discarded,5.0,1
+4908,Round 10,active,50807,finished,33970,Rosier,Osasuna,2,The_National,The National,discarded,5.0,1
+4908,Round 10,active,50807,finished,19485,Torró,Osasuna,3,,,,3.0,1
+4908,Round 10,active,50807,finished,8747,Moncayola,Osasuna,3,Locombia_Fc,Locombia FC,starter,3.0,1
+4908,Round 10,active,50807,finished,1462,Moi Gómez,Osasuna,3,Minabo_De_Kiev,Minabo de Kiev,starter,6.0,1
+4908,Round 10,active,50807,finished,26360,Dubasin,Osasuna,4,,,,4.0,1
+4908,Round 10,active,50807,finished,18398,Budimir,Osasuna,4,Cd_Numancia,CD Numancia,starter,2.0,1
+4908,Round 10,active,50807,finished,1602,Rubén García,Osasuna,3,Manchester_Tity,Manchester Tity,starter,3.0,1
+4908,Round 10,active,50807,finished,19508,Arrasate,Osasuna,5,Freejulian,FreeJulian,coach,0.0,1
+4908,Round 10,active,50807,finished,27591,Aimar,Osasuna,3,Cd_Numancia,CD Numancia,discarded,,0

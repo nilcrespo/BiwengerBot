@@ -1,21 +1,21 @@
 position,club,name,price,change,status,owner,last_sale,recent_pts,this_season_pts,last_season_pts,scraped_at
-Defender,Real Madrid,Mendy,150000,0.0,,Free Agent,"150,000",0,0,10,2026-10-27
-Midfielder,Athletic,De Galarreta,2320000,-90000.0,,Free Agent,"2,320,000",19,33,0,2026-10-27
-Defender,Betis,Bellerin,2550000,-30000.0,,Free Agent,"2,550,000",14,28,0,2026-10-27
-Defender,Rayo Vallecano,Lejeune,2930000,-60000.0,,Free Agent,"2,930,000",9,18,0,2026-10-27
-Defender,Espanyol,Hinojo,1140000,-30000.0,!,Free Agent,"1,140,000",8,26,0,2026-10-27
-Forward,Elche,Fer Nino,6170000,50000.0,,Free Agent,"6,170,000",39,67,0,2026-10-27
-Defender/Midfielder,Valencia,Jesus Vazquez,530000,-10000.0,,Free Agent,"530,000",7,15,0,2026-10-27
-Defender/Midfielder,Getafe,Andres Garcia,1620000,-10000.0,,Free Agent,"1,620,000",15,34,0,2026-10-27
-Midfielder,Deportivo,Marc Casado,1590000,-10000.0,,Free Agent,"1,590,000",3,10,0,2026-10-27
-Goalkeeper,Getafe,Letacek,150000,0.0,,Free Agent,"150,000",0,0,0,2026-10-27
-Forward,Real Sociedad,Oskarsson,2250000,180000.0,,Free Agent,"2,250,000",18,30,0,2026-10-27
-Forward/Midfielder,Celta,El-Abdellaoui,200000,0.0,,Free Agent,"200,000",0,6,0,2026-10-27
-Midfielder,Levante,Oriol Rey,920000,-20000.0,,Free Agent,"920,000",10,29,0,2026-10-27
-Forward/Midfielder,Levante,Thiago Fernandez,1240000,80000.0,,Free Agent,"1,240,000",25,36,0,2026-10-27
-Midfielder,Betis,Fidalgo,370000,0.0,,Free Agent,"370,000",6,9,0,2026-10-27
-Midfielder,Racing,Maguette Gueye,1040000,-10000.0,,Free Agent,"1,040,000",17,27,0,2026-10-27
-Defender,Racing,Jorge Salinas,1730000,-20000.0,,Free Agent,"1,730,000",13,31,0,2026-10-27
-Defender,Osasuna,Yeboah,230000,0.0,,Free Agent,"230,000",2,7,0,2026-10-27
-Forward/Midfielder,Rayo Vallecano,Tsitaishvili,760000,30000.0,,Free Agent,"760,000",20,22,0,2026-10-27
-Goalkeeper,Atletico,Esquivel,150000,0.0,,Free Agent,"150,000",0,0,0,2026-10-27
+Forward,Getafe,Mayoral,570000,-10000.0,,Free Agent,"570,000",3,5,0,2026-10-28
+Forward,Getafe,Juanmi,150000,0.0,,Free Agent,"150,000",0,0,22,2026-10-28
+Defender,Alaves,Jonny,1570000,-40000.0,,Free Agent,"1,570,000",9,27,0,2026-10-28
+Midfielder,Celta,Miguel Roman,2000000,-20000.0,,Free Agent,"2,000,000",21,44,0,2026-10-28
+Forward,Elche,Ponce,200000,0.0,,Free Agent,"200,000",0,8,0,2026-10-28
+Goalkeeper,Alaves,Sivera,4480000,-70000.0,,Free Agent,"4,480,000",22,54,0,2026-10-28
+Goalkeeper,Rayo Vallecano,Cardenas,670000,-10000.0,,Free Agent,"670,000",0,7,0,2026-10-28
+Midfielder,Valencia,Mayol,1220000,-40000.0,,Free Agent,"1,220,000",16,16,0,2026-10-28
+Forward/Midfielder,Rayo Vallecano,Fran Perez,290000,-10000.0,,Free Agent,"290,000",5,10,0,2026-10-28
+Midfielder/Defender/Forward,Real Sociedad,Pablo Marin,300000,-10000.0,,Free Agent,"300,000",-5,5,0,2026-10-28
+Defender/Midfielder,Deportivo,Adria Altimira,1050000,10000.0,,Free Agent,"1,050,000",13,18,0,2026-10-28
+Forward/Midfielder,Elche,Boayar,150000,0.0,,Free Agent,"150,000",0,0,20,2026-10-28
+Midfielder,Sevilla,Kochorashvili,1200000,-30000.0,,Free Agent,"1,200,000",9,21,0,2026-10-28
+Defender,Sevilla,Castrin,1590000,10000.0,,Free Agent,"1,590,000",14,32,0,2026-10-28
+Defender,Sevilla,Suazo,2700000,-10000.0,,Free Agent,"2,700,000",19,36,0,2026-10-28
+Forward,Racing,Arana,250000,0.0,,Free Agent,"250,000",0,1,0,2026-10-28
+Defender,Racing,Facundo Gonzalez,740000,-10000.0,,Free Agent,"740,000",-1,11,0,2026-10-28
+Midfielder,Atletico,Hjulmand,2620000,-20000.0,,Free Agent,"2,620,000",11,35,0,2026-10-28
+Midfielder/Forward,Deportivo,Jensen,650000,0.0,,Free Agent,"650,000",10,16,0,2026-10-28
+Midfielder,Valencia,Elliott,1230000,-50000.0,,Free Agent,"1,230,000",5,10,0,2026-10-28

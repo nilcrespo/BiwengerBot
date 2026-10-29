@@ -1,18 +1,18 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Getafe,David Soria,55,0,5140000,-90000.0,Fit,10,5.5,35,7.0,20,4.0
+Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Getafe,David Soria,55,0,5090000,-50000.0,Fit,10,5.5,35,7.0,20,4.0
 Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Celta,Ivan Villar,0,0,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Defender/Midfielder,Alaves,Tenaglia,57,0,4690000,10000.0,Fit,10,5.7,43,7.2,14,3.5
-Minabo de Kiev,Minabo_De_Kiev,Defender,Atletico,Pubill,43,0,4950000,20000.0,Fit,8,5.4,25,6.3,18,4.5
-Minabo de Kiev,Minabo_De_Kiev,Defender,Alaves,Valentini,24,0,990000,-20000.0,Fit,7,3.4,9,3.0,15,3.8
-Minabo de Kiev,Minabo_De_Kiev,Defender,Racing,Mantilla,17,0,800000,-10000.0,Fit,9,1.9,13,2.6,4,1.0
-Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Barcelona,Fermin,73,0,13290000,20000.0,Fit,9,8.1,24,6.0,49,9.8
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Atletico,Barrios,38,0,7040000,10000.0,Fit,7,5.4,14,4.7,24,6.0
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Barcelona,Marc Bernal,33,0,2690000,-60000.0,Fit,8,4.1,20,5.0,13,3.3
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Levante,Bardeli,31,0,1240000,-50000.0,Injured. Hamstring injury in the left leg. Estimated return: Undetermined.,7,4.4,17,8.5,14,2.8
-Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Real Sociedad,Kubo,30,0,3450000,-100000.0,Fit,6,5.0,8,2.7,22,7.3
-Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Osasuna,Moi Gomez,30,0,1470000,30000.0,Fit,7,4.3,12,4.0,18,4.5
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Betis,Lo Celso,10,0,2800000,90000.0,Fit,3,3.3,5,5.0,5,2.5
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Deportivo,Yeremay,49,0,6020000,110000.0,Fit,9,5.4,18,4.5,31,6.2
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Getafe,Satriano,43,0,3040000,10000.0,Fit,10,4.3,36,7.2,7,1.4
-Minabo de Kiev,Minabo_De_Kiev,Forward,Valencia,Hugo Duro,20,0,1300000,-20000.0,Fit,10,2.0,11,1.8,9,2.3
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Rayo Vallecano,De Frutos,18,0,2880000,-40000.0,Fit,7,2.6,3,1.0,15,3.8
+Minabo de Kiev,Minabo_De_Kiev,Defender/Midfielder,Alaves,Tenaglia,57,0,4690000,0.0,Fit,10,5.7,43,7.2,14,3.5
+Minabo de Kiev,Minabo_De_Kiev,Defender,Atletico,Pubill,43,0,4980000,30000.0,Fit,8,5.4,25,6.3,18,4.5
+Minabo de Kiev,Minabo_De_Kiev,Defender,Alaves,Valentini,24,0,970000,-20000.0,Fit,7,3.4,9,3.0,15,3.8
+Minabo de Kiev,Minabo_De_Kiev,Defender,Racing,Mantilla,17,0,790000,-10000.0,Fit,9,1.9,13,2.6,4,1.0
+Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Barcelona,Fermin,73,0,13320000,30000.0,Fit,9,8.1,24,6.0,49,9.8
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Atletico,Barrios,38,0,7050000,10000.0,Fit,7,5.4,14,4.7,24,6.0
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Barcelona,Marc Bernal,33,0,2650000,-40000.0,Fit,8,4.1,20,5.0,13,3.3
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Levante,Bardeli,31,0,1200000,-40000.0,Injured. Hamstring injury in the left leg. Estimated return: Undetermined.,7,4.4,17,8.5,14,2.8
+Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Real Sociedad,Kubo,30,0,3340000,-110000.0,Fit,6,5.0,8,2.7,22,7.3
+Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Osasuna,Moi Gomez,30,0,1500000,30000.0,Fit,7,4.3,12,4.0,18,4.5
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Betis,Lo Celso,10,0,2860000,60000.0,Fit,3,3.3,5,5.0,5,2.5
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Deportivo,Yeremay,49,0,6150000,130000.0,Fit,9,5.4,18,4.5,31,6.2
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Getafe,Satriano,43,0,3050000,10000.0,Fit,10,4.3,36,7.2,7,1.4
+Minabo de Kiev,Minabo_De_Kiev,Forward,Valencia,Hugo Duro,20,0,1290000,-10000.0,Fit,10,2.0,11,1.8,9,2.3
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Rayo Vallecano,De Frutos,18,0,2860000,-20000.0,Fit,7,2.6,3,1.0,15,3.8

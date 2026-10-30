@@ -1,17 +1,18 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-RaiFC,Raifc,Goalkeeper,Real Madrid,Courtois,46,0,5870000,20000.0,Fit,9,5.1,30,6.0,16,4.0
-RaiFC,Raifc,Defender,Athletic,Laporte,30,0,4740000,-10000.0,Fit,8,3.8,21,5.3,9,2.3
-RaiFC,Raifc,Defender,Betis,Fran Garcia,30,0,3670000,-30000.0,Fit,8,3.8,17,4.3,13,3.3
-RaiFC,Raifc,Defender/Midfielder,Elche,Revivo,30,0,2380000,140000.0,Fit,7,4.3,7,2.3,23,5.8
-RaiFC,Raifc,Defender/Midfielder,Valencia,Maffeo,19,0,1400000,-10000.0,Fit,9,2.1,16,2.7,3,1.0
-RaiFC,Raifc,Defender,Osasuna,Boyomo,13,0,1560000,40000.0,Fit,5,2.6,7,3.5,6,2.0
-RaiFC,Raifc,Midfielder,Villarreal,Pape Gueye,58,0,6420000,-90000.0,Suspended. Straight red card.,10,5.8,13,3.3,45,7.5
-RaiFC,Raifc,Midfielder/Forward,Atletico,Giuliano Simeone,50,0,6610000,50000.0,Fit,10,5.0,32,6.4,18,3.6
-RaiFC,Raifc,Midfielder,Alaves,Pablo Ibanez,44,0,2680000,10000.0,Fit,10,4.4,29,4.8,15,3.8
-RaiFC,Raifc,Forward,Racing,Zabiri,77,0,7800000,60000.0,One yellow card away from suspension,10,7.7,60,12.0,17,3.4
-RaiFC,Raifc,Forward,Alaves,Boye,61,0,5460000,10000.0,Fit,9,6.8,46,9.2,15,3.8
-RaiFC,Raifc,Forward/Midfielder,Rayo Vallecano,Alvaro Garcia,52,0,4190000,50000.0,Fit,9,5.8,25,6.3,27,5.4
-RaiFC,Raifc,Forward/Midfielder,Athletic,Robert Navarro,47,0,5250000,-110000.0,Fit,7,6.7,22,7.3,25,6.3
-RaiFC,Raifc,Forward/Midfielder,Betis,Antony,42,0,7420000,-30000.0,Fit,9,4.7,24,6.0,18,3.6
-RaiFC,Raifc,Forward/Midfielder,Espanyol,Puado,4,0,1750000,-20000.0,Fit,2,2.0,2,2.0,2,2.0
+RaiFC,Raifc,Goalkeeper,Real Madrid,Courtois,46,0,5890000,20000.0,Fit,9,5.1,30,6.0,16,4.0
+RaiFC,Raifc,Defender,Athletic,Laporte,30,0,4730000,-10000.0,Fit,8,3.8,21,5.3,9,2.3
+RaiFC,Raifc,Defender,Betis,Fran Garcia,30,0,3650000,-20000.0,Fit,8,3.8,17,4.3,13,3.3
+RaiFC,Raifc,Defender/Midfielder,Elche,Revivo,30,0,2510000,130000.0,Fit,7,4.3,7,2.3,23,5.8
+RaiFC,Raifc,Defender/Midfielder,Valencia,Maffeo,19,0,1390000,-10000.0,Fit,9,2.1,16,2.7,3,1.0
+RaiFC,Raifc,Defender,Osasuna,Boyomo,13,0,1600000,40000.0,Fit,5,2.6,7,3.5,6,2.0
+RaiFC,Raifc,Midfielder,Villarreal,Pape Gueye,58,0,6320000,-100000.0,Suspended. Straight red card.,10,5.8,13,3.3,45,7.5
+RaiFC,Raifc,Midfielder/Forward,Atletico,Giuliano Simeone,50,0,6630000,20000.0,Fit,10,5.0,32,6.4,18,3.6
+RaiFC,Raifc,Midfielder,Alaves,Pablo Ibanez,44,0,2690000,10000.0,Fit,10,4.4,29,4.8,15,3.8
+RaiFC,Raifc,Midfielder,Real Madrid,Bernardo Silva,28,0,4120000,40000.0,Fit,8,3.5,14,3.5,14,3.5
+RaiFC,Raifc,Forward,Racing,Zabiri,77,0,7860000,60000.0,One yellow card away from suspension,10,7.7,60,12.0,17,3.4
+RaiFC,Raifc,Forward,Alaves,Boye,61,0,5470000,10000.0,Fit,9,6.8,46,9.2,15,3.8
+RaiFC,Raifc,Forward/Midfielder,Rayo Vallecano,Alvaro Garcia,52,0,4220000,30000.0,Fit,9,5.8,25,6.3,27,5.4
+RaiFC,Raifc,Forward/Midfielder,Athletic,Robert Navarro,47,0,5140000,-110000.0,Fit,7,6.7,22,7.3,25,6.3
+RaiFC,Raifc,Forward/Midfielder,Betis,Antony,42,0,7400000,-20000.0,Fit,9,4.7,24,6.0,18,3.6
+RaiFC,Raifc,Forward/Midfielder,Espanyol,Puado,4,0,1740000,-10000.0,Fit,2,2.0,2,2.0,2,2.0
 RaiFC,Raifc,Coach,Villarreal,Inigo Perez,12,0,1350000,0.0,Fit,10,1.2,4,1.0,8,1.3

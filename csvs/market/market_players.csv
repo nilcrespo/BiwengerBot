@@ -1,21 +1,21 @@
 position,club,name,price,change,status,owner,last_sale,recent_pts,this_season_pts,last_season_pts,scraped_at
-Goalkeeper,Levante,Alex Primo,150000,0.0,,Free Agent,"150,000",0,0,0,2026-11-01
-Defender,Espanyol,Unai Nunez,1130000,-20000.0,,Free Agent,"1,130,000",5,20,0,2026-11-01
-Midfielder,Espanyol,Bauza,340000,30000.0,,Free Agent,"340,000",6,14,0,2026-11-01
-Defender,Espanyol,Hinojo,1060000,-10000.0,,Free Agent,"1,060,000",12,32,0,2026-11-01
-Midfielder,Athletic,Benat Prados,150000,0.0,,Free Agent,"150,000",3,3,0,2026-11-01
-Midfielder,Sevilla,Manu Bueno,520000,20000.0,,Free Agent,"520,000",16,24,0,2026-11-01
-Forward/Midfielder,Osasuna,Dubasin,1150000,-10000.0,,Free Agent,"1,150,000",13,26,0,2026-11-01
-Forward/Midfielder,Sevilla,Peque,840000,-10000.0,,Free Agent,"840,000",2,19,0,2026-11-01
-Midfielder,Elche,Marc Aguado,1070000,-10000.0,,Free Agent,"1,070,000",9,26,0,2026-11-01
-Defender/Midfielder,Getafe,Davinchi,490000,-10000.0,,Free Agent,"490,000",2,7,0,2026-11-01
-Forward/Midfielder,Espanyol,Dolan,1290000,-30000.0,,Free Agent,"1,290,000",8,25,0,2026-11-01
-Defender,Barcelona,Espart,3690000,-90000.0,,Free Agent,"3,690,000",14,49,0,2026-11-01
-Midfielder,Deportivo,Noe Carrillo,150000,0.0,,Free Agent,"150,000",0,0,0,2026-11-01
-Defender,Deportivo,Comas,150000,0.0,,Free Agent,"150,000",0,0,0,2026-11-01
-Forward,Racing,Arana,250000,0.0,,Free Agent,"250,000",0,1,0,2026-11-01
-Forward,Elche,Osorio,750000,-10000.0,,Free Agent,"750,000",22,25,0,2026-11-01
-Midfielder,Valencia,Dieng,480000,-10000.0,,Free Agent,"480,000",2,16,0,2026-11-01
-Defender,Levante,Ndukwe,1340000,40000.0,,Free Agent,"1,340,000",29,34,0,2026-11-01
-Midfielder,Rayo Vallecano,Bouare,570000,0.0,,Free Agent,"570,000",16,24,0,2026-11-01
-Defender,Elche,Lomonaco,570000,-10000.0,,Free Agent,"570,000",0,0,0,2026-11-01
+Forward,Espanyol,Kike Garcia,360000,0.0,,Free Agent,"360,000",0,0,140,2026-11-02
+Forward/Midfielder,Celta,Iago Aspas,1710000,-30000.0,,Free Agent,"1,710,000",7,35,0,2026-11-02
+Defender,Real Sociedad,Zubeldia,920000,-10000.0,,Free Agent,"920,000",8,19,0,2026-11-02
+Goalkeeper,Real Madrid,Lunin,440000,0.0,,Free Agent,"440,000",9,9,0,2026-11-02
+Forward,Osasuna,Raul Garcia,910000,-10000.0,,Free Agent,"910,000",14,30,0,2026-11-02
+Forward/Midfielder,Malaga,Joaquin Munoz,810000,-10000.0,,Free Agent,"810,000",9,23,0,2026-11-02
+Midfielder/Defender,Rayo Vallecano,Pathe Ciss,2230000,-10000.0,,Free Agent,"2,230,000",15,30,0,2026-11-02
+Midfielder/Forward,Espanyol,Javi Hernandez,2980000,40000.0,,Free Agent,"2,980,000",20,46,0,2026-11-02
+Defender,Valencia,Arnau Martinez,860000,-10000.0,,Free Agent,"860,000",8,17,0,2026-11-02
+Midfielder,Sevilla,Manu Bueno,510000,-10000.0,,Free Agent,"510,000",12,20,0,2026-11-02
+Forward/Midfielder,Rayo Vallecano,Fran Perez,260000,-10000.0,,Free Agent,"260,000",5,10,0,2026-11-02
+Forward/Midfielder,Sevilla,Ejuke,1840000,40000.0,,Free Agent,"1,840,000",17,43,0,2026-11-02
+Midfielder,Rayo Vallecano,Pedro Diaz,950000,0.0,,Free Agent,"950,000",15,28,0,2026-11-02
+Defender,Real Madrid,Asencio,250000,0.0,,Free Agent,"250,000",0,0,109,2026-11-02
+Defender/Midfielder,Malaga,Aznou,280000,0.0,,Free Agent,"280,000",8,8,0,2026-11-02
+Midfielder,Elche,Marc Aguado,1060000,-10000.0,,Free Agent,"1,060,000",7,26,0,2026-11-02
+Goalkeeper,Levante,Pablo Campos,440000,0.0,,Free Agent,"440,000",0,0,13,2026-11-02
+Defender,Deportivo,Comas,150000,0.0,,Free Agent,"150,000",0,0,0,2026-11-02
+Midfielder,Valencia,Elliott,1110000,-10000.0,,Free Agent,"1,110,000",5,10,0,2026-11-02
+Forward,Alaves,Izei,150000,0.0,,Free Agent,"150,000",0,0,0,2026-11-02

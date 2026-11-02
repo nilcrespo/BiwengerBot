@@ -1,23 +1,22 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-CD Numancia,Cd_Numancia,Goalkeeper,Levante,Ryan,52,0,3150000,-30000.0,Fit,11,4.7,17,3.4,35,5.8
-CD Numancia,Cd_Numancia,Defender,Betis,Natan,56,0,6140000,10000.0,Fit,9,6.2,30,6.0,26,6.5
-CD Numancia,Cd_Numancia,Defender,Atletico,Hancko,52,0,4220000,80000.0,Fit,11,4.7,25,5.0,27,4.5
-CD Numancia,Cd_Numancia,Defender,Sevilla,Juan Iglesias,51,0,3750000,20000.0,Fit,10,5.1,31,6.2,20,4.0
-CD Numancia,Cd_Numancia,Defender,Barcelona,Gerard Martin,47,0,5250000,-20000.0,Fit,10,4.7,26,5.2,21,4.2
-CD Numancia,Cd_Numancia,Defender,Deportivo,Gimenez,36,0,3170000,10000.0,Fit,9,4.0,15,3.8,21,4.2
-CD Numancia,Cd_Numancia,Defender,Athletic,Yuri,34,0,3060000,40000.0,Fit,7,4.9,23,4.6,11,5.5
-CD Numancia,Cd_Numancia,Defender,Sevilla,Castrin,32,0,1660000,10000.0,Fit,9,3.6,15,3.8,17,3.4
-CD Numancia,Cd_Numancia,Defender,Celta,Marcos Alonso,30,0,2460000,-30000.0,Fit,8,3.8,8,2.0,22,5.5
-CD Numancia,Cd_Numancia,Defender,Espanyol,Drkusic,24,0,1110000,80000.0,Fit,6,4.0,7,3.5,17,4.3
-CD Numancia,Cd_Numancia,Midfielder/Defender,Real Madrid,Valverde,50,0,10070000,40000.0,Injured. Hamstring discomfort. Estimated return: Early November.,10,5.0,29,5.8,21,4.2
-CD Numancia,Cd_Numancia,Midfielder,Sevilla,Fofana,50,0,7260000,90000.0,Fit,7,7.1,27,9.0,23,5.8
-CD Numancia,Cd_Numancia,Midfielder/Forward,Betis,Fornals,46,0,5440000,20000.0,Fit,10,4.6,32,6.4,14,2.8
-CD Numancia,Cd_Numancia,Midfielder,Deportivo,Villares,29,0,1190000,-10000.0,Fit,6,4.8,19,6.3,10,3.3
-CD Numancia,Cd_Numancia,Midfielder/Forward,Osasuna,Aimar,9,0,1430000,-10000.0,Injured. Hamstring injury in the left leg. Estimated return: Mid-November.,3,3.0,8,4.0,1,1.0
-CD Numancia,Cd_Numancia,Midfielder,Barcelona,Farinas,8,0,210000,50000.0,Fit,1,8.0,8,8.0,0,0.0
-CD Numancia,Cd_Numancia,Forward,Osasuna,Budimir,75,0,12810000,30000.0,Fit,10,7.5,41,8.2,34,6.8
-CD Numancia,Cd_Numancia,Forward,Espanyol,Roberto Fernandez,69,0,7240000,-80000.0,Fit,11,6.3,27,5.4,42,7.0
-CD Numancia,Cd_Numancia,Forward,Real Madrid,Diomande,63,0,15330000,170000.0,Fit,10,6.3,38,7.6,25,5.0
-CD Numancia,Cd_Numancia,Forward/Midfielder,Racing,Inigo Vicente,60,0,6310000,40000.0,Fit,10,6.0,43,8.6,17,3.4
-CD Numancia,Cd_Numancia,Forward,Malaga,Adrian Nino,52,0,4040000,140000.0,Fit,7,7.4,21,7.0,31,7.8
-CD Numancia,Cd_Numancia,Forward/Midfielder,Valencia,Raba,20,0,1560000,-10000.0,Fit,4,5.0,8,4.0,12,6.0
+CD Numancia,Cd_Numancia,Goalkeeper,Levante,Ryan,52,0,3120000,-30000.0,Fit,11,4.7,17,3.4,35,5.8
+CD Numancia,Cd_Numancia,Defender,Betis,Natan,56,0,6140000,0.0,Fit,9,6.2,30,6.0,26,6.5
+CD Numancia,Cd_Numancia,Defender,Sevilla,Juan Iglesias,56,0,3770000,20000.0,Fit,11,5.1,31,6.2,25,4.2
+CD Numancia,Cd_Numancia,Defender,Atletico,Hancko,52,0,4280000,60000.0,Fit,11,4.7,25,5.0,27,4.5
+CD Numancia,Cd_Numancia,Defender,Barcelona,Gerard Martin,47,0,5200000,-50000.0,Fit,10,4.7,26,5.2,21,4.2
+CD Numancia,Cd_Numancia,Defender,Athletic,Yuri,37,0,3090000,30000.0,Fit,8,4.6,26,4.3,11,5.5
+CD Numancia,Cd_Numancia,Defender,Deportivo,Gimenez,36,0,3180000,10000.0,Fit,9,4.0,15,3.8,21,4.2
+CD Numancia,Cd_Numancia,Defender,Sevilla,Castrin,36,0,1670000,10000.0,Fit,10,3.6,15,3.8,21,3.5
+CD Numancia,Cd_Numancia,Defender,Celta,Marcos Alonso,30,0,2370000,-90000.0,Fit,8,3.8,8,2.0,22,5.5
+CD Numancia,Cd_Numancia,Defender,Espanyol,Drkusic,24,0,1190000,80000.0,Fit,6,4.0,7,3.5,17,4.3
+CD Numancia,Cd_Numancia,Midfielder,Sevilla,Fofana,52,0,7320000,60000.0,Doubtful. Discomfort in the lower back.,8,6.5,27,9.0,25,5.0
+CD Numancia,Cd_Numancia,Midfielder/Defender,Real Madrid,Valverde,50,0,10100000,30000.0,Doubtful. Hamstring discomfort.,10,5.0,29,5.8,21,4.2
+CD Numancia,Cd_Numancia,Midfielder/Forward,Betis,Fornals,46,0,5500000,60000.0,Fit,10,4.6,32,6.4,14,2.8
+CD Numancia,Cd_Numancia,Midfielder,Deportivo,Villares,29,0,1180000,-10000.0,Fit,6,4.8,19,6.3,10,3.3
+CD Numancia,Cd_Numancia,Midfielder,Espanyol,Bauza,14,0,370000,30000.0,Fit,5,2.8,7,3.5,7,2.3
+CD Numancia,Cd_Numancia,Midfielder/Forward,Osasuna,Aimar,9,0,1420000,-10000.0,Injured. Hamstring injury in the left leg. Estimated return: Mid-November.,3,3.0,8,4.0,1,1.0
+CD Numancia,Cd_Numancia,Forward,Real Madrid,Diomande,75,0,15570000,240000.0,Fit,11,6.8,38,7.6,37,6.2
+CD Numancia,Cd_Numancia,Forward,Osasuna,Budimir,75,0,12860000,50000.0,Fit,10,7.5,41,8.2,34,6.8
+CD Numancia,Cd_Numancia,Forward,Espanyol,Roberto Fernandez,69,0,7160000,-80000.0,Fit,11,6.3,27,5.4,42,7.0
+CD Numancia,Cd_Numancia,Forward/Midfielder,Racing,Inigo Vicente,63,0,6330000,20000.0,Fit,11,5.7,46,7.7,17,3.4
+CD Numancia,Cd_Numancia,Forward,Malaga,Adrian Nino,52,0,4210000,170000.0,Fit,7,7.4,21,7.0,31,7.8

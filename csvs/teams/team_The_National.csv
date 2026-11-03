@@ -1,20 +1,21 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-The National,The_National,Goalkeeper,Deportivo,Leo Roman,40,0,2950000,-20000.0,Fit,10,4.0,20,4.0,20,4.0
+The National,The_National,Goalkeeper,Deportivo,Leo Roman,39,0,2920000,-30000.0,Fit,11,3.5,19,3.2,20,4.0
 The National,The_National,Goalkeeper,Atletico,Musso,0,33,320000,0.0,Fit,0,0.0,0,0.0,0,0.0
-The National,The_National,Defender/Midfielder,Atletico,Marcos Llorente,51,0,5900000,50000.0,Fit,11,4.6,24,4.8,27,4.5
-The National,The_National,Defender,Elche,Chust,48,0,2560000,60000.0,Fit,11,4.4,20,4.0,28,4.7
-The National,The_National,Defender,Celta,Lago,47,0,2750000,20000.0,One yellow card away from suspension,11,4.3,31,5.2,16,3.2
-The National,The_National,Defender,Real Sociedad,Jon Martin,39,0,3800000,50000.0,Fit,10,3.9,29,7.3,10,1.7
-The National,The_National,Defender,Osasuna,Rosier,10,0,1270000,0.0,Fit,3,3.3,3,3.0,7,3.5
-The National,The_National,Midfielder/Defender/Forward,Elche,German Valera,59,0,5870000,50000.0,Fit,11,5.4,18,3.6,41,6.8
-The National,The_National,Midfielder,Rayo Vallecano,Unai Lopez,53,0,2820000,80000.0,Fit,10,5.3,35,7.0,18,3.6
-The National,The_National,Midfielder/Forward,Valencia,Javi Guerra,44,0,3390000,0.0,Fit,11,4.0,19,3.2,25,5.0
-The National,The_National,Midfielder,Athletic,Peio Canales,29,0,1710000,0.0,Fit,8,3.6,18,4.5,11,2.8
-The National,The_National,Midfielder,Real Sociedad,Gorrotxategi,26,0,1420000,30000.0,Fit,8,3.3,11,2.8,15,3.8
-The National,The_National,Forward,Barcelona,Raphinha,144,0,24720000,-20000.0,Fit,10,14.4,78,15.6,66,13.2
-The National,The_National,Forward,Deportivo,Nsongo,50,0,3830000,0.0,Fit,10,5.0,31,6.2,19,3.8
-The National,The_National,Forward,Getafe,Enes Unal,43,0,2410000,30000.0,Fit,10,4.3,35,5.8,8,2.0
-The National,The_National,Forward/Midfielder,Levante,Thiago Fernandez,38,0,1730000,30000.0,Fit,9,4.2,16,4.0,22,4.4
-The National,The_National,Forward/Midfielder,Rayo Vallecano,Tsitaishvili,27,0,940000,40000.0,Fit,7,3.9,16,4.0,11,3.7
-The National,The_National,Forward,Rayo Vallecano,Alemão,23,0,590000,-10000.0,Fit,9,2.6,8,2.0,15,3.0
+The National,The_National,Defender/Midfielder,Atletico,Marcos Llorente,51,0,5950000,50000.0,Fit,11,4.6,24,4.8,27,4.5
+The National,The_National,Defender,Elche,Chust,48,0,2640000,80000.0,Fit,11,4.4,20,4.0,28,4.7
+The National,The_National,Defender,Celta,Lago,47,0,2760000,10000.0,One yellow card away from suspension,11,4.3,31,5.2,16,3.2
+The National,The_National,Defender,Real Sociedad,Jon Martin,39,0,3830000,30000.0,Fit,10,3.9,29,7.3,10,1.7
+The National,The_National,Defender,Osasuna,Rosier,13,0,1270000,0.0,Fit,4,3.3,3,3.0,10,3.3
+The National,The_National,Midfielder/Defender/Forward,Elche,German Valera,59,0,5910000,40000.0,Fit,11,5.4,18,3.6,41,6.8
+The National,The_National,Midfielder,Rayo Vallecano,Unai Lopez,53,0,2910000,90000.0,Fit,10,5.3,35,7.0,18,3.6
+The National,The_National,Midfielder/Forward,Espanyol,Javi Hernandez,46,0,3020000,40000.0,Fit,11,4.2,21,4.2,25,4.2
+The National,The_National,Midfielder/Forward,Valencia,Javi Guerra,44,0,3400000,10000.0,Fit,11,4.0,19,3.2,25,5.0
+The National,The_National,Midfielder,Athletic,Peio Canales,29,0,1720000,10000.0,Fit,8,3.6,18,4.5,11,2.8
+The National,The_National,Midfielder,Real Sociedad,Gorrotxategi,26,0,1450000,30000.0,Fit,8,3.3,11,2.8,15,3.8
+The National,The_National,Forward,Barcelona,Raphinha,144,0,24780000,60000.0,Fit,10,14.4,78,15.6,66,13.2
+The National,The_National,Forward,Deportivo,Nsongo,59,0,3850000,20000.0,Fit,11,5.4,40,6.7,19,3.8
+The National,The_National,Forward,Getafe,Enes Unal,43,0,2470000,60000.0,Fit,10,4.3,35,5.8,8,2.0
+The National,The_National,Forward/Midfielder,Levante,Thiago Fernandez,38,0,1750000,20000.0,Fit,9,4.2,16,4.0,22,4.4
+The National,The_National,Forward/Midfielder,Rayo Vallecano,Tsitaishvili,27,0,980000,40000.0,Fit,7,3.9,16,4.0,11,3.7
+The National,The_National,Forward,Rayo Vallecano,Alemão,23,0,580000,-10000.0,Fit,9,2.6,8,2.0,15,3.0
 The National,The_National,Coach,Athletic,Terzić,15,0,920000,0.0,Fit,10,1.5,11,1.8,4,1.0

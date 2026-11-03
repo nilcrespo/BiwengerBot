@@ -1,21 +1,21 @@
 position,club,name,price,change,status,owner,last_sale,recent_pts,this_season_pts,last_season_pts,scraped_at
-Forward,Espanyol,Kike Garcia,360000,0.0,,Free Agent,"360,000",0,0,140,2026-11-02
-Forward/Midfielder,Celta,Iago Aspas,1710000,-30000.0,,Free Agent,"1,710,000",7,35,0,2026-11-02
-Defender,Real Sociedad,Zubeldia,920000,-10000.0,,Free Agent,"920,000",8,19,0,2026-11-02
-Goalkeeper,Real Madrid,Lunin,440000,0.0,,Free Agent,"440,000",9,9,0,2026-11-02
-Forward,Osasuna,Raul Garcia,910000,-10000.0,,Free Agent,"910,000",14,30,0,2026-11-02
-Forward/Midfielder,Malaga,Joaquin Munoz,810000,-10000.0,,Free Agent,"810,000",9,23,0,2026-11-02
-Midfielder/Defender,Rayo Vallecano,Pathe Ciss,2230000,-10000.0,,Free Agent,"2,230,000",15,30,0,2026-11-02
-Midfielder/Forward,Espanyol,Javi Hernandez,2980000,40000.0,,Free Agent,"2,980,000",20,46,0,2026-11-02
-Defender,Valencia,Arnau Martinez,860000,-10000.0,,Free Agent,"860,000",8,17,0,2026-11-02
-Midfielder,Sevilla,Manu Bueno,510000,-10000.0,,Free Agent,"510,000",12,20,0,2026-11-02
-Forward/Midfielder,Rayo Vallecano,Fran Perez,260000,-10000.0,,Free Agent,"260,000",5,10,0,2026-11-02
-Forward/Midfielder,Sevilla,Ejuke,1840000,40000.0,,Free Agent,"1,840,000",17,43,0,2026-11-02
-Midfielder,Rayo Vallecano,Pedro Diaz,950000,0.0,,Free Agent,"950,000",15,28,0,2026-11-02
-Defender,Real Madrid,Asencio,250000,0.0,,Free Agent,"250,000",0,0,109,2026-11-02
-Defender/Midfielder,Malaga,Aznou,280000,0.0,,Free Agent,"280,000",8,8,0,2026-11-02
-Midfielder,Elche,Marc Aguado,1060000,-10000.0,,Free Agent,"1,060,000",7,26,0,2026-11-02
-Goalkeeper,Levante,Pablo Campos,440000,0.0,,Free Agent,"440,000",0,0,13,2026-11-02
-Defender,Deportivo,Comas,150000,0.0,,Free Agent,"150,000",0,0,0,2026-11-02
-Midfielder,Valencia,Elliott,1110000,-10000.0,,Free Agent,"1,110,000",5,10,0,2026-11-02
-Forward,Alaves,Izei,150000,0.0,,Free Agent,"150,000",0,0,0,2026-11-02
+Forward/Midfielder,Espanyol,Pere Milla,890000,-10000.0,,Free Agent,"890,000",5,14,0,2026-11-03
+Defender/Midfielder,Getafe,Djene,1100000,0.0,,Free Agent,"1,100,000",1,17,0,2026-11-03
+Midfielder/Forward,Alaves,Alena,480000,-20000.0,,Free Agent,"480,000",7,17,0,2026-11-03
+Midfielder,Real Sociedad,Yangel Herrera,1670000,-40000.0,!,Free Agent,"1,670,000",11,35,0,2026-11-03
+Defender/Midfielder,Rayo Vallecano,Balliu,560000,-30000.0,,Free Agent,"560,000",12,20,0,2026-11-03
+Forward,Deportivo,Aubameyang,7470000,190000.0,,Free Agent,"7,470,000",9,74,0,2026-11-03
+Midfielder,Athletic,Jauregizar,1260000,-40000.0,,Free Agent,"1,260,000",4,17,0,2026-11-03
+Forward/Midfielder,Sevilla,Isaac Romero,1950000,-40000.0,,Free Agent,"1,950,000",23,43,0,2026-11-03
+Defender/Midfielder,Osasuna,Bretones,1090000,0.0,,Free Agent,"1,090,000",17,25,0,2026-11-03
+Goalkeeper,Alaves,Adrian Rodriguez,150000,0.0,,Free Agent,"150,000",0,0,0,2026-11-03
+Midfielder/Forward,Betis,Deossa,2780000,-90000.0,,Free Agent,"2,780,000",18,41,0,2026-11-03
+Defender/Midfielder,Celta,Alvaro Nunez,620000,-10000.0,,Free Agent,"620,000",10,20,0,2026-11-03
+Defender/Midfielder,Getafe,Davinchi,470000,-10000.0,,Free Agent,"470,000",4,10,0,2026-11-03
+Defender,Levante,Toljan,870000,-10000.0,,Free Agent,"870,000",8,27,0,2026-11-03
+Defender,Betis,Valentin Gomez,1430000,-90000.0,,Free Agent,"1,430,000",21,30,0,2026-11-03
+Midfielder,Betis,Fidalgo,330000,-10000.0,,Free Agent,"330,000",6,9,0,2026-11-03
+Goalkeeper,Malaga,Alfonso Herrero,3020000,-50000.0,,Free Agent,"3,020,000",12,47,0,2026-11-03
+Defender,Real Madrid,Dumfries,2240000,-120000.0,,Free Agent,"2,240,000",5,23,0,2026-11-03
+Coach,Malaga,Funes,330000,0.0,,Free Agent,"330,000",2,5,0,2026-11-03
+Midfielder,Valencia,Elliott,1100000,-10000.0,,Free Agent,"1,100,000",5,10,0,2026-11-03

@@ -1,21 +1,21 @@
 position,club,name,price,change,status,owner,last_sale,recent_pts,this_season_pts,last_season_pts,scraped_at
-Forward/Midfielder,Espanyol,Pere Milla,890000,-10000.0,,Free Agent,"890,000",5,14,0,2026-11-03
-Defender/Midfielder,Getafe,Djene,1100000,0.0,,Free Agent,"1,100,000",1,17,0,2026-11-03
-Midfielder/Forward,Alaves,Alena,480000,-20000.0,,Free Agent,"480,000",7,17,0,2026-11-03
-Midfielder,Real Sociedad,Yangel Herrera,1670000,-40000.0,!,Free Agent,"1,670,000",11,35,0,2026-11-03
-Defender/Midfielder,Rayo Vallecano,Balliu,560000,-30000.0,,Free Agent,"560,000",12,20,0,2026-11-03
-Forward,Deportivo,Aubameyang,7470000,190000.0,,Free Agent,"7,470,000",9,74,0,2026-11-03
-Midfielder,Athletic,Jauregizar,1260000,-40000.0,,Free Agent,"1,260,000",4,17,0,2026-11-03
-Forward/Midfielder,Sevilla,Isaac Romero,1950000,-40000.0,,Free Agent,"1,950,000",23,43,0,2026-11-03
-Defender/Midfielder,Osasuna,Bretones,1090000,0.0,,Free Agent,"1,090,000",17,25,0,2026-11-03
-Goalkeeper,Alaves,Adrian Rodriguez,150000,0.0,,Free Agent,"150,000",0,0,0,2026-11-03
-Midfielder/Forward,Betis,Deossa,2780000,-90000.0,,Free Agent,"2,780,000",18,41,0,2026-11-03
-Defender/Midfielder,Celta,Alvaro Nunez,620000,-10000.0,,Free Agent,"620,000",10,20,0,2026-11-03
-Defender/Midfielder,Getafe,Davinchi,470000,-10000.0,,Free Agent,"470,000",4,10,0,2026-11-03
-Defender,Levante,Toljan,870000,-10000.0,,Free Agent,"870,000",8,27,0,2026-11-03
-Defender,Betis,Valentin Gomez,1430000,-90000.0,,Free Agent,"1,430,000",21,30,0,2026-11-03
-Midfielder,Betis,Fidalgo,330000,-10000.0,,Free Agent,"330,000",6,9,0,2026-11-03
-Goalkeeper,Malaga,Alfonso Herrero,3020000,-50000.0,,Free Agent,"3,020,000",12,47,0,2026-11-03
-Defender,Real Madrid,Dumfries,2240000,-120000.0,,Free Agent,"2,240,000",5,23,0,2026-11-03
-Coach,Malaga,Funes,330000,0.0,,Free Agent,"330,000",2,5,0,2026-11-03
-Midfielder,Valencia,Elliott,1100000,-10000.0,,Free Agent,"1,100,000",5,10,0,2026-11-03
+Forward,Getafe,Juanmi,150000,0.0,,Free Agent,"150,000",0,0,22,2026-11-04
+Forward/Midfielder,Espanyol,Pere Milla,880000,-10000.0,,Free Agent,"880,000",5,14,0,2026-11-04
+Defender,Deportivo,Ximo Navarro,950000,-40000.0,,Free Agent,"950,000",7,21,0,2026-11-04
+Defender,Barcelona,Balde,1450000,-110000.0,,Free Agent,"1,450,000",6,12,0,2026-11-04
+Defender,Espanyol,Hinojo,1030000,-10000.0,,Free Agent,"1,030,000",12,32,0,2026-11-04
+Defender,Real Sociedad,Aihen,220000,0.0,,Free Agent,"220,000",6,9,0,2026-11-04
+Coach,Barcelona,Hansi Flick,4550000,0.0,,Free Agent,"4,550,000",12,30,0,2026-11-04
+Coach,Betis,Pellegrini,2280000,-10000.0,,Free Agent,"2,280,000",8,23,0,2026-11-04
+Midfielder/Defender,Elche,Josan,170000,0.0,,Free Agent,"170,000",0,8,0,2026-11-04
+Defender,Osasuna,Herrando,310000,0.0,,Free Agent,"310,000",0,10,0,2026-11-04
+Forward/Defender/Midfielder,Alaves,Abde Rebbach,1620000,-10000.0,,Free Agent,"1,620,000",16,37,0,2026-11-04
+Goalkeeper,Real Sociedad,Marrero,350000,0.0,,Free Agent,"350,000",0,7,0,2026-11-04
+Midfielder,Atletico,Johnny,2410000,-30000.0,,Free Agent,"2,410,000",10,28,0,2026-11-04
+Forward/Midfielder,Elche,Boayar,150000,0.0,,Free Agent,"150,000",0,0,20,2026-11-04
+Coach,Levante,Luis Castro,380000,0.0,,Free Agent,"380,000",5,10,0,2026-11-04
+Forward/Midfielder,Elche,Cepeda,1650000,0.0,,Free Agent,"1,650,000",20,43,0,2026-11-04
+Midfielder,Racing,Maguette Gueye,950000,-20000.0,,Free Agent,"950,000",7,27,0,2026-11-04
+Defender/Midfielder,Athletic,Johaneko,640000,-20000.0,,Free Agent,"640,000",7,18,0,2026-11-04
+Forward,Getafe,Azon,1560000,-60000.0,,Free Agent,"1,560,000",11,24,0,2026-11-04
+Forward,Atletico,Jonathan David,7510000,-200000.0,,Free Agent,"7,510,000",20,44,0,2026-11-04

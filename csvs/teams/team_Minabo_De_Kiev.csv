@@ -1,19 +1,19 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Getafe,David Soria,59,0,4730000,-40000.0,Fit,11,5.4,39,6.5,20,4.0
+Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Getafe,David Soria,59,0,4630000,-50000.0,Fit,11,5.4,39,6.5,20,4.0
 Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Celta,Ivan Villar,0,0,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Defender/Midfielder,Alaves,Tenaglia,53,0,4390000,-10000.0,Fit,11,4.8,43,7.2,10,2.0
-Minabo de Kiev,Minabo_De_Kiev,Defender,Atletico,Pubill,50,0,5250000,50000.0,Fit,9,5.6,25,6.3,25,5.0
-Minabo de Kiev,Minabo_De_Kiev,Defender,Alaves,Valentini,24,0,770000,-20000.0,Fit,7,3.4,9,3.0,15,3.8
-Minabo de Kiev,Minabo_De_Kiev,Defender,Racing,Mantilla,18,0,610000,-30000.0,Injured. Torn anterior cruciate ligament in the right knee. Estimated return: Early July.,10,1.8,14,2.3,4,1.0
-Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Barcelona,Fermin,90,0,13940000,130000.0,Fit,10,9.0,41,8.2,49,9.8
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Atletico,Barrios,45,0,7200000,40000.0,Fit,8,5.6,14,4.7,31,6.2
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Barcelona,Marc Bernal,38,0,2520000,60000.0,Fit,9,4.2,25,5.0,13,3.3
-Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Osasuna,Moi Gomez,36,0,1740000,50000.0,Fit,8,4.5,12,4.0,24,4.8
-Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Real Sociedad,Kubo,32,0,2910000,-40000.0,Fit,7,4.6,8,2.7,24,6.0
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Levante,Bardeli,31,0,1050000,-10000.0,Doubtful. Hamstring injury in the left leg.,7,4.4,17,8.5,14,2.8
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Betis,Lo Celso,10,0,2280000,-70000.0,Fit,3,3.3,5,5.0,5,2.5
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Deportivo,Yeremay,56,0,6900000,130000.0,Fit,10,5.6,25,5.0,31,6.2
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Getafe,Satriano,56,0,3290000,80000.0,Fit,11,5.1,49,8.2,7,1.4
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Rayo Vallecano,De Frutos,35,0,3270000,70000.0,Fit,8,4.4,20,5.0,15,3.8
-Minabo de Kiev,Minabo_De_Kiev,Forward,Valencia,Hugo Duro,20,0,1090000,-20000.0,Fit,10,2.0,11,1.8,9,2.3
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Espanyol,Pere Milla,14,0,870000,-10000.0,Fit,6,2.3,6,2.0,8,2.7
+Minabo de Kiev,Minabo_De_Kiev,Defender/Midfielder,Alaves,Tenaglia,57,0,4330000,-40000.0,Fit,12,4.8,43,7.2,14,2.3
+Minabo de Kiev,Minabo_De_Kiev,Defender,Atletico,Pubill,50,0,5330000,40000.0,Fit,9,5.6,25,6.3,25,5.0
+Minabo de Kiev,Minabo_De_Kiev,Defender,Alaves,Valentini,30,0,750000,-10000.0,Fit,8,3.8,9,3.0,21,4.2
+Minabo de Kiev,Minabo_De_Kiev,Defender,Racing,Mantilla,18,0,570000,-20000.0,Injured. Torn anterior cruciate ligament in the right knee. Estimated return: Early July.,10,1.8,14,2.3,4,1.0
+Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Barcelona,Fermin,90,0,14170000,140000.0,Fit,10,9.0,41,8.2,49,9.8
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Atletico,Barrios,45,0,7270000,40000.0,Fit,8,5.6,14,4.7,31,6.2
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Barcelona,Marc Bernal,38,0,2750000,120000.0,Fit,9,4.2,25,5.0,13,3.3
+Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Osasuna,Moi Gomez,36,0,1860000,50000.0,Fit,8,4.5,12,4.0,24,4.8
+Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Real Sociedad,Kubo,32,0,2870000,-30000.0,Fit,7,4.6,8,2.7,24,6.0
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Levante,Bardeli,31,0,1030000,-10000.0,Doubtful. Hamstring injury in the left leg.,7,4.4,17,8.5,14,2.8
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Betis,Lo Celso,10,0,2200000,-40000.0,Fit,3,3.3,5,5.0,5,2.5
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Deportivo,Yeremay,56,0,7160000,150000.0,Fit,10,5.6,25,5.0,31,6.2
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Getafe,Satriano,56,0,3390000,50000.0,Fit,11,5.1,49,8.2,7,1.4
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Rayo Vallecano,De Frutos,35,0,3380000,50000.0,Fit,8,4.4,20,5.0,15,3.8
+Minabo de Kiev,Minabo_De_Kiev,Forward,Valencia,Hugo Duro,20,0,1050000,-20000.0,Fit,10,2.0,11,1.8,9,2.3
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Espanyol,Pere Milla,14,0,850000,-10000.0,Fit,6,2.3,6,2.0,8,2.7

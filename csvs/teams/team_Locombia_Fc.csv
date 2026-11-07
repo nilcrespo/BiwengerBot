@@ -1,20 +1,20 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Locombia FC,Locombia_Fc,Goalkeeper,Betis,Alvaro Valles,79,0,7070000,0.0,Fit,11,7.2,37,6.2,42,8.4
+Locombia FC,Locombia_Fc,Goalkeeper,Betis,Alvaro Valles,79,0,7020000,-30000.0,Fit,11,7.2,37,6.2,42,8.4
 Locombia FC,Locombia_Fc,Goalkeeper,Betis,Diego Conde,0,0,240000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Locombia_Fc,Defender,Atletico,Cristian Romero,49,0,7380000,-90000.0,Injured. Muscle soreness. Estimated return: Mid-November.,6,8.2,16,8.0,33,8.3
-Locombia FC,Locombia_Fc,Defender,Rayo Vallecano,Ratiu,32,0,3140000,150000.0,Fit,7,4.6,27,6.8,5,1.7
-Locombia FC,Locombia_Fc,Defender,Valencia,Tarrega,27,0,1490000,40000.0,Fit,8,3.4,19,3.8,8,2.7
-Locombia FC,Locombia_Fc,Defender,Espanyol,Riedel,22,0,650000,-10000.0,One yellow card away from suspension,8,2.8,13,2.6,9,3.0
-Locombia FC,Locombia_Fc,Defender,Real Madrid,Militão,2,0,2710000,-10000.0,Fit,1,2.0,2,2.0,0,0.0
-Locombia FC,Locombia_Fc,Midfielder,Real Madrid,Bellingham,101,0,18260000,110000.0,Fit,11,9.2,54,10.8,47,7.8
-Locombia FC,Locombia_Fc,Midfielder/Forward,Villarreal,Moleiro,65,0,10230000,-170000.0,Fit,11,5.9,31,6.2,34,5.7
-Locombia FC,Locombia_Fc,Midfielder/Forward,Real Sociedad,Luka Sucic,60,0,4980000,80000.0,Fit,10,6.0,16,3.2,44,8.8
-Locombia FC,Locombia_Fc,Midfielder/Defender,Osasuna,Moncayola,31,0,1670000,-10000.0,Fit,11,2.8,17,3.4,14,2.3
-Locombia FC,Locombia_Fc,Midfielder,Athletic,Sancet,28,0,3540000,30000.0,Fit,7,4.0,21,4.2,7,3.5
-Locombia FC,Locombia_Fc,Midfielder,Atletico,Johnny,28,0,2380000,-30000.0,Doubtful. A mild muscle strain in the thigh.,6,4.7,15,7.5,13,3.3
-Locombia FC,Locombia_Fc,Midfielder,Celta,Febas,16,0,2380000,-40000.0,Fit,6,2.7,8,2.7,8,2.7
-Locombia FC,Locombia_Fc,Midfielder/Defender,Barcelona,De Jong,12,0,4070000,160000.0,Fit,2,6.0,12,6.0,0,0.0
-Locombia FC,Locombia_Fc,Midfielder/Defender,Barcelona,Farinas,8,0,630000,170000.0,Fit,1,8.0,8,8.0,0,0.0
-Locombia FC,Locombia_Fc,Forward,Real Sociedad,Oskarsson,33,0,3230000,10000.0,Fit,9,3.7,24,6.0,9,1.8
-Locombia FC,Locombia_Fc,Forward/Defender/Midfielder,Valencia,Rioja,29,0,1740000,-20000.0,Fit,7,4.1,15,3.8,14,4.7
-Locombia FC,Locombia_Fc,Coach,Betis,Pellegrini,23,0,2300000,20000.0,Fit,11,2.1,15,2.5,8,1.6
+Locombia FC,Locombia_Fc,Defender,Atletico,Cristian Romero,49,0,6800000,-280000.0,Injured. Muscle soreness. Estimated return: Mid-November.,6,8.2,16,8.0,33,8.3
+Locombia FC,Locombia_Fc,Defender,Rayo Vallecano,Ratiu,32,0,3250000,50000.0,Fit,7,4.6,27,6.8,5,1.7
+Locombia FC,Locombia_Fc,Defender,Valencia,Tarrega,27,0,1550000,30000.0,Fit,8,3.4,19,3.8,8,2.7
+Locombia FC,Locombia_Fc,Defender,Espanyol,Riedel,22,0,630000,-10000.0,One yellow card away from suspension,8,2.8,13,2.6,9,3.0
+Locombia FC,Locombia_Fc,Defender,Real Madrid,Militão,2,0,2710000,0.0,Fit,1,2.0,2,2.0,0,0.0
+Locombia FC,Locombia_Fc,Midfielder,Real Madrid,Bellingham,101,0,18500000,140000.0,Fit,11,9.2,54,10.8,47,7.8
+Locombia FC,Locombia_Fc,Midfielder/Forward,Villarreal,Moleiro,65,0,9990000,-110000.0,Fit,11,5.9,31,6.2,34,5.7
+Locombia FC,Locombia_Fc,Midfielder/Forward,Real Sociedad,Luka Sucic,60,0,5130000,80000.0,Fit,10,6.0,16,3.2,44,8.8
+Locombia FC,Locombia_Fc,Midfielder/Defender,Osasuna,Moncayola,31,0,1640000,-20000.0,Fit,11,2.8,17,3.4,14,2.3
+Locombia FC,Locombia_Fc,Midfielder,Athletic,Sancet,28,0,3590000,30000.0,Fit,7,4.0,21,4.2,7,3.5
+Locombia FC,Locombia_Fc,Midfielder,Atletico,Johnny,28,0,2360000,-10000.0,Fit,6,4.7,15,7.5,13,3.3
+Locombia FC,Locombia_Fc,Midfielder,Celta,Febas,16,0,2320000,-40000.0,Fit,6,2.7,8,2.7,8,2.7
+Locombia FC,Locombia_Fc,Midfielder/Defender,Barcelona,De Jong,12,0,4390000,170000.0,Fit,2,6.0,12,6.0,0,0.0
+Locombia FC,Locombia_Fc,Midfielder/Defender,Barcelona,Farinas,8,0,1030000,210000.0,Fit,1,8.0,8,8.0,0,0.0
+Locombia FC,Locombia_Fc,Forward,Real Sociedad,Oskarsson,33,0,3260000,10000.0,Fit,9,3.7,24,6.0,9,1.8
+Locombia FC,Locombia_Fc,Forward/Defender/Midfielder,Valencia,Rioja,29,0,1690000,-30000.0,Fit,7,4.1,15,3.8,14,4.7
+Locombia FC,Locombia_Fc,Coach,Betis,Pellegrini,23,0,2310000,0.0,Fit,11,2.1,15,2.5,8,1.6

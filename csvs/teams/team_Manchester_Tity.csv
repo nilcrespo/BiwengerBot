@@ -1,17 +1,17 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Manchester Tity,Manchester_Tity,Goalkeeper,Espanyol,Fortuno,35,0,3250000,60000.0,Fit,4,8.8,8,8.0,27,9.0
-Manchester Tity,Manchester_Tity,Defender,Atletico,Grimaldo,70,0,9330000,160000.0,Fit,10,7.0,28,7.0,42,7.0
-Manchester Tity,Manchester_Tity,Defender,Real Sociedad,Mamadou Sarr,30,0,2720000,0.0,Doubtful. Discomfort in the soleus muscle.,6,5.0,15,5.0,15,5.0
+Manchester Tity,Manchester_Tity,Goalkeeper,Espanyol,Fortuno,43,0,3320000,70000.0,Fit,5,8.6,16,8.0,27,9.0
+Manchester Tity,Manchester_Tity,Defender,Atletico,Grimaldo,70,0,9480000,150000.0,Fit,10,7.0,28,7.0,42,7.0
+Manchester Tity,Manchester_Tity,Defender,Real Sociedad,Mamadou Sarr,30,0,2620000,-100000.0,Injured. Muscle injury in the soleus muscle of his left leg. Estimated return: Mid-November.,6,5.0,15,5.0,15,5.0
 Manchester Tity,Manchester_Tity,Defender,Betis,Angel Ortiz,17,0,190000,0.0,Fit,5,3.4,8,2.7,9,4.5
 Manchester Tity,Manchester_Tity,Defender,Malaga,Moussa Diarra,0,0,150000,0.0,Injured. Muscle injury. Estimated return: Indefinite return.,0,0.0,0,0.0,0,0.0
-Manchester Tity,Manchester_Tity,Midfielder/Forward,Atletico,Baena,90,0,13620000,80000.0,Fit,11,8.2,33,6.6,57,9.5
-Manchester Tity,Manchester_Tity,Midfielder/Forward,Deportivo,Mario Soriano,67,0,5300000,80000.0,Fit,11,6.1,40,6.7,27,5.4
-Manchester Tity,Manchester_Tity,Midfielder/Defender,Valencia,Pepelu,45,0,3650000,30000.0,Fit,11,4.1,24,4.0,21,4.2
+Manchester Tity,Manchester_Tity,Midfielder/Forward,Atletico,Baena,90,0,13700000,80000.0,Fit,11,8.2,33,6.6,57,9.5
+Manchester Tity,Manchester_Tity,Midfielder/Forward,Deportivo,Mario Soriano,73,0,5370000,70000.0,Fit,12,6.1,40,6.7,33,5.5
+Manchester Tity,Manchester_Tity,Midfielder/Defender,Valencia,Pepelu,46,0,3680000,30000.0,Fit,12,3.8,25,3.6,21,4.2
 Manchester Tity,Manchester_Tity,Midfielder/Defender,Elche,Javi Morcillo,32,0,1170000,0.0,Fit,9,3.6,8,2.7,24,4.0
-Manchester Tity,Manchester_Tity,Midfielder/Forward,Real Sociedad,Zakharyan,17,0,320000,0.0,Doubtful. Ankle sprain.,5,3.4,14,4.7,3,1.5
-Manchester Tity,Manchester_Tity,Forward,Barcelona,Yamal,131,0,25600000,50000.0,Fit,11,11.9,67,11.2,64,12.8
-Manchester Tity,Manchester_Tity,Forward,Barcelona,Adeyemi,68,0,8540000,-100000.0,Fit,11,6.2,30,5.0,38,7.6
-Manchester Tity,Manchester_Tity,Forward/Midfielder,Elche,Cepeda,43,0,1660000,0.0,Fit,11,3.9,26,5.2,17,2.8
-Manchester Tity,Manchester_Tity,Forward/Midfielder,Espanyol,Bryan Zaragoza,36,0,3260000,20000.0,Fit,8,4.5,9,3.0,27,5.4
-Manchester Tity,Manchester_Tity,Forward,Sevilla,Stassin,28,0,1790000,-50000.0,Fit,7,4.0,6,2.0,22,5.5
+Manchester Tity,Manchester_Tity,Midfielder/Forward,Real Sociedad,Zakharyan,17,0,320000,0.0,Fit,5,3.4,14,4.7,3,1.5
+Manchester Tity,Manchester_Tity,Forward,Barcelona,Yamal,131,0,25690000,90000.0,Fit,11,11.9,67,11.2,64,12.8
+Manchester Tity,Manchester_Tity,Forward,Barcelona,Adeyemi,68,0,8490000,-50000.0,Fit,11,6.2,30,5.0,38,7.6
+Manchester Tity,Manchester_Tity,Forward/Midfielder,Elche,Cepeda,43,0,1650000,-10000.0,Fit,11,3.9,26,5.2,17,2.8
+Manchester Tity,Manchester_Tity,Forward/Midfielder,Espanyol,Bryan Zaragoza,39,0,3270000,10000.0,Fit,9,4.3,12,3.0,27,5.4
+Manchester Tity,Manchester_Tity,Forward,Sevilla,Stassin,28,0,1700000,-90000.0,Fit,7,4.0,6,2.0,22,5.5
 Manchester Tity,Manchester_Tity,Forward,Barcelona,Bisiwu,0,0,260000,0.0,Fit,0,0.0,0,0.0,0,0.0

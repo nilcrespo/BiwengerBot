@@ -4,6 +4,7 @@ each just calls build_recommendations(conn, date) against its own DB
 connection and gets back the same two ranked DataFrames.
 """
 import unicodedata
+import itertools
 from itertools import combinations
 from statistics import NormalDist
 
@@ -1470,18 +1471,10 @@ def build_best_eleven(conn, date):
     striker is always part of the XI rather than being outcompeted by
     the squad's expensive attacking talent.
 
-    Dual-position players (e.g. "Defender/Midfielder") are filled in two
-    passes rather than solved as a true assignment problem: pass one
-    fills each slot type from players whose FIRST listed position matches
-    it (their primary registration), pass two uses leftover dual-eligible
-    players to patch any slot a formation still can't fill from primaries
-    alone. This is a heuristic, not a guaranteed-optimal solver — with a
-    ~16-man squad and only two adjacent-position combinations possible in
-    real football (DEF/MID, MID/FWD), a genuine conflict where the greedy
-    order picks worse than optimal is rare enough not to justify a real
-    bipartite-matching solver here, matching the rest of this module's
-    "good heuristic over data we actually have" approach rather than a
-    from-scratch optimizer.
+    Dual-position players (e.g. "Defender/Midfielder") are solved
+    exactly: every combination of roles for them is tried (see
+    _solve_best_eleven). An earlier greedy primary-first fill could miss
+    the only valid formation on a thin squad and return no XI at all.
     """
     d = resolve_scraped_at(conn, date)
 
@@ -1606,50 +1599,54 @@ def _solve_best_eleven(roster, rounds_played):
         if len(affordable_fwd) else None
     )
 
+    # Dual-position players (e.g. "Forward/Midfielder") get every role
+    # combination tried, rather than a greedy primary-first fill. Greedy
+    # broke for real on a thin 12-man squad: a FWD/MID outscored a pure
+    # forward for a FWD slot, the pure forward then couldn't patch the
+    # MID gap left behind, and the only fillable formation (3-4-3) was
+    # skipped — leaving NO valid XI at all on the dashboard. Once every
+    # player has exactly one role, taking the top-n per row is optimal,
+    # so this is exact. A squad has a handful of dual players at most
+    # (2^k combos, each a cheap pure-Python pass), so brute force is fine.
+    values = roster['selection_value'].fillna(0).to_dict()
+    label_options = {
+        i: ls for i, ls in roster['labels'].items()
+        if ls and i != ariete_idx
+    }
+    player_ids = list(label_options)
+    combos = list(itertools.product(*(label_options[i] for i in player_ids)))
+
     best = None
     for def_n, mid_n, fwd_n in BEST_XI_FORMATIONS:
-        needed = [('GK', 1), ('DEF', def_n), ('MID', mid_n), ('FWD', fwd_n)]
-        assigned = []
-        slot_of = {}  # player index -> which row (GK/DEF/MID/FWD) he fills
         reserve_ariete = ariete_idx is not None and fwd_n > 0
-        if reserve_ariete:
-            assigned.append(ariete_idx)
-            slot_of[ariete_idx] = 'FWD'
-
-        def _take(pool, count, label):
-            pool = pool[~pool.index.isin(assigned)].sort_values('selection_value', ascending=False)
-            picked = pool.head(count).index.tolist()
-            assigned.extend(picked)
-            slot_of.update({i: label for i in picked})
-            return picked
-
-        filled = {'FWD': 1} if reserve_ariete else {}
-        for label, count in needed:
-            remaining = count - filled.get(label, 0)
-            if remaining > 0:
-                filled[label] = filled.get(label, 0) + len(_take(roster[roster['primary'] == label], remaining, label))
-        # Second pass: any formation slot a primary-only fill couldn't
-        # complete gets patched from remaining dual-position-eligible
-        # players (e.g. a MID slot short a body pulled from a leftover
-        # Defender/Midfielder), best expected value first. His pitch row
-        # is the SLOT he fills here, not his own primary position — a
-        # Defender/Midfielder patched into a MID gap lines up with the
-        # midfielders, not the defenders.
-        for label, count in needed:
-            shortfall = count - filled[label]
-            if shortfall > 0:
-                eligible = roster[roster['labels'].apply(lambda ls: label in ls)]
-                _take(eligible, shortfall, label)
-
-        if len(assigned) != 11:
-            continue  # squad can't fill this formation at all — skip it
-        # The formation itself is still picked on selection_value (start
-        # risk has to matter when comparing formations — an 11 built
-        # around iffy starters shouldn't win just because their ceiling
-        # is high), even though projected_points is what gets displayed.
-        total = roster.loc[assigned, 'selection_value'].sum()
-        if best is None or total > best['total']:
-            best = {'formation': f"{def_n}-{mid_n}-{fwd_n}", 'assigned': assigned, 'slot_of': slot_of, 'total': total}
+        needed = {'GK': 1, 'DEF': def_n, 'MID': mid_n, 'FWD': fwd_n - (1 if reserve_ariete else 0)}
+        for combo in combos:
+            pools = {label: [] for label in needed}
+            for i, label in zip(player_ids, combo):
+                pools[label].append(i)
+            # The ariete only reserves a slot when the formation actually
+            # has a FWD row; otherwise he competes like everyone else.
+            if ariete_idx is not None and not reserve_ariete:
+                pools[roster.at[ariete_idx, 'primary']].append(ariete_idx)
+            assigned = [ariete_idx] if reserve_ariete else []
+            slot_of = {ariete_idx: 'FWD'} if reserve_ariete else {}
+            ok = True
+            for label, count in needed.items():
+                picked = sorted(pools[label], key=lambda i: values[i], reverse=True)[:count]
+                if len(picked) < count:
+                    ok = False
+                    break
+                assigned.extend(picked)
+                slot_of.update({i: label for i in picked})
+            if not ok:
+                continue  # this role assignment can't fill the formation
+            # The formation itself is still picked on selection_value
+            # (start risk has to matter when comparing formations — an 11
+            # built around iffy starters shouldn't win just because their
+            # ceiling is high), even though projected_points is shown.
+            total = sum(values[i] for i in assigned)
+            if best is None or total > best['total']:
+                best = {'formation': f"{def_n}-{mid_n}-{fwd_n}", 'assigned': assigned, 'slot_of': slot_of, 'total': total}
 
     if best is None:
         return {'formation': None, 'starters': [], 'bench': [], 'total_projected_points': 0}

@@ -1,19 +1,19 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Getafe,David Soria,68,0,4510000,-20000.0,Fit,12,5.7,39,6.5,29,4.8
+Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Getafe,David Soria,68,0,4470000,-40000.0,Fit,12,5.7,39,6.5,29,4.8
 Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Celta,Ivan Villar,0,0,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Defender/Midfielder,Alaves,Tenaglia,57,0,4210000,-30000.0,Fit,12,4.8,43,7.2,14,2.3
-Minabo de Kiev,Minabo_De_Kiev,Defender,Atletico,Pubill,53,0,5420000,0.0,One yellow card away from suspension,10,5.3,28,5.6,25,5.0
+Minabo de Kiev,Minabo_De_Kiev,Defender/Midfielder,Alaves,Tenaglia,57,0,4180000,-30000.0,Fit,12,4.8,43,7.2,14,2.3
+Minabo de Kiev,Minabo_De_Kiev,Defender,Atletico,Pubill,53,0,5410000,-10000.0,One yellow card away from suspension,10,5.3,28,5.6,25,5.0
 Minabo de Kiev,Minabo_De_Kiev,Defender,Alaves,Valentini,30,0,750000,0.0,Fit,8,3.8,9,3.0,21,4.2
-Minabo de Kiev,Minabo_De_Kiev,Defender,Racing,Mantilla,18,0,530000,-10000.0,Injured. Torn anterior cruciate ligament in the right knee. Estimated return: Early July.,10,1.8,14,2.3,4,1.0
-Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Barcelona,Fermin,109,0,14890000,220000.0,Fit,11,9.9,41,8.2,68,11.3
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Atletico,Barrios,51,0,7500000,70000.0,Fit,9,5.7,20,5.0,31,6.2
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Barcelona,Marc Bernal,42,0,3100000,40000.0,Fit,10,4.2,25,5.0,17,3.4
-Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Osasuna,Moi Gomez,41,0,2130000,70000.0,Fit,9,4.6,17,4.3,24,4.8
-Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Real Sociedad,Kubo,36,0,2810000,-10000.0,Fit,8,4.5,12,3.0,24,6.0
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Levante,Bardeli,31,0,990000,-10000.0,Fit,7,4.4,17,8.5,14,2.8
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Betis,Lo Celso,10,0,1950000,-40000.0,Fit,3,3.3,5,5.0,5,2.5
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Deportivo,Yeremay,58,0,7460000,60000.0,Fit,11,5.3,25,5.0,33,5.5
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Getafe,Satriano,58,0,3530000,30000.0,Fit,12,4.8,49,8.2,9,1.5
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Rayo Vallecano,De Frutos,40,0,3600000,70000.0,Fit,9,4.4,20,5.0,20,4.0
-Minabo de Kiev,Minabo_De_Kiev,Forward,Valencia,Hugo Duro,20,0,950000,-20000.0,Fit,10,2.0,11,1.8,9,2.3
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Espanyol,Pere Milla,19,0,880000,10000.0,Fit,7,2.7,11,2.8,8,2.7
+Minabo de Kiev,Minabo_De_Kiev,Defender,Racing,Mantilla,18,0,520000,-10000.0,Injured. Torn anterior cruciate ligament in the right knee. Estimated return: Early July.,10,1.8,14,2.3,4,1.0
+Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Barcelona,Fermin,109,0,15040000,150000.0,Fit,11,9.9,41,8.2,68,11.3
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Atletico,Barrios,51,0,7550000,50000.0,Fit,9,5.7,20,5.0,31,6.2
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Barcelona,Marc Bernal,42,0,3110000,10000.0,Fit,10,4.2,25,5.0,17,3.4
+Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Osasuna,Moi Gomez,41,0,2190000,60000.0,Fit,9,4.6,17,4.3,24,4.8
+Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Real Sociedad,Kubo,36,0,2810000,0.0,Fit,8,4.5,12,3.0,24,6.0
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Levante,Bardeli,31,0,980000,-10000.0,Fit,7,4.4,17,8.5,14,2.8
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Betis,Lo Celso,10,0,1910000,-40000.0,Fit,3,3.3,5,5.0,5,2.5
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Deportivo,Yeremay,58,0,7490000,30000.0,Fit,11,5.3,25,5.0,33,5.5
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Getafe,Satriano,58,0,3540000,10000.0,Fit,12,4.8,49,8.2,9,1.5
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Rayo Vallecano,De Frutos,40,0,3650000,50000.0,Fit,9,4.4,20,5.0,20,4.0
+Minabo de Kiev,Minabo_De_Kiev,Forward,Valencia,Hugo Duro,20,0,940000,-10000.0,Fit,10,2.0,11,1.8,9,2.3
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Espanyol,Pere Milla,19,0,890000,10000.0,Fit,7,2.7,11,2.8,8,2.7

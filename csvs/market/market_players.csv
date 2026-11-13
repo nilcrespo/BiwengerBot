@@ -1,21 +1,21 @@
 position,club,name,price,change,status,owner,last_sale,recent_pts,this_season_pts,last_season_pts,scraped_at
-Defender,Alaves,Jonny,1210000,-10000.0,,Free Agent,"1,210,000",5,26,0,2026-11-12
-Midfielder,Alaves,Denis Suarez,920000,-10000.0,,Free Agent,"920,000",11,31,0,2026-11-12
-Defender,Barcelona,Cancelo,4400000,-150000.0,,Free Agent,"4,400,000",11,39,0,2026-11-12
-Midfielder,Getafe,Mario Martin,710000,-10000.0,,Free Agent,"710,000",-2,6,0,2026-11-12
-Defender,Real Sociedad,Odriozola,150000,0.0,,Free Agent,"150,000",0,0,29,2026-11-12
-Midfielder,Alaves,Pablo Ibanez,2420000,-10000.0,,Free Agent,"2,420,000",20,50,0,2026-11-12
-Goalkeeper,Real Madrid,Lunin,440000,0.0,,Free Agent,"440,000",9,9,0,2026-11-12
-Midfielder,Athletic,Benat Prados,150000,0.0,,Free Agent,"150,000",7,7,0,2026-11-12
-Midfielder/Defender,Rayo Vallecano,Pathe Ciss,2100000,-20000.0,,Free Agent,"2,100,000",10,33,0,2026-11-12
-Defender,Villarreal,Sergi Cardona,1750000,-70000.0,,Free Agent,"1,750,000",20,25,0,2026-11-12
-Forward/Midfielder,Osasuna,Raul Moro,850000,0.0,,Free Agent,"850,000",10,25,0,2026-11-12
-Goalkeeper,Alaves,Adrian Rodriguez,150000,0.0,,Free Agent,"150,000",0,0,0,2026-11-12
-Forward/Midfielder,Elche,Boayar,150000,0.0,,Free Agent,"150,000",0,0,20,2026-11-12
-Defender,Sevilla,Suazo,2820000,30000.0,,Free Agent,"2,820,000",21,48,0,2026-11-12
-Forward/Midfielder,Sevilla,Sierra,2200000,-30000.0,,Free Agent,"2,200,000",6,51,0,2026-11-12
-Forward/Defender/Midfielder,Alaves,Angel Perez,2860000,-20000.0,,Free Agent,"2,860,000",8,47,0,2026-11-12
-Forward/Midfielder,Malaga,Haitam,160000,0.0,,Free Agent,"160,000",2,9,0,2026-11-12
-Defender,Osasuna,Yeboah,200000,0.0,,Free Agent,"200,000",0,7,0,2026-11-12
-Defender,Levante,Marc Santos,150000,0.0,,Free Agent,"150,000",6,8,0,2026-11-12
-Midfielder/Forward,Espanyol,Calatrava,1760000,-10000.0,,Free Agent,"1,760,000",13,38,0,2026-11-12
+Forward/Midfielder,Real Madrid,Brahim,870000,-10000.0,,Free Agent,"870,000",6,15,0,2026-11-13
+Forward,Getafe,Juanmi,150000,0.0,,Free Agent,"150,000",0,0,22,2026-11-13
+Defender,Levante,Manu Sanchez,1220000,-20000.0,,Free Agent,"1,220,000",8,34,0,2026-11-13
+Forward,Racing,Villalibre,730000,-10000.0,,Free Agent,"730,000",3,17,0,2026-11-13
+Goalkeeper,Sevilla,Fran Gonzalez,270000,0.0,,Free Agent,"270,000",0,0,0,2026-11-13
+Defender/Midfielder,Osasuna,Arguibide,1000000,-20000.0,,Free Agent,"1,000,000",11,31,0,2026-11-13
+Defender,Real Sociedad,Pacheco,190000,0.0,,Free Agent,"190,000",0,3,0,2026-11-13
+Goalkeeper,Osasuna,Aitor Fernandez,990000,-20000.0,,Free Agent,"990,000",15,25,0,2026-11-13
+Midfielder/Defender/Forward,Betis,Ruibal,1310000,50000.0,,Free Agent,"1,310,000",9,9,0,2026-11-13
+Goalkeeper,Racing,Agirrezabala,2290000,20000.0,,Free Agent,"2,290,000",23,52,0,2026-11-13
+Midfielder,Osasuna,Torro,730000,0.0,,Free Agent,"730,000",13,29,0,2026-11-13
+Forward/Midfielder,Rayo Vallecano,Fran Perez,240000,0.0,,Free Agent,"240,000",2,10,0,2026-11-13
+Defender,Getafe,Sazonov,240000,0.0,,Free Agent,"240,000",3,11,0,2026-11-13
+Defender,Elche,Diaby,150000,0.0,,Free Agent,"150,000",0,0,4,2026-11-13
+Defender/Midfielder,Malaga,Jose Salinas,460000,0.0,,Free Agent,"460,000",6,20,0,2026-11-13
+Defender,Sevilla,Cardoso,150000,0.0,,Free Agent,"150,000",0,0,15,2026-11-13
+Midfielder,Real Madrid,Sergio Martinez,810000,-10000.0,,Free Agent,"810,000",0,18,0,2026-11-13
+Midfielder,Getafe,Mangala,1270000,-30000.0,,Free Agent,"1,270,000",14,37,0,2026-11-13
+Defender,Valencia,De Haas,1110000,-10000.0,,Free Agent,"1,110,000",10,23,0,2026-11-13
+Midfielder,Sevilla,Fofana,6550000,-110000.0,,Free Agent,"6,550,000",27,54,0,2026-11-13

@@ -1,20 +1,19 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Locombia FC,Locombia_Fc,Goalkeeper,Betis,Alvaro Valles,83,0,6810000,-20000.0,Fit,12,6.9,37,6.2,46,7.7
+Locombia FC,Locombia_Fc,Goalkeeper,Betis,Alvaro Valles,83,0,6740000,-70000.0,Fit,12,6.9,37,6.2,46,7.7
 Locombia FC,Locombia_Fc,Goalkeeper,Betis,Diego Conde,0,0,240000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Locombia FC,Locombia_Fc,Defender,Atletico,Cristian Romero,49,0,6620000,10000.0,Doubtful. Muscle discomfort.,6,8.2,16,8.0,33,8.3
-Locombia FC,Locombia_Fc,Defender,Sevilla,Suazo,48,0,2850000,30000.0,Fit,12,4.0,26,4.3,22,3.7
-Locombia FC,Locombia_Fc,Defender,Rayo Vallecano,Ratiu,36,0,3420000,20000.0,Fit,8,4.5,27,6.8,9,2.3
-Locombia FC,Locombia_Fc,Defender,Valencia,Tarrega,29,0,1530000,-20000.0,Fit,9,3.2,21,3.5,8,2.7
-Locombia FC,Locombia_Fc,Defender,Espanyol,Riedel,22,0,570000,-10000.0,One yellow card away from suspension,8,2.8,13,2.6,9,3.0
-Locombia FC,Locombia_Fc,Defender,Villarreal,Logan Costa,19,0,330000,20000.0,Fit,3,6.3,19,6.3,0,0.0
-Locombia FC,Locombia_Fc,Defender,Real Madrid,Militão,2,0,2560000,-30000.0,Fit,1,2.0,2,2.0,0,0.0
-Locombia FC,Locombia_Fc,Midfielder,Real Madrid,Bellingham,112,0,19300000,100000.0,Fit,12,9.3,54,10.8,58,8.3
-Locombia FC,Locombia_Fc,Midfielder/Forward,Villarreal,Moleiro,68,0,9060000,-130000.0,Fit,12,5.7,34,5.7,34,5.7
-Locombia FC,Locombia_Fc,Midfielder/Forward,Real Sociedad,Luka Sucic,67,0,5600000,90000.0,Fit,11,6.1,23,3.8,44,8.8
-Locombia FC,Locombia_Fc,Midfielder,Athletic,Sancet,31,0,3750000,20000.0,Fit,8,3.9,21,4.2,10,3.3
-Locombia FC,Locombia_Fc,Midfielder,Atletico,Johnny,31,0,2280000,-20000.0,Fit,7,4.4,18,6.0,13,3.3
-Locombia FC,Locombia_Fc,Midfielder/Defender,Barcelona,De Jong,18,0,5260000,120000.0,Fit,3,6.0,12,6.0,6,6.0
-Locombia FC,Locombia_Fc,Midfielder/Defender,Barcelona,Farinas,9,0,1240000,-70000.0,Fit,2,4.5,8,8.0,1,1.0
-Locombia FC,Locombia_Fc,Forward,Real Sociedad,Oskarsson,42,0,3620000,70000.0,Fit,10,4.2,33,6.6,9,1.8
-Locombia FC,Locombia_Fc,Forward/Defender/Midfielder,Valencia,Rioja,31,0,1510000,-10000.0,Fit,8,3.9,17,3.4,14,4.7
-Locombia FC,Locombia_Fc,Coach,Betis,Pellegrini,26,0,2340000,-10000.0,Fit,12,2.2,15,2.5,11,1.8
+Locombia FC,Locombia_Fc,Defender,Atletico,Cristian Romero,49,0,6630000,10000.0,Doubtful. Muscle discomfort.,6,8.2,16,8.0,33,8.3
+Locombia FC,Locombia_Fc,Defender,Sevilla,Suazo,48,0,2870000,20000.0,Fit,12,4.0,26,4.3,22,3.7
+Locombia FC,Locombia_Fc,Defender,Rayo Vallecano,Ratiu,36,0,3440000,20000.0,Fit,8,4.5,27,6.8,9,2.3
+Locombia FC,Locombia_Fc,Defender,Valencia,Tarrega,29,0,1510000,-20000.0,Fit,9,3.2,21,3.5,8,2.7
+Locombia FC,Locombia_Fc,Defender,Espanyol,Riedel,22,0,560000,-10000.0,One yellow card away from suspension,8,2.8,13,2.6,9,3.0
+Locombia FC,Locombia_Fc,Defender,Villarreal,Logan Costa,19,0,350000,20000.0,Fit,3,6.3,19,6.3,0,0.0
+Locombia FC,Locombia_Fc,Defender,Real Madrid,Militão,2,0,2530000,-30000.0,Fit,1,2.0,2,2.0,0,0.0
+Locombia FC,Locombia_Fc,Midfielder,Real Madrid,Bellingham,112,0,19420000,120000.0,Fit,12,9.3,54,10.8,58,8.3
+Locombia FC,Locombia_Fc,Midfielder/Forward,Villarreal,Moleiro,68,0,8950000,-110000.0,Fit,12,5.7,34,5.7,34,5.7
+Locombia FC,Locombia_Fc,Midfielder/Forward,Real Sociedad,Luka Sucic,67,0,5670000,70000.0,Fit,11,6.1,23,3.8,44,8.8
+Locombia FC,Locombia_Fc,Midfielder,Athletic,Sancet,31,0,3780000,30000.0,Fit,8,3.9,21,4.2,10,3.3
+Locombia FC,Locombia_Fc,Midfielder,Atletico,Johnny,31,0,2260000,-20000.0,Fit,7,4.4,18,6.0,13,3.3
+Locombia FC,Locombia_Fc,Midfielder/Defender,Barcelona,De Jong,18,0,5390000,130000.0,Fit,3,6.0,12,6.0,6,6.0
+Locombia FC,Locombia_Fc,Forward,Real Sociedad,Oskarsson,42,0,3690000,70000.0,Fit,10,4.2,33,6.6,9,1.8
+Locombia FC,Locombia_Fc,Forward/Defender/Midfielder,Valencia,Rioja,31,0,1500000,-10000.0,Fit,8,3.9,17,3.4,14,4.7
+Locombia FC,Locombia_Fc,Coach,Betis,Pellegrini,26,0,2330000,-10000.0,Fit,12,2.2,15,2.5,11,1.8

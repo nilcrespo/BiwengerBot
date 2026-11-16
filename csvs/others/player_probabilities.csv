@@ -146,11 +146,11 @@ Celta,Couhaib Driouech,30%
 Celta,Carl Starfelt,10%
 Celta,Abdoulaye Faye,10%
 Celta,Alvaro Nunez,10%
-Celta,Borja Iglesias,10%
 Celta,Altay Bayindir,5%
-Celta,Miguel Roman,0%
 Celta,Jones El-Abdellaoui,0%
 Celta,Ivan Villar,0%
+Celta,Miguel Roman,0%
+Celta,Borja Iglesias,0%
 Elche,Matias Dituro,90%
 Elche,Victor Chust,90%
 Elche,Federico Redondo,70%
@@ -158,13 +158,14 @@ Elche,Buba Sangare,50%
 Elche,Roy Revivo,90%
 Elche,Gonzalo Villar,70%
 Elche,Javi Morcillo,90%
-Elche,Grady Diangana,50%
+Elche,Thomas Lemar,50%
 Elche,Lucas Cepeda,50%
 Elche,German Valera,90%
 Elche,Fernando Nino,70%
 Elche,Ruben Sanchez,50%
 Elche,Tete Morente,50%
 Elche,Ali Houary,40%
+Elche,Grady Diangana,30%
 Elche,Martim Neto,30%
 Elche,Abiel Osorio,30%
 Elche,Pedro Bigas,30%
@@ -178,7 +179,6 @@ Elche,Yago Santiago,0%
 Elche,Bambo Diaby,0%
 Elche,Matia Barzic,0%
 Elche,Marc Aguado,0%
-Elche,Thomas Lemar,0%
 Espanyol,Angel Fortuno,70%
 Espanyol,Leandro Cabrera,80%
 Espanyol,Omar El Hilali,70%
@@ -329,9 +329,9 @@ Real Madrid,Carlos Espi,10%
 Real Madrid,Endrick,5%
 Real Madrid,Andriy Lunin,5%
 Real Madrid,Ferland Mendy,0%
-Real Madrid,Rodrygo Goes,0%
 Real Madrid,Raul Asencio,0%
 Real Madrid,Thiago Pitarch,0%
+Real Madrid,Rodrygo Goes,0%
 Real Sociedad,Alex Remiro,95%
 Real Sociedad,Igor Zubeldia,60%
 Real Sociedad,Jon Martin,90%
@@ -372,7 +372,6 @@ Sevilla,Isaac Romero,60%
 Sevilla,Andres Castrin,50%
 Sevilla,Chidera Ejuke,40%
 Sevilla,Giorgi Kochorashvili,35%
-Sevilla,Alfonso Gonzalez,20%
 Sevilla,Robbie Ure,20%
 Sevilla,Jon Guridi,20%
 Sevilla,Julio Diaz,10%
@@ -382,6 +381,7 @@ Sevilla,Manu Bueno,5%
 Sevilla,Marcão,0%
 Sevilla,Peque,0%
 Sevilla,Fabio Cardoso,0%
+Sevilla,Alfonso Gonzalez,0%
 Sevilla,Miguel Sierra,0%
 Valencia,Stole Dimitrievski,95%
 Valencia,Pepelu,90%

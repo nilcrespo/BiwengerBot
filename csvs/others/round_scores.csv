@@ -4602,29 +4602,40 @@ round_id,round_name,round_status,game_id,game_status,player_id,player,club,posit
 4911,Round 13,active,50832,finished,15828,Cristian Romero,Atlético,2,Locombia_Fc,Locombia FC,starter,,0
 4911,Round 13,active,50832,finished,34805,Musso,Atlético,1,The_National,The National,reserve,,0
 4911,Round 13,active,50832,finished,25398,Pubill,Atlético,2,Minabo_De_Kiev,Minabo de Kiev,starter,,0
-4911,Round 13,active,50833,preview,32435,Etta Eyong,Levante,4,,,,,0
-4911,Round 13,active,50833,preview,39431,Thiago Fernández,Levante,4,,,,,0
-4911,Round 13,active,50833,preview,17937,Iván Romero,Levante,4,,,,,0
-4911,Round 13,active,50833,preview,15396,Brugué,Levante,4,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
-4911,Round 13,active,50833,preview,37488,Requena,Levante,3,,,,,0
-4911,Round 13,active,50833,preview,29661,Olasagasti,Levante,3,,,,,0
-4911,Round 13,active,50833,preview,1721,Manu Sánchez,Levante,2,,,,,0
-4911,Round 13,active,50833,preview,42757,Ndukwe,Levante,2,Patsi_FC,Patsi F.C,starter,,0
-4911,Round 13,active,50833,preview,37739,De la Fuente,Levante,2,Hernan_Krezzpo,Hernan Krezzpo,starter,,0
-4911,Round 13,active,50833,preview,38143,Toljan,Levante,2,,,,,0
-4911,Round 13,active,50833,preview,2184,Ryan,Levante,1,Cd_Numancia,CD Numancia,starter,,0
-4911,Round 13,active,50833,preview,25815,Nacho Pérez,Levante,2,General_Hansi_Topete,"General ""Hansi” Topete",reserve,,0
-4911,Round 13,active,50833,preview,41385,Bardeli,Levante,3,Minabo_De_Kiev,Minabo de Kiev,discarded,,0
-4911,Round 13,active,50833,preview,25400,Sotelo,Levante,3,Patsi_FC,Patsi F.C,discarded,,0
-4911,Round 13,active,50833,preview,21132,Fer Niño,Elche,4,,,,,0
-4911,Round 13,active,50833,preview,20969,Germán Valera,Elche,3,The_National,The National,starter,,0
-4911,Round 13,active,50833,preview,11196,Lemar,Elche,3,,,,,0
-4911,Round 13,active,50833,preview,39874,Cepeda,Elche,4,Manchester_Tity,Manchester Tity,starter,,0
-4911,Round 13,active,50833,preview,12734,Javi Morcillo,Elche,3,Manchester_Tity,Manchester Tity,discarded,,0
-4911,Round 13,active,50833,preview,25403,Gonzalo Villar,Elche,3,,,,,0
-4911,Round 13,active,50833,preview,43268,Revivo,Elche,2,Raifc,RaiFC,reserve,,0
-4911,Round 13,active,50833,preview,38422,Redondo,Elche,3,General_Hansi_Topete,"General ""Hansi” Topete",starter,,0
-4911,Round 13,active,50833,preview,1760,Chust,Elche,2,The_National,The National,starter,,0
-4911,Round 13,active,50833,preview,40010,Sangaré,Elche,2,,,,,0
-4911,Round 13,active,50833,preview,17482,Dituro,Elche,1,,,,,0
-4911,Round 13,active,50833,preview,37526,Iturbe,Elche,1,Cd_Numancia,CD Numancia,discarded,,0
+4911,Round 13,active,50833,finished,25815,Nacho Pérez,Levante,2,General_Hansi_Topete,"General ""Hansi” Topete",reserve,2.0,1
+4911,Round 13,active,50833,finished,32435,Etta Eyong,Levante,4,,,,2.0,1
+4911,Round 13,active,50833,finished,42277,Marc Santos,Levante,2,,,,4.0,1
+4911,Round 13,active,50833,finished,43270,Ratkov,Levante,4,,,,2.0,1
+4911,Round 13,active,50833,finished,2184,Ryan,Levante,1,Cd_Numancia,CD Numancia,starter,3.0,1
+4911,Round 13,active,50833,finished,1721,Manu Sánchez,Levante,2,,,,3.0,1
+4911,Round 13,active,50833,finished,2480,Mandi,Levante,2,,,,4.0,1
+4911,Round 13,active,50833,finished,37739,De la Fuente,Levante,2,Hernan_Krezzpo,Hernan Krezzpo,starter,8.0,1
+4911,Round 13,active,50833,finished,38143,Toljan,Levante,2,,,,3.0,1
+4911,Round 13,active,50833,finished,37726,Oriol Rey,Levante,3,,,,3.0,1
+4911,Round 13,active,50833,finished,39431,Thiago Fernández,Levante,4,,,,4.0,1
+4911,Round 13,active,50833,finished,37488,Requena,Levante,3,,,,14.0,1
+4911,Round 13,active,50833,finished,29661,Olasagasti,Levante,3,,,,6.0,1
+4911,Round 13,active,50833,finished,15396,Brugué,Levante,4,General_Hansi_Topete,"General ""Hansi” Topete",starter,2.0,1
+4911,Round 13,active,50833,finished,17937,Iván Romero,Levante,4,,,,4.0,1
+4911,Round 13,active,50833,finished,39398,Luis Castro,Levante,5,,,,1.0,1
+4911,Round 13,active,50833,finished,41385,Bardeli,Levante,3,Minabo_De_Kiev,Minabo de Kiev,discarded,,0
+4911,Round 13,active,50833,finished,42757,Ndukwe,Levante,2,Patsi_FC,Patsi F.C,starter,,0
+4911,Round 13,active,50833,finished,25400,Sotelo,Levante,3,Patsi_FC,Patsi F.C,discarded,,0
+4911,Round 13,active,50833,finished,11196,Lemar,Elche,3,,,,1.0,1
+4911,Round 13,active,50833,finished,22690,Tete Morente,Elche,4,,,,2.0,1
+4911,Round 13,active,50833,finished,27575,Barzic,Elche,2,,,,2.0,1
+4911,Round 13,active,50833,finished,38355,Neto,Elche,3,,,,3.0,1
+4911,Round 13,active,50833,finished,38875,Diangana,Elche,3,,,,0.0,1
+4911,Round 13,active,50833,finished,17482,Dituro,Elche,1,,,,3.0,1
+4911,Round 13,active,50833,finished,43268,Revivo,Elche,2,Raifc,RaiFC,reserve,16.0,1
+4911,Round 13,active,50833,finished,38422,Redondo,Elche,3,General_Hansi_Topete,"General ""Hansi” Topete",starter,7.0,1
+4911,Round 13,active,50833,finished,1760,Chust,Elche,2,The_National,The National,starter,6.0,1
+4911,Round 13,active,50833,finished,40010,Sangaré,Elche,2,,,,3.0,1
+4911,Round 13,active,50833,finished,20969,Germán Valera,Elche,3,The_National,The National,starter,3.0,1
+4911,Round 13,active,50833,finished,12734,Javi Morcillo,Elche,3,Manchester_Tity,Manchester Tity,discarded,6.0,1
+4911,Round 13,active,50833,finished,25403,Gonzalo Villar,Elche,3,,,,3.0,1
+4911,Round 13,active,50833,finished,39874,Cepeda,Elche,4,Manchester_Tity,Manchester Tity,starter,3.0,1
+4911,Round 13,active,50833,finished,21132,Fer Niño,Elche,4,,,,3.0,1
+4911,Round 13,active,50833,finished,41565,Osorio,Elche,4,,,,3.0,1
+4911,Round 13,active,50833,finished,41388,Anselmi,Elche,5,,,,1.0,1
+4911,Round 13,active,50833,finished,37526,Iturbe,Elche,1,Cd_Numancia,CD Numancia,discarded,,0

@@ -1038,6 +1038,61 @@ def get_round_scores(page, la_liga_players=None) -> list:
           f"{len({r['round_id'] for r in rows})} round(s)")
     return rows
 
+def get_next_round(page) -> dict:
+    """When the next matchweek locks: the first kickoff of the earliest
+    round that hasn't started yet.
+
+    Biwenger needs a non-negative balance at that moment, or the whole
+    round scores zero for us (it happened in round 10). notify.py turns
+    this into a countdown so a negative balance is caught while there's
+    still time to sell.
+
+    The kickoff is read from the round's own fixtures (each game's `date`,
+    a unix timestamp) rather than a round-level field, because the first
+    game is what actually locks lineups. A round that is already under way
+    is skipped: its lock has passed, so the deadline that still matters is
+    the next one. "(postponed)" rounds (`part` > 1) are skipped for the
+    same reason get_round_scores skips them: they re-list fixtures that
+    belong to an earlier round.
+    """
+    import time as _time
+
+    headers = _capture_auth_headers(page)
+    version = headers.get("x-version") if headers else None
+    if not version:
+        print("⚠️ No x-version in captured headers — skipping next-round lookup")
+        return {}
+
+    current = _fetch_round(None, version)
+    rounds = (current.get("season") or {}).get("rounds") or []
+    current_id = current.get("id")
+    ids = [r.get("id") for r in rounds]
+    # Current round first, then the ones after it in season order. A
+    # handful is plenty: the next lock is never more than a couple away.
+    start_at = ids.index(current_id) if current_id in ids else 0
+    candidates = ids[start_at:start_at + 4] or ([current_id] if current_id else [])
+
+    now = _time.time()
+    for round_id in candidates:
+        data = current if round_id == current_id else _fetch_round(round_id, version)
+        if not data or (data.get("part") or 1) != 1:
+            continue
+        kickoffs = [g.get("date") for g in (data.get("games") or []) if g.get("date")]
+        if not kickoffs:
+            continue
+        first = min(kickoffs)
+        if first > now:
+            info = {"round_id": data.get("id") or round_id,
+                    "round_name": data.get("name"),
+                    "start": int(first)}
+            print(f"📅 Next matchweek: {info['round_name']} locks at "
+                  f"{pd.Timestamp(first, unit='s', tz='Europe/Madrid'):%a %d %b %H:%M}")
+            return info
+
+    print("⚠️ Could not find an upcoming round with fixture dates")
+    return {}
+
+
 # Biwenger encodes a player's position as a small int everywhere in its
 # own APIs (player database, lineups). Confirmed by cross-checking each
 # rival's locked lineup against its declared formation: a "4-4-2" team's
@@ -1613,6 +1668,11 @@ def run(playwright: Playwright) -> None:
                       "scraped_at"]
     pd.DataFrame(lineup_rows, columns=lineup_columns).to_csv("csvs/others/rival_lineups.csv", index=False)
     print(f"Saved {len(lineup_rows)} lineup slots → rival_lineups.csv")
+
+    # When the next matchweek locks, for notify.py's balance countdown.
+    next_round = get_next_round(page)
+    with open("csvs/others/next_round.json", "w") as f:
+        json.dump(next_round, f, indent=2)
 
     # Keep every owned player's sale listing alive at current market
     # value (see renew_player_sales' docstring for why this is safe/

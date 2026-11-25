@@ -12,6 +12,7 @@ import json
 import os
 import sqlite3
 import sys
+import time
 import urllib.parse
 import urllib.request
 
@@ -22,6 +23,8 @@ import recommenders
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 RENEWAL_RESULTS_PATH = "csvs/others/renewal_results.json"
+NEXT_ROUND_PATH = "csvs/others/next_round.json"
+MADRID_TZ = "Europe/Madrid"
 
 
 def send_telegram_message(text: str) -> bool:
@@ -56,20 +59,89 @@ def _money(n):
     return f"{sign}€{abs(n):,.0f}"
 
 
-def _balance_section(conn, date) -> str:
-    """Warn when the live balance is negative — Biwenger requires a
-    non-negative balance heading into each round (see
-    recommenders.get_my_balance's docstring), so this is a real,
-    near-term forced-sale risk, not just a low number. Silent otherwise:
-    a healthy balance isn't news worth a line in every digest."""
+def _load_next_round(now=None):
+    """The next matchweek lock written by scraper.get_next_round, or None
+    when it's missing, unreadable or already in the past (a stale file
+    from an older run must never show a countdown to a round that has
+    started)."""
+    if not os.path.exists(NEXT_ROUND_PATH):
+        return None
+    try:
+        with open(NEXT_ROUND_PATH) as f:
+            info = json.load(f)
+        start = float(info.get("start"))
+    except Exception:
+        return None
+    now = time.time() if now is None else now
+    if start <= now:
+        return None
+    return {**info, "start": start, "days_left": (start - now) / 86400}
+
+
+def _when(info) -> str:
+    kickoff = pd.Timestamp(info["start"], unit="s", tz=MADRID_TZ)
+    days = info["days_left"]
+    if days < 1:
+        left = f"in {days * 24:.0f} h"
+    else:
+        left = f"in {days:.1f} days"
+    name = info.get("round_name") or "Next round"
+    return f"{name} locks {kickoff:%a %d %b, %H:%M} ({left})"
+
+
+def _funding_sells(sell_df, shortfall):
+    """The sell recommender's own top picks, taken in its ranking order
+    until their sale value covers the shortfall. Uses effective_price, the
+    computer's instant offer when there is one, since that's money that
+    lands before the deadline for certain."""
+    picks, total = [], 0.0
+    if sell_df is None or not len(sell_df):
+        return picks, total
+    for _, r in sell_df.iterrows():
+        if total >= shortfall:
+            break
+        value = r.get("effective_price")
+        if value is None or pd.isna(value) or value <= 0:
+            continue
+        picks.append((r["player"], float(value), bool(r.get("has_offer"))))
+        total += float(value)
+    return picks, total
+
+
+def _balance_section(conn, date, sell_df=None, now=None) -> str:
+    """Countdown to the next matchweek lock, plus a loud warning when the
+    live balance is negative.
+
+    Biwenger needs a non-negative balance when a round starts, or the
+    whole round scores zero (see recommenders.get_my_balance). That cost
+    us round 10, so a negative balance always comes with the deadline and
+    a concrete list of sells that would cover it. A healthy balance still
+    gets the one-line countdown, so the deadline is never a surprise."""
     balance = recommenders.get_my_balance(conn, date)
+    info = _load_next_round(now)
+    when = _when(info) if info else None
+
     if balance >= 0:
-        return ""
-    return (
-        f"🚨 <b>Balance is negative: {_money(balance)}</b>\n"
-        "  Biwenger needs a non-negative balance before the next round — "
-        "sell something or you may be forced to."
-    )
+        if not when:
+            return ""
+        return f"📅 {when}\n  Balance {_money(balance)} ✅"
+
+    shortfall = -balance
+    lines = [f"🚨 <b>Balance is negative: {_money(balance)}</b>"]
+    if when:
+        lines.append(f"  {when}. If it's still negative then, the whole round scores 0.")
+    else:
+        lines.append("  Biwenger needs a non-negative balance before the next round, "
+                     "or the round scores 0.")
+    picks, total = _funding_sells(sell_df, shortfall)
+    if picks and total >= shortfall:
+        parts = [f"{name} ({_money(value)}{', instant offer' if offer else ''})"
+                 for name, value, offer in picks]
+        lines.append(f"  To cover {_money(shortfall)}, sell: " + ", ".join(parts))
+    elif picks:
+        lines.append(f"  The sell list only covers {_money(total)} of the {_money(shortfall)} needed. "
+                     "You'll need to sell someone outside it.")
+    return "\n".join(lines)
 
 
 def _renewal_section() -> str:
@@ -101,7 +173,7 @@ def build_digest(conn, date) -> str:
 
     sections = []
 
-    balance_warning = _balance_section(conn, date)
+    balance_warning = _balance_section(conn, date, sell_df)
     if balance_warning:
         sections.append(balance_warning)
 

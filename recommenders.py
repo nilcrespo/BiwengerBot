@@ -231,6 +231,18 @@ MIN_CALIBRATION_SAMPLES = 20
 # MIN_CALIBRATION_SAMPLES: read the real shape once there's enough of it,
 # don't lean on a handful of points.
 MIN_QUANTILE_SAMPLES = 20
+
+# Win-probability bids are read straight off how far above asking price
+# real winning bids went, over a recent window and within the player's
+# price band. Replayed against 319 past auctions (each scored only on what
+# was known the day before), the older bidder-count route said "90%" but
+# won about 60% of the time, every month since September; this one said
+# "90%" and won 86-95%. Bands are coarse on purpose: the 6M+ band only has
+# a couple of dozen auctions all season.
+WIN_RATIO_WINDOW_DAYS = 45
+WIN_RATIO_BANDS = [(0, 1_000_000), (1_000_000, 3_000_000),
+                   (3_000_000, 6_000_000), (6_000_000, float('inf'))]
+MIN_WIN_RATIO_BAND_SAMPLES = 15
 # FALLBACK ONLY as of 2026-09-09 — used solely when fewer than
 # MIN_QUANTILE_SAMPLES real auctions are available to read the spread off
 # directly (see bidder_ratio_samples). Checked against 9 real auctions on
@@ -322,7 +334,7 @@ class BidCompetitionModel:
     """
 
     def __init__(self, rivals, bucket_avg_bids, markup_per_bidder, calibration_samples,
-                 bidder_ratio_samples=None):
+                 bidder_ratio_samples=None, win_ratio_samples=None):
         # rivals: [{'team_id', 'team_name', 'capacity', 'depth': {POS: float}}]
         self.rivals = rivals
         self.bucket_avg_bids = bucket_avg_bids
@@ -332,6 +344,9 @@ class BidCompetitionModel:
         # completed auctions — the empirical spread that replaces
         # BIDDER_UNCERTAINTY's Normal assumption once there's enough of it.
         self.bidder_ratio_samples = bidder_ratio_samples or []
+        # {band index | 'all': sorted winning/asking ratios} from recent
+        # auctions — see _winning_ratio_samples and WIN_RATIO_WINDOW_DAYS.
+        self.win_ratio_samples = win_ratio_samples or {}
 
     # --- competitor weighting -------------------------------------------------
     @staticmethod
@@ -497,6 +512,20 @@ class BidCompetitionModel:
         win_75 = _at(_n_at_quantile(0.75))
         win_90 = _at(_n_at_quantile(0.90))
 
+        # Preferred route for the win-probability bids: the empirical
+        # winning-ratio quantiles (see WIN_RATIO_WINDOW_DAYS for why).
+        # The bidder-count route above stays as the fallback for a
+        # thin window, and still drives the range fields.
+        ratios = self.win_ratio_samples.get(_win_band(price)) or []
+        if len(ratios) < MIN_WIN_RATIO_BAND_SAMPLES:
+            ratios = self.win_ratio_samples.get('all') or []
+        win_bid_source = 'bidder model'
+        if len(ratios) >= MIN_QUANTILE_SAMPLES and price > 0:
+            win_50 = price * _empirical_quantile(ratios, 0.50)
+            win_75 = price * _empirical_quantile(ratios, 0.75)
+            win_90 = price * _empirical_quantile(ratios, 0.90)
+            win_bid_source = f'last {WIN_RATIO_WINDOW_DAYS} days, {len(ratios)} auctions'
+
         # The original flat €10,000 rounding collapses the whole range to
         # a single number on cheap players — a €210k listing's realistic
         # spread is a few thousand euros, which rounds away entirely and
@@ -514,6 +543,7 @@ class BidCompetitionModel:
             'win_bid_50': _round(win_50),
             'win_bid_75': _round(win_75),
             'win_bid_90': _round(win_90),
+            'win_bid_source': win_bid_source,
             'expected_bidders': round(bidders, 1),
             'competitor_pressure': round(pressure, 2),
             'markup_per_bidder': round(self.markup_per_bidder, 4),
@@ -576,6 +606,47 @@ def _bidder_ratio_samples(conn, date, bucket_avg_bids):
     )
     ratios = (usable['num_bidders'] / usable['bucket_avg']).tolist()
     return sorted(ratios)
+
+
+def _win_band(price):
+    for i, (lo, hi) in enumerate(WIN_RATIO_BANDS):
+        if lo <= price < hi:
+            return i
+    return len(WIN_RATIO_BANDS) - 1
+
+
+def _winning_ratio_samples(conn, date, window_days=WIN_RATIO_WINDOW_DAYS):
+    """Sorted winning_amount / asking_price ratios from auctions completed
+    in the `window_days` before `date`, per price band plus 'all'.
+
+    Same look-ahead discipline as _markup_per_bidder (only rows captured
+    on or before `date`), and the same asking-price reconstruction
+    (captured price minus that day's own increment). The window keeps the
+    numbers tracking how the league bids now rather than in August.
+    """
+    if not _table_exists(conn, 'market_bid_history'):
+        return {}
+    txns = pd.read_sql(
+        """
+        SELECT DISTINCT txn_key, txn_date, player_price, price_change, winning_amount
+        FROM market_bid_history
+        WHERE is_winner = 1 AND DATE(scraped_at) <= ?
+        """,
+        conn, params=(date,)
+    )
+    if not len(txns):
+        return {}
+    cutoff = (pd.Timestamp(date) - pd.Timedelta(days=window_days)).timestamp()
+    end = (pd.Timestamp(date) + pd.Timedelta(days=1)).timestamp()
+    txns = txns[(txns['txn_date'] >= cutoff) & (txns['txn_date'] < end)]
+    asking = txns['player_price'] - txns['price_change'].fillna(0)
+    ok = (asking > 0) & txns['winning_amount'].notna()
+    ratios = (txns.loc[ok, 'winning_amount'] / asking[ok]).clip(lower=1.0)
+    bands = asking[ok].apply(_win_band)
+    out = {'all': sorted(ratios.tolist())}
+    for b in range(len(WIN_RATIO_BANDS)):
+        out[b] = sorted(ratios[bands == b].tolist())
+    return out
 
 
 def _markup_per_bidder(conn, date):
@@ -654,6 +725,7 @@ def build_bid_competition_model(conn, date, my_team_id=None):
 
     markup, samples = _markup_per_bidder(conn, date)
     bidder_ratio_samples = _bidder_ratio_samples(conn, date, bucket_avg_bids)
+    win_ratio_samples = _winning_ratio_samples(conn, date)
 
     rivals = []
     if _table_exists(conn, 'rival_lineups'):
@@ -699,7 +771,8 @@ def build_bid_competition_model(conn, date, my_team_id=None):
                 'depth': depth,
             })
 
-    model = BidCompetitionModel(rivals, bucket_avg_bids, markup, samples, bidder_ratio_samples)
+    model = BidCompetitionModel(rivals, bucket_avg_bids, markup, samples, bidder_ratio_samples,
+                                win_ratio_samples)
     return model, bucket_avg_bids, bucket_sample_size
 
 

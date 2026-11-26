@@ -171,20 +171,21 @@ def _renewal_section() -> str:
 
 
 def _log_flip_plan(plan, date):
-    """Append today's flip suggestions to the flip log, so a player bought
+    """Add today's flip suggestions to the flip log, so a player bought
     off this list is later recognized as a flip (sold first, tracked
-    separately). One row per player per day; re-running a day replaces
-    that day's rows instead of duplicating them."""
+    separately). Rows are only ever added: a rerun later the same day can
+    refresh a player's row but never erases a plan that was already sent,
+    since someone may have bid on it."""
     path = recommenders.FLIP_LOG_PATH
     cols = ["date", "name", "club", "price", "bid", "expected_profit", "round_name"]
+    if not len(plan):
+        return
     try:
         log = pd.read_csv(path)
     except Exception:
         log = pd.DataFrame(columns=cols)
-    log = log[log["date"] != date]
-    if len(plan):
-        today = plan.assign(date=date)[cols]
-        log = pd.concat([log, today], ignore_index=True)
+    today = plan.assign(date=date)[cols]
+    log = pd.concat([log, today], ignore_index=True).drop_duplicates(["date", "name"], keep="last")
     log[cols].to_csv(path, index=False)
 
 

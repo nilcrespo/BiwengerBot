@@ -517,16 +517,17 @@ class BidCompetitionModel:
         # The bidder-count route above stays as the fallback for a
         # thin window, and still drives the range fields.
         ratios = self.win_ratio_samples.get(_win_band(price)) or []
-        if len(ratios) < MIN_WIN_RATIO_BAND_SAMPLES:
+        if len(ratios) < max(MIN_WIN_RATIO_BAND_SAMPLES, MIN_QUANTILE_SAMPLES):
             ratios = self.win_ratio_samples.get('all') or []
         win_bid_source = 'bidder model'
         if len(ratios) >= MIN_QUANTILE_SAMPLES and price > 0:
-            # Applied to `base` (asking price plus today's rise), like the
-            # route above: a riser is likely still rising when the bid
-            # resolves, so bidding off today's asking price undershoots.
-            win_50 = base * _empirical_quantile(ratios, 0.50)
-            win_75 = base * _empirical_quantile(ratios, 0.75)
-            win_90 = base * _empirical_quantile(ratios, 0.90)
+            # Applied to today's asking price, the same reference the
+            # samples are measured against (winning bid / asking price on
+            # the auction day). That is what the 319-auction replay
+            # validated; adding today's rise on top would count it twice.
+            win_50 = price * _empirical_quantile(ratios, 0.50)
+            win_75 = price * _empirical_quantile(ratios, 0.75)
+            win_90 = price * _empirical_quantile(ratios, 0.90)
             win_bid_source = f'last {WIN_RATIO_WINDOW_DAYS} days, {len(ratios)} auctions'
 
         # The original flat €10,000 rounding collapses the whole range to
@@ -1598,7 +1599,7 @@ def _daily_price_matrix(conn, date, days):
     if not len(a):
         return pd.DataFrame()
     a.loc[:, 'key'] = a['name'].map(_normalize_name) + '|' + a['club'].map(_normalize_name)
-    a = a.sort_values('src').drop_duplicates(['key', 'day'])
+    a = a.sort_values('src', kind='stable').drop_duplicates(['key', 'day'])
     m = a.pivot_table(index='day', columns='key', values='price', aggfunc='first')
     m.index = pd.to_datetime(m.index)
     return m.asfreq('D')
@@ -1658,7 +1659,7 @@ def build_flip_plan(conn, date, model=None, now=None, buy_df=None):
     # safe" level) won. Players already on the buy list aren't flips.
     squad_targets = set()
     if buy_df is not None and len(buy_df):
-        if 'win_bid_90' in buy_df:
+        if 'win_bid_90' in buy_df and pd.notna(buy_df['win_bid_90'].iloc[0]):
             spare -= float(buy_df['win_bid_90'].iloc[0])
         squad_targets = set(buy_df['name'].map(_normalize_name))
     if spare <= 0:
@@ -1666,7 +1667,7 @@ def build_flip_plan(conn, date, model=None, now=None, buy_df=None):
 
     d = resolve_scraped_at(conn, date)
     market = pd.read_sql(
-        "SELECT name, club, position, price, change, this_season_pts FROM market WHERE scraped_at = ?",
+        "SELECT name, club, position, price, change, this_season_pts FROM market WHERE scraped_at LIKE ?",
         conn, params=(d,))
     # Today's own price move is the signal: it's on every listing, even a
     # player listed for the first time with no history in the DB yet.
@@ -1759,7 +1760,9 @@ def owned_flips(conn, date, days=FLIP_OWNED_DAYS):
     if not len(wins):
         return pd.DataFrame()
     wins.loc[:, 'key'] = wins['player_name'].map(_normalize_name)
-    wins.loc[:, 'won_day'] = pd.to_datetime(wins['txn_date'], unit='s').dt.normalize()
+    # Madrid calendar days, matching the run dates the flip log uses.
+    wins.loc[:, 'won_day'] = (pd.to_datetime(wins['txn_date'], unit='s', utc=True)
+                              .dt.tz_convert('Europe/Madrid').dt.tz_localize(None).dt.normalize())
     m = wins.merge(log[['key', 'date', 'bid']], on='key')
     m.loc[:, 'gap'] = (m['won_day'] - pd.to_datetime(m['date'])).dt.days
     m = m[(m['gap'] >= 0) & (m['gap'] <= FLIP_BUY_WINDOW_DAYS)
@@ -1769,7 +1772,7 @@ def owned_flips(conn, date, days=FLIP_OWNED_DAYS):
     bought = m.sort_values('won_day').groupby('key').agg(buy_price=('winning_amount', 'last'))
 
     mine = pd.read_sql("SELECT name, club, price AS current_price FROM team_players "
-                       "WHERE scraped_at = ? AND team_id = ?", conn, params=(d, team_id))
+                       "WHERE scraped_at LIKE ? AND team_id = ?", conn, params=(d, team_id))
     mine.loc[:, 'key'] = mine['name'].map(_normalize_name)
     mine = mine.drop_duplicates('key').merge(bought, left_on='key', right_index=True)
     if not len(mine):

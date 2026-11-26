@@ -1648,12 +1648,14 @@ def build_flip_plan(conn, date, model=None, now=None, buy_df=None):
         return pd.DataFrame(), f"only {info['days_left']:.1f} days until the matchweek"
 
     spare = get_my_balance(conn, date) - FLIP_BALANCE_BUFFER
-    # Money for the best squad buy suggested today comes first: flips only
-    # get what would still be left if that bid ("to be safe" level) won.
-    if buy_df is not None and len(buy_df) and 'win_bid_90' in buy_df:
-        affordable = buy_df[buy_df.get('shortfall', 0) <= 0] if 'shortfall' in buy_df else buy_df
-        if len(affordable):
-            spare -= float(affordable['win_bid_90'].iloc[0])
+    # Money for the top squad buy suggested today comes first, affordable
+    # or not: flips only get what would still be left if that bid ("to be
+    # safe" level) won. Players already on the buy list aren't flips.
+    squad_targets = set()
+    if buy_df is not None and len(buy_df):
+        if 'win_bid_90' in buy_df:
+            spare -= float(buy_df['win_bid_90'].iloc[0])
+        squad_targets = set(buy_df['name'].map(_normalize_name))
     if spare <= 0:
         return pd.DataFrame(), "no spare money"
 
@@ -1675,6 +1677,8 @@ def build_flip_plan(conn, date, model=None, now=None, buy_df=None):
 
     rows = []
     for _, r in market.iterrows():
+        if _normalize_name(r['name']) in squad_targets:
+            continue
         before = float(r['price']) - float(r['change'])
         if before <= 0:
             continue

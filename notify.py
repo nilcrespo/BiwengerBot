@@ -64,7 +64,9 @@ def _load_next_round(now=None):
 def _when(info) -> str:
     kickoff = pd.Timestamp(info["start"], unit="s", tz=MADRID_TZ)
     days = info["days_left"]
-    if days < 1:
+    if days * 24 < 1:
+        left = f"in {max(days * 1440, 1):.0f} min"
+    elif days < 1:
         left = f"in {days * 24:.0f} h"
     else:
         left = f"in {days:.1f} days"
@@ -75,8 +77,10 @@ def _when(info) -> str:
 def _funding_sells(sell_df, shortfall, flips_df=None):
     """The sell recommender's own top picks, taken in its ranking order
     until their sale value covers the shortfall. Uses effective_price, the
-    computer's instant offer when there is one, since that's money that
-    lands before the deadline for certain."""
+    computer's instant offer when there is one. Only instant offers count
+    toward covering the shortfall, since only they are money that lands
+    before the deadline for certain; a player without one is still listed
+    (marked "no offer yet") but never makes the shortfall look covered."""
     picks, total = [], 0.0
     # Flip players go first, always: they were bought to be sold, so
     # covering a shortfall should never cost a starter while one is held.
@@ -86,8 +90,10 @@ def _funding_sells(sell_df, shortfall, flips_df=None):
         value = r.get("sale_value")
         if value is None or pd.isna(value) or value <= 0:
             continue
-        picks.append((f"{r['name']} [flip]", float(value), pd.notna(r.get("offer_price"))))
-        total += float(value)
+        has_offer = pd.notna(r.get("offer_price"))
+        picks.append((f"{r['name']} [flip]", float(value), has_offer))
+        if has_offer:
+            total += float(value)
     if sell_df is None or not len(sell_df):
         return picks, total
     taken = {p[0].replace(" [flip]", "") for p in picks}
@@ -99,8 +105,10 @@ def _funding_sells(sell_df, shortfall, flips_df=None):
         value = r.get("effective_price")
         if value is None or pd.isna(value) or value <= 0:
             continue
-        picks.append((r["player"], float(value), bool(r.get("has_offer"))))
-        total += float(value)
+        has_offer = bool(r.get("has_offer"))
+        picks.append((r["player"], float(value), has_offer))
+        if has_offer:
+            total += float(value)
     return picks, total
 
 
@@ -131,7 +139,7 @@ def _balance_section(conn, date, sell_df=None, now=None, flips_df=None) -> str:
                      "or the round scores 0.")
     picks, total = _funding_sells(sell_df, shortfall, flips_df)
     if picks and total >= shortfall:
-        parts = [f"{name} ({_money(value)}{', instant offer' if offer else ''})"
+        parts = [f"{name} ({_money(value)}{', instant offer' if offer else ', no offer yet'})"
                  for name, value, offer in picks]
         lines.append(f"  To cover {_money(shortfall)}, sell: " + ", ".join(parts))
     elif picks:
@@ -217,10 +225,13 @@ def build_digest(conn, date) -> str:
     # is the line that matters most, so any failure in it is contained.
     try:
         flip_plan, flip_note = recommenders.build_flip_plan(conn, date, buy_df=buy_df)
-        _log_flip_plan(flip_plan, date)
     except Exception as e:
         print(f"⚠️ Flip plan failed: {e}")
         flip_plan, flip_note = pd.DataFrame(), None
+    try:
+        _log_flip_plan(flip_plan, date)
+    except Exception as e:
+        print(f"⚠️ Could not write the flip log: {e}")
     try:
         owned = recommenders.owned_flips(conn, date)
     except Exception as e:

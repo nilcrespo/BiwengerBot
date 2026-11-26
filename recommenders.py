@@ -521,9 +521,12 @@ class BidCompetitionModel:
             ratios = self.win_ratio_samples.get('all') or []
         win_bid_source = 'bidder model'
         if len(ratios) >= MIN_QUANTILE_SAMPLES and price > 0:
-            win_50 = price * _empirical_quantile(ratios, 0.50)
-            win_75 = price * _empirical_quantile(ratios, 0.75)
-            win_90 = price * _empirical_quantile(ratios, 0.90)
+            # Applied to `base` (asking price plus today's rise), like the
+            # route above: a riser is likely still rising when the bid
+            # resolves, so bidding off today's asking price undershoots.
+            win_50 = base * _empirical_quantile(ratios, 0.50)
+            win_75 = base * _empirical_quantile(ratios, 0.75)
+            win_90 = base * _empirical_quantile(ratios, 0.90)
             win_bid_source = f'last {WIN_RATIO_WINDOW_DAYS} days, {len(ratios)} auctions'
 
         # The original flat €10,000 rounding collapses the whole range to
@@ -984,7 +987,8 @@ def build_recommendations(conn, date):
     bid_fields = ('suggested_bid', 'suggested_bid_low', 'suggested_bid_high',
                   'win_bid_50', 'win_bid_75', 'win_bid_90',
                   'expected_bidders', 'competitor_pressure', 'markup_per_bidder',
-                  'bid_calibration_samples', 'top_competitors', 'competitor_count')
+                  'bid_calibration_samples', 'top_competitors', 'competitor_count',
+                  'win_bid_source')
     bids = [bid_model.suggest(r['price'], r['change'], r['position']) for _, r in buy.iterrows()]
     for field in bid_fields:
         buy.loc[:, field] = [b[field] for b in bids]
@@ -1577,7 +1581,8 @@ def load_next_round(now=None):
 
 
 def _daily_price_matrix(conn, date, days):
-    """Day x player price matrix (normalized names), from owned-player
+    """Day x player price matrix keyed by (normalized name, club), so two
+    players sharing a name never merge into one series, from owned-player
     card values and market listings, team_players winning a same-day tie
     for the reason _price_history_lookup gives."""
     d = resolve_scraped_at(conn, date)[:10]
@@ -1585,14 +1590,14 @@ def _daily_price_matrix(conn, date, days):
     frames = []
     for src, table in enumerate(('team_players', 'market')):
         df = pd.read_sql(
-            f"SELECT name, DATE(scraped_at) AS day, price FROM {table} "
+            f"SELECT name, club, DATE(scraped_at) AS day, price FROM {table} "
             "WHERE DATE(scraped_at) >= ? AND DATE(scraped_at) <= ?",
             conn, params=(since, d))
         frames.append(df.assign(src=src))
     a = pd.concat(frames)
     if not len(a):
         return pd.DataFrame()
-    a.loc[:, 'key'] = a['name'].map(_normalize_name)
+    a.loc[:, 'key'] = a['name'].map(_normalize_name) + '|' + a['club'].map(_normalize_name)
     a = a.sort_values('src').drop_duplicates(['key', 'day'])
     m = a.pivot_table(index='day', columns='key', values='price', aggfunc='first')
     m.index = pd.to_datetime(m.index)
@@ -1673,7 +1678,10 @@ def build_flip_plan(conn, date, model=None, now=None, buy_df=None):
     prices = _daily_price_matrix(conn, date, FLIP_HISTORY_DAYS)
     forward = _momentum_forward_table(prices)
     if model is None:
-        model = build_bid_competition_model(conn, date)[0]
+        me = pd.read_sql("SELECT team_id FROM team_balance WHERE is_me = 1 AND scraped_at LIKE ? LIMIT 1",
+                         conn, params=(resolve_scraped_at(conn, date),))
+        my_team_id = me['team_id'].iloc[0] if len(me) else None
+        model = build_bid_competition_model(conn, date, my_team_id=my_team_id)[0]
 
     rows = []
     for _, r in market.iterrows():

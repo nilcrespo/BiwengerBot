@@ -75,41 +75,34 @@ def _when(info) -> str:
 
 
 def _funding_sells(sell_df, shortfall, flips_df=None):
-    """The sell recommender's own top picks, taken in its ranking order
-    until their sale value covers the shortfall. Uses effective_price, the
-    computer's instant offer when there is one. Only instant offers count
-    toward covering the shortfall, since only they are money that lands
-    before the deadline for certain; a player without one is still listed
-    (marked "no offer yet") but never makes the shortfall look covered."""
-    picks, total = [], 0.0
+    """Players to sell to cover a shortfall: owned flips first, then the
+    sell recommender's own picks in its ranking order, until their value
+    covers it. Value is the computer's instant offer when there is one,
+    market value otherwise.
+
+    Returns (picks, certain, total): certain counts only instant offers,
+    the money sure to land before the lock; total counts every pick at
+    its value. The caller words the advice from both."""
+    picks, certain, total = [], 0.0, 0.0
+    candidates = []
     # Flip players go first, always: they were bought to be sold, so
     # covering a shortfall should never cost a starter while one is held.
     for _, r in (flips_df if flips_df is not None else pd.DataFrame()).iterrows():
+        candidates.append((f"{r['name']} [flip]", r.get("sale_value"), pd.notna(r.get("offer_price"))))
+    flip_names = {c[0].replace(" [flip]", "") for c in candidates}
+    for _, r in (sell_df if sell_df is not None else pd.DataFrame()).iterrows():
+        if r["player"] not in flip_names:
+            candidates.append((r["player"], r.get("effective_price"), bool(r.get("has_offer"))))
+    for name, value, has_offer in candidates:
         if total >= shortfall:
             break
-        value = r.get("sale_value")
         if value is None or pd.isna(value) or value <= 0:
             continue
-        has_offer = pd.notna(r.get("offer_price"))
-        picks.append((f"{r['name']} [flip]", float(value), has_offer))
+        picks.append((name, float(value), has_offer))
+        total += float(value)
         if has_offer:
-            total += float(value)
-    if sell_df is None or not len(sell_df):
-        return picks, total
-    taken = {p[0].replace(" [flip]", "") for p in picks}
-    for _, r in sell_df.iterrows():
-        if r["player"] in taken:
-            continue
-        if total >= shortfall:
-            break
-        value = r.get("effective_price")
-        if value is None or pd.isna(value) or value <= 0:
-            continue
-        has_offer = bool(r.get("has_offer"))
-        picks.append((r["player"], float(value), has_offer))
-        if has_offer:
-            total += float(value)
-    return picks, total
+            certain += float(value)
+    return picks, certain, total
 
 
 def _balance_section(conn, date, sell_df=None, now=None, flips_df=None) -> str:
@@ -137,14 +130,19 @@ def _balance_section(conn, date, sell_df=None, now=None, flips_df=None) -> str:
     else:
         lines.append("  Biwenger needs a non-negative balance before the next round, "
                      "or the round scores 0.")
-    picks, total = _funding_sells(sell_df, shortfall, flips_df)
+    picks, certain, total = _funding_sells(sell_df, shortfall, flips_df)
+    parts = [f"{name} ({_money(value)}{', instant offer' if offer else ', no offer yet'})"
+             for name, value, offer in picks]
     if picks and total >= shortfall:
-        parts = [f"{name} ({_money(value)}{', instant offer' if offer else ', no offer yet'})"
-                 for name, value, offer in picks]
         lines.append(f"  To cover {_money(shortfall)}, sell: " + ", ".join(parts))
+        if certain < shortfall:
+            lines.append("  Not all of these have an instant offer yet. List them now so the money "
+                         "arrives before the lock.")
     elif picks:
-        lines.append(f"  The sell list only covers {_money(total)} of the {_money(shortfall)} needed. "
-                     "You'll need to sell someone outside it.")
+        lines.append(f"  The sell list only covers {_money(total)} of the {_money(shortfall)} needed: "
+                     + ", ".join(parts) + ". You'll need to sell someone outside it too.")
+    else:
+        lines.append(f"  Sell someone to cover {_money(shortfall)} before then.")
     return "\n".join(lines)
 
 
@@ -190,14 +188,14 @@ def _log_flip_plan(plan, date):
     log[cols].to_csv(path, index=False)
 
 
-def _flip_section(conn, date, plan, note, owned) -> str:
+def _flip_section(conn, date, plan, note, owned, now=None) -> str:
     # note (why there's no plan) is only printed to the run log, so a
     # quiet day doesn't become a Telegram message on its own.
     if note and not len(plan):
         print(f"No flips today: {note}")
     lines = []
     if len(owned):
-        info = recommenders.load_next_round()
+        info = recommenders.load_next_round(now)
         by = f" before {_when(info)}" if info else ""
         lines.append(f"🔁 <b>Your flip players</b> (sell these first{by})")
         for _, r in owned.iterrows():
@@ -225,13 +223,17 @@ def build_digest(conn, date) -> str:
     # is the line that matters most, so any failure in it is contained.
     try:
         flip_plan, flip_note = recommenders.build_flip_plan(conn, date, buy_df=buy_df)
+        plan_ok = True
     except Exception as e:
         print(f"⚠️ Flip plan failed: {e}")
-        flip_plan, flip_note = pd.DataFrame(), None
-    try:
-        _log_flip_plan(flip_plan, date)
-    except Exception as e:
-        print(f"⚠️ Could not write the flip log: {e}")
+        flip_plan, flip_note, plan_ok = pd.DataFrame(), None, False
+    # Only a plan that was really computed may replace today's log rows:
+    # a failed rerun must not erase the plan that was already sent.
+    if plan_ok:
+        try:
+            _log_flip_plan(flip_plan, date)
+        except Exception as e:
+            print(f"⚠️ Could not write the flip log: {e}")
     try:
         owned = recommenders.owned_flips(conn, date)
     except Exception as e:

@@ -18,6 +18,7 @@ import urllib.request
 import pandas as pd
 
 import recommenders
+import review
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
@@ -218,11 +219,85 @@ def _flip_section(conn, date, plan, note, owned, now=None) -> str:
     return "\n".join(lines)
 
 
+ROUND_LOCKS_PATH = "csvs/others/round_locks.csv"
+DAILY_START_PCT_WARN = 60
+
+
+def _log_round_lock():
+    """Keep a history of each round's lock time (from next_round.json), so
+    the after-round review can check the balance at the real deadline."""
+    info = recommenders.load_next_round()
+    if not info or info.get("round_id") is None:
+        return
+    try:
+        locks = pd.read_csv(ROUND_LOCKS_PATH)
+    except Exception:
+        locks = pd.DataFrame(columns=["round_id", "round_name", "start"])
+    row = pd.DataFrame([{"round_id": info["round_id"], "round_name": info.get("round_name"),
+                         "start": int(info["start"])}])
+    locks = pd.concat([locks, row], ignore_index=True).drop_duplicates("round_id", keep="last")
+    locks.to_csv(ROUND_LOCKS_PATH, index=False)
+
+
+def _daily_check_section(conn, date) -> str:
+    """Daily check, from the lessons so far: starters in the best XI who
+    might not play (low start %, injured or suspended). A starter who
+    doesn't play scores 0, which has happened in 6 of the first 13 rounds."""
+    try:
+        xi = recommenders.build_best_eleven(conn, date)
+    except Exception as e:
+        print(f"⚠️ Best XI failed: {e}")
+        return ""
+    # Feedback from the reviews: when starters not playing keeps coming
+    # back as a lesson, warn earlier (at a higher start %).
+    threshold = DAILY_START_PCT_WARN
+    try:
+        if "dnp" in review.recurring_lessons():
+            threshold = 75
+    except Exception:
+        pass
+    risky = []
+    for p in xi.get("starters", []):
+        status = str(p.get("status") or "")
+        bad_status = any(w in status.lower() for w in ("injur", "suspend", "doubt", "lesion", "sancion"))
+        if (p.get("start_pct") or 0) < threshold or bad_status:
+            risky.append(f"{p['player']} ({p.get('start_pct', 0):.0f}% start"
+                         + (f", {status}" if bad_status else "") + ")")
+    lines = []
+    if risky:
+        lines.append("⚠️ <b>Check before the lock</b>: " + ", ".join(risky)
+                     + ". Have a bench player ready or swap him out.")
+    captain = next((p["player"] for p in xi.get("starters", []) if p.get("is_captain")), None)
+    if captain:
+        lines.append(f"🧢 Suggested captain: {captain}")
+    return "\n".join(lines)
+
+
+def _review_section(conn) -> str:
+    """The review of any round that finished since the last run, plus the
+    lessons that keep coming back over recent rounds."""
+    try:
+        new = review.review_new_rounds(conn)
+        recurring = review.recurring_lessons()
+    except Exception as e:
+        print(f"⚠️ Round review failed: {e}")
+        return ""
+    parts = [review.format_review(r) for r in new]
+    if new and recurring:
+        parts.append("🔁 <b>Keeps happening</b>\n" + "\n".join(
+            f"  • {review.RECURRING_ADVICE.get(k, k)}" for k in recurring))
+    return "\n\n".join(parts)
+
+
 def build_digest(conn, date) -> str:
     buy_df, sell_df = recommenders.build_recommendations(conn, date)
 
     sections = []
 
+    try:
+        _log_round_lock()
+    except Exception as e:
+        print(f"⚠️ Could not log the round lock: {e}")
     # The flip code must never cost us the balance warning below, which
     # is the line that matters most, so any failure in it is contained.
     try:
@@ -246,6 +321,14 @@ def build_digest(conn, date) -> str:
     balance_warning = _balance_section(conn, date, sell_df, flips_df=owned)
     if balance_warning:
         sections.append(balance_warning)
+
+    review_text = _review_section(conn)
+    if review_text:
+        sections.append(review_text)
+
+    daily = _daily_check_section(conn, date)
+    if daily:
+        sections.append(daily)
 
     renewal = _renewal_section()
     if renewal:

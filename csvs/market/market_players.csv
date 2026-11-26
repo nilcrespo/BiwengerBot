@@ -1,21 +1,21 @@
 position,club,name,price,change,status,owner,last_sale,recent_pts,this_season_pts,last_season_pts,scraped_at
-Defender,Athletic,Vivian,2970000,-50000.0,,Free Agent,"2,970,000",23,23,0,2026-11-25
-Coach,Celta,Claudio Giraldez,640000,0.0,,Free Agent,"640,000",5,13,0,2026-11-25
-Defender,Atletico,Le Normand,900000,20000.0,,Free Agent,"900,000",13,25,0,2026-11-25
-Midfielder,Real Sociedad,Yangel Herrera,1120000,-30000.0,,Free Agent,"1,120,000",3,35,0,2026-11-25
-Midfielder/Forward,Atletico,Kang-In Lee,6850000,-70000.0,,Free Agent,"6,850,000",18,72,0,2026-11-25
-Midfielder/Defender,Osasuna,Osambela,460000,0.0,,Free Agent,"460,000",19,34,0,2026-11-25
-Forward/Midfielder,Rayo Vallecano,Nteka,240000,0.0,,Free Agent,"240,000",5,12,0,2026-11-25
-Midfielder,Real Madrid,Pitarch,340000,0.0,,Free Agent,"340,000",0,0,33,2026-11-25
-Defender/Midfielder,Alaves,Novoa,660000,-10000.0,,Free Agent,"660,000",26,26,0,2026-11-25
-Defender,Valencia,Cordoba,150000,0.0,,Free Agent,"150,000",0,6,0,2026-11-25
-Defender/Midfielder,Malaga,Aznou,220000,0.0,,Free Agent,"220,000",2,4,0,2026-11-25
-Defender,Real Sociedad,Beitia,220000,0.0,,Free Agent,"220,000",0,7,0,2026-11-25
-Midfielder/Forward,Betis,Deossa,1990000,-30000.0,,Free Agent,"1,990,000",14,45,0,2026-11-25
-Defender,Levante,Cabello,150000,0.0,,Free Agent,"150,000",0,0,11,2026-11-25
-Forward/Defender/Midfielder,Espanyol,Dolan,1200000,20000.0,,Free Agent,"1,200,000",13,36,0,2026-11-25
-Midfielder,Elche,Neto,320000,0.0,,Free Agent,"320,000",11,22,0,2026-11-25
-Defender,Deportivo,Quagliata,1980000,-20000.0,,Free Agent,"1,980,000",17,45,0,2026-11-25
-Midfielder,Malaga,Izan Merino,700000,-10000.0,,Free Agent,"700,000",0,16,0,2026-11-25
-Coach,Real Madrid,Mourinho,4100000,10000.0,,Free Agent,"4,100,000",15,33,0,2026-11-25
-Defender,Elche,Lomonaco,340000,-10000.0,,Free Agent,"340,000",0,0,0,2026-11-25
+Defender,Real Madrid,Rudiger,1520000,-30000.0,,Free Agent,"1,520,000",0,28,0,2026-11-26
+Goalkeeper,Deportivo,Alvaro Fernandez,290000,0.0,,Free Agent,"290,000",0,0,0,2026-11-26
+Midfielder/Forward,Alaves,Alena,340000,0.0,,Free Agent,"340,000",4,17,0,2026-11-26
+Defender,Real Madrid,Cucurella,7240000,30000.0,,Free Agent,"7,240,000",25,48,0,2026-11-26
+Midfielder/Defender/Forward,Levante,Victor Garcia,600000,-10000.0,,Free Agent,"600,000",12,30,0,2026-11-26
+Midfielder,Real Sociedad,Yangel Herrera,1090000,-30000.0,,Free Agent,"1,090,000",3,35,0,2026-11-26
+Defender,Osasuna,Catena,2070000,-60000.0,,Free Agent,"2,070,000",19,43,0,2026-11-26
+Midfielder/Forward,Osasuna,Barja,470000,0.0,!,Free Agent,"470,000",8,29,0,2026-11-26
+Defender,Osasuna,Unai Santos,150000,0.0,,Free Agent,"150,000",0,1,0,2026-11-26
+Forward/Midfielder,Osasuna,Dubasin,780000,-20000.0,,Free Agent,"780,000",12,31,0,2026-11-26
+Goalkeeper,Celta,Radu,3480000,-10000.0,,Free Agent,"3,480,000",27,72,0,2026-11-26
+Forward,Real Madrid,Espi,1630000,10000.0,,Free Agent,"1,630,000",11,37,0,2026-11-26
+Defender,Levante,Cabello,150000,0.0,,Free Agent,"150,000",0,0,11,2026-11-26
+Midfielder,Valencia,Dieng,370000,0.0,,Free Agent,"370,000",2,18,0,2026-11-26
+Coach,Deportivo,Hidalgo,610000,-10000.0,,Free Agent,"610,000",5,15,0,2026-11-26
+Defender,Valencia,Wanjala,150000,0.0,,Free Agent,"150,000",0,0,0,2026-11-26
+Goalkeeper,Valencia,Van Oevelen,200000,0.0,,Free Agent,"200,000",0,0,0,2026-11-26
+Midfielder,Valencia,Elliott,700000,-20000.0,,Free Agent,"700,000",1,10,0,2026-11-26
+Forward,Getafe,Azon,1040000,-20000.0,,Free Agent,"1,040,000",6,27,0,2026-11-26
+Defender,Celta,Caceres,570000,-10000.0,,Free Agent,"570,000",11,19,0,2026-11-26

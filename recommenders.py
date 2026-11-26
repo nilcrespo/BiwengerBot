@@ -1244,7 +1244,11 @@ def build_recommendations(conn, date):
     # it takes to win a contested auction, and "✅ in balance" followed by
     # not actually being able to fund the bid you needed to place is the
     # exact failure this is meant to catch.
-    buy_recommendations.loc[:, 'shortfall'] = (buy_recommendations['suggested_bid_high'] - my_balance).clip(lower=0)
+    # The digest calls win_bid_90 the bid "to be safe", and since it now
+    # comes from a separate (empirical) route it can sit above the range's
+    # top, so affordability uses whichever is higher.
+    top_bid = buy_recommendations[['suggested_bid_high', 'win_bid_90']].max(axis=1)
+    buy_recommendations.loc[:, 'shortfall'] = (top_bid - my_balance).clip(lower=0)
     buy_recommendations.loc[:, 'raisable_from_sells'] = raisable_from_sells
     buy_recommendations.loc[:, 'funded_without_hard_choices'] = buy_recommendations['shortfall'] <= raisable_from_sells
     plans = buy_recommendations['shortfall'].apply(_funding_plan)
@@ -1459,7 +1463,10 @@ def _price_history_lookup(conn, date, lookback_days=14):
 
 
 def build_speculative_recommendations(conn, date, lookback_days=14):
-    """Today's market listings ranked purely on likely PROFIT — a real,
+    """No longer used by the digest (build_flip_plan replaced its section);
+    kept for the dashboard work and ad-hoc analysis.
+
+    Today's market listings ranked purely on likely PROFIT — a real,
     sustained multi-day price rise, weighted toward cheap listings (the
     same euro move is a bigger % gain, and costs less capital/roster risk,
     lower down the price ladder) — with no requirement that the player
@@ -1622,7 +1629,7 @@ def _momentum_forward_table(prices):
     return table
 
 
-def build_flip_plan(conn, date, model=None, now=None):
+def build_flip_plan(conn, date, model=None, now=None, buy_df=None):
     """Today's profit-only buys that pass the four flip rules above, each
     with the bid to place, the expected profit and the sell-by deadline.
 
@@ -1641,6 +1648,12 @@ def build_flip_plan(conn, date, model=None, now=None):
         return pd.DataFrame(), f"only {info['days_left']:.1f} days until the matchweek"
 
     spare = get_my_balance(conn, date) - FLIP_BALANCE_BUFFER
+    # Money for the best squad buy suggested today comes first: flips only
+    # get what would still be left if that bid ("to be safe" level) won.
+    if buy_df is not None and len(buy_df) and 'win_bid_90' in buy_df:
+        affordable = buy_df[buy_df.get('shortfall', 0) <= 0] if 'shortfall' in buy_df else buy_df
+        if len(affordable):
+            spare -= float(affordable['win_bid_90'].iloc[0])
     if spare <= 0:
         return pd.DataFrame(), "no spare money"
 
@@ -1747,6 +1760,16 @@ def owned_flips(conn, date, days=FLIP_OWNED_DAYS):
                        "WHERE scraped_at = ? AND team_id = ?", conn, params=(d, team_id))
     mine.loc[:, 'key'] = mine['name'].map(_normalize_name)
     mine = mine.drop_duplicates('key').merge(bought, left_on='key', right_index=True)
+    if not len(mine):
+        return mine
+    # Whatever the auction history says, a player who is now in my best XI
+    # is not treated as a flip: selling him first would cost a starter,
+    # which is the one thing the flip rules must never do.
+    try:
+        starters = {_normalize_name(p['player']) for p in build_best_eleven(conn, date).get('starters', [])}
+    except Exception:
+        starters = set()
+    mine = mine[~mine['key'].isin(starters)]
     if not len(mine):
         return mine
     offers = pd.read_sql("SELECT player_name, price AS offer_price FROM player_offers WHERE scraped_at LIKE ?",

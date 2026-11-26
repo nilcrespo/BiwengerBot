@@ -183,6 +183,10 @@ def _log_flip_plan(plan, date):
 
 
 def _flip_section(conn, date, plan, note, owned) -> str:
+    # note (why there's no plan) is only printed to the run log, so a
+    # quiet day doesn't become a Telegram message on its own.
+    if note and not len(plan):
+        print(f"No flips today: {note}")
     lines = []
     if len(owned):
         info = recommenders.load_next_round()
@@ -201,8 +205,6 @@ def _flip_section(conn, date, plan, note, owned) -> str:
                 f"bid {_money(r['bid'])}, expect about +{_money(r['expected_profit'])} "
                 f"({r['expected_profit_pct']:.0f}%) if sold before the lock"
             )
-    elif note and not len(owned):
-        lines.append(f"💰 No flips today: {note}.")
     return "\n".join(lines)
 
 
@@ -211,9 +213,19 @@ def build_digest(conn, date) -> str:
 
     sections = []
 
-    flip_plan, flip_note = recommenders.build_flip_plan(conn, date)
-    _log_flip_plan(flip_plan, date)
-    owned = recommenders.owned_flips(conn, date)
+    # The flip code must never cost us the balance warning below, which
+    # is the line that matters most, so any failure in it is contained.
+    try:
+        flip_plan, flip_note = recommenders.build_flip_plan(conn, date, buy_df=buy_df)
+        _log_flip_plan(flip_plan, date)
+    except Exception as e:
+        print(f"⚠️ Flip plan failed: {e}")
+        flip_plan, flip_note = pd.DataFrame(), None
+    try:
+        owned = recommenders.owned_flips(conn, date)
+    except Exception as e:
+        print(f"⚠️ Owned-flip lookup failed: {e}")
+        owned = pd.DataFrame()
     balance_warning = _balance_section(conn, date, sell_df, flips_df=owned)
     if balance_warning:
         sections.append(balance_warning)

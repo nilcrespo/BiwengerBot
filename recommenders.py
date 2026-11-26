@@ -1352,11 +1352,23 @@ def build_recommendations(conn, date):
             'has_this_signal': row['this_season_pts'] > 0,
         }])
         simulated = pd.concat([remaining, candidate], ignore_index=True)
-        simulated_total = _solve_best_eleven(simulated, rounds_played)['total_projected_points']
-        return round(simulated_total - baseline_total, 1)
+        simulated_xi = _solve_best_eleven(simulated, rounds_played)
+        if not simulated_xi.get('formation'):
+            # The funding sells leave too few players to field any valid
+            # XI. The solver reports that as 0 points, which used to show
+            # up as a huge negative "gain" (Radu funded by Amatucci showed
+            # -65.4, i.e. the whole lineup) while still being recommended.
+            return None
+        return round(simulated_xi['total_projected_points'] - baseline_total, 1)
 
     if len(buy_recommendations):
         buy_recommendations.loc[:, 'potential_points_gain'] = buy_recommendations.apply(_potential_points_gain, axis=1)
+        # The league is won on points: a signing whose funding leaves the
+        # best XI weaker, or unable to field a full XI at all, is a loss
+        # however good the player looks alone. Gain of exactly 0 stays in
+        # (bench depth that doesn't break into the XI is still worth it).
+        gain = buy_recommendations['potential_points_gain']
+        buy_recommendations = buy_recommendations[gain.notna() & (gain >= 0)]
     else:
         buy_recommendations.loc[:, 'potential_points_gain'] = pd.Series(dtype=float)
 

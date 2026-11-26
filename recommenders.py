@@ -1333,7 +1333,9 @@ def build_recommendations(conn, date):
     ].copy()
     base_roster.loc[:, 'this_ppm'] = (base_roster['this_season_pts'] / base_roster['played'].replace(0, pd.NA)).fillna(0)
     base_roster.loc[:, 'has_this_signal'] = base_roster['played'] > 0
-    baseline_total = _solve_best_eleven(base_roster, rounds_played)['total_projected_points']
+    baseline_xi = _solve_best_eleven(base_roster, rounds_played)
+    baseline_total = baseline_xi['total_projected_points']
+    baseline_has_xi = bool(baseline_xi.get('formation'))
 
     def _potential_points_gain(row):
         names = {d['player'] for d in row['funding_details']}
@@ -1353,7 +1355,7 @@ def build_recommendations(conn, date):
         }])
         simulated = pd.concat([remaining, candidate], ignore_index=True)
         simulated_xi = _solve_best_eleven(simulated, rounds_played)
-        if not simulated_xi.get('formation'):
+        if baseline_has_xi and not simulated_xi.get('formation'):
             # The funding sells leave too few players to field any valid
             # XI. The solver reports that as 0 points, which used to show
             # up as a huge negative "gain" (Radu funded by Amatucci showed
@@ -1368,6 +1370,9 @@ def build_recommendations(conn, date):
         # however good the player looks alone. Gain of exactly 0 stays in
         # (bench depth that doesn't break into the XI is still worth it).
         gain = buy_recommendations['potential_points_gain']
+        # None only happens when funding breaks an XI that existed. A
+        # squad that can't field an XI today compares against 0, so a
+        # signing that doesn't fix it scores 0 and stays listed.
         buy_recommendations = buy_recommendations[gain.notna() & (gain >= 0)]
     else:
         buy_recommendations.loc[:, 'potential_points_gain'] = pd.Series(dtype=float)
@@ -1538,6 +1543,8 @@ FLIP_HISTORY_DAYS = 60
 FLIP_RISE_BUCKETS = [0.01, 0.02, 0.04, float('inf')]  # today's rise bands
 FLIP_LOG_PATH = 'csvs/others/flip_log.csv'
 FLIP_OWNED_DAYS = 14             # a logged flip bought within this many days
+FLIP_BUY_WINDOW_DAYS = 3         # flip bought this soon after the plan listed him
+FLIP_BID_TOLERANCE = 0.05        # ...for at most the flip bid + 5%
 NEXT_ROUND_PATH = 'csvs/others/next_round.json'
 
 
@@ -1693,9 +1700,15 @@ def build_flip_plan(conn, date, model=None, now=None):
 
 
 def owned_flips(conn, date, days=FLIP_OWNED_DAYS):
-    """Players in my squad that were on the flip plan in the last `days`
-    days: the ones to sell first. Bought price comes from open_positions;
-    an instant computer offer, when there is one, from player_offers."""
+    """Players in my squad that I actually bought as flips in the last
+    `days` days: the ones to sell first.
+
+    Being on the flip plan isn't enough, since a player can show up there
+    and then be signed later for points. A flip is an auction I won within
+    FLIP_BUY_WINDOW_DAYS after the plan listed him, for no more than the
+    flip bid (plus a small tolerance), i.e. the bid the plan told me to
+    place. Bought price comes from that auction; an instant computer
+    offer, when there is one, from player_offers."""
     import os
     if not os.path.exists(FLIP_LOG_PATH):
         return pd.DataFrame()
@@ -1703,25 +1716,43 @@ def owned_flips(conn, date, days=FLIP_OWNED_DAYS):
     if not len(log):
         return pd.DataFrame()
     since = (pd.Timestamp(date) - pd.Timedelta(days=days)).strftime('%Y-%m-%d')
-    flagged = set(log[log['date'] >= since]['name'].map(_normalize_name))
+    log = log[log['date'] >= since].copy()
+    if not len(log):
+        return pd.DataFrame()
+    log.loc[:, 'key'] = log['name'].map(_normalize_name)
+
     d = resolve_scraped_at(conn, date)
-    mine = pd.read_sql(
-        """
-        SELECT tp.name, tp.club, tp.price AS current_price, op.buy_price
-        FROM team_players tp
-        LEFT JOIN open_positions op
-          ON op.team_id = tp.team_id AND op.player = tp.name AND op.scraped_at = tp.scraped_at
-        WHERE tp.scraped_at = ? AND tp.team_id = (
-            SELECT team_id FROM team_balance WHERE is_me = 1 LIMIT 1)
-        """, conn, params=(d,))
-    mine = mine[mine['name'].map(_normalize_name).isin(flagged)].drop_duplicates('name')
+    me = pd.read_sql("SELECT team_id, team_name FROM team_balance WHERE is_me = 1 AND scraped_at LIKE ? LIMIT 1",
+                     conn, params=(d,))
+    if not len(me) or not _table_exists(conn, 'market_bid_history'):
+        return pd.DataFrame()
+    team_id, team_name = me['team_id'].iloc[0], me['team_name'].iloc[0]
+
+    wins = pd.read_sql(
+        "SELECT DISTINCT txn_key, txn_date, player_name, winning_amount FROM market_bid_history "
+        "WHERE is_winner = 1 AND winner_name = ?", conn, params=(team_name,))
+    if not len(wins):
+        return pd.DataFrame()
+    wins.loc[:, 'key'] = wins['player_name'].map(_normalize_name)
+    wins.loc[:, 'won_day'] = pd.to_datetime(wins['txn_date'], unit='s').dt.normalize()
+    m = wins.merge(log[['key', 'date', 'bid']], on='key')
+    m.loc[:, 'gap'] = (m['won_day'] - pd.to_datetime(m['date'])).dt.days
+    m = m[(m['gap'] >= 0) & (m['gap'] <= FLIP_BUY_WINDOW_DAYS)
+          & (m['winning_amount'] <= m['bid'] * (1 + FLIP_BID_TOLERANCE))]
+    if not len(m):
+        return pd.DataFrame()
+    bought = m.sort_values('won_day').groupby('key').agg(buy_price=('winning_amount', 'last'))
+
+    mine = pd.read_sql("SELECT name, club, price AS current_price FROM team_players "
+                       "WHERE scraped_at = ? AND team_id = ?", conn, params=(d, team_id))
+    mine.loc[:, 'key'] = mine['name'].map(_normalize_name)
+    mine = mine.drop_duplicates('key').merge(bought, left_on='key', right_index=True)
     if not len(mine):
         return mine
     offers = pd.read_sql("SELECT player_name, price AS offer_price FROM player_offers WHERE scraped_at LIKE ?",
                          conn, params=(d[:10] + '%',))
     offers.loc[:, 'key'] = offers['player_name'].map(_normalize_name)
-    mine.loc[:, 'key'] = mine['name'].map(_normalize_name)
-    mine = mine.merge(offers[['key', 'offer_price']].drop_duplicates('key'), on='key', how='left')
+    mine = mine.merge(offers.groupby('key', as_index=False)['offer_price'].max(), on='key', how='left')
     mine.loc[:, 'sale_value'] = mine['offer_price'].fillna(mine['current_price'])
     mine.loc[:, 'profit'] = mine['sale_value'] - mine['buy_price']
     return mine.drop(columns=['key'])

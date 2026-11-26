@@ -1069,8 +1069,13 @@ def get_next_round(page) -> dict:
     ids = [r.get("id") for r in rounds]
     # Current round first, then the ones after it in season order. A
     # handful is plenty: the next lock is never more than a couple away.
-    start_at = ids.index(current_id) if current_id in ids else 0
-    candidates = ids[start_at:start_at + 4] or ([current_id] if current_id else [])
+    if current_id in ids:
+        start_at = ids.index(current_id)
+        candidates = ids[start_at:start_at + 4]
+    else:
+        # Without knowing where we are in the season, only the current
+        # round's own fixtures can be trusted (not round 1 onwards).
+        candidates = [current_id] if current_id else []
 
     now = _time.time()
     for round_id in candidates:
@@ -1670,9 +1675,17 @@ def run(playwright: Playwright) -> None:
     print(f"Saved {len(lineup_rows)} lineup slots → rival_lineups.csv")
 
     # When the next matchweek locks, for notify.py's balance countdown.
-    next_round = get_next_round(page)
-    with open("csvs/others/next_round.json", "w") as f:
-        json.dump(next_round, f, indent=2)
+    # Never allowed to stop the run: renewals below matter more than a
+    # countdown. A failed lookup also keeps the last good file instead of
+    # blanking it, since notify ignores a deadline that has already passed.
+    try:
+        next_round = get_next_round(page)
+    except Exception as e:
+        print(f"⚠️ Next-round lookup failed: {e}")
+        next_round = {}
+    if next_round.get("start"):
+        with open("csvs/others/next_round.json", "w") as f:
+            json.dump(next_round, f, indent=2)
 
     # Keep every owned player's sale listing alive at current market
     # value (see renew_player_sales' docstring for why this is safe/

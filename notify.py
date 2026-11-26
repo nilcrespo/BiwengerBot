@@ -12,7 +12,6 @@ import json
 import os
 import sqlite3
 import sys
-import time
 import urllib.parse
 import urllib.request
 
@@ -194,7 +193,6 @@ def _flip_section(conn, date, plan, note, owned) -> str:
             profit = f", profit {_money(r['profit'])}" if pd.notna(r.get("profit")) else ""
             lines.append(f"  • {r['name']} — {src} {_money(r['sale_value'])}{profit}")
     if len(plan):
-        info = recommenders.load_next_round()
         lines.append(f"💰 <b>Flip plan</b> (profit only, spare money only, "
                      f"{plan['horizon_days'].iloc[0]} days to {plan['round_name'].iloc[0] or 'the matchweek'})")
         for _, r in plan.head(5).iterrows():

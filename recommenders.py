@@ -243,6 +243,19 @@ WIN_RATIO_WINDOW_DAYS = 45
 WIN_RATIO_BANDS = [(0, 1_000_000), (1_000_000, 3_000_000),
                    (3_000_000, 6_000_000), (6_000_000, float('inf'))]
 MIN_WIN_RATIO_BAND_SAMPLES = MIN_QUANTILE_SAMPLES
+# The price trend on the day matters more than the price band (Nil's
+# point, 2026-11-26: a falling player rarely needs more than asking).
+# Replay of 322 auctions: falling players mostly had 1 bidder and the
+# "90%" bid fell from +31% over asking (band samples) to +13% (trend
+# samples), while hot risers (+4%/day or more) went from a 50% bid that
+# won only 12% of the time to one that won about half. Buckets use the
+# day's change as a share of asking price.
+WIN_TREND_HOT = 0.02
+# Exception: a star whose price is sliding (injury, bad form) can still
+# draw a bidding war from managers expecting him back (Adeyemi went for
+# +82% with 6 bidders while falling). Above this asking price a falling
+# listing keeps the price-band samples instead of the falling ones.
+FALLING_STAR_PRICE = 6_000_000
 # FALLBACK ONLY as of 2026-09-09 — used solely when fewer than
 # MIN_QUANTILE_SAMPLES real auctions are available to read the spread off
 # directly (see bidder_ratio_samples). Checked against 9 real auctions on
@@ -516,9 +529,17 @@ class BidCompetitionModel:
         # winning-ratio quantiles (see WIN_RATIO_WINDOW_DAYS for why).
         # The bidder-count route above stays as the fallback for a
         # thin window, and still drives the range fields.
-        ratios = self.win_ratio_samples.get(_win_band(price)) or []
+        trend = _win_trend(price, change)
+        falling_star = trend == 'fall' and price - change >= FALLING_STAR_PRICE
+        ratios = [] if falling_star else (
+            self.win_ratio_samples.get(('trend', trend)) or [])
+        sample_label = f'{trend} price'
+        if len(ratios) < MIN_WIN_RATIO_BAND_SAMPLES:
+            ratios = self.win_ratio_samples.get(_win_band(price)) or []
+            sample_label = 'falling star, price band' if falling_star else 'price band'
         if len(ratios) < MIN_WIN_RATIO_BAND_SAMPLES:
             ratios = self.win_ratio_samples.get('all') or []
+            sample_label = 'all'
         win_bid_source = 'bidder model'
         if len(ratios) >= MIN_QUANTILE_SAMPLES and price > 0:
             # Applied to today's asking price, the same reference the
@@ -528,7 +549,8 @@ class BidCompetitionModel:
             win_50 = price * _empirical_quantile(ratios, 0.50)
             win_75 = price * _empirical_quantile(ratios, 0.75)
             win_90 = price * _empirical_quantile(ratios, 0.90)
-            win_bid_source = f'last {WIN_RATIO_WINDOW_DAYS} days, {len(ratios)} auctions'
+            win_bid_source = (f'last {WIN_RATIO_WINDOW_DAYS} days, '
+                              f'{len(ratios)} auctions, {sample_label}')
 
         # The original flat €10,000 rounding collapses the whole range to
         # a single number on cheap players — a €210k listing's realistic
@@ -619,6 +641,18 @@ def _win_band(price):
     return len(WIN_RATIO_BANDS) - 1
 
 
+def _win_trend(price, change):
+    """'fall' / 'flat' / 'up' / 'hot' from the day's change relative to
+    the asking price (price before today's change)."""
+    change = float(change) if pd.notna(change) else 0.0
+    asking = float(price or 0) - change
+    if change < 0:
+        return 'fall'
+    if change == 0 or asking <= 0:
+        return 'flat'
+    return 'hot' if change / asking >= WIN_TREND_HOT else 'up'
+
+
 def _winning_ratio_samples(conn, date, window_days=WIN_RATIO_WINDOW_DAYS):
     """Sorted winning_amount / asking_price ratios from auctions completed
     in the `window_days` before `date`, per price band plus 'all'.
@@ -650,6 +684,10 @@ def _winning_ratio_samples(conn, date, window_days=WIN_RATIO_WINDOW_DAYS):
     out = {'all': sorted(ratios.tolist())}
     for b in range(len(WIN_RATIO_BANDS)):
         out[b] = sorted(ratios[bands == b].tolist())
+    trends = txns.loc[ok].apply(
+        lambda r: _win_trend(r['player_price'], r['price_change']), axis=1)
+    for t in ('fall', 'flat', 'up', 'hot'):
+        out[('trend', t)] = sorted(ratios[trends == t].tolist()) if len(trends) else []
     return out
 
 

@@ -535,7 +535,8 @@ class BidCompetitionModel:
             self.win_ratio_samples.get(('trend', trend)) or [])
         sample_label = f'{trend} price'
         if len(ratios) < MIN_WIN_RATIO_BAND_SAMPLES:
-            ratios = self.win_ratio_samples.get(_win_band(price)) or []
+            # Banded by asking price, the same way the samples are.
+            ratios = self.win_ratio_samples.get(_win_band(price - change)) or []
             sample_label = 'falling star, price band' if falling_star else 'price band'
         if len(ratios) < MIN_WIN_RATIO_BAND_SAMPLES:
             ratios = self.win_ratio_samples.get('all') or []
@@ -1850,7 +1851,7 @@ def owned_flips(conn, date, days=FLIP_OWNED_DAYS):
 # formation seen in real rival_lineups data: 4-4-2, 3-4-3, 3-5-2, 4-5-1,
 # 4-3-3 — all five of Biwenger's known valid shapes turned up, none other
 # did), as (DEF, MID, FWD) outfield counts alongside the fixed 1 GK.
-BEST_XI_FORMATIONS = [(4, 4, 2), (4, 3, 3), (3, 5, 2), (3, 4, 3), (4, 5, 1)]
+BEST_XI_FORMATIONS = [(4, 4, 2), (4, 3, 3), (3, 5, 2), (3, 4, 3), (4, 5, 1), (5, 3, 2), (5, 4, 1)]
 # Hard price ceiling on the captain and the starting forward (the
 # "ariete") — a standing user requirement independent of who'd otherwise
 # score highest (see feedback_starting_xi_constraints in project memory).

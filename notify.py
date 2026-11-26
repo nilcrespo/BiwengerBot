@@ -229,9 +229,11 @@ def _log_round_lock():
     info = recommenders.load_next_round()
     if not info or info.get("round_id") is None:
         return
-    try:
+    if os.path.exists(ROUND_LOCKS_PATH):
+        # A parse error raises (and the caller skips this run) rather than
+        # overwriting the lock history with a single row.
         locks = pd.read_csv(ROUND_LOCKS_PATH)
-    except Exception:
+    else:
         locks = pd.DataFrame(columns=["round_id", "round_name", "start"])
     row = pd.DataFrame([{"round_id": info["round_id"], "round_name": info.get("round_name"),
                          "start": int(info["start"])}])
@@ -326,7 +328,11 @@ def build_digest(conn, date) -> str:
     if review_text:
         sections.append(review_text)
 
-    daily = _daily_check_section(conn, date)
+    try:
+        daily = _daily_check_section(conn, date)
+    except Exception as e:
+        print(f"⚠️ Daily check failed: {e}")
+        daily = ""
     if daily:
         sections.append(daily)
 

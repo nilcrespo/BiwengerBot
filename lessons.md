@@ -3,9 +3,11 @@
 Written automatically after every finished round by review.py. Newest at the bottom.
 
 ## Round 1: 52 pts, 4º of 10 (best Locombia FC 60, average 44.3)
+- No lineup snapshot for this round, so captain bonuses are missing and points and rank may be a little off.
 - Bench choices cost 5 pts: Gonzalo Villar (5) over Barrenetxea (1).
 
 ## Round 2: 48 pts, 6º of 10 (best The National 65, average 48.3)
+- No lineup snapshot for this round, so captain bonuses are missing and points and rank may be a little off.
 - Bench choices cost 4 pts: Carlos López (0) over Unai Simón (-4).
 
 ## Round 3: 50 pts, 8º of 10 (best CD Numancia 65, average 53.1)
@@ -27,12 +29,12 @@ Written automatically after every finished round by review.py. Newest at the bot
 - Lost Natan by only €41,090; he scored 7 this round. For players you really want, bid the 'safe' amount.
 
 ## Round 8: 69 pts, 3º of 10 (best CD Numancia 84, average 50.8)
-- 2 starter(s) didn't play: Camello, Unai Simón. Check start % the day before the lock and keep a bench player ready for each position.
+- Good round: 3º of 10. Keep the same approach.
 
 ## Round 9: 59 pts, 7º of 10 (best FreeJulian 89, average 61.6)
 - 2 starter(s) didn't play: Veiga, Isco. Check start % the day before the lock and keep a bench player ready for each position.
 
-## Round 10: 0 pts counted (lineup scored 44), 8º of 10 (best CD Numancia 69, average 52.7)
+## Round 10: 0 pts, 10º of 10 (best CD Numancia 69, average 48.3)
 - The round scored 0 because the balance was negative at the lock (bought Cabrera and Jutglà on 22 Oct). Sell before the deadline, every time.
 - 1 starter(s) didn't play: De la Fuente. Check start % the day before the lock and keep a bench player ready for each position.
 - Captain Agoumé (7) instead of Iván Romero (3) would have added 4 pts.

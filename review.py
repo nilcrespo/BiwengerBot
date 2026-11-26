@@ -34,7 +34,7 @@ LESSONS_PATH = 'lessons.md'
 REVIEW_COLUMNS = ['round_id', 'round_name', 'my_points', 'round_rank', 'teams',
                   'best_team', 'best_points', 'league_avg', 'bench_lost',
                   'captain_lost', 'dnp', 'zeroed', 'close_bids_lost', 'lessons']
-FORMATIONS = [(4, 4, 2), (4, 3, 3), (3, 5, 2), (3, 4, 3), (4, 5, 1)]
+FORMATIONS = recommenders.BEST_XI_FORMATIONS
 POS = {1: 'GK', 2: 'DEF', 3: 'MID', 4: 'FWD'}
 CLOSE_BID_PCT = 0.05
 CAPTAIN_CAP = recommenders.STARTING_XI_PRICE_CAP
@@ -88,27 +88,35 @@ def _best_xi_points(squad):
     return best
 
 
-def _lock_balance(conn, round_id):
-    """My balance on the morning of the round's lock, when the lock time is
-    known (logged daily from next_round.json by notify.py)."""
-    locks_path = 'csvs/others/round_locks.csv'
-    if not os.path.exists(locks_path):
+LOCKS_PATH = 'csvs/others/round_locks.csv'
+
+
+def _round_locks():
+    """{round_id: lock unix time}, logged daily from next_round.json by
+    notify.py. Empty when no lock has been logged yet."""
+    if not os.path.exists(LOCKS_PATH):
+        return {}
+    locks = pd.read_csv(LOCKS_PATH)
+    return {int(r.round_id): int(r.start) for r in locks.itertuples()}
+
+
+def _lock_balance(conn, round_id, locks):
+    """My balance from the last snapshot taken before the round's lock
+    (scraped_at is stored in UTC), when the lock time is known."""
+    if round_id not in locks:
         return None
-    locks = pd.read_csv(locks_path)
-    row = locks[locks['round_id'] == round_id]
-    if not len(row):
-        return None
-    lock_day = pd.Timestamp(int(row['start'].iloc[-1]), unit='s', tz='Europe/Madrid').strftime('%Y-%m-%d')
+    lock_utc = pd.Timestamp(locks[round_id], unit='s').strftime('%Y-%m-%d %H:%M:%S')
     bal = conn.execute(
         "SELECT COALESCE(actual_balance, ledger_balance) FROM team_balance "
-        "WHERE is_me = 1 AND DATE(scraped_at) <= ? ORDER BY scraped_at DESC LIMIT 1",
-        (lock_day,)).fetchone()
+        "WHERE is_me = 1 AND scraped_at <= ? ORDER BY scraped_at DESC LIMIT 1",
+        (lock_utc,)).fetchone()
     return bal[0] if bal else None
 
 
 def review_round(conn, round_id, round_name=None, me=None):
     me = me or _my_team_name(conn)
-    rs = pd.read_sql("SELECT round_name, player_id, player, position, team, lineup_slot, points, played "
+    rs = pd.read_sql("SELECT round_name, player_id, player, position, team, lineup_slot, points, played, "
+                     "game_status "
                      "FROM round_scores WHERE round_id = ?", conn, params=(round_id,))
     if not len(rs) or me not in set(rs['team']):
         return None
@@ -125,6 +133,12 @@ def review_round(conn, round_id, round_name=None, me=None):
         cap = captains.get(team)
         bonus = g[g['player_id'] == cap[0]]['pts'].sum() if cap else 0
         totals[team] = float(base + bonus)
+    # A negative balance at the lock scores the whole round as 0.
+    locks = _round_locks()
+    balance = _lock_balance(conn, round_id, locks)
+    zeroed = balance is not None and balance < 0
+    if zeroed:
+        totals[me] = 0.0
     mine = rs[rs['team'] == me]
     my_points = totals.get(me, 0.0)
     ranking = sorted(totals.items(), key=lambda kv: kv[1], reverse=True)
@@ -163,23 +177,30 @@ def review_round(conn, round_id, round_name=None, me=None):
                 cap_note = (f"{top['player']} ({top['pts']:g}) instead of "
                             f"{cap_name.iloc[0] if len(cap_name) else 'your captain'} ({cap_pts:g})")
 
-    dnp = mine[(mine['lineup_slot'] == 'starter') & (mine['played'] == 0)]['player'].tolist()
-
-    balance = _lock_balance(conn, round_id)
-    zeroed = balance is not None and balance < 0
+    # Only finished games: a postponed fixture isn't a starter who didn't play.
+    dnp = mine[(mine['lineup_slot'] == 'starter') & (mine['played'] == 0)
+               & (mine['game_status'] == 'finished')]['player'].tolist()
 
     # Bids lost by under 5% in the week before this round.
     close = []
     bids = pd.read_sql(
         "SELECT txn_date, player_id, player_name, bid_amount, winning_amount, winner_name "
         "FROM market_bid_history WHERE bidder_name = ? AND is_winner = 0", conn, params=(me,))
-    window = conn.execute("SELECT MIN(scraped_at), MAX(scraped_at) FROM rival_lineups WHERE round_id = ?",
-                          (round_id,)).fetchone()
-    if len(bids) and window and window[1]:
-        # Only auctions from the week before this round's lock, so one lost
-        # bid isn't reported again every round afterwards.
-        end = pd.Timestamp(window[1]).timestamp()
-        start = end - 8 * 86400
+    # Only auctions between the previous round's lock and this one, so one
+    # lost bid is reported in exactly one round. Without logged locks, fall
+    # back to the 8 days before this round's last lineup snapshot.
+    start = end = None
+    if round_id in locks:
+        end = locks[round_id]
+        earlier = [t for rid, t in locks.items() if rid != round_id and t < end]
+        start = max(earlier) if earlier else end - 8 * 86400
+    else:
+        window = conn.execute("SELECT MAX(scraped_at) FROM rival_lineups WHERE round_id = ?",
+                              (round_id,)).fetchone()
+        if window and window[0]:
+            end = pd.Timestamp(window[0]).timestamp()
+            start = end - 8 * 86400
+    if len(bids) and end is not None:
         bids = bids[(bids['txn_date'] >= start) & (bids['txn_date'] <= end)]
         bids = bids[(bids['winning_amount'] - bids['bid_amount']) / bids['bid_amount'] < CLOSE_BID_PCT]
         for b in bids.itertuples():
@@ -188,6 +209,9 @@ def review_round(conn, round_id, round_name=None, me=None):
                 close.append((b.player_name, float(b.winning_amount - b.bid_amount), float(scored.sum())))
 
     lessons = []
+    if not captains:
+        lessons.append(('note', "No lineup snapshot for this round, so captain bonuses are missing "
+                                "and points and rank may be a little off."))
     if zeroed:
         lessons.append(('balance', "The round scored 0 because the balance was negative at the lock. "
                                    "Sell before the deadline, every time."))
@@ -204,7 +228,7 @@ def review_round(conn, round_id, round_name=None, me=None):
         if pts >= 6:
             lessons.append(('bids', f"Lost {name} by only {recommenders_money(gap)}; he scored {pts:g} this round. "
                                     "For players you really want, bid the 'safe' amount."))
-    if rank <= 3 and not lessons:
+    if rank <= 3 and not [k for k, _ in lessons if k != 'note']:
         lessons.append(('good', f"Good round: {rank}º of {len(totals)}. Keep the same approach."))
 
     return {
@@ -224,10 +248,9 @@ def recommenders_money(n):
 def load_reviews():
     if not os.path.exists(REVIEWS_PATH):
         return pd.DataFrame(columns=REVIEW_COLUMNS)
-    try:
-        return pd.read_csv(REVIEWS_PATH)
-    except Exception:
-        return pd.DataFrame(columns=REVIEW_COLUMNS)
+    # A file that fails to parse raises: falling back to an empty frame
+    # would let review_new_rounds overwrite the whole history.
+    return pd.read_csv(REVIEWS_PATH)
 
 
 def review_new_rounds(conn):
@@ -275,7 +298,7 @@ def recurring_lessons(reviews=None):
     counts = {}
     for raw in reviews.sort_values('round_id').tail(RECENT_ROUNDS)['lessons']:
         for kind, _ in json.loads(raw):
-            if kind != 'good':
+            if kind not in ('good', 'note'):
                 counts[kind] = counts.get(kind, 0) + 1
     return {k: v for k, v in counts.items() if v >= RECURRING_MIN}
 

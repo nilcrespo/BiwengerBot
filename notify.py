@@ -23,6 +23,7 @@ TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 RENEWAL_RESULTS_PATH = "csvs/others/renewal_results.json"
 MADRID_TZ = "Europe/Madrid"
+FLIPS_SHOWN = 5
 
 
 def send_telegram_message(text: str) -> bool:
@@ -184,7 +185,9 @@ def _log_flip_plan(plan, date):
         log = pd.read_csv(path)
     except Exception:
         log = pd.DataFrame(columns=cols)
-    today = plan.assign(date=date)[cols]
+    # Only the rows the digest actually shows (_flip_section's head(5)):
+    # a player the user never saw as a flip must never be tagged as one.
+    today = plan.head(FLIPS_SHOWN).assign(date=date)[cols]
     log = pd.concat([log, today], ignore_index=True).drop_duplicates(["date", "name"], keep="last")
     log[cols].to_csv(path, index=False)
 
@@ -206,7 +209,7 @@ def _flip_section(conn, date, plan, note, owned, now=None) -> str:
     if len(plan):
         lines.append(f"💰 <b>Flip plan</b> (profit only, spare money only, "
                      f"{plan['horizon_days'].iloc[0]} days to {plan['round_name'].iloc[0] or 'the matchweek'})")
-        for _, r in plan.head(5).iterrows():
+        for _, r in plan.head(FLIPS_SHOWN).iterrows():
             lines.append(
                 f"  • {r['name']} ({r['club']}) — {_money(r['price'])}, up {r['rise_today_pct']:.1f}% today → "
                 f"bid {_money(r['bid'])}, expect about +{_money(r['expected_profit'])} "

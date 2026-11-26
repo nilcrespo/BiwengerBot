@@ -242,7 +242,7 @@ MIN_QUANTILE_SAMPLES = 20
 WIN_RATIO_WINDOW_DAYS = 45
 WIN_RATIO_BANDS = [(0, 1_000_000), (1_000_000, 3_000_000),
                    (3_000_000, 6_000_000), (6_000_000, float('inf'))]
-MIN_WIN_RATIO_BAND_SAMPLES = 15
+MIN_WIN_RATIO_BAND_SAMPLES = MIN_QUANTILE_SAMPLES
 # FALLBACK ONLY as of 2026-09-09 — used solely when fewer than
 # MIN_QUANTILE_SAMPLES real auctions are available to read the spread off
 # directly (see bidder_ratio_samples). Checked against 9 real auctions on
@@ -517,7 +517,7 @@ class BidCompetitionModel:
         # The bidder-count route above stays as the fallback for a
         # thin window, and still drives the range fields.
         ratios = self.win_ratio_samples.get(_win_band(price)) or []
-        if len(ratios) < max(MIN_WIN_RATIO_BAND_SAMPLES, MIN_QUANTILE_SAMPLES):
+        if len(ratios) < MIN_WIN_RATIO_BAND_SAMPLES:
             ratios = self.win_ratio_samples.get('all') or []
         win_bid_source = 'bidder model'
         if len(ratios) >= MIN_QUANTILE_SAMPLES and price > 0:
@@ -1626,7 +1626,7 @@ def _momentum_forward_table(prices):
     table = {}
     for h in range(1, FLIP_MAX_HORIZON + 1):
         fut = (prices.shift(-h) / prices - 1).values
-        lo = FLIP_RISE_BUCKETS[0]
+        lo = 0.0
         for b, hi in enumerate(FLIP_RISE_BUCKETS):
             mask = (past > lo) & (past <= hi) & ~np.isnan(fut) & (P > 0)
             if mask.sum() >= 30:
@@ -1714,6 +1714,17 @@ def build_flip_plan(conn, date, model=None, now=None, buy_df=None):
         return pd.DataFrame(), None
 
     plan = pd.DataFrame(rows).sort_values('expected_profit_pct', ascending=False)
+    # Flip bids from an earlier run today may already be placed and not
+    # resolved yet, so they use up spare money too (players that are still
+    # in today's plan are counted once, below).
+    import os
+    if os.path.exists(FLIP_LOG_PATH):
+        try:
+            log = pd.read_csv(FLIP_LOG_PATH)
+            today = log[(log['date'] == str(date)[:10]) & ~log['name'].isin(plan['name'])]
+            spare -= float(today['bid'].fillna(0).sum())
+        except Exception:
+            pass
     # Rule 1: all of today's flip bids together must fit in spare money,
     # since any of them could be won.
     keep, used = [], 0.0

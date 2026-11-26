@@ -173,6 +173,9 @@ def backtest(conn, txns, latest_date):
     # drops suggest() back to the Normal-distribution fallback, matching
     # what the model would genuinely have had on day one of the board feed.
     prior_model.bidder_ratio_samples = []
+    # The empirical win-ratio route takes priority in suggest(), and its
+    # samples include the auctions scored below too, so it goes as well.
+    prior_model.win_ratio_samples = {}
     # (2) Calibrated on everything, including the rows being scored.
     tuned_model, _, _ = recommenders.build_bid_competition_model(
         conn, latest_date, my_team_id=my_team_id

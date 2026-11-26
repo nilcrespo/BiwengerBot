@@ -1518,6 +1518,215 @@ def build_speculative_recommendations(conn, date, lookback_days=14):
     return candidates.drop(columns=['key']).sort_values('flip_score', ascending=False).head(8)
 
 
+# ---------- Profit-only flips ----------
+# Rules agreed with the user for players bought only to resell:
+#  1. A flip only ever uses spare money: the bid has to fit inside what the
+#     balance would still have left at the next matchweek lock, after a
+#     buffer, so covering a flip never means selling a starter.
+#  2. The expected price rise has to beat the overpay plus a margin.
+#  3. The rise only counts for the days left before the lock, so the
+#     closer the matchweek, the harder a flip is to justify.
+#  4. Owned flips are the first thing sold when money is tight
+#     (see notify._funding_sells).
+# The limits are plain constants so they're easy to change.
+FLIP_MAX_SPEND = 2_000_000       # most a single flip bid may be
+FLIP_BALANCE_BUFFER = 500_000    # always keep this much at the lock
+FLIP_MIN_MARGIN = 0.02           # expected profit must beat the bid by 2%
+FLIP_MIN_DAYS = 2                # bid resolves next day, sale a day later
+FLIP_MAX_HORIZON = 5             # history only supports ~5-day forecasts
+FLIP_HISTORY_DAYS = 60
+FLIP_RISE_BUCKETS = [0.01, 0.02, 0.04, float('inf')]  # today's rise bands
+FLIP_LOG_PATH = 'csvs/others/flip_log.csv'
+FLIP_OWNED_DAYS = 14             # a logged flip bought within this many days
+NEXT_ROUND_PATH = 'csvs/others/next_round.json'
+
+
+def load_next_round(now=None):
+    """The next matchweek lock written by scraper.get_next_round, or None
+    when it's missing, unreadable or already in the past (a stale file
+    must never produce a countdown to a round that has started)."""
+    import json
+    import os
+    import time
+    if not os.path.exists(NEXT_ROUND_PATH):
+        return None
+    try:
+        with open(NEXT_ROUND_PATH) as f:
+            info = json.load(f)
+        start = float(info.get('start'))
+    except Exception:
+        return None
+    now = time.time() if now is None else now
+    if start <= now:
+        return None
+    return {**info, 'start': start, 'days_left': (start - now) / 86400}
+
+
+def _daily_price_matrix(conn, date, days):
+    """Day x player price matrix (normalized names), from owned-player
+    card values and market listings, team_players winning a same-day tie
+    for the reason _price_history_lookup gives."""
+    d = resolve_scraped_at(conn, date)[:10]
+    since = (pd.Timestamp(d) - pd.Timedelta(days=days)).strftime('%Y-%m-%d')
+    frames = []
+    for src, table in enumerate(('team_players', 'market')):
+        df = pd.read_sql(
+            f"SELECT name, DATE(scraped_at) AS day, price FROM {table} "
+            "WHERE DATE(scraped_at) >= ? AND DATE(scraped_at) <= ?",
+            conn, params=(since, d))
+        frames.append(df.assign(src=src))
+    a = pd.concat(frames)
+    if not len(a):
+        return pd.DataFrame()
+    a.loc[:, 'key'] = a['name'].map(_normalize_name)
+    a = a.sort_values('src').drop_duplicates(['key', 'day'])
+    m = a.pivot_table(index='day', columns='key', values='price', aggfunc='first')
+    m.index = pd.to_datetime(m.index)
+    return m.asfreq('D')
+
+
+def _rise_bucket(rise):
+    for i, hi in enumerate(FLIP_RISE_BUCKETS):
+        if rise <= hi:
+            return i
+    return len(FLIP_RISE_BUCKETS) - 1
+
+
+def _momentum_forward_table(prices):
+    """{(rise bucket, days ahead): median future % change} learned from
+    the price history itself: after a player's price rose X% in a day,
+    how much did it typically rise over the next h days. On the season so
+    far, a 4%+ daily riser was up a median 16% three days later and 23%
+    five days later, while a 1-2% riser was up only 3.5% and 6%."""
+    import numpy as np
+    if prices.empty:
+        return {}
+    P = prices.values
+    past = prices.pct_change(1, fill_method=None).values
+    table = {}
+    for h in range(1, FLIP_MAX_HORIZON + 1):
+        fut = (prices.shift(-h) / prices - 1).values
+        lo = FLIP_RISE_BUCKETS[0]
+        for b, hi in enumerate(FLIP_RISE_BUCKETS):
+            mask = (past > lo) & (past <= hi) & ~np.isnan(fut) & (P > 0)
+            if mask.sum() >= 30:
+                table[(b, h)] = float(np.median(fut[mask]))
+            lo = hi
+    return table
+
+
+def build_flip_plan(conn, date, model=None, now=None):
+    """Today's profit-only buys that pass the four flip rules above, each
+    with the bid to place, the expected profit and the sell-by deadline.
+
+    Bids are the 50% win-probability bid on purpose: losing a flip
+    auction costs nothing, while every euro of overpay comes straight out
+    of the profit, so there's no reason to bid to be safe.
+
+    Returns (plan_df, note). note explains an empty plan when the reason
+    isn't simply "nothing passes" (no matchweek date, no spare money).
+    """
+    info = load_next_round(now)
+    if not info:
+        return pd.DataFrame(), "no matchweek date yet"
+    horizon = min(int(info['days_left']), FLIP_MAX_HORIZON)
+    if horizon < FLIP_MIN_DAYS:
+        return pd.DataFrame(), f"only {info['days_left']:.1f} days until the matchweek"
+
+    spare = get_my_balance(conn, date) - FLIP_BALANCE_BUFFER
+    if spare <= 0:
+        return pd.DataFrame(), "no spare money"
+
+    d = resolve_scraped_at(conn, date)
+    market = pd.read_sql(
+        "SELECT name, club, position, price, change, this_season_pts FROM market WHERE scraped_at = ?",
+        conn, params=(d,))
+    # Today's own price move is the signal: it's on every listing, even a
+    # player listed for the first time with no history in the DB yet.
+    # Some real season output is required as a floor against noise.
+    market = market[(market['change'] > 0) & (market['this_season_pts'].fillna(0) > 0)]
+    if not len(market):
+        return pd.DataFrame(), None
+
+    prices = _daily_price_matrix(conn, date, FLIP_HISTORY_DAYS)
+    forward = _momentum_forward_table(prices)
+    if model is None:
+        model = build_bid_competition_model(conn, date)[0]
+
+    rows = []
+    for _, r in market.iterrows():
+        before = float(r['price']) - float(r['change'])
+        if before <= 0:
+            continue
+        rise1 = float(r['change']) / before
+        if rise1 <= FLIP_RISE_BUCKETS[0]:
+            continue
+        exp_rise = forward.get((_rise_bucket(rise1), horizon))
+        if exp_rise is None:
+            continue
+        price = float(r['price'])
+        bid = float(model.suggest(price, r.get('change'), r['position'])['win_bid_50'])
+        exp_value = price * (1 + exp_rise)
+        profit = exp_value - bid
+        if bid <= 0 or profit / bid < FLIP_MIN_MARGIN or bid > FLIP_MAX_SPEND:
+            continue
+        rows.append({'name': r['name'], 'club': r['club'], 'position': r['position'],
+                     'price': price, 'rise_today_pct': round(rise1 * 100, 1),
+                     'bid': bid, 'expected_value': round(exp_value, -3),
+                     'expected_profit': round(profit, -3),
+                     'expected_profit_pct': round(profit / bid * 100, 1),
+                     'horizon_days': horizon, 'sell_by': info['start'],
+                     'round_name': info.get('round_name')})
+    if not rows:
+        return pd.DataFrame(), None
+
+    plan = pd.DataFrame(rows).sort_values('expected_profit_pct', ascending=False)
+    # Rule 1: all of today's flip bids together must fit in spare money,
+    # since any of them could be won.
+    keep, used = [], 0.0
+    for i, r in plan.iterrows():
+        if used + r['bid'] <= spare:
+            keep.append(i)
+            used += r['bid']
+    note = None if keep else "spare money doesn't cover any flip bid"
+    return plan.loc[keep], note
+
+
+def owned_flips(conn, date, days=FLIP_OWNED_DAYS):
+    """Players in my squad that were on the flip plan in the last `days`
+    days: the ones to sell first. Bought price comes from open_positions;
+    an instant computer offer, when there is one, from player_offers."""
+    import os
+    if not os.path.exists(FLIP_LOG_PATH):
+        return pd.DataFrame()
+    log = pd.read_csv(FLIP_LOG_PATH)
+    if not len(log):
+        return pd.DataFrame()
+    since = (pd.Timestamp(date) - pd.Timedelta(days=days)).strftime('%Y-%m-%d')
+    flagged = set(log[log['date'] >= since]['name'].map(_normalize_name))
+    d = resolve_scraped_at(conn, date)
+    mine = pd.read_sql(
+        """
+        SELECT tp.name, tp.club, tp.price AS current_price, op.buy_price
+        FROM team_players tp
+        LEFT JOIN open_positions op
+          ON op.team_id = tp.team_id AND op.player = tp.name AND op.scraped_at = tp.scraped_at
+        WHERE tp.scraped_at = ? AND tp.team_id = (
+            SELECT team_id FROM team_balance WHERE is_me = 1 LIMIT 1)
+        """, conn, params=(d,))
+    mine = mine[mine['name'].map(_normalize_name).isin(flagged)].drop_duplicates('name')
+    if not len(mine):
+        return mine
+    offers = pd.read_sql("SELECT player_name, price AS offer_price FROM player_offers WHERE scraped_at LIKE ?",
+                         conn, params=(d[:10] + '%',))
+    offers.loc[:, 'key'] = offers['player_name'].map(_normalize_name)
+    mine.loc[:, 'key'] = mine['name'].map(_normalize_name)
+    mine = mine.merge(offers[['key', 'offer_price']].drop_duplicates('key'), on='key', how='left')
+    mine.loc[:, 'sale_value'] = mine['offer_price'].fillna(mine['current_price'])
+    mine.loc[:, 'profit'] = mine['sale_value'] - mine['buy_price']
+    return mine.drop(columns=['key'])
+
+
 # ---------- Best XI recommender ----------
 # The five formations Biwenger actually allows (confirmed against every
 # formation seen in real rival_lineups data: 4-4-2, 3-4-3, 3-5-2, 4-5-1,

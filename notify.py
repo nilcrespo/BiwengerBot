@@ -23,7 +23,6 @@ import recommenders
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 RENEWAL_RESULTS_PATH = "csvs/others/renewal_results.json"
-NEXT_ROUND_PATH = "csvs/others/next_round.json"
 MADRID_TZ = "Europe/Madrid"
 
 
@@ -60,22 +59,7 @@ def _money(n):
 
 
 def _load_next_round(now=None):
-    """The next matchweek lock written by scraper.get_next_round, or None
-    when it's missing, unreadable or already in the past (a stale file
-    from an older run must never show a countdown to a round that has
-    started)."""
-    if not os.path.exists(NEXT_ROUND_PATH):
-        return None
-    try:
-        with open(NEXT_ROUND_PATH) as f:
-            info = json.load(f)
-        start = float(info.get("start"))
-    except Exception:
-        return None
-    now = time.time() if now is None else now
-    if start <= now:
-        return None
-    return {**info, "start": start, "days_left": (start - now) / 86400}
+    return recommenders.load_next_round(now)
 
 
 def _when(info) -> str:
@@ -89,15 +73,28 @@ def _when(info) -> str:
     return f"{name} locks {kickoff:%a %d %b, %H:%M} ({left})"
 
 
-def _funding_sells(sell_df, shortfall):
+def _funding_sells(sell_df, shortfall, flips_df=None):
     """The sell recommender's own top picks, taken in its ranking order
     until their sale value covers the shortfall. Uses effective_price, the
     computer's instant offer when there is one, since that's money that
     lands before the deadline for certain."""
     picks, total = [], 0.0
+    # Flip players go first, always: they were bought to be sold, so
+    # covering a shortfall should never cost a starter while one is held.
+    for _, r in (flips_df if flips_df is not None else pd.DataFrame()).iterrows():
+        if total >= shortfall:
+            break
+        value = r.get("sale_value")
+        if value is None or pd.isna(value) or value <= 0:
+            continue
+        picks.append((f"{r['name']} [flip]", float(value), pd.notna(r.get("offer_price"))))
+        total += float(value)
     if sell_df is None or not len(sell_df):
         return picks, total
+    taken = {p[0].replace(" [flip]", "") for p in picks}
     for _, r in sell_df.iterrows():
+        if r["player"] in taken:
+            continue
         if total >= shortfall:
             break
         value = r.get("effective_price")
@@ -108,7 +105,7 @@ def _funding_sells(sell_df, shortfall):
     return picks, total
 
 
-def _balance_section(conn, date, sell_df=None, now=None) -> str:
+def _balance_section(conn, date, sell_df=None, now=None, flips_df=None) -> str:
     """Countdown to the next matchweek lock, plus a loud warning when the
     live balance is negative.
 
@@ -133,7 +130,7 @@ def _balance_section(conn, date, sell_df=None, now=None) -> str:
     else:
         lines.append("  Biwenger needs a non-negative balance before the next round, "
                      "or the round scores 0.")
-    picks, total = _funding_sells(sell_df, shortfall)
+    picks, total = _funding_sells(sell_df, shortfall, flips_df)
     if picks and total >= shortfall:
         parts = [f"{name} ({_money(value)}{', instant offer' if offer else ''})"
                  for name, value, offer in picks]
@@ -168,12 +165,58 @@ def _renewal_section() -> str:
     return line
 
 
+def _log_flip_plan(plan, date):
+    """Append today's flip suggestions to the flip log, so a player bought
+    off this list is later recognized as a flip (sold first, tracked
+    separately). One row per player per day; re-running a day replaces
+    that day's rows instead of duplicating them."""
+    path = recommenders.FLIP_LOG_PATH
+    cols = ["date", "name", "club", "price", "bid", "expected_profit", "round_name"]
+    try:
+        log = pd.read_csv(path)
+    except Exception:
+        log = pd.DataFrame(columns=cols)
+    log = log[log["date"] != date]
+    if len(plan):
+        today = plan.assign(date=date)[cols]
+        log = pd.concat([log, today], ignore_index=True)
+    log[cols].to_csv(path, index=False)
+
+
+def _flip_section(conn, date, plan, note, owned) -> str:
+    lines = []
+    if len(owned):
+        info = recommenders.load_next_round()
+        by = f" before {_when(info)}" if info else ""
+        lines.append(f"🔁 <b>Your flip players</b> (sell these first{by})")
+        for _, r in owned.iterrows():
+            src = "computer offer" if pd.notna(r.get("offer_price")) else "market value"
+            profit = f", profit {_money(r['profit'])}" if pd.notna(r.get("profit")) else ""
+            lines.append(f"  • {r['name']} — {src} {_money(r['sale_value'])}{profit}")
+    if len(plan):
+        info = recommenders.load_next_round()
+        lines.append(f"💰 <b>Flip plan</b> (profit only, spare money only, "
+                     f"{plan['horizon_days'].iloc[0]} days to {plan['round_name'].iloc[0] or 'the matchweek'})")
+        for _, r in plan.head(5).iterrows():
+            lines.append(
+                f"  • {r['name']} ({r['club']}) — {_money(r['price'])}, up {r['rise_today_pct']:.1f}% today → "
+                f"bid {_money(r['bid'])}, expect about +{_money(r['expected_profit'])} "
+                f"({r['expected_profit_pct']:.0f}%) if sold before the lock"
+            )
+    elif note and not len(owned):
+        lines.append(f"💰 No flips today: {note}.")
+    return "\n".join(lines)
+
+
 def build_digest(conn, date) -> str:
     buy_df, sell_df = recommenders.build_recommendations(conn, date)
 
     sections = []
 
-    balance_warning = _balance_section(conn, date, sell_df)
+    flip_plan, flip_note = recommenders.build_flip_plan(conn, date)
+    _log_flip_plan(flip_plan, date)
+    owned = recommenders.owned_flips(conn, date)
+    balance_warning = _balance_section(conn, date, sell_df, flips_df=owned)
     if balance_warning:
         sections.append(balance_warning)
 
@@ -230,21 +273,12 @@ def build_digest(conn, date) -> str:
             lines.append(f"  • {r['player']} ({r['club']}) — profit {profit}, score {r['score']}{tag}")
         sections.append("\n".join(lines))
 
-    # Separate from the buy list above on purpose — these are NOT
-    # squad-fit picks (several may have low or no starting-XI odds) and
-    # are ranked purely on a real multi-day price rise. Only ever
-    # non-empty when the market actually shows one; see
-    # recommenders.build_speculative_recommendations's docstring.
-    flip_df = recommenders.build_speculative_recommendations(conn, date)
-    if len(flip_df):
-        lines = [f"💰 <b>Flip watch: {len(flip_df)} riser(s)</b> (not squad picks — pure profit plays)"]
-        for _, r in flip_df.head(5).iterrows():
-            lines.append(
-                f"  • {r['name']} ({r['club']}, {r['position']}) — {_money(r['price'])}, "
-                f"+{r['pct_change_window']:.1f}% over {r['days_observed']} day(s) "
-                f"(~{r['pct_change_per_day']:.1f}%/day)"
-            )
-        sections.append("\n".join(lines))
+    # Profit-only buys, kept apart from the buy list above: they're judged
+    # on resale before the matchweek, never on points (see the flip rules
+    # in recommenders.py).
+    flips = _flip_section(conn, date, flip_plan, flip_note, owned)
+    if flips:
+        sections.append(flips)
 
     return "\n\n".join(sections)
 

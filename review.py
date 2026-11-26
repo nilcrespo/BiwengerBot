@@ -94,7 +94,7 @@ LOCKS_PATH = 'csvs/others/round_locks.csv'
 def _round_locks():
     """{round_id: lock unix time}, logged daily from next_round.json by
     notify.py. Empty when no lock has been logged yet."""
-    if not os.path.exists(LOCKS_PATH):
+    if not os.path.exists(LOCKS_PATH) or os.path.getsize(LOCKS_PATH) == 0:
         return {}
     locks = pd.read_csv(LOCKS_PATH)
     return {int(r.round_id): int(r.start) for r in locks.itertuples()}
@@ -111,6 +111,26 @@ def _lock_balance(conn, round_id, locks):
         "WHERE is_me = 1 AND scraped_at <= ? ORDER BY scraped_at DESC LIMIT 1",
         (lock_utc,)).fetchone()
     return bal[0] if bal else None
+
+
+def _confirmed_zero(conn, round_id, locks):
+    """True when the standings show my season total didn't move over this
+    round: the last snapshot before its lock vs the last one before the
+    next lock (or the latest). The balance snapshot alone can't prove a
+    zero, since it is taken in the morning and I may sell before an
+    evening lock. None when there aren't snapshots on both sides."""
+    if round_id not in locks:
+        return None
+    lock = locks[round_id]
+    later = [t for t in locks.values() if t > lock]
+    utc = lambda t: pd.Timestamp(t, unit='s').strftime('%Y-%m-%d %H:%M:%S')
+    q = ("SELECT points FROM teams WHERE is_me = 1 AND scraped_at {} ? "
+         "ORDER BY scraped_at DESC LIMIT 1")
+    before = conn.execute(q.format('<='), (utc(lock),)).fetchone()
+    after = conn.execute(q.format('<='), (utc(min(later)) if later else '9999',)).fetchone()
+    if not before or not after:
+        return None
+    return after[0] == before[0]
 
 
 def review_round(conn, round_id, round_name=None, me=None):
@@ -137,7 +157,8 @@ def review_round(conn, round_id, round_name=None, me=None):
     locks = _round_locks()
     balance = _lock_balance(conn, round_id, locks)
     zeroed = balance is not None and balance < 0
-    if zeroed:
+    # Only overwrite the score when the standings confirm the zero.
+    if zeroed and _confirmed_zero(conn, round_id, locks):
         totals[me] = 0.0
     mine = rs[rs['team'] == me]
     my_points = totals.get(me, 0.0)
@@ -200,8 +221,10 @@ def review_round(conn, round_id, round_name=None, me=None):
         if window and window[0]:
             end = pd.Timestamp(window[0]).timestamp()
             start = end - 8 * 86400
-    if len(bids) and end is not None:
-        bids = bids[(bids['txn_date'] >= start) & (bids['txn_date'] <= end)]
+    if end is None:
+        bids = bids.iloc[0:0]
+    if len(bids):
+        bids = bids[(bids['txn_date'] > start) & (bids['txn_date'] <= end)]
         bids = bids[(bids['winning_amount'] - bids['bid_amount']) / bids['bid_amount'] < CLOSE_BID_PCT]
         for b in bids.itertuples():
             scored = rs[rs['player_id'] == b.player_id]['pts']
@@ -213,8 +236,12 @@ def review_round(conn, round_id, round_name=None, me=None):
         lessons.append(('note', "No lineup snapshot for this round, so captain bonuses are missing "
                                 "and points and rank may be a little off."))
     if zeroed:
-        lessons.append(('balance', "The round scored 0 because the balance was negative at the lock. "
-                                   "Sell before the deadline, every time."))
+        if totals[me] == 0:
+            lessons.append(('balance', "The round scored 0 because the balance was negative at the lock. "
+                                       "Sell before the deadline, every time."))
+        else:
+            lessons.append(('balance', "The balance was still negative on the morning of the lock. "
+                                       "Get above €0 a day early, so the round is never at risk."))
     if dnp:
         lessons.append(('dnp', f"{len(dnp)} starter(s) didn't play: {', '.join(dnp)}. Check start % the "
                                "day before the lock and keep a bench player ready for each position."))
@@ -248,8 +275,11 @@ def recommenders_money(n):
 def load_reviews():
     if not os.path.exists(REVIEWS_PATH):
         return pd.DataFrame(columns=REVIEW_COLUMNS)
-    # A file that fails to parse raises: falling back to an empty frame
-    # would let review_new_rounds overwrite the whole history.
+    # An empty file is treated as no reviews. Any other parse error raises:
+    # falling back to an empty frame would let review_new_rounds
+    # overwrite the whole history.
+    if os.path.getsize(REVIEWS_PATH) == 0:
+        return pd.DataFrame(columns=REVIEW_COLUMNS)
     return pd.read_csv(REVIEWS_PATH)
 
 

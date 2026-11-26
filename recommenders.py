@@ -1847,10 +1847,10 @@ def owned_flips(conn, date, days=FLIP_OWNED_DAYS):
 
 
 # ---------- Best XI recommender ----------
-# The five formations Biwenger actually allows (confirmed against every
-# formation seen in real rival_lineups data: 4-4-2, 3-4-3, 3-5-2, 4-5-1,
-# 4-3-3 — all five of Biwenger's known valid shapes turned up, none other
-# did), as (DEF, MID, FWD) outfield counts alongside the fixed 1 GK.
+# The formations Biwenger allows, as (DEF, MID, FWD) outfield counts
+# alongside the fixed 1 GK. The first five were the only ones seen in
+# early rival_lineups data; 5-3-2 and 5-4-1 were added on 2026-11-26
+# after 5-3-2 turned up in rivals' lineups too.
 BEST_XI_FORMATIONS = [(4, 4, 2), (4, 3, 3), (3, 5, 2), (3, 4, 3), (4, 5, 1), (5, 3, 2), (5, 4, 1)]
 # Hard price ceiling on the captain and the starting forward (the
 # "ariete") — a standing user requirement independent of who'd otherwise

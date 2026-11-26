@@ -229,7 +229,7 @@ def _log_round_lock():
     info = recommenders.load_next_round()
     if not info or info.get("round_id") is None:
         return
-    if os.path.exists(ROUND_LOCKS_PATH):
+    if os.path.exists(ROUND_LOCKS_PATH) and os.path.getsize(ROUND_LOCKS_PATH) > 0:
         # A parse error raises (and the caller skips this run) rather than
         # overwriting the lock history with a single row.
         locks = pd.read_csv(ROUND_LOCKS_PATH)
@@ -283,7 +283,7 @@ def _review_section(conn) -> str:
         recurring = review.recurring_lessons()
     except Exception as e:
         print(f"⚠️ Round review failed: {e}")
-        return ""
+        return f"⚠️ Matchweek review failed ({e}). Check csvs/others/round_reviews.csv."
     parts = [review.format_review(r) for r in new]
     if new and recurring:
         parts.append("🔁 <b>Keeps happening</b>\n" + "\n".join(

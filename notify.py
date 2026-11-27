@@ -209,12 +209,15 @@ def _flip_section(conn, date, plan, note, owned, now=None) -> str:
             lines.append(f"  • {r['name']} — {src} {_money(r['sale_value'])}{profit}")
     if len(plan):
         lines.append(f"💰 <b>Buy for value</b> (flip for profit only, spare money only, "
-                     f"{plan['horizon_days'].iloc[0]} days to {plan['round_name'].iloc[0] or 'the matchweek'})")
+                     + (f"{plan['horizon_days'].iloc[0]} days to {plan['round_name'].iloc[0] or 'the matchweek'})"
+                        if pd.notna(plan['sell_by'].iloc[0]) else
+                        f"bids settle after tonight's lock, sell within {plan['horizon_days'].iloc[0]} days)"))
         for _, r in plan.head(FLIPS_SHOWN).iterrows():
             lines.append(
                 f"  • {r['name']} ({r['club']}) — {_money(r['price'])}, up {r['rise_today_pct']:.1f}% today → "
                 f"bid {_money(r['bid'])}, expect about +{_money(r['expected_profit'])} "
-                f"({r['expected_profit_pct']:.0f}%) if sold before the lock"
+                f"({r['expected_profit_pct']:.0f}%) if sold "
+                + ("before the lock" if pd.notna(r.get('sell_by')) else f"within {r['horizon_days']} days")
             )
     return "\n".join(lines)
 
@@ -307,7 +310,7 @@ def build_digest(conn, date) -> str:
         plan_ok = True
     except Exception as e:
         print(f"⚠️ Flip plan failed: {e}")
-        flip_plan, flip_note, plan_ok = pd.DataFrame(), None, False
+        flip_plan, flip_note, plan_ok = pd.DataFrame(), f"couldn't compute ({e})", False
     # Only a plan that was really computed may replace today's log rows:
     # a failed rerun must not erase the plan that was already sent.
     if plan_ok:
@@ -341,8 +344,14 @@ def build_digest(conn, date) -> str:
         sections.append(renewal)
 
     kind = buy_df['buy_kind'] if 'buy_kind' in buy_df else pd.Series('points', index=buy_df.index)
-    sections.append(_buy_section(buy_df[kind == 'points'], "🎯 <b>Buy for points</b> (would make your XI)",
-                                 "🎯 <b>Buy for points</b>: nobody on the market would make your XI today"))
+    # "None today" lines only fill out a digest that has something else in
+    # it: a quiet day must not become a Telegram message on its own.
+    empty_notes = []
+    points_df = buy_df[kind == 'points']
+    if len(points_df):
+        sections.append(_buy_section(points_df, "🎯 <b>Buy for points</b> (would make your XI)"))
+    else:
+        empty_notes.append("🎯 <b>Buy for points</b>: nobody on the market would make your XI today")
     bench_df = buy_df[kind == 'bench']
     if len(bench_df):
         sections.append(_buy_section(bench_df, "🪑 <b>Buy for bench depth</b> (starts for his club, "
@@ -370,9 +379,15 @@ def build_digest(conn, date) -> str:
     # They're judged on resale before the matchweek, never on points (see
     # the flip rules in recommenders.py).
     flips = _flip_section(conn, date, flip_plan, flip_note, owned)
-    sections.append(flips or f"💰 <b>Buy for value</b>: none today ({flip_note or 'no rise beats the overpay'})")
+    if flips:
+        sections.append(flips)
+    else:
+        empty_notes.append(f"💰 <b>Buy for value</b>: none today ({flip_note or 'no rise beats the overpay'})")
 
-    return "\n\n".join(s for s in sections if s)
+    sections = [s for s in sections if s]
+    if sections:
+        sections += empty_notes
+    return "\n\n".join(sections)
 
 
 def _buy_section(buy_df, title, empty_text=None) -> str:

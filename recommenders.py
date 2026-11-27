@@ -1188,12 +1188,21 @@ def build_recommendations(conn, date):
     # locks within LOCK_DAY_HOURS of this scrape, never suggest selling a
     # player in today's Best XI: his replacement would be a weaker bench
     # player, and the sale can just as well wait until the round is over.
+    # Not when the balance is negative: then a sale is what saves the
+    # round from scoring 0, so every candidate must stay available.
+    # held_for_lock rides on the frame's attrs (so every caller keeps the
+    # same two return values) and is set before any early return below.
     held_for_lock = []
-    if len(sell_recommendations) and _locks_soon(d):
-        xi = {_normalize_name(p['player']) for p in build_best_eleven(conn, date).get('starters', [])}
+    if len(sell_recommendations) and _locks_soon(d) and get_my_balance(conn, date) >= 0:
+        try:
+            xi = {_normalize_name(p['player']) for p in build_best_eleven(conn, date).get('starters', [])}
+        except Exception as e:
+            print(f"⚠️ Lock-day sell guard skipped, Best XI failed: {e}")
+            xi = set()
         in_xi = sell_recommendations['player'].map(_normalize_name).isin(xi)
         held_for_lock = sell_recommendations.loc[in_xi, 'player'].tolist()
         sell_recommendations = sell_recommendations[~in_xi]
+    sell_recommendations.attrs['held_for_lock'] = held_for_lock
 
     # --- Affordability: Biwenger requires a non-negative balance heading
     # into each round, so "can I bid this" isn't just "is it under my
@@ -1442,8 +1451,9 @@ def build_recommendations(conn, date):
     #    projected points he adds, since the league is won on points.
     #  - 'bench': he wouldn't make my XI but is likely to start for his
     #    own club, so he's real cover when a starter is out. Only
-    #    suggested with money left after the top points buy (bid to be
-    #    safe), and only as many as that leftover covers if all are won.
+    #    suggested with money left after the top points buy, and only as
+    #    many as that leftover covers if all are won at the "to be safe"
+    #    bid the digest shows (win_bid_90).
     # Anyone else (no XI gain, unlikely to start) isn't a buy at all.
     # Profit-only buys are a third list, build_flip_plan, kept apart.
     gain = buy_recommendations['potential_points_gain']
@@ -1457,16 +1467,13 @@ def build_recommendations(conn, date):
     bench_pool = buy_recommendations[(gain == 0) & (buy_recommendations['start_pct'] >= BENCH_MIN_START_PCT)]
     keep, used = [], 0.0
     for i, r in bench_pool.sort_values('score', ascending=False).iterrows():
-        bid = float(r['win_bid_50']) if pd.notna(r['win_bid_50']) else float(r['price'])
+        bid = float(r['win_bid_90']) if pd.notna(r['win_bid_90']) else float(r['price'])
         if used + bid <= leftover:
             keep.append(i)
             used += bid
     bench = bench_pool.loc[keep].assign(buy_kind='bench')
 
     buy_recommendations = pd.concat([points, bench])
-    # Kept on the frame (not in a third return value, so every caller
-    # stays unchanged): who was left off the sell list for tonight's lock.
-    sell_recommendations.attrs['held_for_lock'] = held_for_lock
 
     return buy_recommendations, sell_recommendations
 
@@ -1647,8 +1654,11 @@ BENCH_MIN_START_PCT = 60         # bench-depth buys must be this likely to start
 
 def _locks_soon(scraped_at, hours=LOCK_DAY_HOURS):
     """True when the next matchweek locks within `hours` after this
-    scrape (scraped_at is the UTC run timestamp). Judged against the
-    scrape time, not the clock, so an old date never counts as lock day."""
+    scrape. Judged against the scrape time, not the clock, so an old date
+    never counts as lock day. scraped_at is the runner's local time,
+    which is UTC on the GitHub Action that produces the real data; a
+    local run in Madrid shifts the window by an hour or two, which the
+    24h margin absorbs."""
     info = load_next_round(now=0)
     if not info:
         return False
@@ -1763,11 +1773,17 @@ def build_flip_plan(conn, date, model=None, now=None, buy_df=None):
     spare = get_my_balance(conn, date) - FLIP_BALANCE_BUFFER
     # Money for the top squad buy suggested today comes first, affordable
     # or not: flips only get what would still be left if that bid ("to be
-    # safe" level) won. Players already on the buy list aren't flips.
+    # safe" level) won. Bench-depth buys are already sized to fit what's
+    # left after that, so their safe bids come off the flip money too.
+    # Players already on the buy list aren't flips.
     squad_targets = set()
     if buy_df is not None and len(buy_df):
-        if 'win_bid_90' in buy_df and pd.notna(buy_df['win_bid_90'].iloc[0]):
-            spare -= float(buy_df['win_bid_90'].iloc[0])
+        kind = buy_df['buy_kind'] if 'buy_kind' in buy_df else pd.Series('points', index=buy_df.index)
+        points, bench = buy_df[kind == 'points'], buy_df[kind == 'bench']
+        if len(points) and pd.notna(points['win_bid_90'].iloc[0]):
+            spare -= float(points['win_bid_90'].iloc[0])
+        if len(bench):
+            spare -= float(bench['win_bid_90'].fillna(bench['price']).sum())
         squad_targets = set(buy_df['name'].map(_normalize_name))
     if spare <= 0:
         return pd.DataFrame(), "no spare money"

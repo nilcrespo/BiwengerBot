@@ -1,13 +1,15 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Hernan Krezzpo,Hernan_Krezzpo,Goalkeeper,Athletic,Unai Simon,63,0,4030000,-20000.0,Fit,12,5.3,29,4.1,34,6.8
+Hernan Krezzpo,Hernan_Krezzpo,Goalkeeper,Athletic,Unai Simon,63,0,4020000,-10000.0,Fit,12,5.3,29,4.1,34,6.8
 Hernan Krezzpo,Hernan_Krezzpo,Goalkeeper,Malaga,Carlos Lopez,0,0,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Hernan Krezzpo,Hernan_Krezzpo,Defender,Levante,De La Fuente,69,0,4140000,10000.0,One yellow card away from suspension,11,6.3,38,7.6,31,5.2
-Hernan Krezzpo,Hernan_Krezzpo,Defender,Villarreal,Veiga,57,0,3510000,-20000.0,One yellow card away from suspension,12,4.8,31,6.2,26,3.7
-Hernan Krezzpo,Hernan_Krezzpo,Defender,Espanyol,Cabrera,53,0,4580000,40000.0,Fit,10,5.3,16,4.0,37,6.2
-Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Barcelona,Pedri,93,0,16170000,90000.0,Fit,13,7.2,52,7.4,41,6.8
-Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Betis,Isco,70,0,12510000,100000.0,Fit,12,5.8,39,7.8,31,4.4
-Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Sevilla,Agoume,65,0,4010000,-30000.0,One yellow card away from suspension,13,5.0,34,4.9,31,5.2
-Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Deportivo,Amatucci,50,0,3190000,-50000.0,One yellow card away from suspension,11,4.5,24,6.0,26,3.7
-Hernan Krezzpo,Hernan_Krezzpo,Forward,Rayo Vallecano,Camello,94,0,9260000,-110000.0,One yellow card away from suspension,12,7.8,46,7.7,48,8.0
-Hernan Krezzpo,Hernan_Krezzpo,Forward,Deportivo,Aubameyang,81,0,11490000,90000.0,Fit,10,8.1,36,7.2,45,9.0
-Hernan Krezzpo,Hernan_Krezzpo,Forward/Midfielder,Sevilla,Felix Correia,48,0,4730000,-20000.0,Fit,9,5.3,31,6.2,17,4.3
+Hernan Krezzpo,Hernan_Krezzpo,Defender,Levante,De La Fuente,69,0,4150000,10000.0,One yellow card away from suspension,11,6.3,38,7.6,31,5.2
+Hernan Krezzpo,Hernan_Krezzpo,Defender,Villarreal,Veiga,57,0,3490000,-20000.0,One yellow card away from suspension,12,4.8,31,6.2,26,3.7
+Hernan Krezzpo,Hernan_Krezzpo,Defender,Espanyol,Cabrera,53,0,4630000,50000.0,Fit,10,5.3,16,4.0,37,6.2
+Hernan Krezzpo,Hernan_Krezzpo,Defender,Celta,Caceres,19,0,570000,0.0,Fit,5,3.8,20,5.0,-1,-1.0
+Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Barcelona,Pedri,93,0,16240000,70000.0,Fit,13,7.2,52,7.4,41,6.8
+Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Betis,Isco,70,0,12560000,50000.0,Fit,12,5.8,39,7.8,31,4.4
+Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Sevilla,Agoume,65,0,3980000,-30000.0,One yellow card away from suspension,13,5.0,34,4.9,31,5.2
+Hernan Krezzpo,Hernan_Krezzpo,Midfielder,Deportivo,Amatucci,50,0,3150000,-40000.0,One yellow card away from suspension,11,4.5,24,6.0,26,3.7
+Hernan Krezzpo,Hernan_Krezzpo,Midfielder/Forward,Osasuna,Barja,29,0,470000,0.0,One yellow card away from suspension,10,2.9,15,2.5,14,3.5
+Hernan Krezzpo,Hernan_Krezzpo,Forward,Rayo Vallecano,Camello,94,0,9150000,-110000.0,One yellow card away from suspension,12,7.8,46,7.7,48,8.0
+Hernan Krezzpo,Hernan_Krezzpo,Forward,Deportivo,Aubameyang,81,0,11560000,70000.0,Fit,10,8.1,36,7.2,45,9.0
+Hernan Krezzpo,Hernan_Krezzpo,Forward/Midfielder,Sevilla,Felix Correia,48,0,4680000,-50000.0,Fit,9,5.3,31,6.2,17,4.3

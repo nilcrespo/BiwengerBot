@@ -1183,6 +1183,18 @@ def build_recommendations(conn, date):
     ) & ~sell_pool['leaves_thin']
     sell_recommendations = sell_pool[worth_selling].sort_values('score', ascending=False)
 
+    # Lock-day guard: a sale goes through at once, but tonight's lineup
+    # is locked with whoever is still in the squad. So when the matchweek
+    # locks within LOCK_DAY_HOURS of this scrape, never suggest selling a
+    # player in today's Best XI: his replacement would be a weaker bench
+    # player, and the sale can just as well wait until the round is over.
+    held_for_lock = []
+    if len(sell_recommendations) and _locks_soon(d):
+        xi = {_normalize_name(p['player']) for p in build_best_eleven(conn, date).get('starters', [])}
+        in_xi = sell_recommendations['player'].map(_normalize_name).isin(xi)
+        held_for_lock = sell_recommendations.loc[in_xi, 'player'].tolist()
+        sell_recommendations = sell_recommendations[~in_xi]
+
     # --- Affordability: Biwenger requires a non-negative balance heading
     # into each round, so "can I bid this" isn't just "is it under my
     # max-bid limit" (balance + 25% of squad value — a credit line, not
@@ -1425,6 +1437,37 @@ def build_recommendations(conn, date):
     else:
         buy_recommendations.loc[:, 'potential_points_gain'] = pd.Series(dtype=float)
 
+    # Two kinds of squad buy, shown as separate lists:
+    #  - 'points': he'd walk into my Best XI (gain > 0). Ranked by how many
+    #    projected points he adds, since the league is won on points.
+    #  - 'bench': he wouldn't make my XI but is likely to start for his
+    #    own club, so he's real cover when a starter is out. Only
+    #    suggested with money left after the top points buy (bid to be
+    #    safe), and only as many as that leftover covers if all are won.
+    # Anyone else (no XI gain, unlikely to start) isn't a buy at all.
+    # Profit-only buys are a third list, build_flip_plan, kept apart.
+    gain = buy_recommendations['potential_points_gain']
+    points = buy_recommendations[gain > 0].sort_values(
+        ['potential_points_gain', 'score'], ascending=False)
+    points = points.assign(buy_kind='points')
+
+    leftover = my_balance
+    if len(points) and pd.notna(points['win_bid_90'].iloc[0]):
+        leftover -= float(points['win_bid_90'].iloc[0])
+    bench_pool = buy_recommendations[(gain == 0) & (buy_recommendations['start_pct'] >= BENCH_MIN_START_PCT)]
+    keep, used = [], 0.0
+    for i, r in bench_pool.sort_values('score', ascending=False).iterrows():
+        bid = float(r['win_bid_50']) if pd.notna(r['win_bid_50']) else float(r['price'])
+        if used + bid <= leftover:
+            keep.append(i)
+            used += bid
+    bench = bench_pool.loc[keep].assign(buy_kind='bench')
+
+    buy_recommendations = pd.concat([points, bench])
+    # Kept on the frame (not in a third return value, so every caller
+    # stays unchanged): who was left off the sell list for tonight's lock.
+    sell_recommendations.attrs['held_for_lock'] = held_for_lock
+
     return buy_recommendations, sell_recommendations
 
 
@@ -1590,6 +1633,7 @@ FLIP_BALANCE_BUFFER = 500_000    # always keep this much at the lock
 FLIP_MIN_MARGIN = 0.02           # expected profit must beat the bid by 2%
 FLIP_MIN_DAYS = 2                # bid resolves next day, sale a day later
 FLIP_MAX_HORIZON = 5             # history only supports ~5-day forecasts
+FLIP_LOCK_DAY_HORIZON = 3        # lock-day flips: days to sell before the next round
 FLIP_HISTORY_DAYS = 60
 FLIP_RISE_BUCKETS = [0.01, 0.02, 0.04, float('inf')]  # today's rise bands
 FLIP_LOG_PATH = 'csvs/others/flip_log.csv'
@@ -1597,6 +1641,22 @@ FLIP_OWNED_DAYS = 14             # a logged flip bought within this many days
 FLIP_BUY_WINDOW_DAYS = 3         # flip bought this soon after the plan listed him
 FLIP_BID_TOLERANCE = 0.05        # ...for at most the flip bid + 5%
 NEXT_ROUND_PATH = 'csvs/others/next_round.json'
+LOCK_DAY_HOURS = 24              # "lock day": the matchweek locks this soon after the scrape
+BENCH_MIN_START_PCT = 60         # bench-depth buys must be this likely to start for their club
+
+
+def _locks_soon(scraped_at, hours=LOCK_DAY_HOURS):
+    """True when the next matchweek locks within `hours` after this
+    scrape (scraped_at is the UTC run timestamp). Judged against the
+    scrape time, not the clock, so an old date never counts as lock day."""
+    info = load_next_round(now=0)
+    if not info:
+        return False
+    try:
+        ts = pd.Timestamp(str(scraped_at)[:19], tz='UTC').timestamp()
+    except Exception:
+        return False
+    return 0 < info['start'] - ts <= hours * 3600
 
 
 def load_next_round(now=None):
@@ -1689,6 +1749,14 @@ def build_flip_plan(conn, date, model=None, now=None, buy_df=None):
     if not info:
         return pd.DataFrame(), "no matchweek date yet"
     horizon = min(int(info['days_left']), FLIP_MAX_HORIZON)
+    round_name, sell_by = info.get('round_name'), info['start']
+    # Lock day: bids placed now settle after tonight's lock, so tonight's
+    # balance check never sees them and the flip has until the NEXT
+    # matchweek to be sold. That date isn't known yet, so use a short
+    # horizon a midweek round always leaves room for.
+    if info['days_left'] < 1:
+        horizon = FLIP_LOCK_DAY_HORIZON
+        round_name, sell_by = 'the next matchweek', None
     if horizon < FLIP_MIN_DAYS:
         return pd.DataFrame(), f"only {info['days_left']:.1f} days until the matchweek"
 
@@ -1747,8 +1815,8 @@ def build_flip_plan(conn, date, model=None, now=None, buy_df=None):
                      'bid': bid, 'expected_value': round(exp_value, -3),
                      'expected_profit': round(profit, -3),
                      'expected_profit_pct': round(profit / bid * 100, 1),
-                     'horizon_days': horizon, 'sell_by': info['start'],
-                     'round_name': info.get('round_name')})
+                     'horizon_days': horizon, 'sell_by': sell_by,
+                     'round_name': round_name})
     if not rows:
         return pd.DataFrame(), None
 

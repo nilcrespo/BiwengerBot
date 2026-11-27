@@ -132,6 +132,14 @@ def build_dashboard_data(conn, date):
     # (notify.py) via recommenders.py so the two never drift apart. ---
     buy_recommendations, sell_recommendations = recommenders.build_recommendations(conn, date)
     best_eleven = recommenders.build_best_eleven(conn, date)
+    # Value buys (profit-only flips). Read-only here: the flip log is only
+    # written by notify.py, for the flips the digest actually showed.
+    try:
+        value_buys, value_buys_note = recommenders.build_flip_plan(conn, date, buy_df=buy_recommendations)
+    except Exception as e:
+        value_buys, value_buys_note = pd.DataFrame(), f"couldn't compute ({e})"
+    if not len(value_buys) and not value_buys_note:
+        value_buys_note = "no rise beats the overpay"
 
     # --- My trades: current holdings (unrealized profit) and completed
     # sales (realized profit), for the "My Trades" tab. Only meaningful
@@ -205,5 +213,8 @@ def build_dashboard_data(conn, date):
         'buy_recommendations': to_records(buy_recommendations),
         'sell_recommendations': to_records(sell_recommendations),
         'best_eleven': best_eleven,
+        'value_buys': to_records(value_buys.drop(columns=['sell_by'], errors='ignore')),
+        'value_buys_note': value_buys_note,
+        'held_for_lock': sell_recommendations.attrs.get('held_for_lock', []),
         'date': date,
     }

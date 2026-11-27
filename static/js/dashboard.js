@@ -415,8 +415,13 @@ function pointsGainCell(p) {
   return `<span class="money-pos" title="${escapeHtml(title)}">+${gain.toFixed(1)}/rd</span>`;
 }
 
-function renderBuyRecommendations(data) {
-  const tbody = document.querySelector('#buyTable tbody');
+// The same row layout serves both squad-buy lists (points and bench
+// depth); only the target table differs.
+function renderBuyRecommendations(data) { renderBuyTable('buyTable', data); }
+function renderBenchRecommendations(data) { renderBuyTable('benchTable', data); }
+
+function renderBuyTable(tableId, data) {
+  const tbody = document.querySelector(`#${tableId} tbody`);
   renderTable(tbody, data, 10, (p) => {
     const bucketNote = p.bucket_avg_bids
       ? `${p.bucket_sample} historical signings in the ${p.bid_bucket} range drew ${parseFloat(p.bucket_avg_bids).toFixed(1)} bids on average`
@@ -451,6 +456,23 @@ function renderBuyRecommendations(data) {
     </tr>
   `;
   });
+}
+
+// Value buys: profit-only flips (recommenders.build_flip_plan), judged on
+// resale before the matchweek, never on points.
+function renderValueRecommendations(data) {
+  const tbody = document.querySelector('#valueTable tbody');
+  renderTable(tbody, data, 7, (p) => `
+    <tr>
+      <td><span class="pos-badge">${escapeHtml(p.position)}</span></td>
+      <td class="cell-muted">${escapeHtml(p.club)}</td>
+      <td class="cell-primary">${escapeHtml(p.name)}</td>
+      <td class="num">${formatMoney(p.price)}</td>
+      <td class="num">+${parseFloat(p.rise_today_pct).toFixed(1)}%</td>
+      <td class="num">${formatMoney(p.bid)}</td>
+      <td class="num">${formatDelta(p.expected_profit)} (${parseFloat(p.expected_profit_pct).toFixed(0)}%)</td>
+    </tr>
+  `);
 }
 
 function offerCell(p) {
@@ -642,7 +664,20 @@ function loadData() {
       setTableData('teamsTable', data.teams);
       setTableData('holdingsTable', data.my_holdings);
       setTableData('salesTable', data.my_sales);
-      setTableData('buyTable', data.buy_recommendations);
+      const buys = data.buy_recommendations || [];
+      setTableData('buyTable', buys.filter((p) => (p.buy_kind || 'points') === 'points'));
+      setTableData('benchTable', buys.filter((p) => p.buy_kind === 'bench'));
+      setTableData('valueTable', data.value_buys);
+      const valueMeta = document.getElementById('valueMeta');
+      if (valueMeta && data.value_buys_note) valueMeta.textContent = `None today: ${data.value_buys_note}`;
+      const heldMeta = document.getElementById('heldForLock');
+      if (heldMeta) {
+        const held = data.held_for_lock || [];
+        heldMeta.textContent = held.length
+          ? `Not selling today (in tonight's XI, sell after the round if still worth it): ${held.join(', ')}`
+          : '';
+        heldMeta.hidden = !held.length;
+      }
       setTableData('sellTable', data.sell_recommendations);
       state.allRoundScores = data.round_scores;
       applyRoundScoresFilter();
@@ -686,7 +721,9 @@ function initSortableTables() {
   registerSortable('teamsTable', renderTeamsWrapper, 'total_value', 'desc');
   registerSortable('holdingsTable', renderHoldings, 'profit', 'desc');
   registerSortable('salesTable', renderSales, 'profit', 'desc');
-  registerSortable('buyTable', renderBuyRecommendations, 'score', 'desc');
+  registerSortable('buyTable', renderBuyRecommendations, 'potential_points_gain', 'desc');
+  registerSortable('benchTable', renderBenchRecommendations, 'score', 'desc');
+  registerSortable('valueTable', renderValueRecommendations, 'expected_profit_pct', 'desc');
   registerSortable('sellTable', renderSellRecommendations, 'score', 'desc');
   // Defaults to "my team only" (see applyRoundScoresFilter) — round order
   // reads naturally for a short own-squad list; sorting a full league-

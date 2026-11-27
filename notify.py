@@ -208,7 +208,7 @@ def _flip_section(conn, date, plan, note, owned, now=None) -> str:
             profit = f", profit {_money(r['profit'])}" if pd.notna(r.get("profit")) else ""
             lines.append(f"  • {r['name']} — {src} {_money(r['sale_value'])}{profit}")
     if len(plan):
-        lines.append(f"💰 <b>Flip plan</b> (profit only, spare money only, "
+        lines.append(f"💰 <b>Buy for value</b> (flip for profit only, spare money only, "
                      f"{plan['horizon_days'].iloc[0]} days to {plan['round_name'].iloc[0] or 'the matchweek'})")
         for _, r in plan.head(FLIPS_SHOWN).iterrows():
             lines.append(
@@ -340,40 +340,13 @@ def build_digest(conn, date) -> str:
     if renewal:
         sections.append(renewal)
 
-    if len(buy_df):
-        lines = [f"🎯 <b>Buy: {len(buy_df)} real deal(s)</b>"]
-        for _, r in buy_df.head(5).iterrows():
-            need = f" [{r['squad_need']}]" if r.get('squad_need') else ""
-            afford = ""
-            if r.get('shortfall', 0) > 0:
-                if r.get('funding_plan'):
-                    afford = f"\n    ⚠️ short {_money(r['shortfall'])} — would need to sell: {r['funding_plan']}"
-                else:
-                    afford = f"\n    ⚠️ short {_money(r['shortfall'])}, no sells available to cover it"
-            # Biwenger's market is a first-price sealed-bid auction — the
-            # winner pays exactly what they bid, never the runner-up's
-            # amount plus an increment (confirmed on 9/9 real transactions
-            # captured so far). That makes "bid the predicted average
-            # price" the wrong advice: every euro above the true minimum
-            # needed to clear the field is pure waste. win_bid_50/90 are
-            # framed as what they actually are — the minimum bid for a
-            # roughly-coin-flip vs. a pretty-safe chance of winning — not
-            # a range around an expected price.
-            rivals = f", vs {r['top_competitors']}" if r.get('top_competitors') else ""
-            # A high buy score only ever judges the incoming player alone.
-            # potential_points_gain re-runs Best XI with him swapped in
-            # and the funded sells swapped out — a good player on paper
-            # can still be a net-zero (or worse) squad upgrade once that
-            # actually plays out, and this is the only place that shows.
-            gain = r.get('potential_points_gain')
-            xi_note = f"\n    📈 Best XI: +{gain:.1f} pts/round net of the sells above" if gain and gain > 0 else ""
-            lines.append(
-                f"  • {r['name']} ({r['club']}, {r['position']}) — {_money(r['price'])}, "
-                f"{r['probability']} start, score {r['score']}{need} → "
-                f"bid {_money(r['win_bid_50'])} for even odds, {_money(r['win_bid_90'])} to be safe "
-                f"(~{r['expected_bidders']:g} bidders expected{rivals}){afford}{xi_note}"
-            )
-        sections.append("\n".join(lines))
+    kind = buy_df['buy_kind'] if 'buy_kind' in buy_df else pd.Series('points', index=buy_df.index)
+    sections.append(_buy_section(buy_df[kind == 'points'], "🎯 <b>Buy for points</b> (would make your XI)",
+                                 "🎯 <b>Buy for points</b>: nobody on the market would make your XI today"))
+    bench_df = buy_df[kind == 'bench']
+    if len(bench_df):
+        sections.append(_buy_section(bench_df, "🪑 <b>Buy for bench depth</b> (starts for his club, "
+                                     "not your XI; fits the money left after the points buy)"))
 
     if len(sell_df):
         lines = [f"📤 <b>Sell: {len(sell_df)} candidate(s)</b>"]
@@ -388,15 +361,60 @@ def build_digest(conn, date) -> str:
             profit = _money(r['profit']) if pd.notna(r['profit']) else "—"
             lines.append(f"  • {r['player']} ({r['club']}) — profit {profit}, score {r['score']}{tag}")
         sections.append("\n".join(lines))
+    held = sell_df.attrs.get('held_for_lock') or []
+    if held:
+        sections.append("🔒 <b>Not selling today</b> (in tonight's XI, sell after the round if still worth it): "
+                        + ", ".join(held))
 
-    # Profit-only buys, kept apart from the buy list above: they're judged
-    # on resale before the matchweek, never on points (see the flip rules
-    # in recommenders.py).
+    # Value buys: profit-only flips, kept apart from the two lists above.
+    # They're judged on resale before the matchweek, never on points (see
+    # the flip rules in recommenders.py).
     flips = _flip_section(conn, date, flip_plan, flip_note, owned)
-    if flips:
-        sections.append(flips)
+    sections.append(flips or f"💰 <b>Buy for value</b>: none today ({flip_note or 'no rise beats the overpay'})")
 
-    return "\n\n".join(sections)
+    return "\n\n".join(s for s in sections if s)
+
+
+def _buy_section(buy_df, title, empty_text=None) -> str:
+    if not len(buy_df):
+        return empty_text or ""
+    lines = [title]
+    for _, r in buy_df.head(5).iterrows():
+        need = f" [{r['squad_need']}]" if r.get('squad_need') else ""
+        afford = ""
+        if r.get('shortfall', 0) > 0:
+            if r.get('funding_plan'):
+                afford = f"\n    ⚠️ short {_money(r['shortfall'])} — would need to sell: {r['funding_plan']}"
+            else:
+                afford = f"\n    ⚠️ short {_money(r['shortfall'])}, no sells available to cover it"
+        # Biwenger's market is a first-price sealed-bid auction — the
+        # winner pays exactly what they bid, never the runner-up's
+        # amount plus an increment (confirmed on 9/9 real transactions
+        # captured so far). That makes "bid the predicted average
+        # price" the wrong advice: every euro above the true minimum
+        # needed to clear the field is pure waste. win_bid_50/90 are
+        # framed as what they actually are — the minimum bid for a
+        # roughly-coin-flip vs. a pretty-safe chance of winning — not
+        # a range around an expected price.
+        rivals = f", vs {r['top_competitors']}" if r.get('top_competitors') else ""
+        # A high buy score only ever judges the incoming player alone.
+        # potential_points_gain re-runs Best XI with him swapped in
+        # and the funded sells swapped out — a good player on paper
+        # can still be a net-zero (or worse) squad upgrade once that
+        # actually plays out, and this is the only place that shows.
+        gain = r.get('potential_points_gain')
+        xi_note = f"\n    📈 Best XI: +{gain:.1f} pts/round net of the sells above" if gain and gain > 0 else ""
+        # Rising value doesn't make him a better buy for points, it only
+        # means waiting will cost more.
+        if (r.get('momentum_pct') or 0) > 0:
+            xi_note += "\n    ⏫ price rising: bid today rather than wait"
+        lines.append(
+            f"  • {r['name']} ({r['club']}, {r['position']}) — {_money(r['price'])}, "
+            f"{r['probability']} start, score {r['score']}{need} → "
+            f"bid {_money(r['win_bid_50'])} for even odds, {_money(r['win_bid_90'])} to be safe "
+            f"(~{r['expected_bidders']:g} bidders expected{rivals}){afford}{xi_note}"
+        )
+    return "\n".join(lines)
 
 
 def main():

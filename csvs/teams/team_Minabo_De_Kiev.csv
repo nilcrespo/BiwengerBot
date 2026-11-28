@@ -1,20 +1,20 @@
 team,team_id,position,club,name,this_season_pts,last_season_pts,price,change,status,played,points_per_match,home_pts,home_average,away_pts,away_average
-Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Getafe,David Soria,72,0,4080000,-10000.0,Fit,13,5.5,43,6.1,29,4.8
+Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Getafe,David Soria,72,0,4060000,-20000.0,Fit,13,5.5,43,6.1,29,4.8
 Minabo de Kiev,Minabo_De_Kiev,Goalkeeper,Celta,Ivan Villar,0,0,150000,0.0,Fit,0,0.0,0,0.0,0,0.0
-Minabo de Kiev,Minabo_De_Kiev,Defender/Midfielder,Alaves,Tenaglia,58,0,3600000,-50000.0,Fit,13,4.5,44,6.3,14,2.3
-Minabo de Kiev,Minabo_De_Kiev,Defender,Atletico,Pubill,53,0,4500000,10000.0,One yellow card away from suspension,10,5.3,28,5.6,25,5.0
-Minabo de Kiev,Minabo_De_Kiev,Defender,Villarreal,Freeman,53,0,3220000,-10000.0,Fit,12,4.4,20,3.3,33,5.5
-Minabo de Kiev,Minabo_De_Kiev,Defender,Alaves,Valentini,30,0,610000,-10000.0,Fit,8,3.8,9,3.0,21,4.2
-Minabo de Kiev,Minabo_De_Kiev,Defender,Racing,Mantilla,18,0,450000,0.0,Injured. Torn anterior cruciate ligament in the right knee. Estimated return: Early July.,10,1.8,14,2.3,4,1.0
-Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Barcelona,Fermin,114,0,15760000,-280000.0,Suspended. Straight red card.,12,9.5,46,7.7,68,11.3
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Atletico,Barrios,57,0,8390000,80000.0,Fit,10,5.7,20,5.0,37,6.2
-Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Osasuna,Moi Gomez,50,0,3090000,70000.0,Fit,10,5.0,26,5.2,24,4.8
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Barcelona,Marc Bernal,45,0,2710000,10000.0,Fit,11,4.1,28,4.7,17,3.4
-Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Real Sociedad,Kubo,38,0,2820000,-20000.0,Fit,9,4.2,12,3.0,26,5.2
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Levante,Bardeli,31,0,830000,-10000.0,Fit,7,4.4,17,8.5,14,2.8
-Minabo de Kiev,Minabo_De_Kiev,Midfielder,Betis,Lo Celso,10,0,1540000,-20000.0,Doubtful. Blow to the knee.,3,3.3,5,5.0,5,2.5
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Deportivo,Yeremay,60,0,6990000,-130000.0,Fit,12,5.0,25,5.0,35,5.0
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Getafe,Satriano,57,0,3320000,-40000.0,Fit,13,4.4,48,6.9,9,1.5
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Rayo Vallecano,De Frutos,45,0,4270000,40000.0,Fit,10,4.5,25,5.0,20,4.0
-Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Espanyol,Pere Milla,22,0,890000,30000.0,Fit,8,2.8,11,2.8,11,2.8
-Minabo de Kiev,Minabo_De_Kiev,Forward,Valencia,Hugo Duro,21,0,790000,-10000.0,Fit,11,1.9,11,1.8,10,2.0
+Minabo de Kiev,Minabo_De_Kiev,Defender/Midfielder,Alaves,Tenaglia,58,0,3550000,-50000.0,Fit,13,4.5,44,6.3,14,2.3
+Minabo de Kiev,Minabo_De_Kiev,Defender,Atletico,Pubill,53,0,4510000,10000.0,One yellow card away from suspension,10,5.3,28,5.6,25,5.0
+Minabo de Kiev,Minabo_De_Kiev,Defender,Villarreal,Freeman,53,0,3180000,-40000.0,Fit,12,4.4,20,3.3,33,5.5
+Minabo de Kiev,Minabo_De_Kiev,Defender,Alaves,Valentini,30,0,600000,-10000.0,Fit,8,3.8,9,3.0,21,4.2
+Minabo de Kiev,Minabo_De_Kiev,Defender,Racing,Mantilla,18,0,440000,-10000.0,Injured. Torn anterior cruciate ligament in the right knee. Estimated return: Early July.,10,1.8,14,2.3,4,1.0
+Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Barcelona,Fermin,114,0,15630000,-130000.0,Suspended. Straight red card.,12,9.5,46,7.7,68,11.3
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Atletico,Barrios,57,0,8460000,70000.0,Fit,10,5.7,20,5.0,37,6.2
+Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Osasuna,Moi Gomez,50,0,3140000,50000.0,Fit,10,5.0,26,5.2,24,4.8
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Barcelona,Marc Bernal,45,0,2710000,0.0,Fit,11,4.1,28,4.7,17,3.4
+Minabo de Kiev,Minabo_De_Kiev,Midfielder/Forward,Real Sociedad,Kubo,38,0,2800000,-20000.0,Fit,9,4.2,12,3.0,26,5.2
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Levante,Bardeli,31,0,820000,-10000.0,Fit,8,3.9,17,5.7,14,2.8
+Minabo de Kiev,Minabo_De_Kiev,Midfielder,Betis,Lo Celso,10,0,1510000,-30000.0,Injured. Knee discomfort. Estimated return: Indefinite return.,3,3.3,5,5.0,5,2.5
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Deportivo,Yeremay,60,0,6880000,-110000.0,Fit,12,5.0,25,5.0,35,5.0
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Getafe,Satriano,57,0,3280000,-40000.0,Fit,13,4.4,48,6.9,9,1.5
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Rayo Vallecano,De Frutos,45,0,4300000,30000.0,Fit,10,4.5,25,5.0,20,4.0
+Minabo de Kiev,Minabo_De_Kiev,Forward/Midfielder,Espanyol,Pere Milla,22,0,910000,20000.0,Fit,8,2.8,11,2.8,11,2.8
+Minabo de Kiev,Minabo_De_Kiev,Forward,Valencia,Hugo Duro,21,0,780000,-10000.0,Fit,11,1.9,11,1.8,10,2.0
